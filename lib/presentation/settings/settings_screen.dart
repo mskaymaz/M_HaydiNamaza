@@ -2,16 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../app/locale_controller.dart';
+import '../../app/location_storage.dart';
+import 'location_screen.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
 
   const SettingsScreen({super.key, required this.localeController});
 
   @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  final LocationStorage _locationStorage = LocationStorage();
+  LocationData? _location;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLocation();
+  }
+
+  Future<void> _loadLocation() async {
+    final data = await _locationStorage.read();
+    if (!mounted) return;
+    setState(() {
+      _location = data;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final current = localeController.value;
+    final current = widget.localeController.value;
+
+    String locationSubtitle() {
+      final data = _location;
+      if (data == null) return l10n.locationNotSet;
+      return '${data.city} (${data.latitude}, ${data.longitude})';
+    }
 
     String codeFor(Locale? locale) => locale?.languageCode ?? 'system';
 
@@ -44,7 +74,7 @@ class SettingsScreen extends StatelessWidget {
             groupValue: codeFor(current),
             onChanged: (value) async {
               if (value == null) return;
-              await localeController.setLocale(localeFor(value));
+              await widget.localeController.setLocale(localeFor(value));
             },
           ),
           RadioListTile<String>(
@@ -53,7 +83,7 @@ class SettingsScreen extends StatelessWidget {
             groupValue: codeFor(current),
             onChanged: (value) async {
               if (value == null) return;
-              await localeController.setLocale(localeFor(value));
+              await widget.localeController.setLocale(localeFor(value));
             },
           ),
           RadioListTile<String>(
@@ -62,7 +92,7 @@ class SettingsScreen extends StatelessWidget {
             groupValue: codeFor(current),
             onChanged: (value) async {
               if (value == null) return;
-              await localeController.setLocale(localeFor(value));
+              await widget.localeController.setLocale(localeFor(value));
             },
           ),
           RadioListTile<String>(
@@ -71,14 +101,24 @@ class SettingsScreen extends StatelessWidget {
             groupValue: codeFor(current),
             onChanged: (value) async {
               if (value == null) return;
-              await localeController.setLocale(localeFor(value));
+              await widget.localeController.setLocale(localeFor(value));
             },
           ),
           const Divider(height: 32),
           ListTile(
             title: Text(l10n.locationLabel),
-            subtitle: Text(l10n.comingSoon),
+            subtitle: Text(locationSubtitle()),
             trailing: const Icon(Icons.location_on_outlined),
+            onTap: () async {
+              final changed = await Navigator.of(context).push<bool>(
+                MaterialPageRoute(
+                  builder: (_) => LocationScreen(initial: _location),
+                ),
+              );
+              if (changed == true) {
+                await _loadLocation();
+              }
+            },
           ),
           ListTile(
             title: Text(l10n.calculationMethodLabel),

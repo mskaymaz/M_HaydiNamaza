@@ -10,5 +10,12 @@
   "languageArabic": "Arabic",
   "locationLabel": "Location",
   "calculationMethodLabel": "Calculation method",
-  "comingSoon": "Coming soon"
+  "comingSoon": "Coming soon",
+  "locationNotSet": "Not set",
+  "locationEditTitle": "Location",
+  "locationCityLabel": "City",
+  "locationLatitudeLabel": "Latitude",
+  "locationLongitudeLabel": "Longitude",
+  "locationSave": "Save",
+  "locationFillAll": "Please fill all fields."
 }

@@ -10,5 +10,12 @@
   "languageArabic": "Arapca",
   "locationLabel": "Konum",
   "calculationMethodLabel": "Hesaplama yontemi",
-  "comingSoon": "Yakinda"
+  "comingSoon": "Yakinda",
+  "locationNotSet": "Secilmedi",
+  "locationEditTitle": "Konum",
+  "locationCityLabel": "Sehir",
+  "locationLatitudeLabel": "Enlem",
+  "locationLongitudeLabel": "Boylam",
+  "locationSave": "Kaydet",
+  "locationFillAll": "Lutfen tum alanlari doldurun."
 }

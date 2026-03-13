@@ -16,3 +16,4 @@ Notlar:
 - Ilerleme: Ayarlar ekrani ve dil secimi (gecici bellek) eklendi.
 - Ilerleme: Dil tercihi shared_preferences ile kalici hale getirildi.
 - Ilerleme: Ayarlar ekranina konum ve hesaplama yontemi iskeleti eklendi.
+- Ilerleme: Konum secimi taslagi (sehir + enlem/boylam) ve kayit eklendi.

@@ -10,5 +10,12 @@
   "languageArabic": "العربية",
   "locationLabel": "الموقع",
   "calculationMethodLabel": "طريقة الحساب",
-  "comingSoon": "قريبًا"
+  "comingSoon": "قريبًا",
+  "locationNotSet": "غير محدد",
+  "locationEditTitle": "الموقع",
+  "locationCityLabel": "المدينة",
+  "locationLatitudeLabel": "خط العرض",
+  "locationLongitudeLabel": "خط الطول",
+  "locationSave": "حفظ",
+  "locationFillAll": "يرجى تعبئة جميع الحقول."
 }

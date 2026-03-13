@@ -11,3 +11,4 @@ Notlar:
 - Flutter komutlari takilma olursa dart-sdk yolu ile calistirilabilir.
 - Proje adi ve paket kimligi kesinlestirilecek.
 - Ilerleme: Flutter iskeleti (Android + iOS) olusturuldu.
+- Ilerleme: Klasor yapisi ve ilk ekran stub (App + HomeScreen) eklendi.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,13 +7,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MHaydiNamaza'),
+        title: Text(l10n.appTitle),
       ),
       body: Center(
         child: Text(
-          'Namaz vakitleri yakinda burada.',
+          l10n.homePlaceholder,
           textAlign: TextAlign.center,
           style: theme.textTheme.titleMedium,
         ),

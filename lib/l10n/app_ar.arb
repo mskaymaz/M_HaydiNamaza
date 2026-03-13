@@ -17,5 +17,21 @@
   "locationLatitudeLabel": "خط العرض",
   "locationLongitudeLabel": "خط الطول",
   "locationSave": "حفظ",
-  "locationFillAll": "يرجى تعبئة جميع الحقول."
+  "locationFillAll": "يرجى تعبئة جميع الحقول.",
+  "methodNotSet": "غير محدد",
+  "methodEditTitle": "طريقة الحساب",
+  "methodSave": "حفظ",
+  "methodTurkey": "تركيا (ديانت)",
+  "methodMuslimWorldLeague": "رابطة العالم الإسلامي",
+  "methodUmmAlQura": "أم القرى",
+  "methodDubai": "دبي",
+  "methodKuwait": "الكويت",
+  "methodQatar": "قطر",
+  "methodSingapore": "سنغافورة",
+  "methodTehran": "طهران",
+  "methodMoonsighting": "لجنة تحري الهلال",
+  "methodNorthAmerica": "أمريكا الشمالية (ISNA)",
+  "methodEgyptian": "الهيئة المصرية",
+  "methodKarachi": "كراتشي",
+  "methodOther": "أخرى"
 }

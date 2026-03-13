@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../app/calculation_method_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_storage.dart';
+import 'calculation_method_screen.dart';
 import 'location_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -16,12 +18,15 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final LocationStorage _locationStorage = LocationStorage();
+  final CalculationMethodStorage _methodStorage = CalculationMethodStorage();
   LocationData? _location;
+  String? _methodCode;
 
   @override
   void initState() {
     super.initState();
     _loadLocation();
+    _loadMethod();
   }
 
   Future<void> _loadLocation() async {
@@ -29,6 +34,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (!mounted) return;
     setState(() {
       _location = data;
+    });
+  }
+
+  Future<void> _loadMethod() async {
+    final code = await _methodStorage.readCode();
+    if (!mounted) return;
+    setState(() {
+      _methodCode = code;
     });
   }
 
@@ -41,6 +54,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
       final data = _location;
       if (data == null) return l10n.locationNotSet;
       return '${data.city} (${data.latitude}, ${data.longitude})';
+    }
+
+    String methodSubtitle() {
+      switch (_methodCode) {
+        case 'turkey':
+          return l10n.methodTurkey;
+        case 'muslim_world_league':
+          return l10n.methodMuslimWorldLeague;
+        case 'umm_al_qura':
+          return l10n.methodUmmAlQura;
+        case 'dubai':
+          return l10n.methodDubai;
+        case 'kuwait':
+          return l10n.methodKuwait;
+        case 'qatar':
+          return l10n.methodQatar;
+        case 'singapore':
+          return l10n.methodSingapore;
+        case 'tehran':
+          return l10n.methodTehran;
+        case 'moonsighting':
+          return l10n.methodMoonsighting;
+        case 'north_america':
+          return l10n.methodNorthAmerica;
+        case 'egyptian':
+          return l10n.methodEgyptian;
+        case 'karachi':
+          return l10n.methodKarachi;
+        case 'other':
+          return l10n.methodOther;
+        default:
+          return l10n.methodNotSet;
+      }
     }
 
     String codeFor(Locale? locale) => locale?.languageCode ?? 'system';
@@ -122,8 +168,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           ListTile(
             title: Text(l10n.calculationMethodLabel),
-            subtitle: Text(l10n.comingSoon),
+            subtitle: Text(methodSubtitle()),
             trailing: const Icon(Icons.calculate_outlined),
+            onTap: () async {
+              final changed = await Navigator.of(context).push<bool>(
+                MaterialPageRoute(
+                  builder: (_) => CalculationMethodScreen(
+                    initialCode: _methodCode,
+                  ),
+                ),
+              );
+              if (changed == true) {
+                await _loadMethod();
+              }
+            },
           ),
         ],
       ),

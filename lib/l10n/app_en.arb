@@ -17,5 +17,21 @@
   "locationLatitudeLabel": "Latitude",
   "locationLongitudeLabel": "Longitude",
   "locationSave": "Save",
-  "locationFillAll": "Please fill all fields."
+  "locationFillAll": "Please fill all fields.",
+  "methodNotSet": "Not set",
+  "methodEditTitle": "Calculation method",
+  "methodSave": "Save",
+  "methodTurkey": "Turkey (Diyanet)",
+  "methodMuslimWorldLeague": "Muslim World League",
+  "methodUmmAlQura": "Umm Al-Qura",
+  "methodDubai": "Dubai",
+  "methodKuwait": "Kuwait",
+  "methodQatar": "Qatar",
+  "methodSingapore": "Singapore",
+  "methodTehran": "Tehran",
+  "methodMoonsighting": "Moonsighting Committee",
+  "methodNorthAmerica": "North America (ISNA)",
+  "methodEgyptian": "Egyptian",
+  "methodKarachi": "Karachi",
+  "methodOther": "Other"
 }

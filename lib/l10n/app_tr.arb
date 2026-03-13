@@ -17,5 +17,21 @@
   "locationLatitudeLabel": "Enlem",
   "locationLongitudeLabel": "Boylam",
   "locationSave": "Kaydet",
-  "locationFillAll": "Lutfen tum alanlari doldurun."
+  "locationFillAll": "Lutfen tum alanlari doldurun.",
+  "methodNotSet": "Secilmedi",
+  "methodEditTitle": "Hesaplama yontemi",
+  "methodSave": "Kaydet",
+  "methodTurkey": "Turkiye (Diyanet)",
+  "methodMuslimWorldLeague": "Muslim World League",
+  "methodUmmAlQura": "Umm Al-Qura",
+  "methodDubai": "Dubai",
+  "methodKuwait": "Kuveyt",
+  "methodQatar": "Katar",
+  "methodSingapore": "Singapur",
+  "methodTehran": "Tahran",
+  "methodMoonsighting": "Hilal Komitesi",
+  "methodNorthAmerica": "Kuzey Amerika (ISNA)",
+  "methodEgyptian": "Misir",
+  "methodKarachi": "Karachi",
+  "methodOther": "Diger"
 }

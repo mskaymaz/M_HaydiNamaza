@@ -5,8 +5,9 @@ Cikti:
 - Flutter proje iskeleti (Android + iOS).
 - Temel klasor yapisi ve ilk ekran stub.
 - Ileride cok dilli yapiya uygun i18n altyapi notu.
-Durum: planned
+Durum: in_progress
 
 Notlar:
 - Flutter komutlari takilma olursa dart-sdk yolu ile calistirilabilir.
 - Proje adi ve paket kimligi kesinlestirilecek.
+- Ilerleme: Flutter iskeleti (Android + iOS) olusturuldu.

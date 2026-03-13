@@ -79,3 +79,14 @@ Execute only requested scope, avoid unnecessary refactors/explanations, and keep
 - `M`: Mobil uygulama (genel)
 - `MA`: Mobil Android
 - `MI`: Mobil iOS
+
+## 6) USB Bundle Yedek (MUST)
+
+- Uzak repo yerine USB uzerinden yedek tercih edilir.
+- `usb ye yedekle` talimatinda `git bundle` ile tek dosya yedek alin ve dosya adina `R.yymmdd_hhmm` eklenir.
+- `usb den al` talimatinda bundle dosyasindan repo acilir (yerel repo).
+- `en guncelini` denince en son `R.yymmdd_hhmm` etiketli bundle/teslim secilir.
+
+## 7) ProjeOrj Arsiv (MUST)
+
+- `ProjeOrj/` klasoru arsivdir: silinmez ve icerigi guncellenmez.

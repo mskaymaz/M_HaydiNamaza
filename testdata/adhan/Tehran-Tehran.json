@@ -1,0 +1,338 @@
+[
+  {
+    "id": "tehran-tehran-2018-01-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-01-01",
+    "times": {
+      "fajr": "05:44",
+      "sunrise": "07:14",
+      "dhuhr": "12:08",
+      "asr": "14:44",
+      "maghrib": "17:22",
+      "isha": "18:12"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-02-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-02-01",
+    "times": {
+      "fajr": "05:39",
+      "sunrise": "07:05",
+      "dhuhr": "12:18",
+      "asr": "15:10",
+      "maghrib": "17:51",
+      "isha": "18:39"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-03-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-03-01",
+    "times": {
+      "fajr": "05:11",
+      "sunrise": "06:35",
+      "dhuhr": "12:17",
+      "asr": "15:30",
+      "maghrib": "18:17",
+      "isha": "19:04"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-04-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-04-01",
+    "times": {
+      "fajr": "05:26",
+      "sunrise": "06:51",
+      "dhuhr": "13:08",
+      "asr": "16:42",
+      "maghrib": "19:44",
+      "isha": "20:32"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-05-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-05-01",
+    "times": {
+      "fajr": "04:40",
+      "sunrise": "06:13",
+      "dhuhr": "13:02",
+      "asr": "16:46",
+      "maghrib": "20:10",
+      "isha": "21:02"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-06-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-06-01",
+    "times": {
+      "fajr": "04:06",
+      "sunrise": "05:50",
+      "dhuhr": "13:02",
+      "asr": "16:51",
+      "maghrib": "20:36",
+      "isha": "21:34"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-07-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-07-01",
+    "times": {
+      "fajr": "04:06",
+      "sunrise": "05:52",
+      "dhuhr": "13:08",
+      "asr": "16:57",
+      "maghrib": "20:45",
+      "isha": "21:45"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-08-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-08-01",
+    "times": {
+      "fajr": "04:35",
+      "sunrise": "06:12",
+      "dhuhr": "13:11",
+      "asr": "16:58",
+      "maghrib": "20:29",
+      "isha": "21:23"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-09-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-09-01",
+    "times": {
+      "fajr": "05:09",
+      "sunrise": "06:36",
+      "dhuhr": "13:04",
+      "asr": "16:43",
+      "maghrib": "19:51",
+      "isha": "20:40"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-10-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-10-01",
+    "times": {
+      "fajr": "04:36",
+      "sunrise": "05:59",
+      "dhuhr": "11:54",
+      "asr": "15:16",
+      "maghrib": "18:07",
+      "isha": "18:54"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-11-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-11-01",
+    "times": {
+      "fajr": "05:01",
+      "sunrise": "06:26",
+      "dhuhr": "11:48",
+      "asr": "14:46",
+      "maghrib": "17:28",
+      "isha": "18:16"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  },
+  {
+    "id": "tehran-tehran-2018-12-01",
+    "city": "Tehran",
+    "lat": 35.715298,
+    "lon": 51.404343,
+    "timezone": "Asia/Tehran",
+    "method": "Tehran",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2018-12-01",
+    "times": {
+      "fajr": "05:27",
+      "sunrise": "06:55",
+      "dhuhr": "11:53",
+      "asr": "14:32",
+      "maghrib": "17:11",
+      "isha": "18:01"
+    },
+    "source": "adhan-testdata/Times/Tehran-Tehran.json"
+  }
+]

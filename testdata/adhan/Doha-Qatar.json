@@ -1,0 +1,338 @@
+[
+  {
+    "id": "doha-qatar-2016-01-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-01-01",
+    "times": {
+      "fajr": "04:58",
+      "sunrise": "06:19",
+      "dhuhr": "11:37",
+      "asr": "14:35",
+      "maghrib": "16:55",
+      "isha": "18:25"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-02-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-02-01",
+    "times": {
+      "fajr": "04:59",
+      "sunrise": "06:17",
+      "dhuhr": "11:47",
+      "asr": "14:56",
+      "maghrib": "17:18",
+      "isha": "18:48"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-03-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-03-01",
+    "times": {
+      "fajr": "04:41",
+      "sunrise": "05:57",
+      "dhuhr": "11:46",
+      "asr": "15:07",
+      "maghrib": "17:36",
+      "isha": "19:06"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-04-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-04-01",
+    "times": {
+      "fajr": "04:08",
+      "sunrise": "05:25",
+      "dhuhr": "11:38",
+      "asr": "15:07",
+      "maghrib": "17:51",
+      "isha": "19:21"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-05-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-05-01",
+    "times": {
+      "fajr": "03:36",
+      "sunrise": "04:58",
+      "dhuhr": "11:31",
+      "asr": "15:00",
+      "maghrib": "18:05",
+      "isha": "19:35"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-06-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-06-01",
+    "times": {
+      "fajr": "03:15",
+      "sunrise": "04:43",
+      "dhuhr": "11:32",
+      "asr": "14:56",
+      "maghrib": "18:20",
+      "isha": "19:50"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-07-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-07-01",
+    "times": {
+      "fajr": "03:18",
+      "sunrise": "04:47",
+      "dhuhr": "11:38",
+      "asr": "15:01",
+      "maghrib": "18:28",
+      "isha": "19:58"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-08-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-08-01",
+    "times": {
+      "fajr": "03:37",
+      "sunrise": "05:01",
+      "dhuhr": "11:40",
+      "asr": "15:07",
+      "maghrib": "18:19",
+      "isha": "19:49"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-09-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-09-01",
+    "times": {
+      "fajr": "03:56",
+      "sunrise": "05:15",
+      "dhuhr": "11:34",
+      "asr": "15:03",
+      "maghrib": "17:53",
+      "isha": "19:23"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-10-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-10-01",
+    "times": {
+      "fajr": "04:10",
+      "sunrise": "05:26",
+      "dhuhr": "11:23",
+      "asr": "14:47",
+      "maghrib": "17:20",
+      "isha": "18:50"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-11-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-11-01",
+    "times": {
+      "fajr": "04:24",
+      "sunrise": "05:42",
+      "dhuhr": "11:17",
+      "asr": "14:29",
+      "maghrib": "16:53",
+      "isha": "18:23"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  },
+  {
+    "id": "doha-qatar-2016-12-01",
+    "city": "Doha",
+    "lat": 25.283897,
+    "lon": 51.52877,
+    "timezone": "Asia/Riyadh",
+    "method": "Qatar",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2016-12-01",
+    "times": {
+      "fajr": "04:42",
+      "sunrise": "06:03",
+      "dhuhr": "11:23",
+      "asr": "14:23",
+      "maghrib": "16:43",
+      "isha": "18:13"
+    },
+    "source": "adhan-testdata/Times/Doha-Qatar.json"
+  }
+]

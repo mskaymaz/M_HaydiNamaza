@@ -8,6 +8,7 @@ Her kayit bir test vektoru:
 - timezone: IANA timezone (ornek: Europe/Istanbul)
 - utc_offset_minutes: opsiyonel, test calismasi icin acik ofset
   - Not: DST/IANA cozumlenemeyen kayitlar atlanir.
+- Kaynak ornekleri: adhan-testdata, AlAdhan (Turkey method=13)
 - date: YYYY-MM-DD
 - method: hesaplama yontemi (enum)
 - madhab: shafi | hanafi

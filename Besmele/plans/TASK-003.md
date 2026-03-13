@@ -16,3 +16,5 @@ Notlar:
 - Ilerleme: lib/core/prayer_engine/* iskeleti ve tools/golden_test_runner.dart eklendi.
 - Ilerleme: Adhan-js hesaplama cekirdegi Dart portu (astronomical/solar_time/prayer_times).
 - Ilerleme: testdata/adhan dosyalarina utc_offset_minutes eklendi (DST olmayanlar) ve golden test runner karsilastirma yapacak sekilde guncellendi.
+- Ilerleme: AlAdhan Turkey (method=13) kaynakli Istanbul/Izmir/Konya test seti eklendi.
+- Not: Dart komutu ortamda takiliyor; golden testler tekrar kosulamadi.

@@ -1,0 +1,722 @@
+[
+  {
+    "id": "izmir-2026-01-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-01-01",
+    "times": {
+      "fajr": "06:54",
+      "sunrise": "08:22",
+      "dhuhr": "13:20",
+      "asr": "15:47",
+      "maghrib": "18:08",
+      "isha": "19:31"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-01-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-01-15",
+    "times": {
+      "fajr": "06:54",
+      "sunrise": "08:20",
+      "dhuhr": "13:26",
+      "asr": "15:58",
+      "maghrib": "18:22",
+      "isha": "19:43"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-02-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-02-01",
+    "times": {
+      "fajr": "06:46",
+      "sunrise": "08:10",
+      "dhuhr": "13:30",
+      "asr": "16:14",
+      "maghrib": "18:41",
+      "isha": "19:59"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-02-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-02-15",
+    "times": {
+      "fajr": "06:33",
+      "sunrise": "07:55",
+      "dhuhr": "13:31",
+      "asr": "16:27",
+      "maghrib": "18:56",
+      "isha": "20:13"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-03-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-03-01",
+    "times": {
+      "fajr": "06:16",
+      "sunrise": "07:37",
+      "dhuhr": "13:29",
+      "asr": "16:37",
+      "maghrib": "19:11",
+      "isha": "20:27"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-03-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-03-15",
+    "times": {
+      "fajr": "05:55",
+      "sunrise": "07:16",
+      "dhuhr": "13:25",
+      "asr": "16:45",
+      "maghrib": "19:25",
+      "isha": "20:41"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-04-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-04-01",
+    "times": {
+      "fajr": "05:26",
+      "sunrise": "06:50",
+      "dhuhr": "13:20",
+      "asr": "16:52",
+      "maghrib": "19:42",
+      "isha": "21:00"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-04-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-04-15",
+    "times": {
+      "fajr": "05:02",
+      "sunrise": "06:29",
+      "dhuhr": "13:17",
+      "asr": "16:56",
+      "maghrib": "19:55",
+      "isha": "21:16"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-05-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-05-01",
+    "times": {
+      "fajr": "04:35",
+      "sunrise": "06:08",
+      "dhuhr": "13:14",
+      "asr": "17:00",
+      "maghrib": "20:10",
+      "isha": "21:37"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-05-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-05-15",
+    "times": {
+      "fajr": "04:14",
+      "sunrise": "05:53",
+      "dhuhr": "13:13",
+      "asr": "17:03",
+      "maghrib": "20:23",
+      "isha": "21:55"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-06-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-06-01",
+    "times": {
+      "fajr": "03:56",
+      "sunrise": "05:42",
+      "dhuhr": "13:14",
+      "asr": "17:07",
+      "maghrib": "20:36",
+      "isha": "22:15"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-06-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-06-15",
+    "times": {
+      "fajr": "03:50",
+      "sunrise": "05:40",
+      "dhuhr": "13:17",
+      "asr": "17:11",
+      "maghrib": "20:44",
+      "isha": "22:26"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-07-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-07-01",
+    "times": {
+      "fajr": "03:55",
+      "sunrise": "05:44",
+      "dhuhr": "13:20",
+      "asr": "17:15",
+      "maghrib": "20:46",
+      "isha": "22:28"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-07-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-07-15",
+    "times": {
+      "fajr": "04:08",
+      "sunrise": "05:53",
+      "dhuhr": "13:22",
+      "asr": "17:16",
+      "maghrib": "20:42",
+      "isha": "22:19"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-08-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-08-01",
+    "times": {
+      "fajr": "04:29",
+      "sunrise": "06:06",
+      "dhuhr": "13:23",
+      "asr": "17:14",
+      "maghrib": "20:29",
+      "isha": "21:59"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-08-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-08-15",
+    "times": {
+      "fajr": "04:47",
+      "sunrise": "06:19",
+      "dhuhr": "13:21",
+      "asr": "17:08",
+      "maghrib": "20:13",
+      "isha": "21:38"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-09-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-09-01",
+    "times": {
+      "fajr": "05:08",
+      "sunrise": "06:34",
+      "dhuhr": "13:16",
+      "asr": "16:56",
+      "maghrib": "19:49",
+      "isha": "21:09"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-09-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-09-15",
+    "times": {
+      "fajr": "05:23",
+      "sunrise": "06:46",
+      "dhuhr": "13:12",
+      "asr": "16:43",
+      "maghrib": "19:27",
+      "isha": "20:44"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-10-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-10-01",
+    "times": {
+      "fajr": "05:39",
+      "sunrise": "07:00",
+      "dhuhr": "13:06",
+      "asr": "16:26",
+      "maghrib": "19:02",
+      "isha": "20:17"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-10-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-10-15",
+    "times": {
+      "fajr": "05:52",
+      "sunrise": "07:13",
+      "dhuhr": "13:02",
+      "asr": "16:11",
+      "maghrib": "18:41",
+      "isha": "19:57"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-11-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-11-01",
+    "times": {
+      "fajr": "06:08",
+      "sunrise": "07:31",
+      "dhuhr": "13:00",
+      "asr": "15:54",
+      "maghrib": "18:19",
+      "isha": "19:36"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-11-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-11-15",
+    "times": {
+      "fajr": "06:21",
+      "sunrise": "07:46",
+      "dhuhr": "13:01",
+      "asr": "15:44",
+      "maghrib": "18:06",
+      "isha": "19:25"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-12-01-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-12-01",
+    "times": {
+      "fajr": "06:36",
+      "sunrise": "08:02",
+      "dhuhr": "13:05",
+      "asr": "15:37",
+      "maghrib": "17:58",
+      "isha": "19:20"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  },
+  {
+    "id": "izmir-2026-12-15-diyanet",
+    "city": "Izmir",
+    "lat": 8.8888888,
+    "lon": 7.7777777,
+    "timezone": "Europe/Istanbul",
+    "utc_offset_minutes": 180,
+    "method": "Turkey",
+    "madhab": "shafi",
+    "high_latitude_rule": "middle_of_the_night",
+    "adjustments": {
+      "fajr": 0,
+      "sunrise": 0,
+      "dhuhr": 0,
+      "asr": 0,
+      "maghrib": 0,
+      "isha": 0
+    },
+    "date": "2026-12-15",
+    "times": {
+      "fajr": "06:46",
+      "sunrise": "08:14",
+      "dhuhr": "13:12",
+      "asr": "15:38",
+      "maghrib": "17:59",
+      "isha": "19:22"
+    },
+    "source": "aladhan.com",
+    "variance": 2
+  }
+]

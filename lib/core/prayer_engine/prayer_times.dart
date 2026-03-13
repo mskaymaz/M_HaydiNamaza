@@ -134,7 +134,7 @@ class PrayerTimes {
       }
     }();
 
-    if (fajrTime.isAfter(safeFajr)) {
+    if (safeFajr.isAfter(fajrTime)) {
       fajrTime = safeFajr;
     }
 
@@ -167,7 +167,7 @@ class PrayerTimes {
         }
       }();
 
-      if (ishaTime.isBefore(safeIsha)) {
+      if (safeIsha.isBefore(ishaTime)) {
         ishaTime = safeIsha;
       }
     }

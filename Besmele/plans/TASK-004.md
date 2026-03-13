@@ -13,3 +13,4 @@ Notlar:
 - Ilerleme: Flutter iskeleti (Android + iOS) olusturuldu.
 - Ilerleme: Klasor yapisi ve ilk ekran stub (App + HomeScreen) eklendi.
 - Ilerleme: i18n altyapisi (TR/EN/AR) eklendi.
+- Ilerleme: Ayarlar ekrani ve dil secimi (gecici bellek) eklendi.

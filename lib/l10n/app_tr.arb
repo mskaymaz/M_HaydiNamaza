@@ -1,5 +1,11 @@
 {
   "@@locale": "tr",
   "appTitle": "MHaydiNamaza",
-  "homePlaceholder": "Namaz vakitleri yakinda burada."
+  "homePlaceholder": "Namaz vakitleri yakinda burada.",
+  "settingsTitle": "Ayarlar",
+  "languageLabel": "Dil",
+  "languageSystem": "Sistem dili",
+  "languageTurkish": "Turkce",
+  "languageEnglish": "Ingilizce",
+  "languageArabic": "Arapca"
 }

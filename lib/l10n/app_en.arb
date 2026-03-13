@@ -1,5 +1,11 @@
 {
   "@@locale": "en",
   "appTitle": "MHaydiNamaza",
-  "homePlaceholder": "Prayer times will appear here soon."
+  "homePlaceholder": "Prayer times will appear here soon.",
+  "settingsTitle": "Settings",
+  "languageLabel": "Language",
+  "languageSystem": "System default",
+  "languageTurkish": "Turkish",
+  "languageEnglish": "English",
+  "languageArabic": "Arabic"
 }

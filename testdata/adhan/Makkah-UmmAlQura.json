@@ -25,7 +25,8 @@
       "maghrib": "17:52",
       "isha": "19:22"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-02-04",
@@ -53,7 +54,8 @@
       "maghrib": "18:12",
       "isha": "19:42"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-03-05",
@@ -81,7 +83,8 @@
       "maghrib": "18:27",
       "isha": "19:57"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-04-03",
@@ -109,7 +112,8 @@
       "maghrib": "18:36",
       "isha": "20:06"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-05-02",
@@ -137,7 +141,8 @@
       "maghrib": "18:47",
       "isha": "20:17"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-06-04",
@@ -165,7 +170,8 @@
       "maghrib": "19:01",
       "isha": "20:31"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-07-08",
@@ -193,7 +199,8 @@
       "maghrib": "19:07",
       "isha": "20:37"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-08-02",
@@ -221,7 +228,8 @@
       "maghrib": "18:59",
       "isha": "20:29"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-09-04",
@@ -249,7 +257,8 @@
       "maghrib": "18:34",
       "isha": "20:04"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-10-06",
@@ -277,7 +286,8 @@
       "maghrib": "18:04",
       "isha": "19:34"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-11-05",
@@ -305,7 +315,8 @@
       "maghrib": "17:42",
       "isha": "19:12"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "makkah-ummalqura-2016-12-04",
@@ -333,6 +344,7 @@
       "maghrib": "17:38",
       "isha": "19:08"
     },
-    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json"
+    "source": "adhan-testdata/Times/Makkah-UmmAlQura.json",
+    "utc_offset_minutes": 180
   }
 ]

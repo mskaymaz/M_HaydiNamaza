@@ -25,7 +25,8 @@
       "maghrib": "16:55",
       "isha": "18:25"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-02-01",
@@ -53,7 +54,8 @@
       "maghrib": "17:18",
       "isha": "18:48"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-03-01",
@@ -81,7 +83,8 @@
       "maghrib": "17:36",
       "isha": "19:06"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-04-01",
@@ -109,7 +112,8 @@
       "maghrib": "17:51",
       "isha": "19:21"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-05-01",
@@ -137,7 +141,8 @@
       "maghrib": "18:05",
       "isha": "19:35"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-06-01",
@@ -165,7 +170,8 @@
       "maghrib": "18:20",
       "isha": "19:50"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-07-01",
@@ -193,7 +199,8 @@
       "maghrib": "18:28",
       "isha": "19:58"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-08-01",
@@ -221,7 +228,8 @@
       "maghrib": "18:19",
       "isha": "19:49"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-09-01",
@@ -249,7 +257,8 @@
       "maghrib": "17:53",
       "isha": "19:23"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-10-01",
@@ -277,7 +286,8 @@
       "maghrib": "17:20",
       "isha": "18:50"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-11-01",
@@ -305,7 +315,8 @@
       "maghrib": "16:53",
       "isha": "18:23"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "doha-qatar-2016-12-01",
@@ -333,6 +344,7 @@
       "maghrib": "16:43",
       "isha": "18:13"
     },
-    "source": "adhan-testdata/Times/Doha-Qatar.json"
+    "source": "adhan-testdata/Times/Doha-Qatar.json",
+    "utc_offset_minutes": 180
   }
 ]

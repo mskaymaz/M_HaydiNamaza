@@ -25,7 +25,8 @@
       "maghrib": "17:44",
       "isha": "19:03"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2016-02-01",
@@ -53,7 +54,8 @@
       "maghrib": "18:07",
       "isha": "19:22"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2016-03-01",
@@ -81,7 +83,8 @@
       "maghrib": "18:24",
       "isha": "19:38"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2016-04-01",
@@ -109,7 +112,8 @@
       "maghrib": "18:38",
       "isha": "19:53"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2016-05-01",
@@ -137,7 +141,8 @@
       "maghrib": "18:52",
       "isha": "20:12"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2016-06-01",
@@ -165,7 +170,8 @@
       "maghrib": "19:08",
       "isha": "20:33"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2016-07-01",
@@ -193,7 +199,8 @@
       "maghrib": "19:16",
       "isha": "20:43"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2016-08-01",
@@ -221,7 +228,8 @@
       "maghrib": "19:07",
       "isha": "20:29"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2016-09-01",
@@ -249,7 +257,8 @@
       "maghrib": "18:41",
       "isha": "19:57"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2016-10-01",
@@ -277,7 +286,8 @@
       "maghrib": "18:09",
       "isha": "19:23"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2015-11-01",
@@ -305,7 +315,8 @@
       "maghrib": "17:42",
       "isha": "18:57"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   },
   {
     "id": "dubai-gulf-2015-12-01",
@@ -333,6 +344,7 @@
       "maghrib": "17:32",
       "isha": "18:50"
     },
-    "source": "adhan-testdata/Times/Dubai-Gulf.json"
+    "source": "adhan-testdata/Times/Dubai-Gulf.json",
+    "utc_offset_minutes": 240
   }
 ]

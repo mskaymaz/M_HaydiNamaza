@@ -25,7 +25,8 @@
       "maghrib": "17:01",
       "isha": "18:23"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-02-01",
@@ -53,7 +54,8 @@
       "maghrib": "17:26",
       "isha": "18:45"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-03-01",
@@ -81,7 +83,8 @@
       "maghrib": "17:47",
       "isha": "19:04"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-04-01",
@@ -109,7 +112,8 @@
       "maghrib": "18:06",
       "isha": "19:24"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-05-01",
@@ -137,7 +141,8 @@
       "maghrib": "18:24",
       "isha": "19:47"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-06-01",
@@ -165,7 +170,8 @@
       "maghrib": "18:43",
       "isha": "20:13"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-07-01",
@@ -193,7 +199,8 @@
       "maghrib": "18:52",
       "isha": "20:23"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-08-01",
@@ -221,7 +228,8 @@
       "maghrib": "18:40",
       "isha": "20:06"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-09-01",
@@ -249,7 +257,8 @@
       "maghrib": "18:11",
       "isha": "19:30"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-10-01",
@@ -277,7 +286,8 @@
       "maghrib": "17:34",
       "isha": "18:51"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-11-01",
@@ -305,7 +315,8 @@
       "maghrib": "17:02",
       "isha": "18:20"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "kuwait city-kuwait-2016-12-01",
@@ -333,6 +344,7 @@
       "maghrib": "16:49",
       "isha": "18:11"
     },
-    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json"
+    "source": "adhan-testdata/Times/Kuwait City-Kuwait.json",
+    "utc_offset_minutes": 180
   }
 ]

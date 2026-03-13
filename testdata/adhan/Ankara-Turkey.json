@@ -25,7 +25,8 @@
       "maghrib": "17:40",
       "isha": "19:05"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-01-15",
@@ -53,7 +54,8 @@
       "maghrib": "17:54",
       "isha": "19:17"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-02-01",
@@ -81,7 +83,8 @@
       "maghrib": "18:14",
       "isha": "19:34"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-02-15",
@@ -109,7 +112,8 @@
       "maghrib": "18:30",
       "isha": "19:49"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-03-01",
@@ -137,7 +141,8 @@
       "maghrib": "18:46",
       "isha": "20:04"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-03-15",
@@ -165,7 +170,8 @@
       "maghrib": "19:01",
       "isha": "20:19"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-04-01",
@@ -193,7 +199,8 @@
       "maghrib": "19:19",
       "isha": "20:39"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-04-15",
@@ -221,7 +228,8 @@
       "maghrib": "19:33",
       "isha": "20:56"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-05-01",
@@ -249,7 +257,8 @@
       "maghrib": "19:49",
       "isha": "21:18"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-05-15",
@@ -277,7 +286,8 @@
       "maghrib": "20:03",
       "isha": "21:39"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-06-01",
@@ -305,7 +315,8 @@
       "maghrib": "20:17",
       "isha": "22:00"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-06-15",
@@ -333,7 +344,8 @@
       "maghrib": "20:26",
       "isha": "22:12"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-07-01",
@@ -361,7 +373,8 @@
       "maghrib": "20:28",
       "isha": "22:15"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-07-15",
@@ -389,7 +402,8 @@
       "maghrib": "20:24",
       "isha": "22:06"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-08-01",
@@ -417,7 +431,8 @@
       "maghrib": "20:10",
       "isha": "21:45"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-08-15",
@@ -445,7 +460,8 @@
       "maghrib": "19:54",
       "isha": "21:22"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-09-01",
@@ -473,7 +489,8 @@
       "maghrib": "19:29",
       "isha": "20:52"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-09-15",
@@ -501,7 +518,8 @@
       "maghrib": "19:06",
       "isha": "20:26"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-10-01",
@@ -529,7 +547,8 @@
       "maghrib": "18:40",
       "isha": "19:58"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-10-15",
@@ -557,7 +576,8 @@
       "maghrib": "18:18",
       "isha": "19:36"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-11-01",
@@ -585,7 +605,8 @@
       "maghrib": "17:55",
       "isha": "19:14"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-11-15",
@@ -613,7 +634,8 @@
       "maghrib": "17:40",
       "isha": "19:02"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-12-01",
@@ -641,7 +663,8 @@
       "maghrib": "17:31",
       "isha": "18:55"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   },
   {
     "id": "ankara-turkey-2019-12-15",
@@ -669,6 +692,7 @@
       "maghrib": "17:31",
       "isha": "18:56"
     },
-    "source": "adhan-testdata/Times/Ankara-Turkey.json"
+    "source": "adhan-testdata/Times/Ankara-Turkey.json",
+    "utc_offset_minutes": 180
   }
 ]

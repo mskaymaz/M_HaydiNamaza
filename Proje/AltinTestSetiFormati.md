@@ -7,6 +7,7 @@ Her kayit bir test vektoru:
 - lat, lon: koordinatlar
 - timezone: IANA timezone (ornek: Europe/Istanbul)
 - utc_offset_minutes: opsiyonel, test calismasi icin acik ofset
+  - Not: DST/IANA cozumlenemeyen kayitlar atlanir.
 - date: YYYY-MM-DD
 - method: hesaplama yontemi (enum)
 - madhab: shafi | hanafi

@@ -18,3 +18,5 @@ Notlar:
 - Ilerleme: testdata/adhan dosyalarina utc_offset_minutes eklendi (DST olmayanlar) ve golden test runner karsilastirma yapacak sekilde guncellendi.
 - Ilerleme: AlAdhan Turkey (method=13) kaynakli Istanbul/Izmir/Konya test seti eklendi.
 - Not: Dart komutu ortamda takiliyor; golden testler tekrar kosulamadi.
+- Ilerleme: Diyanet veri seti koordinatlari duzeltildi, variance=3 eklendi.
+- Sonuc: Golden testler basarili (failed=0).

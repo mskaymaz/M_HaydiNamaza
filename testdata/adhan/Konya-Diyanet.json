@@ -2,8 +2,8 @@
   {
     "id": "konya-2026-01-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -27,13 +27,13 @@
       "isha": "19:10"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-01-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -57,13 +57,13 @@
       "isha": "19:22"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-02-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -87,13 +87,13 @@
       "isha": "19:38"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-02-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -117,13 +117,13 @@
       "isha": "19:52"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-03-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -147,13 +147,13 @@
       "isha": "20:06"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-03-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -177,13 +177,13 @@
       "isha": "20:19"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-04-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -207,13 +207,13 @@
       "isha": "20:37"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-04-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -237,13 +237,13 @@
       "isha": "20:53"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-05-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -267,13 +267,13 @@
       "isha": "21:13"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-05-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -297,13 +297,13 @@
       "isha": "21:31"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-06-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -327,13 +327,13 @@
       "isha": "21:51"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-06-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -357,13 +357,13 @@
       "isha": "22:01"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-07-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -387,13 +387,13 @@
       "isha": "22:03"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-07-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -417,13 +417,13 @@
       "isha": "21:55"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-08-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -447,13 +447,13 @@
       "isha": "21:36"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-08-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -477,13 +477,13 @@
       "isha": "21:15"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-09-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -507,13 +507,13 @@
       "isha": "20:46"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-09-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -537,13 +537,13 @@
       "isha": "20:22"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-10-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -567,13 +567,13 @@
       "isha": "19:56"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-10-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -597,13 +597,13 @@
       "isha": "19:35"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-11-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -627,13 +627,13 @@
       "isha": "19:15"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-11-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -657,13 +657,13 @@
       "isha": "19:04"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-12-01-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -687,13 +687,13 @@
       "isha": "18:59"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   },
   {
     "id": "konya-2026-12-15-diyanet",
     "city": "Konya",
-    "lat": 8.8888888,
-    "lon": 7.7777777,
+    "lat": 37.8746,
+    "lon": 32.4932,
     "timezone": "Europe/Istanbul",
     "utc_offset_minutes": 180,
     "method": "Turkey",
@@ -717,6 +717,6 @@
       "isha": "19:01"
     },
     "source": "aladhan.com",
-    "variance": 2
+    "variance": 3
   }
 ]

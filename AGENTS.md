@@ -23,6 +23,8 @@ Execute only requested scope, avoid unnecessary refactors/explanations, and keep
 - Her commit/push notu su formati izler:
   - `<kisa-aciklama> | TASK-xxx[,TASK-yyy] | R.yymmdd_hhmm`
 - `R.yymmdd_hhmm` ayni zamanda kanonik teslim/push isaretidir.
+- Kullanici R bilgisini yazmasa bile commit/push notuna otomatik eklenir.
+- EXE olustururken dosya adina `R.yymmdd_hhmm` eklenir.
 
 ## 1) Bismillah Tetikleyici (MUST)
 
@@ -90,3 +92,9 @@ Execute only requested scope, avoid unnecessary refactors/explanations, and keep
 ## 7) ProjeOrj Arsiv (MUST)
 
 - `ProjeOrj/` klasoru arsivdir: silinmez ve icerigi guncellenmez.
+- Aktif calisma dokumanlari `Proje/` altinda tutulur.
+
+## 8) Token Ekonomisi (Tercih)
+
+- Gunluk calisma tasimasi icin USB `.bundle` tercih edilir (en ekonomik).
+- Uzak repo push sadece yedek ve teslim amacli yapilir.

@@ -74,6 +74,17 @@ class SettingsScreen extends StatelessWidget {
               await localeController.setLocale(localeFor(value));
             },
           ),
+          const Divider(height: 32),
+          ListTile(
+            title: Text(l10n.locationLabel),
+            subtitle: Text(l10n.comingSoon),
+            trailing: const Icon(Icons.location_on_outlined),
+          ),
+          ListTile(
+            title: Text(l10n.calculationMethodLabel),
+            subtitle: Text(l10n.comingSoon),
+            trailing: const Icon(Icons.calculate_outlined),
+          ),
         ],
       ),
     );

@@ -7,5 +7,8 @@
   "languageSystem": "Sistem dili",
   "languageTurkish": "Turkce",
   "languageEnglish": "Ingilizce",
-  "languageArabic": "Arapca"
+  "languageArabic": "Arapca",
+  "locationLabel": "Konum",
+  "calculationMethodLabel": "Hesaplama yontemi",
+  "comingSoon": "Yakinda"
 }

@@ -18,3 +18,4 @@ Notlar:
 - Ilerleme: Ayarlar ekranina konum ve hesaplama yontemi iskeleti eklendi.
 - Ilerleme: Konum secimi taslagi (sehir + enlem/boylam) ve kayit eklendi.
 - Ilerleme: Hesaplama yontemi listesi ve secim UI eklendi.
+- Ilerleme: Secilen yontem ve konum prayer_engine ile baglandi, ana ekranda gosterim yapildi.

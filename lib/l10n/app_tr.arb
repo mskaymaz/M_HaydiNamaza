@@ -33,5 +33,11 @@
   "methodNorthAmerica": "Kuzey Amerika (ISNA)",
   "methodEgyptian": "Misir",
   "methodKarachi": "Karachi",
-  "methodOther": "Diger"
+  "methodOther": "Diger",
+  "prayerFajr": "Imsak",
+  "prayerSunrise": "Gunes",
+  "prayerDhuhr": "Ogle",
+  "prayerAsr": "Ikindi",
+  "prayerMaghrib": "Aksam",
+  "prayerIsha": "Yatsi"
 }

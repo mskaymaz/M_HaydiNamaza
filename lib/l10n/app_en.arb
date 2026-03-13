@@ -33,5 +33,11 @@
   "methodNorthAmerica": "North America (ISNA)",
   "methodEgyptian": "Egyptian",
   "methodKarachi": "Karachi",
-  "methodOther": "Other"
+  "methodOther": "Other",
+  "prayerFajr": "Fajr",
+  "prayerSunrise": "Sunrise",
+  "prayerDhuhr": "Dhuhr",
+  "prayerAsr": "Asr",
+  "prayerMaghrib": "Maghrib",
+  "prayerIsha": "Isha"
 }

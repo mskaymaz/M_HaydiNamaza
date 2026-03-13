@@ -33,5 +33,11 @@
   "methodNorthAmerica": "أمريكا الشمالية (ISNA)",
   "methodEgyptian": "الهيئة المصرية",
   "methodKarachi": "كراتشي",
-  "methodOther": "أخرى"
+  "methodOther": "أخرى",
+  "prayerFajr": "الفجر",
+  "prayerSunrise": "الشروق",
+  "prayerDhuhr": "الظهر",
+  "prayerAsr": "العصر",
+  "prayerMaghrib": "المغرب",
+  "prayerIsha": "العشاء"
 }

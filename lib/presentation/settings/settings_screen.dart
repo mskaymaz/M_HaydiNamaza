@@ -38,7 +38,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _loadMethod() async {
-    final code = await _methodStorage.readCode();
+    var code = await _methodStorage.readCode();
+    if (code == null) {
+      code = 'turkey';
+      await _methodStorage.writeCode(code);
+    }
     if (!mounted) return;
     setState(() {
       _methodCode = code;

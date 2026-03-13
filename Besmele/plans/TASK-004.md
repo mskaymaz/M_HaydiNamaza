@@ -14,3 +14,4 @@ Notlar:
 - Ilerleme: Klasor yapisi ve ilk ekran stub (App + HomeScreen) eklendi.
 - Ilerleme: i18n altyapisi (TR/EN/AR) eklendi.
 - Ilerleme: Ayarlar ekrani ve dil secimi (gecici bellek) eklendi.
+- Ilerleme: Dil tercihi shared_preferences ile kalici hale getirildi.

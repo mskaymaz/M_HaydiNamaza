@@ -15,6 +15,12 @@ class _AppState extends State<App> {
   final LocaleController _localeController = LocaleController();
 
   @override
+  void initState() {
+    super.initState();
+    _localeController.load();
+  }
+
+  @override
   void dispose() {
     _localeController.dispose();
     super.dispose();

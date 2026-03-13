@@ -42,36 +42,36 @@ class SettingsScreen extends StatelessWidget {
             title: Text(l10n.languageSystem),
             value: 'system',
             groupValue: codeFor(current),
-            onChanged: (value) {
+            onChanged: (value) async {
               if (value == null) return;
-              localeController.setLocale(localeFor(value));
+              await localeController.setLocale(localeFor(value));
             },
           ),
           RadioListTile<String>(
             title: Text(l10n.languageTurkish),
             value: 'tr',
             groupValue: codeFor(current),
-            onChanged: (value) {
+            onChanged: (value) async {
               if (value == null) return;
-              localeController.setLocale(localeFor(value));
+              await localeController.setLocale(localeFor(value));
             },
           ),
           RadioListTile<String>(
             title: Text(l10n.languageEnglish),
             value: 'en',
             groupValue: codeFor(current),
-            onChanged: (value) {
+            onChanged: (value) async {
               if (value == null) return;
-              localeController.setLocale(localeFor(value));
+              await localeController.setLocale(localeFor(value));
             },
           ),
           RadioListTile<String>(
             title: Text(l10n.languageArabic),
             value: 'ar',
             groupValue: codeFor(current),
-            onChanged: (value) {
+            onChanged: (value) async {
               if (value == null) return;
-              localeController.setLocale(localeFor(value));
+              await localeController.setLocale(localeFor(value));
             },
           ),
         ],

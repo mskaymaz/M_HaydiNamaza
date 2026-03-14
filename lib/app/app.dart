@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../presentation/home/home_screen.dart';
 import 'locale_controller.dart';

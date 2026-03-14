@@ -8,3 +8,8 @@
 Not:
 - Besmele dosyalari bu uygulamaya ozel netlestirmeler icerebilir.
 - BesmeleTemel genel sablondur; oraya uygulama-ozel detay eklenmez.
+
+Commit/Push veya USB yedek istendiginde:
+- Once baglam MD'leri guncelle (STATE/WORKBOARD/ilgili TASK/DECISIONS/UI_NOTES).
+- Yerel yedek/kayit tamamla.
+- Sonra commit/push veya USB yedek al.

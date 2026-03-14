@@ -5,3 +5,6 @@
 3) Sadece istenen kapsamda degistir.
 4) `STATE.md`, `WORKBOARD.md`, ilgili `TASK-xxx` guncelle.
 5) Teslimde `PUSH_LOG.md` ve `QUALITY_GATE.md`.
+
+Commit/Push/USB yedek:
+- Baglam MD'leri guncelle → yerel yedek → commit/push veya USB.

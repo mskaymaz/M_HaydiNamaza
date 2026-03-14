@@ -12,3 +12,6 @@ Token ekonomisi:
 
 Not:
 - BesmeleTemel yalnizca genel sablondur; uygulama-ozel detay eklenmez.
+
+Commit/Push veya USB yedek istendiginde:
+- Baglam MD'leri guncelle → yerel yedek → commit/push veya USB.

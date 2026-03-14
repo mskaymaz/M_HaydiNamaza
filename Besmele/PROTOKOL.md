@@ -4,3 +4,7 @@
 - Calisma: Degisiklikler ilgili plan dosyasina yazilir.
 - Kayit: STATE ve WORKBOARD guncel tutulur.
 - Teslim: PUSH_LOG ve QUALITY_GATE kullanilir.
+
+Not:
+- Besmele dosyalari bu uygulamaya ozel netlestirmeler icerebilir.
+- BesmeleTemel genel sablondur; oraya uygulama-ozel detay eklenmez.

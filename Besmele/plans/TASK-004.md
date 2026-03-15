@@ -20,3 +20,4 @@ Notlar:
 - Ilerleme: Hesaplama yontemi listesi ve secim UI eklendi.
 - Ilerleme: Secilen yontem ve konum prayer_engine ile baglandi, ana ekranda gosterim yapildi.
 - Ilerleme: UI notlari derlendi, referans gorseller eklendi.
+- Ilerleme: Zemin motif tercihi (templates_line/bg_line_motif02_tile.png) secildi.

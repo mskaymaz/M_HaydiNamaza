@@ -46,3 +46,12 @@ Amac: UI kararlarini tek yerde, kisa ve uygulanabilir tutmak.
 - Ek kartlar: “Gunun Ayeti” (baslik + metin + kaynak).
 - CTA: “Aylik namaz vakitleri” butonu.
 - Not: Uyelik/promosyon yok; sosyal/proje odagi.
+
+## Zemin motif secimi
+- Secilen: `img/templates_line/bg_line_motif02_tile.png` (cizgisel, beyaz zemin, yesil ton).
+
+## Kible Pusulasi (Mobil)
+- Ana menude “Kible” CTA; ayri ekran.
+- Yontem: sensor (manyetometre + ivme) ile cihaz yonu, hesaplanan kible acisi ile fark.
+- UX: buyuk pusula + sabit kible oku; aci degeri; “kalibrasyon” uyarisi.
+- Kalite: sensor gurultusu icin smoothing (low-pass) ve “dogruluk” rozeti.

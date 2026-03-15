@@ -20,4 +20,13 @@ Notlar:
 - Ilerleme: Hesaplama yontemi listesi ve secim UI eklendi.
 - Ilerleme: Secilen yontem ve konum prayer_engine ile baglandi, ana ekranda gosterim yapildi.
 - Ilerleme: UI notlari derlendi, referans gorseller eklendi.
-- Ilerleme: Zemin motif tercihi (templates_line/bg_line_motif02_tile.png) secildi.
+- Ilerleme: Zemin motif tercihi `img/templates_line/bg_motif02.png` olarak netlesti.
+- Ilerleme: Motif renkleri (beyaz cizgi + yesil zemin) duzenlendi ve ana ekrana uygulandi.
+- Ilerleme: Ana ekran ust panel kompaktlandi; baslik kaldirildi.
+- Ilerleme: Liste karti bosluklari, ikon/rozet olculeri ve tipografi ayarlandi.
+- Ilerleme: UI ayarlari icin merkezi `config_registry` eklendi.
+- Ilerleme: Ust panelde vakit + geri sayim sag ustte; konum ikonu ve yontem satiri altinda.
+- Ilerleme: UI ayarlari icin `Proje/UI_Ayarlar.md` eklendi.
+- Ilerleme: Ust panel bloklari sola/saga ayrildi; konuma uzun bas ayarlar.
+- Ilerleme: Konum ikonu saga alindi; gear alt satira tasindi ve saydamlasti.
+- Ilerleme: Ust panel hizalamasi guncellendi; gear ustte kucuk alan, panel kucultuldu.

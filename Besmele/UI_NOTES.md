@@ -7,6 +7,13 @@ Amac: UI kararlarini tek yerde, kisa ve uygulanabilir tutmak.
 - Ust panel cift tik: vakit listesi ac/kapat.
 - Konum tiklaninca favori konum listesi acilir; secilene gore vakitler guncellenir.
 - Opsiyonel: “sessiz mod” (tumu gecici kapat) ikonu ust panelde olabilir.
+- Ust panelde uygulama adi yok; konum + geri sayim odak.
+- Ust panel: sag ustte vakit adi (ustte) + geri sayim (altta); altinda konum ikonu + il-ilce, altinda yontem satiri.
+- Tipografi bazlari: vakit adi 13 -> +%50 = 20, geri sayim 22 -> +%30 = 29 (sayisal sabit kullan).
+- UI ayarlari icin referans: `Proje/UI_Ayarlar.md`.
+- Ust panel revize: vakit + geri sayim sol blok; konum/yontem sag blok. Konuma uzun bas = ayarlar.
+- Konum metni sagda, ikon metnin saginda. Gear alt satira alindi ve daha saydam.
+- Ust panel hizasi: sag blok, sol vakit blogunun alt hizasina oturur; gear ustte kucuk alan.
 
 ## Vakit listesi (satir yapisi)
 - Satir: vakit adi → saat → hatirlatma dakikasi → ses / goz / ezan ikonlari.
@@ -48,7 +55,7 @@ Amac: UI kararlarini tek yerde, kisa ve uygulanabilir tutmak.
 - Not: Uyelik/promosyon yok; sosyal/proje odagi.
 
 ## Zemin motif secimi
-- Secilen: `img/templates_line/bg_line_motif02_tile.png` (cizgisel, beyaz zemin, yesil ton).
+- Secilen: `img/templates_line/bg_motif02.png` (cizgiler beyaz, zemin yesil ton).
 
 ## Kible Pusulasi (Mobil)
 - Ana menude “Kible” CTA; ayri ekran.

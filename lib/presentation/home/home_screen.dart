@@ -7,6 +7,7 @@ import '../../app/calculation_method_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_storage.dart';
 import '../../app/prayer_service.dart';
+import '../../core/config/config_registry.dart';
 import '../../core/prayer_engine/prayer.dart';
 import '../../core/prayer_engine/prayer_times.dart';
 import '../settings/settings_screen.dart';
@@ -182,28 +183,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
           final items = _buildItems(l10n, times);
           final active = _activePrayer(times, _now);
-          final next = _nextPrayer(times, _now, l10n);
-          final countdown = _formatCountdown(_now, next.time);
+    final next = _nextPrayer(times, _now, l10n);
+    final countdown = _formatCountdown(_now, next.time);
+    final ui = ConfigRegistry.mainUi;
 
           return Container(
-            color: const Color(0xFFF5F6F2),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('img/templates_line/bg_motif02.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: ui.screenPadding,
                 child: Column(
                   children: [
                     GestureDetector(
                       onDoubleTap: () => setState(() => _showList = !_showList),
                       child: _TopPanel(
-                        title: l10n.appTitle,
                         location: data.location!.city,
                         method: _methodLabel(l10n, data.methodCode ?? 'turkey'),
                         nextLabel: next.label,
                         countdown: countdown,
                         onSettings: _openSettings,
+                        style: ui.topPanel,
+                        padding: ui.topPanelPadding,
+                        settingsIconSize: ui.settingsIconSize,
+                        settingsIconBoxSize: ui.settingsIconBoxSize,
+                        settingsIconOpacity: ui.settingsIconOpacity,
+                        typography: ui.typography,
                       ),
                     ),
-                    const SizedBox(height: 14),
+                    SizedBox(height: ui.sectionGap),
                     Expanded(
                       child: AnimatedCrossFade(
                         duration: const Duration(milliseconds: 220),
@@ -214,6 +226,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           items: items,
                           active: active,
                           timeFormat: _formatTime,
+                          style: ui.listPanel,
+                          listPadding: ui.listPadding,
+                          rowGap: ui.rowGap,
+                          iconStyle: ui.iconToggle,
+                          chipStyle: ui.reminderChip,
+                          typography: ui.typography,
                         ),
                         secondChild: _CollapsedHint(
                           label: l10n.locationLabel,
@@ -330,92 +348,126 @@ class _PrayerNext {
 }
 
 class _TopPanel extends StatelessWidget {
-  final String title;
   final String location;
   final String method;
   final String nextLabel;
   final String countdown;
   final VoidCallback onSettings;
+  final SurfaceStyle style;
+  final EdgeInsets padding;
+  final double settingsIconSize;
+  final double settingsIconBoxSize;
+  final double settingsIconOpacity;
+  final HomeTypography typography;
 
   const _TopPanel({
-    required this.title,
     required this.location,
     required this.method,
     required this.nextLabel,
     required this.countdown,
     required this.onSettings,
+    required this.style,
+    required this.padding,
+    required this.settingsIconSize,
+    required this.settingsIconBoxSize,
+    required this.settingsIconOpacity,
+    required this.typography,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: padding,
       decoration: BoxDecoration(
-        color: const Color(0xFF1F7A3E),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x33000000),
-            blurRadius: 12,
-            offset: Offset(0, 6),
-          ),
-        ],
+        color: style.color,
+        borderRadius: style.borderRadius,
+        boxShadow: style.shadows,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  nextLabel,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: Colors.white,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w600,
+                        fontSize: typography.nextLabelSize,
                       ),
                 ),
-              ),
-              IconButton(
-                onPressed: onSettings,
-                icon: const Icon(Icons.settings_outlined, color: Colors.white),
-                tooltip: AppLocalizations.of(context)!.settingsTitle,
-              ),
-            ],
-          ),
-          const SizedBox(height: 6),
-          Text(
-            location,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white.withOpacity(0.9),
-                  fontWeight: FontWeight.w600,
+                Text(
+                  countdown,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.5,
+                        fontSize: typography.nextTimeSize,
+                      ),
                 ),
+              ],
+            ),
           ),
-          const SizedBox(height: 4),
-          Text(
-            method,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white.withOpacity(0.8),
-                ),
-          ),
-          const SizedBox(height: 12),
-          Row(
+          const SizedBox(width: 12),
+          Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                nextLabel,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
+              IconButton(
+                onPressed: onSettings,
+                icon: Icon(
+                  Icons.settings_outlined,
+                  color: Colors.white.withOpacity(settingsIconOpacity),
+                  size: settingsIconSize,
+                ),
+                tooltip: AppLocalizations.of(context)!.settingsTitle,
+                padding: EdgeInsets.zero,
+                constraints: BoxConstraints(
+                  minWidth: settingsIconBoxSize,
+                  minHeight: settingsIconBoxSize,
+                ),
               ),
-              const SizedBox(width: 8),
-              Text(
-                countdown,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0.5,
+              const SizedBox(height: 4),
+              GestureDetector(
+                onLongPress: onSettings,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          location,
+                          textAlign: TextAlign.right,
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: typography.locationSize,
+                                  ),
+                        ),
+                        const SizedBox(width: 6),
+                        const Icon(
+                          Icons.location_on_outlined,
+                          size: 16,
+                          color: Color(0xCCFFFFFF),
+                        ),
+                      ],
                     ),
+                    const SizedBox(height: 2),
+                    Text(
+                      method,
+                      textAlign: TextAlign.right,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Colors.white.withOpacity(0.8),
+                            fontSize: typography.methodSize,
+                          ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -429,29 +481,35 @@ class _PrayerList extends StatelessWidget {
   final List<_PrayerItem> items;
   final Prayer active;
   final String Function(DateTime) timeFormat;
+  final SurfaceStyle style;
+  final EdgeInsets listPadding;
+  final double rowGap;
+  final InlineIconStyle iconStyle;
+  final InlineChipStyle chipStyle;
+  final HomeTypography typography;
 
   const _PrayerList({
     required this.items,
     required this.active,
     required this.timeFormat,
+    required this.style,
+    required this.listPadding,
+    required this.rowGap,
+    required this.iconStyle,
+    required this.chipStyle,
+    required this.typography,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF0E3B22),
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x22000000),
-            blurRadius: 16,
-            offset: Offset(0, 8),
-          ),
-        ],
+        color: style.color,
+        borderRadius: style.borderRadius,
+        boxShadow: style.shadows,
       ),
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: listPadding,
         itemBuilder: (context, index) {
           final item = items[index];
           final isActive = item.prayer == active;
@@ -467,27 +525,29 @@ class _PrayerList extends StatelessWidget {
                 Expanded(
                   child: Text(
                     item.label,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
+                          fontSize: typography.listLabelSize,
                         ),
                   ),
                 ),
                 Text(
                   timeFormat(item.time),
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: Colors.white.withOpacity(0.9),
                         fontWeight: FontWeight.w600,
+                        fontSize: typography.listTimeSize,
                       ),
                 ),
-                const SizedBox(width: 12),
-                _ReminderChip(minutes: item.reminderMinutes),
-                const SizedBox(width: 12),
-                const _IconToggle(icon: Icons.volume_up_outlined),
-                const SizedBox(width: 8),
-                const _IconToggle(icon: Icons.remove_red_eye_outlined),
-                const SizedBox(width: 8),
-                const _IconToggle(icon: Icons.mosque_outlined),
+                SizedBox(width: rowGap),
+                _ReminderChip(minutes: item.reminderMinutes, style: chipStyle),
+                SizedBox(width: rowGap),
+                _IconToggle(icon: Icons.volume_up_outlined, style: iconStyle),
+                SizedBox(width: rowGap),
+                _IconToggle(icon: Icons.remove_red_eye_outlined, style: iconStyle),
+                SizedBox(width: rowGap),
+                _IconToggle(icon: Icons.mosque_outlined, style: iconStyle),
               ],
             ),
           );
@@ -504,25 +564,27 @@ class _PrayerList extends StatelessWidget {
 
 class _ReminderChip extends StatelessWidget {
   final int minutes;
+  final InlineChipStyle style;
 
-  const _ReminderChip({required this.minutes});
+  const _ReminderChip({required this.minutes, required this.style});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40,
+      width: style.width,
       alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: EdgeInsets.symmetric(vertical: style.verticalPadding),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.08),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        color: style.backgroundColor,
+        borderRadius: style.borderRadius,
+        border: Border.all(color: style.borderColor),
       ),
       child: Text(
         minutes.toString(),
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.w700,
+              fontSize: style.fontSize,
             ),
       ),
     );
@@ -531,19 +593,20 @@ class _ReminderChip extends StatelessWidget {
 
 class _IconToggle extends StatelessWidget {
   final IconData icon;
+  final InlineIconStyle style;
 
-  const _IconToggle({required this.icon});
+  const _IconToggle({required this.icon, required this.style});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 30,
-      height: 30,
+      width: style.size,
+      height: style.size,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.08),
-        borderRadius: BorderRadius.circular(10),
+        color: style.backgroundColor,
+        borderRadius: style.borderRadius,
       ),
-      child: Icon(icon, size: 18, color: Colors.white),
+      child: Icon(icon, size: style.iconSize, color: Colors.white),
     );
   }
 }

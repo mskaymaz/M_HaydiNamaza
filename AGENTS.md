@@ -72,6 +72,7 @@ Execute only requested scope, avoid unnecessary refactors/explanations, and keep
 - Ciktiyi kisa, net ve test edilebilir tut.
 - Minimum gerekli dosyayi oku, minimum gerekli kaydi yaz, ayni bilgiyi gereksiz tekrar etme.
 - Secret/token/sifre, yerel makineye ozel gizli bilgi ve gereksiz binary artefakt commitlenmez.
+- UI duzenlemede yuzde/oran istenirse deger hesaplanip sayisal olarak yazilir; kodda carpansal ifade (orn. `x * 0.30`) kullanilmaz.
 
 ## 5) Platform Onekleri (MUST)
 

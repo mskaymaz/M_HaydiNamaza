@@ -155,18 +155,40 @@ class _HomeScreenState extends State<HomeScreen> {
           final data = snapshot.data!;
           if (data.location == null) {
             return Center(
-              child: Text(
-                l10n.locationNotSet,
-                textAlign: TextAlign.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    l10n.locationNotSet,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  ElevatedButton.icon(
+                    onPressed: _openSettings,
+                    icon: const Icon(Icons.settings_outlined),
+                    label: Text(l10n.settingsTitle),
+                  ),
+                ],
               ),
             );
           }
 
           if (data.error == 'invalid_location') {
             return Center(
-              child: Text(
-                l10n.locationFillAll,
-                textAlign: TextAlign.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    l10n.locationFillAll,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 12),
+                  ElevatedButton.icon(
+                    onPressed: _openSettings,
+                    icon: const Icon(Icons.settings_outlined),
+                    label: Text(l10n.settingsTitle),
+                  ),
+                ],
               ),
             );
           }
@@ -420,7 +442,7 @@ class _TopPanel extends StatelessWidget {
                 onPressed: onSettings,
                 icon: Icon(
                   Icons.settings_outlined,
-                  color: Colors.white.withOpacity(settingsIconOpacity),
+                  color: Colors.white.withValues(alpha: settingsIconOpacity),
                   size: settingsIconSize,
                 ),
                 tooltip: AppLocalizations.of(context)!.settingsTitle,
@@ -462,7 +484,7 @@ class _TopPanel extends StatelessWidget {
                       method,
                       textAlign: TextAlign.right,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withOpacity(0.8),
+                            color: Colors.white.withValues(alpha: 0.8),
                             fontSize: typography.methodSize,
                           ),
                     ),
@@ -535,7 +557,7 @@ class _PrayerList extends StatelessWidget {
                 Text(
                   timeFormat(item.time),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white.withValues(alpha: 0.9),
                         fontWeight: FontWeight.w600,
                         fontSize: typography.listTimeSize,
                       ),
@@ -552,7 +574,7 @@ class _PrayerList extends StatelessWidget {
             ),
           );
         },
-        separatorBuilder: (_, __) => const Divider(
+        separatorBuilder: (_, _) => const Divider(
           height: 1,
           color: Color(0x22000000),
         ),

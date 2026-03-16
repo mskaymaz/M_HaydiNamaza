@@ -57,22 +57,24 @@ class _CalculationMethodScreenState extends State<CalculationMethodScreen> {
           ),
         ],
       ),
-      body: ListView(
-        children: items
-            .map(
-              (item) => RadioListTile<String>(
-                title: Text(item.label),
-                value: item.code,
-                groupValue: _selected,
-                onChanged: (value) {
-                  if (value == null) return;
-                  setState(() {
-                    _selected = value;
-                  });
-                },
-              ),
-            )
-            .toList(),
+      body: RadioGroup<String>(
+        groupValue: _selected,
+        onChanged: (value) {
+          if (value == null) return;
+          setState(() {
+            _selected = value;
+          });
+        },
+        child: ListView(
+          children: items
+              .map(
+                (item) => RadioListTile<String>(
+                  title: Text(item.label),
+                  value: item.code,
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }

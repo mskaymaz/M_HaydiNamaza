@@ -118,41 +118,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ListTile(
             title: Text(l10n.languageLabel),
           ),
-          RadioListTile<String>(
-            title: Text(l10n.languageSystem),
-            value: 'system',
+          RadioGroup<String>(
             groupValue: codeFor(current),
             onChanged: (value) async {
               if (value == null) return;
               await widget.localeController.setLocale(localeFor(value));
             },
-          ),
-          RadioListTile<String>(
-            title: Text(l10n.languageTurkish),
-            value: 'tr',
-            groupValue: codeFor(current),
-            onChanged: (value) async {
-              if (value == null) return;
-              await widget.localeController.setLocale(localeFor(value));
-            },
-          ),
-          RadioListTile<String>(
-            title: Text(l10n.languageEnglish),
-            value: 'en',
-            groupValue: codeFor(current),
-            onChanged: (value) async {
-              if (value == null) return;
-              await widget.localeController.setLocale(localeFor(value));
-            },
-          ),
-          RadioListTile<String>(
-            title: Text(l10n.languageArabic),
-            value: 'ar',
-            groupValue: codeFor(current),
-            onChanged: (value) async {
-              if (value == null) return;
-              await widget.localeController.setLocale(localeFor(value));
-            },
+            child: Column(
+              children: [
+                RadioListTile<String>(
+                  title: Text(l10n.languageSystem),
+                  value: 'system',
+                ),
+                RadioListTile<String>(
+                  title: Text(l10n.languageTurkish),
+                  value: 'tr',
+                ),
+                RadioListTile<String>(
+                  title: Text(l10n.languageEnglish),
+                  value: 'en',
+                ),
+                RadioListTile<String>(
+                  title: Text(l10n.languageArabic),
+                  value: 'ar',
+                ),
+              ],
+            ),
           ),
           const Divider(height: 32),
           ListTile(

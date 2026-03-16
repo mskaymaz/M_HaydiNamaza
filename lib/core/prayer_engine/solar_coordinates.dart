@@ -16,8 +16,6 @@ class SolarCoordinates {
   static double _declination(double julianDay) {
     final t = Astronomical.julianCentury(julianDay);
     final l0 = Astronomical.meanSolarLongitude(t);
-    final lp = Astronomical.meanLunarLongitude(t);
-    final omega = Astronomical.ascendingLunarNodeLongitude(t);
     final lambda = degreesToRadians(Astronomical.apparentSolarLongitude(t, l0));
     final epsilon0 = Astronomical.meanObliquityOfTheEcliptic(t);
     final epsilonApparent = degreesToRadians(

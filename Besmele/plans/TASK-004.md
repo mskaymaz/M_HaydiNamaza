@@ -30,3 +30,7 @@ Notlar:
 - Ilerleme: Ust panel bloklari sola/saga ayrildi; konuma uzun bas ayarlar.
 - Ilerleme: Konum ikonu saga alindi; gear alt satira tasindi ve saydamlasti.
 - Ilerleme: Ust panel hizalamasi guncellendi; gear ustte kucuk alan, panel kucultuldu.
+- Ilerleme: Dil ve hesaplama listelerinde RadioGroup gecisi yapildi.
+- Ilerleme: Bos/hatali konum ekranina Ayarlar butonu eklendi.
+- Ilerleme: withOpacity uyarilari withValues ile guncellendi.
+- Ilerleme: solar_coordinates kullanilmayan degiskenler temizlendi.

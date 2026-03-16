@@ -48,6 +48,7 @@ Execute only requested scope, avoid unnecessary refactors/explanations, and keep
 - Bismillah sonrasi calisma dongusu icin tek kaynak `Besmele/PROTOKOL.md` dosyasidir.
 - Global durum/handover icin tek kaynak `Besmele/STATE.md` dosyasidir.
 - Gorev listesi icin tek kaynak `Besmele/WORKBOARD.md` dosyasidir.
+- Gorev listesi sorulursa `Besmele/WORKBOARD.md` okunur ve tum maddeler eksiksiz aktarilir; dosya yoksa bu acikca belirtilir ve senkron ihtiyaci belirtilir.
 - Her is icin kanonik plan dosyasi `Besmele/plans/TASK-xxx.md` formatindadir.
 - Push/teslim gecmisi icin tek kaynak `Besmele/PUSH_LOG.md` dosyasidir.
 - Push oncesi kalite kapanisi `Besmele/QUALITY_GATE.md` ile yapilir.

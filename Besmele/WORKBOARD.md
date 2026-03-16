@@ -15,3 +15,4 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-009 | planned | 2026-03-14 16:17 +03:00 | I18n/RTL + bolgesel varsayilanlar |
 | TASK-010 | planned | 2026-03-14 16:17 +03:00 | Performans + hata izleme |
 | TASK-011 | planned | 2026-03-14 16:17 +03:00 | Test/CI-CD + store hazirligi |
+| TASK-012 | done | 2026-03-17 00:50 +03:00 | Gorev listesi yaniti kurali |

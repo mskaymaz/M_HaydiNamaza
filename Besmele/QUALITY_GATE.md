@@ -13,3 +13,8 @@
 - Testler calisti mi? Hayir (calistirilmadi).
 - Temel akislarda regresyon var mi? Bilinmiyor (emulator onayi bekleniyor).
 - Surumleme ve notlar hazir mi? Evet (push log guncellendi).
+
+## 2026-03-17 00:50 +03:00
+- Testler calisti mi? Hayir (calistirilmadi).
+- Temel akislarda regresyon var mi? Bilinmiyor (dokuman guncellemesi).
+- Surumleme ve notlar hazir mi? Evet (push log guncellendi).

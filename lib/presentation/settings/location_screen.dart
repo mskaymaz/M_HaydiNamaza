@@ -325,7 +325,7 @@ class _LocationScreenState extends State<LocationScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           DropdownButtonFormField<String>(
-            value: _countries.any((item) => item.id == _selectedCountryId)
+            initialValue: _countries.any((item) => item.id == _selectedCountryId)
                 ? _selectedCountryId
                 : null,
             decoration: InputDecoration(labelText: l10n.locationCountryLabel),
@@ -374,7 +374,7 @@ class _LocationScreenState extends State<LocationScreen> {
           ),
           if (_favorites.isNotEmpty) ...[
             DropdownButtonFormField<LocationFavorite>(
-              value: _selectedFavorite,
+              initialValue: _selectedFavorite,
               decoration: InputDecoration(labelText: l10n.locationFavoritesLabel),
               items: _favorites
                   .map(
@@ -404,7 +404,7 @@ class _LocationScreenState extends State<LocationScreen> {
           ],
           if (_useList) ...[
             DropdownButtonFormField<String>(
-              value: _states.any((item) => item.id == _selectedStateId)
+              initialValue: _states.any((item) => item.id == _selectedStateId)
                   ? _selectedStateId
                   : null,
               decoration: InputDecoration(labelText: l10n.locationCityLabel),
@@ -435,7 +435,7 @@ class _LocationScreenState extends State<LocationScreen> {
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
-              value: _districts.any((item) => item.id == _selectedDistrictId)
+              initialValue: _districts.any((item) => item.id == _selectedDistrictId)
                   ? _selectedDistrictId
                   : null,
               decoration: InputDecoration(labelText: l10n.locationDistrictLabel),

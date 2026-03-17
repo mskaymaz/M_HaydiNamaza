@@ -33,6 +33,7 @@ class _CalculationMethodScreenState extends State<CalculationMethodScreen> {
     final l10n = AppLocalizations.of(context)!;
     final items = <_MethodItem>[
       _MethodItem('turkey', l10n.methodTurkey),
+      _MethodItem('aladhan', l10n.methodAladhan),
       _MethodItem('muslim_world_league', l10n.methodMuslimWorldLeague),
       _MethodItem('umm_al_qura', l10n.methodUmmAlQura),
       _MethodItem('dubai', l10n.methodDubai),

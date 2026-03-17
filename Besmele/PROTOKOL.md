@@ -8,6 +8,7 @@
 Not:
 - Besmele dosyalari bu uygulamaya ozel netlestirmeler icerebilir.
 - BesmeleTemel genel sablondur; oraya uygulama-ozel detay eklenmez.
+- STATE handover tek satir ve kisa tutulur (token ekonomisi).
 
 Commit/Push veya USB yedek istendiginde:
 - Once baglam MD'leri guncelle (STATE/WORKBOARD/ilgili TASK/DECISIONS/UI_NOTES).

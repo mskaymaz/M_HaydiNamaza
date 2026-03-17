@@ -90,6 +90,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get methodTurkey => 'Türkiye (Diyanet)';
 
   @override
+  String get methodAladhan => 'Aladhan';
+
+  @override
   String get methodMuslimWorldLeague => 'Muslim World League';
 
   @override

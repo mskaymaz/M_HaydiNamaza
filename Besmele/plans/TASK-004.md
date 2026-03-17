@@ -49,3 +49,18 @@ Notlar:
 - Ilerleme: Diyanet vakitlerinde minute offset sifira cekildi (ham saatler).
 - Ilerleme: Konum ekranina ulke listesi eklendi; countryId kaydi ve Diyanet resolve ulke bazli yapildi.
 - Ilerleme: Gun degisiminde vakitleri otomatik yenileme eklendi (countdown sifirlanmasi onleme).
+- Ilerleme: Sıradaki vakit geri sayimi tarih normalize edildi; favori tekrar ekleme engellendi (normalize).
+- Ilerleme: Favori listesi okurken normalize dedup ve storage temizleme eklendi.
+- Ilerleme: AlAdhan kaldirildi; ezanvakti tek harici kaynak.
+- Ilerleme: Hesaplama yontemi listesine Aladhan eklendi.
+- Ilerleme: Diyanet HTML parse denemesi eklendi (once HTML, sonra API).
+- Ilerleme: Ust panel sagda tarih+saat ve tap ile miladi/hicri eklendi.
+- Ilerleme: Saat buyutuldu; il/ilce title-case ve tipografi ayrildi.
+- Ilerleme: Tarih+saat ortaya cekildi; gear sag/ust +10px.
+- Ilerleme: Ust panel icerik dikey hizasi ortaya alindi.
+- Ilerleme: Konum ikonu gear yanina tasindi; konum metni saga kaydi; panel padding azaltildi.
+- Ilerleme: Gear-konum araligi azaltildi (offset ayari).
+- Ilerleme: Tarih+saat sola, vakit+kalan orta hizaya alindi.
+- Ilerleme: Tarih 3 satir; vakit/kalan panel ortasina alindi (stack).
+- Ilerleme: Handover yedegi notu guncellendi.
+- Ilerleme: Ust panel gorsel ayari olusturuldu.

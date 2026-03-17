@@ -162,7 +162,7 @@ class AladhanDataSourceConfig {
 class ConfigRegistry {
   static const MainUiConfig mainUi = MainUiConfig(
     screenPadding: EdgeInsets.fromLTRB(18, 14, 18, 18),
-    topPanelPadding: EdgeInsets.fromLTRB(10, 2, 10, 6),
+    topPanelPadding: EdgeInsets.fromLTRB(10, 1, 10, 4),
     sectionGap: 12,
     settingsIconSize: 16,
     settingsIconBoxSize: 28,

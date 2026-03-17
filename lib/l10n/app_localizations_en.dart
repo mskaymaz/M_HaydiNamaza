@@ -90,6 +90,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get methodTurkey => 'Turkey (Diyanet)';
 
   @override
+  String get methodAladhan => 'Aladhan';
+
+  @override
   String get methodMuslimWorldLeague => 'Muslim World League';
 
   @override

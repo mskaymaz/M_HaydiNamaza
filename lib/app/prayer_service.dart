@@ -59,24 +59,6 @@ class PrayerService {
       }
     }
 
-    final apiTimes = await _tryAladhan(
-      latitude: latitude,
-      longitude: longitude,
-      date: DateTime.now(),
-      methodCode: methodCode,
-      fallbackParams: params,
-    );
-    if (apiTimes != null) {
-      _log('[AlAdhan] ${location.province}/${location.district} '
-          'Fajr ${_fmt(apiTimes.fajr)} '
-          'Sunrise ${_fmt(apiTimes.sunrise)} '
-          'Dhuhr ${_fmt(apiTimes.dhuhr)} '
-          'Asr ${_fmt(apiTimes.asr)} '
-          'Maghrib ${_fmt(apiTimes.maghrib)} '
-          'Isha ${_fmt(apiTimes.isha)}');
-      return apiTimes;
-    }
-
     _log('[Calc] fallback local engine');
     return _engine.calculate(
       date: DateTime.now(),
@@ -291,7 +273,7 @@ class PrayerService {
         dhuhr: dhuhr!,
         asr: asr!,
         sunset: maghrib!,
-        maghrib: maghrib!,
+        maghrib: maghrib,
         isha: isha!,
       );
     } catch (_) {

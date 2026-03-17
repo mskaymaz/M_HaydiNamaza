@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../app/calculation_method_storage.dart';
@@ -31,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime _now = DateTime.now();
   DateTime _lastRefreshDay = DateTime.now();
   bool _showList = true;
+  bool _showHijriDate = false;
 
   @override
   void initState() {
@@ -106,6 +108,155 @@ class _HomeScreenState extends State<HomeScreen> {
     final h = dt.hour.toString().padLeft(2, '0');
     final m = dt.minute.toString().padLeft(2, '0');
     return '$h:$m';
+  }
+
+  String _formatClock(DateTime dt) {
+    final h = dt.hour.toString().padLeft(2, '0');
+    final m = dt.minute.toString().padLeft(2, '0');
+    final s = dt.second.toString().padLeft(2, '0');
+    return '$h:$m:$s';
+  }
+
+  String _formatGregorianYear(DateTime dt, AppLocalizations l10n) {
+    return DateFormat.y(l10n.localeName).format(dt);
+  }
+
+  String _formatGregorianDayMonth(DateTime dt, AppLocalizations l10n) {
+    return DateFormat.MMMMd(l10n.localeName).format(dt);
+  }
+
+  String _formatHijriYear(DateTime dt) {
+    final hijri = _toHijri(dt);
+    return hijri.year.toString();
+  }
+
+  String _formatHijriDayMonth(DateTime dt, AppLocalizations l10n) {
+    final hijri = _toHijri(dt);
+    final months = _hijriMonths(l10n.localeName);
+    final monthName =
+        (hijri.month >= 1 && hijri.month <= 12) ? months[hijri.month - 1] : '';
+    return '${hijri.day} $monthName';
+  }
+
+  String _titleCase(String input, String locale) {
+    final isTr = locale.startsWith('tr');
+    final lower = _lowerLocale(input.trim(), isTr);
+    if (lower.isEmpty) return lower;
+    final buffer = StringBuffer();
+    var capitalizeNext = true;
+    for (final rune in lower.runes) {
+      final ch = String.fromCharCode(rune);
+      if (_isWordChar(ch)) {
+        if (capitalizeNext) {
+          buffer.write(_upperLocale(ch, isTr));
+          capitalizeNext = false;
+        } else {
+          buffer.write(ch);
+        }
+      } else {
+        buffer.write(ch);
+        capitalizeNext = ch == ' ' || ch == '/' || ch == '-' || ch == '.';
+      }
+    }
+    return buffer.toString();
+  }
+
+  String _lowerLocale(String value, bool isTr) {
+    if (!isTr) return value.toLowerCase();
+    return value
+        .replaceAll('I', 'ı')
+        .replaceAll('İ', 'i')
+        .toLowerCase();
+  }
+
+  String _upperLocale(String value, bool isTr) {
+    if (!isTr) return value.toUpperCase();
+    if (value == 'i') return 'İ';
+    if (value == 'ı') return 'I';
+    return value.toUpperCase();
+  }
+
+  bool _isWordChar(String ch) {
+    return RegExp(r'[0-9A-Za-zÇĞİÖŞÜçğıöşü]').hasMatch(ch);
+  }
+
+  List<String> _hijriMonths(String locale) {
+    if (locale.startsWith('ar')) {
+      return const [
+        'محرم',
+        'صفر',
+        'ربيع الأول',
+        'ربيع الآخر',
+        'جمادى الأولى',
+        'جمادى الآخرة',
+        'رجب',
+        'شعبان',
+        'رمضان',
+        'شوال',
+        'ذو القعدة',
+        'ذو الحجة',
+      ];
+    }
+    if (locale.startsWith('tr')) {
+      return const [
+        'Muharrem',
+        'Safer',
+        'Rebiülevvel',
+        'Rebiülahir',
+        'Cemaziyelevvel',
+        'Cemaziyelahir',
+        'Recep',
+        'Şaban',
+        'Ramazan',
+        'Şevval',
+        'Zilkade',
+        'Zilhicce',
+      ];
+    }
+    return const [
+      'Muharram',
+      'Safar',
+      'Rabiʻ al-awwal',
+      'Rabiʻ al-thani',
+      'Jumada al-awwal',
+      'Jumada al-thani',
+      'Rajab',
+      'Shaʻban',
+      'Ramadan',
+      'Shawwal',
+      'Dhu al-Qadah',
+      'Dhu al-Hijjah',
+    ];
+  }
+
+  _HijriDate _toHijri(DateTime date) {
+    final y = date.year;
+    final m = date.month;
+    final d = date.day;
+    final a = ((14 - m) / 12).floor();
+    final y2 = y + 4800 - a;
+    final m2 = m + 12 * a - 3;
+    final jd = d +
+        ((153 * m2 + 2) / 5).floor() +
+        365 * y2 +
+        (y2 / 4).floor() -
+        (y2 / 100).floor() +
+        (y2 / 400).floor() -
+        32045;
+    var l = jd - 1948440 + 10632;
+    final n = ((l - 1) / 10631).floor();
+    l = l - 10631 * n + 354;
+    final j = (((10985 - l) / 5316).floor()) *
+            (((50 * l) / 17719).floor()) +
+        (((l / 5670).floor()) * (((43 * l) / 15238).floor()));
+    l = l -
+        (((30 - j) / 15).floor()) * (((17719 * j) / 50).floor()) -
+        ((j / 16).floor()) * (((15238 * j) / 43).floor()) +
+        29;
+    final month = ((24 * l) / 709).floor();
+    final day = l - ((709 * month) / 24).floor();
+    final year = 30 * n + j - 30;
+    return _HijriDate(year: year, month: month, day: day);
   }
 
   Future<void> _openSettings() async {
@@ -188,6 +339,19 @@ class _HomeScreenState extends State<HomeScreen> {
           final next = _nextPrayer(times, _now, l10n);
           final countdown = _formatCountdown(_now, next.time);
           final nextTime = _formatTime(next.time);
+          final location = data.location!;
+          final provinceLabel = _titleCase(location.province, l10n.localeName);
+          final districtLabel = _titleCase(location.district, l10n.localeName);
+          final displayName = districtLabel.trim().isEmpty
+              ? provinceLabel
+              : '$provinceLabel / $districtLabel';
+          final dateYearLabel = _showHijriDate
+              ? _formatHijriYear(_now)
+              : _formatGregorianYear(_now, l10n);
+          final dateDayMonthLabel = _showHijriDate
+              ? _formatHijriDayMonth(_now, l10n)
+              : _formatGregorianDayMonth(_now, l10n);
+          final timeLabel = _formatClock(_now);
           final ui = ConfigRegistry.mainUi;
 
           return Container(
@@ -205,10 +369,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     GestureDetector(
                       onDoubleTap: () => setState(() => _showList = !_showList),
                       child: _TopPanel(
-                        location: data.location!.displayName,
+                        provinceLabel: provinceLabel,
+                        districtLabel: districtLabel,
                         nextLabel: next.label,
                         nextTime: nextTime,
                         countdown: countdown,
+                        dateYearLabel: dateYearLabel,
+                        dateDayMonthLabel: dateDayMonthLabel,
+                        timeLabel: timeLabel,
+                        onToggleDate: () =>
+                            setState(() => _showHijriDate = !_showHijriDate),
                         onSettings: _openSettings,
                         style: ui.topPanel,
                         padding: ui.topPanelPadding,
@@ -238,7 +408,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         secondChild: _CollapsedHint(
                           label: l10n.locationLabel,
-                          value: data.location!.displayName,
+                          value: displayName,
                         ),
                       ),
                     ),
@@ -253,49 +423,61 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Prayer _activePrayer(PrayerTimes times, DateTime now) {
-    if (!now.isBefore(times.isha)) {
+    final fajr = _atToday(times.fajr, now);
+    final sunrise = _atToday(times.sunrise, now);
+    final dhuhr = _atToday(times.dhuhr, now);
+    final asr = _atToday(times.asr, now);
+    final maghrib = _atToday(times.maghrib, now);
+    final isha = _atToday(times.isha, now);
+    if (!now.isBefore(isha)) {
       return Prayer.isha;
     }
-    if (!now.isBefore(times.maghrib)) {
+    if (!now.isBefore(maghrib)) {
       return Prayer.maghrib;
     }
-    if (!now.isBefore(times.asr)) {
+    if (!now.isBefore(asr)) {
       return Prayer.asr;
     }
-    if (!now.isBefore(times.dhuhr)) {
+    if (!now.isBefore(dhuhr)) {
       return Prayer.dhuhr;
     }
-    if (!now.isBefore(times.sunrise)) {
+    if (!now.isBefore(sunrise)) {
       return Prayer.sunrise;
     }
-    if (!now.isBefore(times.fajr)) {
+    if (!now.isBefore(fajr)) {
       return Prayer.fajr;
     }
     return Prayer.fajr;
   }
 
   _PrayerNext _nextPrayer(PrayerTimes times, DateTime now, AppLocalizations l10n) {
-    if (now.isBefore(times.fajr)) {
-      return _PrayerNext(label: l10n.prayerFajr, time: times.fajr);
+    final fajr = _atToday(times.fajr, now);
+    final sunrise = _atToday(times.sunrise, now);
+    final dhuhr = _atToday(times.dhuhr, now);
+    final asr = _atToday(times.asr, now);
+    final maghrib = _atToday(times.maghrib, now);
+    final isha = _atToday(times.isha, now);
+    if (now.isBefore(fajr)) {
+      return _PrayerNext(label: l10n.prayerFajr, time: fajr);
     }
-    if (now.isBefore(times.sunrise)) {
-      return _PrayerNext(label: l10n.prayerSunrise, time: times.sunrise);
+    if (now.isBefore(sunrise)) {
+      return _PrayerNext(label: l10n.prayerSunrise, time: sunrise);
     }
-    if (now.isBefore(times.dhuhr)) {
-      return _PrayerNext(label: l10n.prayerDhuhr, time: times.dhuhr);
+    if (now.isBefore(dhuhr)) {
+      return _PrayerNext(label: l10n.prayerDhuhr, time: dhuhr);
     }
-    if (now.isBefore(times.asr)) {
-      return _PrayerNext(label: l10n.prayerAsr, time: times.asr);
+    if (now.isBefore(asr)) {
+      return _PrayerNext(label: l10n.prayerAsr, time: asr);
     }
-    if (now.isBefore(times.maghrib)) {
-      return _PrayerNext(label: l10n.prayerMaghrib, time: times.maghrib);
+    if (now.isBefore(maghrib)) {
+      return _PrayerNext(label: l10n.prayerMaghrib, time: maghrib);
     }
-    if (now.isBefore(times.isha)) {
-      return _PrayerNext(label: l10n.prayerIsha, time: times.isha);
+    if (now.isBefore(isha)) {
+      return _PrayerNext(label: l10n.prayerIsha, time: isha);
     }
     return _PrayerNext(
       label: l10n.prayerFajr,
-      time: times.fajr.add(const Duration(days: 1)),
+      time: fajr.add(const Duration(days: 1)),
     );
   }
 
@@ -306,6 +488,17 @@ class _HomeScreenState extends State<HomeScreen> {
     final minutes = ((totalSeconds % 3600) ~/ 60).toString().padLeft(2, '0');
     final seconds = (totalSeconds % 60).toString().padLeft(2, '0');
     return '$hours:$minutes:$seconds';
+  }
+
+  DateTime _atToday(DateTime source, DateTime now) {
+    return DateTime(
+      now.year,
+      now.month,
+      now.day,
+      source.hour,
+      source.minute,
+      source.second,
+    );
   }
 
   List<_PrayerItem> _buildItems(AppLocalizations l10n, PrayerTimes times) {
@@ -350,11 +543,24 @@ class _PrayerNext {
   _PrayerNext({required this.label, required this.time});
 }
 
+class _HijriDate {
+  final int year;
+  final int month;
+  final int day;
+
+  const _HijriDate({required this.year, required this.month, required this.day});
+}
+
 class _TopPanel extends StatelessWidget {
-  final String location;
+  final String provinceLabel;
+  final String districtLabel;
   final String nextLabel;
   final String nextTime;
   final String countdown;
+  final String dateYearLabel;
+  final String dateDayMonthLabel;
+  final String timeLabel;
+  final VoidCallback onToggleDate;
   final VoidCallback onSettings;
   final SurfaceStyle style;
   final EdgeInsets padding;
@@ -364,10 +570,15 @@ class _TopPanel extends StatelessWidget {
   final HomeTypography typography;
 
   const _TopPanel({
-    required this.location,
+    required this.provinceLabel,
+    required this.districtLabel,
     required this.nextLabel,
     required this.nextTime,
     required this.countdown,
+    required this.dateYearLabel,
+    required this.dateDayMonthLabel,
+    required this.timeLabel,
+    required this.onToggleDate,
     required this.onSettings,
     required this.style,
     required this.padding,
@@ -386,98 +597,140 @@ class _TopPanel extends StatelessWidget {
         borderRadius: style.borderRadius,
         boxShadow: style.shadows,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      nextLabel,
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: typography.nextLabelSize,
-                          ),
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      nextTime,
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.85),
-                            fontWeight: FontWeight.w300,
-                            fontSize: typography.nextLabelSize,
-                          ),
-                    ),
-                  ],
-                ),
-                Text(
-                  countdown,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.5,
-                        fontSize: typography.nextTimeSize,
-                      ),
-                ),
-              ],
+          Align(
+            alignment: Alignment.centerLeft,
+            child: GestureDetector(
+              onTap: onToggleDate,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    dateYearLabel,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.85),
+                          fontWeight: FontWeight.w300,
+                          fontSize: typography.methodSize + 1,
+                        ),
+                  ),
+                  Text(
+                    dateDayMonthLabel,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: typography.methodSize + 1,
+                        ),
+                  ),
+                  Text(
+                    timeLabel,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.85),
+                          fontWeight: FontWeight.w300,
+                          fontSize: typography.nextLabelSize,
+                        ),
+                  ),
+                ],
+              ),
             ),
           ),
-          const SizedBox(width: 12),
           Column(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              IconButton(
-                onPressed: onSettings,
-                icon: Icon(
-                  Icons.settings_outlined,
-                  color: Colors.white.withValues(alpha: settingsIconOpacity),
-                  size: settingsIconSize,
-                ),
-                tooltip: AppLocalizations.of(context)!.settingsTitle,
-                padding: EdgeInsets.zero,
-                constraints: BoxConstraints(
-                  minWidth: settingsIconBoxSize,
-                  minHeight: settingsIconBoxSize,
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    nextLabel,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: typography.nextLabelSize,
+                        ),
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    nextTime,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.85),
+                          fontWeight: FontWeight.w300,
+                          fontSize: typography.nextLabelSize,
+                        ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 0),
-              GestureDetector(
-                onLongPress: onSettings,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
+              Text(
+                countdown,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.5,
+                      fontSize: typography.nextTimeSize,
+                    ),
+              ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Transform.translate(
+                  offset: const Offset(10, -10),
+                  child: IconButton(
+                    onPressed: onSettings,
+                    icon: Icon(
+                      Icons.settings_outlined,
+                      color: Colors.white.withValues(alpha: settingsIconOpacity),
+                      size: settingsIconSize,
+                    ),
+                    tooltip: AppLocalizations.of(context)!.settingsTitle,
+                    padding: EdgeInsets.zero,
+                    constraints: BoxConstraints(
+                      minWidth: settingsIconBoxSize,
+                      minHeight: settingsIconBoxSize,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 0),
+                Transform.translate(
+                  offset: const Offset(0, -20),
+                  child: GestureDetector(
+                    onLongPress: onSettings,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          location,
+                          provinceLabel,
                           textAlign: TextAlign.right,
                           style:
                               Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w700,
+                                    fontWeight: FontWeight.w500,
                                     fontSize: typography.locationSize,
                                   ),
                         ),
-                        const SizedBox(width: 6),
-                        const Icon(
-                          Icons.location_on_outlined,
-                          size: 16,
-                          color: Color(0xCCFFFFFF),
-                        ),
+                        if (districtLabel.trim().isNotEmpty)
+                          Text(
+                            districtLabel,
+                            textAlign: TextAlign.right,
+                            style:
+                                Theme.of(context).textTheme.titleSmall?.copyWith(
+                                      color: Colors.white.withValues(alpha: 0.85),
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: typography.locationSize,
+                                    ),
+                          ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

@@ -262,6 +262,12 @@ abstract class AppLocalizations {
   /// **'Turkey (Diyanet)'**
   String get methodTurkey;
 
+  /// No description provided for @methodAladhan.
+  ///
+  /// In en, this message translates to:
+  /// **'Aladhan'**
+  String get methodAladhan;
+
   /// No description provided for @methodMuslimWorldLeague.
   ///
   /// In en, this message translates to:

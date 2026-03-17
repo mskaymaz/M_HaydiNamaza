@@ -65,14 +65,31 @@ class LocationFavoritesStorage {
     final prefs = await SharedPreferences.getInstance();
     final rawList = prefs.getStringList(_key) ?? <String>[];
     final result = <LocationFavorite>[];
+    final seen = <String>{};
+    var changed = false;
     for (final raw in rawList) {
       try {
         final json = jsonDecode(raw);
         if (json is Map<String, dynamic>) {
           final fav = LocationFavorite.fromJson(json);
-          if (fav != null) result.add(fav);
+          if (fav != null) {
+            final key = _favoriteKey(fav);
+            if (seen.add(key)) {
+              result.add(fav);
+            } else {
+              changed = true;
+            }
+          } else {
+            changed = true;
+          }
         }
-      } catch (_) {}
+      } catch (_) {
+        changed = true;
+      }
+    }
+    if (changed) {
+      final cleaned = result.map((fav) => jsonEncode(fav.toJson())).toList();
+      await prefs.setStringList(_key, cleaned);
     }
     return result;
   }
@@ -80,13 +97,57 @@ class LocationFavoritesStorage {
   Future<void> add(LocationFavorite favorite) async {
     final prefs = await SharedPreferences.getInstance();
     final current = await read();
-    final exists = current.any((fav) =>
-        fav.province == favorite.province &&
-        fav.district == favorite.district &&
-        (fav.countryId ?? '') == (favorite.countryId ?? ''));
+    final targetKey = _favoriteKey(favorite);
+    final exists = current.any((fav) => _favoriteKey(fav) == targetKey);
     if (exists) return;
     current.add(favorite);
     final rawList = current.map((fav) => jsonEncode(fav.toJson())).toList();
     await prefs.setStringList(_key, rawList);
+  }
+
+  String _favoriteKey(LocationFavorite favorite) {
+    final countryId = favorite.countryId ?? '';
+    return '${_normalizeName(countryId)}|'
+        '${_normalizeName(favorite.province)}|'
+        '${_normalizeName(favorite.district)}';
+  }
+
+  String _normalizeName(String input) {
+    final upper = input.trim().toUpperCase();
+    final buffer = StringBuffer();
+    for (final rune in upper.runes) {
+      switch (rune) {
+        case 0x00C7: // Ã‡
+          buffer.write('C');
+          break;
+        case 0x011E: // Ä
+          buffer.write('G');
+          break;
+        case 0x0130: // Ä°
+          buffer.write('I');
+          break;
+        case 0x00D6: // Ã–
+          buffer.write('O');
+          break;
+        case 0x015E: // Åž
+          buffer.write('S');
+          break;
+        case 0x00DC: // Ãœ
+          buffer.write('U');
+          break;
+        case 0x00C2: // Ã‚
+          buffer.write('A');
+          break;
+        case 0x00CE: // ÃŽ
+          buffer.write('I');
+          break;
+        case 0x00DB: // Ã›
+          buffer.write('U');
+          break;
+        default:
+          buffer.write(String.fromCharCode(rune));
+      }
+    }
+    return buffer.toString().replaceAll(RegExp(r'[^A-Z0-9]'), '');
   }
 }

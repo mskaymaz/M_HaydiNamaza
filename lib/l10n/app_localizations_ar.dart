@@ -90,6 +90,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get methodTurkey => 'تركيا (ديانت)';
 
   @override
+  String get methodAladhan => 'Aladhan';
+
+  @override
   String get methodMuslimWorldLeague => 'رابطة العالم الإسلامي';
 
   @override

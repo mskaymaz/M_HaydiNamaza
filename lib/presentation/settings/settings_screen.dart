@@ -64,6 +64,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       switch (_methodCode) {
         case 'turkey':
           return l10n.methodTurkey;
+        case 'aladhan':
+          return l10n.methodAladhan;
         case 'muslim_world_league':
           return l10n.methodMuslimWorldLeague;
         case 'umm_al_qura':

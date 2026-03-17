@@ -12,7 +12,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get appTitle => 'MHaydiNamaza';
 
   @override
-  String get homePlaceholder => 'Namaz vakitleri yakinda burada.';
+  String get homePlaceholder => 'Namaz vakitleri yakında burada.';
 
   @override
   String get settingsTitle => 'Ayarlar';
@@ -24,31 +24,46 @@ class AppLocalizationsTr extends AppLocalizations {
   String get languageSystem => 'Sistem dili';
 
   @override
-  String get languageTurkish => 'Turkce';
+  String get languageTurkish => 'Türkçe';
 
   @override
-  String get languageEnglish => 'Ingilizce';
+  String get languageEnglish => 'İngilizce';
 
   @override
-  String get languageArabic => 'Arapca';
+  String get languageArabic => 'Arapça';
 
   @override
   String get locationLabel => 'Konum';
 
   @override
-  String get calculationMethodLabel => 'Hesaplama yontemi';
+  String get calculationMethodLabel => 'Hesaplama yöntemi';
 
   @override
-  String get comingSoon => 'Yakinda';
+  String get comingSoon => 'Yakında';
 
   @override
-  String get locationNotSet => 'Secilmedi';
+  String get locationNotSet => 'Seçilmedi';
 
   @override
   String get locationEditTitle => 'Konum';
 
   @override
-  String get locationCityLabel => 'Sehir';
+  String get locationCountryLabel => 'Ulke';
+
+  @override
+  String get locationCityLabel => 'İl';
+
+  @override
+  String get locationUseList => 'Listeden seç';
+
+  @override
+  String get locationFavoritesLabel => 'Favoriler';
+
+  @override
+  String get locationAddFavorite => 'Favorilere ekle';
+
+  @override
+  String get locationDistrictLabel => 'İlçe';
 
   @override
   String get locationLatitudeLabel => 'Enlem';
@@ -60,19 +75,19 @@ class AppLocalizationsTr extends AppLocalizations {
   String get locationSave => 'Kaydet';
 
   @override
-  String get locationFillAll => 'Lutfen tum alanlari doldurun.';
+  String get locationFillAll => 'Lütfen tüm alanları doldurun.';
 
   @override
-  String get methodNotSet => 'Secilmedi';
+  String get methodNotSet => 'Seçilmedi';
 
   @override
-  String get methodEditTitle => 'Hesaplama yontemi';
+  String get methodEditTitle => 'Hesaplama yöntemi';
 
   @override
   String get methodSave => 'Kaydet';
 
   @override
-  String get methodTurkey => 'Turkiye (Diyanet)';
+  String get methodTurkey => 'Türkiye (Diyanet)';
 
   @override
   String get methodMuslimWorldLeague => 'Muslim World League';
@@ -102,29 +117,29 @@ class AppLocalizationsTr extends AppLocalizations {
   String get methodNorthAmerica => 'Kuzey Amerika (ISNA)';
 
   @override
-  String get methodEgyptian => 'Misir';
+  String get methodEgyptian => 'Mısır';
 
   @override
   String get methodKarachi => 'Karachi';
 
   @override
-  String get methodOther => 'Diger';
+  String get methodOther => 'Diğer';
 
   @override
-  String get prayerFajr => 'Imsak';
+  String get prayerFajr => 'İmsak';
 
   @override
-  String get prayerSunrise => 'Gunes';
+  String get prayerSunrise => 'Güneş';
 
   @override
-  String get prayerDhuhr => 'Ogle';
+  String get prayerDhuhr => 'Öğle';
 
   @override
-  String get prayerAsr => 'Ikindi';
+  String get prayerAsr => 'İkindi';
 
   @override
-  String get prayerMaghrib => 'Aksam';
+  String get prayerMaghrib => 'Akşam';
 
   @override
-  String get prayerIsha => 'Yatsi';
+  String get prayerIsha => 'Yatsı';
 }

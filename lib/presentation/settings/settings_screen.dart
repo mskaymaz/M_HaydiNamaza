@@ -57,7 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     String locationSubtitle() {
       final data = _location;
       if (data == null) return l10n.locationNotSet;
-      return '${data.city} (${data.latitude}, ${data.longitude})';
+      return '${data.displayName} (${data.latitude}, ${data.longitude})';
     }
 
     String methodSubtitle() {

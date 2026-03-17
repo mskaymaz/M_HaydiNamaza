@@ -48,7 +48,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get locationEditTitle => 'الموقع';
 
   @override
-  String get locationCityLabel => 'المدينة';
+  String get locationCountryLabel => '?????';
+
+  @override
+  String get locationCityLabel => 'المحافظة';
+
+  @override
+  String get locationUseList => 'اختر من القائمة';
+
+  @override
+  String get locationFavoritesLabel => 'المفضلة';
+
+  @override
+  String get locationAddFavorite => 'أضف إلى المفضلة';
+
+  @override
+  String get locationDistrictLabel => 'المنطقة';
 
   @override
   String get locationLatitudeLabel => 'خط العرض';

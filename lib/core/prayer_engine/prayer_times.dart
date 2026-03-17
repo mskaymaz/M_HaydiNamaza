@@ -34,6 +34,32 @@ class PrayerTimes {
     this.isha,
   );
 
+  factory PrayerTimes.fromTimings({
+    required Coordinates coordinates,
+    required DateTime date,
+    required CalculationParameters calculationParameters,
+    required DateTime fajr,
+    required DateTime sunrise,
+    required DateTime dhuhr,
+    required DateTime asr,
+    required DateTime sunset,
+    required DateTime maghrib,
+    required DateTime isha,
+  }) {
+    return PrayerTimes._(
+      coordinates,
+      date,
+      calculationParameters,
+      fajr,
+      sunrise,
+      dhuhr,
+      asr,
+      sunset,
+      maghrib,
+      isha,
+    );
+  }
+
   factory PrayerTimes(
     Coordinates coordinates,
     DateTime date,

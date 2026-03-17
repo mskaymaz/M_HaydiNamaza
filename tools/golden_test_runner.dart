@@ -1,12 +1,12 @@
 ﻿import 'dart:convert';
 import 'dart:io';
 
-import '../lib/core/prayer_engine/calculation_method.dart';
-import '../lib/core/prayer_engine/calculation_parameters.dart';
-import '../lib/core/prayer_engine/coordinates.dart';
-import '../lib/core/prayer_engine/high_latitude_rule.dart';
-import '../lib/core/prayer_engine/madhab.dart';
-import '../lib/core/prayer_engine/prayer_engine.dart';
+import 'package:mhaydinamaza/core/prayer_engine/calculation_method.dart';
+import 'package:mhaydinamaza/core/prayer_engine/calculation_parameters.dart';
+import 'package:mhaydinamaza/core/prayer_engine/coordinates.dart';
+import 'package:mhaydinamaza/core/prayer_engine/high_latitude_rule.dart';
+import 'package:mhaydinamaza/core/prayer_engine/madhab.dart';
+import 'package:mhaydinamaza/core/prayer_engine/prayer_engine.dart';
 
 CalculationParameters _methodToParams(String method) {
   switch (method) {

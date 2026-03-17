@@ -178,11 +178,41 @@ abstract class AppLocalizations {
   /// **'Location'**
   String get locationEditTitle;
 
+  /// No description provided for @locationCountryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get locationCountryLabel;
+
   /// No description provided for @locationCityLabel.
   ///
   /// In en, this message translates to:
-  /// **'City'**
+  /// **'Province'**
   String get locationCityLabel;
+
+  /// No description provided for @locationUseList.
+  ///
+  /// In en, this message translates to:
+  /// **'Select from list'**
+  String get locationUseList;
+
+  /// No description provided for @locationFavoritesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get locationFavoritesLabel;
+
+  /// No description provided for @locationAddFavorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to favorites'**
+  String get locationAddFavorite;
+
+  /// No description provided for @locationDistrictLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get locationDistrictLabel;
 
   /// No description provided for @locationLatitudeLabel.
   ///

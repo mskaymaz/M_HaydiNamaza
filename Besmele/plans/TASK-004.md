@@ -10,6 +10,9 @@ Durum: in_progress
 Notlar:
 - Flutter komutlari takilma olursa dart-sdk yolu ile calistirilabilir.
 - Proje adi ve paket kimligi kesinlestirilecek.
+- Ikincil referans (Diyanet uyumu yok): https://www.turktakvim.com/index.php?link=html/namaz_vakitleri_nasil_hesaplanir.php (TR PDF: https://www.turktakvim.com/pdf/tr.1.pdf)
+- Backlog: Haftalik/aylik/ozel tarih araligi liste + PDF/Excel/Word disa aktarim (cache tasarimi buna uygun kurulacak).
+- Diyanet birebir hedefi icin veri kaynagi: https://ezanvakti.imsakiyem.com (Diyanet kaynakli API); Diyanet sayfasinda acik JSON endpoint yok.
 - Ilerleme: Flutter iskeleti (Android + iOS) olusturuldu.
 - Ilerleme: Klasor yapisi ve ilk ekran stub (App + HomeScreen) eklendi.
 - Ilerleme: i18n altyapisi (TR/EN/AR) eklendi.
@@ -34,3 +37,15 @@ Notlar:
 - Ilerleme: Bos/hatali konum ekranina Ayarlar butonu eklendi.
 - Ilerleme: withOpacity uyarilari withValues ile guncellendi.
 - Ilerleme: solar_coordinates kullanilmayan degiskenler temizlendi.
+- Ilerleme: Konum alanlari il/ilce olacak sekilde guncellendi; Diyanet odakli yapiya uygun hale getirildi.
+- Ilerleme: AlAdhan API ile vakit cekme eklendi (Shafii school, method mapping, fallback local hesaplama).
+- Ilerleme: Ust panelde vakit adi yanina saat eklendi; sag tarafta yontem satiri kaldirildi, gear yukariya alindi.
+- Ilerleme: Ust panelde vakit saati ince ve esit boyuta alindi; alt hizalama ve padding ayarlandi.
+- Ilerleme: Diyanet verisi icin ezanvakti.imsakiyem.com API’dan il/ilce cozumleme ve gunluk vakit cekme eklendi.
+- Ilerleme: Diyanet/AlAdhan/calc zamanlari icin debug log eklendi.
+- Ilerleme: Ayarlar->Konum icin Diyanet listeden il/ilce secimi ve favoriler eklendi.
+- Ilerleme: Konum dropdown deger eslesmesi sabitlendi.
+- Ilerleme: Diyanet entegrasyonu icin ayrintili debug loglar eklendi.
+- Ilerleme: Diyanet vakitlerinde minute offset sifira cekildi (ham saatler).
+- Ilerleme: Konum ekranina ulke listesi eklendi; countryId kaydi ve Diyanet resolve ulke bazli yapildi.
+- Ilerleme: Gun degisiminde vakitleri otomatik yenileme eklendi (countdown sifirlanmasi onleme).

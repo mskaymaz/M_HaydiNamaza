@@ -5,3 +5,4 @@ Format (tek satir):
 
 - 2026-03-15 | Ana ekran UI | Ucretsiz/sosyal odak, uyelik/odeme yok; ana ekran: geri sayim + vakit listesi + (ops) gunun ayeti + CTA | Sosyal proje hedefi
 - 2026-03-15 | Zemin motif | Cizgisel beyaz zemin + yesil ton (bg_line_motif02) | Temiz ve hafif gorunum
+- 2026-03-17 | Diyanet veri kaynagi | Diyanet uyumu icin imsakiyem API (ulke/sehir/ilce + prayer-times) kullanilacak | Diyanet sayfasinda acik JSON endpoint yok

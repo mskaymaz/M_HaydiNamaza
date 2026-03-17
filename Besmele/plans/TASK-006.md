@@ -11,3 +11,5 @@ Durum: planned
 Notlar:
 - Kullanici konumu ve hesaplama parametreleri tek kaynaktan.
 - Offline-first oncelikli.
+- Backlog: 30 gunluk vakit cache + favori eklenince prefetch.
+- Backlog: Liste ekranlari (haftalik/aylik/ozel tarih araligi) ve disa aktarim (PDF/Excel/Word) icin veri katmani altyapisi.

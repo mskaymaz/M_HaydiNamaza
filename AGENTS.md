@@ -16,6 +16,9 @@ Apply domain-based config design (main_ui, settings_panels, help_panels, data_so
 Execute only requested scope, avoid unnecessary refactors/explanations, and keep token usage highly economical while still delivering complete, testable results.
 ```
 
+Ek not (oturumlar arasi baglam):
+- Bu mod aktifken kayitlar minimum tutulur; yalniz gerekli Besmele dosyalari guncellenir ve net bir handover notu yazilir ki yeni Codex oturumlari hizla devam edebilsin.
+
 ## 0) Terminoloji (MUST)
 
 - `commit yap`: Yalniz commit yapilir, push yapilmaz.
@@ -83,6 +86,19 @@ Execute only requested scope, avoid unnecessary refactors/explanations, and keep
 - `M`: Mobil uygulama (genel)
 - `MA`: Mobil Android
 - `MI`: Mobil iOS
+
+## 5.1) Calistirma Terminolojisi (MUST)
+
+- `M de calistir`: Emulator.
+- `tel de calistir`: Fiziksel telefon.
+- Varsayilan calisma: Genelde `M de calistir`, genel kontroller `tel de calistir`.
+
+## 5.2) M Calistirma Varsayilani (MUST)
+
+- Pixel 7a emulator seri no: `emulator-5554`.
+- `M de calistir` icin varsayilan komut: `flutter run -d emulator-5554`.
+- Seri no yoksa `adb devices` ile dogrula ve kullanicidan seri iste.
+- Kalici cache icin `tools/run_m.ps1` kullan; gradle/pub cache `.cache/` altinda tutulur.
 
 ## 6) USB Bundle Yedek (MUST)
 

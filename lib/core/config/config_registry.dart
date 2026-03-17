@@ -113,7 +113,13 @@ class HelpPanelsConfig {
 
 @immutable
 class DataSourcesConfig {
-  const DataSourcesConfig();
+  final DiyanetDataSourceConfig diyanet;
+  final AladhanDataSourceConfig aladhan;
+
+  const DataSourcesConfig({
+    required this.diyanet,
+    required this.aladhan,
+  });
 }
 
 @immutable
@@ -121,10 +127,42 @@ class AppBehaviorConfig {
   const AppBehaviorConfig();
 }
 
+@immutable
+class DiyanetDataSourceConfig {
+  final String baseUrl;
+  final String countryId;
+  final Map<String, int> minuteOffsets;
+
+  const DiyanetDataSourceConfig({
+    required this.baseUrl,
+    required this.countryId,
+    required this.minuteOffsets,
+  });
+}
+
+@immutable
+class AladhanDataSourceConfig {
+  final String baseUrl;
+  final Map<String, int> methodIds;
+  final int school;
+  final String timeZone;
+  final String tune;
+  final String shafaq;
+
+  const AladhanDataSourceConfig({
+    required this.baseUrl,
+    required this.methodIds,
+    required this.school,
+    required this.timeZone,
+    required this.tune,
+    required this.shafaq,
+  });
+}
+
 class ConfigRegistry {
   static const MainUiConfig mainUi = MainUiConfig(
     screenPadding: EdgeInsets.fromLTRB(18, 14, 18, 18),
-    topPanelPadding: EdgeInsets.fromLTRB(10, 6, 10, 8),
+    topPanelPadding: EdgeInsets.fromLTRB(10, 2, 10, 6),
     sectionGap: 12,
     settingsIconSize: 16,
     settingsIconBoxSize: 28,
@@ -180,6 +218,40 @@ class ConfigRegistry {
 
   static const SettingsPanelsConfig settingsPanels = SettingsPanelsConfig();
   static const HelpPanelsConfig helpPanels = HelpPanelsConfig();
-  static const DataSourcesConfig dataSources = DataSourcesConfig();
+  static const DataSourcesConfig dataSources = DataSourcesConfig(
+    diyanet: DiyanetDataSourceConfig(
+      baseUrl: 'https://ezanvakti.imsakiyem.com',
+      countryId: '2',
+      minuteOffsets: <String, int>{
+        'imsak': 0,
+        'gunes': 0,
+        'ogle': 0,
+        'ikindi': 0,
+        'aksam': 0,
+        'yatsi': 0,
+      },
+    ),
+    aladhan: AladhanDataSourceConfig(
+      baseUrl: 'https://api.aladhan.com/v1',
+      methodIds: <String, int>{
+        'karachi': 1,
+        'north_america': 2,
+        'muslim_world_league': 3,
+        'umm_al_qura': 4,
+        'egyptian': 5,
+        'tehran': 7,
+        'dubai': 16,
+        'kuwait': 9,
+        'qatar': 10,
+        'singapore': 11,
+        'turkey': 13,
+        'moonsighting': 15,
+      },
+      school: 0,
+      timeZone: 'Europe/Istanbul',
+      tune: '',
+      shafaq: 'general',
+    ),
+  );
   static const AppBehaviorConfig appBehavior = AppBehaviorConfig();
 }

@@ -29,15 +29,27 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<_HomeData> _future;
   Timer? _ticker;
   DateTime _now = DateTime.now();
+  DateTime _lastRefreshDay = DateTime.now();
   bool _showList = true;
 
   @override
   void initState() {
     super.initState();
+    _lastRefreshDay = DateTime(_now.year, _now.month, _now.day);
     _future = _loadData();
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       if (!mounted) return;
-      setState(() => _now = DateTime.now());
+      final now = DateTime.now();
+      final dayChanged = now.year != _lastRefreshDay.year ||
+          now.month != _lastRefreshDay.month ||
+          now.day != _lastRefreshDay.day;
+      setState(() {
+        _now = now;
+        if (dayChanged) {
+          _lastRefreshDay = DateTime(now.year, now.month, now.day);
+          _future = _loadData();
+        }
+      });
     });
   }
 
@@ -66,7 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     final timeZone = _offsetToTz(DateTime.now().timeZoneOffset);
-    final times = _prayerService.calculateToday(
+    final times = await _prayerService.calculateToday(
+      location: location,
       latitude: lat,
       longitude: lon,
       timeZone: timeZone,
@@ -93,39 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final h = dt.hour.toString().padLeft(2, '0');
     final m = dt.minute.toString().padLeft(2, '0');
     return '$h:$m';
-  }
-
-  String _methodLabel(AppLocalizations l10n, String code) {
-    switch (code) {
-      case 'turkey':
-        return l10n.methodTurkey;
-      case 'muslim_world_league':
-        return l10n.methodMuslimWorldLeague;
-      case 'umm_al_qura':
-        return l10n.methodUmmAlQura;
-      case 'dubai':
-        return l10n.methodDubai;
-      case 'kuwait':
-        return l10n.methodKuwait;
-      case 'qatar':
-        return l10n.methodQatar;
-      case 'singapore':
-        return l10n.methodSingapore;
-      case 'tehran':
-        return l10n.methodTehran;
-      case 'moonsighting':
-        return l10n.methodMoonsighting;
-      case 'north_america':
-        return l10n.methodNorthAmerica;
-      case 'egyptian':
-        return l10n.methodEgyptian;
-      case 'karachi':
-        return l10n.methodKarachi;
-      case 'other':
-        return l10n.methodOther;
-      default:
-        return l10n.methodNotSet;
-    }
   }
 
   Future<void> _openSettings() async {
@@ -205,9 +185,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
           final items = _buildItems(l10n, times);
           final active = _activePrayer(times, _now);
-    final next = _nextPrayer(times, _now, l10n);
-    final countdown = _formatCountdown(_now, next.time);
-    final ui = ConfigRegistry.mainUi;
+          final next = _nextPrayer(times, _now, l10n);
+          final countdown = _formatCountdown(_now, next.time);
+          final nextTime = _formatTime(next.time);
+          final ui = ConfigRegistry.mainUi;
 
           return Container(
             decoration: const BoxDecoration(
@@ -224,9 +205,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     GestureDetector(
                       onDoubleTap: () => setState(() => _showList = !_showList),
                       child: _TopPanel(
-                        location: data.location!.city,
-                        method: _methodLabel(l10n, data.methodCode ?? 'turkey'),
+                        location: data.location!.displayName,
                         nextLabel: next.label,
+                        nextTime: nextTime,
                         countdown: countdown,
                         onSettings: _openSettings,
                         style: ui.topPanel,
@@ -257,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         secondChild: _CollapsedHint(
                           label: l10n.locationLabel,
-                          value: data.location!.city,
+                          value: data.location!.displayName,
                         ),
                       ),
                     ),
@@ -371,8 +352,8 @@ class _PrayerNext {
 
 class _TopPanel extends StatelessWidget {
   final String location;
-  final String method;
   final String nextLabel;
+  final String nextTime;
   final String countdown;
   final VoidCallback onSettings;
   final SurfaceStyle style;
@@ -384,8 +365,8 @@ class _TopPanel extends StatelessWidget {
 
   const _TopPanel({
     required this.location,
-    required this.method,
     required this.nextLabel,
+    required this.nextTime,
     required this.countdown,
     required this.onSettings,
     required this.style,
@@ -413,13 +394,27 @@ class _TopPanel extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  nextLabel,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: typography.nextLabelSize,
-                      ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      nextLabel,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: typography.nextLabelSize,
+                          ),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      nextTime,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: Colors.white.withValues(alpha: 0.85),
+                            fontWeight: FontWeight.w300,
+                            fontSize: typography.nextLabelSize,
+                          ),
+                    ),
+                  ],
                 ),
                 Text(
                   countdown,
@@ -452,7 +447,7 @@ class _TopPanel extends StatelessWidget {
                   minHeight: settingsIconBoxSize,
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 0),
               GestureDetector(
                 onLongPress: onSettings,
                 child: Column(
@@ -478,15 +473,6 @@ class _TopPanel extends StatelessWidget {
                           color: Color(0xCCFFFFFF),
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      method,
-                      textAlign: TextAlign.right,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.8),
-                            fontSize: typography.methodSize,
-                          ),
                     ),
                   ],
                 ),

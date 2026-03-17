@@ -48,7 +48,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locationEditTitle => 'Location';
 
   @override
-  String get locationCityLabel => 'City';
+  String get locationCountryLabel => 'Country';
+
+  @override
+  String get locationCityLabel => 'Province';
+
+  @override
+  String get locationUseList => 'Select from list';
+
+  @override
+  String get locationFavoritesLabel => 'Favorites';
+
+  @override
+  String get locationAddFavorite => 'Add to favorites';
+
+  @override
+  String get locationDistrictLabel => 'District';
 
   @override
   String get locationLatitudeLabel => 'Latitude';

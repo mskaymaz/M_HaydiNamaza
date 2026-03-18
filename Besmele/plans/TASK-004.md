@@ -1,7 +1,7 @@
 # TASK-004
 
 status: in_progress
-updated: 2026-03-18 09:56 +03:00
+updated: 2026-03-18 16:43 +03:00
 scope: Faz 2 - Flutter uygulama iskeleti ve temel mimari girisi.
 
 done_summary:
@@ -10,13 +10,36 @@ done_summary:
 - Veri akisi hazir: `ezanvakti.imsakiyem.com` birincil kaynak, HTML parse denemesi, gunluk vakit cekme, normalize/dedup ve debug loglar.
 - UI temeli hazir: merkezi `config_registry`, ust panel yerlesimi, tarih 3 satir, vakit/kalan merkez, konum gear alti.
 - Stabilite iyilestirmeleri hazir: gun degisimi yenileme, countdown tarih normalize, storage temizleme, `withValues` gecisi.
+- Konum ekrani sadeleştirildi: kompakt dropdownlar, bas harfi buyuk ad gosterimi, koordinat satiri ve favori yonetimi eklendi.
+- Ayarlar ekraninda `Favori Konumlar` ve dil secimi dropdown yapisina alindi; konum ozeti tek bosluklu `il / ilce` ve alt satir koordinat olacak sekilde normalize edildi.
+- Konum ekraninda `Favori Konumlar` bolumu `Favorilere ekle` butonunun altina tasindi.
+- Android tarafinda `INTERNET` izni eklendi; fiziksel telefonda Diyanet konum listelerinin veri cekebilmesi saglandi.
+- Konum ekranindaki favori dropdownu ayarlar ekraniyla uyumlu hale getirildi; secim sonrasi ayri `Uygula` ve `Sil` aksiyonlari eklendi.
+- Mobil uygulama adi Android ve iOS tarafinda `Haydi Namaza` olarak guncellendi.
+- Konum ekranindaki favori aksiyonlari dar mobil genislikte kaybolmasin diye dropdown altindaki ayri aksiyon satirina tasindi.
+- Ayarlar ve konum ekranlarindaki favori satiri yeniden esitlenildi; iki tarafta da dropdown + `Uygula` + `Sil` ayni kompakt tek satir stiline cekildi.
+- Telefon tarafinda bos gelen ulke/il/ilce listeleri icin Diyanet istekleri `Accept: application/json` ve timeout ile guclendirildi; konum ekranina gorunur hata ve `Tekrar dene` akisi eklendi.
+- Prayer service tarafindaki Diyanet istekleri de ayni istek basliklari ve timeout ile esitlenildi.
+- Diyanet secim akisinda enlem-boylam zorunlulugu kaldirildi; koordinatlar bos olsa da konum kaydi ve favori uygulama akisi devam ediyor.
+- Ayarlar ekraninda `Mevcut Konumu Al` checkbox'i eklendi; cihaz konumu izinle alinip il/ilce ve koordinatlar otomatik dolduruluyor.
+- Ana panelde sol ust konum ozeti tiklanabilir hale getirildi ve dogrudan konum ekranina baglandi.
+- `Mevcut Konumu Al` checkbox'i konum ekranina tasindi; reverse geocode timeout'u ham exception yerine yumusak uyariya cevrildi.
+- Favori dropdownlari kapali durumdayken mevcut konum ozetini gosterecek sekilde guncellendi.
+- Mola/backup oncesi snapshot alindi; mevcut durum backup devrine hazir.
+- `Ayarlar ve Arayuz duzenlemesi devam ediyor` notuyla commit/push hazirlandi.
 
 now:
-- Uygulamada kalinan nokta: ust panel gorsel ayari olusturuldu; tarih 3 satir, vakit/kalan merkez, konum gear alti.
+- Uygulamada kalinan nokta: backup oncesi snapshot alinmis durumda; son UI akisi ana panel konum girisi + konum ekraninda checkbox + mevcut konum etiketli favori dropdownlari.
 
 next:
-- 00:00 gun gecisinde vakitlerin otomatik yenilendigini dogrula.
-- Paket adi/proje kimligi netlesince kalici adlandirmayi sabitle.
+- USB bagli telefonda konum dropdownlarinin acildigini kontrol et.
+- Ayarlar ve konum ekranlarinda favori satirinin tek satir gorunumunu ve `Uygula`/`Sil` akislarini cihazda dogrula.
+- Mobil cihazda uygulama adinin `Haydi Namaza` olarak gorundugunu kontrol et.
+- Telefon uzerinde ulke, il ve ilce listelerinin artik yuklendigini dogrula.
+- Telefonda il/ilce secip koordinatlar bosken kaydetme ve ana ekranda Diyanet vakitlerinin gelmesini dogrula.
+- Telefonda `Mevcut Konumu Al` checkbox'ini isaretleyip izin ve otomatik konum dolumunu dogrula.
+- Telefonda reverse geocode timeout'unda ham exception yerine yumusak mesaj geldigini dogrula.
+- Backup/yedek adimini tamamla.
 
 refs:
 - `Proje/UI_Ayarlar.md`

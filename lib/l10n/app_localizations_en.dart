@@ -57,7 +57,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locationUseList => 'Select from list';
 
   @override
-  String get locationFavoritesLabel => 'Favorites';
+  String get locationFavoritesLabel => 'Favorite locations';
+
+  @override
+  String get locationSelectLabel => 'Select location';
 
   @override
   String get locationAddFavorite => 'Add to favorites';
@@ -76,6 +79,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get locationFillAll => 'Please fill all fields.';
+
+  @override
+  String get locationFavoriteAdded => 'Location added to favorites.';
+
+  @override
+  String get locationFavoriteExists => 'This location is already in favorites.';
+
+  @override
+  String get locationFavoriteRemoved => 'Favorite location removed.';
+
+  @override
+  String get locationFavoriteApplied => 'Favorite location applied.';
+
+  @override
+  String get locationFavoriteApplyLabel => 'Apply';
+
+  @override
+  String get locationFavoriteUnavailable => 'This favorite has no coordinates.';
+
+  @override
+  String get locationFavoriteRemoveLabel => 'Remove favorite';
 
   @override
   String get methodNotSet => 'Not set';

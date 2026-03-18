@@ -36,7 +36,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get locationLabel => 'Konum';
 
   @override
-  String get calculationMethodLabel => 'Hesaplama yöntemi';
+  String get calculationMethodLabel => 'Hesaplama Yöntemi';
 
   @override
   String get comingSoon => 'Yakında';
@@ -57,7 +57,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get locationUseList => 'Listeden seç';
 
   @override
-  String get locationFavoritesLabel => 'Favoriler';
+  String get locationFavoritesLabel => 'Favori Konumlar';
+
+  @override
+  String get locationSelectLabel => 'Konum Seç';
 
   @override
   String get locationAddFavorite => 'Favorilere ekle';
@@ -76,6 +79,28 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get locationFillAll => 'Lütfen tüm alanları doldurun.';
+
+  @override
+  String get locationFavoriteAdded => 'Konum favorilere eklendi.';
+
+  @override
+  String get locationFavoriteExists => 'Bu konum zaten favorilerde.';
+
+  @override
+  String get locationFavoriteRemoved => 'Favori konum silindi.';
+
+  @override
+  String get locationFavoriteApplied => 'Favori konum aktif edildi.';
+
+  @override
+  String get locationFavoriteApplyLabel => 'Uygula';
+
+  @override
+  String get locationFavoriteUnavailable =>
+      'Bu favoride koordinat bilgisi yok.';
+
+  @override
+  String get locationFavoriteRemoveLabel => 'Favoriyi sil';
 
   @override
   String get methodNotSet => 'Seçilmedi';

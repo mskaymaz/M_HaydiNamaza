@@ -7,12 +7,16 @@ class LocationFavorite {
   final String? countryName;
   final String province;
   final String district;
+  final String latitude;
+  final String longitude;
 
   const LocationFavorite({
     this.countryId,
     this.countryName,
     required this.province,
     required this.district,
+    required this.latitude,
+    required this.longitude,
   });
 
   String get label {
@@ -27,6 +31,8 @@ class LocationFavorite {
         'countryName': countryName,
         'province': province,
         'district': district,
+        'latitude': latitude,
+        'longitude': longitude,
       };
 
   static LocationFavorite? fromJson(Map<String, dynamic> json) {
@@ -34,6 +40,8 @@ class LocationFavorite {
     final countryName = json['countryName'];
     final province = json['province'];
     final district = json['district'];
+    final latitude = json['latitude'];
+    final longitude = json['longitude'];
     if (province is! String || district is! String) {
       return null;
     }
@@ -42,6 +50,8 @@ class LocationFavorite {
       countryName: countryName is String ? countryName : null,
       province: province,
       district: district,
+      latitude: latitude is String ? latitude : '',
+      longitude: longitude is String ? longitude : '',
     );
   }
 
@@ -51,11 +61,19 @@ class LocationFavorite {
     return other is LocationFavorite &&
         other.countryId == countryId &&
         other.province == province &&
-        other.district == district;
+        other.district == district &&
+        other.latitude == latitude &&
+        other.longitude == longitude;
   }
 
   @override
-  int get hashCode => Object.hash(countryId, province, district);
+  int get hashCode => Object.hash(
+    countryId,
+    province,
+    district,
+    latitude,
+    longitude,
+  );
 }
 
 class LocationFavoritesStorage {
@@ -94,15 +112,26 @@ class LocationFavoritesStorage {
     return result;
   }
 
-  Future<void> add(LocationFavorite favorite) async {
+  Future<bool> add(LocationFavorite favorite) async {
     final prefs = await SharedPreferences.getInstance();
     final current = await read();
     final targetKey = _favoriteKey(favorite);
     final exists = current.any((fav) => _favoriteKey(fav) == targetKey);
-    if (exists) return;
+    if (exists) return false;
     current.add(favorite);
     final rawList = current.map((fav) => jsonEncode(fav.toJson())).toList();
     await prefs.setStringList(_key, rawList);
+    return true;
+  }
+
+  Future<bool> remove(LocationFavorite favorite) async {
+    final prefs = await SharedPreferences.getInstance();
+    final current = await read();
+    final before = current.length;
+    current.removeWhere((fav) => _favoriteKey(fav) == _favoriteKey(favorite));
+    final rawList = current.map((fav) => jsonEncode(fav.toJson())).toList();
+    await prefs.setStringList(_key, rawList);
+    return current.length != before;
   }
 
   String _favoriteKey(LocationFavorite favorite) {

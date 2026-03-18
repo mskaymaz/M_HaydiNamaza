@@ -3,6 +3,7 @@ import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../app/calculation_method_storage.dart';
 import '../../app/locale_controller.dart';
+import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
@@ -18,22 +19,41 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final LocationStorage _locationStorage = LocationStorage();
+  final LocationFavoritesStorage _favoritesStorage = LocationFavoritesStorage();
   final CalculationMethodStorage _methodStorage = CalculationMethodStorage();
   LocationData? _location;
+  List<LocationFavorite> _favorites = [];
+  LocationFavorite? _selectedFavorite;
   String? _methodCode;
 
   @override
   void initState() {
     super.initState();
     _loadLocation();
+    _loadFavorites();
     _loadMethod();
   }
 
   Future<void> _loadLocation() async {
     final data = await _locationStorage.read();
     if (!mounted) return;
+    final matched = _matchFavorite(data, _favorites);
     setState(() {
       _location = data;
+      _selectedFavorite = matched;
+    });
+  }
+
+  Future<void> _loadFavorites() async {
+    final favorites = await _favoritesStorage.read();
+    if (!mounted) return;
+    final matched = _matchFavorite(_location, favorites);
+    setState(() {
+      _favorites = favorites;
+      _selectedFavorite = _selectedFavorite != null &&
+              favorites.contains(_selectedFavorite)
+          ? _selectedFavorite
+          : matched;
     });
   }
 
@@ -57,7 +77,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     String locationSubtitle() {
       final data = _location;
       if (data == null) return l10n.locationNotSet;
-      return '${data.displayName} (${data.latitude}, ${data.longitude})';
+      final coords = data.latitude.trim().isEmpty || data.longitude.trim().isEmpty
+          ? ''
+          : '\n${data.latitude}, ${data.longitude}';
+      return '${_formatLocationSummary(data)}$coords';
     }
 
     String methodSubtitle() {
@@ -117,41 +140,122 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: ListView(
         children: [
-          ListTile(
-            title: Text(l10n.languageLabel),
-          ),
-          RadioGroup<String>(
-            groupValue: codeFor(current),
-            onChanged: (value) async {
-              if (value == null) return;
-              await widget.localeController.setLocale(localeFor(value));
-            },
-            child: Column(
-              children: [
-                RadioListTile<String>(
-                  title: Text(l10n.languageSystem),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: DropdownButtonFormField<String>(
+              value: codeFor(current),
+              decoration: _dropdownDecoration(l10n.languageLabel),
+              items: [
+                DropdownMenuItem(
                   value: 'system',
+                  child: Text(l10n.languageSystem),
                 ),
-                RadioListTile<String>(
-                  title: Text(l10n.languageTurkish),
-                  value: 'tr',
+                DropdownMenuItem(value: 'tr', child: Text(l10n.languageTurkish)),
+                DropdownMenuItem(value: 'en', child: Text(l10n.languageEnglish)),
+                DropdownMenuItem(value: 'ar', child: Text(l10n.languageArabic)),
+              ],
+              onChanged: (value) async {
+                if (value == null) return;
+                await widget.localeController.setLocale(localeFor(value));
+              },
+            ),
+          ),
+          const Divider(height: 32),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Row(
+              children: [
+                Expanded(
+                  child: DropdownButtonFormField<LocationFavorite>(
+                    value: _favorites.contains(_selectedFavorite)
+                        ? _selectedFavorite
+                        : null,
+                    decoration:
+                        _dropdownDecoration(_currentFavoriteClosedLabel(l10n)),
+                    items: _favorites
+                        .map(
+                          (favorite) => DropdownMenuItem<LocationFavorite>(
+                            value: favorite,
+                            child: Text(_formatFavoriteLabel(favorite)),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: _favorites.isEmpty
+                        ? null
+                        : (favorite) {
+                            if (favorite == null) return;
+                            setState(() {
+                              _selectedFavorite = favorite;
+                            });
+                          },
+                  ),
                 ),
-                RadioListTile<String>(
-                  title: Text(l10n.languageEnglish),
-                  value: 'en',
+                const SizedBox(width: 8),
+                TextButton(
+                  onPressed: _selectedFavorite == null
+                      ? null
+                      : () async {
+                          final favorite = _selectedFavorite!;
+                          final data = LocationData(
+                            countryId: favorite.countryId,
+                            countryName: favorite.countryName,
+                            province: favorite.province,
+                            district: favorite.district,
+                            latitude: favorite.latitude,
+                            longitude: favorite.longitude,
+                          );
+                          await _locationStorage.write(data);
+                          if (!mounted) return;
+                          setState(() {
+                            _location = data;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(l10n.locationFavoriteApplied),
+                            ),
+                          );
+                        },
+                  style: TextButton.styleFrom(
+                    minimumSize: const Size(0, 40),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  child: Text(l10n.locationFavoriteApplyLabel),
                 ),
-                RadioListTile<String>(
-                  title: Text(l10n.languageArabic),
-                  value: 'ar',
+                IconButton(
+                  onPressed: _selectedFavorite == null
+                      ? null
+                      : () async {
+                          final favorite = _selectedFavorite!;
+                          final removed = await _favoritesStorage.remove(favorite);
+                          if (!mounted || !removed) return;
+                          await _loadFavorites();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(l10n.locationFavoriteRemoved),
+                            ),
+                          );
+                        },
+                  icon: const Icon(Icons.delete_outline),
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints.tightFor(
+                    width: 40,
+                    height: 40,
+                  ),
+                  visualDensity: VisualDensity.compact,
+                  tooltip: l10n.locationFavoriteRemoveLabel,
                 ),
               ],
             ),
           ),
-          const Divider(height: 32),
           ListTile(
-            title: Text(l10n.locationLabel),
+            title: Text(l10n.locationSelectLabel),
             subtitle: Text(locationSubtitle()),
             trailing: const Icon(Icons.location_on_outlined),
+            subtitleTextStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  height: 1.35,
+                ),
             onTap: () async {
               final changed = await Navigator.of(context).push<bool>(
                 MaterialPageRoute(
@@ -160,6 +264,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               );
               if (changed == true) {
                 await _loadLocation();
+                await _loadFavorites();
               }
             },
           ),
@@ -183,5 +288,110 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       ),
     );
+  }
+
+  InputDecoration _dropdownDecoration(String label) {
+    return InputDecoration(
+      labelText: label,
+      isDense: true,
+      filled: true,
+      fillColor: Colors.white,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 10,
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: const BorderSide(color: Color(0xFF1F7A3E)),
+      ),
+    );
+  }
+
+  String _formatDisplayName(String input) {
+    final trimmed = _normalizeSpacing(input);
+    if (trimmed.isEmpty) return trimmed;
+    final lower = trimmed
+        .replaceAll('I', String.fromCharCode(0x0131))
+        .replaceAll(String.fromCharCode(0x0130), 'i')
+        .toLowerCase();
+    final parts = lower.split(RegExp(r'(\s+|/|-)'));
+    final buffer = StringBuffer();
+    for (final part in parts) {
+      if (part.isEmpty) continue;
+      final isSeparator = RegExp(r'^\s+$|^/$|^-$').hasMatch(part);
+      if (isSeparator) {
+        buffer.write(part);
+        continue;
+      }
+      buffer.write(_capitalizeFirst(part[0]));
+      if (part.length > 1) {
+        buffer.write(part.substring(1));
+      }
+    }
+    return buffer.toString();
+  }
+
+  String _capitalizeFirst(String char) {
+    if (char == 'i') return String.fromCharCode(0x0130);
+    if (char == String.fromCharCode(0x0131)) return 'I';
+    return char.toUpperCase();
+  }
+
+  String _formatLocationSummary(LocationData data) {
+    final province = _formatDisplayName(data.province);
+    final district = _formatDisplayName(data.district);
+    if (district.isEmpty) return province;
+    return '$province / $district';
+  }
+
+  String _formatFavoriteLabel(LocationFavorite favorite) {
+    return _formatLocationSummary(
+      LocationData(
+        countryId: favorite.countryId,
+        countryName: favorite.countryName,
+        province: favorite.province,
+        district: favorite.district,
+        latitude: favorite.latitude,
+        longitude: favorite.longitude,
+      ),
+    );
+  }
+
+  String _currentFavoriteClosedLabel(AppLocalizations l10n) {
+    final data = _location;
+    if (data == null) return l10n.locationFavoritesLabel;
+    return _formatLocationSummary(data);
+  }
+
+  String _normalizeSpacing(String input) {
+    return input.trim().replaceAll(RegExp(r'\s+'), ' ');
+  }
+
+  LocationFavorite? _matchFavorite(
+    LocationData? data,
+    List<LocationFavorite> favorites,
+  ) {
+    if (data == null) return null;
+    for (final favorite in favorites) {
+      final sameCountry = (favorite.countryId ?? '') == (data.countryId ?? '');
+      final sameProvince =
+          _normalizeSpacing(favorite.province).toUpperCase() ==
+          _normalizeSpacing(data.province).toUpperCase();
+      final sameDistrict =
+          _normalizeSpacing(favorite.district).toUpperCase() ==
+          _normalizeSpacing(data.district).toUpperCase();
+      if (sameCountry && sameProvince && sameDistrict) {
+        return favorite;
+      }
+    }
+    return null;
   }
 }

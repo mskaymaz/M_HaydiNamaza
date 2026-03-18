@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
@@ -18,6 +21,14 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  static const Duration _diyanetTimeout = Duration(seconds: 12);
+  static const Map<String, String> _diyanetHeaders = <String, String>{
+    'Accept': 'application/json',
+    'User-Agent': 'HaydiNamaza/1.0',
+  };
+  static const String _listLoadErrorMessage =
+      'Konum listesi yuklenemedi. Lutfen tekrar deneyin.';
+
   final _provinceController = TextEditingController();
   final _districtController = TextEditingController();
   final _latController = TextEditingController();
@@ -25,7 +36,6 @@ class _LocationScreenState extends State<LocationScreen> {
   final _storage = LocationStorage();
   final _favoritesStorage = LocationFavoritesStorage();
 
-  bool _useList = true;
   bool _loadingCountries = false;
   bool _loadingStates = false;
   bool _loadingDistricts = false;
@@ -38,6 +48,9 @@ class _LocationScreenState extends State<LocationScreen> {
   String? _selectedDistrictId;
   List<LocationFavorite> _favorites = [];
   LocationFavorite? _selectedFavorite;
+  String? _listLoadError;
+  bool _useCurrentLocation = false;
+  bool _locating = false;
   bool _isMounted = true;
 
   @override
@@ -69,33 +82,34 @@ class _LocationScreenState extends State<LocationScreen> {
 
   Future<void> _loadFavorites() async {
     final favorites = await _favoritesStorage.read();
+    favorites.sort(
+      (a, b) => _normalizeName(a.label).compareTo(_normalizeName(b.label)),
+    );
     if (!_isMounted) return;
+    final selected = _selectedFavorite != null && favorites.contains(_selectedFavorite)
+        ? _selectedFavorite
+        : null;
     setState(() {
       _favorites = favorites;
+      _selectedFavorite = selected;
     });
   }
 
   Future<void> _loadCountries() async {
     if (_loadingCountries) return;
+    _setListLoadError(null);
     setState(() {
       _loadingCountries = true;
     });
     try {
       final config = ConfigRegistry.dataSources.diyanet;
       final uri = Uri.parse('${config.baseUrl}/api/locations/countries');
-      final response = await http.get(uri);
-      if (response.statusCode != 200) {
-        return;
-      }
-      final payload = response.body;
-      final items = _parseItems(payload);
+      final items = await _fetchItems(uri);
       if (!_isMounted) return;
       setState(() {
         _countries = items;
       });
       _syncCountrySelection();
-    } catch (_) {
-      if (!_isMounted) return;
     } finally {
       if (_isMounted) {
         setState(() {
@@ -107,6 +121,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
   Future<void> _loadStates(String countryId) async {
     if (_loadingStates) return;
+    _setListLoadError(null);
     setState(() {
       _loadingStates = true;
     });
@@ -115,19 +130,12 @@ class _LocationScreenState extends State<LocationScreen> {
       final uri = Uri.parse('${config.baseUrl}/api/locations/states').replace(
         queryParameters: <String, String>{'countryId': countryId},
       );
-      final response = await http.get(uri);
-      if (response.statusCode != 200) {
-        return;
-      }
-      final payload = response.body;
-      final items = _parseItems(payload);
+      final items = await _fetchItems(uri);
       if (!_isMounted) return;
       setState(() {
         _states = items;
       });
       _syncStateSelection();
-    } catch (_) {
-      if (!_isMounted) return;
     } finally {
       if (_isMounted) {
         setState(() {
@@ -139,33 +147,142 @@ class _LocationScreenState extends State<LocationScreen> {
 
   Future<void> _loadDistricts(String stateId) async {
     if (_loadingDistricts) return;
+    _setListLoadError(null);
     setState(() {
       _loadingDistricts = true;
     });
     try {
       final config = ConfigRegistry.dataSources.diyanet;
-      final uri = Uri.parse('${config.baseUrl}/api/locations/districts').replace(
+      final uri =
+          Uri.parse('${config.baseUrl}/api/locations/districts').replace(
         queryParameters: <String, String>{'stateId': stateId},
       );
-      final response = await http.get(uri);
-      if (response.statusCode != 200) {
-        return;
-      }
-      final payload = response.body;
-      final items = _parseItems(payload);
+      final items = await _fetchItems(uri);
       if (!_isMounted) return;
       setState(() {
         _districts = items;
       });
       _syncDistrictSelection();
-    } catch (_) {
-      if (!_isMounted) return;
     } finally {
       if (_isMounted) {
         setState(() {
           _loadingDistricts = false;
         });
       }
+    }
+  }
+
+  Future<List<_DiyanetItem>> _fetchItems(Uri uri) async {
+    try {
+      final response =
+          await http.get(uri, headers: _diyanetHeaders).timeout(_diyanetTimeout);
+      if (response.statusCode != 200) {
+        _setListLoadError(_listLoadErrorMessage);
+        return const <_DiyanetItem>[];
+      }
+      final items = _parseItems(response.body);
+      if (items.isEmpty) {
+        _setListLoadError(_listLoadErrorMessage);
+        return const <_DiyanetItem>[];
+      }
+      _setListLoadError(null);
+      return items;
+    } catch (error) {
+      debugPrint('Location list load failed: $error');
+      _setListLoadError(_listLoadErrorMessage);
+      return const <_DiyanetItem>[];
+    }
+  }
+
+  void _setListLoadError(String? message) {
+    if (!_isMounted) return;
+    setState(() {
+      _listLoadError = message;
+    });
+  }
+
+  void _retryLocationLoad() {
+    if (_countries.isEmpty) {
+      _loadCountries();
+      return;
+    }
+    if (_states.isEmpty && _selectedCountryId != null) {
+      _loadStates(_selectedCountryId!);
+      return;
+    }
+    if (_districts.isEmpty && _selectedStateId != null) {
+      _loadDistricts(_selectedStateId!);
+      return;
+    }
+    _loadCountries();
+  }
+
+  Future<void> _setUseCurrentLocation(bool value) async {
+    if (!value) {
+      if (!mounted) return;
+      setState(() {
+        _useCurrentLocation = false;
+      });
+      return;
+    }
+    if (!mounted) return;
+    setState(() {
+      _useCurrentLocation = true;
+      _locating = true;
+    });
+    try {
+      final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) throw Exception();
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        throw Exception();
+      }
+      final position = await Geolocator.getCurrentPosition();
+      final placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      ).timeout(const Duration(seconds: 3), onTimeout: () => <Placemark>[]);
+      final placemark = placemarks.isEmpty ? null : placemarks.first;
+      final province = (placemark?.administrativeArea ?? '').trim();
+      final district =
+          (placemark?.locality ?? placemark?.subAdministrativeArea ?? '').trim();
+      setState(() {
+        _selectedFavorite = null;
+        _selectedCountryId = ConfigRegistry.dataSources.diyanet.countryId;
+        _selectedCountryName = placemark?.country ?? 'Turkiye';
+        _selectedStateId = null;
+        _selectedDistrictId = null;
+        _states = [];
+        _districts = [];
+        _provinceController.text = province;
+        _districtController.text = district;
+        _latController.text = position.latitude.toString();
+        _lonController.text = position.longitude.toString();
+      });
+      await _loadStates(_selectedCountryId!);
+      if (province.isEmpty || district.isEmpty) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Koordinatlar alindi, il / ilce cozulemedi.')),
+        );
+      }
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _useCurrentLocation = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Mevcut konum alinamadi.')),
+      );
+    } finally {
+      if (!mounted) return;
+      setState(() {
+        _locating = false;
+      });
     }
   }
 
@@ -183,6 +300,9 @@ class _LocationScreenState extends State<LocationScreen> {
         if (id == null || name is! String) continue;
         items.add(_DiyanetItem(id: id, name: name));
       }
+      items.sort(
+        (a, b) => _normalizeName(a.name).compareTo(_normalizeName(b.name)),
+      );
       return items;
     } catch (_) {
       return [];
@@ -260,20 +380,77 @@ class _LocationScreenState extends State<LocationScreen> {
     final l10n = AppLocalizations.of(context)!;
     final province = _provinceController.text.trim();
     final district = _districtController.text.trim();
+    final latitude = _latController.text.trim();
+    final longitude = _lonController.text.trim();
     if (_selectedCountryId == null || province.isEmpty || district.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(l10n.locationFillAll)));
       return;
     }
-    await _favoritesStorage.add(
+    final added = await _favoritesStorage.add(
       LocationFavorite(
         countryId: _selectedCountryId,
         countryName: _selectedCountryName,
         province: province,
         district: district,
+        latitude: latitude,
+        longitude: longitude,
       ),
     );
     await _loadFavorites();
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          added ? l10n.locationFavoriteAdded : l10n.locationFavoriteExists,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _removeFavorite(LocationFavorite favorite) async {
+    final isSelected = favorite == _selectedFavorite;
+    final removed = await _favoritesStorage.remove(favorite);
+    if (!mounted) return;
+    if (isSelected) {
+      setState(() {
+        _selectedFavorite = null;
+      });
+    }
+    await _loadFavorites();
+    if (!mounted || !removed) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(AppLocalizations.of(context)!.locationFavoriteRemoved)),
+    );
+  }
+
+  void _applyFavorite(LocationFavorite favorite) {
+    setState(() {
+      _selectedFavorite = favorite;
+      _selectedCountryId = favorite.countryId ?? _selectedCountryId;
+      _selectedCountryName = favorite.countryName ?? _selectedCountryName;
+      _selectedStateId = null;
+      _selectedDistrictId = null;
+      _states = [];
+      _districts = [];
+      _provinceController.text = favorite.province;
+      _districtController.text = favorite.district;
+    });
+    if (_selectedCountryId != null) {
+      _loadStates(_selectedCountryId!);
+    }
+  }
+
+  void _applySelectedFavorite() {
+    final l10n = AppLocalizations.of(context)!;
+    final favorite = _selectedFavorite;
+    if (favorite == null) return;
+    _applyFavorite(favorite);
+    _latController.text = favorite.latitude;
+    _lonController.text = favorite.longitude;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(l10n.locationFavoriteApplied)),
+    );
   }
 
   Future<void> _save() async {
@@ -287,9 +464,7 @@ class _LocationScreenState extends State<LocationScreen> {
     if (countryId == null ||
         countryName.isEmpty ||
         province.isEmpty ||
-        district.isEmpty ||
-        lat.isEmpty ||
-        lon.isEmpty) {
+        district.isEmpty) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(l10n.locationFillAll)));
       return;
@@ -311,6 +486,7 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final ui = ConfigRegistry.settingsPanels;
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.locationEditTitle),
@@ -322,180 +498,283 @@ class _LocationScreenState extends State<LocationScreen> {
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: ui.screenPadding,
         children: [
-          DropdownButtonFormField<String>(
-            initialValue: _countries.any((item) => item.id == _selectedCountryId)
-                ? _selectedCountryId
-                : null,
-            decoration: InputDecoration(labelText: l10n.locationCountryLabel),
-            items: _countries
-                .map(
-                  (item) => DropdownMenuItem<String>(
-                    value: item.id,
-                    child: Text(item.name),
-                  ),
-                )
-                .toList(),
-            onChanged: _loadingCountries
+          CheckboxListTile(
+            value: _useCurrentLocation,
+            onChanged: _locating
                 ? null
-                : (value) {
-                    if (value == null) return;
-                    final selected = _countries.firstWhere(
-                      (item) => item.id == value,
-                    );
-                    setState(() {
-                      _selectedCountryId = value;
-                      _selectedCountryName = selected.name;
-                      _selectedStateId = null;
-                      _selectedDistrictId = null;
-                      _states = [];
-                      _districts = [];
-                      _provinceController.text = '';
-                      _districtController.text = '';
-                    });
-                    _loadStates(value);
-                  },
-          ),
-          const SizedBox(height: 12),
-          SwitchListTile(
-            value: _useList,
-            onChanged: (value) {
-              setState(() => _useList = value);
-              if (value && _countries.isEmpty) {
-                _loadCountries();
-              }
-              if (value && _states.isEmpty && _selectedCountryId != null) {
-                _loadStates(_selectedCountryId!);
-              }
-            },
-            title: Text(l10n.locationUseList),
+                : (value) => _setUseCurrentLocation(value ?? false),
+            title: const Text('Mevcut Konumu Al'),
+            controlAffinity: ListTileControlAffinity.leading,
+            secondary: _locating
+                ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.my_location_outlined),
             contentPadding: EdgeInsets.zero,
           ),
-          if (_favorites.isNotEmpty) ...[
-            DropdownButtonFormField<LocationFavorite>(
-              initialValue: _selectedFavorite,
-              decoration: InputDecoration(labelText: l10n.locationFavoritesLabel),
-              items: _favorites
-                  .map(
-                    (fav) => DropdownMenuItem<LocationFavorite>(
-                      value: fav,
-                      child: Text(fav.label),
+          SizedBox(height: ui.sectionGap),
+          _SectionCard(
+            style: ui.panel,
+            padding: ui.sectionPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.locationSelectLabel,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontSize: ui.sectionTitleSize,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                SizedBox(height: ui.fieldGap),
+                _CompactDropdown<String>(
+                  value:
+                      _countries.any((item) => item.id == _selectedCountryId)
+                          ? _selectedCountryId
+                          : null,
+                  label: l10n.locationCountryLabel,
+                  items: _countries
+                      .map(
+                        (item) => DropdownMenuItem<String>(
+                          value: item.id,
+                          child: Text(_formatDisplayName(item.name)),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: _loadingCountries
+                      ? null
+                      : (value) async {
+                          if (value == null) return;
+                          final selected = _countries.firstWhere(
+                            (item) => item.id == value,
+                          );
+                          setState(() {
+                            _selectedFavorite = null;
+                            _selectedCountryId = value;
+                            _selectedCountryName = selected.name;
+                            _selectedStateId = null;
+                            _selectedDistrictId = null;
+                            _states = [];
+                            _districts = [];
+                            _provinceController.text = '';
+                            _districtController.text = '';
+                          });
+                          await _loadStates(value);
+                        },
+                ),
+                SizedBox(height: ui.fieldGap),
+                _CompactDropdown<String>(
+                  value:
+                      _states.any((item) => item.id == _selectedStateId)
+                          ? _selectedStateId
+                          : null,
+                  label: l10n.locationCityLabel,
+                  items: _states
+                      .map(
+                        (item) => DropdownMenuItem<String>(
+                          value: item.id,
+                          child: Text(_formatDisplayName(item.name)),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: _loadingStates
+                      ? null
+                      : (value) async {
+                          if (value == null) return;
+                          final selected = _states.firstWhere(
+                            (item) => item.id == value,
+                          );
+                          setState(() {
+                            _selectedFavorite = null;
+                            _selectedStateId = value;
+                            _selectedDistrictId = null;
+                            _districts = [];
+                            _provinceController.text = selected.name;
+                            _districtController.text = '';
+                          });
+                          await _loadDistricts(value);
+                        },
+                ),
+                SizedBox(height: ui.fieldGap),
+                _CompactDropdown<String>(
+                  value:
+                      _districts.any((item) => item.id == _selectedDistrictId)
+                          ? _selectedDistrictId
+                          : null,
+                  label: l10n.locationDistrictLabel,
+                  items: _districts
+                      .map(
+                        (item) => DropdownMenuItem<String>(
+                          value: item.id,
+                          child: Text(_formatDisplayName(item.name)),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: _loadingDistricts
+                      ? null
+                      : (value) {
+                          if (value == null) return;
+                          final selected = _districts.firstWhere(
+                            (item) => item.id == value,
+                          );
+                          setState(() {
+                            _selectedFavorite = null;
+                            _selectedDistrictId = value;
+                            _districtController.text = selected.name;
+                          });
+                        },
+                ),
+                if (_listLoadError != null) ...[
+                  SizedBox(height: ui.fieldGap),
+                  Text(
+                    _listLoadError!,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: _retryLocationLoad,
+                      child: const Text('Tekrar dene'),
                     ),
-                  )
-                  .toList(),
-              onChanged: (fav) {
-                if (fav == null) return;
-                setState(() {
-                  _selectedFavorite = fav;
-                  _selectedCountryId = fav.countryId ?? _selectedCountryId;
-                  _selectedCountryName =
-                      fav.countryName ?? _selectedCountryName;
-                  _provinceController.text = fav.province;
-                  _districtController.text = fav.district;
-                });
-                if (_useList) {
-                  _syncCountrySelection();
-                  _syncStateSelection();
-                }
-              },
+                  ),
+                ],
+              ],
             ),
-            const SizedBox(height: 12),
-          ],
-          if (_useList) ...[
-            DropdownButtonFormField<String>(
-              initialValue: _states.any((item) => item.id == _selectedStateId)
-                  ? _selectedStateId
-                  : null,
-              decoration: InputDecoration(labelText: l10n.locationCityLabel),
-              items: _states
-                  .map(
-                    (item) => DropdownMenuItem<String>(
-                      value: item.id,
-                      child: Text(item.name),
-                    ),
-                  )
-                  .toList(),
-              onChanged: _loadingStates
-                  ? null
-                  : (value) {
-                      if (value == null) return;
-                      final selected = _states.firstWhere(
-                        (item) => item.id == value,
-                      );
-                      setState(() {
-                        _selectedStateId = value;
-                        _selectedDistrictId = null;
-                        _districts = [];
-                        _provinceController.text = selected.name;
-                        _districtController.text = '';
-                      });
-                      _loadDistricts(value);
-                    },
-            ),
-            const SizedBox(height: 12),
-            DropdownButtonFormField<String>(
-              initialValue: _districts.any((item) => item.id == _selectedDistrictId)
-                  ? _selectedDistrictId
-                  : null,
-              decoration: InputDecoration(labelText: l10n.locationDistrictLabel),
-              items: _districts
-                  .map(
-                    (item) => DropdownMenuItem<String>(
-                      value: item.id,
-                      child: Text(item.name),
-                    ),
-                  )
-                  .toList(),
-              onChanged: _loadingDistricts
-                  ? null
-                  : (value) {
-                      if (value == null) return;
-                      final selected = _districts.firstWhere(
-                        (item) => item.id == value,
-                      );
-                      setState(() {
-                        _selectedDistrictId = value;
-                        _districtController.text = selected.name;
-                      });
-                    },
-            ),
-            const SizedBox(height: 12),
-          ] else ...[
-            TextField(
-              controller: _provinceController,
-              decoration: InputDecoration(labelText: l10n.locationCityLabel),
-              textInputAction: TextInputAction.next,
-            ),
-            const SizedBox(height: 12),
-            TextField(
-              controller: _districtController,
-              decoration: InputDecoration(labelText: l10n.locationDistrictLabel),
-              textInputAction: TextInputAction.next,
-            ),
-            const SizedBox(height: 12),
-          ],
-          TextField(
-            controller: _latController,
-            decoration: InputDecoration(labelText: l10n.locationLatitudeLabel),
-            keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
-            textInputAction: TextInputAction.next,
           ),
-          const SizedBox(height: 12),
-          TextField(
-            controller: _lonController,
-            decoration: InputDecoration(labelText: l10n.locationLongitudeLabel),
-            keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
-            textInputAction: TextInputAction.done,
-            onSubmitted: (_) => _save(),
+          SizedBox(height: ui.sectionGap),
+          _SectionCard(
+            style: ui.panel,
+            padding: ui.sectionPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${l10n.locationLatitudeLabel} / ${l10n.locationLongitudeLabel}',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontSize: ui.sectionTitleSize,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                SizedBox(height: ui.fieldGap),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _latController,
+                        decoration: _coordinateDecoration(
+                          ui,
+                          l10n.locationLatitudeLabel,
+                        ),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                          signed: true,
+                        ),
+                        textInputAction: TextInputAction.next,
+                      ),
+                    ),
+                    SizedBox(width: ui.coordinateGap),
+                    Expanded(
+                      child: TextField(
+                        controller: _lonController,
+                        decoration: _coordinateDecoration(
+                          ui,
+                          l10n.locationLongitudeLabel,
+                        ),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                          signed: true,
+                        ),
+                        textInputAction: TextInputAction.done,
+                        onSubmitted: (_) => _save(),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 12),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              onPressed: _addFavorite,
-              icon: const Icon(Icons.star_border),
-              label: Text(l10n.locationAddFavorite),
+          SizedBox(height: ui.sectionGap),
+          FilledButton.tonalIcon(
+            onPressed: _addFavorite,
+            icon: const Icon(Icons.star_border),
+            label: Text(l10n.locationAddFavorite),
+          ),
+          SizedBox(height: ui.sectionGap),
+          _SectionCard(
+            style: ui.panel,
+            padding: ui.sectionPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.locationFavoritesLabel,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                SizedBox(height: ui.fieldGap),
+                if (_favorites.isEmpty)
+                  Text(l10n.locationNotSet)
+                else
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _CompactDropdown<LocationFavorite>(
+                          value: _favorites.contains(_selectedFavorite)
+                              ? _selectedFavorite
+                              : null,
+                          label: _currentFavoriteClosedLabel(l10n),
+                          items: _favorites
+                              .map(
+                                (favorite) => DropdownMenuItem<LocationFavorite>(
+                                  value: favorite,
+                                  child: Text(_favoriteLabel(favorite)),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (favorite) {
+                            if (favorite == null) return;
+                            setState(() {
+                              _selectedFavorite = favorite;
+                            });
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        onPressed: _selectedFavorite == null
+                            ? null
+                            : _applySelectedFavorite,
+                        style: TextButton.styleFrom(
+                          minimumSize: const Size(0, 40),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          visualDensity: VisualDensity.compact,
+                        ),
+                        child: Text(l10n.locationFavoriteApplyLabel),
+                      ),
+                      IconButton(
+                        onPressed: _selectedFavorite == null
+                            ? null
+                            : () => _removeFavorite(_selectedFavorite!),
+                        icon: const Icon(Icons.delete_outline),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints.tightFor(
+                          width: 40,
+                          height: 40,
+                        ),
+                        visualDensity: VisualDensity.compact,
+                        tooltip: l10n.locationFavoriteRemoveLabel,
+                      ),
+                    ],
+                  ),
+              ],
             ),
           ),
         ],
@@ -503,36 +782,107 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 
+  InputDecoration _coordinateDecoration(
+    SettingsPanelsConfig ui,
+    String label,
+  ) {
+    return InputDecoration(
+      labelText: label,
+      isDense: true,
+      filled: true,
+      fillColor: ui.itemPanel.color,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 10,
+      ),
+      border: OutlineInputBorder(
+        borderRadius: ui.itemPanel.borderRadius,
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: ui.itemPanel.borderRadius,
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: ui.itemPanel.borderRadius,
+        borderSide: const BorderSide(color: Color(0xFF1F7A3E)),
+      ),
+    );
+  }
+
+  String _formatDisplayName(String input) {
+    final trimmed = input.trim();
+    if (trimmed.isEmpty) return trimmed;
+    final lower = trimmed
+        .replaceAll('I', String.fromCharCode(0x0131))
+        .replaceAll(String.fromCharCode(0x0130), 'i')
+        .toLowerCase();
+    final parts = lower.split(RegExp(r'(\s+|/|-)'));
+    final buffer = StringBuffer();
+    for (final part in parts) {
+      if (part.isEmpty) continue;
+      final isSeparator = RegExp(r'^\s+$|^/$|^-$').hasMatch(part);
+      if (isSeparator) {
+        buffer.write(part);
+        continue;
+      }
+      buffer.write(_capitalizeFirst(part[0]));
+      if (part.length > 1) {
+        buffer.write(part.substring(1));
+      }
+    }
+    return buffer.toString();
+  }
+
+  String _capitalizeFirst(String char) {
+    if (char == 'i') return String.fromCharCode(0x0130);
+    if (char == String.fromCharCode(0x0131)) return 'I';
+    return char.toUpperCase();
+  }
+
+  String _favoriteLabel(LocationFavorite favorite) {
+    return '${_formatDisplayName(favorite.province)} / '
+        '${_formatDisplayName(favorite.district)}';
+  }
+
+  String _currentFavoriteClosedLabel(AppLocalizations l10n) {
+    final province = _formatDisplayName(_provinceController.text);
+    final district = _formatDisplayName(_districtController.text);
+    if (province.isEmpty) return l10n.locationFavoritesLabel;
+    if (district.isEmpty) return province;
+    return '$province / $district';
+  }
+
   String _normalizeName(String input) {
     final upper = input.trim().toUpperCase();
     final buffer = StringBuffer();
     for (final rune in upper.runes) {
       switch (rune) {
-        case 0x00C7: // Ç
+        case 0x00C7:
           buffer.write('C');
           break;
-        case 0x011E: // Ğ
+        case 0x011E:
           buffer.write('G');
           break;
-        case 0x0130: // İ
+        case 0x0130:
           buffer.write('I');
           break;
-        case 0x00D6: // Ö
+        case 0x00D6:
           buffer.write('O');
           break;
-        case 0x015E: // Ş
+        case 0x015E:
           buffer.write('S');
           break;
-        case 0x00DC: // Ü
+        case 0x00DC:
           buffer.write('U');
           break;
-        case 0x00C2: // Â
+        case 0x00C2:
           buffer.write('A');
           break;
-        case 0x00CE: // Î
+        case 0x00CE:
           buffer.write('I');
           break;
-        case 0x00DB: // Û
+        case 0x00DB:
           buffer.write('U');
           break;
         default:
@@ -548,4 +898,79 @@ class _DiyanetItem {
   final String name;
 
   const _DiyanetItem({required this.id, required this.name});
+}
+
+class _CompactDropdown<T> extends StatelessWidget {
+  final T? value;
+  final String label;
+  final List<DropdownMenuItem<T>> items;
+  final ValueChanged<T?>? onChanged;
+
+  const _CompactDropdown({
+    required this.value,
+    required this.label,
+    required this.items,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<T>(
+      value: value,
+      isExpanded: true,
+      decoration: InputDecoration(
+        labelText: label,
+        isDense: true,
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 10,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(color: Color(0xFF1F7A3E)),
+        ),
+      ),
+      icon: const Icon(Icons.keyboard_arrow_down_rounded),
+      menuMaxHeight: 280,
+      items: items,
+      onChanged: onChanged,
+    );
+  }
+}
+
+class _SectionCard extends StatelessWidget {
+  final SurfaceStyle style;
+  final EdgeInsets padding;
+  final Widget child;
+
+  const _SectionCard({
+    required this.style,
+    required this.padding,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: style.color,
+        borderRadius: style.borderRadius,
+        boxShadow: style.shadows,
+      ),
+      child: Padding(
+        padding: padding,
+        child: child,
+      ),
+    );
+  }
 }

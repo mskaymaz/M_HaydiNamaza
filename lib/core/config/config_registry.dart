@@ -103,7 +103,29 @@ class MainUiConfig {
 
 @immutable
 class SettingsPanelsConfig {
-  const SettingsPanelsConfig();
+  final EdgeInsets screenPadding;
+  final double sectionGap;
+  final double fieldGap;
+  final double coordinateGap;
+  final EdgeInsets sectionPadding;
+  final EdgeInsets favoriteItemPadding;
+  final double sectionTitleSize;
+  final SurfaceStyle panel;
+  final SurfaceStyle itemPanel;
+  final SurfaceStyle selectedItemPanel;
+
+  const SettingsPanelsConfig({
+    required this.screenPadding,
+    required this.sectionGap,
+    required this.fieldGap,
+    required this.coordinateGap,
+    required this.sectionPadding,
+    required this.favoriteItemPadding,
+    required this.sectionTitleSize,
+    required this.panel,
+    required this.itemPanel,
+    required this.selectedItemPanel,
+  });
 }
 
 @immutable
@@ -216,7 +238,48 @@ class ConfigRegistry {
     ),
   );
 
-  static const SettingsPanelsConfig settingsPanels = SettingsPanelsConfig();
+  static const SettingsPanelsConfig settingsPanels = SettingsPanelsConfig(
+    screenPadding: EdgeInsets.fromLTRB(16, 12, 16, 18),
+    sectionGap: 10,
+    fieldGap: 8,
+    coordinateGap: 10,
+    sectionPadding: EdgeInsets.fromLTRB(12, 10, 12, 12),
+    favoriteItemPadding: EdgeInsets.fromLTRB(12, 8, 12, 8),
+    sectionTitleSize: 14,
+    panel: SurfaceStyle(
+      color: Color(0xFFF8F8F2),
+      borderRadius: BorderRadius.all(Radius.circular(18)),
+      shadows: [
+        BoxShadow(
+          color: Color(0x14000000),
+          blurRadius: 10,
+          offset: Offset(0, 4),
+        ),
+      ],
+    ),
+    itemPanel: SurfaceStyle(
+      color: Color(0xFFFFFFFF),
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+      shadows: [
+        BoxShadow(
+          color: Color(0x0F000000),
+          blurRadius: 8,
+          offset: Offset(0, 3),
+        ),
+      ],
+    ),
+    selectedItemPanel: SurfaceStyle(
+      color: Color(0xFFEAF6ED),
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+      shadows: [
+        BoxShadow(
+          color: Color(0x140E5A2A),
+          blurRadius: 8,
+          offset: Offset(0, 3),
+        ),
+      ],
+    ),
+  );
   static const HelpPanelsConfig helpPanels = HelpPanelsConfig();
   static const DataSourcesConfig dataSources = DataSourcesConfig(
     diyanet: DiyanetDataSourceConfig(

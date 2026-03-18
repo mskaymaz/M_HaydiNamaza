@@ -19,6 +19,12 @@ class _DiyanetIds {
 }
 
 class PrayerService {
+  static const Duration _diyanetTimeout = Duration(seconds: 12);
+  static const Map<String, String> _diyanetHeaders = <String, String>{
+    'Accept': 'application/json',
+    'User-Agent': 'HaydiNamaza/1.0',
+  };
+
   final PrayerEngine _engine;
 
   static final Map<String, String> _stateIdCache = {};
@@ -100,82 +106,6 @@ class PrayerService {
     }
   }
 
-  Future<PrayerTimes?> _tryAladhan({
-    required double latitude,
-    required double longitude,
-    required DateTime date,
-    required String methodCode,
-    required CalculationParameters fallbackParams,
-  }) async {
-    final config = ConfigRegistry.dataSources.aladhan;
-    final methodId = config.methodIds[methodCode];
-    if (methodId == null) {
-      return null;
-    }
-
-    final dateStr = _formatDate(date);
-    final uri = Uri.parse('${config.baseUrl}/timings/$dateStr').replace(
-      queryParameters: <String, String>{
-        'latitude': latitude.toString(),
-        'longitude': longitude.toString(),
-        'method': methodId.toString(),
-        'school': config.school.toString(),
-        if (config.tune.isNotEmpty) 'tune': config.tune,
-        if (methodId == 15) 'shafaq': config.shafaq,
-        if (methodCode == 'turkey') 'timezonestring': config.timeZone,
-      },
-    );
-
-    try {
-      final response = await http.get(uri);
-      if (response.statusCode != 200) {
-        return null;
-      }
-      final payload = jsonDecode(response.body) as Map<String, dynamic>;
-      final data = payload['data'] as Map<String, dynamic>?;
-      final timings = data?['timings'] as Map<String, dynamic>?;
-      if (timings == null) {
-        return null;
-      }
-
-      DateTime? parseTime(String key) {
-        final raw = timings[key];
-        if (raw is! String) return null;
-        final match = RegExp(r'(\d{1,2}):(\d{2})').firstMatch(raw);
-        if (match == null) return null;
-        final hour = int.parse(match.group(1)!);
-        final minute = int.parse(match.group(2)!);
-        return DateTime(date.year, date.month, date.day, hour, minute);
-      }
-
-      final fajr = parseTime('Fajr');
-      final sunrise = parseTime('Sunrise');
-      final dhuhr = parseTime('Dhuhr');
-      final asr = parseTime('Asr');
-      final sunset = parseTime('Sunset');
-      final maghrib = parseTime('Maghrib') ?? sunset;
-      final isha = parseTime('Isha');
-      if ([fajr, sunrise, dhuhr, asr, sunset, maghrib, isha].contains(null)) {
-        return null;
-      }
-
-      return PrayerTimes.fromTimings(
-        coordinates: Coordinates(latitude, longitude),
-        date: date,
-        calculationParameters: fallbackParams,
-        fajr: fajr!,
-        sunrise: sunrise!,
-        dhuhr: dhuhr!,
-        asr: asr!,
-        sunset: sunset!,
-        maghrib: maghrib!,
-        isha: isha!,
-      );
-    } catch (_) {
-      return null;
-    }
-  }
-
   Future<PrayerTimes?> _tryDiyanet({
     required LocationData location,
     required DateTime date,
@@ -200,7 +130,8 @@ class PrayerService {
     final uri = Uri.parse('${config.baseUrl}/api/prayer-times/${ids.districtId}/daily');
 
     try {
-      final response = await http.get(uri);
+      final response =
+          await http.get(uri, headers: _diyanetHeaders).timeout(_diyanetTimeout);
       if (response.statusCode != 200) {
         _log('[Diyanet] prayer-times status=${response.statusCode}');
         return null;
@@ -305,7 +236,9 @@ class PrayerService {
     );
 
     try {
-      final statesResponse = await http.get(statesUri);
+      final statesResponse = await http
+          .get(statesUri, headers: _diyanetHeaders)
+          .timeout(_diyanetTimeout);
       if (statesResponse.statusCode != 200) {
         _log('[Diyanet] states status=${statesResponse.statusCode}');
         return null;
@@ -340,7 +273,9 @@ class PrayerService {
       final districtsUri = Uri.parse('${config.baseUrl}/api/locations/districts').replace(
         queryParameters: <String, String>{'stateId': stateId},
       );
-      final districtsResponse = await http.get(districtsUri);
+      final districtsResponse = await http
+          .get(districtsUri, headers: _diyanetHeaders)
+          .timeout(_diyanetTimeout);
       if (districtsResponse.statusCode != 200) {
         _log('[Diyanet] districts status=${districtsResponse.statusCode}');
         return null;
@@ -417,13 +352,6 @@ class PrayerService {
       }
     }
     return buffer.toString().replaceAll(RegExp(r'[^A-Z0-9]'), '');
-  }
-
-  String _formatDate(DateTime date) {
-    final day = date.day.toString().padLeft(2, '0');
-    final month = date.month.toString().padLeft(2, '0');
-    final year = date.year.toString();
-    return '$day-$month-$year';
   }
 
   String _fmt(DateTime dt) {

@@ -1,9 +1,9 @@
 # BESMELE STATE
 
-last_update: 2026-03-18 14:27 +03:00
-active_task: TASK-016
-phase: Besmele markdown omurgasi, M_HaydiNamaza icin ultra-ekonomik ve profesyonel senteze cekildi
-next_step: Yeni oturumlarda `bismillah` akisi bu sentez uzerinden kullanilabilir; uygulama gelistirme icin TASK-004 akisi korunuyor.
+last_update: 2026-03-18 16:43 +03:00
+active_task: TASK-004
+phase: Ayarlar ve arayuz duzenlemesi devam ediyor; commit/push alindi
+next_step: Backup adimina gec; sonra telefonda sol ust konum tiklamasi, konum ekrani checkbox'i ve favori kapali etiketini kontrol et.
 blockers: NONE
-last_delivery: R.260318_1427
-handover: TASK-016 ile repo markdown yapisi ultra-ekonomik bootstrap + opsiyonel proje referans modeliyle guncellendi; uygulama kod akisi TASK-004'te kaldi.
+last_delivery: R.260318_1643
+handover: Ayarlar ve arayuz duzenlemesi devam ediyor notuyla commit/push hazir. Son durum: ana panelde sol ust konum tiklamasi dogrudan konum ekranina bagli; `Mevcut Konumu Al` checkbox'i konum ekraninda; reverse geocode timeout'u yumusak mesaja indirildi; favori dropdownlari kapali halde mevcut konumu gosteriyor.

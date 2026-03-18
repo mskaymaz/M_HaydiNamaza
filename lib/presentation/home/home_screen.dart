@@ -11,6 +11,7 @@ import '../../app/prayer_service.dart';
 import '../../core/config/config_registry.dart';
 import '../../core/prayer_engine/prayer.dart';
 import '../../core/prayer_engine/prayer_times.dart';
+import '../settings/location_screen.dart';
 import '../settings/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -71,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final lat = double.tryParse(location.latitude);
     final lon = double.tryParse(location.longitude);
-    if (lat == null || lon == null) {
+    if (methodCode != 'turkey' && (lat == null || lon == null)) {
       return _HomeData(
         location: location,
         methodCode: methodCode,
@@ -82,8 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final timeZone = _offsetToTz(DateTime.now().timeZoneOffset);
     final times = await _prayerService.calculateToday(
       location: location,
-      latitude: lat,
-      longitude: lon,
+      latitude: lat ?? 0,
+      longitude: lon ?? 0,
       timeZone: timeZone,
       methodCode: methodCode,
     );
@@ -379,6 +380,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         timeLabel: timeLabel,
                         onToggleDate: () =>
                             setState(() => _showHijriDate = !_showHijriDate),
+                        onLocationTap: () => _openLocationSettings(location),
                         onSettings: _openSettings,
                         style: ui.topPanel,
                         padding: ui.topPanelPadding,
@@ -448,6 +450,19 @@ class _HomeScreenState extends State<HomeScreen> {
       return Prayer.fajr;
     }
     return Prayer.fajr;
+  }
+
+  Future<void> _openLocationSettings(LocationData? location) async {
+    final changed = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (_) => LocationScreen(initial: location),
+      ),
+    );
+    if (changed == true) {
+      setState(() {
+        _future = _loadData();
+      });
+    }
   }
 
   _PrayerNext _nextPrayer(PrayerTimes times, DateTime now, AppLocalizations l10n) {
@@ -561,6 +576,7 @@ class _TopPanel extends StatelessWidget {
   final String dateDayMonthLabel;
   final String timeLabel;
   final VoidCallback onToggleDate;
+  final VoidCallback onLocationTap;
   final VoidCallback onSettings;
   final SurfaceStyle style;
   final EdgeInsets padding;
@@ -579,6 +595,7 @@ class _TopPanel extends StatelessWidget {
     required this.dateDayMonthLabel,
     required this.timeLabel,
     required this.onToggleDate,
+    required this.onLocationTap,
     required this.onSettings,
     required this.style,
     required this.padding,
@@ -602,38 +619,69 @@ class _TopPanel extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: GestureDetector(
-              onTap: onToggleDate,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    dateYearLabel,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.85),
-                          fontWeight: FontWeight.w300,
-                          fontSize: typography.methodSize + 1,
-                        ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: onLocationTap,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.white,
+                        size: typography.locationSize + 1,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        districtLabel.trim().isEmpty
+                            ? provinceLabel
+                            : '$provinceLabel / $districtLabel',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: typography.locationSize,
+                            ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    dateDayMonthLabel,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: typography.methodSize + 1,
-                        ),
+                ),
+                const SizedBox(height: 4),
+                GestureDetector(
+                  onTap: onToggleDate,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        dateYearLabel,
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: Colors.white.withValues(alpha: 0.85),
+                              fontWeight: FontWeight.w300,
+                              fontSize: typography.methodSize + 1,
+                            ),
+                      ),
+                      Text(
+                        dateDayMonthLabel,
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: typography.methodSize + 1,
+                            ),
+                      ),
+                      Text(
+                        timeLabel,
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: Colors.white.withValues(alpha: 0.85),
+                              fontWeight: FontWeight.w300,
+                              fontSize: typography.nextLabelSize,
+                            ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    timeLabel,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.85),
-                          fontWeight: FontWeight.w300,
-                          fontSize: typography.nextLabelSize,
-                        ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Column(
@@ -675,61 +723,22 @@ class _TopPanel extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.centerRight,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Transform.translate(
-                  offset: const Offset(10, -10),
-                  child: IconButton(
-                    onPressed: onSettings,
-                    icon: Icon(
-                      Icons.settings_outlined,
-                      color: Colors.white.withValues(alpha: settingsIconOpacity),
-                      size: settingsIconSize,
-                    ),
-                    tooltip: AppLocalizations.of(context)!.settingsTitle,
-                    padding: EdgeInsets.zero,
-                    constraints: BoxConstraints(
-                      minWidth: settingsIconBoxSize,
-                      minHeight: settingsIconBoxSize,
-                    ),
-                  ),
+            child: Transform.translate(
+              offset: const Offset(10, -10),
+              child: IconButton(
+                onPressed: onSettings,
+                icon: Icon(
+                  Icons.settings_outlined,
+                  color: Colors.white.withValues(alpha: settingsIconOpacity),
+                  size: settingsIconSize,
                 ),
-                const SizedBox(height: 0),
-                Transform.translate(
-                  offset: const Offset(0, -20),
-                  child: GestureDetector(
-                    onLongPress: onSettings,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          provinceLabel,
-                          textAlign: TextAlign.right,
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: typography.locationSize,
-                                  ),
-                        ),
-                        if (districtLabel.trim().isNotEmpty)
-                          Text(
-                            districtLabel,
-                            textAlign: TextAlign.right,
-                            style:
-                                Theme.of(context).textTheme.titleSmall?.copyWith(
-                                      color: Colors.white.withValues(alpha: 0.85),
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: typography.locationSize,
-                                    ),
-                          ),
-                      ],
-                    ),
-                  ),
+                tooltip: AppLocalizations.of(context)!.settingsTitle,
+                padding: EdgeInsets.zero,
+                constraints: BoxConstraints(
+                  minWidth: settingsIconBoxSize,
+                  minHeight: settingsIconBoxSize,
                 ),
-              ],
+              ),
             ),
           ),
         ],

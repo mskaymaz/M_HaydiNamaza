@@ -57,7 +57,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get locationUseList => 'اختر من القائمة';
 
   @override
-  String get locationFavoritesLabel => 'المفضلة';
+  String get locationFavoritesLabel => 'المواقع المفضلة';
+
+  @override
+  String get locationSelectLabel => 'اختر الموقع';
 
   @override
   String get locationAddFavorite => 'أضف إلى المفضلة';
@@ -76,6 +79,27 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get locationFillAll => 'يرجى تعبئة جميع الحقول.';
+
+  @override
+  String get locationFavoriteAdded => 'تمت إضافة الموقع إلى المفضلة.';
+
+  @override
+  String get locationFavoriteExists => 'هذا الموقع موجود بالفعل في المفضلة.';
+
+  @override
+  String get locationFavoriteRemoved => 'تم حذف الموقع المفضل.';
+
+  @override
+  String get locationFavoriteApplied => 'تم تفعيل الموقع المفضل.';
+
+  @override
+  String get locationFavoriteApplyLabel => 'تطبيق';
+
+  @override
+  String get locationFavoriteUnavailable => 'لا توجد إحداثيات لهذا المفضل.';
+
+  @override
+  String get locationFavoriteRemoveLabel => 'حذف المفضل';
 
   @override
   String get methodNotSet => 'غير محدد';

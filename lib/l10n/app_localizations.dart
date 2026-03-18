@@ -199,8 +199,14 @@ abstract class AppLocalizations {
   /// No description provided for @locationFavoritesLabel.
   ///
   /// In en, this message translates to:
-  /// **'Favorites'**
+  /// **'Favorite locations'**
   String get locationFavoritesLabel;
+
+  /// No description provided for @locationSelectLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Select location'**
+  String get locationSelectLabel;
 
   /// No description provided for @locationAddFavorite.
   ///
@@ -237,6 +243,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please fill all fields.'**
   String get locationFillAll;
+
+  /// No description provided for @locationFavoriteAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Location added to favorites.'**
+  String get locationFavoriteAdded;
+
+  /// No description provided for @locationFavoriteExists.
+  ///
+  /// In en, this message translates to:
+  /// **'This location is already in favorites.'**
+  String get locationFavoriteExists;
+
+  /// No description provided for @locationFavoriteRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite location removed.'**
+  String get locationFavoriteRemoved;
+
+  /// No description provided for @locationFavoriteApplied.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite location applied.'**
+  String get locationFavoriteApplied;
+
+  /// No description provided for @locationFavoriteApplyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get locationFavoriteApplyLabel;
+
+  /// No description provided for @locationFavoriteUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This favorite has no coordinates.'**
+  String get locationFavoriteUnavailable;
+
+  /// No description provided for @locationFavoriteRemoveLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove favorite'**
+  String get locationFavoriteRemoveLabel;
 
   /// No description provided for @methodNotSet.
   ///

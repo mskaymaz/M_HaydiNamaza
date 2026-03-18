@@ -25,6 +25,18 @@ Ilke:
 - Sohbet gecici, markdown kayitlari kalicidir.
 - Ortak ilke cekirdekte tutulur; uygulama-ozel detay yalniz gerektiginde acilir.
 
+Kilit hatirlatici:
+- Her yeni kullanici talimati gorulur gorumaz, daha cevap yazmadan once bu bolum otomatik yeniden hatirlanmis kabul edilir.
+- Bu hatirlama sessiz uygulanir; kullanici ozellikle istemedikce her seferinde uzun aciklama olarak tekrar yazilmaz.
+- Her anlamli yanit ve her arac kullanimindan hemen once su 4 kontrol zorunludur:
+  1. Yalniz istenen kapsami mi yapiyorum?
+  2. Gerekenden fazla dosya veya tekrar aciklama uretiyor muyum?
+  3. Ayni bilgiyi ikinci kez mi anlatiyorum?
+  4. Bu mesaji daha kisa ama ayni derecede net yazabilir miyim?
+- Bu 4 kontrolden biri `evet, sapma var` sonucuna giderse once ciktiyi kisalt, tekrari sil ve sonra devam et.
+- Kullanici token ekonomisini hatirlattiysa ayni oturumun kalaninda bu bolum `sert mod` kabul edilir.
+- Kullanici token ekonomisini `her talimatta hatirla` seviyesine cikardiysa bu durum yeni bir hatirlatma gelene kadar kalici varsayim sayilir.
+
 Bootstrap:
 1. `Besmele/PROTOKOL.md` ve `Besmele/STATE.md` oku.
 2. Yalniz gerekiyorsa `Besmele/WORKBOARD.md` oku.

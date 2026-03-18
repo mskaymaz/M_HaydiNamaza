@@ -248,8 +248,7 @@ class _LocationScreenState extends State<LocationScreen> {
       ).timeout(const Duration(seconds: 3), onTimeout: () => <Placemark>[]);
       final placemark = placemarks.isEmpty ? null : placemarks.first;
       final province = (placemark?.administrativeArea ?? '').trim();
-      final district =
-          (placemark?.locality ?? placemark?.subAdministrativeArea ?? '').trim();
+      final district = _pickDistrictName(placemark);
       setState(() {
         _selectedFavorite = null;
         _selectedCountryId = ConfigRegistry.dataSources.diyanet.countryId;
@@ -284,6 +283,23 @@ class _LocationScreenState extends State<LocationScreen> {
         _locating = false;
       });
     }
+  }
+
+  String _pickDistrictName(Placemark? placemark) {
+    final candidates = <String>[
+      placemark?.subAdministrativeArea ?? '',
+      placemark?.locality ?? '',
+      placemark?.subLocality ?? '',
+      placemark?.street ?? '',
+      placemark?.name ?? '',
+    ];
+    for (final value in candidates) {
+      final trimmed = value.trim();
+      if (trimmed.isNotEmpty) {
+        return trimmed;
+      }
+    }
+    return '';
   }
 
   List<_DiyanetItem> _parseItems(String raw) {
@@ -441,16 +457,24 @@ class _LocationScreenState extends State<LocationScreen> {
     }
   }
 
-  void _applySelectedFavorite() {
-    final l10n = AppLocalizations.of(context)!;
+  Future<void> _applySelectedFavorite() async {
     final favorite = _selectedFavorite;
     if (favorite == null) return;
     _applyFavorite(favorite);
     _latController.text = favorite.latitude;
     _lonController.text = favorite.longitude;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l10n.locationFavoriteApplied)),
+    await _storage.write(
+      LocationData(
+        countryId: _selectedCountryId,
+        countryName: _selectedCountryName,
+        province: _provinceController.text.trim(),
+        district: _districtController.text.trim(),
+        latitude: _latController.text.trim(),
+        longitude: _lonController.text.trim(),
+      ),
     );
+    if (!mounted) return;
+    Navigator.of(context).pop(true);
   }
 
   Future<void> _save() async {

@@ -615,111 +615,104 @@ class _TopPanel extends StatelessWidget {
         boxShadow: style.shadows,
       ),
       child: Stack(
-        alignment: Alignment.center,
         children: [
           Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: onLocationTap,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.location_on_outlined,
-                        color: Colors.white,
-                        size: typography.locationSize + 1,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        districtLabel.trim().isEmpty
-                            ? provinceLabel
-                            : '$provinceLabel / $districtLabel',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: typography.locationSize,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 4),
-                GestureDetector(
-                  onTap: onToggleDate,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        dateYearLabel,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: Colors.white.withValues(alpha: 0.85),
-                              fontWeight: FontWeight.w300,
-                              fontSize: typography.methodSize + 1,
-                            ),
-                      ),
-                      Text(
-                        dateDayMonthLabel,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: typography.methodSize + 1,
-                            ),
-                      ),
-                      Text(
-                        timeLabel,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: Colors.white.withValues(alpha: 0.85),
-                              fontWeight: FontWeight.w300,
-                              fontSize: typography.nextLabelSize,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
+            alignment: Alignment.topLeft,
+            child: GestureDetector(
+              onTap: onLocationTap,
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    nextLabel,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: typography.nextLabelSize,
-                        ),
+                  Icon(
+                    Icons.location_on_outlined,
+                    color: Colors.white,
+                    size: typography.locationSize + 1,
                   ),
-                  const SizedBox(width: 6),
+                  const SizedBox(width: 4),
                   Text(
-                    nextTime,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.85),
-                          fontWeight: FontWeight.w300,
-                          fontSize: typography.nextLabelSize,
+                    districtLabel.trim().isEmpty
+                        ? provinceLabel
+                        : '$provinceLabel / $districtLabel',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: typography.locationSize,
                         ),
                   ),
                 ],
               ),
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: typography.locationSize + 5),
+              GestureDetector(
+                onTap: onToggleDate,
+                child: Text(
+                  '$dateDayMonthLabel $dateYearLabel',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: (typography.methodSize + 1) * 1.2,
+                      ),
+                ),
+              ),
               Text(
-                countdown,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0.5,
-                      fontSize: typography.nextTimeSize,
+                timeLabel,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: Colors.white.withValues(alpha: 0.85),
+                      fontWeight: FontWeight.w300,
+                      fontSize: typography.nextLabelSize * 1.2,
                     ),
               ),
             ],
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: EdgeInsets.only(top: typography.locationSize + 5),
+              child: Transform.translate(
+                offset: const Offset(25, 0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          nextLabel,
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: typography.nextLabelSize,
+                              ),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          nextTime,
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: Colors.white.withValues(alpha: 0.85),
+                                fontWeight: FontWeight.w300,
+                                fontSize: typography.nextLabelSize,
+                              ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      countdown,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.5,
+                            fontSize: typography.nextTimeSize,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
           Align(
             alignment: Alignment.centerRight,

@@ -32,3 +32,7 @@
 | 2026-03-18 16:39 +03:00 | R.260318_1639 | Ana panel konum girisi, konum ekrani checkbox yeri ve reverse geocode hata akisi guncellendi |
 | 2026-03-18 16:41 +03:00 | R.260318_1641 | Mola/backup oncesi snapshot alindi |
 | 2026-03-18 16:43 +03:00 | R.260318_1643 | Ayarlar ve arayuz duzenlemesi devam ediyor notuyla commit/push hazirlandi |
+| 2026-03-18 16:45 +03:00 | R.260318_1645 | E surucusune bundle yedegi alindi |
+| 2026-03-18 16:49 +03:00 | R.260318_1649 | Konum ekraninda favori uygula tek adima indirildi |
+| 2026-03-18 16:53 +03:00 | R.260318_1653 | Codex devri icin guncel snapshot alindi |
+| 2026-03-18 16:58 +03:00 | R.260318_1658 | Ana panelde konum ust satiri ile tarih-saat ve vakit bloklari yeniden hizalandi |

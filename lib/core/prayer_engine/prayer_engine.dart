@@ -16,7 +16,7 @@ class PrayerEngine {
 
     final offsetMinutes = _parseOffsetMinutes(timeZone);
     if (offsetMinutes == 0) {
-      // TODO: Resolve IANA timezone. For now, return UTC times.
+      // Named time zones are not resolved here; unsupported values fall back to UTC.
       return timesUtc;
     }
 

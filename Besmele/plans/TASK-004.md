@@ -1,7 +1,7 @@
 # TASK-004
 
 status: in_progress
-updated: 2026-03-18 16:43 +03:00
+updated: 2026-03-18 16:58 +03:00
 scope: Faz 2 - Flutter uygulama iskeleti ve temel mimari girisi.
 
 done_summary:
@@ -27,9 +27,13 @@ done_summary:
 - Favori dropdownlari kapali durumdayken mevcut konum ozetini gosterecek sekilde guncellendi.
 - Mola/backup oncesi snapshot alindi; mevcut durum backup devrine hazir.
 - `Ayarlar ve Arayuz duzenlemesi devam ediyor` notuyla commit/push hazirlandi.
+- `E:\\M_HaydiNamaza_R.260318_1645.bundle` bundle yedegi olusturuldu.
+- Konum ekranindaki favori `Uygula` aksiyonu ikinci `Kaydet` adimini gerektirmeyecek sekilde dogrudan kaydet + donus yapacak hale getirildi.
+- Codex devri icin mevcut durum snapshot kaydi alindi.
+- Ana panel tekrar duzeltildi; konum en ustte tek satir, tarih ve saat solda iki satir, orta vakit-kalan bloku konum satirinin altina alindi.
 
 now:
-- Uygulamada kalinan nokta: backup oncesi snapshot alinmis durumda; son UI akisi ana panel konum girisi + konum ekraninda checkbox + mevcut konum etiketli favori dropdownlari.
+- Uygulamada kalinan nokta: ana panel ust yerlesimi son talimata gore daraltildi; konum tek satir ustte, tarih-saat solda, vakit-kalan ortada.
 
 next:
 - USB bagli telefonda konum dropdownlarinin acildigini kontrol et.
@@ -40,6 +44,7 @@ next:
 - Telefonda `Mevcut Konumu Al` checkbox'ini isaretleyip izin ve otomatik konum dolumunu dogrula.
 - Telefonda reverse geocode timeout'unda ham exception yerine yumusak mesaj geldigini dogrula.
 - Backup/yedek adimini tamamla.
+- Telefonda ana panelde konum tek satir, sol tarih-saat ve orta vakit bloku yerlesimini dogrula.
 
 refs:
 - `Proje/UI_Ayarlar.md`

@@ -10,3 +10,7 @@
 | 2026-03-17 00:50 +03:00 | R.260317_0050 | AGENTS gorev listesi yaniti kurali |
 | 2026-03-17 16:56 +03:00 | R.260317_1656 | handover yedegi (context) |
 | 2026-03-17 17:00 +03:00 | R.260317_1659 | Ust panel gorsel ayari olusturuldu |
+| 2026-03-18 09:56 +03:00 | R.260318_0956 | Besmele baglami snapshot semasina cekildi |
+| 2026-03-18 10:07 +03:00 | R.260318_1007 | Snapshot tetigi explicit + 8 talimat olarak netlesti |
+| 2026-03-18 14:17 +03:00 | R.260318_1417 | M_HaydiNamaza markdown omurgasi BesmeleUltra ilkeleriyle sentezlendi |
+| 2026-03-18 14:27 +03:00 | R.260318_1427 | BesmeleUltra sentezi icin operasyon snapshoti alindi ve push hazirlandi |

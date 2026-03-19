@@ -9,12 +9,18 @@ import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
+import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
 
 class LocationScreen extends StatefulWidget {
   final LocationData? initial;
+  final UiPaletteController uiPaletteController;
 
-  const LocationScreen({super.key, this.initial});
+  const LocationScreen({
+    super.key,
+    this.initial,
+    required this.uiPaletteController,
+  });
 
   @override
   State<LocationScreen> createState() => _LocationScreenState();
@@ -510,7 +516,8 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    final ui = ConfigRegistry.settingsPanels;
+    final palette = widget.uiPaletteController.value;
+    final ui = ConfigRegistry.settingsPanelsFor(palette);
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.locationEditTitle),
@@ -560,6 +567,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       _countries.any((item) => item.id == _selectedCountryId)
                           ? _selectedCountryId
                           : null,
+                  palette: palette,
                   label: l10n.locationCountryLabel,
                   items: _countries
                       .map(
@@ -596,6 +604,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       _states.any((item) => item.id == _selectedStateId)
                           ? _selectedStateId
                           : null,
+                  palette: palette,
                   label: l10n.locationCityLabel,
                   items: _states
                       .map(
@@ -629,6 +638,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       _districts.any((item) => item.id == _selectedDistrictId)
                           ? _selectedDistrictId
                           : null,
+                  palette: palette,
                   label: l10n.locationDistrictLabel,
                   items: _districts
                       .map(
@@ -693,6 +703,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         controller: _latController,
                         decoration: _coordinateDecoration(
                           ui,
+                          palette,
                           l10n.locationLatitudeLabel,
                         ),
                         keyboardType: const TextInputType.numberWithOptions(
@@ -708,6 +719,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         controller: _lonController,
                         decoration: _coordinateDecoration(
                           ui,
+                          palette,
                           l10n.locationLongitudeLabel,
                         ),
                         keyboardType: const TextInputType.numberWithOptions(
@@ -753,6 +765,7 @@ class _LocationScreenState extends State<LocationScreen> {
                           value: _favorites.contains(_selectedFavorite)
                               ? _selectedFavorite
                               : null,
+                          palette: palette,
                           label: _currentFavoriteClosedLabel(l10n),
                           items: _favorites
                               .map(
@@ -808,6 +821,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
   InputDecoration _coordinateDecoration(
     SettingsPanelsConfig ui,
+    UiPaletteConfig palette,
     String label,
   ) {
     return InputDecoration(
@@ -829,7 +843,7 @@ class _LocationScreenState extends State<LocationScreen> {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: ui.itemPanel.borderRadius,
-        borderSide: const BorderSide(color: Color(0xFF1F7A3E)),
+        borderSide: BorderSide(color: palette.zeminColor),
       ),
     );
   }
@@ -929,12 +943,14 @@ class _CompactDropdown<T> extends StatelessWidget {
   final String label;
   final List<DropdownMenuItem<T>> items;
   final ValueChanged<T?>? onChanged;
+  final UiPaletteConfig palette;
 
   const _CompactDropdown({
     required this.value,
     required this.label,
     required this.items,
     required this.onChanged,
+    required this.palette,
   });
 
   @override
@@ -946,7 +962,7 @@ class _CompactDropdown<T> extends StatelessWidget {
         labelText: label,
         isDense: true,
         filled: true,
-        fillColor: Colors.white,
+        fillColor: ConfigRegistry.settingsPanelsFor(palette).itemPanel.color,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 12,
           vertical: 10,
@@ -961,7 +977,7 @@ class _CompactDropdown<T> extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: Color(0xFF1F7A3E)),
+          borderSide: BorderSide(color: palette.zeminColor),
         ),
       ),
       icon: const Icon(Icons.keyboard_arrow_down_rounded),

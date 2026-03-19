@@ -1,6 +1,36 @@
 import 'package:flutter/material.dart';
 
 @immutable
+class UiPaletteConfig {
+  final Color zeminColor;
+  final Color cizgiColor;
+  final Color backgroundZeminColor;
+  final Color backgroundCizgiColor;
+
+  const UiPaletteConfig({
+    required this.zeminColor,
+    required this.cizgiColor,
+    required this.backgroundZeminColor,
+    required this.backgroundCizgiColor,
+  });
+
+  UiPaletteConfig copyWith({
+    Color? zeminColor,
+    Color? cizgiColor,
+    Color? backgroundZeminColor,
+    Color? backgroundCizgiColor,
+  }) {
+    return UiPaletteConfig(
+      zeminColor: zeminColor ?? this.zeminColor,
+      cizgiColor: cizgiColor ?? this.cizgiColor,
+      backgroundZeminColor: backgroundZeminColor ?? this.backgroundZeminColor,
+      backgroundCizgiColor:
+          backgroundCizgiColor ?? this.backgroundCizgiColor,
+    );
+  }
+}
+
+@immutable
 class SurfaceStyle {
   final Color color;
   final BorderRadius borderRadius;
@@ -182,104 +212,116 @@ class AladhanDataSourceConfig {
 }
 
 class ConfigRegistry {
-  static const MainUiConfig mainUi = MainUiConfig(
-    screenPadding: EdgeInsets.fromLTRB(18, 14, 18, 18),
-    topPanelPadding: EdgeInsets.fromLTRB(10, 1, 10, 4),
-    sectionGap: 12,
-    settingsIconSize: 16,
-    settingsIconBoxSize: 28,
-    settingsIconOpacity: 0.45,
-    topPanel: SurfaceStyle(
-      color: Color(0xFF1F7A3E),
-      borderRadius: BorderRadius.all(Radius.circular(18)),
-      shadows: [
-        BoxShadow(
-          color: Color(0x33000000),
-          blurRadius: 12,
-          offset: Offset(0, 6),
-        ),
-      ],
-    ),
-    listPanel: SurfaceStyle(
-      color: Color(0xFF0E3B22),
-      borderRadius: BorderRadius.all(Radius.circular(20)),
-      shadows: [
-        BoxShadow(
-          color: Color(0x22000000),
-          blurRadius: 16,
-          offset: Offset(0, 8),
-        ),
-      ],
-    ),
-    listPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-    rowGap: 8,
-    iconToggle: InlineIconStyle(
-      size: 26,
-      iconSize: 15,
-      backgroundColor: Color(0x14FFFFFF),
-      borderRadius: BorderRadius.all(Radius.circular(8)),
-    ),
-    reminderChip: InlineChipStyle(
-      width: 36,
-      verticalPadding: 5,
-      fontSize: 12,
-      backgroundColor: Color(0x14FFFFFF),
-      borderColor: Color(0x33FFFFFF),
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-    ),
-    typography: HomeTypography(
-      locationSize: 16,
-      methodSize: 12,
-      nextLabelSize: 20,
-      nextTimeSize: 29,
-      listLabelSize: 14,
-      listTimeSize: 14,
-      chipSize: 12,
-    ),
+  static const UiPaletteConfig defaultPalette = UiPaletteConfig(
+    zeminColor: Color(0xFF1F7A3E),
+    cizgiColor: Color(0xFFFFFFFF),
+    backgroundZeminColor: Color(0xFFF3EFE2),
+    backgroundCizgiColor: Color(0xFF7A8F6A),
   );
 
-  static const SettingsPanelsConfig settingsPanels = SettingsPanelsConfig(
-    screenPadding: EdgeInsets.fromLTRB(16, 12, 16, 18),
-    sectionGap: 10,
-    fieldGap: 8,
-    coordinateGap: 10,
-    sectionPadding: EdgeInsets.fromLTRB(12, 10, 12, 12),
-    favoriteItemPadding: EdgeInsets.fromLTRB(12, 8, 12, 8),
-    sectionTitleSize: 14,
-    panel: SurfaceStyle(
-      color: Color(0xFFF8F8F2),
-      borderRadius: BorderRadius.all(Radius.circular(18)),
-      shadows: [
-        BoxShadow(
-          color: Color(0x14000000),
-          blurRadius: 10,
-          offset: Offset(0, 4),
-        ),
-      ],
-    ),
-    itemPanel: SurfaceStyle(
-      color: Color(0xFFFFFFFF),
-      borderRadius: BorderRadius.all(Radius.circular(16)),
-      shadows: [
-        BoxShadow(
-          color: Color(0x0F000000),
-          blurRadius: 8,
-          offset: Offset(0, 3),
-        ),
-      ],
-    ),
-    selectedItemPanel: SurfaceStyle(
-      color: Color(0xFFEAF6ED),
-      borderRadius: BorderRadius.all(Radius.circular(16)),
-      shadows: [
-        BoxShadow(
-          color: Color(0x140E5A2A),
-          blurRadius: 8,
-          offset: Offset(0, 3),
-        ),
-      ],
-    ),
-  );
+  static MainUiConfig mainUiFor(UiPaletteConfig palette) {
+    return MainUiConfig(
+      screenPadding: const EdgeInsets.fromLTRB(18, 14, 18, 18),
+      topPanelPadding: const EdgeInsets.fromLTRB(10, 1, 10, 4),
+      sectionGap: 12,
+      settingsIconSize: 16,
+      settingsIconBoxSize: 28,
+      settingsIconOpacity: 0.45,
+      topPanel: SurfaceStyle(
+        color: palette.zeminColor,
+        borderRadius: const BorderRadius.all(Radius.circular(18)),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x33000000),
+            blurRadius: 12,
+            offset: Offset(0, 6),
+          ),
+        ],
+      ),
+      listPanel: SurfaceStyle(
+        color: _blendWithBlack(palette.zeminColor, 0.42),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x22000000),
+            blurRadius: 16,
+            offset: Offset(0, 8),
+          ),
+        ],
+      ),
+      listPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      rowGap: 8,
+      iconToggle: InlineIconStyle(
+        size: 26,
+        iconSize: 15,
+        backgroundColor: palette.cizgiColor.withValues(alpha: 0.08),
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+      ),
+      reminderChip: InlineChipStyle(
+        width: 36,
+        verticalPadding: 5,
+        fontSize: 12,
+        backgroundColor: palette.cizgiColor.withValues(alpha: 0.08),
+        borderColor: palette.cizgiColor.withValues(alpha: 0.2),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+      ),
+      typography: const HomeTypography(
+        locationSize: 16,
+        methodSize: 12,
+        nextLabelSize: 20,
+        nextTimeSize: 29,
+        listLabelSize: 14,
+        listTimeSize: 14,
+        chipSize: 12,
+      ),
+    );
+  }
+
+  static SettingsPanelsConfig settingsPanelsFor(UiPaletteConfig palette) {
+    return SettingsPanelsConfig(
+      screenPadding: const EdgeInsets.fromLTRB(16, 12, 16, 18),
+      sectionGap: 10,
+      fieldGap: 8,
+      coordinateGap: 10,
+      sectionPadding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+      favoriteItemPadding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+      sectionTitleSize: 14,
+      panel: SurfaceStyle(
+        color: _blend(palette.cizgiColor, palette.zeminColor, 0.9),
+        borderRadius: const BorderRadius.all(Radius.circular(18)),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x14000000),
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      itemPanel: SurfaceStyle(
+        color: _blend(palette.cizgiColor, palette.zeminColor, 0.96),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x0F000000),
+            blurRadius: 8,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      selectedItemPanel: SurfaceStyle(
+        color: _blend(palette.zeminColor, palette.cizgiColor, 0.8),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x140E5A2A),
+            blurRadius: 8,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+    );
+  }
+
   static const HelpPanelsConfig helpPanels = HelpPanelsConfig();
   static const DataSourcesConfig dataSources = DataSourcesConfig(
     diyanet: DiyanetDataSourceConfig(
@@ -317,4 +359,12 @@ class ConfigRegistry {
     ),
   );
   static const AppBehaviorConfig appBehavior = AppBehaviorConfig();
+
+  static Color _blend(Color a, Color b, double t) {
+    return Color.lerp(a, b, t) ?? a;
+  }
+
+  static Color _blendWithBlack(Color color, double amount) {
+    return _blend(color, Colors.black, amount);
+  }
 }

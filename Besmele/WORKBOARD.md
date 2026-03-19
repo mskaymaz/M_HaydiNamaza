@@ -7,7 +7,7 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-001 | planned | 2026-03-13 00:00 +03:00 | Istisare + gereksinim taslagi |
 | TASK-002 | done | 2026-03-13 00:58 +03:00 | Repo init + tam icerik push |
 | TASK-003 | done | 2026-03-14 16:17 +03:00 | Faz 1: Adhan portu + altin test seti |
-| TASK-004 | in_progress | 2026-03-19 09:47 +03:00 | Faz 2: Flutter iskeleti; ust panel simdilik tamamlandi |
+| TASK-004 | in_progress | 2026-03-19 11:03 +03:00 | Faz 2: Flutter iskeleti; zemin ve panel renklendirme tamamlandi |
 | TASK-005 | planned | 2026-03-14 16:17 +03:00 | UI/UX temel ekranlar + tasarim sistemi |
 | TASK-006 | planned | 2026-03-14 16:17 +03:00 | Konum/zaman + offline-first veri katmani |
 | TASK-007 | planned | 2026-03-14 16:17 +03:00 | Bildirim + ezan/ses altyapisi |
@@ -23,3 +23,4 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-017 | done | 2026-03-18 15:24 +03:00 | Token ekonomisi icin her talimatta sessiz hatirlatici |
 | TASK-018 | done | 2026-03-19 00:00 +03:00 | AGENTS ekonomik token kuralini en ust oncelikte sertlestir |
 | TASK-019 | done | 2026-03-19 10:08 +03:00 | Ekonomik token preflight metni kisaltildi |
+| TASK-020 | done | 2026-03-19 10:20 +03:00 | Exact scope talimati zorunlu preflight olarak sabitlendi |

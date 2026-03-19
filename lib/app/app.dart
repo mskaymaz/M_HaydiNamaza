@@ -3,6 +3,7 @@ import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../presentation/home/home_screen.dart';
 import 'locale_controller.dart';
+import 'ui_palette_controller.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -13,16 +14,19 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final LocaleController _localeController = LocaleController();
+  final UiPaletteController _uiPaletteController = UiPaletteController();
 
   @override
   void initState() {
     super.initState();
     _localeController.load();
+    _uiPaletteController.load();
   }
 
   @override
   void dispose() {
     _localeController.dispose();
+    _uiPaletteController.dispose();
     super.dispose();
   }
 
@@ -31,16 +35,29 @@ class _AppState extends State<App> {
     return ValueListenableBuilder<Locale?>(
       valueListenable: _localeController,
       builder: (context, locale, _) {
-        return MaterialApp(
-          onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
-            useMaterial3: true,
-          ),
-          locale: locale,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: HomeScreen(localeController: _localeController),
+        return ValueListenableBuilder(
+          valueListenable: _uiPaletteController,
+          builder: (context, palette, _) {
+            final colorScheme = ColorScheme.fromSeed(seedColor: palette.zeminColor);
+            return MaterialApp(
+              onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
+              theme: ThemeData(
+                colorScheme: colorScheme,
+                useMaterial3: true,
+                appBarTheme: AppBarTheme(
+                  backgroundColor: colorScheme.surface,
+                  foregroundColor: colorScheme.onSurface,
+                ),
+              ),
+              locale: locale,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: HomeScreen(
+                localeController: _localeController,
+                uiPaletteController: _uiPaletteController,
+              ),
+            );
+          },
         );
       },
     );

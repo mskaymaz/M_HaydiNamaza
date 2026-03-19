@@ -1,7 +1,7 @@
 # TASK-004
 
 status: in_progress
-updated: 2026-03-19 09:47 +03:00
+updated: 2026-03-19 11:03 +03:00
 scope: Faz 2 - Flutter uygulama iskeleti ve temel mimari girisi.
 
 done_summary:
@@ -33,11 +33,15 @@ done_summary:
 - Ana panel tekrar duzeltildi; konum en ustte tek satir, tarih ve saat solda iki satir, orta vakit-kalan bloku konum satirinin altina alindi.
 - `R.260318_1659` etiketiyle bundle yedek oncesi yeni snapshot alindi.
 - Ust panel son turda tamamlandi: konum satiri yatay merkezde, ilce ince tipte, gear ayni satirda saga tasinip buyutuldu; tarih-saat solda serbest ve `Siradaki Vakit` blogu sanal `1/3-2/3` hesabiyla sag alana merkezlendi.
+- Ayarlar sadeleştirildi; favori konum ve konum sec kisimlari kaldirildi, hesaplama yontemi uste tasindi.
+- Ayarlar icine panel/yazi ve arka plan zemin/cizgi renk secicileri eklendi; palette ana panel, Vakitler Paneli, ayar panelleri ve geometrik background'a baglandi.
+- Background motifi ustten 15 px bosluk birakacak sekilde asagi alindi; renk basliklarina bilgi ikonu ve reset aksiyonlari eklendi.
 
 now:
-- Uygulamada kalinan nokta: ust panel kullanici talimatlarina gore simdilik tamamlandi; commit/push hazir.
+- Uygulamada kalinan nokta: zemin ve panel renklendirme tamamlandi; commit/push hazir.
 
 next:
+- Renk duzenlemelerini cihazda gorsel olarak dogrula.
 - Ust panel yerlesimini cihazda gorsel olarak dogrula.
 - USB bagli telefonda konum dropdownlarinin acildigini kontrol et.
 - Ayarlar ve konum ekranlarinda favori satirinin tek satir gorunumunu ve `Uygula`/`Sil` akislarini cihazda dogrula.

@@ -8,6 +8,7 @@ import '../../app/calculation_method_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_storage.dart';
 import '../../app/prayer_service.dart';
+import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
 import '../../core/prayer_engine/prayer.dart';
 import '../../core/prayer_engine/prayer_times.dart';
@@ -16,8 +17,13 @@ import '../settings/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final LocaleController localeController;
+  final UiPaletteController uiPaletteController;
 
-  const HomeScreen({super.key, required this.localeController});
+  const HomeScreen({
+    super.key,
+    required this.localeController,
+    required this.uiPaletteController,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -265,6 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
       MaterialPageRoute(
         builder: (_) => SettingsScreen(
           localeController: widget.localeController,
+          uiPaletteController: widget.uiPaletteController,
         ),
       ),
     );
@@ -353,71 +360,86 @@ class _HomeScreenState extends State<HomeScreen> {
               ? _formatHijriDayMonth(_now, l10n)
               : _formatGregorianDayMonth(_now, l10n);
           final timeLabel = _formatClock(_now);
-          final ui = ConfigRegistry.mainUi;
+          final palette = widget.uiPaletteController.value;
+          final ui = ConfigRegistry.mainUiFor(palette);
 
-          return Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('img/templates_line/bg_motif02.png'),
-                fit: BoxFit.cover,
+          return Stack(
+            children: [
+              Positioned.fill(
+                child: ColoredBox(color: palette.backgroundZeminColor),
               ),
-            ),
-            child: SafeArea(
-              child: Padding(
-                padding: ui.screenPadding,
-                child: Column(
-                  children: [
-                    GestureDetector(
-                      onDoubleTap: () => setState(() => _showList = !_showList),
-                      child: _TopPanel(
-                        provinceLabel: provinceLabel,
-                        districtLabel: districtLabel,
-                        nextLabel: next.label,
-                        nextTime: nextTime,
-                        countdown: countdown,
-                        dateYearLabel: dateYearLabel,
-                        dateDayMonthLabel: dateDayMonthLabel,
-                        timeLabel: timeLabel,
-                        onToggleDate: () =>
-                            setState(() => _showHijriDate = !_showHijriDate),
-                        onLocationTap: () => _openLocationSettings(location),
-                        onSettings: _openSettings,
-                        style: ui.topPanel,
-                        padding: ui.topPanelPadding,
-                        settingsIconSize: ui.settingsIconSize,
-                        settingsIconBoxSize: ui.settingsIconBoxSize,
-                        settingsIconOpacity: ui.settingsIconOpacity,
-                        typography: ui.typography,
-                      ),
-                    ),
-                    SizedBox(height: ui.sectionGap),
-                    Expanded(
-                      child: AnimatedCrossFade(
-                        duration: const Duration(milliseconds: 220),
-                        crossFadeState: _showList
-                            ? CrossFadeState.showFirst
-                            : CrossFadeState.showSecond,
-                        firstChild: _PrayerList(
-                          items: items,
-                          active: active,
-                          timeFormat: _formatTime,
-                          style: ui.listPanel,
-                          listPadding: ui.listPadding,
-                          rowGap: ui.rowGap,
-                          iconStyle: ui.iconToggle,
-                          chipStyle: ui.reminderChip,
-                          typography: ui.typography,
-                        ),
-                        secondChild: _CollapsedHint(
-                          label: l10n.locationLabel,
-                          value: displayName,
-                        ),
-                      ),
-                    ),
-                  ],
+              Positioned.fill(
+                top: 15,
+                child: IgnorePointer(
+                  child: Image.asset(
+                    'img/templates_line/bg_motif02.png',
+                    fit: BoxFit.cover,
+                    alignment: Alignment.topCenter,
+                    color: palette.backgroundCizgiColor.withValues(alpha: 0.5),
+                    colorBlendMode: BlendMode.modulate,
+                  ),
                 ),
               ),
-            ),
+              SafeArea(
+                child: Padding(
+                  padding: ui.screenPadding,
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onDoubleTap: () => setState(() => _showList = !_showList),
+                        child: _TopPanel(
+                          provinceLabel: provinceLabel,
+                          districtLabel: districtLabel,
+                          nextLabel: next.label,
+                          nextTime: nextTime,
+                          countdown: countdown,
+                          dateYearLabel: dateYearLabel,
+                          dateDayMonthLabel: dateDayMonthLabel,
+                          timeLabel: timeLabel,
+                          onToggleDate: () =>
+                              setState(() => _showHijriDate = !_showHijriDate),
+                          onLocationTap: () => _openLocationSettings(location),
+                          onSettings: _openSettings,
+                          style: ui.topPanel,
+                          padding: ui.topPanelPadding,
+                          settingsIconSize: ui.settingsIconSize,
+                          settingsIconBoxSize: ui.settingsIconBoxSize,
+                          settingsIconOpacity: ui.settingsIconOpacity,
+                          typography: ui.typography,
+                          cizgiColor: palette.cizgiColor,
+                        ),
+                      ),
+                      SizedBox(height: ui.sectionGap),
+                      Expanded(
+                        child: AnimatedCrossFade(
+                          duration: const Duration(milliseconds: 220),
+                          crossFadeState: _showList
+                              ? CrossFadeState.showFirst
+                              : CrossFadeState.showSecond,
+                          firstChild: _PrayerList(
+                            items: items,
+                            active: active,
+                            timeFormat: _formatTime,
+                            style: ui.listPanel,
+                            listPadding: ui.listPadding,
+                            rowGap: ui.rowGap,
+                            iconStyle: ui.iconToggle,
+                            chipStyle: ui.reminderChip,
+                            typography: ui.typography,
+                            cizgiColor: palette.cizgiColor,
+                            activeColor: palette.zeminColor,
+                          ),
+                          secondChild: _CollapsedHint(
+                            label: l10n.locationLabel,
+                            value: displayName,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           );
         },
       ),
@@ -455,7 +477,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _openLocationSettings(LocationData? location) async {
     final changed = await Navigator.of(context).push<bool>(
       MaterialPageRoute(
-        builder: (_) => LocationScreen(initial: location),
+        builder: (_) => LocationScreen(
+          initial: location,
+          uiPaletteController: widget.uiPaletteController,
+        ),
       ),
     );
     if (changed == true) {
@@ -584,6 +609,7 @@ class _TopPanel extends StatelessWidget {
   final double settingsIconBoxSize;
   final double settingsIconOpacity;
   final HomeTypography typography;
+  final Color cizgiColor;
 
   const _TopPanel({
     required this.provinceLabel,
@@ -603,6 +629,7 @@ class _TopPanel extends StatelessWidget {
     required this.settingsIconBoxSize,
     required this.settingsIconOpacity,
     required this.typography,
+    required this.cizgiColor,
   });
 
   @override
@@ -613,7 +640,7 @@ class _TopPanel extends StatelessWidget {
         ? settingsIconBoxSize
         : typography.locationSize + 8;
     final locationTextStyle = theme.textTheme.titleMedium?.copyWith(
-      color: Colors.white,
+      color: cizgiColor,
       fontWeight: FontWeight.w500,
       fontSize: typography.locationSize,
     );
@@ -642,7 +669,7 @@ class _TopPanel extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.location_on_outlined,
-                          color: Colors.white,
+                          color: cizgiColor,
                           size: typography.locationSize + 1,
                         ),
                         const SizedBox(width: 4),
@@ -674,8 +701,8 @@ class _TopPanel extends StatelessWidget {
                       onPressed: onSettings,
                       icon: Icon(
                         Icons.settings_outlined,
-                        color: Colors.white.withValues(alpha: settingsIconOpacity),
-                        size: settingsIconSize * 1.2,
+                        color: cizgiColor.withValues(alpha: settingsIconOpacity),
+                        size: settingsIconSize * 1.3,
                       ),
                       tooltip: AppLocalizations.of(context)!.settingsTitle,
                       padding: EdgeInsets.zero,
@@ -692,7 +719,7 @@ class _TopPanel extends StatelessWidget {
           const SizedBox(height: 4),
           Container(
             height: 1,
-            color: Colors.white.withValues(alpha: 0.14),
+            color: cizgiColor.withValues(alpha: 0.18),
           ),
           const SizedBox(height: 10),
           SizedBox(
@@ -710,7 +737,7 @@ class _TopPanel extends StatelessWidget {
                         child: Text(
                           '$dateDayMonthLabel $dateYearLabel',
                           style: theme.textTheme.titleSmall?.copyWith(
-                                color: Colors.white,
+                                color: cizgiColor,
                                 fontWeight: FontWeight.w600,
                                 fontSize: (typography.methodSize + 1) * 1.2,
                               ),
@@ -719,7 +746,7 @@ class _TopPanel extends StatelessWidget {
                       Text(
                         timeLabel,
                         style: theme.textTheme.titleSmall?.copyWith(
-                              color: Colors.white.withValues(alpha: 0.85),
+                              color: cizgiColor.withValues(alpha: 0.85),
                               fontWeight: FontWeight.w300,
                               fontSize: typography.nextLabelSize * 1.2,
                             ),
@@ -739,7 +766,7 @@ class _TopPanel extends StatelessWidget {
                           Text(
                             nextLabel,
                             style: theme.textTheme.titleSmall?.copyWith(
-                                  color: Colors.white,
+                                  color: cizgiColor,
                                   fontWeight: FontWeight.w600,
                                   fontSize: typography.nextLabelSize,
                                 ),
@@ -748,7 +775,7 @@ class _TopPanel extends StatelessWidget {
                           Text(
                             nextTime,
                             style: theme.textTheme.titleSmall?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.85),
+                                  color: cizgiColor.withValues(alpha: 0.85),
                                   fontWeight: FontWeight.w300,
                                   fontSize: typography.nextLabelSize,
                                 ),
@@ -758,7 +785,7 @@ class _TopPanel extends StatelessWidget {
                       Text(
                         countdown,
                         style: theme.textTheme.headlineSmall?.copyWith(
-                              color: Colors.white,
+                              color: cizgiColor,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 0.5,
                               fontSize: typography.nextTimeSize,
@@ -786,6 +813,8 @@ class _PrayerList extends StatelessWidget {
   final InlineIconStyle iconStyle;
   final InlineChipStyle chipStyle;
   final HomeTypography typography;
+  final Color cizgiColor;
+  final Color activeColor;
 
   const _PrayerList({
     required this.items,
@@ -797,6 +826,8 @@ class _PrayerList extends StatelessWidget {
     required this.iconStyle,
     required this.chipStyle,
     required this.typography,
+    required this.cizgiColor,
+    required this.activeColor,
   });
 
   @override
@@ -816,7 +847,7 @@ class _PrayerList extends StatelessWidget {
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             decoration: BoxDecoration(
-              color: isActive ? const Color(0xFF1E8B4A) : Colors.transparent,
+              color: isActive ? activeColor.withValues(alpha: 0.9) : Colors.transparent,
               borderRadius: BorderRadius.circular(14),
             ),
             child: Row(
@@ -825,7 +856,7 @@ class _PrayerList extends StatelessWidget {
                   child: Text(
                     item.label,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Colors.white,
+                          color: cizgiColor,
                           fontWeight: FontWeight.w600,
                           fontSize: typography.listLabelSize,
                         ),
@@ -834,19 +865,35 @@ class _PrayerList extends StatelessWidget {
                 Text(
                   timeFormat(item.time),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: Colors.white.withValues(alpha: 0.9),
+                        color: cizgiColor.withValues(alpha: 0.9),
                         fontWeight: FontWeight.w600,
                         fontSize: typography.listTimeSize,
                       ),
                 ),
                 SizedBox(width: rowGap),
-                _ReminderChip(minutes: item.reminderMinutes, style: chipStyle),
+                _ReminderChip(
+                  minutes: item.reminderMinutes,
+                  style: chipStyle,
+                  cizgiColor: cizgiColor,
+                ),
                 SizedBox(width: rowGap),
-                _IconToggle(icon: Icons.volume_up_outlined, style: iconStyle),
+                _IconToggle(
+                  icon: Icons.volume_up_outlined,
+                  style: iconStyle,
+                  cizgiColor: cizgiColor,
+                ),
                 SizedBox(width: rowGap),
-                _IconToggle(icon: Icons.remove_red_eye_outlined, style: iconStyle),
+                _IconToggle(
+                  icon: Icons.remove_red_eye_outlined,
+                  style: iconStyle,
+                  cizgiColor: cizgiColor,
+                ),
                 SizedBox(width: rowGap),
-                _IconToggle(icon: Icons.mosque_outlined, style: iconStyle),
+                _IconToggle(
+                  icon: Icons.mosque_outlined,
+                  style: iconStyle,
+                  cizgiColor: cizgiColor,
+                ),
               ],
             ),
           );
@@ -864,8 +911,13 @@ class _PrayerList extends StatelessWidget {
 class _ReminderChip extends StatelessWidget {
   final int minutes;
   final InlineChipStyle style;
+  final Color cizgiColor;
 
-  const _ReminderChip({required this.minutes, required this.style});
+  const _ReminderChip({
+    required this.minutes,
+    required this.style,
+    required this.cizgiColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -881,7 +933,7 @@ class _ReminderChip extends StatelessWidget {
       child: Text(
         minutes.toString(),
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: Colors.white,
+              color: cizgiColor,
               fontWeight: FontWeight.w700,
               fontSize: style.fontSize,
             ),
@@ -893,8 +945,13 @@ class _ReminderChip extends StatelessWidget {
 class _IconToggle extends StatelessWidget {
   final IconData icon;
   final InlineIconStyle style;
+  final Color cizgiColor;
 
-  const _IconToggle({required this.icon, required this.style});
+  const _IconToggle({
+    required this.icon,
+    required this.style,
+    required this.cizgiColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -905,7 +962,7 @@ class _IconToggle extends StatelessWidget {
         color: style.backgroundColor,
         borderRadius: style.borderRadius,
       ),
-      child: Icon(icon, size: style.iconSize, color: Colors.white),
+      child: Icon(icon, size: style.iconSize, color: cizgiColor),
     );
   }
 }

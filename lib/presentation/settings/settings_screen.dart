@@ -5,13 +5,20 @@ import '../../app/calculation_method_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
+import '../../app/ui_palette_controller.dart';
+import '../../core/config/config_registry.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
+  final UiPaletteController uiPaletteController;
 
-  const SettingsScreen({super.key, required this.localeController});
+  const SettingsScreen({
+    super.key,
+    required this.localeController,
+    required this.uiPaletteController,
+  });
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -73,6 +80,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final current = widget.localeController.value;
+    final palette = widget.uiPaletteController.value;
+    final ui = ConfigRegistry.settingsPanelsFor(palette);
 
     String locationSubtitle() {
       final data = _location;
@@ -160,114 +169,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
             ),
           ),
-          const Divider(height: 32),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Row(
-              children: [
-                Expanded(
-                  child: DropdownButtonFormField<LocationFavorite>(
-                    value: _favorites.contains(_selectedFavorite)
-                        ? _selectedFavorite
-                        : null,
-                    decoration:
-                        _dropdownDecoration(_currentFavoriteClosedLabel(l10n)),
-                    items: _favorites
-                        .map(
-                          (favorite) => DropdownMenuItem<LocationFavorite>(
-                            value: favorite,
-                            child: Text(_formatFavoriteLabel(favorite)),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: _favorites.isEmpty
-                        ? null
-                        : (favorite) {
-                            if (favorite == null) return;
-                            setState(() {
-                              _selectedFavorite = favorite;
-                            });
-                          },
-                  ),
-                ),
-                const SizedBox(width: 8),
-                TextButton(
-                  onPressed: _selectedFavorite == null
-                      ? null
-                      : () async {
-                          final favorite = _selectedFavorite!;
-                          final data = LocationData(
-                            countryId: favorite.countryId,
-                            countryName: favorite.countryName,
-                            province: favorite.province,
-                            district: favorite.district,
-                            latitude: favorite.latitude,
-                            longitude: favorite.longitude,
-                          );
-                          await _locationStorage.write(data);
-                          if (!mounted) return;
-                          setState(() {
-                            _location = data;
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(l10n.locationFavoriteApplied),
-                            ),
-                          );
-                        },
-                  style: TextButton.styleFrom(
-                    minimumSize: const Size(0, 40),
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    visualDensity: VisualDensity.compact,
-                  ),
-                  child: Text(l10n.locationFavoriteApplyLabel),
-                ),
-                IconButton(
-                  onPressed: _selectedFavorite == null
-                      ? null
-                      : () async {
-                          final favorite = _selectedFavorite!;
-                          final removed = await _favoritesStorage.remove(favorite);
-                          if (!mounted || !removed) return;
-                          await _loadFavorites();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(l10n.locationFavoriteRemoved),
-                            ),
-                          );
-                        },
-                  icon: const Icon(Icons.delete_outline),
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints.tightFor(
-                    width: 40,
-                    height: 40,
-                  ),
-                  visualDensity: VisualDensity.compact,
-                  tooltip: l10n.locationFavoriteRemoveLabel,
-                ),
-              ],
-            ),
-          ),
-          ListTile(
-            title: Text(l10n.locationSelectLabel),
-            subtitle: Text(locationSubtitle()),
-            trailing: const Icon(Icons.location_on_outlined),
-            subtitleTextStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  height: 1.35,
-                ),
-            onTap: () async {
-              final changed = await Navigator.of(context).push<bool>(
-                MaterialPageRoute(
-                  builder: (_) => LocationScreen(initial: _location),
-                ),
-              );
-              if (changed == true) {
-                await _loadLocation();
-                await _loadFavorites();
-              }
-            },
-          ),
           ListTile(
             title: Text(l10n.calculationMethodLabel),
             subtitle: Text(methodSubtitle()),
@@ -285,33 +186,246 @@ class _SettingsScreenState extends State<SettingsScreen> {
               }
             },
           ),
+          const Divider(height: 32),
+          Padding(
+            padding: ui.screenPadding,
+            child: _SettingsPanel(
+              style: ui.panel,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _SectionHeader(
+                    title: 'Arayuz Renkleri',
+                    tooltip: 'Panel ve yazi renklerini degistir.',
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _ColorActionTile(
+                          title: 'Panel Rengi',
+                          color: palette.zeminColor,
+                          onTap: () => _editColor(
+                            context: context,
+                            title: 'Panel Rengi',
+                            initialColor: palette.zeminColor,
+                            onApply: widget.uiPaletteController.setZeminColor,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: _ColorActionTile(
+                          title: 'Yazi Rengi',
+                          color: palette.cizgiColor,
+                          onTap: () => _editColor(
+                            context: context,
+                            title: 'Yazi Rengi',
+                            initialColor: palette.cizgiColor,
+                            onApply: widget.uiPaletteController.setCizgiColor,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      _ResetIconButton(
+                        onTap: () async {
+                          await widget.uiPaletteController.setZeminColor(
+                            ConfigRegistry.defaultPalette.zeminColor,
+                          );
+                          await widget.uiPaletteController.setCizgiColor(
+                            ConfigRegistry.defaultPalette.cizgiColor,
+                          );
+                          if (!context.mounted) return;
+                          setState(() {});
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: ui.screenPadding.copyWith(top: 0),
+            child: _SettingsPanel(
+              style: ui.panel,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _SectionHeader(
+                    title: 'Arka Plan Renkleri',
+                    tooltip: 'Geometrik arka planin zemin ve cizgi renklerini degistir.',
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _ColorActionTile(
+                          title: 'Zemin Rengi',
+                          color: palette.backgroundZeminColor,
+                          onTap: () => _editColor(
+                            context: context,
+                            title: 'Arka Plan Zemin',
+                            initialColor: palette.backgroundZeminColor,
+                            onApply: widget.uiPaletteController
+                                .setBackgroundZeminColor,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: _ColorActionTile(
+                          title: 'Cizgi Rengi',
+                          color: palette.backgroundCizgiColor,
+                          onTap: () => _editColor(
+                            context: context,
+                            title: 'Arka Plan Cizgi Rengi',
+                            initialColor: palette.backgroundCizgiColor,
+                            onApply: widget.uiPaletteController
+                                .setBackgroundCizgiColor,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      _ResetIconButton(
+                        onTap: () async {
+                          await widget.uiPaletteController.setBackgroundZeminColor(
+                            ConfigRegistry.defaultPalette.backgroundZeminColor,
+                          );
+                          await widget.uiPaletteController.setBackgroundCizgiColor(
+                            ConfigRegistry.defaultPalette.backgroundCizgiColor,
+                          );
+                          if (!context.mounted) return;
+                          setState(() {});
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
   InputDecoration _dropdownDecoration(String label) {
+    final palette = widget.uiPaletteController.value;
+    final ui = ConfigRegistry.settingsPanelsFor(palette);
     return InputDecoration(
       labelText: label,
       isDense: true,
       filled: true,
-      fillColor: Colors.white,
+      fillColor: ui.itemPanel.color,
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 12,
         vertical: 10,
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: ui.itemPanel.borderRadius,
         borderSide: BorderSide.none,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: ui.itemPanel.borderRadius,
         borderSide: BorderSide.none,
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(color: Color(0xFF1F7A3E)),
+        borderRadius: ui.itemPanel.borderRadius,
+        borderSide: BorderSide(color: palette.zeminColor),
       ),
+    );
+  }
+
+  Future<void> _editColor({
+    required BuildContext context,
+    required String title,
+    required Color initialColor,
+    required Future<void> Function(Color color) onApply,
+  }) async {
+    var draft = HSVColor.fromColor(initialColor);
+    await showDialog<void>(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text('$title Rengi'),
+              content: SizedBox(
+                width: 320,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 52,
+                      decoration: BoxDecoration(
+                        color: draft.toColor(),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.black12),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        _hexColor(draft.toColor()),
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: draft.value > 0.6
+                                  ? Colors.black87
+                                  : Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    SizedBox(
+                      height: 220,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: _ColorSpectrum(
+                              hsv: draft,
+                              onChanged: (saturation, value) {
+                                setState(() {
+                                  draft = draft.withSaturation(saturation).withValue(value);
+                                });
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          _HueStrip(
+                            hue: draft.hue,
+                            onChanged: (hue) {
+                              setState(() {
+                                draft = draft.withHue(hue);
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Iptal'),
+                ),
+                FilledButton(
+                  onPressed: () async {
+                    await onApply(draft.toColor());
+                    if (mounted) {
+                      setState(() {});
+                    }
+                    if (!context.mounted) return;
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Uygula'),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 
@@ -375,6 +489,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return input.trim().replaceAll(RegExp(r'\s+'), ' ');
   }
 
+  String _hexColor(Color color) {
+    final value = color.toARGB32() & 0xFFFFFF;
+    return '#${value.toRadixString(16).padLeft(6, '0').toUpperCase()}';
+  }
+
   LocationFavorite? _matchFavorite(
     LocationData? data,
     List<LocationFavorite> favorites,
@@ -393,5 +512,339 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
     }
     return null;
+  }
+}
+
+class _SettingsPanel extends StatelessWidget {
+  final SurfaceStyle style;
+  final Widget child;
+
+  const _SettingsPanel({
+    required this.style,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: style.color,
+        borderRadius: style.borderRadius,
+        boxShadow: style.shadows,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: child,
+      ),
+    );
+  }
+}
+
+class _SectionHeader extends StatelessWidget {
+  final String title;
+  final String tooltip;
+
+  const _SectionHeader({
+    required this.title,
+    required this.tooltip,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+        ),
+        const SizedBox(width: 10),
+        InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () {
+            showDialog<void>(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text(title),
+                  content: Text(tooltip),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('Tamam'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: const Padding(
+            padding: EdgeInsets.all(2),
+            child: Icon(Icons.info_outline, size: 24),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ColorActionTile extends StatelessWidget {
+  final String title;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _ColorActionTile({
+    required this.title,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(14),
+      onTap: onTap,
+      child: Ink(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.14),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: color.withValues(alpha: 0.45)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 22,
+              height: 22,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(child: Text(title)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ResetIconButton extends StatelessWidget {
+  final Future<void> Function() onTap;
+
+  const _ResetIconButton({
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(14),
+      onTap: onTap,
+      child: Ink(
+        width: 42,
+        height: 42,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.black12),
+        ),
+        child: const Icon(Icons.restart_alt_rounded),
+      ),
+    );
+  }
+}
+
+class _ColorSlider extends StatelessWidget {
+  final String label;
+  final double value;
+  final Color activeColor;
+  final ValueChanged<double> onChanged;
+
+  const _ColorSlider({
+    required this.label,
+    required this.value,
+    required this.activeColor,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 18, child: Text(label)),
+        Expanded(
+          child: Slider(
+            min: 0,
+            max: 255,
+            activeColor: activeColor,
+            value: value,
+            onChanged: onChanged,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ColorSpectrum extends StatelessWidget {
+  final HSVColor hsv;
+  final void Function(double saturation, double value) onChanged;
+
+  const _ColorSpectrum({
+    required this.hsv,
+    required this.onChanged,
+  });
+
+  void _update(Offset localPosition, Size size) {
+    final dx = localPosition.dx.clamp(0.0, size.width);
+    final dy = localPosition.dy.clamp(0.0, size.height);
+    final saturation = size.width == 0 ? 0.0 : dx / size.width;
+    final value = size.height == 0 ? 0.0 : 1 - (dy / size.height);
+    onChanged(saturation.clamp(0.0, 1.0), value.clamp(0.0, 1.0));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final size = Size(constraints.maxWidth, constraints.maxHeight);
+        final indicatorOffset = Offset(
+          hsv.saturation * size.width,
+          (1 - hsv.value) * size.height,
+        );
+        return GestureDetector(
+          onPanDown: (details) => _update(details.localPosition, size),
+          onPanUpdate: (details) => _update(details.localPosition, size),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white,
+                        HSVColor.fromAHSV(1, hsv.hue, 1, 1).toColor(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black,
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: indicatorOffset.dx - 9,
+                top: indicatorOffset.dy - 9,
+                child: Container(
+                  width: 18,
+                  height: 18,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white, width: 2),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x33000000),
+                        blurRadius: 4,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _HueStrip extends StatelessWidget {
+  final double hue;
+  final ValueChanged<double> onChanged;
+
+  const _HueStrip({
+    required this.hue,
+    required this.onChanged,
+  });
+
+  void _update(Offset localPosition, double height) {
+    final dy = localPosition.dy.clamp(0.0, height);
+    final nextHue = height == 0 ? 0.0 : (dy / height) * 360;
+    onChanged(nextHue.clamp(0.0, 360.0));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final height = constraints.maxHeight;
+        final top = ((hue / 360) * height).clamp(0.0, height);
+        return SizedBox(
+          width: 28,
+          child: GestureDetector(
+            onPanDown: (details) => _update(details.localPosition, height),
+            onPanUpdate: (details) => _update(details.localPosition, height),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xFFFF0000),
+                          Color(0xFFFFFF00),
+                          Color(0xFF00FF00),
+                          Color(0xFF00FFFF),
+                          Color(0xFF0000FF),
+                          Color(0xFFFF00FF),
+                          Color(0xFFFF0000),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: top - 2,
+                  child: Container(
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color(0x33000000),
+                          blurRadius: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

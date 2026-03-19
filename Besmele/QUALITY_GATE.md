@@ -67,3 +67,8 @@
 - Testler calisti mi? Hayir (`dart format` ve `flutter analyze` denemeleri timeout oldu; son duzenlemeler manuel ilerledi).
 - Temel akislarda regresyon var mi? Bilinmiyor (vakitler paneli ve qibla ikon duzeni cihazda yeniden dogrulanmadi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-025`, `TASK-026` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-19 23:04 +03:00
+- Testler calisti mi? Kismen (kullanicidan `flutter run` derleme hatasi geri bildirimi alindi; hedefli duzeltme yapildi ama `dart analyze`/`dart format` yine timeout oldu).
+- Temel akislarda regresyon var mi? Bilinmiyor (cekmece davranisi ve yeni nafile satiri akislarinin cihaz dogrulamasi tamamlanmadi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-026` ve `PUSH_LOG` guncellendi).

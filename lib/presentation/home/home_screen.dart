@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final Map<Prayer, _PrayerRowSettings> _rowSettings = {};
   final Map<Prayer, TextEditingController> _reminderControllers = {};
   final Map<String, String> _triggerLog = {};
+  final List<_CustomPrayerDraft> _customPrayerRows = [];
 
   late Future<_HomeData> _future;
   Timer? _ticker;
@@ -58,9 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Timer? _vibrationRepeatTimer;
   DateTime _now = DateTime.now();
   DateTime _lastRefreshDay = DateTime.now();
-  bool _showList = true;
+  double _drawerProgress = 0;
   bool _showHijriDate = false;
   bool _reminderCheckInProgress = false;
+  int _customPrayerSeed = 0;
   DateTime? _voiceLoopUntil;
   String? _voiceLoopPrayerLabel;
   DateTime? _visualLoopUntil;
@@ -106,6 +108,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _reminderAudioService.dispose();
     for (final controller in _reminderControllers.values) {
       controller.dispose();
+    }
+    for (final row in _customPrayerRows) {
+      row.labelController.dispose();
+      row.reminderController.dispose();
     }
     super.dispose();
   }
@@ -632,7 +638,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       children: [
                         GestureDetector(
-                          onDoubleTap: () => setState(() => _showList = !_showList),
+                          onDoubleTap: _toggleDrawer,
                           child: _TopPanel(
                             provinceLabel: provinceLabel,
                             districtLabel: districtLabel,
@@ -658,38 +664,124 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(height: ui.sectionGap),
                         Expanded(
-                          child: AnimatedCrossFade(
-                            duration: const Duration(milliseconds: 220),
-                            crossFadeState: _showList
-                                ? CrossFadeState.showFirst
-                                : CrossFadeState.showSecond,
-                            firstChild: _PrayerList(
-                              items: items,
-                              active: active,
-                              timeFormat: _formatTime,
-                              style: ui.listPanel,
-                              listPadding: ui.listPadding,
-                              rowGap: ui.rowGap,
-                              iconStyle: ui.iconToggle,
-                              chipStyle: ui.reminderChip,
-                              typography: ui.typography,
-                              cizgiColor: palette.cizgiColor,
-                              activeColor: palette.zeminColor,
-                              showVoiceIcon: _reminderSettings.showVoiceIcon,
-                              showVisualIcon: _reminderSettings.showVisualIcon,
-                              showAzanIcon: _reminderSettings.showAzanIcon,
-                              showVibrationIcon:
-                                  _reminderSettings.showVibrationIcon,
-                              onReminderChanged: _setReminderMinutes,
-                              onVoiceToggle: _toggleVoiceReminder,
-                              onVisualToggle: _toggleVisualReminder,
-                              onAzanToggle: _toggleAzanReminder,
-                              onVibrationToggle: _toggleVibrationReminder,
-                            ),
-                            secondChild: _CollapsedHint(
-                              label: l10n.locationLabel,
-                              value: displayName,
-                            ),
+                          child: LayoutBuilder(
+                            builder: (context, constraints) {
+                              const minDrawerHeight = 18.0;
+                              final maxDrawerHeight = constraints.maxHeight <
+                                      minDrawerHeight
+                                  ? minDrawerHeight
+                                  : constraints.maxHeight;
+                              final drawerHeight =
+                                  minDrawerHeight +
+                                  ((maxDrawerHeight - minDrawerHeight) *
+                                      _drawerProgress);
+
+                              return Stack(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: _CollapsedHint(
+                                      label: l10n.locationLabel,
+                                      value: displayName,
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topCenter,
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 220),
+                                      curve: Curves.easeOutCubic,
+                                      height: drawerHeight,
+                                      decoration: BoxDecoration(
+                                        color: ui.listPanel.color,
+                                        borderRadius: ui.listPanel.borderRadius,
+                                        boxShadow: ui.listPanel.shadows,
+                                      ),
+                                      clipBehavior: Clip.antiAlias,
+                                      child: Column(
+                                        children: [
+                                          GestureDetector(
+                                            behavior: HitTestBehavior.opaque,
+                                            onTap: _toggleDrawer,
+                                            onVerticalDragUpdate: (details) {
+                                              final travel =
+                                                  (maxDrawerHeight - minDrawerHeight)
+                                                      .clamp(1.0, double.infinity);
+                                              setState(() {
+                                                _drawerProgress = (_drawerProgress +
+                                                        (details.delta.dy / travel))
+                                                    .clamp(0.0, 1.0)
+                                                    .toDouble();
+                                              });
+                                            },
+                                            onVerticalDragEnd: (details) {
+                                              final velocity =
+                                                  details.primaryVelocity ?? 0;
+                                              setState(() {
+                                                if (velocity > 250) {
+                                                  _drawerProgress = 1;
+                                                } else if (velocity < -250) {
+                                                  _drawerProgress = 0;
+                                                } else {
+                                                  _drawerProgress =
+                                                      _drawerProgress >= 0.35
+                                                      ? 1
+                                                      : 0;
+                                                }
+                                              });
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.fromLTRB(
+                                                0,
+                                                6,
+                                                0,
+                                                6,
+                                              ),
+                                              child: Center(
+                                                child: Container(
+                                                  width: 52,
+                                                  height: 6,
+                                                  decoration: BoxDecoration(
+                                                    color: palette.cizgiColor
+                                                        .withValues(alpha: 0.4),
+                                                    borderRadius:
+                                                        BorderRadius.circular(999),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          if (_drawerProgress > 0)
+                                            Expanded(
+                                              child: _PrayerList(
+                                                items: items,
+                                                active: active,
+                                                style: ui.listPanel,
+                                                listPadding: ui.listPadding,
+                                                rowGap: ui.rowGap,
+                                                iconStyle: ui.iconToggle,
+                                                chipStyle: ui.reminderChip,
+                                                typography: ui.typography,
+                                                cizgiColor: palette.cizgiColor,
+                                                activeColor: palette.zeminColor,
+                                                showVoiceIcon:
+                                                    _reminderSettings.showVoiceIcon,
+                                                showVisualIcon:
+                                                    _reminderSettings.showVisualIcon,
+                                                showAzanIcon:
+                                                    _reminderSettings.showAzanIcon,
+                                                showVibrationIcon:
+                                                    _reminderSettings
+                                                        .showVibrationIcon,
+                                                onAddCustomPrayer: _addCustomPrayerRow,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
                         ),
                       ],
@@ -1090,23 +1182,388 @@ class _HomeScreenState extends State<HomeScreen> {
     unawaited(_persistPrayerRowSettings());
   }
 
+  void _toggleDrawer() {
+    setState(() {
+      _drawerProgress = _drawerProgress > 0.35 ? 0 : 1;
+    });
+  }
+
+  void _addCustomPrayerRow() {
+    final label = 'Nafile ${_nextAvailableNafileIndex()}';
+    final row = _CustomPrayerDraft(
+      id: 'nafile_${_customPrayerSeed++}',
+      labelController: TextEditingController(text: label),
+      reminderController: TextEditingController(text: '15'),
+      settings: const _PrayerRowSettings(reminderMinutes: 15),
+      timeRule: const _CustomPrayerTimeRule(
+        mode: _CustomPrayerTimeMode.manual,
+        manualTime: null,
+      ),
+    );
+    setState(() {
+      _customPrayerRows.add(row);
+      _drawerProgress = 1;
+    });
+  }
+
+  int _nextAvailableNafileIndex({String? excludingId}) {
+    final used = <int>{};
+    final pattern = RegExp(r'^Nafile (\d+)$');
+    for (final row in _customPrayerRows) {
+      if (row.id == excludingId) continue;
+      final match = pattern.firstMatch(row.labelController.text.trim());
+      if (match != null) {
+        used.add(int.parse(match.group(1)!));
+      }
+    }
+    var candidate = 1;
+    while (used.contains(candidate)) {
+      candidate++;
+    }
+    return candidate;
+  }
+
+  void _setCustomPrayerLabel(_CustomPrayerDraft row, String value) {
+    setState(() {});
+  }
+
+  void _normalizeCustomPrayerLabel(_CustomPrayerDraft row) {
+    if (row.labelController.text.trim().isNotEmpty) return;
+    final label = 'Nafile ${_nextAvailableNafileIndex(excludingId: row.id)}';
+    row.labelController.text = label;
+    row.labelController.selection = TextSelection.collapsed(
+      offset: row.labelController.text.length,
+    );
+    setState(() {});
+  }
+
+  void _setCustomReminderMinutes(_CustomPrayerDraft row, String value) {
+    final minutes = int.tryParse(value) ?? 0;
+    setState(() {
+      row.settings = row.settings.copyWith(reminderMinutes: minutes);
+    });
+  }
+
+  void _toggleCustomVoice(_CustomPrayerDraft row) {
+    setState(() {
+      row.settings = row.settings.copyWith(
+        voiceEnabled: !row.settings.voiceEnabled,
+      );
+    });
+  }
+
+  void _toggleCustomVisual(_CustomPrayerDraft row) {
+    setState(() {
+      row.settings = row.settings.copyWith(
+        visualEnabled: !row.settings.visualEnabled,
+      );
+    });
+  }
+
+  void _toggleCustomAzan(_CustomPrayerDraft row) {
+    setState(() {
+      row.settings = row.settings.copyWith(
+        azanEnabled: !row.settings.azanEnabled,
+      );
+    });
+  }
+
+  void _toggleCustomVibration(_CustomPrayerDraft row) {
+    setState(() {
+      row.settings = row.settings.copyWith(
+        vibrationEnabled: !row.settings.vibrationEnabled,
+      );
+    });
+  }
+
+  void _removeCustomPrayerRow(_CustomPrayerDraft row) {
+    setState(() {
+      _customPrayerRows.removeWhere((entry) => entry.id == row.id);
+    });
+    row.labelController.dispose();
+    row.reminderController.dispose();
+  }
+
+  DateTime _prayerTimeFor(Prayer prayer, PrayerTimes times) {
+    switch (prayer) {
+      case Prayer.fajr:
+        return _atToday(times.fajr, _now);
+      case Prayer.sunrise:
+        return _atToday(times.sunrise, _now);
+      case Prayer.dhuhr:
+        return _atToday(times.dhuhr, _now);
+      case Prayer.asr:
+        return _atToday(times.asr, _now);
+      case Prayer.maghrib:
+        return _atToday(times.maghrib, _now);
+      case Prayer.isha:
+        return _atToday(times.isha, _now);
+      case Prayer.none:
+        return _now;
+    }
+  }
+
+  DateTime? _resolveCustomPrayerTime(
+    _CustomPrayerTimeRule rule,
+    PrayerTimes times,
+  ) {
+    switch (rule.mode) {
+      case _CustomPrayerTimeMode.manual:
+        final manualTime = rule.manualTime;
+        if (manualTime == null) return null;
+        return DateTime(
+          _now.year,
+          _now.month,
+          _now.day,
+          manualTime.hour,
+          manualTime.minute,
+        );
+      case _CustomPrayerTimeMode.beforePrayer:
+        final anchor = rule.anchorPrayer;
+        if (anchor == null) return null;
+        return _prayerTimeFor(anchor, times).subtract(
+          Duration(minutes: rule.offsetMinutes.abs()),
+        );
+      case _CustomPrayerTimeMode.afterPrayer:
+        final anchor = rule.anchorPrayer;
+        if (anchor == null) return null;
+        return _prayerTimeFor(anchor, times).add(
+          Duration(minutes: rule.offsetMinutes.abs()),
+        );
+    }
+  }
+
+  String _formatTimeOfDay(TimeOfDay time) {
+    final h = time.hour.toString().padLeft(2, '0');
+    final m = time.minute.toString().padLeft(2, '0');
+    return '$h:$m';
+  }
+
+  Future<void> _openCustomTimeEditor(
+    _CustomPrayerDraft row,
+    AppLocalizations l10n,
+  ) async {
+    var mode = row.timeRule.mode;
+    var anchorPrayer = row.timeRule.anchorPrayer ?? Prayer.fajr;
+    final offsetController = TextEditingController(
+      text: row.timeRule.offsetMinutes.toString(),
+    );
+    final hourController = TextEditingController(
+      text: row.timeRule.manualTime == null
+          ? ''
+          : row.timeRule.manualTime!.hour.toString().padLeft(2, '0'),
+    );
+    final minuteController = TextEditingController(
+      text: row.timeRule.manualTime == null
+          ? ''
+          : row.timeRule.manualTime!.minute.toString().padLeft(2, '0'),
+    );
+
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setSheetState) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                20,
+                20,
+                20,
+                20 + MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Vakit zamani',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                  ),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      ChoiceChip(
+                        label: const Text('Sabit saat'),
+                        selected: mode == _CustomPrayerTimeMode.manual,
+                        onSelected: (_) {
+                          setSheetState(() {
+                            mode = _CustomPrayerTimeMode.manual;
+                          });
+                        },
+                      ),
+                      ChoiceChip(
+                        label: const Text('Vakitten once'),
+                        selected: mode == _CustomPrayerTimeMode.beforePrayer,
+                        onSelected: (_) {
+                          setSheetState(() {
+                            mode = _CustomPrayerTimeMode.beforePrayer;
+                          });
+                        },
+                      ),
+                      ChoiceChip(
+                        label: const Text('Vakitten sonra'),
+                        selected: mode == _CustomPrayerTimeMode.afterPrayer,
+                        onSelected: (_) {
+                          setSheetState(() {
+                            mode = _CustomPrayerTimeMode.afterPrayer;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  if (mode == _CustomPrayerTimeMode.manual)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: hourController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            decoration: const InputDecoration(labelText: 'Saat'),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: TextField(
+                            controller: minuteController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            decoration: const InputDecoration(
+                              labelText: 'Dakika',
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  else ...[
+                    DropdownButtonFormField<Prayer>(
+                      value: anchorPrayer,
+                      decoration: const InputDecoration(
+                        labelText: 'Referans vakit',
+                      ),
+                      items: [
+                        DropdownMenuItem(
+                          value: Prayer.fajr,
+                          child: Text(l10n.prayerFajr),
+                        ),
+                        DropdownMenuItem(
+                          value: Prayer.sunrise,
+                          child: Text(l10n.prayerSunrise),
+                        ),
+                        DropdownMenuItem(
+                          value: Prayer.dhuhr,
+                          child: Text(l10n.prayerDhuhr),
+                        ),
+                        DropdownMenuItem(
+                          value: Prayer.asr,
+                          child: Text(l10n.prayerAsr),
+                        ),
+                        DropdownMenuItem(
+                          value: Prayer.maghrib,
+                          child: Text(l10n.prayerMaghrib),
+                        ),
+                        DropdownMenuItem(
+                          value: Prayer.isha,
+                          child: Text(l10n.prayerIsha),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        if (value == null) return;
+                        setSheetState(() {
+                          anchorPrayer = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: offsetController,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      decoration: const InputDecoration(
+                        labelText: 'Dakika',
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: () {
+                        final hour = int.tryParse(hourController.text.trim());
+                        final minute = int.tryParse(minuteController.text.trim());
+                        final offsetMinutes =
+                            int.tryParse(offsetController.text.trim()) ?? 0;
+                        setState(() {
+                          row.timeRule = _CustomPrayerTimeRule(
+                            mode: mode,
+                            anchorPrayer: mode == _CustomPrayerTimeMode.manual
+                                ? null
+                                : anchorPrayer,
+                            offsetMinutes: offsetMinutes,
+                            manualTime: mode == _CustomPrayerTimeMode.manual
+                                ? (hour == null ||
+                                        minute == null ||
+                                        hour < 0 ||
+                                        hour > 23 ||
+                                        minute < 0 ||
+                                        minute > 59
+                                    ? null
+                                    : TimeOfDay(hour: hour, minute: minute))
+                                : null,
+                          );
+                        });
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Kaydet'),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    offsetController.dispose();
+    hourController.dispose();
+    minuteController.dispose();
+  }
+
   List<_PrayerItem> _buildItems(AppLocalizations l10n, PrayerTimes times) {
     _PrayerItem itemFor(Prayer prayer, String label, DateTime time) {
       final settings = _settingsFor(prayer);
       return _PrayerItem(
+        id: prayer.name,
         prayer: prayer,
         label: label,
-        time: time,
-        reminderMinutes: settings.reminderMinutes,
+        timeLabel: _formatTime(time),
         reminderController: _controllerFor(prayer),
+        onReminderChanged: (value) => _setReminderMinutes(prayer, value),
         voiceEnabled: settings.voiceEnabled,
         visualEnabled: settings.visualEnabled,
         azanEnabled: settings.azanEnabled,
         vibrationEnabled: settings.vibrationEnabled,
+        onVoiceToggle: () => _toggleVoiceReminder(prayer),
+        onVisualToggle: () => _toggleVisualReminder(prayer),
+        onAzanToggle: () => _toggleAzanReminder(prayer),
+        onVibrationToggle: () => _toggleVibrationReminder(prayer),
       );
     }
 
-    return [
+    final items = [
       itemFor(Prayer.fajr, l10n.prayerFajr, times.fajr),
       itemFor(Prayer.sunrise, l10n.prayerSunrise, times.sunrise),
       itemFor(Prayer.dhuhr, l10n.prayerDhuhr, times.dhuhr),
@@ -1114,6 +1571,35 @@ class _HomeScreenState extends State<HomeScreen> {
       itemFor(Prayer.maghrib, l10n.prayerMaghrib, times.maghrib),
       itemFor(Prayer.isha, l10n.prayerIsha, times.isha),
     ];
+
+    for (final row in _customPrayerRows) {
+      final resolvedTime = _resolveCustomPrayerTime(row.timeRule, times);
+      items.add(
+        _PrayerItem(
+          id: row.id,
+          prayer: null,
+          label: row.labelController.text.trim(),
+          labelController: row.labelController,
+          onLabelChanged: (value) => _setCustomPrayerLabel(row, value),
+          onLabelEditingComplete: () => _normalizeCustomPrayerLabel(row),
+          timeLabel: resolvedTime == null ? '--:--' : _formatTime(resolvedTime),
+          onTimeTap: () => _openCustomTimeEditor(row, l10n),
+          reminderController: row.reminderController,
+          onReminderChanged: (value) => _setCustomReminderMinutes(row, value),
+          voiceEnabled: row.settings.voiceEnabled,
+          visualEnabled: row.settings.visualEnabled,
+          azanEnabled: row.settings.azanEnabled,
+          vibrationEnabled: row.settings.vibrationEnabled,
+          onVoiceToggle: () => _toggleCustomVoice(row),
+          onVisualToggle: () => _toggleCustomVisual(row),
+          onAzanToggle: () => _toggleCustomAzan(row),
+          onVibrationToggle: () => _toggleCustomVibration(row),
+          onDelete: () => _removeCustomPrayerRow(row),
+        ),
+      );
+    }
+
+    return items;
   }
 }
 
@@ -1132,26 +1618,46 @@ class _HomeData {
 }
 
 class _PrayerItem {
-  final Prayer prayer;
+  final String id;
+  final Prayer? prayer;
   final String label;
-  final DateTime time;
-  final int reminderMinutes;
+  final TextEditingController? labelController;
+  final ValueChanged<String>? onLabelChanged;
+  final VoidCallback? onLabelEditingComplete;
+  final String timeLabel;
+  final VoidCallback? onTimeTap;
   final TextEditingController reminderController;
+  final ValueChanged<String> onReminderChanged;
   final bool voiceEnabled;
   final bool visualEnabled;
   final bool azanEnabled;
   final bool vibrationEnabled;
+  final VoidCallback onVoiceToggle;
+  final VoidCallback onVisualToggle;
+  final VoidCallback onAzanToggle;
+  final VoidCallback onVibrationToggle;
+  final VoidCallback? onDelete;
 
   _PrayerItem({
+    required this.id,
     required this.prayer,
     required this.label,
-    required this.time,
-    required this.reminderMinutes,
+    this.labelController,
+    this.onLabelChanged,
+    this.onLabelEditingComplete,
+    required this.timeLabel,
+    this.onTimeTap,
     required this.reminderController,
+    required this.onReminderChanged,
     required this.voiceEnabled,
     required this.visualEnabled,
     required this.azanEnabled,
     required this.vibrationEnabled,
+    required this.onVoiceToggle,
+    required this.onVisualToggle,
+    required this.onAzanToggle,
+    required this.onVibrationToggle,
+    this.onDelete,
   });
 }
 
@@ -1185,6 +1691,38 @@ class _PrayerRowSettings {
       vibrationEnabled: vibrationEnabled ?? this.vibrationEnabled,
     );
   }
+}
+
+class _CustomPrayerDraft {
+  final String id;
+  final TextEditingController labelController;
+  final TextEditingController reminderController;
+  _PrayerRowSettings settings;
+  _CustomPrayerTimeRule timeRule;
+
+  _CustomPrayerDraft({
+    required this.id,
+    required this.labelController,
+    required this.reminderController,
+    required this.settings,
+    required this.timeRule,
+  });
+}
+
+enum _CustomPrayerTimeMode { manual, beforePrayer, afterPrayer }
+
+class _CustomPrayerTimeRule {
+  final _CustomPrayerTimeMode mode;
+  final Prayer? anchorPrayer;
+  final int offsetMinutes;
+  final TimeOfDay? manualTime;
+
+  const _CustomPrayerTimeRule({
+    required this.mode,
+    this.anchorPrayer,
+    this.offsetMinutes = 0,
+    this.manualTime,
+  });
 }
 
 enum _ReminderStage { reminder, prayer }
@@ -1441,7 +1979,6 @@ class _TopPanel extends StatelessWidget {
 class _PrayerList extends StatelessWidget {
   final List<_PrayerItem> items;
   final Prayer active;
-  final String Function(DateTime) timeFormat;
   final SurfaceStyle style;
   final EdgeInsets listPadding;
   final double rowGap;
@@ -1454,16 +1991,11 @@ class _PrayerList extends StatelessWidget {
   final bool showVisualIcon;
   final bool showAzanIcon;
   final bool showVibrationIcon;
-  final void Function(Prayer prayer, String value) onReminderChanged;
-  final void Function(Prayer prayer) onVoiceToggle;
-  final void Function(Prayer prayer) onVisualToggle;
-  final void Function(Prayer prayer) onAzanToggle;
-  final void Function(Prayer prayer) onVibrationToggle;
+  final VoidCallback onAddCustomPrayer;
 
   const _PrayerList({
     required this.items,
     required this.active,
-    required this.timeFormat,
     required this.style,
     required this.listPadding,
     required this.rowGap,
@@ -1476,11 +2008,7 @@ class _PrayerList extends StatelessWidget {
     required this.showVisualIcon,
     required this.showAzanIcon,
     required this.showVibrationIcon,
-    required this.onReminderChanged,
-    required this.onVoiceToggle,
-    required this.onVisualToggle,
-    required this.onAzanToggle,
-    required this.onVibrationToggle,
+    required this.onAddCustomPrayer,
   });
 
   @override
@@ -1509,188 +2037,258 @@ class _PrayerList extends StatelessWidget {
       (currentMax, item) => math.max(
         currentMax,
         _measureTextWidth(
-          item.label,
+          item.labelController?.text.trim().isNotEmpty == true
+              ? item.labelController!.text.trim()
+              : item.label,
           baseLabelStyle,
         ),
       ),
     );
-    return Container(
-      decoration: BoxDecoration(
-        color: style.color,
-        borderRadius: style.borderRadius,
-        boxShadow: style.shadows,
-      ),
-      child: ListView.separated(
-        padding: listPadding,
-        itemBuilder: (context, index) {
-          final item = items[index];
-          final activeIndex = items.indexWhere((entry) => entry.prayer == active);
-          final isPast = activeIndex != -1 && index < activeIndex;
-          final isActive = item.prayer == active;
-          final labelColor = isActive
-              ? cizgiColor
-              : isPast
-                  ? cizgiColor.withValues(alpha: 0.45)
-                  : cizgiColor;
-          final timeColor = isActive
-              ? cizgiColor.withValues(alpha: 0.9)
-              : isPast
-                  ? cizgiColor.withValues(alpha: 0.5)
-                  : cizgiColor.withValues(alpha: 0.9);
-          final controlColor = cizgiColor;
-          final chipBackgroundColor = isActive
-              ? activeColor.withValues(alpha: 0.12)
-              : chipStyle.backgroundColor;
-          final chipBorderColor = isActive
-              ? activeColor.withValues(alpha: 0.45)
-              : chipStyle.borderColor;
-          final labelStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: labelColor,
-                fontWeight: isActive ? FontWeight.w700 : FontWeight.w300,
-                fontSize: rowTextSize,
-              );
-          final labelWidth = _measureTextWidth(item.label, labelStyle);
-          final labelInset =
-              (maxLabelWidth - labelWidth).clamp(0.0, maxLabelWidth).toDouble();
-          final timeSlotWidth = typography.nextLabelSize * 2.8;
-          final iconSlotWidth = iconStyle.size * 1.3;
-          final rowWidgets = <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: labelInset),
-              child: Text(
-                item.label,
-                textAlign: TextAlign.right,
-                style: labelStyle,
-              ),
-            ),
-            SizedBox(
-              width: timeSlotWidth,
-              child: Text(
-                timeFormat(item.time),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: timeColor,
-                      fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
-                      fontSize: rowTextSize,
-                    ),
-              ),
-            ),
-            SizedBox(
-              width: chipStyle.width,
-              child: _ReminderChip(
-                controller: item.reminderController,
-                style: scaledChipStyle,
-                cizgiColor: controlColor,
-                backgroundColor: chipBackgroundColor,
-                borderColor: chipBorderColor,
-                onChanged: (value) => onReminderChanged(item.prayer, value),
-              ),
-            ),
-          ];
+    final labelSlotWidth = math.max(maxLabelWidth, 88.0);
+    final timeSlotWidth = typography.nextLabelSize * 2.8;
+    final iconSlotWidth = iconStyle.size * 1.3;
+    final activeIndex = items.indexWhere((entry) => entry.prayer == active);
 
-          if (showVoiceIcon) {
-            rowWidgets.add(
-              SizedBox(
-                width: iconSlotWidth,
-                child: _IconToggle(
-                  icon: Icons.volume_up_outlined,
-                  style: scaledIconStyle,
-                  isEnabled: item.voiceEnabled,
-                  cizgiColor: controlColor,
-                  onTap: () => onVoiceToggle(item.prayer),
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.separated(
+            padding: listPadding,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              final isPast =
+                  item.prayer != null && activeIndex != -1 && index < activeIndex;
+              final isActive = item.prayer == active;
+              final labelColor = isActive
+                  ? cizgiColor
+                  : isPast
+                      ? cizgiColor.withValues(alpha: 0.45)
+                      : cizgiColor;
+              final timeColor = isActive
+                  ? cizgiColor.withValues(alpha: 0.9)
+                  : isPast
+                      ? cizgiColor.withValues(alpha: 0.5)
+                      : cizgiColor.withValues(alpha: 0.9);
+              final controlColor = cizgiColor;
+              final chipBackgroundColor = isActive
+                  ? activeColor.withValues(alpha: 0.12)
+                  : chipStyle.backgroundColor;
+              final chipBorderColor = isActive
+                  ? activeColor.withValues(alpha: 0.45)
+                  : chipStyle.borderColor;
+              final labelStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: labelColor,
+                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w300,
+                    fontSize: rowTextSize,
+                  );
+              final rowWidgets = <Widget>[
+                SizedBox(
+                  width: labelSlotWidth,
+                  child: item.labelController == null
+                      ? Text(
+                          item.label,
+                          textAlign: TextAlign.right,
+                          style: labelStyle,
+                        )
+                      : TextField(
+                          controller: item.labelController,
+                          onChanged: item.onLabelChanged,
+                          onEditingComplete: () {
+                            item.onLabelEditingComplete?.call();
+                            FocusScope.of(context).unfocus();
+                          },
+                          onSubmitted: (_) {
+                            item.onLabelEditingComplete?.call();
+                          },
+                          textAlign: TextAlign.right,
+                          textInputAction: TextInputAction.done,
+                          style: labelStyle?.copyWith(fontWeight: FontWeight.w600),
+                          decoration: const InputDecoration(
+                            isDense: true,
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.zero,
+                          ),
+                        ),
                 ),
-              ),
-            );
-          }
-          if (showVisualIcon) {
-            rowWidgets.add(
-              SizedBox(
-                width: iconSlotWidth,
-                child: _IconToggle(
-                  icon: Icons.desktop_windows_outlined,
-                  style: scaledIconStyle,
-                  isEnabled: item.visualEnabled,
-                  cizgiColor: controlColor,
-                  onTap: () => onVisualToggle(item.prayer),
-                ),
-              ),
-            );
-          }
-          if (showAzanIcon) {
-            rowWidgets.add(
-              SizedBox(
-                width: iconSlotWidth,
-                child: _IconToggle(
-                  icon: Icons.mosque_outlined,
-                  style: scaledIconStyle,
-                  isEnabled: item.azanEnabled,
-                  cizgiColor: controlColor,
-                  onTap: () => onAzanToggle(item.prayer),
-                ),
-              ),
-            );
-          }
-          if (showVibrationIcon) {
-            rowWidgets.add(
-              SizedBox(
-                width: iconSlotWidth,
-                child: _IconToggle(
-                  icon: Icons.vibration_outlined,
-                  style: scaledIconStyle,
-                  isEnabled: item.vibrationEnabled,
-                  cizgiColor: controlColor,
-                  onTap: () => onVibrationToggle(item.prayer),
-                ),
-              ),
-            );
-          }
-          return AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: isActive ? Colors.white.withValues(alpha: 0.12) : Colors.transparent,
-              borderRadius: BorderRadius.circular(14),
-              border: isActive
-                  ? Border.all(
-                      color: Colors.white.withValues(alpha: 0.45),
-                      width: 1,
-                    )
-                  : null,
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        for (var i = 0; i < rowWidgets.length; i++) ...[
-                          if (i > 0)
-                            SizedBox(
-                              width: i == 3
-                                  ? 10
-                                  : i <= 2
-                                  ? 12
-                                  : 2,
+                SizedBox(
+                  width: timeSlotWidth,
+                  child: item.onTimeTap == null
+                      ? Text(
+                          item.timeLabel,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: timeColor,
+                                fontWeight: isActive
+                                    ? FontWeight.w700
+                                    : FontWeight.w600,
+                                fontSize: rowTextSize,
+                              ),
+                        )
+                      : InkWell(
+                          borderRadius: BorderRadius.circular(10),
+                          onTap: item.onTimeTap,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 2),
+                            child: Text(
+                              item.timeLabel,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(
+                                    color: timeColor,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: rowTextSize,
+                                    decoration: TextDecoration.underline,
+                                  ),
                             ),
-                          rowWidgets[i],
-                        ],
-                      ],
-                    ),
+                          ),
+                        ),
+                ),
+                SizedBox(
+                  width: chipStyle.width,
+                  child: _ReminderChip(
+                    controller: item.reminderController,
+                    style: scaledChipStyle,
+                    cizgiColor: controlColor,
+                    backgroundColor: chipBackgroundColor,
+                    borderColor: chipBorderColor,
+                    onChanged: item.onReminderChanged,
                   ),
                 ),
-              ],
+                if (showVoiceIcon)
+                  SizedBox(
+                    width: iconSlotWidth,
+                    child: _IconToggle(
+                      icon: Icons.volume_up_outlined,
+                      style: scaledIconStyle,
+                      isEnabled: item.voiceEnabled,
+                      cizgiColor: controlColor,
+                      onTap: item.onVoiceToggle,
+                    ),
+                  ),
+                if (showVisualIcon)
+                  SizedBox(
+                    width: iconSlotWidth,
+                    child: _IconToggle(
+                      icon: Icons.desktop_windows_outlined,
+                      style: scaledIconStyle,
+                      isEnabled: item.visualEnabled,
+                      cizgiColor: controlColor,
+                      onTap: item.onVisualToggle,
+                    ),
+                  ),
+                if (showAzanIcon)
+                  SizedBox(
+                    width: iconSlotWidth,
+                    child: _IconToggle(
+                      icon: Icons.mosque_outlined,
+                      style: scaledIconStyle,
+                      isEnabled: item.azanEnabled,
+                      cizgiColor: controlColor,
+                      onTap: item.onAzanToggle,
+                    ),
+                  ),
+                if (showVibrationIcon)
+                  SizedBox(
+                    width: iconSlotWidth,
+                    child: _IconToggle(
+                      icon: Icons.vibration_outlined,
+                      style: scaledIconStyle,
+                      isEnabled: item.vibrationEnabled,
+                      cizgiColor: controlColor,
+                      onTap: item.onVibrationToggle,
+                    ),
+                  ),
+                if (item.onDelete != null)
+                  SizedBox(
+                    width: iconSlotWidth,
+                    child: _IconToggle(
+                      icon: Icons.delete_outline,
+                      style: scaledIconStyle,
+                      isEnabled: true,
+                      cizgiColor: controlColor,
+                      onTap: item.onDelete!,
+                    ),
+                  ),
+              ];
+
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: isActive
+                      ? Colors.white.withValues(alpha: 0.12)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(14),
+                  border: isActive
+                      ? Border.all(
+                          color: Colors.white.withValues(alpha: 0.45),
+                          width: 1,
+                        )
+                      : null,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            for (var i = 0; i < rowWidgets.length; i++) ...[
+                              if (i > 0)
+                                SizedBox(
+                                  width: i == 3
+                                      ? 10
+                                      : i <= 2
+                                      ? 12
+                                      : 2,
+                                ),
+                              rowWidgets[i],
+                            ],
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+            separatorBuilder: (_, _) => const Divider(
+              height: 1,
+              color: Color(0x22000000),
             ),
-          );
-        },
-        separatorBuilder: (_, _) => const Divider(
-          height: 1,
-          color: Color(0x22000000),
+            itemCount: items.length,
+          ),
         ),
-        itemCount: items.length,
-      ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 2, 0, 12),
+          child: Center(
+            child: InkWell(
+              borderRadius: BorderRadius.circular(999),
+              onTap: onAddCustomPrayer,
+              child: Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(
+                  color: cizgiColor.withValues(alpha: 0.12),
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: cizgiColor.withValues(alpha: 0.25),
+                  ),
+                ),
+                child: Icon(
+                  Icons.add,
+                  color: cizgiColor,
+                  size: 18,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

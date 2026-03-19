@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
@@ -362,84 +363,104 @@ class _HomeScreenState extends State<HomeScreen> {
           final timeLabel = _formatClock(_now);
           final palette = widget.uiPaletteController.value;
           final ui = ConfigRegistry.mainUiFor(palette);
+          final statusBarColor =
+              Color.lerp(palette.zeminColor, Colors.white, 0.5) ??
+              palette.zeminColor;
 
-          return Stack(
-            children: [
-              Positioned.fill(
-                child: ColoredBox(color: palette.backgroundZeminColor),
-              ),
-              Positioned.fill(
-                top: 15,
-                child: IgnorePointer(
-                  child: Image.asset(
-                    'img/templates_line/bg_motif02.png',
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                    color: palette.backgroundCizgiColor.withValues(alpha: 0.5),
-                    colorBlendMode: BlendMode.modulate,
+          return AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.dark,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: ColoredBox(color: palette.backgroundZeminColor),
+                ),
+                const Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 30,
+                  child: SizedBox.shrink(),
+                ),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 30,
+                  child: ColoredBox(color: statusBarColor),
+                ),
+                Positioned.fill(
+                  top: 30,
+                  child: IgnorePointer(
+                    child: Image.asset(
+                      'img/templates_line/bg_motif02.png',
+                      fit: BoxFit.cover,
+                      alignment: Alignment.topCenter,
+                      color: palette.backgroundCizgiColor.withValues(alpha: 0.5),
+                      colorBlendMode: BlendMode.modulate,
+                    ),
                   ),
                 ),
-              ),
-              SafeArea(
-                child: Padding(
-                  padding: ui.screenPadding,
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onDoubleTap: () => setState(() => _showList = !_showList),
-                        child: _TopPanel(
-                          provinceLabel: provinceLabel,
-                          districtLabel: districtLabel,
-                          nextLabel: next.label,
-                          nextTime: nextTime,
-                          countdown: countdown,
-                          dateYearLabel: dateYearLabel,
-                          dateDayMonthLabel: dateDayMonthLabel,
-                          timeLabel: timeLabel,
-                          onToggleDate: () =>
-                              setState(() => _showHijriDate = !_showHijriDate),
-                          onLocationTap: () => _openLocationSettings(location),
-                          onSettings: _openSettings,
-                          style: ui.topPanel,
-                          padding: ui.topPanelPadding,
-                          settingsIconSize: ui.settingsIconSize,
-                          settingsIconBoxSize: ui.settingsIconBoxSize,
-                          settingsIconOpacity: ui.settingsIconOpacity,
-                          typography: ui.typography,
-                          cizgiColor: palette.cizgiColor,
-                        ),
-                      ),
-                      SizedBox(height: ui.sectionGap),
-                      Expanded(
-                        child: AnimatedCrossFade(
-                          duration: const Duration(milliseconds: 220),
-                          crossFadeState: _showList
-                              ? CrossFadeState.showFirst
-                              : CrossFadeState.showSecond,
-                          firstChild: _PrayerList(
-                            items: items,
-                            active: active,
-                            timeFormat: _formatTime,
-                            style: ui.listPanel,
-                            listPadding: ui.listPadding,
-                            rowGap: ui.rowGap,
-                            iconStyle: ui.iconToggle,
-                            chipStyle: ui.reminderChip,
+                SafeArea(
+                  child: Padding(
+                    padding: ui.screenPadding,
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onDoubleTap: () => setState(() => _showList = !_showList),
+                          child: _TopPanel(
+                            provinceLabel: provinceLabel,
+                            districtLabel: districtLabel,
+                            nextLabel: next.label,
+                            nextTime: nextTime,
+                            countdown: countdown,
+                            dateYearLabel: dateYearLabel,
+                            dateDayMonthLabel: dateDayMonthLabel,
+                            timeLabel: timeLabel,
+                            onToggleDate: () =>
+                                setState(() => _showHijriDate = !_showHijriDate),
+                            onLocationTap: () => _openLocationSettings(location),
+                            onSettings: _openSettings,
+                            style: ui.topPanel,
+                            padding: ui.topPanelPadding,
+                            settingsIconSize: ui.settingsIconSize,
+                            settingsIconBoxSize: ui.settingsIconBoxSize,
+                            settingsIconOpacity: ui.settingsIconOpacity,
                             typography: ui.typography,
                             cizgiColor: palette.cizgiColor,
-                            activeColor: palette.zeminColor,
-                          ),
-                          secondChild: _CollapsedHint(
-                            label: l10n.locationLabel,
-                            value: displayName,
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: ui.sectionGap),
+                        Expanded(
+                          child: AnimatedCrossFade(
+                            duration: const Duration(milliseconds: 220),
+                            crossFadeState: _showList
+                                ? CrossFadeState.showFirst
+                                : CrossFadeState.showSecond,
+                            firstChild: _PrayerList(
+                              items: items,
+                              active: active,
+                              timeFormat: _formatTime,
+                              style: ui.listPanel,
+                              listPadding: ui.listPadding,
+                              rowGap: ui.rowGap,
+                              iconStyle: ui.iconToggle,
+                              chipStyle: ui.reminderChip,
+                              typography: ui.typography,
+                              cizgiColor: palette.cizgiColor,
+                              activeColor: palette.zeminColor,
+                            ),
+                            secondChild: _CollapsedHint(
+                              label: l10n.locationLabel,
+                              value: displayName,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

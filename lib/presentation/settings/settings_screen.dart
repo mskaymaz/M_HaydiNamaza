@@ -1,16 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../app/calculation_method_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
+import '../../app/reminder_audio_service.dart';
 import '../../app/reminder_text_settings_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
+import '../reminders/flashing_reminder_card.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
 
@@ -34,16 +38,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final CalculationMethodStorage _methodStorage = CalculationMethodStorage();
   final ReminderTextSettingsStorage _reminderTextStorage =
       ReminderTextSettingsStorage();
+  final ReminderAudioService _reminderAudioService = ReminderAudioService();
   final FlutterTts _flutterTts = FlutterTts();
   final TextEditingController _voiceReminderController = TextEditingController();
   final TextEditingController _visualReminderController = TextEditingController();
+  final TextEditingController _voiceRepeatController = TextEditingController();
+  final TextEditingController _vibrationDurationController =
+      TextEditingController();
+  final TextEditingController _vibrationPauseController = TextEditingController();
+  final TextEditingController _visualDisplayController = TextEditingController();
+  final TextEditingController _visualReopenController = TextEditingController();
   final List<_VoiceOption> _voiceOptions = [];
   LocationData? _location;
   List<LocationFavorite> _favorites = [];
   LocationFavorite? _selectedFavorite;
   String? _methodCode;
-  bool _voiceTextEnabled = true;
+  ReminderAudioMode _selectedAudioMode = ReminderAudioMode.textToSpeech;
   String? _selectedVoiceKey;
+  String? _selectedAudioPath;
+  String? _selectedAudioLabel;
+  bool _showVoiceIcon = true;
+  bool _showVisualIcon = true;
+  bool _showAzanIcon = true;
+  bool _showVibrationIcon = true;
 
   @override
   void initState() {
@@ -94,7 +111,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final settings = await _reminderTextStorage.read();
     _voiceReminderController.text = settings.voiceText;
     _visualReminderController.text = settings.visualText;
-    _voiceTextEnabled = settings.voiceTextEnabled;
+    _voiceRepeatController.text = settings.voiceRepeatSeconds.toString();
+    _vibrationDurationController.text =
+        settings.vibrationDurationSeconds.toString();
+    _vibrationPauseController.text = settings.vibrationPauseSeconds.toString();
+    _visualDisplayController.text = settings.visualDisplaySeconds.toString();
+    _visualReopenController.text = settings.visualReopenSeconds.toString();
+    _selectedAudioMode = settings.audioMode;
+    _selectedAudioPath = settings.selectedAudioPath;
+    _selectedAudioLabel = settings.selectedAudioLabel;
+    _showVoiceIcon = settings.showVoiceIcon;
+    _showVisualIcon = settings.showVisualIcon;
+    _showAzanIcon = settings.showAzanIcon;
+    _showVibrationIcon = settings.showVibrationIcon;
     if (settings.selectedVoiceName != null && settings.selectedVoiceLocale != null) {
       _selectedVoiceKey = _voiceKey(
         settings.selectedVoiceName!,
@@ -106,27 +135,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _loadVoiceOptions() async {
-    dynamic voices;
-    try {
-      voices = await _flutterTts.getVoices;
-    } catch (_) {
-      return;
-    }
-    if (voices is! List) return;
-    final options = <_VoiceOption>[];
-    for (final item in voices) {
-      if (item is! Map) continue;
-      final name = (item['name'] ?? '').toString().trim();
-      final locale = (item['locale'] ?? '').toString().trim();
-      if (name.isEmpty || locale.isEmpty) continue;
-      options.add(_VoiceOption(name: name, locale: locale));
-    }
-    options.sort((a, b) => a.label.compareTo(b.label));
+    final options = await _reminderAudioService.loadVoiceOptions();
     if (!mounted) return;
     setState(() {
       _voiceOptions
         ..clear()
-        ..addAll(options);
+        ..addAll(
+          options.map((voice) => _VoiceOption(name: voice.name, locale: voice.locale)),
+        );
       if (_selectedVoiceKey != null &&
           !_voiceOptions.any((voice) => voice.key == _selectedVoiceKey)) {
         _selectedVoiceKey = null;
@@ -138,7 +154,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void dispose() {
     _voiceReminderController.dispose();
     _visualReminderController.dispose();
-    _flutterTts.stop();
+    _voiceRepeatController.dispose();
+    _vibrationDurationController.dispose();
+    _vibrationPauseController.dispose();
+    _visualDisplayController.dispose();
+    _visualReopenController.dispose();
+    _reminderAudioService.dispose();
     super.dispose();
   }
 
@@ -261,22 +282,123 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const _SectionHeader(
+                    title: 'Hatırlatma Seçenekleri',
+                    tooltip:
+                        'Buradaki seçimler vakitler panelinde hangi hatırlatıcı ikonlarının görüneceğini belirler.',
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _ReminderOptionToggle(
+                          label: 'Sesli',
+                          value: _showVoiceIcon,
+                          onChanged: (value) {
+                            setState(() {
+                              _showVoiceIcon = value;
+                            });
+                            _persistReminderTexts();
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: _ReminderOptionToggle(
+                          label: 'Görsel',
+                          value: _showVisualIcon,
+                          onChanged: (value) {
+                            setState(() {
+                              _showVisualIcon = value;
+                            });
+                            _persistReminderTexts();
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: _ReminderOptionToggle(
+                          label: 'Ezan',
+                          value: _showAzanIcon,
+                          onChanged: (value) {
+                            setState(() {
+                              _showAzanIcon = value;
+                            });
+                            _persistReminderTexts();
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: _ReminderOptionToggle(
+                          label: 'Titreşim',
+                          value: _showVibrationIcon,
+                          onChanged: (value) {
+                            setState(() {
+                              _showVibrationIcon = value;
+                            });
+                            _persistReminderTexts();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _ReminderNumberField(
+                          label: 'Titreşim Süresi (sn)',
+                          controller: _vibrationDurationController,
+                          onChanged: (_) => _persistReminderTexts(),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: _ReminderNumberField(
+                          label: 'Titreşim Aralığı (sn)',
+                          controller: _vibrationPauseController,
+                          onChanged: (_) => _persistReminderTexts(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: ui.screenPadding.copyWith(top: 0),
+            child: _SettingsPanel(
+              style: ui.panel,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _SectionHeader(
                     title: 'Sesli Hatırlatma',
                     tooltip:
                         'Metni Oku açıldığında sesli hatırlatma metni ve sistem sesi seçimi görünür. Seçilen ses sesli testte ve hatırlatma okumasında kullanılır.',
                   ),
-                  SwitchListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: const Text('Metni Oku'),
-                    value: _voiceTextEnabled,
+                  const SizedBox(height: 6),
+                  DropdownButtonFormField<ReminderAudioMode>(
+                    value: _selectedAudioMode,
+                    decoration: const InputDecoration(
+                      labelText: 'Ses Kaynagi',
+                      border: OutlineInputBorder(),
+                    ),
+                    items: ReminderAudioMode.values
+                        .map(
+                          (mode) => DropdownMenuItem<ReminderAudioMode>(
+                            value: mode,
+                            child: Text(_audioModeLabel(mode)),
+                          ),
+                        )
+                        .toList(),
                     onChanged: (value) {
+                      if (value == null) return;
                       setState(() {
-                        _voiceTextEnabled = value;
+                        _selectedAudioMode = value;
                       });
                       _persistReminderTexts();
                     },
                   ),
-                  if (_voiceTextEnabled) ...[
+                  if (_selectedAudioMode == ReminderAudioMode.textToSpeech) ...[
                     const SizedBox(height: 6),
                     DropdownButtonFormField<String?>(
                       value: _selectedVoiceKey,
@@ -311,15 +433,35 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onChanged: (_) => _persistReminderTexts(),
                     ),
                     const SizedBox(height: 8),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: OutlinedButton.icon(
-                        onPressed: () => _speakVoiceReminderTest(context, l10n),
-                        icon: const Icon(Icons.play_arrow_rounded),
-                        label: const Text('Sesli Test'),
-                      ),
+                    _ReminderNumberField(
+                      label: 'Sesli Hatırlatma Periyodu (sn)',
+                      controller: _voiceRepeatController,
+                      onChanged: (_) => _persistReminderTexts(),
+                    ),
+                  ] else ...[
+                    const SizedBox(height: 10),
+                    OutlinedButton.icon(
+                      onPressed: () => _pickReminderAudio(context),
+                      icon: const Icon(Icons.library_music_outlined),
+                      label: Text(_audioPickerButtonLabel(_selectedAudioMode)),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      _selectedAudioLabel?.trim().isNotEmpty == true
+                          ? 'Seçilen dosya: $_selectedAudioLabel'
+                          : _audioPickerHelpText(_selectedAudioMode),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: OutlinedButton.icon(
+                      onPressed: () => _playVoiceReminderTest(context, l10n),
+                      icon: const Icon(Icons.play_arrow_rounded),
+                      label: const Text('Sesli Test'),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -344,6 +486,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         'Buraya herhangi bir metin girilmediğinde sesli hatırlatmadaki metin kullanılacaktır.',
                     onChanged: (_) => _persistReminderTexts(),
                     maxLines: 3,
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _ReminderNumberField(
+                          label: 'Ekranda Kalma (sn)',
+                          controller: _visualDisplayController,
+                          onChanged: (_) => _persistReminderTexts(),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: _ReminderNumberField(
+                          label: 'Kapanıp Açılma (sn)',
+                          controller: _visualReopenController,
+                          onChanged: (_) => _persistReminderTexts(),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 8),
                   Align(
@@ -487,9 +649,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ReminderTextSettings(
         voiceText: _voiceReminderController.text.trim(),
         visualText: _visualReminderController.text.trim(),
-        voiceTextEnabled: _voiceTextEnabled,
+        audioMode: _selectedAudioMode,
+        showVoiceIcon: _showVoiceIcon,
+        showVisualIcon: _showVisualIcon,
+        showAzanIcon: _showAzanIcon,
+        showVibrationIcon: _showVibrationIcon,
+        voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 0),
+        vibrationDurationSeconds:
+            _readSeconds(_vibrationDurationController, fallback: 3),
+        vibrationPauseSeconds:
+            _readSeconds(_vibrationPauseController, fallback: 5),
+        visualDisplaySeconds: _readSeconds(_visualDisplayController, fallback: 6),
+        visualReopenSeconds: _readSeconds(_visualReopenController, fallback: 4),
         selectedVoiceName: selectedVoice?.name,
         selectedVoiceLocale: selectedVoice?.locale,
+        selectedAudioPath: _selectedAudioPath,
+        selectedAudioLabel: _selectedAudioLabel,
       ),
     );
   }
@@ -500,22 +675,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return _voiceReminderController.text.trim();
   }
 
-  Future<void> _speakVoiceReminderTest(
+  String _toTurkishUpper(String value) {
+    return value
+        .replaceAll('i', 'İ')
+        .replaceAll('ı', 'I')
+        .toUpperCase();
+  }
+
+  Future<void> _playVoiceReminderTest(
     BuildContext context,
     AppLocalizations l10n,
   ) async {
-    if (!_voiceTextEnabled) {
+    final settings = ReminderTextSettings(
+      voiceText: _voiceReminderController.text.trim(),
+      visualText: _visualReminderController.text.trim(),
+      audioMode: _selectedAudioMode,
+      showVoiceIcon: _showVoiceIcon,
+      showVisualIcon: _showVisualIcon,
+      showAzanIcon: _showAzanIcon,
+      showVibrationIcon: _showVibrationIcon,
+      voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 0),
+      vibrationDurationSeconds:
+          _readSeconds(_vibrationDurationController, fallback: 3),
+      vibrationPauseSeconds:
+          _readSeconds(_vibrationPauseController, fallback: 5),
+      visualDisplaySeconds: _readSeconds(_visualDisplayController, fallback: 6),
+      visualReopenSeconds: _readSeconds(_visualReopenController, fallback: 4),
+      selectedVoiceName: _selectedVoice()?.name,
+      selectedVoiceLocale: _selectedVoice()?.locale,
+      selectedAudioPath: _selectedAudioPath,
+      selectedAudioLabel: _selectedAudioLabel,
+    );
+    if (settings.audioMode == ReminderAudioMode.textToSpeech &&
+        settings.voiceText.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Önce Metni Oku seçeneğini açın.')),
       );
       return;
     }
-    final text = _voiceReminderController.text.trim();
-    await _speakReminderPreview(
-      context: context,
-      previewText: text,
-      prayerLabel: l10n.prayerDhuhr,
-    );
+    if (settings.audioMode != ReminderAudioMode.textToSpeech &&
+        (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Test için önce bir ses dosyası seçin.')),
+      );
+      return;
+    }
+    try {
+      await _reminderAudioService.playReminder(
+        settings: settings,
+        selectedLocale: widget.localeController.value,
+        prayerLabel: l10n.prayerDhuhr,
+      );
+    } catch (_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Sesli test başlatılamadı.')),
+      );
+    }
   }
 
   Future<void> _speakReminderPreview({
@@ -572,7 +788,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       return;
     }
     if (voices is! List) return;
-    Map<String, dynamic>? selectedVoice;
+    Map<String, dynamic>? matchedVoice;
     for (final voice in voices) {
       if (voice is! Map) continue;
       final name = (voice['name'] ?? '').toString().toLowerCase();
@@ -583,16 +799,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (name.contains('male') ||
           name.contains('erkek') ||
           name.contains('man')) {
-        selectedVoice = Map<String, dynamic>.from(voice);
+        matchedVoice = Map<String, dynamic>.from(voice);
         break;
       }
-      selectedVoice ??= Map<String, dynamic>.from(voice);
+      matchedVoice ??= Map<String, dynamic>.from(voice);
     }
-    if (selectedVoice == null) return;
+    if (matchedVoice == null) return;
     try {
       await _flutterTts.setVoice({
-        'name': (selectedVoice['name'] ?? '').toString(),
-        'locale': (selectedVoice['locale'] ?? localeKey).toString(),
+        'name': (matchedVoice['name'] ?? '').toString(),
+        'locale': (matchedVoice['locale'] ?? localeKey).toString(),
       });
     } catch (_) {}
   }
@@ -639,8 +855,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       builder: (context) {
         return AlertDialog(
           contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-          content: _FlashingReminderPreview(
-            prayerLabel: '${l10n.prayerDhuhr.toUpperCase()} VAKTI',
+          content: FlashingReminderCard(
+            prayerLabel: '${_toTurkishUpper(l10n.prayerDhuhr)} VAKTİ',
             message: effectiveText,
           ),
           actions: [
@@ -665,6 +881,67 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
     }
     return null;
+  }
+
+  Future<void> _pickReminderAudio(BuildContext context) async {
+    final result = await FilePicker.platform.pickFiles(
+      type: _selectedAudioMode == ReminderAudioMode.mp3File
+          ? FileType.custom
+          : FileType.audio,
+      allowedExtensions: _selectedAudioMode == ReminderAudioMode.mp3File
+          ? const ['mp3']
+          : null,
+    );
+    final file = result == null || result.files.isEmpty ? null : result.files.first;
+    final path = file?.path?.trim() ?? '';
+    if (path.isEmpty) return;
+    setState(() {
+      _selectedAudioPath = path;
+      _selectedAudioLabel = file?.name ?? path.split('\\').last;
+    });
+    await _persistReminderTexts();
+  }
+
+  String _audioModeLabel(ReminderAudioMode mode) {
+    switch (mode) {
+      case ReminderAudioMode.textToSpeech:
+        return 'Metni Oku';
+      case ReminderAudioMode.deviceAudio:
+        return 'Telefon Melodisi';
+      case ReminderAudioMode.mp3File:
+        return 'MP3 Dosyasi';
+    }
+  }
+
+  String _audioPickerButtonLabel(ReminderAudioMode mode) {
+    switch (mode) {
+      case ReminderAudioMode.textToSpeech:
+        return 'Ses Dosyasi Sec';
+      case ReminderAudioMode.deviceAudio:
+        return 'Telefon Melodisi Sec';
+      case ReminderAudioMode.mp3File:
+        return 'MP3 Dosyasi Sec';
+    }
+  }
+
+  String _audioPickerHelpText(ReminderAudioMode mode) {
+    switch (mode) {
+      case ReminderAudioMode.textToSpeech:
+        return '';
+      case ReminderAudioMode.deviceAudio:
+        return 'Telefonunuzdaki ses dosyalarindan bir melodi secin.';
+      case ReminderAudioMode.mp3File:
+        return 'Yalniz mp3 dosyasi secilir.';
+    }
+  }
+
+  int _readSeconds(TextEditingController controller, {required int fallback}) {
+    final parsed = int.tryParse(controller.text.trim());
+    if (parsed == null) return fallback;
+    if (fallback == 0) {
+      return parsed.clamp(0, 3600);
+    }
+    return parsed.clamp(1, 3600);
   }
 
   InputDecoration _dropdownDecoration(String label) {
@@ -1053,6 +1330,72 @@ class _ReminderTextField extends StatelessWidget {
         alignLabelWithHint: true,
         border: const OutlineInputBorder(),
       ),
+    );
+  }
+}
+
+class _ReminderNumberField extends StatelessWidget {
+  final String label;
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
+
+  const _ReminderNumberField({
+    required this.label,
+    required this.controller,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      onChanged: onChanged,
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Colors.black87,
+          ),
+      decoration: InputDecoration(
+        labelText: label,
+        filled: true,
+        fillColor: const Color(0xFFF4F1EA),
+        labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.black87,
+            ),
+        border: const OutlineInputBorder(),
+      ),
+    );
+  }
+}
+
+class _ReminderOptionToggle extends StatelessWidget {
+  final String label;
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  const _ReminderOptionToggle({
+    required this.label,
+    required this.value,
+    required this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Checkbox(
+          value: value,
+          onChanged: (next) => onChanged(next ?? false),
+        ),
+        Text(
+          label,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Colors.black87,
+              ),
+        ),
+      ],
     );
   }
 }

@@ -1,7 +1,7 @@
 # TASK-004
 
 status: in_progress
-updated: 2026-03-19 11:03 +03:00
+updated: 2026-03-19 14:12 +03:00
 scope: Faz 2 - Flutter uygulama iskeleti ve temel mimari girisi.
 
 done_summary:
@@ -36,23 +36,18 @@ done_summary:
 - Ayarlar sadeleştirildi; favori konum ve konum sec kisimlari kaldirildi, hesaplama yontemi uste tasindi.
 - Ayarlar icine panel/yazi ve arka plan zemin/cizgi renk secicileri eklendi; palette ana panel, Vakitler Paneli, ayar panelleri ve geometrik background'a baglandi.
 - Background motifi ustten 15 px bosluk birakacak sekilde asagi alindi; renk basliklarina bilgi ikonu ve reset aksiyonlari eklendi.
+- Vakitler paneline satir bazli sesli, gorsel, ezan ve titresim hatirlatma akisi eklendi; aktifken kapat paneli ve gorsel kart baglandi.
+- Ayarlara ses kaynagi secimi, gorsel-ses metinleri, sesli-gorsel periyotlar ve global ikon gorunurluk secenekleri eklendi.
+- Ust panele pusula ikonu ve cihaz pusulasiyla qibla yonu gosteren ekran baglandi.
 
 now:
-- Uygulamada kalinan nokta: zemin ve panel renklendirme tamamlandi; commit/push hazir.
+- Uygulamada kalinan nokta: hatirlatma sistemi, gorsel kart ve qibla ekrani tamamlandi; commit/push hazir.
 
 next:
-- Renk duzenlemelerini cihazda gorsel olarak dogrula.
-- Ust panel yerlesimini cihazda gorsel olarak dogrula.
-- USB bagli telefonda konum dropdownlarinin acildigini kontrol et.
-- Ayarlar ve konum ekranlarinda favori satirinin tek satir gorunumunu ve `Uygula`/`Sil` akislarini cihazda dogrula.
-- Mobil cihazda uygulama adinin `Haydi Namaza` olarak gorundugunu kontrol et.
-- Telefon uzerinde ulke, il ve ilce listelerinin artik yuklendigini dogrula.
-- Telefonda il/ilce secip koordinatlar bosken kaydetme ve ana ekranda Diyanet vakitlerinin gelmesini dogrula.
-- Telefonda `Mevcut Konumu Al` checkbox'ini isaretleyip izin ve otomatik konum dolumunu dogrula.
-- Telefonda reverse geocode timeout'unda ham exception yerine yumusak mesaj geldigini dogrula.
-- Backup/yedek adimini tamamla.
-- Telefonda ana panelde konum tek satir, sol tarih-saat ve orta vakit bloku yerlesimini dogrula.
-- `E:` surucusune `R.260318_1659` etiketli bundle yedegini yaz.
+- Telefonda satir bazli hatirlatmalarin dogru vakitte ve secili ikonlarla calistigini dogrula.
+- Telefonda titresim suresi ve araligi davranisini dogrula.
+- Qibla ekraninda pusula izni ve yon gosterimini dogrula.
+- Ust panel yerlesimini ve pusula ikon konumunu cihazda gorsel olarak dogrula.
 
 refs:
 - `Proje/UI_Ayarlar.md`

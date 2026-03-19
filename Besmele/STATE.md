@@ -1,9 +1,9 @@
 # BESMELE STATE
 
-last_update: 2026-03-19 11:03 +03:00
+last_update: 2026-03-19 14:12 +03:00
 active_task: TASK-004
-phase: Zemin ve panel renklendirme tamamlandi; commit/push hazir
-next_step: Renk duzenlemelerini cihazda dogrula; sonra `Vakitler Paneli` duzenlemelerine don.
+phase: Vakitler paneli hatirlatma sistemi ve ust panel qibla ekrani tamamlandi; commit/push hazir
+next_step: Telefonda hatirlatma donguleri, qibla ekrani ve ust panel yerlesimini dogrula.
 blockers: NONE
-last_delivery: R.260319_1103
-handover: `TASK-004` icinde Ayarlar tarafina panel ve arka plan renk secimi eklendi; ust panel ve geometrik arka plan palette baglandi, baslik/info ve reset duzenleri tamamlandi, Ayarlar sadeleştirildi. `Vakitler Paneli` sonraki UI adimi olarak duruyor.
+last_delivery: R.260319_1412
+handover: `TASK-004` icinde Vakitler Paneli icin satir bazli sesli/gorsel/ezan/titresim hatirlatma akisi, global ikon gorunurluk ayari, gorsel kart ve aktif kapat paneli eklendi; ust panele qibla pusulasi baglandi. Ayarlarda ses kaynagi, gorsel-ses metinleri ve ilgili periyotlar genisletildi.

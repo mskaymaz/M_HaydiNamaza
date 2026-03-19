@@ -250,10 +250,10 @@ class ConfigRegistry {
         ],
       ),
       listPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      rowGap: 8,
+      rowGap: 1,
       iconToggle: InlineIconStyle(
         size: 26,
-        iconSize: 15,
+        iconSize: 18,
         backgroundColor: palette.cizgiColor.withValues(alpha: 0.08),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),

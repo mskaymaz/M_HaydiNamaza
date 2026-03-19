@@ -9,12 +9,14 @@ class PrayerRowSettingsRecord {
   final bool voiceEnabled;
   final bool visualEnabled;
   final bool azanEnabled;
+  final bool vibrationEnabled;
 
   const PrayerRowSettingsRecord({
     required this.reminderMinutes,
     required this.voiceEnabled,
     required this.visualEnabled,
     required this.azanEnabled,
+    required this.vibrationEnabled,
   });
 
   Map<String, dynamic> toJson() {
@@ -23,6 +25,7 @@ class PrayerRowSettingsRecord {
       'voiceEnabled': voiceEnabled,
       'visualEnabled': visualEnabled,
       'azanEnabled': azanEnabled,
+      'vibrationEnabled': vibrationEnabled,
     };
   }
 
@@ -32,6 +35,7 @@ class PrayerRowSettingsRecord {
       voiceEnabled: json['voiceEnabled'] == true,
       visualEnabled: json['visualEnabled'] == true,
       azanEnabled: json['azanEnabled'] == true,
+      vibrationEnabled: json['vibrationEnabled'] == true,
     );
   }
 }

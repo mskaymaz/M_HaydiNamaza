@@ -29,4 +29,4 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-023 | done | 2026-03-19 17:52 +03:00 | Ayarlar ve konum ayarlari panel renkleri softlastirildi |
 | TASK-024 | in_progress | 2026-03-19 17:52 +03:00 | Vakit satiri objeleri esit aralikli ve merkezli dagitiliyor |
 | TASK-025 | done | 2026-03-19 22:15 +03:00 | Ust panel ve vakitler paneli gorsellestirme 1. asama tamamlandi |
-| TASK-026 | in_progress | 2026-03-19 23:04 +03:00 | Cekmece iskeleti ve nafile satir taslagi kuruldu; cihaz dogrulamasi ve polish suruyor |
+| TASK-026 | in_progress | 2026-03-20 00:33 +03:00 | Cekmece kulpu, nafile kaliciligi ve vakte gore siralama teslim edildi; son polish suruyor |

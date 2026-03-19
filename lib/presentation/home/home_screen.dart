@@ -10,6 +10,7 @@ import 'package:mhaydinamaza/l10n/app_localizations.dart';
 import 'package:vibration/vibration.dart';
 
 import '../../app/calculation_method_storage.dart';
+import '../../app/custom_prayer_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_storage.dart';
 import '../../app/reminder_audio_service.dart';
@@ -42,6 +43,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _locationStorage = LocationStorage();
   final _methodStorage = CalculationMethodStorage();
+  final _customPrayerStorage = CustomPrayerStorage();
   final _rowSettingsStorage = PrayerRowSettingsStorage();
   final _reminderTextStorage = ReminderTextSettingsStorage();
   final _reminderTriggerStorage = ReminderTriggerStorage();
@@ -80,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _lastRefreshDay = DateTime(_now.year, _now.month, _now.day);
     unawaited(_loadPrayerRowSettings());
+    unawaited(_loadCustomPrayerRows());
     unawaited(_loadReminderSettings());
     unawaited(_loadReminderTriggerLog());
     _future = _loadData();
@@ -662,15 +665,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             cizgiColor: palette.cizgiColor,
                           ),
                         ),
-                        SizedBox(height: ui.sectionGap),
+                        Transform.translate(
+                          offset: const Offset(0, -10),
+                          child: SizedBox(height: 10),
+                        ),
                         Expanded(
-                          child: LayoutBuilder(
+                          child: Transform.translate(
+                            offset: const Offset(0, -10),
+                            child: LayoutBuilder(
                             builder: (context, constraints) {
-                              const minDrawerHeight = 18.0;
+                              const minDrawerHeight = 24.0;
+                              const maxDrawerHeightLimit = 320.0;
                               final maxDrawerHeight = constraints.maxHeight <
-                                      minDrawerHeight
-                                  ? minDrawerHeight
-                                  : constraints.maxHeight;
+                                      maxDrawerHeightLimit
+                                  ? constraints.maxHeight
+                                  : maxDrawerHeightLimit;
                               final drawerHeight =
                                   minDrawerHeight +
                                   ((maxDrawerHeight - minDrawerHeight) *
@@ -678,13 +687,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                               return Stack(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: _CollapsedHint(
-                                      label: l10n.locationLabel,
-                                      value: displayName,
-                                    ),
-                                  ),
                                   Align(
                                     alignment: Alignment.topCenter,
                                     child: AnimatedContainer(
@@ -693,64 +695,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: drawerHeight,
                                       decoration: BoxDecoration(
                                         color: ui.listPanel.color,
-                                        borderRadius: ui.listPanel.borderRadius,
-                                        boxShadow: ui.listPanel.shadows,
+                                        borderRadius: const BorderRadius.only(
+                                          bottomLeft: Radius.circular(20),
+                                          bottomRight: Radius.circular(20),
+                                        ),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Color(0x22000000),
+                                            blurRadius: 12,
+                                            offset: Offset(0, 8),
+                                          ),
+                                        ],
                                       ),
                                       clipBehavior: Clip.antiAlias,
                                       child: Column(
                                         children: [
-                                          GestureDetector(
-                                            behavior: HitTestBehavior.opaque,
-                                            onTap: _toggleDrawer,
-                                            onVerticalDragUpdate: (details) {
-                                              final travel =
-                                                  (maxDrawerHeight - minDrawerHeight)
-                                                      .clamp(1.0, double.infinity);
-                                              setState(() {
-                                                _drawerProgress = (_drawerProgress +
-                                                        (details.delta.dy / travel))
-                                                    .clamp(0.0, 1.0)
-                                                    .toDouble();
-                                              });
-                                            },
-                                            onVerticalDragEnd: (details) {
-                                              final velocity =
-                                                  details.primaryVelocity ?? 0;
-                                              setState(() {
-                                                if (velocity > 250) {
-                                                  _drawerProgress = 1;
-                                                } else if (velocity < -250) {
-                                                  _drawerProgress = 0;
-                                                } else {
-                                                  _drawerProgress =
-                                                      _drawerProgress >= 0.35
-                                                      ? 1
-                                                      : 0;
-                                                }
-                                              });
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.fromLTRB(
-                                                0,
-                                                6,
-                                                0,
-                                                6,
-                                              ),
-                                              child: Center(
-                                                child: Container(
-                                                  width: 52,
-                                                  height: 6,
-                                                  decoration: BoxDecoration(
-                                                    color: palette.cizgiColor
-                                                        .withValues(alpha: 0.4),
-                                                    borderRadius:
-                                                        BorderRadius.circular(999),
-                                                  ),
-                                                ),
-                                              ),
+                                          Container(
+                                            height: 7,
+                                            color: palette.zeminColor.withValues(
+                                              alpha: 0.55,
                                             ),
                                           ),
-                                          if (_drawerProgress > 0)
+                                          if (_drawerProgress > 0.02)
+                                            const SizedBox(height: 15),
+                                          if (_drawerProgress > 0.02)
                                             Expanded(
                                               child: _PrayerList(
                                                 items: items,
@@ -779,9 +747,86 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   ),
+                                  Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Transform.translate(
+                                      offset: Offset.zero,
+                                      child: GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onTap: _toggleDrawer,
+                                        onVerticalDragUpdate: (details) {
+                                          final travel =
+                                              (maxDrawerHeight - minDrawerHeight)
+                                                  .clamp(1.0, double.infinity);
+                                          setState(() {
+                                            _drawerProgress = (_drawerProgress +
+                                                    (details.delta.dy / travel))
+                                                .clamp(0.0, 1.0)
+                                                .toDouble();
+                                          });
+                                        },
+                                        onVerticalDragEnd: (details) {
+                                          final velocity =
+                                              details.primaryVelocity ?? 0;
+                                          setState(() {
+                                            if (velocity > 250) {
+                                              _drawerProgress = 1;
+                                            } else if (velocity < -250) {
+                                              _drawerProgress = 0;
+                                            } else {
+                                              _drawerProgress =
+                                                  _drawerProgress >= 0.35
+                                                  ? 1
+                                                  : 0;
+                                            }
+                                          });
+                                        },
+                                        child: SizedBox(
+                                          width: 148,
+                                          height: 40,
+                                          child: Center(
+                                            child: Transform.translate(
+                                              offset: const Offset(0, -7),
+                                              child: TweenAnimationBuilder<double>(
+                                                tween: Tween<double>(
+                                                  begin: 1,
+                                                  end: _drawerProgress > 0.35
+                                                      ? -1
+                                                      : 1,
+                                                ),
+                                                duration: const Duration(
+                                                  milliseconds: 180,
+                                                ),
+                                                builder: (context, scaleY, child) {
+                                                  return Transform(
+                                                    alignment: Alignment.center,
+                                                    transform:
+                                                        Matrix4.diagonal3Values(
+                                                          1,
+                                                          scaleY,
+                                                          1,
+                                                        ),
+                                                    child: child,
+                                                  );
+                                                },
+                                                child: CustomPaint(
+                                                  size: const Size(64, 11.1),
+                                                  painter: _DrawerHandlePainter(
+                                                    color: palette.cizgiColor
+                                                        .withValues(alpha: 0.78),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               );
                             },
+                          ),
                           ),
                         ),
                       ],
@@ -1113,6 +1158,74 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  Future<void> _loadCustomPrayerRows() async {
+    final saved = await _customPrayerStorage.read();
+    if (!mounted || saved.isEmpty) return;
+    final loadedRows = <_CustomPrayerDraft>[];
+    var maxSeed = _customPrayerSeed;
+    for (final record in saved) {
+      final manualTime =
+          record.manualHour == null || record.manualMinute == null
+          ? null
+          : TimeOfDay(hour: record.manualHour!, minute: record.manualMinute!);
+      loadedRows.add(
+        _CustomPrayerDraft(
+          id: record.id,
+          labelController: TextEditingController(text: record.label),
+          reminderController: TextEditingController(
+            text: record.reminderMinutes.toString(),
+          ),
+          settings: _PrayerRowSettings(
+            reminderMinutes: record.reminderMinutes,
+            voiceEnabled: record.voiceEnabled,
+            visualEnabled: record.visualEnabled,
+            azanEnabled: record.azanEnabled,
+            vibrationEnabled: record.vibrationEnabled,
+          ),
+          timeRule: _CustomPrayerTimeRule(
+            mode: _customPrayerTimeModeFromKey(record.timeMode),
+            anchorPrayer: record.anchorPrayer,
+            secondaryAnchorPrayer: record.secondaryAnchorPrayer,
+            offsetMinutes: record.offsetMinutes,
+            manualTime: manualTime,
+          ),
+        ),
+      );
+      final match = RegExp(r'^nafile_(\d+)$').firstMatch(record.id);
+      final seed = int.tryParse(match?.group(1) ?? '');
+      if (seed != null && seed >= maxSeed) {
+        maxSeed = seed + 1;
+      }
+    }
+    setState(() {
+      _customPrayerRows
+        ..clear()
+        ..addAll(loadedRows);
+      _customPrayerSeed = maxSeed;
+    });
+  }
+
+  Future<void> _persistCustomPrayerRows() {
+    final payload = _customPrayerRows.map((row) {
+      return CustomPrayerRecord(
+        id: row.id,
+        label: row.labelController.text.trim(),
+        reminderMinutes: row.settings.reminderMinutes,
+        voiceEnabled: row.settings.voiceEnabled,
+        visualEnabled: row.settings.visualEnabled,
+        azanEnabled: row.settings.azanEnabled,
+        vibrationEnabled: row.settings.vibrationEnabled,
+        timeMode: row.timeRule.mode.name,
+        anchorPrayer: row.timeRule.anchorPrayer,
+        secondaryAnchorPrayer: row.timeRule.secondaryAnchorPrayer,
+        offsetMinutes: row.timeRule.offsetMinutes,
+        manualHour: row.timeRule.manualTime?.hour,
+        manualMinute: row.timeRule.manualTime?.minute,
+      );
+    }).toList();
+    return _customPrayerStorage.write(payload);
+  }
+
   Future<void> _persistPrayerRowSettings() {
     final payload = <Prayer, PrayerRowSettingsRecord>{};
     for (final entry in _rowSettings.entries) {
@@ -1204,6 +1317,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _customPrayerRows.add(row);
       _drawerProgress = 1;
     });
+    unawaited(_persistCustomPrayerRows());
   }
 
   int _nextAvailableNafileIndex({String? excludingId}) {
@@ -1225,6 +1339,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _setCustomPrayerLabel(_CustomPrayerDraft row, String value) {
     setState(() {});
+    unawaited(_persistCustomPrayerRows());
   }
 
   void _normalizeCustomPrayerLabel(_CustomPrayerDraft row) {
@@ -1235,6 +1350,7 @@ class _HomeScreenState extends State<HomeScreen> {
       offset: row.labelController.text.length,
     );
     setState(() {});
+    unawaited(_persistCustomPrayerRows());
   }
 
   void _setCustomReminderMinutes(_CustomPrayerDraft row, String value) {
@@ -1242,6 +1358,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       row.settings = row.settings.copyWith(reminderMinutes: minutes);
     });
+    unawaited(_persistCustomPrayerRows());
   }
 
   void _toggleCustomVoice(_CustomPrayerDraft row) {
@@ -1250,6 +1367,7 @@ class _HomeScreenState extends State<HomeScreen> {
         voiceEnabled: !row.settings.voiceEnabled,
       );
     });
+    unawaited(_persistCustomPrayerRows());
   }
 
   void _toggleCustomVisual(_CustomPrayerDraft row) {
@@ -1258,6 +1376,7 @@ class _HomeScreenState extends State<HomeScreen> {
         visualEnabled: !row.settings.visualEnabled,
       );
     });
+    unawaited(_persistCustomPrayerRows());
   }
 
   void _toggleCustomAzan(_CustomPrayerDraft row) {
@@ -1266,6 +1385,7 @@ class _HomeScreenState extends State<HomeScreen> {
         azanEnabled: !row.settings.azanEnabled,
       );
     });
+    unawaited(_persistCustomPrayerRows());
   }
 
   void _toggleCustomVibration(_CustomPrayerDraft row) {
@@ -1274,6 +1394,7 @@ class _HomeScreenState extends State<HomeScreen> {
         vibrationEnabled: !row.settings.vibrationEnabled,
       );
     });
+    unawaited(_persistCustomPrayerRows());
   }
 
   void _removeCustomPrayerRow(_CustomPrayerDraft row) {
@@ -1282,6 +1403,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     row.labelController.dispose();
     row.reminderController.dispose();
+    unawaited(_persistCustomPrayerRows());
   }
 
   DateTime _prayerTimeFor(Prayer prayer, PrayerTimes times) {
@@ -1330,6 +1452,18 @@ class _HomeScreenState extends State<HomeScreen> {
         return _prayerTimeFor(anchor, times).add(
           Duration(minutes: rule.offsetMinutes.abs()),
         );
+      case _CustomPrayerTimeMode.midpointBetweenPrayers:
+        final firstAnchor = rule.anchorPrayer;
+        final secondAnchor = rule.secondaryAnchorPrayer;
+        if (firstAnchor == null || secondAnchor == null) return null;
+        final firstTime = _prayerTimeFor(firstAnchor, times);
+        final secondTime = _prayerTimeFor(secondAnchor, times);
+        final midpointMillis =
+            firstTime.millisecondsSinceEpoch +
+            ((secondTime.millisecondsSinceEpoch -
+                    firstTime.millisecondsSinceEpoch) ~/
+                2);
+        return DateTime.fromMillisecondsSinceEpoch(midpointMillis);
     }
   }
 
@@ -1345,6 +1479,16 @@ class _HomeScreenState extends State<HomeScreen> {
   ) async {
     var mode = row.timeRule.mode;
     var anchorPrayer = row.timeRule.anchorPrayer ?? Prayer.fajr;
+    var secondaryAnchorPrayer =
+        row.timeRule.secondaryAnchorPrayer ?? Prayer.sunrise;
+    final prayerOptions = <MapEntry<Prayer, String>>[
+      MapEntry(Prayer.fajr, l10n.prayerFajr),
+      MapEntry(Prayer.sunrise, l10n.prayerSunrise),
+      MapEntry(Prayer.dhuhr, l10n.prayerDhuhr),
+      MapEntry(Prayer.asr, l10n.prayerAsr),
+      MapEntry(Prayer.maghrib, l10n.prayerMaghrib),
+      MapEntry(Prayer.isha, l10n.prayerIsha),
+    ];
     final offsetController = TextEditingController(
       text: row.timeRule.offsetMinutes.toString(),
     );
@@ -1414,6 +1558,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           });
                         },
                       ),
+                      ChoiceChip(
+                        label: const Text('Iki vaktin ortasi'),
+                        selected:
+                            mode == _CustomPrayerTimeMode.midpointBetweenPrayers,
+                        onSelected: (_) {
+                          setSheetState(() {
+                            mode =
+                                _CustomPrayerTimeMode.midpointBetweenPrayers;
+                          });
+                        },
+                      ),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -1447,44 +1602,71 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     )
-                  else ...[
-                    DropdownButtonFormField<Prayer>(
-                      value: anchorPrayer,
-                      decoration: const InputDecoration(
-                        labelText: 'Referans vakit',
-                      ),
-                      items: [
-                        DropdownMenuItem(
-                          value: Prayer.fajr,
-                          child: Text(l10n.prayerFajr),
-                        ),
-                        DropdownMenuItem(
-                          value: Prayer.sunrise,
-                          child: Text(l10n.prayerSunrise),
-                        ),
-                        DropdownMenuItem(
-                          value: Prayer.dhuhr,
-                          child: Text(l10n.prayerDhuhr),
-                        ),
-                        DropdownMenuItem(
-                          value: Prayer.asr,
-                          child: Text(l10n.prayerAsr),
-                        ),
-                        DropdownMenuItem(
-                          value: Prayer.maghrib,
-                          child: Text(l10n.prayerMaghrib),
-                        ),
-                        DropdownMenuItem(
-                          value: Prayer.isha,
-                          child: Text(l10n.prayerIsha),
-                        ),
+                  else if (mode == _CustomPrayerTimeMode.midpointBetweenPrayers) ...[
+                    Text(
+                      'Birinci vakit',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        for (final option in prayerOptions)
+                          ChoiceChip(
+                            label: Text(option.value),
+                            selected: anchorPrayer == option.key,
+                            onSelected: (_) {
+                              setSheetState(() {
+                                anchorPrayer = option.key;
+                              });
+                            },
+                          ),
                       ],
-                      onChanged: (value) {
-                        if (value == null) return;
-                        setSheetState(() {
-                          anchorPrayer = value;
-                        });
-                      },
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Ikinci vakit',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        for (final option in prayerOptions)
+                          ChoiceChip(
+                            label: Text(option.value),
+                            selected: secondaryAnchorPrayer == option.key,
+                            onSelected: (_) {
+                              setSheetState(() {
+                                secondaryAnchorPrayer = option.key;
+                              });
+                            },
+                          ),
+                      ],
+                    ),
+                  ] else ...[
+                    Text(
+                      'Referans vakit',
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        for (final option in prayerOptions)
+                          ChoiceChip(
+                            label: Text(option.value),
+                            selected: anchorPrayer == option.key,
+                            onSelected: (_) {
+                              setSheetState(() {
+                                anchorPrayer = option.key;
+                              });
+                            },
+                          ),
+                      ],
                     ),
                     const SizedBox(height: 12),
                     TextField(
@@ -1511,6 +1693,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             anchorPrayer: mode == _CustomPrayerTimeMode.manual
                                 ? null
                                 : anchorPrayer,
+                            secondaryAnchorPrayer:
+                                mode == _CustomPrayerTimeMode.midpointBetweenPrayers
+                                ? secondaryAnchorPrayer
+                                : null,
                             offsetMinutes: offsetMinutes,
                             manualTime: mode == _CustomPrayerTimeMode.manual
                                 ? (hour == null ||
@@ -1524,6 +1710,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 : null,
                           );
                         });
+                        unawaited(_persistCustomPrayerRows());
                         Navigator.of(context).pop();
                       },
                       child: const Text('Kaydet'),
@@ -1549,6 +1736,7 @@ class _HomeScreenState extends State<HomeScreen> {
         id: prayer.name,
         prayer: prayer,
         label: label,
+        sortTime: time,
         timeLabel: _formatTime(time),
         reminderController: _controllerFor(prayer),
         onReminderChanged: (value) => _setReminderMinutes(prayer, value),
@@ -1579,6 +1767,7 @@ class _HomeScreenState extends State<HomeScreen> {
           id: row.id,
           prayer: null,
           label: row.labelController.text.trim(),
+          sortTime: resolvedTime,
           labelController: row.labelController,
           onLabelChanged: (value) => _setCustomPrayerLabel(row, value),
           onLabelEditingComplete: () => _normalizeCustomPrayerLabel(row),
@@ -1599,7 +1788,24 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    return items;
+    if (!_reminderSettings.sortCustomPrayersByTime) {
+      return items;
+    }
+
+    final ordered = List<_PrayerItem>.from(items);
+    ordered.sort((a, b) {
+      final aTime = a.sortTime;
+      final bTime = b.sortTime;
+      if (aTime == null && bTime == null) return 0;
+      if (aTime == null) return 1;
+      if (bTime == null) return -1;
+      final compare = aTime.compareTo(bTime);
+      if (compare != 0) return compare;
+      if (a.prayer != null && b.prayer == null) return -1;
+      if (a.prayer == null && b.prayer != null) return 1;
+      return a.label.compareTo(b.label);
+    });
+    return ordered;
   }
 }
 
@@ -1621,6 +1827,7 @@ class _PrayerItem {
   final String id;
   final Prayer? prayer;
   final String label;
+  final DateTime? sortTime;
   final TextEditingController? labelController;
   final ValueChanged<String>? onLabelChanged;
   final VoidCallback? onLabelEditingComplete;
@@ -1642,6 +1849,7 @@ class _PrayerItem {
     required this.id,
     required this.prayer,
     required this.label,
+    this.sortTime,
     this.labelController,
     this.onLabelChanged,
     this.onLabelEditingComplete,
@@ -1709,17 +1917,31 @@ class _CustomPrayerDraft {
   });
 }
 
-enum _CustomPrayerTimeMode { manual, beforePrayer, afterPrayer }
+enum _CustomPrayerTimeMode {
+  manual,
+  beforePrayer,
+  afterPrayer,
+  midpointBetweenPrayers,
+}
+
+_CustomPrayerTimeMode _customPrayerTimeModeFromKey(String key) {
+  for (final mode in _CustomPrayerTimeMode.values) {
+    if (mode.name == key) return mode;
+  }
+  return _CustomPrayerTimeMode.manual;
+}
 
 class _CustomPrayerTimeRule {
   final _CustomPrayerTimeMode mode;
   final Prayer? anchorPrayer;
+  final Prayer? secondaryAnchorPrayer;
   final int offsetMinutes;
   final TimeOfDay? manualTime;
 
   const _CustomPrayerTimeRule({
     required this.mode,
     this.anchorPrayer,
+    this.secondaryAnchorPrayer,
     this.offsetMinutes = 0,
     this.manualTime,
   });
@@ -2200,22 +2422,28 @@ class _PrayerList extends StatelessWidget {
                       onTap: item.onVibrationToggle,
                     ),
                   ),
-                if (item.onDelete != null)
-                  SizedBox(
-                    width: iconSlotWidth,
-                    child: _IconToggle(
-                      icon: Icons.delete_outline,
-                      style: scaledIconStyle,
-                      isEnabled: true,
-                      cizgiColor: controlColor,
-                      onTap: item.onDelete!,
-                    ),
-                  ),
+                SizedBox(
+                  width: iconStyle.iconSize * rowScale + 2,
+                  child: item.onDelete == null
+                      ? const SizedBox.shrink()
+                      : _IconToggle(
+                          icon: Icons.delete_outline,
+                          style: InlineIconStyle(
+                            size: scaledIconStyle.iconSize + 2,
+                            iconSize: scaledIconStyle.iconSize,
+                            backgroundColor: scaledIconStyle.backgroundColor,
+                            borderRadius: scaledIconStyle.borderRadius,
+                          ),
+                          isEnabled: true,
+                          cizgiColor: controlColor,
+                          onTap: item.onDelete!,
+                        ),
+                ),
               ];
 
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                 decoration: BoxDecoration(
                   color: isActive
                       ? Colors.white.withValues(alpha: 0.12)
@@ -2231,7 +2459,9 @@ class _PrayerList extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Center(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerRight,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           mainAxisSize: MainAxisSize.min,
@@ -2241,10 +2471,10 @@ class _PrayerList extends StatelessWidget {
                               if (i > 0)
                                 SizedBox(
                                   width: i == 3
-                                      ? 10
+                                      ? 8
                                       : i <= 2
-                                      ? 12
-                                      : 2,
+                                      ? 10
+                                      : 0,
                                 ),
                               rowWidgets[i],
                             ],
@@ -2465,23 +2695,31 @@ class _ActiveReminderPanel extends StatelessWidget {
   }
 }
 
-class _CollapsedHint extends StatelessWidget {
-  final String label;
-  final String value;
+class _DrawerHandlePainter extends CustomPainter {
+  final Color color;
 
-  const _CollapsedHint({required this.label, required this.value});
+  const _DrawerHandlePainter({required this.color});
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        '$label: $value',
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: const Color(0xFF1E6D3C),
-              fontWeight: FontWeight.w600,
-            ),
-      ),
-    );
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill
+      ..isAntiAlias = true;
+
+    final path = Path()
+      ..moveTo(0, 0)
+      ..lineTo(size.width * 0.5, size.height * 0.46)
+      ..lineTo(size.width, 0)
+      ..lineTo(size.width * 0.5, size.height)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _DrawerHandlePainter oldDelegate) {
+    return oldDelegate.color != color;
   }
 }
 

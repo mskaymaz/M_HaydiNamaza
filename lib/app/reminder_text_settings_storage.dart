@@ -39,6 +39,7 @@ class ReminderTextSettings {
   final bool showVisualIcon;
   final bool showAzanIcon;
   final bool showVibrationIcon;
+  final bool sortCustomPrayersByTime;
   final int voiceRepeatSeconds;
   final int vibrationDurationSeconds;
   final int vibrationPauseSeconds;
@@ -57,6 +58,7 @@ class ReminderTextSettings {
     this.showVisualIcon = true,
     this.showAzanIcon = true,
     this.showVibrationIcon = true,
+    this.sortCustomPrayersByTime = true,
     this.voiceRepeatSeconds = 0,
     this.vibrationDurationSeconds = 3,
     this.vibrationPauseSeconds = 5,
@@ -80,6 +82,8 @@ class ReminderTextSettingsStorage {
   static const String _showVisualIconKey = 'reminder_show_visual_icon';
   static const String _showAzanIconKey = 'reminder_show_azan_icon';
   static const String _showVibrationIconKey = 'reminder_show_vibration_icon';
+  static const String _sortCustomPrayersByTimeKey =
+      'sort_custom_prayers_by_time';
   static const String _voiceRepeatSecondsKey = 'reminder_voice_repeat_seconds';
   static const String _vibrationDurationSecondsKey =
       'reminder_vibration_duration_seconds';
@@ -108,6 +112,8 @@ class ReminderTextSettingsStorage {
       showVisualIcon: prefs.getBool(_showVisualIconKey) ?? true,
       showAzanIcon: prefs.getBool(_showAzanIconKey) ?? true,
       showVibrationIcon: prefs.getBool(_showVibrationIconKey) ?? true,
+      sortCustomPrayersByTime:
+          prefs.getBool(_sortCustomPrayersByTimeKey) ?? true,
       voiceRepeatSeconds:
           (prefs.getInt(_voiceRepeatSecondsKey) ?? 0).clamp(0, 3600),
       vibrationDurationSeconds:
@@ -135,6 +141,10 @@ class ReminderTextSettingsStorage {
     await prefs.setBool(_showVisualIconKey, settings.showVisualIcon);
     await prefs.setBool(_showAzanIconKey, settings.showAzanIcon);
     await prefs.setBool(_showVibrationIconKey, settings.showVibrationIcon);
+    await prefs.setBool(
+      _sortCustomPrayersByTimeKey,
+      settings.sortCustomPrayersByTime,
+    );
     await prefs.setInt(_voiceRepeatSecondsKey, settings.voiceRepeatSeconds);
     await prefs.setInt(
       _vibrationDurationSecondsKey,

@@ -72,3 +72,8 @@
 - Testler calisti mi? Kismen (kullanicidan `flutter run` derleme hatasi geri bildirimi alindi; hedefli duzeltme yapildi ama `dart analyze`/`dart format` yine timeout oldu).
 - Temel akislarda regresyon var mi? Bilinmiyor (cekmece davranisi ve yeni nafile satiri akislarinin cihaz dogrulamasi tamamlanmadi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-026` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-20 00:33 +03:00
+- Testler calisti mi? Hayir (cihaz geri bildirimiyle iteratif duzenleme yapildi; ek test/analyze calistirilmadi).
+- Temel akislarda regresyon var mi? Bilinmiyor (cekmece kulpu oranlari ve nafile siralama davranisi cihazda son kez dogrulanmadi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-026` ve `PUSH_LOG` guncellendi).

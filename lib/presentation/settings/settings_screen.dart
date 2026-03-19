@@ -61,6 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _showVisualIcon = true;
   bool _showAzanIcon = true;
   bool _showVibrationIcon = true;
+  bool _sortCustomPrayersByTime = true;
 
   @override
   void initState() {
@@ -124,6 +125,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _showVisualIcon = settings.showVisualIcon;
     _showAzanIcon = settings.showAzanIcon;
     _showVibrationIcon = settings.showVibrationIcon;
+    _sortCustomPrayersByTime = settings.sortCustomPrayersByTime;
     if (settings.selectedVoiceName != null && settings.selectedVoiceLocale != null) {
       _selectedVoiceKey = _voiceKey(
         settings.selectedVoiceName!,
@@ -338,6 +340,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 10),
+                  CheckboxListTile(
+                    value: _sortCustomPrayersByTime,
+                    contentPadding: EdgeInsets.zero,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    title: const Text('Nafileler vakitlere gore siralansin'),
+                    subtitle: const Text(
+                      'Kapaliysa nafileler listenin en altinda kalir.',
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        _sortCustomPrayersByTime = value ?? true;
+                      });
+                      _persistReminderTexts();
+                    },
                   ),
                   const SizedBox(height: 10),
                   Row(
@@ -654,6 +672,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         showVisualIcon: _showVisualIcon,
         showAzanIcon: _showAzanIcon,
         showVibrationIcon: _showVibrationIcon,
+        sortCustomPrayersByTime: _sortCustomPrayersByTime,
         voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 0),
         vibrationDurationSeconds:
             _readSeconds(_vibrationDurationController, fallback: 3),
@@ -694,6 +713,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       showVisualIcon: _showVisualIcon,
       showAzanIcon: _showAzanIcon,
       showVibrationIcon: _showVibrationIcon,
+      sortCustomPrayersByTime: _sortCustomPrayersByTime,
       voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 0),
       vibrationDurationSeconds:
           _readSeconds(_vibrationDurationController, fallback: 3),

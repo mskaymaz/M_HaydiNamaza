@@ -38,3 +38,4 @@
 | 2026-03-18 16:58 +03:00 | R.260318_1658 | Ana panelde konum ust satiri ile tarih-saat ve vakit bloklari yeniden hizalandi |
 | 2026-03-18 16:59 +03:00 | R.260318_1659 | E surucusune bundle yedegi oncesi snapshot alindi |
 | 2026-03-19 09:47 +03:00 | R.260319_0947 | Ust panel simdilik tamamlandi |
+| 2026-03-19 10:08 +03:00 | R.260319_1008 | Ekonomik token preflight metni kisaltildi |

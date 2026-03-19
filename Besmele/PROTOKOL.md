@@ -28,6 +28,7 @@ Ilke:
 Kilit hatirlatici:
 - Her yeni kullanici talimati gorulur gorumaz, daha cevap yazmadan once bu bolum otomatik yeniden hatirlanmis kabul edilir.
 - Bu hatirlama sessiz uygulanir; kullanici ozellikle istemedikce her seferinde uzun aciklama olarak tekrar yazilmaz.
+- Ekonomik token preflight zorunludur: her cevap, plan, arac, duzeltme, snapshot, commit ve push oncesi sessizce `yalniz istenen kapsam + minimum dosya + tek satir varsayilani` uygulanir.
 - Her anlamli yanit ve her arac kullanimindan hemen once su 4 kontrol zorunludur:
   1. Yalniz istenen kapsami mi yapiyorum?
   2. Gerekenden fazla dosya veya tekrar aciklama uretiyor muyum?
@@ -62,5 +63,6 @@ Kayit:
 - Her snapshot sonra sayaci sifirla.
 
 Teslim:
+- Commit/push akisi da ayni preflight'a tabidir; kayit disinda kapsam genisletilmez ve ilgisiz dosya stage edilmez.
 - Commit/push/USB yedek oncesi `STATE`, `WORKBOARD`, ilgili `TASK` ve gerekirse `ADR` guncellenir.
 - Sonra `QUALITY_GATE` ve teslim adimi uygulanir.

@@ -22,3 +22,4 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-016 | done | 2026-03-18 14:17 +03:00 | M_HaydiNamaza markdown omurgasi BesmeleUltra ilkeleriyle sentezlendi |
 | TASK-017 | done | 2026-03-18 15:24 +03:00 | Token ekonomisi icin her talimatta sessiz hatirlatici |
 | TASK-018 | done | 2026-03-19 00:00 +03:00 | AGENTS ekonomik token kuralini en ust oncelikte sertlestir |
+| TASK-019 | done | 2026-03-19 10:08 +03:00 | Ekonomik token preflight metni kisaltildi |

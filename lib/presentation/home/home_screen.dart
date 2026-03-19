@@ -607,6 +607,17 @@ class _TopPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final lowerSectionHeight = typography.nextTimeSize + typography.nextLabelSize + 18;
+    final topRowHeight = settingsIconBoxSize > typography.locationSize + 8
+        ? settingsIconBoxSize
+        : typography.locationSize + 8;
+    final locationTextStyle = theme.textTheme.titleMedium?.copyWith(
+      color: Colors.white,
+      fontWeight: FontWeight.w500,
+      fontSize: typography.locationSize,
+    );
+
     return Container(
       padding: padding,
       decoration: BoxDecoration(
@@ -614,124 +625,149 @@ class _TopPanel extends StatelessWidget {
         borderRadius: style.borderRadius,
         boxShadow: style.shadows,
       ),
-      child: Stack(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: GestureDetector(
-              onTap: onLocationTap,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.location_on_outlined,
-                    color: Colors.white,
-                    size: typography.locationSize + 1,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    districtLabel.trim().isEmpty
-                        ? provinceLabel
-                        : '$provinceLabel / $districtLabel',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: typography.locationSize,
-                        ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: typography.locationSize + 5),
-              GestureDetector(
-                onTap: onToggleDate,
-                child: Text(
-                  '$dateDayMonthLabel $dateYearLabel',
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: (typography.methodSize + 1) * 1.2,
-                      ),
-                ),
-              ),
-              Text(
-                timeLabel,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white.withValues(alpha: 0.85),
-                      fontWeight: FontWeight.w300,
-                      fontSize: typography.nextLabelSize * 1.2,
-                    ),
-              ),
-            ],
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: EdgeInsets.only(top: typography.locationSize + 5),
-              child: Transform.translate(
-                offset: const Offset(25, 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
+          SizedBox(
+            height: topRowHeight,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: GestureDetector(
+                    onTap: onLocationTap,
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          nextLabel,
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: typography.nextLabelSize,
-                              ),
+                        Icon(
+                          Icons.location_on_outlined,
+                          color: Colors.white,
+                          size: typography.locationSize + 1,
                         ),
-                        const SizedBox(width: 6),
-                        Text(
-                          nextTime,
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: Colors.white.withValues(alpha: 0.85),
-                                fontWeight: FontWeight.w300,
-                                fontSize: typography.nextLabelSize,
-                              ),
+                        const SizedBox(width: 4),
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: provinceLabel, style: locationTextStyle),
+                              if (districtLabel.trim().isNotEmpty) ...[
+                                TextSpan(text: ' / ', style: locationTextStyle),
+                                TextSpan(
+                                  text: districtLabel,
+                                  style: locationTextStyle?.copyWith(
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                    Text(
-                      countdown,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 0.5,
-                            fontSize: typography.nextTimeSize,
-                          ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Transform.translate(
+                    offset: const Offset(13, 0),
+                    child: IconButton(
+                      onPressed: onSettings,
+                      icon: Icon(
+                        Icons.settings_outlined,
+                        color: Colors.white.withValues(alpha: settingsIconOpacity),
+                        size: settingsIconSize * 1.2,
+                      ),
+                      tooltip: AppLocalizations.of(context)!.settingsTitle,
+                      padding: EdgeInsets.zero,
+                      constraints: BoxConstraints(
+                        minWidth: settingsIconBoxSize,
+                        minHeight: settingsIconBoxSize,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Transform.translate(
-              offset: const Offset(10, -10),
-              child: IconButton(
-                onPressed: onSettings,
-                icon: Icon(
-                  Icons.settings_outlined,
-                  color: Colors.white.withValues(alpha: settingsIconOpacity),
-                  size: settingsIconSize,
+          const SizedBox(height: 4),
+          Container(
+            height: 1,
+            color: Colors.white.withValues(alpha: 0.14),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: lowerSectionHeight,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: onToggleDate,
+                        child: Text(
+                          '$dateDayMonthLabel $dateYearLabel',
+                          style: theme.textTheme.titleSmall?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: (typography.methodSize + 1) * 1.2,
+                              ),
+                        ),
+                      ),
+                      Text(
+                        timeLabel,
+                        style: theme.textTheme.titleSmall?.copyWith(
+                              color: Colors.white.withValues(alpha: 0.85),
+                              fontWeight: FontWeight.w300,
+                              fontSize: typography.nextLabelSize * 1.2,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-                tooltip: AppLocalizations.of(context)!.settingsTitle,
-                padding: EdgeInsets.zero,
-                constraints: BoxConstraints(
-                  minWidth: settingsIconBoxSize,
-                  minHeight: settingsIconBoxSize,
+                Align(
+                  alignment: const Alignment(1 / 3, 0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            nextLabel,
+                            style: theme.textTheme.titleSmall?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: typography.nextLabelSize,
+                                ),
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            nextTime,
+                            style: theme.textTheme.titleSmall?.copyWith(
+                                  color: Colors.white.withValues(alpha: 0.85),
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: typography.nextLabelSize,
+                                ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        countdown,
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.5,
+                              fontSize: typography.nextTimeSize,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ],

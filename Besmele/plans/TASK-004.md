@@ -1,7 +1,7 @@
 # TASK-004
 
 status: in_progress
-updated: 2026-03-18 16:58 +03:00
+updated: 2026-03-19 09:47 +03:00
 scope: Faz 2 - Flutter uygulama iskeleti ve temel mimari girisi.
 
 done_summary:
@@ -31,11 +31,14 @@ done_summary:
 - Konum ekranindaki favori `Uygula` aksiyonu ikinci `Kaydet` adimini gerektirmeyecek sekilde dogrudan kaydet + donus yapacak hale getirildi.
 - Codex devri icin mevcut durum snapshot kaydi alindi.
 - Ana panel tekrar duzeltildi; konum en ustte tek satir, tarih ve saat solda iki satir, orta vakit-kalan bloku konum satirinin altina alindi.
+- `R.260318_1659` etiketiyle bundle yedek oncesi yeni snapshot alindi.
+- Ust panel son turda tamamlandi: konum satiri yatay merkezde, ilce ince tipte, gear ayni satirda saga tasinip buyutuldu; tarih-saat solda serbest ve `Siradaki Vakit` blogu sanal `1/3-2/3` hesabiyla sag alana merkezlendi.
 
 now:
-- Uygulamada kalinan nokta: ana panel ust yerlesimi son talimata gore daraltildi; konum tek satir ustte, tarih-saat solda, vakit-kalan ortada.
+- Uygulamada kalinan nokta: ust panel kullanici talimatlarina gore simdilik tamamlandi; commit/push hazir.
 
 next:
+- Ust panel yerlesimini cihazda gorsel olarak dogrula.
 - USB bagli telefonda konum dropdownlarinin acildigini kontrol et.
 - Ayarlar ve konum ekranlarinda favori satirinin tek satir gorunumunu ve `Uygula`/`Sil` akislarini cihazda dogrula.
 - Mobil cihazda uygulama adinin `Haydi Namaza` olarak gorundugunu kontrol et.
@@ -45,6 +48,7 @@ next:
 - Telefonda reverse geocode timeout'unda ham exception yerine yumusak mesaj geldigini dogrula.
 - Backup/yedek adimini tamamla.
 - Telefonda ana panelde konum tek satir, sol tarih-saat ve orta vakit bloku yerlesimini dogrula.
+- `E:` surucusune `R.260318_1659` etiketli bundle yedegini yaz.
 
 refs:
 - `Proje/UI_Ayarlar.md`

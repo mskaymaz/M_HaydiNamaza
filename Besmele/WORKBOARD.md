@@ -7,7 +7,7 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-001 | planned | 2026-03-13 00:00 +03:00 | Istisare + gereksinim taslagi |
 | TASK-002 | done | 2026-03-13 00:58 +03:00 | Repo init + tam icerik push |
 | TASK-003 | done | 2026-03-14 16:17 +03:00 | Faz 1: Adhan portu + altin test seti |
-| TASK-004 | in_progress | 2026-03-18 16:58 +03:00 | Faz 2: Flutter iskeleti + ana panel yerlesimi son talimata gore guncellendi |
+| TASK-004 | in_progress | 2026-03-19 09:47 +03:00 | Faz 2: Flutter iskeleti; ust panel simdilik tamamlandi |
 | TASK-005 | planned | 2026-03-14 16:17 +03:00 | UI/UX temel ekranlar + tasarim sistemi |
 | TASK-006 | planned | 2026-03-14 16:17 +03:00 | Konum/zaman + offline-first veri katmani |
 | TASK-007 | planned | 2026-03-14 16:17 +03:00 | Bildirim + ezan/ses altyapisi |
@@ -21,3 +21,4 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-015 | done | 2026-03-18 10:07 +03:00 | Snapshot tetigi explicit + 8 talimat olarak netlesti |
 | TASK-016 | done | 2026-03-18 14:17 +03:00 | M_HaydiNamaza markdown omurgasi BesmeleUltra ilkeleriyle sentezlendi |
 | TASK-017 | done | 2026-03-18 15:24 +03:00 | Token ekonomisi icin her talimatta sessiz hatirlatici |
+| TASK-018 | done | 2026-03-19 00:00 +03:00 | AGENTS ekonomik token kuralini en ust oncelikte sertlestir |

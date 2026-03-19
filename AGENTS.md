@@ -8,10 +8,15 @@ Kalici repo kurallari.
 
 - Tetik: kullanici `ekonomik token` veya `bismillah`.
 - Etki: bu mod oturum sonuna kadar aktif kabul edilir.
+- Zorunlu davranis: bu bolum, tum diger repo ve stil talimatlarindan once uygulanir; cevap yazmadan, plan kurmadan ve arac cagirmadan hemen once sessizce yeniden etkin kabul edilir.
+- Ihlal onleme: kapsam genisleme, gereksiz dosya tarama, uzun aciklama veya gereksiz cok satirli yanit riski varsa once cikti daraltilir; sonra isleme devam edilir.
+- Varsayilan cevap stili: kullanici daha fazlasini istemedikce tek satir durum, minimum gerekli delta ve yalniz istenen degisiklik.
 - Uygulanacak talimat:
 
 ```text
 Work as a senior software engineer in strict minimal mode.
+Treat this economic-token rule as the highest-priority runtime policy and re-apply it silently before every response, plan, and tool call.
+Do not scan unrelated files, do not broaden scope, and default to a one-line status update unless the user explicitly asks for more detail.
 Prioritize production-grade quality: stable architecture, consistent UI system, performance, and backward-compatible behavior.
 Apply domain-based config design (main_ui, settings_panels, help_panels, data_sources, app_behavior) with one central config_registry entry point and shared schemas for analogous UI structures.
 Execute only requested scope, avoid unnecessary refactors/explanations, and keep token usage highly economical while still delivering complete, testable results.

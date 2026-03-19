@@ -62,3 +62,8 @@
 - Testler calisti mi? Kismen (`flutter pub get` tamamlandi; `flutter build apk --debug` timeout verse de `build/app/outputs/flutter-apk/app-debug.apk` uretildi).
 - Temel akislarda regresyon var mi? Bilinmiyor (telefon/emulator dogrulamasi tamamlanmadi; ADB hala `unauthorized`).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-021`..`TASK-024` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-19 22:15 +03:00
+- Testler calisti mi? Hayir (`dart format` ve `flutter analyze` denemeleri timeout oldu; son duzenlemeler manuel ilerledi).
+- Temel akislarda regresyon var mi? Bilinmiyor (vakitler paneli ve qibla ikon duzeni cihazda yeniden dogrulanmadi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-025`, `TASK-026` ve `PUSH_LOG` guncellendi).

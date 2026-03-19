@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -1308,26 +1309,6 @@ class _TopPanel extends StatelessWidget {
                   ),
                 ),
                 Align(
-                  alignment: Alignment.topRight,
-                  child: Transform.translate(
-                    offset: const Offset(-38, 4),
-                    child: IconButton(
-                      onPressed: onQibla,
-                      icon: Icon(
-                        Icons.explore_outlined,
-                        color: cizgiColor.withValues(alpha: 0.92),
-                        size: settingsIconSize * 1.2,
-                      ),
-                      tooltip: 'Kıble Yönü',
-                      padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(
-                        minWidth: settingsIconBoxSize,
-                        minHeight: settingsIconBoxSize,
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
                   alignment: Alignment.centerRight,
                   child: Transform.translate(
                     offset: const Offset(13, 0),
@@ -1428,6 +1409,26 @@ class _TopPanel extends StatelessWidget {
                     ],
                   ),
                 ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Transform.translate(
+                    offset: const Offset(13, 0),
+                    child: IconButton(
+                      onPressed: onQibla,
+                      icon: Icon(
+                        Icons.explore_outlined,
+                        color: cizgiColor.withValues(alpha: 0.92),
+                        size: settingsIconSize * 2.16,
+                      ),
+                      tooltip: 'Kıble Yönü',
+                      padding: EdgeInsets.zero,
+                      constraints: BoxConstraints(
+                        minWidth: settingsIconBoxSize * 1.5,
+                        minHeight: settingsIconBoxSize * 1.5,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -1484,6 +1485,35 @@ class _PrayerList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const rowScale = 0.85;
+    final rowTextSize = typography.nextLabelSize * rowScale;
+    final scaledChipStyle = InlineChipStyle(
+      width: chipStyle.width,
+      verticalPadding: chipStyle.verticalPadding * rowScale,
+      fontSize: chipStyle.fontSize * rowScale,
+      backgroundColor: chipStyle.backgroundColor,
+      borderColor: chipStyle.borderColor,
+      borderRadius: chipStyle.borderRadius,
+    );
+    final scaledIconStyle = InlineIconStyle(
+      size: iconStyle.size * rowScale,
+      iconSize: iconStyle.iconSize * rowScale,
+      backgroundColor: iconStyle.backgroundColor,
+      borderRadius: iconStyle.borderRadius,
+    );
+    final baseLabelStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
+          fontSize: rowTextSize,
+        );
+    final maxLabelWidth = items.fold<double>(
+      0,
+      (currentMax, item) => math.max(
+        currentMax,
+        _measureTextWidth(
+          item.label,
+          baseLabelStyle,
+        ),
+      ),
+    );
     return Container(
       decoration: BoxDecoration(
         color: style.color,
@@ -1514,82 +1544,109 @@ class _PrayerList extends StatelessWidget {
           final chipBorderColor = isActive
               ? activeColor.withValues(alpha: 0.45)
               : chipStyle.borderColor;
+          final labelStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: labelColor,
+                fontWeight: isActive ? FontWeight.w700 : FontWeight.w300,
+                fontSize: rowTextSize,
+              );
+          final labelWidth = _measureTextWidth(item.label, labelStyle);
+          final labelInset =
+              (maxLabelWidth - labelWidth).clamp(0.0, maxLabelWidth).toDouble();
+          final timeSlotWidth = typography.nextLabelSize * 2.8;
+          final iconSlotWidth = iconStyle.size * 1.3;
           final rowWidgets = <Widget>[
-            Text(
-              item.label,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: labelColor,
-                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w300,
-                    fontSize: typography.nextLabelSize,
-                  ),
+            Padding(
+              padding: EdgeInsets.only(left: labelInset),
+              child: Text(
+                item.label,
+                textAlign: TextAlign.right,
+                style: labelStyle,
+              ),
             ),
-            Text(
-              timeFormat(item.time),
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: timeColor,
-                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
-                    fontSize: typography.nextLabelSize,
-                  ),
+            SizedBox(
+              width: timeSlotWidth,
+              child: Text(
+                timeFormat(item.time),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: timeColor,
+                      fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
+                      fontSize: rowTextSize,
+                    ),
+              ),
             ),
-            _ReminderChip(
-              controller: item.reminderController,
-              style: chipStyle,
-              cizgiColor: controlColor,
-              backgroundColor: chipBackgroundColor,
-              borderColor: chipBorderColor,
-              onChanged: (value) => onReminderChanged(item.prayer, value),
+            SizedBox(
+              width: chipStyle.width,
+              child: _ReminderChip(
+                controller: item.reminderController,
+                style: scaledChipStyle,
+                cizgiColor: controlColor,
+                backgroundColor: chipBackgroundColor,
+                borderColor: chipBorderColor,
+                onChanged: (value) => onReminderChanged(item.prayer, value),
+              ),
             ),
           ];
 
           if (showVoiceIcon) {
             rowWidgets.add(
-              _IconToggle(
-                icon: Icons.volume_up_outlined,
-                style: iconStyle,
-                isEnabled: item.voiceEnabled,
-                cizgiColor: controlColor,
-                onTap: () => onVoiceToggle(item.prayer),
+              SizedBox(
+                width: iconSlotWidth,
+                child: _IconToggle(
+                  icon: Icons.volume_up_outlined,
+                  style: scaledIconStyle,
+                  isEnabled: item.voiceEnabled,
+                  cizgiColor: controlColor,
+                  onTap: () => onVoiceToggle(item.prayer),
+                ),
               ),
             );
           }
           if (showVisualIcon) {
             rowWidgets.add(
-              _IconToggle(
-                icon: Icons.desktop_windows_outlined,
-                style: iconStyle,
-                isEnabled: item.visualEnabled,
-                cizgiColor: controlColor,
-                onTap: () => onVisualToggle(item.prayer),
+              SizedBox(
+                width: iconSlotWidth,
+                child: _IconToggle(
+                  icon: Icons.desktop_windows_outlined,
+                  style: scaledIconStyle,
+                  isEnabled: item.visualEnabled,
+                  cizgiColor: controlColor,
+                  onTap: () => onVisualToggle(item.prayer),
+                ),
               ),
             );
           }
           if (showAzanIcon) {
             rowWidgets.add(
-              _IconToggle(
-                icon: Icons.mosque_outlined,
-                style: iconStyle,
-                isEnabled: item.azanEnabled,
-                cizgiColor: controlColor,
-                onTap: () => onAzanToggle(item.prayer),
+              SizedBox(
+                width: iconSlotWidth,
+                child: _IconToggle(
+                  icon: Icons.mosque_outlined,
+                  style: scaledIconStyle,
+                  isEnabled: item.azanEnabled,
+                  cizgiColor: controlColor,
+                  onTap: () => onAzanToggle(item.prayer),
+                ),
               ),
             );
           }
           if (showVibrationIcon) {
             rowWidgets.add(
-              _IconToggle(
-                icon: Icons.vibration_outlined,
-                style: iconStyle,
-                isEnabled: item.vibrationEnabled,
-                cizgiColor: controlColor,
-                onTap: () => onVibrationToggle(item.prayer),
+              SizedBox(
+                width: iconSlotWidth,
+                child: _IconToggle(
+                  icon: Icons.vibration_outlined,
+                  style: scaledIconStyle,
+                  isEnabled: item.vibrationEnabled,
+                  cizgiColor: controlColor,
+                  onTap: () => onVibrationToggle(item.prayer),
+                ),
               ),
             );
           }
           return AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
               color: isActive ? Colors.white.withValues(alpha: 0.12) : Colors.transparent,
               borderRadius: BorderRadius.circular(14),
@@ -1604,12 +1661,23 @@ class _PrayerList extends StatelessWidget {
               children: [
                 Expanded(
                   child: Center(
-                    child: Wrap(
-                      alignment: WrapAlignment.center,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      spacing: rowGap,
-                      runSpacing: rowGap,
-                      children: rowWidgets,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        for (var i = 0; i < rowWidgets.length; i++) ...[
+                          if (i > 0)
+                            SizedBox(
+                              width: i == 3
+                                  ? 10
+                                  : i <= 2
+                                  ? 12
+                                  : 2,
+                            ),
+                          rowWidgets[i],
+                        ],
+                      ],
                     ),
                   ),
                 ),
@@ -1676,6 +1744,16 @@ class _ReminderChip extends StatelessWidget {
       ),
     );
   }
+
+}
+
+double _measureTextWidth(String text, TextStyle? style) {
+  final painter = TextPainter(
+    text: TextSpan(text: text, style: style),
+    maxLines: 1,
+    textDirection: ui.TextDirection.ltr,
+  )..layout(minWidth: 0, maxWidth: double.infinity);
+  return painter.width;
 }
 
 class _IconToggle extends StatelessWidget {

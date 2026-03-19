@@ -1,9 +1,9 @@
 # BESMELE STATE
 
-last_update: 2026-03-19 17:52 +03:00
-active_task: TASK-024
-phase: Push snapshoti alindi; mobil calistirma ve UI duzenleri commit/push hazir
-next_step: Push sonrasi cihazda Merzifon varsayilani, soft ayar panelleri ve vakit satiri dengesini dogrula.
+last_update: 2026-03-19 22:15 +03:00
+active_task: TASK-026
+phase: Ust panel ve vakitler paneli gorsellestirme 1. asama tamam; cekmece yapisina gecis hazirlaniyor
+next_step: Cekmece yapisi icin TASK-026 kapsaminda ilk panel akisi ve iskeleti ac.
 blockers: NONE
-last_delivery: R.260319_1419
-handover: `TASK-021` icinde `tools/run_m.ps1` Android SDK `platform-tools` ve `ANDROID_USER_HOME` ile duzeltildi; cihaz ADB tarafinda son durumda hala `unauthorized`. `TASK-022` varsayilan konumu Turkiye/Amasya/Merzifon olarak fallback'a aldi. `TASK-023` ayarlar ve konum panellerini daha soft/notr yuzeylere cekti. `TASK-024` vakit satirini tek merkezli `Wrap` akisina alip ikon azalinca kalan ogeleri esit aralikla ortada yeniden dagitacak sekilde guncelledi.
+last_delivery: R.260319_2215
+handover: `TASK-025` tamamlandi; ust panel ve vakitler paneli gorsellestirme 1. asamada satir araliklari, chip genisligi, panel kenar bosluklari ve qibla ikonu kullanici taleplerine gore netlestirildi. Sonraki odak cekmece yapisi icin `TASK-026`.

@@ -221,7 +221,7 @@ class ConfigRegistry {
 
   static MainUiConfig mainUiFor(UiPaletteConfig palette) {
     return MainUiConfig(
-      screenPadding: const EdgeInsets.fromLTRB(18, 14, 18, 18),
+      screenPadding: const EdgeInsets.fromLTRB(5, 14, 5, 18),
       topPanelPadding: const EdgeInsets.fromLTRB(10, 1, 10, 4),
       sectionGap: 12,
       settingsIconSize: 16,
@@ -258,7 +258,7 @@ class ConfigRegistry {
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       reminderChip: InlineChipStyle(
-        width: 36,
+        width: 35,
         verticalPadding: 5,
         fontSize: 12,
         backgroundColor: palette.cizgiColor.withValues(alpha: 0.08),

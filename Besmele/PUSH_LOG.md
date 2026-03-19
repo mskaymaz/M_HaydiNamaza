@@ -43,3 +43,4 @@
 | 2026-03-19 14:12 +03:00 | R.260319_1412 | Vakitler paneli hatirlatma sistemi ve qibla ekrani tamamlandi |
 | 2026-03-19 14:19 +03:00 | R.260319_1419 | Vakitler paneli ikon grubu merkeze alindi |
 | 2026-03-19 17:52 +03:00 | R.260319_1752 | Mobil calistirma scripti, Merzifon varsayilani ve UI panel/satir duzenleri hazirlandi |
+| 2026-03-19 22:15 +03:00 | R.260319_2215 | Ust panel ve vakitler paneli gorsellestirme 1. asama tamam; cekmece yapisina geciliyor |

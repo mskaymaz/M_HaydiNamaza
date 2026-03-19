@@ -8,6 +8,7 @@ import 'package:mhaydinamaza/l10n/app_localizations.dart';
 import '../../app/calculation_method_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_storage.dart';
+import '../../app/prayer_row_settings_storage.dart';
 import '../../app/prayer_service.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
@@ -33,7 +34,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _locationStorage = LocationStorage();
   final _methodStorage = CalculationMethodStorage();
+  final _rowSettingsStorage = PrayerRowSettingsStorage();
   final _prayerService = PrayerService();
+  final Map<Prayer, _PrayerRowSettings> _rowSettings = {};
+  final Map<Prayer, TextEditingController> _reminderControllers = {};
 
   late Future<_HomeData> _future;
   Timer? _ticker;
@@ -46,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _lastRefreshDay = DateTime(_now.year, _now.month, _now.day);
+    _loadPrayerRowSettings();
     _future = _loadData();
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       if (!mounted) return;
@@ -66,6 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _ticker?.cancel();
+    for (final controller in _reminderControllers.values) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -448,6 +456,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               typography: ui.typography,
                               cizgiColor: palette.cizgiColor,
                               activeColor: palette.zeminColor,
+                              onReminderChanged: _setReminderMinutes,
+                              onVoiceToggle: _toggleVoiceReminder,
+                              onVisualToggle: _toggleVisualReminder,
+                              onAzanToggle: _toggleAzanReminder,
                             ),
                             secondChild: _CollapsedHint(
                               label: l10n.locationLabel,
@@ -562,14 +574,116 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  _PrayerRowSettings _settingsFor(Prayer prayer) {
+    return _rowSettings.putIfAbsent(prayer, () {
+      final minutes = _defaultReminderMinutes(prayer);
+      _reminderControllers.putIfAbsent(
+        prayer,
+        () => TextEditingController(text: minutes.toString()),
+      );
+      return _PrayerRowSettings(reminderMinutes: minutes);
+    });
+  }
+
+  Future<void> _loadPrayerRowSettings() async {
+    final saved = await _rowSettingsStorage.read();
+    if (!mounted || saved.isEmpty) return;
+    setState(() {
+      for (final entry in saved.entries) {
+        _rowSettings[entry.key] = _PrayerRowSettings(
+          reminderMinutes: entry.value.reminderMinutes,
+          voiceEnabled: entry.value.voiceEnabled,
+          visualEnabled: entry.value.visualEnabled,
+          azanEnabled: entry.value.azanEnabled,
+        );
+        final controller = _reminderControllers[entry.key];
+        if (controller != null) {
+          controller.text = entry.value.reminderMinutes.toString();
+        }
+      }
+    });
+  }
+
+  Future<void> _persistPrayerRowSettings() {
+    final payload = <Prayer, PrayerRowSettingsRecord>{};
+    for (final entry in _rowSettings.entries) {
+      payload[entry.key] = PrayerRowSettingsRecord(
+        reminderMinutes: entry.value.reminderMinutes,
+        voiceEnabled: entry.value.voiceEnabled,
+        visualEnabled: entry.value.visualEnabled,
+        azanEnabled: entry.value.azanEnabled,
+      );
+    }
+    return _rowSettingsStorage.write(payload);
+  }
+
+  int _defaultReminderMinutes(Prayer prayer) {
+    return prayer == Prayer.sunrise ? 0 : 15;
+  }
+
+  TextEditingController _controllerFor(Prayer prayer) {
+    final settings = _settingsFor(prayer);
+    return _reminderControllers.putIfAbsent(
+      prayer,
+      () => TextEditingController(text: settings.reminderMinutes.toString()),
+    );
+  }
+
+  void _setReminderMinutes(Prayer prayer, String value) {
+    final minutes = int.tryParse(value) ?? 0;
+    setState(() {
+      final current = _settingsFor(prayer);
+      _rowSettings[prayer] = current.copyWith(reminderMinutes: minutes);
+    });
+    unawaited(_persistPrayerRowSettings());
+  }
+
+  void _toggleVoiceReminder(Prayer prayer) {
+    setState(() {
+      final current = _settingsFor(prayer);
+      _rowSettings[prayer] = current.copyWith(voiceEnabled: !current.voiceEnabled);
+    });
+    unawaited(_persistPrayerRowSettings());
+  }
+
+  void _toggleVisualReminder(Prayer prayer) {
+    setState(() {
+      final current = _settingsFor(prayer);
+      _rowSettings[prayer] = current.copyWith(visualEnabled: !current.visualEnabled);
+    });
+    unawaited(_persistPrayerRowSettings());
+  }
+
+  void _toggleAzanReminder(Prayer prayer) {
+    setState(() {
+      final current = _settingsFor(prayer);
+      _rowSettings[prayer] = current.copyWith(azanEnabled: !current.azanEnabled);
+    });
+    unawaited(_persistPrayerRowSettings());
+  }
+
   List<_PrayerItem> _buildItems(AppLocalizations l10n, PrayerTimes times) {
+    _PrayerItem itemFor(Prayer prayer, String label, DateTime time) {
+      final settings = _settingsFor(prayer);
+      return _PrayerItem(
+        prayer: prayer,
+        label: label,
+        time: time,
+        reminderMinutes: settings.reminderMinutes,
+        reminderController: _controllerFor(prayer),
+        voiceEnabled: settings.voiceEnabled,
+        visualEnabled: settings.visualEnabled,
+        azanEnabled: settings.azanEnabled,
+      );
+    }
+
     return [
-      _PrayerItem(Prayer.fajr, l10n.prayerFajr, times.fajr, 15),
-      _PrayerItem(Prayer.sunrise, l10n.prayerSunrise, times.sunrise, 0),
-      _PrayerItem(Prayer.dhuhr, l10n.prayerDhuhr, times.dhuhr, 15),
-      _PrayerItem(Prayer.asr, l10n.prayerAsr, times.asr, 15),
-      _PrayerItem(Prayer.maghrib, l10n.prayerMaghrib, times.maghrib, 15),
-      _PrayerItem(Prayer.isha, l10n.prayerIsha, times.isha, 15),
+      itemFor(Prayer.fajr, l10n.prayerFajr, times.fajr),
+      itemFor(Prayer.sunrise, l10n.prayerSunrise, times.sunrise),
+      itemFor(Prayer.dhuhr, l10n.prayerDhuhr, times.dhuhr),
+      itemFor(Prayer.asr, l10n.prayerAsr, times.asr),
+      itemFor(Prayer.maghrib, l10n.prayerMaghrib, times.maghrib),
+      itemFor(Prayer.isha, l10n.prayerIsha, times.isha),
     ];
   }
 }
@@ -593,8 +707,49 @@ class _PrayerItem {
   final String label;
   final DateTime time;
   final int reminderMinutes;
+  final TextEditingController reminderController;
+  final bool voiceEnabled;
+  final bool visualEnabled;
+  final bool azanEnabled;
 
-  _PrayerItem(this.prayer, this.label, this.time, this.reminderMinutes);
+  _PrayerItem({
+    required this.prayer,
+    required this.label,
+    required this.time,
+    required this.reminderMinutes,
+    required this.reminderController,
+    required this.voiceEnabled,
+    required this.visualEnabled,
+    required this.azanEnabled,
+  });
+}
+
+class _PrayerRowSettings {
+  final int reminderMinutes;
+  final bool voiceEnabled;
+  final bool visualEnabled;
+  final bool azanEnabled;
+
+  const _PrayerRowSettings({
+    required this.reminderMinutes,
+    this.voiceEnabled = false,
+    this.visualEnabled = false,
+    this.azanEnabled = false,
+  });
+
+  _PrayerRowSettings copyWith({
+    int? reminderMinutes,
+    bool? voiceEnabled,
+    bool? visualEnabled,
+    bool? azanEnabled,
+  }) {
+    return _PrayerRowSettings(
+      reminderMinutes: reminderMinutes ?? this.reminderMinutes,
+      voiceEnabled: voiceEnabled ?? this.voiceEnabled,
+      visualEnabled: visualEnabled ?? this.visualEnabled,
+      azanEnabled: azanEnabled ?? this.azanEnabled,
+    );
+  }
 }
 
 class _PrayerNext {
@@ -656,7 +811,7 @@ class _TopPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final lowerSectionHeight = typography.nextTimeSize + typography.nextLabelSize + 18;
+    final lowerSectionHeight = typography.nextTimeSize + typography.nextLabelSize + 20;
     final topRowHeight = settingsIconBoxSize > typography.locationSize + 8
         ? settingsIconBoxSize
         : typography.locationSize + 8;
@@ -836,6 +991,10 @@ class _PrayerList extends StatelessWidget {
   final HomeTypography typography;
   final Color cizgiColor;
   final Color activeColor;
+  final void Function(Prayer prayer, String value) onReminderChanged;
+  final void Function(Prayer prayer) onVoiceToggle;
+  final void Function(Prayer prayer) onVisualToggle;
+  final void Function(Prayer prayer) onAzanToggle;
 
   const _PrayerList({
     required this.items,
@@ -849,6 +1008,10 @@ class _PrayerList extends StatelessWidget {
     required this.typography,
     required this.cizgiColor,
     required this.activeColor,
+    required this.onReminderChanged,
+    required this.onVoiceToggle,
+    required this.onVisualToggle,
+    required this.onAzanToggle,
   });
 
   @override
@@ -863,13 +1026,41 @@ class _PrayerList extends StatelessWidget {
         padding: listPadding,
         itemBuilder: (context, index) {
           final item = items[index];
+          final activeIndex = items.indexWhere((entry) => entry.prayer == active);
+          final isPast = activeIndex != -1 && index < activeIndex;
           final isActive = item.prayer == active;
+          final primaryColor = isActive
+              ? cizgiColor
+              : isPast
+                  ? cizgiColor.withValues(alpha: 0.45)
+                  : cizgiColor;
+          final secondaryColor = isActive
+              ? cizgiColor.withValues(alpha: 0.9)
+              : isPast
+                  ? cizgiColor.withValues(alpha: 0.5)
+                  : cizgiColor.withValues(alpha: 0.9);
+          final chipBackgroundColor = isActive
+              ? activeColor.withValues(alpha: 0.12)
+              : isPast
+                  ? cizgiColor.withValues(alpha: 0.05)
+                  : chipStyle.backgroundColor;
+          final chipBorderColor = isActive
+              ? activeColor.withValues(alpha: 0.45)
+              : isPast
+                  ? cizgiColor.withValues(alpha: 0.16)
+                  : chipStyle.borderColor;
           return AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             decoration: BoxDecoration(
-              color: isActive ? activeColor.withValues(alpha: 0.9) : Colors.transparent,
+              color: isActive ? Colors.white.withValues(alpha: 0.12) : Colors.transparent,
               borderRadius: BorderRadius.circular(14),
+              border: isActive
+                  ? Border.all(
+                      color: Colors.white.withValues(alpha: 0.45),
+                      width: 1,
+                    )
+                  : null,
             ),
             child: Row(
               children: [
@@ -877,43 +1068,59 @@ class _PrayerList extends StatelessWidget {
                   child: Text(
                     item.label,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: cizgiColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: typography.listLabelSize,
+                          color: primaryColor,
+                          fontWeight: isActive ? FontWeight.w700 : FontWeight.w300,
+                          fontSize: typography.nextLabelSize,
                         ),
                   ),
                 ),
-                Text(
-                  timeFormat(item.time),
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: cizgiColor.withValues(alpha: 0.9),
-                        fontWeight: FontWeight.w600,
-                        fontSize: typography.listTimeSize,
+                Transform.translate(
+                  offset: const Offset(-30, 0),
+                  child: Row(
+                    children: [
+                      Text(
+                        timeFormat(item.time),
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: secondaryColor,
+                              fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
+                              fontSize: typography.nextLabelSize,
+                            ),
                       ),
-                ),
-                SizedBox(width: rowGap),
-                _ReminderChip(
-                  minutes: item.reminderMinutes,
-                  style: chipStyle,
-                  cizgiColor: cizgiColor,
-                ),
-                SizedBox(width: rowGap),
-                _IconToggle(
-                  icon: Icons.volume_up_outlined,
-                  style: iconStyle,
-                  cizgiColor: cizgiColor,
-                ),
-                SizedBox(width: rowGap),
-                _IconToggle(
-                  icon: Icons.remove_red_eye_outlined,
-                  style: iconStyle,
-                  cizgiColor: cizgiColor,
-                ),
-                SizedBox(width: rowGap),
-                _IconToggle(
-                  icon: Icons.mosque_outlined,
-                  style: iconStyle,
-                  cizgiColor: cizgiColor,
+                      SizedBox(width: rowGap),
+                      _ReminderChip(
+                        controller: item.reminderController,
+                        style: chipStyle,
+                        cizgiColor: primaryColor,
+                        backgroundColor: chipBackgroundColor,
+                        borderColor: chipBorderColor,
+                        onChanged: (value) => onReminderChanged(item.prayer, value),
+                      ),
+                      SizedBox(width: rowGap),
+                      _IconToggle(
+                        icon: Icons.volume_up_outlined,
+                        style: iconStyle,
+                        isEnabled: item.voiceEnabled,
+                        cizgiColor: primaryColor,
+                        onTap: () => onVoiceToggle(item.prayer),
+                      ),
+                      SizedBox(width: rowGap),
+                      _IconToggle(
+                        icon: Icons.remove_red_eye_outlined,
+                        style: iconStyle,
+                        isEnabled: item.visualEnabled,
+                        cizgiColor: primaryColor,
+                        onTap: () => onVisualToggle(item.prayer),
+                      ),
+                      SizedBox(width: rowGap),
+                      _IconToggle(
+                        icon: Icons.mosque_outlined,
+                        style: iconStyle,
+                        isEnabled: item.azanEnabled,
+                        cizgiColor: primaryColor,
+                        onTap: () => onAzanToggle(item.prayer),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -930,34 +1137,51 @@ class _PrayerList extends StatelessWidget {
 }
 
 class _ReminderChip extends StatelessWidget {
-  final int minutes;
+  final TextEditingController controller;
   final InlineChipStyle style;
   final Color cizgiColor;
+  final Color backgroundColor;
+  final Color borderColor;
+  final ValueChanged<String> onChanged;
 
   const _ReminderChip({
-    required this.minutes,
+    required this.controller,
     required this.style,
     required this.cizgiColor,
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: style.width,
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(vertical: style.verticalPadding),
-      decoration: BoxDecoration(
-        color: style.backgroundColor,
-        borderRadius: style.borderRadius,
-        border: Border.all(color: style.borderColor),
-      ),
-      child: Text(
-        minutes.toString(),
+      child: TextField(
+        controller: controller,
+        onChanged: onChanged,
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: cizgiColor,
               fontWeight: FontWeight.w700,
               fontSize: style.fontSize,
             ),
+        decoration: InputDecoration(
+          isDense: true,
+          filled: true,
+          fillColor: backgroundColor,
+          contentPadding: EdgeInsets.symmetric(vertical: style.verticalPadding),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: style.borderRadius,
+            borderSide: BorderSide(color: borderColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: style.borderRadius,
+            borderSide: BorderSide(color: cizgiColor),
+          ),
+        ),
       ),
     );
   }
@@ -966,24 +1190,28 @@ class _ReminderChip extends StatelessWidget {
 class _IconToggle extends StatelessWidget {
   final IconData icon;
   final InlineIconStyle style;
+  final bool isEnabled;
   final Color cizgiColor;
+  final VoidCallback onTap;
 
   const _IconToggle({
     required this.icon,
     required this.style,
+    required this.isEnabled,
     required this.cizgiColor,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: style.size,
-      height: style.size,
-      decoration: BoxDecoration(
-        color: style.backgroundColor,
-        borderRadius: style.borderRadius,
+    final iconColor = isEnabled ? cizgiColor : cizgiColor.withValues(alpha: 0.4);
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        width: style.size,
+        height: style.size,
+        child: Icon(icon, size: style.iconSize, color: iconColor),
       ),
-      child: Icon(icon, size: style.iconSize, color: cizgiColor),
     );
   }
 }

@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../app/calculation_method_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
+import '../../app/reminder_text_settings_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
 import 'calculation_method_screen.dart';
@@ -28,10 +32,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final LocationStorage _locationStorage = LocationStorage();
   final LocationFavoritesStorage _favoritesStorage = LocationFavoritesStorage();
   final CalculationMethodStorage _methodStorage = CalculationMethodStorage();
+  final ReminderTextSettingsStorage _reminderTextStorage =
+      ReminderTextSettingsStorage();
+  final FlutterTts _flutterTts = FlutterTts();
+  final TextEditingController _voiceReminderController = TextEditingController();
+  final TextEditingController _visualReminderController = TextEditingController();
+  final List<_VoiceOption> _voiceOptions = [];
   LocationData? _location;
   List<LocationFavorite> _favorites = [];
   LocationFavorite? _selectedFavorite;
   String? _methodCode;
+  bool _voiceTextEnabled = true;
+  String? _selectedVoiceKey;
 
   @override
   void initState() {
@@ -39,6 +51,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _loadLocation();
     _loadFavorites();
     _loadMethod();
+    _loadReminderTexts();
+    _loadVoiceOptions();
   }
 
   Future<void> _loadLocation() async {
@@ -74,6 +88,58 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _methodCode = code;
     });
+  }
+
+  Future<void> _loadReminderTexts() async {
+    final settings = await _reminderTextStorage.read();
+    _voiceReminderController.text = settings.voiceText;
+    _visualReminderController.text = settings.visualText;
+    _voiceTextEnabled = settings.voiceTextEnabled;
+    if (settings.selectedVoiceName != null && settings.selectedVoiceLocale != null) {
+      _selectedVoiceKey = _voiceKey(
+        settings.selectedVoiceName!,
+        settings.selectedVoiceLocale!,
+      );
+    }
+    if (!mounted) return;
+    setState(() {});
+  }
+
+  Future<void> _loadVoiceOptions() async {
+    dynamic voices;
+    try {
+      voices = await _flutterTts.getVoices;
+    } catch (_) {
+      return;
+    }
+    if (voices is! List) return;
+    final options = <_VoiceOption>[];
+    for (final item in voices) {
+      if (item is! Map) continue;
+      final name = (item['name'] ?? '').toString().trim();
+      final locale = (item['locale'] ?? '').toString().trim();
+      if (name.isEmpty || locale.isEmpty) continue;
+      options.add(_VoiceOption(name: name, locale: locale));
+    }
+    options.sort((a, b) => a.label.compareTo(b.label));
+    if (!mounted) return;
+    setState(() {
+      _voiceOptions
+        ..clear()
+        ..addAll(options);
+      if (_selectedVoiceKey != null &&
+          !_voiceOptions.any((voice) => voice.key == _selectedVoiceKey)) {
+        _selectedVoiceKey = null;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _voiceReminderController.dispose();
+    _visualReminderController.dispose();
+    _flutterTts.stop();
+    super.dispose();
   }
 
   @override
@@ -194,9 +260,114 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const _SectionHeader(
+                    title: 'Sesli Hatırlatma',
+                    tooltip:
+                        'Metni Oku açıldığında sesli hatırlatma metni ve sistem sesi seçimi görünür. Seçilen ses sesli testte ve hatırlatma okumasında kullanılır.',
+                  ),
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Metni Oku'),
+                    value: _voiceTextEnabled,
+                    onChanged: (value) {
+                      setState(() {
+                        _voiceTextEnabled = value;
+                      });
+                      _persistReminderTexts();
+                    },
+                  ),
+                  if (_voiceTextEnabled) ...[
+                    const SizedBox(height: 6),
+                    DropdownButtonFormField<String?>(
+                      value: _selectedVoiceKey,
+                      decoration: const InputDecoration(
+                        labelText: 'Sistem Sesi',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: [
+                        const DropdownMenuItem<String?>(
+                          value: null,
+                          child: Text('Sistem Varsayılanı'),
+                        ),
+                        ..._voiceOptions.map(
+                          (voice) => DropdownMenuItem<String?>(
+                            value: voice.key,
+                            child: Text(voice.label),
+                          ),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedVoiceKey = value;
+                        });
+                        _persistReminderTexts();
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    _ReminderTextField(
+                      label: 'Sesli Hatırlatma Metni',
+                      controller: _voiceReminderController,
+                      hintText: 'Sesli hatırlatmada okunacak metni girin.',
+                      onChanged: (_) => _persistReminderTexts(),
+                    ),
+                    const SizedBox(height: 8),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: OutlinedButton.icon(
+                        onPressed: () => _speakVoiceReminderTest(context, l10n),
+                        icon: const Icon(Icons.play_arrow_rounded),
+                        label: const Text('Sesli Test'),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: ui.screenPadding.copyWith(top: 0),
+            child: _SettingsPanel(
+              style: ui.panel,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _SectionHeader(
+                    title: 'Görsel Hatırlatma',
+                    tooltip:
+                        'Görsel hatırlatma ayrı tutulur. Bu alan boşsa sesli hatırlatma metni kullanılır.',
+                  ),
+                  const SizedBox(height: 10),
+                  _ReminderTextField(
+                    label: 'Görsel Hatırlatma Metni',
+                    controller: _visualReminderController,
+                    hintText:
+                        'Buraya herhangi bir metin girilmediğinde sesli hatırlatmadaki metin kullanılacaktır.',
+                    onChanged: (_) => _persistReminderTexts(),
+                    maxLines: 3,
+                  ),
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: OutlinedButton.icon(
+                      onPressed: () => _showVisualReminderPreview(context, l10n),
+                      icon: const Icon(Icons.visibility_outlined),
+                      label: const Text('Görsel Yapıyı Göster'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: ui.screenPadding.copyWith(top: 0),
+            child: _SettingsPanel(
+              style: ui.panel,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   _SectionHeader(
-                    title: 'Arayuz Renkleri',
-                    tooltip: 'Panel ve yazi renklerini degistir.',
+                    title: 'Arayüz Renkleri',
+                    tooltip: 'Panel ve yazı renklerini değiştir.',
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -216,11 +387,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       const SizedBox(width: 4),
                       Expanded(
                         child: _ColorActionTile(
-                          title: 'Yazi Rengi',
+                          title: 'Yazı Rengi',
                           color: palette.cizgiColor,
                           onTap: () => _editColor(
                             context: context,
-                            title: 'Yazi Rengi',
+                            title: 'Yazı Rengi',
                             initialColor: palette.cizgiColor,
                             onApply: widget.uiPaletteController.setCizgiColor,
                           ),
@@ -254,7 +425,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   _SectionHeader(
                     title: 'Arka Plan Renkleri',
-                    tooltip: 'Geometrik arka planin zemin ve cizgi renklerini degistir.',
+                    tooltip: 'Geometrik arka planın zemin ve çizgi renklerini değiştir.',
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -275,11 +446,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       const SizedBox(width: 4),
                       Expanded(
                         child: _ColorActionTile(
-                          title: 'Cizgi Rengi',
+                          title: 'Çizgi Rengi',
                           color: palette.backgroundCizgiColor,
                           onTap: () => _editColor(
                             context: context,
-                            title: 'Arka Plan Cizgi Rengi',
+                            title: 'Arka Plan Çizgi Rengi',
                             initialColor: palette.backgroundCizgiColor,
                             onApply: widget.uiPaletteController
                                 .setBackgroundCizgiColor,
@@ -308,6 +479,192 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _persistReminderTexts() async {
+    final selectedVoice = _selectedVoice();
+    await _reminderTextStorage.write(
+      ReminderTextSettings(
+        voiceText: _voiceReminderController.text.trim(),
+        visualText: _visualReminderController.text.trim(),
+        voiceTextEnabled: _voiceTextEnabled,
+        selectedVoiceName: selectedVoice?.name,
+        selectedVoiceLocale: selectedVoice?.locale,
+      ),
+    );
+  }
+
+  String _effectiveVisualReminderText() {
+    final visualText = _visualReminderController.text.trim();
+    if (visualText.isNotEmpty) return visualText;
+    return _voiceReminderController.text.trim();
+  }
+
+  Future<void> _speakVoiceReminderTest(
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
+    if (!_voiceTextEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Önce Metni Oku seçeneğini açın.')),
+      );
+      return;
+    }
+    final text = _voiceReminderController.text.trim();
+    await _speakReminderPreview(
+      context: context,
+      previewText: text,
+      prayerLabel: l10n.prayerDhuhr,
+    );
+  }
+
+  Future<void> _speakReminderPreview({
+    required BuildContext context,
+    required String previewText,
+    String prayerLabel = 'Öğle',
+  }) async {
+    final trimmed = previewText.trim();
+    if (trimmed.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Test için önce metin girin.')),
+      );
+      return;
+    }
+    final spokenText = '$prayerLabel vakti. $trimmed';
+    try {
+      await _speakWithFallback(spokenText);
+    } catch (_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Sesli test başlatılamadı.')),
+      );
+    }
+  }
+
+  Future<void> _applyPreferredVoice() async {
+    final selectedVoice = _selectedVoice();
+    final selected = widget.localeController.value;
+    final deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
+    final locale = selected ?? deviceLocale;
+    final localeKey = locale.countryCode == null || locale.countryCode!.isEmpty
+        ? locale.languageCode
+        : '${locale.languageCode}-${locale.countryCode}';
+    try {
+      await _flutterTts.setLanguage(selectedVoice?.locale ?? localeKey);
+    } catch (_) {
+      try {
+        await _flutterTts.setLanguage(locale.languageCode);
+      } catch (_) {}
+    }
+    if (selectedVoice != null) {
+      try {
+        await _flutterTts.setVoice({
+          'name': selectedVoice.name,
+          'locale': selectedVoice.locale,
+        });
+        return;
+      } catch (_) {}
+    }
+    dynamic voices;
+    try {
+      voices = await _flutterTts.getVoices;
+    } catch (_) {
+      return;
+    }
+    if (voices is! List) return;
+    Map<String, dynamic>? selectedVoice;
+    for (final voice in voices) {
+      if (voice is! Map) continue;
+      final name = (voice['name'] ?? '').toString().toLowerCase();
+      final localeName = (voice['locale'] ?? '').toString().toLowerCase();
+      final sameLocale =
+          localeName.startsWith(locale.languageCode.toLowerCase());
+      if (!sameLocale) continue;
+      if (name.contains('male') ||
+          name.contains('erkek') ||
+          name.contains('man')) {
+        selectedVoice = Map<String, dynamic>.from(voice);
+        break;
+      }
+      selectedVoice ??= Map<String, dynamic>.from(voice);
+    }
+    if (selectedVoice == null) return;
+    try {
+      await _flutterTts.setVoice({
+        'name': (selectedVoice['name'] ?? '').toString(),
+        'locale': (selectedVoice['locale'] ?? localeKey).toString(),
+      });
+    } catch (_) {}
+  }
+
+  Future<void> _speakWithFallback(String spokenText) async {
+    await _flutterTts.stop();
+    try {
+      await _flutterTts.awaitSpeakCompletion(true);
+    } catch (_) {}
+    try {
+      await _applyPreferredVoice();
+    } catch (_) {}
+    try {
+      await _flutterTts.setPitch(0.95);
+    } catch (_) {}
+    try {
+      await _flutterTts.setSpeechRate(0.45);
+    } catch (_) {}
+    final result = await _flutterTts.speak(spokenText);
+    if (result == 1 || result == null) {
+      return;
+    }
+    await _flutterTts.setVoice(const <String, String>{});
+    final retry = await _flutterTts.speak(spokenText);
+    if (retry == 1 || retry == null) {
+      return;
+    }
+    throw Exception('tts_failed');
+  }
+
+  Future<void> _showVisualReminderPreview(
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
+    final effectiveText = _effectiveVisualReminderText().trim();
+    if (effectiveText.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Görsel önizleme için önce metin girin.')),
+      );
+      return;
+    }
+    await showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
+          content: _FlashingReminderPreview(
+            prayerLabel: '${l10n.prayerDhuhr.toUpperCase()} VAKTI',
+            message: effectiveText,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Kapat'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  String _voiceKey(String name, String locale) => '$locale|$name';
+
+  _VoiceOption? _selectedVoice() {
+    final key = _selectedVoiceKey;
+    if (key == null) return null;
+    for (final voice in _voiceOptions) {
+      if (voice.key == key) {
+        return voice;
+      }
+    }
+    return null;
   }
 
   InputDecoration _dropdownDecoration(String label) {
@@ -408,8 +765,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Iptal'),
-                ),
+              child: const Text('İptal'),
+            ),
                 FilledButton(
                   onPressed: () async {
                     await onApply(draft.toColor());
@@ -582,7 +939,7 @@ class _SectionHeader extends StatelessWidget {
           },
           child: const Padding(
             padding: EdgeInsets.all(2),
-            child: Icon(Icons.info_outline, size: 24),
+            child: Icon(Icons.info_outline, size: 19.2),
           ),
         ),
       ],
@@ -652,6 +1009,136 @@ class _ResetIconButton extends StatelessWidget {
           border: Border.all(color: Colors.black12),
         ),
         child: const Icon(Icons.restart_alt_rounded),
+      ),
+    );
+  }
+}
+
+class _ReminderTextField extends StatelessWidget {
+  final String label;
+  final TextEditingController controller;
+  final String hintText;
+  final ValueChanged<String> onChanged;
+  final int maxLines;
+
+  const _ReminderTextField({
+    required this.label,
+    required this.controller,
+    required this.hintText,
+    required this.onChanged,
+    this.maxLines = 2,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      onChanged: onChanged,
+      minLines: maxLines,
+      maxLines: maxLines,
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Colors.black87,
+          ),
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hintText,
+        filled: true,
+        fillColor: const Color(0xFFF4F1EA),
+        hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Colors.grey.shade400,
+            ),
+        labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.black87,
+            ),
+        alignLabelWithHint: true,
+        border: const OutlineInputBorder(),
+      ),
+    );
+  }
+}
+
+class _VoiceOption {
+  final String name;
+  final String locale;
+
+  const _VoiceOption({
+    required this.name,
+    required this.locale,
+  });
+
+  String get key => '$locale|$name';
+  String get label => '$name ($locale)';
+}
+
+class _FlashingReminderPreview extends StatefulWidget {
+  final String prayerLabel;
+  final String message;
+
+  const _FlashingReminderPreview({
+    required this.prayerLabel,
+    required this.message,
+  });
+
+  @override
+  State<_FlashingReminderPreview> createState() => _FlashingReminderPreviewState();
+}
+
+class _FlashingReminderPreviewState extends State<_FlashingReminderPreview> {
+  Timer? _timer;
+  bool _isBright = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(milliseconds: 450), (_) {
+      if (!mounted) return;
+      setState(() {
+        _isBright = !_isBright;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final backgroundColor = _isBright ? const Color(0xFFFFF2F2) : Colors.white;
+    final borderColor = _isBright
+        ? Colors.redAccent.withValues(alpha: 0.9)
+        : Colors.redAccent.withValues(alpha: 0.5);
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 180),
+      width: 320,
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: borderColor, width: _isBright ? 2 : 1),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            widget.prayerLabel,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.6,
+                ),
+          ),
+          const SizedBox(height: 14),
+          Text(
+            widget.message,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
+        ],
       ),
     );
   }

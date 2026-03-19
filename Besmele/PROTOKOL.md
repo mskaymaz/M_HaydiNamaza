@@ -28,7 +28,7 @@ Ilke:
 Kilit hatirlatici:
 - Her yeni kullanici talimati gorulur gorumaz, daha cevap yazmadan once bu bolum otomatik yeniden hatirlanmis kabul edilir.
 - Bu hatirlama sessiz uygulanir; kullanici ozellikle istemedikce her seferinde uzun aciklama olarak tekrar yazilmaz.
-- Ekonomik token preflight zorunludur: her cevap, plan, arac, duzeltme, snapshot, commit ve push oncesi sessizce `yalniz istenen kapsam + minimum dosya + tek satir varsayilani` uygulanir.
+- Ekonomik token preflight zorunludur: her cevap, plan, arac, duzeltme, snapshot, commit ve push oncesi sessizce su cumle birebir yeniden hatirlanip uygulanir: `Execute only the explicitly requested scope; do not scan unrelated files, do not broaden the search/changes, and keep responses minimal (one-line status unless asked).`
 - Her anlamli yanit ve her arac kullanimindan hemen once su 4 kontrol zorunludur:
   1. Yalniz istenen kapsami mi yapiyorum?
   2. Gerekenden fazla dosya veya tekrar aciklama uretiyor muyum?

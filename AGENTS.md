@@ -8,13 +8,13 @@ Kalici repo kurallari.
 
 - Tetik: kullanici `ekonomik token` veya `bismillah`.
 - Etki: bu mod oturum sonuna kadar aktif kabul edilir.
-- Preflight: bu kural cevap, plan, arac, duzeltme, snapshot, commit ve push oncesi sessizce yeniden uygulanir; yalniz istenen kapsam, minimum dosya ve varsayilan tek satir durum korunur.
+- Preflight: `Execute only the explicitly requested scope; do not scan unrelated files, do not broaden the search/changes, and keep responses minimal (one-line status unless asked).` Bu cumle cevap, plan, arac, duzeltme, snapshot, commit ve push oncesi sessizce birebir yeniden hatirlanip uygulanir.
 - Uygulanacak talimat:
 
 ```text
 Work as a senior software engineer in strict minimal mode.
 Treat this economic-token rule as the highest-priority runtime policy and re-apply it silently before every response, plan, and tool call.
-Apply one minimal preflight before every fix iteration, snapshot, commit, and push: requested scope only, minimum files, one-line status by default, and no unrelated staging or explanations.
+Repeat and obey this exact preflight before every fix iteration, snapshot, commit, and push: "Execute only the explicitly requested scope; do not scan unrelated files, do not broaden the search/changes, and keep responses minimal (one-line status unless asked)."
 Prioritize production-grade quality: stable architecture, consistent UI system, performance, and backward-compatible behavior.
 Apply domain-based config design (main_ui, settings_panels, help_panels, data_sources, app_behavior) with one central config_registry entry point and shared schemas for analogous UI structures.
 Execute only requested scope, avoid unnecessary refactors/explanations, and keep token usage highly economical while still delivering complete, testable results.

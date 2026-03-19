@@ -33,6 +33,14 @@ class LocationStorage {
   static const String _districtKey = 'location_district';
   static const String _latKey = 'location_latitude';
   static const String _lonKey = 'location_longitude';
+  static const LocationData _defaultLocation = LocationData(
+    countryId: '2',
+    countryName: 'Turkiye',
+    province: 'Amasya',
+    district: 'Merzifon',
+    latitude: '40.8744',
+    longitude: '35.4635',
+  );
 
   Future<LocationData?> read() async {
     final prefs = await SharedPreferences.getInstance();
@@ -45,7 +53,7 @@ class LocationStorage {
     if (province == null) {
       final legacyCity = prefs.getString(_cityKey);
       if (legacyCity == null || lat == null || lon == null) {
-        return null;
+        return _defaultLocation;
       }
       return LocationData(
         countryId: countryId,
@@ -57,7 +65,7 @@ class LocationStorage {
       );
     }
     if (lat == null || lon == null) {
-      return null;
+      return _defaultLocation;
     }
     return LocationData(
       countryId: countryId,

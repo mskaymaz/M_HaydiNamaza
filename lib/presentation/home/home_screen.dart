@@ -1514,29 +1514,37 @@ class _PrayerList extends StatelessWidget {
           final chipBorderColor = isActive
               ? activeColor.withValues(alpha: 0.45)
               : chipStyle.borderColor;
-          final visibleIconCount = [
-            showVoiceIcon,
-            showVisualIcon,
-            showAzanIcon,
-            showVibrationIcon,
-          ].where((isVisible) => isVisible).length;
-          final dynamicIconGap =
-              rowGap + (4 - visibleIconCount).clamp(0, 3).toDouble();
-          final iconHitWidth = iconStyle.size * 1.3;
-          final maxIconAreaWidth = visibleIconCount == 0
-              ? 0.0
-              : (iconHitWidth * 4) + ((rowGap + 3) * 3);
-          final iconWidgets = <Widget>[];
-
-          void addIcon(Widget widget) {
-            if (iconWidgets.isNotEmpty) {
-              iconWidgets.add(SizedBox(width: dynamicIconGap));
-            }
-            iconWidgets.add(widget);
-          }
+          final rowWidgets = <Widget>[
+            Text(
+              item.label,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: labelColor,
+                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w300,
+                    fontSize: typography.nextLabelSize,
+                  ),
+            ),
+            Text(
+              timeFormat(item.time),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: timeColor,
+                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
+                    fontSize: typography.nextLabelSize,
+                  ),
+            ),
+            _ReminderChip(
+              controller: item.reminderController,
+              style: chipStyle,
+              cizgiColor: controlColor,
+              backgroundColor: chipBackgroundColor,
+              borderColor: chipBorderColor,
+              onChanged: (value) => onReminderChanged(item.prayer, value),
+            ),
+          ];
 
           if (showVoiceIcon) {
-            addIcon(
+            rowWidgets.add(
               _IconToggle(
                 icon: Icons.volume_up_outlined,
                 style: iconStyle,
@@ -1547,7 +1555,7 @@ class _PrayerList extends StatelessWidget {
             );
           }
           if (showVisualIcon) {
-            addIcon(
+            rowWidgets.add(
               _IconToggle(
                 icon: Icons.desktop_windows_outlined,
                 style: iconStyle,
@@ -1558,7 +1566,7 @@ class _PrayerList extends StatelessWidget {
             );
           }
           if (showAzanIcon) {
-            addIcon(
+            rowWidgets.add(
               _IconToggle(
                 icon: Icons.mosque_outlined,
                 style: iconStyle,
@@ -1569,7 +1577,7 @@ class _PrayerList extends StatelessWidget {
             );
           }
           if (showVibrationIcon) {
-            addIcon(
+            rowWidgets.add(
               _IconToggle(
                 icon: Icons.vibration_outlined,
                 style: iconStyle,
@@ -1595,47 +1603,15 @@ class _PrayerList extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(
-                    item.label,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: labelColor,
-                          fontWeight: isActive ? FontWeight.w700 : FontWeight.w300,
-                          fontSize: typography.nextLabelSize,
-                        ),
+                  child: Center(
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      spacing: rowGap,
+                      runSpacing: rowGap,
+                      children: rowWidgets,
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      timeFormat(item.time),
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: timeColor,
-                            fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
-                            fontSize: typography.nextLabelSize,
-                          ),
-                    ),
-                    const SizedBox(width: 5),
-                    _ReminderChip(
-                      controller: item.reminderController,
-                      style: chipStyle,
-                      cizgiColor: controlColor,
-                      backgroundColor: chipBackgroundColor,
-                      borderColor: chipBorderColor,
-                      onChanged: (value) => onReminderChanged(item.prayer, value),
-                    ),
-                    if (iconWidgets.isNotEmpty) ...[
-                      SizedBox(width: rowGap),
-                      SizedBox(
-                        width: maxIconAreaWidth,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: iconWidgets,
-                        ),
-                      ),
-                    ],
-                  ],
                 ),
               ],
             ),

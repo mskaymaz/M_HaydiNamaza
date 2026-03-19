@@ -278,6 +278,9 @@ class ConfigRegistry {
   }
 
   static SettingsPanelsConfig settingsPanelsFor(UiPaletteConfig palette) {
+    final softPanel = _blend(Colors.white, palette.backgroundZeminColor, 0.82);
+    final softItem = _blend(Colors.white, palette.backgroundZeminColor, 0.9);
+    final softSelected = _blend(Colors.white, palette.zeminColor, 0.9);
     return SettingsPanelsConfig(
       screenPadding: const EdgeInsets.fromLTRB(16, 12, 16, 18),
       sectionGap: 10,
@@ -287,35 +290,35 @@ class ConfigRegistry {
       favoriteItemPadding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
       sectionTitleSize: 14,
       panel: SurfaceStyle(
-        color: _blend(palette.cizgiColor, palette.zeminColor, 0.9),
+        color: softPanel,
         borderRadius: const BorderRadius.all(Radius.circular(18)),
         shadows: const [
           BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 10,
-            offset: Offset(0, 4),
+            color: Color(0x0D000000),
+            blurRadius: 12,
+            offset: Offset(0, 3),
           ),
         ],
       ),
       itemPanel: SurfaceStyle(
-        color: _blend(palette.cizgiColor, palette.zeminColor, 0.96),
+        color: softItem,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
         shadows: const [
           BoxShadow(
-            color: Color(0x0F000000),
-            blurRadius: 8,
-            offset: Offset(0, 3),
+            color: Color(0x08000000),
+            blurRadius: 6,
+            offset: Offset(0, 2),
           ),
         ],
       ),
       selectedItemPanel: SurfaceStyle(
-        color: _blend(palette.zeminColor, palette.cizgiColor, 0.8),
+        color: softSelected,
         borderRadius: const BorderRadius.all(Radius.circular(16)),
         shadows: const [
           BoxShadow(
-            color: Color(0x140E5A2A),
+            color: Color(0x0A000000),
             blurRadius: 8,
-            offset: Offset(0, 3),
+            offset: Offset(0, 2),
           ),
         ],
       ),

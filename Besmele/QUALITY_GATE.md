@@ -57,3 +57,8 @@
 - Testler calisti mi? Hayir (yalniz vakit satiri yerlesimi duzeltildi; ek test calistirilmadi).
 - Temel akislarda regresyon var mi? Bilinmiyor (ikon merkezleme cihazda yeniden dogrulanmadi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-004` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-19 17:52 +03:00
+- Testler calisti mi? Kismen (`flutter pub get` tamamlandi; `flutter build apk --debug` timeout verse de `build/app/outputs/flutter-apk/app-debug.apk` uretildi).
+- Temel akislarda regresyon var mi? Bilinmiyor (telefon/emulator dogrulamasi tamamlanmadi; ADB hala `unauthorized`).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-021`..`TASK-024` ve `PUSH_LOG` guncellendi).

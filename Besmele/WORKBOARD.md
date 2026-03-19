@@ -24,3 +24,7 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-018 | done | 2026-03-19 00:00 +03:00 | AGENTS ekonomik token kuralini en ust oncelikte sertlestir |
 | TASK-019 | done | 2026-03-19 10:08 +03:00 | Ekonomik token preflight metni kisaltildi |
 | TASK-020 | done | 2026-03-19 10:20 +03:00 | Exact scope talimati zorunlu preflight olarak sabitlendi |
+| TASK-021 | blocked | 2026-03-19 17:52 +03:00 | Telefon ADB baglantisi scriptte duzeltildi; cihaz halen `unauthorized` |
+| TASK-022 | done | 2026-03-19 17:52 +03:00 | Ilk acilista varsayilan konum Amasya/Merzifon fallback olarak eklendi |
+| TASK-023 | done | 2026-03-19 17:52 +03:00 | Ayarlar ve konum ayarlari panel renkleri softlastirildi |
+| TASK-024 | in_progress | 2026-03-19 17:52 +03:00 | Vakit satiri objeleri esit aralikli ve merkezli dagitiliyor |

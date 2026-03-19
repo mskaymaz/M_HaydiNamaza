@@ -1520,10 +1520,12 @@ class _PrayerList extends StatelessWidget {
             showAzanIcon,
             showVibrationIcon,
           ].where((isVisible) => isVisible).length;
-          final hiddenIconCount = 4 - visibleIconCount;
           final dynamicIconGap =
               rowGap + (4 - visibleIconCount).clamp(0, 3).toDouble();
-          final trailingCompensation = hiddenIconCount * 12.0;
+          final iconHitWidth = iconStyle.size * 1.3;
+          final maxIconAreaWidth = visibleIconCount == 0
+              ? 0.0
+              : (iconHitWidth * 4) + ((rowGap + 3) * 3);
           final iconWidgets = <Widget>[];
 
           void addIcon(Widget widget) {
@@ -1622,10 +1624,17 @@ class _PrayerList extends StatelessWidget {
                       borderColor: chipBorderColor,
                       onChanged: (value) => onReminderChanged(item.prayer, value),
                     ),
-                    if (iconWidgets.isNotEmpty) SizedBox(width: rowGap),
-                    ...iconWidgets,
-                    if (trailingCompensation > 0)
-                      SizedBox(width: trailingCompensation),
+                    if (iconWidgets.isNotEmpty) ...[
+                      SizedBox(width: rowGap),
+                      SizedBox(
+                        width: maxIconAreaWidth,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: iconWidgets,
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ],

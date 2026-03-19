@@ -1,7 +1,7 @@
 # TASK-004
 
 status: in_progress
-updated: 2026-03-19 14:12 +03:00
+updated: 2026-03-19 14:19 +03:00
 scope: Faz 2 - Flutter uygulama iskeleti ve temel mimari girisi.
 
 done_summary:
@@ -39,15 +39,17 @@ done_summary:
 - Vakitler paneline satir bazli sesli, gorsel, ezan ve titresim hatirlatma akisi eklendi; aktifken kapat paneli ve gorsel kart baglandi.
 - Ayarlara ses kaynagi secimi, gorsel-ses metinleri, sesli-gorsel periyotlar ve global ikon gorunurluk secenekleri eklendi.
 - Ust panele pusula ikonu ve cihaz pusulasiyla qibla yonu gosteren ekran baglandi.
+- Vakitler panelinde ikon grubu sabit alan icinde merkezlenerek, ikonlar gizlendiginde vakit adi ile saat arasindaki boslugun buyumesi engellendi.
 
 now:
-- Uygulamada kalinan nokta: hatirlatma sistemi, gorsel kart ve qibla ekrani tamamlandi; commit/push hazir.
+- Uygulamada kalinan nokta: ikon yerlesimi merkezlendi; commit/push ve bundle hazir.
 
 next:
 - Telefonda satir bazli hatirlatmalarin dogru vakitte ve secili ikonlarla calistigini dogrula.
 - Telefonda titresim suresi ve araligi davranisini dogrula.
 - Qibla ekraninda pusula izni ve yon gosterimini dogrula.
 - Ust panel yerlesimini ve pusula ikon konumunu cihazda gorsel olarak dogrula.
+- Vakitler panelinde ikonlar azaltildiginda satir dengesinin merkezde korundugunu cihazda dogrula.
 
 refs:
 - `Proje/UI_Ayarlar.md`

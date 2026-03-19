@@ -1,9 +1,9 @@
 # BESMELE STATE
 
-last_update: 2026-03-19 14:12 +03:00
+last_update: 2026-03-19 14:19 +03:00
 active_task: TASK-004
-phase: Vakitler paneli hatirlatma sistemi ve ust panel qibla ekrani tamamlandi; commit/push hazir
-next_step: Telefonda hatirlatma donguleri, qibla ekrani ve ust panel yerlesimini dogrula.
+phase: Vakitler paneli ikon yerlesimi merkezlendi; commit/push ve bundle hazir
+next_step: Telefonda merkezlenen ikon yerlesimini ve satir dengesini dogrula.
 blockers: NONE
-last_delivery: R.260319_1412
-handover: `TASK-004` icinde Vakitler Paneli icin satir bazli sesli/gorsel/ezan/titresim hatirlatma akisi, global ikon gorunurluk ayari, gorsel kart ve aktif kapat paneli eklendi; ust panele qibla pusulasi baglandi. Ayarlarda ses kaynagi, gorsel-ses metinleri ve ilgili periyotlar genisletildi.
+last_delivery: R.260319_1419
+handover: `TASK-004` icinde Vakitler Paneli ikon grubu sabit alan icinde merkeze alindi; ikonlar azalinca vakit adi ve saat arasindaki bosluk buyumeden satir dengesi korundu. Onceki hatirlatma ve qibla ekrani akisleri aynen duruyor.

@@ -190,9 +190,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     String methodSubtitle() {
-      switch (_methodCode) {
+        switch (_methodCode) {
         case 'turkey':
-          return l10n.methodTurkey;
+          return 'Türkiye (Diyanet)';
         case 'diyanet_tabanli':
           return 'Diyanet tabanlı';
         case 'aladhan':
@@ -250,8 +250,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: Row(
               children: [
-                Expanded(
-                  flex: 1,
+                SizedBox(
+                  width: 140,
                   child: DropdownButtonFormField<String>(
                     value: codeFor(current),
                     decoration: _dropdownDecoration('Uygulama Dili'),
@@ -275,13 +275,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ],
                     onChanged: (value) async {
                       if (value == null) return;
-                      await widget.localeController.setLocale(localeFor(value));
+                      await widget.localeController.setLocale(
+                        localeFor(value),
+                      );
                     },
                   ),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  flex: 2,
+                const SizedBox(width: 35),
+                SizedBox(
+                  width: 160,
                   child: OutlinedButton.icon(
                     onPressed: () async {
                       final changed = await Navigator.of(context).push<bool>(
@@ -296,31 +298,69 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         await _loadLocation();
                       }
                     },
-                    icon: const Icon(Icons.location_on_outlined),
-                    label: const Text('Konum Ayarları'),
+                    icon: const Icon(Icons.settings),
+                    label: const Text('Konum'),
                     style: OutlinedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(56),
+                      backgroundColor: const Color(0xFFE4F3E6),
+                      minimumSize: const Size(160, 50),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          ListTile(
-            title: Text(l10n.calculationMethodLabel),
-            subtitle: Text(methodSubtitle()),
-            trailing: const Icon(Icons.calculate_outlined),
-            onTap: () async {
-              final changed = await Navigator.of(context).push<bool>(
-                MaterialPageRoute(
-                  builder: (_) =>
-                      CalculationMethodScreen(initialCode: _methodCode),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: ui.itemPanel.borderRadius,
+                onTap: () async {
+                  final changed = await Navigator.of(context).push<bool>(
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          CalculationMethodScreen(initialCode: _methodCode),
+                    ),
+                  );
+                  if (changed == true) {
+                    await _loadMethod();
+                  }
+                },
+                child: Ink(
+                  decoration: BoxDecoration(
+                    color: ui.itemPanel.color,
+                    borderRadius: ui.itemPanel.borderRadius,
+                  ),
+                  child: SizedBox(
+                    height: 56,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        children: [
+                          Text(
+                            l10n.calculationMethodLabel,
+                            style: const TextStyle(fontWeight: FontWeight.w700),
+                          ),
+                          const SizedBox(width: 20),
+                          const Icon(
+                            Icons.play_arrow_rounded,
+                            size: 22,
+                            color: Color(0xFF2F6F4F),
+                          ),
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text(
+                              methodSubtitle(),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              );
-              if (changed == true) {
-                await _loadMethod();
-              }
-            },
+              ),
+            ),
           ),
           const Divider(height: 32),
           Padding(

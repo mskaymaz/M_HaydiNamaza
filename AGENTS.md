@@ -92,6 +92,12 @@ Execute only requested scope, avoid unnecessary refactors/explanations, and keep
 - Turkce karakter gereken yerde dogrudan Unicode karakter kullanilir: `Ç Ğ İ Ö Ş Ü ç ğ ı ö ş ü`.
 - Boyle bir bozulma gorulurse gorev tamamlanmis sayilmaz; teslimden once ilgili dosya UTF-8 olarak duzeltilir ve tekrar kontrol edilir.
 
+## 4.2) RATIO-TO-PX-CRITICAL (MUST, COK ONEMLI KODU)
+
+- Kullanici oran, yuzde veya `1/3` gibi bir tarif verirse bu ifade koda dogrudan yazilmaz.
+- Once tek bir nihai px degeri hesaplanir, kullaniciya bu px degeriyle bilgi verilir ve kodda yalniz bu px degeri kullanilir.
+- UI boyut kararlarinda `flex`, bolme, carpma, yuzde veya turetilmis oranla ayni niyet ikinci kez kodlanmaz.
+
 ## 5) Platform Onekleri (MUST)
 
 - `D`: Desktop

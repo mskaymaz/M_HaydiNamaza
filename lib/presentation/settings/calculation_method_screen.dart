@@ -51,31 +51,65 @@ class _CalculationMethodScreenState extends State<CalculationMethodScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.methodEditTitle),
+        titleSpacing: 7,
+        title: const Text(
+          'Hesaplama Yöntemi',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
         actions: [
-          TextButton(
-            onPressed: _save,
-            child: Text(l10n.methodSave),
+          Transform.translate(
+            offset: const Offset(-50, 0),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 12, 8),
+              child: FilledButton(
+                onPressed: _save,
+                style: FilledButton.styleFrom(
+                  backgroundColor: const Color(0xFFE4F3E6),
+                  foregroundColor: const Color(0xFF2F6F4F),
+                  padding: const EdgeInsets.symmetric(horizontal: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+                child: Text(l10n.methodSave),
+              ),
+            ),
           ),
         ],
       ),
-      body: RadioGroup<String>(
-        groupValue: _selected,
-        onChanged: (value) {
-          if (value == null) return;
-          setState(() {
-            _selected = value;
-          });
-        },
-        child: ListView(
-          children: items
-              .map(
-                (item) => RadioListTile<String>(
-                  title: Text(item.label),
-                  value: item.code,
-                ),
-              )
-              .toList(),
+      body: ListTileTheme(
+        horizontalTitleGap: 7,
+        minLeadingWidth: 7,
+        child: RadioGroup<String>(
+          groupValue: _selected,
+          onChanged: (value) {
+            if (value == null) return;
+            setState(() {
+              _selected = value;
+            });
+          },
+          child: ListView(
+            children: items
+                .map(
+                  (item) => RadioListTile<String>(
+                    dense: true,
+                    visualDensity: const VisualDensity(
+                      horizontal: 0,
+                      vertical: -4,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 7),
+                    title: Text(
+                      item.label,
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    value: item.code,
+                  ),
+                )
+                .toList(),
+          ),
         ),
       ),
     );

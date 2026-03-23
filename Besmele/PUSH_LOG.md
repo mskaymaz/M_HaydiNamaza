@@ -48,3 +48,4 @@
 | 2026-03-20 00:07 +03:00 | R.260320_0007 | Cekmece kulpu icin genis chevron ve derin V varyantlari yedek aday olarak notlandi |
 | 2026-03-20 00:33 +03:00 | R.260320_0033 | Cekmece kulpu, nafile kaliciligi ve vakte gore siralama ayari teslim edildi |
 | 2026-03-23 11:48 +03:00 | R.260323_1148 | Cekmece polish'i, varsayilan ses metni/periyodu ve ses-gorsel-titresim kapanis akisi guncellendi |
+| 2026-03-23 12:54 +03:00 | R.260323_1254 | Ayarlar paneli duzenlemesine geciyoruz. |

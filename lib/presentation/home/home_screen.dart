@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
@@ -418,18 +418,18 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> _hijriMonths(String locale) {
     if (locale.startsWith('ar')) {
       return const [
-        'محرم',
-        'صفر',
-        'ربيع الأول',
-        'ربيع الآخر',
-        'جمادى الأولى',
-        'جمادى الآخرة',
-        'رجب',
-        'شعبان',
-        'رمضان',
-        'شوال',
-        'ذو القعدة',
-        'ذو الحجة',
+        'Ù…Ø­Ø±Ù…',
+        'ØµÙØ±',
+        'Ø±Ø¨ÙŠØ¹ Ø§Ù„Ø£ÙˆÙ„',
+        'Ø±Ø¨ÙŠØ¹ Ø§Ù„Ø¢Ø®Ø±',
+        'Ø¬Ù…Ø§Ø¯Ù‰ Ø§Ù„Ø£ÙˆÙ„Ù‰',
+        'Ø¬Ù…Ø§Ø¯Ù‰ Ø§Ù„Ø¢Ø®Ø±Ø©',
+        'Ø±Ø¬Ø¨',
+        'Ø´Ø¹Ø¨Ø§Ù†',
+        'Ø±Ù…Ø¶Ø§Ù†',
+        'Ø´ÙˆØ§Ù„',
+        'Ø°Ùˆ Ø§Ù„Ù‚Ø¹Ø¯Ø©',
+        'Ø°Ùˆ Ø§Ù„Ø­Ø¬Ø©',
       ];
     }
     if (locale.startsWith('tr')) {
@@ -451,12 +451,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return const [
       'Muharram',
       'Safar',
-      'Rabiʻ al-awwal',
-      'Rabiʻ al-thani',
+      'RabiÊ» al-awwal',
+      'RabiÊ» al-thani',
       'Jumada al-awwal',
       'Jumada al-thani',
       'Rajab',
-      'Shaʻban',
+      'ShaÊ»ban',
       'Ramadan',
       'Shawwal',
       'Dhu al-Qadah',
@@ -1319,6 +1319,76 @@ class _HomeScreenState extends State<HomeScreen> {
     unawaited(_persistPrayerRowSettings());
   }
 
+  Future<void> _editReminderMinutes({
+    required TextEditingController controller,
+    required ValueChanged<String> onChanged,
+  }) async {
+    final editController = TextEditingController(text: controller.text.trim());
+    final result = await showDialog<String>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          contentPadding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Hatırlatma Süresi'),
+              const SizedBox(height: 6),
+              SizedBox(
+                width: 72,
+                child: TextField(
+                  controller: editController,
+                  autofocus: true,
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                  decoration: const InputDecoration(
+                    hintText: 'Dakika',
+                    border: OutlineInputBorder(),
+                    isDense: true,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 8,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 6),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    visualDensity: VisualDensity.compact,
+                    tooltip: 'Vazgeç',
+                    icon: const Icon(Icons.close_rounded),
+                  ),
+                  const SizedBox(width: 6),
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(editController.text),
+                    visualDensity: VisualDensity.compact,
+                    tooltip: 'Tamam',
+                    icon: const Icon(Icons.check_rounded),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+    if (result == null) return;
+    final value = result.trim();
+    controller.text = value.isEmpty ? '0' : value;
+    onChanged(controller.text);
+  }
+
   void _toggleVoiceReminder(Prayer prayer) {
     setState(() {
       final current = _settingsFor(prayer);
@@ -1749,6 +1819,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: FilledButton(
+              style: FilledButton.styleFrom(
+                minimumSize: Size(52, 28),
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
                       onPressed: () {
                         final hour = int.tryParse(hourController.text.trim());
                         final minute = int.tryParse(
@@ -1810,6 +1885,10 @@ class _HomeScreenState extends State<HomeScreen> {
         timeLabel: _formatTime(time),
         reminderController: _controllerFor(prayer),
         onReminderChanged: (value) => _setReminderMinutes(prayer, value),
+        onReminderTap: () => _editReminderMinutes(
+          controller: _controllerFor(prayer),
+          onChanged: (value) => _setReminderMinutes(prayer, value),
+        ),
         voiceEnabled: settings.voiceEnabled,
         visualEnabled: settings.visualEnabled,
         azanEnabled: settings.azanEnabled,
@@ -1845,6 +1924,10 @@ class _HomeScreenState extends State<HomeScreen> {
           onTimeTap: () => _openCustomTimeEditor(row, l10n),
           reminderController: row.reminderController,
           onReminderChanged: (value) => _setCustomReminderMinutes(row, value),
+          onReminderTap: () => _editReminderMinutes(
+            controller: row.reminderController,
+            onChanged: (value) => _setCustomReminderMinutes(row, value),
+          ),
           voiceEnabled: row.settings.voiceEnabled,
           visualEnabled: row.settings.visualEnabled,
           azanEnabled: row.settings.azanEnabled,
@@ -1905,6 +1988,7 @@ class _PrayerItem {
   final VoidCallback? onTimeTap;
   final TextEditingController reminderController;
   final ValueChanged<String> onReminderChanged;
+  final VoidCallback onReminderTap;
   final bool voiceEnabled;
   final bool visualEnabled;
   final bool azanEnabled;
@@ -1927,6 +2011,7 @@ class _PrayerItem {
     this.onTimeTap,
     required this.reminderController,
     required this.onReminderChanged,
+    required this.onReminderTap,
     required this.voiceEnabled,
     required this.visualEnabled,
     required this.azanEnabled,
@@ -2456,7 +2541,7 @@ class _PrayerList extends StatelessWidget {
                     cizgiColor: controlColor,
                     backgroundColor: chipBackgroundColor,
                     borderColor: chipBorderColor,
-                    onChanged: item.onReminderChanged,
+                    onTap: item.onReminderTap,
                   ),
                 ),
                 if (showVoiceIcon)
@@ -2602,7 +2687,7 @@ class _ReminderChip extends StatelessWidget {
   final Color cizgiColor;
   final Color backgroundColor;
   final Color borderColor;
-  final ValueChanged<String> onChanged;
+  final VoidCallback onTap;
 
   const _ReminderChip({
     required this.controller,
@@ -2610,36 +2695,39 @@ class _ReminderChip extends StatelessWidget {
     required this.cizgiColor,
     required this.backgroundColor,
     required this.borderColor,
-    required this.onChanged,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: style.width,
-      child: TextField(
-        controller: controller,
-        onChanged: onChanged,
-        textAlign: TextAlign.center,
-        keyboardType: TextInputType.number,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-          color: cizgiColor,
-          fontWeight: FontWeight.w700,
-          fontSize: style.fontSize,
-        ),
-        decoration: InputDecoration(
-          isDense: true,
-          filled: true,
-          fillColor: backgroundColor,
-          contentPadding: EdgeInsets.symmetric(vertical: style.verticalPadding),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: style.borderRadius,
-            borderSide: BorderSide(color: borderColor),
+      child: InkWell(
+        borderRadius: style.borderRadius,
+        onTap: onTap,
+        child: InputDecorator(
+          decoration: InputDecoration(
+            isDense: true,
+            filled: true,
+            fillColor: backgroundColor,
+            contentPadding: EdgeInsets.symmetric(vertical: style.verticalPadding),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: style.borderRadius,
+              borderSide: BorderSide(color: borderColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: style.borderRadius,
+              borderSide: BorderSide(color: cizgiColor),
+            ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: style.borderRadius,
-            borderSide: BorderSide(color: cizgiColor),
+          child: Text(
+            controller.text,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: cizgiColor,
+              fontWeight: FontWeight.w700,
+              fontSize: style.fontSize,
+            ),
           ),
         ),
       ),
@@ -2724,8 +2812,8 @@ class _ActiveReminderPanel extends StatelessWidget {
             behavior: HitTestBehavior.opaque,
             onTap: onCloseVisual,
             child: FlashingReminderCard(
-            prayerLabel: '${_toTurkishUpper(visualPrayerLabel!)} VAKTİ',
-            message: visualMessage ?? '',
+              prayerLabel: '${_toTurkishUpper(visualPrayerLabel!)} VAKTİ',
+              message: visualMessage ?? '',
             ),
           ),
           const SizedBox(height: 8),
@@ -2931,3 +3019,5 @@ class _QiblaScreen extends StatelessWidget {
     );
   }
 }
+
+

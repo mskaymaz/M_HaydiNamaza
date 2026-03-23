@@ -86,6 +86,12 @@ Execute only requested scope, avoid unnecessary refactors/explanations, and keep
 - UI duzenlemede yuzde/oran istenirse son sayisal deger yazilir; kodda carpansal ifade kullanilmaz.
 - Kanonik hafiza sohbette degil repo markdown kayitlarindadir; tekrar tekrar uzun aciklama yerine delta + karar + sonraki adim yazilir.
 
+## 4.1) TR-UTF8-CRITICAL (MUST, COK ONEMLI KODU)
+
+- Turkce UI metni, markdown kaydi ve kullaniciya gorunen hicbir yazi mojibake/encoding bozulmasi (`Ã`, `Ä`, `Å` vb.) iceremez.
+- Turkce karakter gereken yerde dogrudan Unicode karakter kullanilir: `Ç Ğ İ Ö Ş Ü ç ğ ı ö ş ü`.
+- Boyle bir bozulma gorulurse gorev tamamlanmis sayilmaz; teslimden once ilgili dosya UTF-8 olarak duzeltilir ve tekrar kontrol edilir.
+
 ## 5) Platform Onekleri (MUST)
 
 - `D`: Desktop

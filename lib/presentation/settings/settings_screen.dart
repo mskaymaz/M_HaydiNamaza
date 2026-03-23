@@ -1,4 +1,4 @@
-import 'dart:async';
+﻿import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,13 +40,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ReminderTextSettingsStorage();
   final ReminderAudioService _reminderAudioService = ReminderAudioService();
   final FlutterTts _flutterTts = FlutterTts();
-  final TextEditingController _voiceReminderController = TextEditingController();
-  final TextEditingController _visualReminderController = TextEditingController();
+  final TextEditingController _voiceReminderController =
+      TextEditingController();
+  final TextEditingController _visualReminderController =
+      TextEditingController();
   final TextEditingController _voiceRepeatController = TextEditingController();
   final TextEditingController _vibrationDurationController =
       TextEditingController();
-  final TextEditingController _vibrationPauseController = TextEditingController();
-  final TextEditingController _visualDisplayController = TextEditingController();
+  final TextEditingController _vibrationPauseController =
+      TextEditingController();
+  final TextEditingController _visualDisplayController =
+      TextEditingController();
   final TextEditingController _visualReopenController = TextEditingController();
   final List<_VoiceOption> _voiceOptions = [];
   LocationData? _location;
@@ -89,8 +93,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final matched = _matchFavorite(_location, favorites);
     setState(() {
       _favorites = favorites;
-      _selectedFavorite = _selectedFavorite != null &&
-              favorites.contains(_selectedFavorite)
+      _selectedFavorite =
+          _selectedFavorite != null && favorites.contains(_selectedFavorite)
           ? _selectedFavorite
           : matched;
     });
@@ -113,8 +117,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _voiceReminderController.text = settings.voiceText;
     _visualReminderController.text = settings.visualText;
     _voiceRepeatController.text = settings.voiceRepeatSeconds.toString();
-    _vibrationDurationController.text =
-        settings.vibrationDurationSeconds.toString();
+    _vibrationDurationController.text = settings.vibrationDurationSeconds
+        .toString();
     _vibrationPauseController.text = settings.vibrationPauseSeconds.toString();
     _visualDisplayController.text = settings.visualDisplaySeconds.toString();
     _visualReopenController.text = settings.visualReopenSeconds.toString();
@@ -126,7 +130,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _showAzanIcon = settings.showAzanIcon;
     _showVibrationIcon = settings.showVibrationIcon;
     _sortCustomPrayersByTime = settings.sortCustomPrayersByTime;
-    if (settings.selectedVoiceName != null && settings.selectedVoiceLocale != null) {
+    if (settings.selectedVoiceName != null &&
+        settings.selectedVoiceLocale != null) {
       _selectedVoiceKey = _voiceKey(
         settings.selectedVoiceName!,
         settings.selectedVoiceLocale!,
@@ -143,7 +148,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _voiceOptions
         ..clear()
         ..addAll(
-          options.map((voice) => _VoiceOption(name: voice.name, locale: voice.locale)),
+          options.map(
+            (voice) => _VoiceOption(name: voice.name, locale: voice.locale),
+          ),
         );
       if (_selectedVoiceKey != null &&
           !_voiceOptions.any((voice) => voice.key == _selectedVoiceKey)) {
@@ -175,7 +182,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     String locationSubtitle() {
       final data = _location;
       if (data == null) return l10n.locationNotSet;
-      final coords = data.latitude.trim().isEmpty || data.longitude.trim().isEmpty
+      final coords =
+          data.latitude.trim().isEmpty || data.longitude.trim().isEmpty
           ? ''
           : '\n${data.latitude}, ${data.longitude}';
       return '${_formatLocationSummary(data)}$coords';
@@ -233,29 +241,67 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.settingsTitle),
-      ),
+      appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-            child: DropdownButtonFormField<String>(
-              value: codeFor(current),
-              decoration: _dropdownDecoration(l10n.languageLabel),
-              items: [
-                DropdownMenuItem(
-                  value: 'system',
-                  child: Text(l10n.languageSystem),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: DropdownButtonFormField<String>(
+                    value: codeFor(current),
+                    decoration: _dropdownDecoration('Uygulama Dili'),
+                    items: [
+                      DropdownMenuItem(
+                        value: 'system',
+                        child: Text(l10n.languageSystem),
+                      ),
+                      DropdownMenuItem(
+                        value: 'tr',
+                        child: Text(l10n.languageTurkish),
+                      ),
+                      DropdownMenuItem(
+                        value: 'en',
+                        child: Text(l10n.languageEnglish),
+                      ),
+                      DropdownMenuItem(
+                        value: 'ar',
+                        child: Text(l10n.languageArabic),
+                      ),
+                    ],
+                    onChanged: (value) async {
+                      if (value == null) return;
+                      await widget.localeController.setLocale(localeFor(value));
+                    },
+                  ),
                 ),
-                DropdownMenuItem(value: 'tr', child: Text(l10n.languageTurkish)),
-                DropdownMenuItem(value: 'en', child: Text(l10n.languageEnglish)),
-                DropdownMenuItem(value: 'ar', child: Text(l10n.languageArabic)),
+                const SizedBox(width: 12),
+                Expanded(
+                  flex: 2,
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      final changed = await Navigator.of(context).push<bool>(
+                        MaterialPageRoute(
+                          builder: (_) => LocationScreen(
+                            initial: _location,
+                            uiPaletteController: widget.uiPaletteController,
+                          ),
+                        ),
+                      );
+                      if (changed == true) {
+                        await _loadLocation();
+                      }
+                    },
+                    icon: const Icon(Icons.location_on_outlined),
+                    label: const Text('Konum Ayarları'),
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(56),
+                    ),
+                  ),
+                ),
               ],
-              onChanged: (value) async {
-                if (value == null) return;
-                await widget.localeController.setLocale(localeFor(value));
-              },
             ),
           ),
           ListTile(
@@ -265,9 +311,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onTap: () async {
               final changed = await Navigator.of(context).push<bool>(
                 MaterialPageRoute(
-                  builder: (_) => CalculationMethodScreen(
-                    initialCode: _methodCode,
-                  ),
+                  builder: (_) =>
+                      CalculationMethodScreen(initialCode: _methodCode),
                 ),
               );
               if (changed == true) {
@@ -341,14 +386,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 8),
+                  Divider(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    height: 1,
+                  ),
                   const SizedBox(height: 10),
                   CheckboxListTile(
                     value: _sortCustomPrayersByTime,
                     contentPadding: EdgeInsets.zero,
                     controlAffinity: ListTileControlAffinity.leading,
-                    title: const Text('Nafileler vakitlere gore siralansin'),
+                    title: const Text('Nafileler vakitlere göre sıralansın'),
                     subtitle: const Text(
-                      'Kapaliysa nafileler listenin en altinda kalir.',
+                      'Kapalıysa nafileler listenin en altında kalır.',
                     ),
                     onChanged: (value) {
                       setState(() {
@@ -356,6 +406,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       });
                       _persistReminderTexts();
                     },
+                  ),
+                  const SizedBox(height: 8),
+                  Divider(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    height: 1,
+                  ),
+                  const SizedBox(height: 10),
+                  const _SectionHeader(
+                    title: 'Titreşimle Uyarı Ayarları',
+                    tooltip:
+                        'Titreşim süresi ve tekrar aralığı bu bölümden ayarlanır.',
                   ),
                   const SizedBox(height: 10),
                   Row(
@@ -397,7 +458,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   DropdownButtonFormField<ReminderAudioMode>(
                     value: _selectedAudioMode,
                     decoration: const InputDecoration(
-                      labelText: 'Ses Kaynagi',
+                      labelText: 'Ses Kaynağı',
                       border: OutlineInputBorder(),
                     ),
                     items: ReminderAudioMode.values
@@ -466,7 +527,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     const SizedBox(height: 8),
                     Text(
                       _selectedAudioLabel?.trim().isNotEmpty == true
-                          ? 'Seçilen dosya: $_selectedAudioLabel'
+                          ? 'Seçilen dosya: '
                           : _audioPickerHelpText(_selectedAudioMode),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
@@ -529,7 +590,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: OutlinedButton.icon(
-                      onPressed: () => _showVisualReminderPreview(context, l10n),
+                      onPressed: () =>
+                          _showVisualReminderPreview(context, l10n),
                       icon: const Icon(Icons.visibility_outlined),
                       label: const Text('Görsel Yapıyı Göster'),
                     ),
@@ -605,7 +667,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   _SectionHeader(
                     title: 'Arka Plan Renkleri',
-                    tooltip: 'Geometrik arka planın zemin ve çizgi renklerini değiştir.',
+                    tooltip:
+                        'Geometrik arka planın zemin ve çizgi renklerini değiştir.',
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -618,7 +681,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             context: context,
                             title: 'Arka Plan Zemin',
                             initialColor: palette.backgroundZeminColor,
-                            onApply: widget.uiPaletteController
+                            onApply: widget
+                                .uiPaletteController
                                 .setBackgroundZeminColor,
                           ),
                         ),
@@ -632,7 +696,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             context: context,
                             title: 'Arka Plan Çizgi Rengi',
                             initialColor: palette.backgroundCizgiColor,
-                            onApply: widget.uiPaletteController
+                            onApply: widget
+                                .uiPaletteController
                                 .setBackgroundCizgiColor,
                           ),
                         ),
@@ -640,12 +705,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       const SizedBox(width: 4),
                       _ResetIconButton(
                         onTap: () async {
-                          await widget.uiPaletteController.setBackgroundZeminColor(
-                            ConfigRegistry.defaultPalette.backgroundZeminColor,
-                          );
-                          await widget.uiPaletteController.setBackgroundCizgiColor(
-                            ConfigRegistry.defaultPalette.backgroundCizgiColor,
-                          );
+                          await widget.uiPaletteController
+                              .setBackgroundZeminColor(
+                                ConfigRegistry
+                                    .defaultPalette
+                                    .backgroundZeminColor,
+                              );
+                          await widget.uiPaletteController
+                              .setBackgroundCizgiColor(
+                                ConfigRegistry
+                                    .defaultPalette
+                                    .backgroundCizgiColor,
+                              );
                           if (!context.mounted) return;
                           setState(() {});
                         },
@@ -674,11 +745,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
         showVibrationIcon: _showVibrationIcon,
         sortCustomPrayersByTime: _sortCustomPrayersByTime,
         voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 15),
-        vibrationDurationSeconds:
-            _readSeconds(_vibrationDurationController, fallback: 3),
-        vibrationPauseSeconds:
-            _readSeconds(_vibrationPauseController, fallback: 5),
-        visualDisplaySeconds: _readSeconds(_visualDisplayController, fallback: 6),
+        vibrationDurationSeconds: _readSeconds(
+          _vibrationDurationController,
+          fallback: 3,
+        ),
+        vibrationPauseSeconds: _readSeconds(
+          _vibrationPauseController,
+          fallback: 5,
+        ),
+        visualDisplaySeconds: _readSeconds(
+          _visualDisplayController,
+          fallback: 6,
+        ),
         visualReopenSeconds: _readSeconds(_visualReopenController, fallback: 4),
         selectedVoiceName: selectedVoice?.name,
         selectedVoiceLocale: selectedVoice?.locale,
@@ -695,10 +773,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   String _toTurkishUpper(String value) {
-    return value
-        .replaceAll('i', 'İ')
-        .replaceAll('ı', 'I')
-        .toUpperCase();
+    return value.replaceAll('i', 'İ').replaceAll('ı', 'I').toUpperCase();
   }
 
   Future<void> _playVoiceReminderTest(
@@ -715,10 +790,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
       showVibrationIcon: _showVibrationIcon,
       sortCustomPrayersByTime: _sortCustomPrayersByTime,
       voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 15),
-      vibrationDurationSeconds:
-          _readSeconds(_vibrationDurationController, fallback: 3),
-      vibrationPauseSeconds:
-          _readSeconds(_vibrationPauseController, fallback: 5),
+      vibrationDurationSeconds: _readSeconds(
+        _vibrationDurationController,
+        fallback: 3,
+      ),
+      vibrationPauseSeconds: _readSeconds(
+        _vibrationPauseController,
+        fallback: 5,
+      ),
       visualDisplaySeconds: _readSeconds(_visualDisplayController, fallback: 6),
       visualReopenSeconds: _readSeconds(_visualReopenController, fallback: 4),
       selectedVoiceName: _selectedVoice()?.name,
@@ -729,7 +808,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (settings.audioMode != ReminderAudioMode.textToSpeech &&
         (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Test için önce bir ses dosyası seçin.')),
+        const SnackBar(
+          content: Text('Test için önce bir ses dosyası seçin.'),
+        ),
       );
       return;
     }
@@ -806,8 +887,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (voice is! Map) continue;
       final name = (voice['name'] ?? '').toString().toLowerCase();
       final localeName = (voice['locale'] ?? '').toString().toLowerCase();
-      final sameLocale =
-          localeName.startsWith(locale.languageCode.toLowerCase());
+      final sameLocale = localeName.startsWith(
+        locale.languageCode.toLowerCase(),
+      );
       if (!sameLocale) continue;
       if (name.contains('male') ||
           name.contains('erkek') ||
@@ -859,7 +941,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final effectiveText = _effectiveVisualReminderText().trim();
     if (effectiveText.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Görsel önizleme için önce metin girin.')),
+        const SnackBar(
+          content: Text('Görsel önizleme için önce metin girin.'),
+        ),
       );
       return;
     }
@@ -905,7 +989,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ? const ['mp3']
           : null,
     );
-    final file = result == null || result.files.isEmpty ? null : result.files.first;
+    final file = result == null || result.files.isEmpty
+        ? null
+        : result.files.first;
     final path = file?.path?.trim() ?? '';
     if (path.isEmpty) return;
     setState(() {
@@ -965,10 +1051,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       isDense: true,
       filled: true,
       fillColor: ui.itemPanel.color,
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 10,
-      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       border: OutlineInputBorder(
         borderRadius: ui.itemPanel.borderRadius,
         borderSide: BorderSide.none,
@@ -1015,11 +1098,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: Text(
                         _hexColor(draft.toColor()),
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                              color: draft.value > 0.6
-                                  ? Colors.black87
-                                  : Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
+                          color: draft.value > 0.6
+                              ? Colors.black87
+                              : Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 14),
@@ -1032,7 +1115,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               hsv: draft,
                               onChanged: (saturation, value) {
                                 setState(() {
-                                  draft = draft.withSaturation(saturation).withValue(value);
+                                  draft = draft
+                                      .withSaturation(saturation)
+                                      .withValue(value);
                                 });
                               },
                             ),
@@ -1055,8 +1140,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-              child: const Text('İptal'),
-            ),
+                  child: const Text('İptal'),
+                ),
                 FilledButton(
                   onPressed: () async {
                     await onApply(draft.toColor());
@@ -1166,10 +1251,7 @@ class _SettingsPanel extends StatelessWidget {
   final SurfaceStyle style;
   final Widget child;
 
-  const _SettingsPanel({
-    required this.style,
-    required this.child,
-  });
+  const _SettingsPanel({required this.style, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -1179,10 +1261,7 @@ class _SettingsPanel extends StatelessWidget {
         borderRadius: style.borderRadius,
         boxShadow: style.shadows,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: child,
-      ),
+      child: Padding(padding: const EdgeInsets.all(12), child: child),
     );
   }
 }
@@ -1191,10 +1270,7 @@ class _SectionHeader extends StatelessWidget {
   final String title;
   final String tooltip;
 
-  const _SectionHeader({
-    required this.title,
-    required this.tooltip,
-  });
+  const _SectionHeader({required this.title, required this.tooltip});
 
   @override
   Widget build(BuildContext context) {
@@ -1203,9 +1279,9 @@ class _SectionHeader extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
         ),
         const SizedBox(width: 10),
         InkWell(
@@ -1282,9 +1358,7 @@ class _ColorActionTile extends StatelessWidget {
 class _ResetIconButton extends StatelessWidget {
   final Future<void> Function() onTap;
 
-  const _ResetIconButton({
-    required this.onTap,
-  });
+  const _ResetIconButton({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -1326,20 +1400,20 @@ class _ReminderTextField extends StatelessWidget {
       onChanged: onChanged,
       minLines: maxLines,
       maxLines: maxLines,
-      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Colors.black87,
-          ),
+      style: Theme.of(
+        context,
+      ).textTheme.bodyMedium?.copyWith(color: Colors.black87),
       decoration: InputDecoration(
         labelText: label,
         hintText: hintText,
         filled: true,
         fillColor: const Color(0xFFF4F1EA),
-        hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Colors.grey.shade400,
-            ),
-        labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.black87,
-            ),
+        hintStyle: Theme.of(
+          context,
+        ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade400),
+        labelStyle: Theme.of(
+          context,
+        ).textTheme.bodyMedium?.copyWith(color: Colors.black87),
         alignLabelWithHint: true,
         border: const OutlineInputBorder(),
       ),
@@ -1365,16 +1439,16 @@ class _ReminderNumberField extends StatelessWidget {
       onChanged: onChanged,
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Colors.black87,
-          ),
+      style: Theme.of(
+        context,
+      ).textTheme.bodyMedium?.copyWith(color: Colors.black87),
       decoration: InputDecoration(
         labelText: label,
         filled: true,
         fillColor: const Color(0xFFF4F1EA),
-        labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.black87,
-            ),
+        labelStyle: Theme.of(
+          context,
+        ).textTheme.bodyMedium?.copyWith(color: Colors.black87),
         border: const OutlineInputBorder(),
       ),
     );
@@ -1397,16 +1471,13 @@ class _ReminderOptionToggle extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Checkbox(
-          value: value,
-          onChanged: (next) => onChanged(next ?? false),
-        ),
+        Checkbox(value: value, onChanged: (next) => onChanged(next ?? false)),
         Text(
           label,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.black87,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: Colors.black87),
         ),
       ],
     );
@@ -1417,10 +1488,7 @@ class _VoiceOption {
   final String name;
   final String locale;
 
-  const _VoiceOption({
-    required this.name,
-    required this.locale,
-  });
+  const _VoiceOption({required this.name, required this.locale});
 
   String get key => '$locale|$name';
   String get label => '$name ($locale)';
@@ -1436,7 +1504,8 @@ class _FlashingReminderPreview extends StatefulWidget {
   });
 
   @override
-  State<_FlashingReminderPreview> createState() => _FlashingReminderPreviewState();
+  State<_FlashingReminderPreview> createState() =>
+      _FlashingReminderPreviewState();
 }
 
 class _FlashingReminderPreviewState extends State<_FlashingReminderPreview> {
@@ -1482,17 +1551,17 @@ class _FlashingReminderPreviewState extends State<_FlashingReminderPreview> {
             widget.prayerLabel,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 0.6,
-                ),
+              fontWeight: FontWeight.w800,
+              letterSpacing: 0.6,
+            ),
           ),
           const SizedBox(height: 14),
           Text(
             widget.message,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
           ),
         ],
       ),
@@ -1536,10 +1605,7 @@ class _ColorSpectrum extends StatelessWidget {
   final HSVColor hsv;
   final void Function(double saturation, double value) onChanged;
 
-  const _ColorSpectrum({
-    required this.hsv,
-    required this.onChanged,
-  });
+  const _ColorSpectrum({required this.hsv, required this.onChanged});
 
   void _update(Offset localPosition, Size size) {
     final dx = localPosition.dx.clamp(0.0, size.width);
@@ -1583,10 +1649,7 @@ class _ColorSpectrum extends StatelessWidget {
                     gradient: const LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black,
-                      ],
+                      colors: [Colors.transparent, Colors.black],
                     ),
                   ),
                 ),
@@ -1601,10 +1664,7 @@ class _ColorSpectrum extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.white, width: 2),
                     boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x33000000),
-                        blurRadius: 4,
-                      ),
+                      BoxShadow(color: Color(0x33000000), blurRadius: 4),
                     ],
                   ),
                 ),
@@ -1621,10 +1681,7 @@ class _HueStrip extends StatelessWidget {
   final double hue;
   final ValueChanged<double> onChanged;
 
-  const _HueStrip({
-    required this.hue,
-    required this.onChanged,
-  });
+  const _HueStrip({required this.hue, required this.onChanged});
 
   void _update(Offset localPosition, double height) {
     final dy = localPosition.dy.clamp(0.0, height);
@@ -1675,10 +1732,7 @@ class _HueStrip extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(4),
                       boxShadow: const [
-                        BoxShadow(
-                          color: Color(0x33000000),
-                          blurRadius: 3,
-                        ),
+                        BoxShadow(color: Color(0x33000000), blurRadius: 3),
                       ],
                     ),
                   ),
@@ -1691,3 +1745,4 @@ class _HueStrip extends StatelessWidget {
     );
   }
 }
+

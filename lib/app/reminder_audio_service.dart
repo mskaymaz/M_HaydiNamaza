@@ -50,11 +50,9 @@ class ReminderAudioService {
     switch (settings.audioMode) {
       case ReminderAudioMode.textToSpeech:
         final trimmed = settings.voiceText.trim();
-        if (trimmed.isEmpty) {
-          throw Exception('empty_tts_text');
-        }
+        final spokenText = trimmed.isEmpty ? '$prayerLabel vakti.' : '$prayerLabel vakti. $trimmed';
         await _speakWithFallback(
-          '$prayerLabel vakti. $trimmed',
+          spokenText,
           selectedLocale: selectedLocale,
           selectedVoiceName: settings.selectedVoiceName,
           selectedVoiceLocale: settings.selectedVoiceLocale,

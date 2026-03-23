@@ -673,7 +673,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         showAzanIcon: _showAzanIcon,
         showVibrationIcon: _showVibrationIcon,
         sortCustomPrayersByTime: _sortCustomPrayersByTime,
-        voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 0),
+        voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 15),
         vibrationDurationSeconds:
             _readSeconds(_vibrationDurationController, fallback: 3),
         vibrationPauseSeconds:
@@ -714,7 +714,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       showAzanIcon: _showAzanIcon,
       showVibrationIcon: _showVibrationIcon,
       sortCustomPrayersByTime: _sortCustomPrayersByTime,
-      voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 0),
+      voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 15),
       vibrationDurationSeconds:
           _readSeconds(_vibrationDurationController, fallback: 3),
       vibrationPauseSeconds:
@@ -726,13 +726,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       selectedAudioPath: _selectedAudioPath,
       selectedAudioLabel: _selectedAudioLabel,
     );
-    if (settings.audioMode == ReminderAudioMode.textToSpeech &&
-        settings.voiceText.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Önce Metni Oku seçeneğini açın.')),
-      );
-      return;
-    }
     if (settings.audioMode != ReminderAudioMode.textToSpeech &&
         (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
       ScaffoldMessenger.of(context).showSnackBar(

@@ -77,3 +77,8 @@
 - Testler calisti mi? Hayir (cihaz geri bildirimiyle iteratif duzenleme yapildi; ek test/analyze calistirilmadi).
 - Temel akislarda regresyon var mi? Bilinmiyor (cekmece kulpu oranlari ve nafile siralama davranisi cihazda son kez dogrulanmadi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-026` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-23 11:48 +03:00
+- Testler calisti mi? Kismen (kullanici tarafinda `dart format`, parcali `flutter analyze` ve cihazda iteratif `r/R` kontrolleri yapildi; tam proje testi calistirilmadi).
+- Temel akislarda regresyon var mi? Bilinmiyor (cekmece gorunumu ve titresim dongusu cihazda son kez yeniden dogrulanacak).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-026` ve `PUSH_LOG` guncellendi).

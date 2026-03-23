@@ -70,10 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime? _visualLoopUntil;
   String? _visualLoopPrayerLabel;
   String? _visualLoopMessage;
+  DateTime? _vibrationLoopUntil;
   String? _vibrationLoopPrayerLabel;
   bool _showVisualOverlay = false;
   ReminderTextSettings _reminderSettings = const ReminderTextSettings(
-    voiceText: '',
+    voiceText: kDefaultVoiceReminderText,
     visualText: '',
   );
 
@@ -89,7 +90,8 @@ class _HomeScreenState extends State<HomeScreen> {
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       if (!mounted) return;
       final now = DateTime.now();
-      final dayChanged = now.year != _lastRefreshDay.year ||
+      final dayChanged =
+          now.year != _lastRefreshDay.year ||
           now.month != _lastRefreshDay.month ||
           now.day != _lastRefreshDay.day;
       setState(() {
@@ -146,11 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
       methodCode: methodCode,
     );
 
-    return _HomeData(
-      location: location,
-      methodCode: methodCode,
-      times: times,
-    );
+    return _HomeData(location: location, methodCode: methodCode, times: times);
   }
 
   Future<void> _loadReminderSettings() async {
@@ -180,7 +178,6 @@ class _HomeScreenState extends State<HomeScreen> {
         _voiceLoopPrayerLabel = null;
       });
     }
-    _syncVibrationLoop();
   }
 
   void _stopVisualLoop() {
@@ -197,23 +194,27 @@ class _HomeScreenState extends State<HomeScreen> {
         _showVisualOverlay = false;
       });
     }
-    _syncVibrationLoop();
   }
 
   void _stopVibrationLoop() {
     _vibrationRepeatTimer?.cancel();
     _vibrationRepeatTimer = null;
-    if (_vibrationLoopPrayerLabel != null) {
+    if (_vibrationLoopUntil != null || _vibrationLoopPrayerLabel != null) {
       setState(() {
+        _vibrationLoopUntil = null;
         _vibrationLoopPrayerLabel = null;
       });
     }
   }
 
-  void _syncVibrationLoop() {
-    if (_voiceLoopPrayerLabel == null && _visualLoopPrayerLabel == null) {
-      _stopVibrationLoop();
-    }
+  void _dismissVoiceReminder() {
+    _stopVoiceLoop();
+    _stopVibrationLoop();
+  }
+
+  void _dismissVisualReminder() {
+    _stopVisualLoop();
+    _stopVibrationLoop();
   }
 
   void _startVoiceLoop({
@@ -227,7 +228,9 @@ class _HomeScreenState extends State<HomeScreen> {
       _voiceLoopUntil = prayerTime;
       _voiceLoopPrayerLabel = prayerLabel;
     });
-    _voiceRepeatTimer = Timer.periodic(Duration(seconds: repeatSeconds), (_) async {
+    _voiceRepeatTimer = Timer.periodic(Duration(seconds: repeatSeconds), (
+      _,
+    ) async {
       if (!mounted ||
           _voiceLoopUntil == null ||
           DateTime.now().isAfter(_voiceLoopUntil!) ||
@@ -260,23 +263,25 @@ class _HomeScreenState extends State<HomeScreen> {
     _scheduleVisualPhase(isVisible: true);
   }
 
-  void _startVibrationLoop({required String prayerLabel}) {
+  void _startVibrationLoop({
+    required String prayerLabel,
+    required DateTime prayerTime,
+  }) {
     _vibrationRepeatTimer?.cancel();
     final vibrationOnMilliseconds =
         _reminderSettings.vibrationDurationSeconds * 1000;
-    final vibrationOffMilliseconds =
-        _reminderSettings.vibrationPauseSeconds * 1000;
+    final vibrationRepeatMilliseconds =
+        (_reminderSettings.vibrationPauseSeconds * 1000).clamp(1, 3600000);
     setState(() {
+      _vibrationLoopUntil = prayerTime;
       _vibrationLoopPrayerLabel = prayerLabel;
     });
     _vibrationRepeatTimer = Timer.periodic(
-      Duration(
-        milliseconds: vibrationOnMilliseconds + vibrationOffMilliseconds,
-      ),
+      Duration(milliseconds: vibrationRepeatMilliseconds),
       (_) async {
         if (!mounted ||
-            (_voiceLoopPrayerLabel == null &&
-                _visualLoopPrayerLabel == null)) {
+            _vibrationLoopUntil == null ||
+            DateTime.now().isAfter(_vibrationLoopUntil!)) {
           _stopVibrationLoop();
           return;
         }
@@ -314,7 +319,9 @@ class _HomeScreenState extends State<HomeScreen> {
       return;
     }
     _visualCycleTimer = Timer(Duration(seconds: seconds), () {
-      if (!mounted || _visualLoopUntil == null || DateTime.now().isAfter(_visualLoopUntil!)) {
+      if (!mounted ||
+          _visualLoopUntil == null ||
+          DateTime.now().isAfter(_visualLoopUntil!)) {
         _stopVisualLoop();
         return;
       }
@@ -363,8 +370,9 @@ class _HomeScreenState extends State<HomeScreen> {
   String _formatHijriDayMonth(DateTime dt, AppLocalizations l10n) {
     final hijri = _toHijri(dt);
     final months = _hijriMonths(l10n.localeName);
-    final monthName =
-        (hijri.month >= 1 && hijri.month <= 12) ? months[hijri.month - 1] : '';
+    final monthName = (hijri.month >= 1 && hijri.month <= 12)
+        ? months[hijri.month - 1]
+        : '';
     return '${hijri.day} $monthName';
   }
 
@@ -393,10 +401,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _lowerLocale(String value, bool isTr) {
     if (!isTr) return value.toLowerCase();
-    return value
-        .replaceAll('I', 'ı')
-        .replaceAll('İ', 'i')
-        .toLowerCase();
+    return value.replaceAll('I', 'ı').replaceAll('İ', 'i').toLowerCase();
   }
 
   String _upperLocale(String value, bool isTr) {
@@ -466,7 +471,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final a = ((14 - m) / 12).floor();
     final y2 = y + 4800 - a;
     final m2 = m + 12 * a - 3;
-    final jd = d +
+    final jd =
+        d +
         ((153 * m2 + 2) / 5).floor() +
         365 * y2 +
         (y2 / 4).floor() -
@@ -476,10 +482,11 @@ class _HomeScreenState extends State<HomeScreen> {
     var l = jd - 1948440 + 10632;
     final n = ((l - 1) / 10631).floor();
     l = l - 10631 * n + 354;
-    final j = (((10985 - l) / 5316).floor()) *
-            (((50 * l) / 17719).floor()) +
+    final j =
+        (((10985 - l) / 5316).floor()) * (((50 * l) / 17719).floor()) +
         (((l / 5670).floor()) * (((43 * l) / 15238).floor()));
-    l = l -
+    l =
+        l -
         (((30 - j) / 15).floor()) * (((17719 * j) / 50).floor()) -
         ((j / 16).floor()) * (((15238 * j) / 43).floor()) +
         29;
@@ -505,11 +512,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openQibla(LocationData? location) async {
-    await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => _QiblaScreen(location: location),
-      ),
-    );
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => _QiblaScreen(location: location)));
   }
 
   @override
@@ -529,10 +534,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    l10n.locationNotSet,
-                    textAlign: TextAlign.center,
-                  ),
+                  Text(l10n.locationNotSet, textAlign: TextAlign.center),
                   const SizedBox(height: 12),
                   ElevatedButton.icon(
                     onPressed: _openSettings,
@@ -549,10 +551,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    l10n.locationFillAll,
-                    textAlign: TextAlign.center,
-                  ),
+                  Text(l10n.locationFillAll, textAlign: TextAlign.center),
                   const SizedBox(height: 12),
                   ElevatedButton.icon(
                     onPressed: _openSettings,
@@ -567,10 +566,7 @@ class _HomeScreenState extends State<HomeScreen> {
           final times = data.times;
           if (times == null) {
             return Center(
-              child: Text(
-                l10n.comingSoon,
-                textAlign: TextAlign.center,
-              ),
+              child: Text(l10n.comingSoon, textAlign: TextAlign.center),
             );
           }
 
@@ -630,7 +626,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       'img/templates_line/bg_motif02.png',
                       fit: BoxFit.cover,
                       alignment: Alignment.topCenter,
-                      color: palette.backgroundCizgiColor.withValues(alpha: 0.5),
+                      color: palette.backgroundCizgiColor.withValues(
+                        alpha: 0.5,
+                      ),
                       colorBlendMode: BlendMode.modulate,
                     ),
                   ),
@@ -638,198 +636,250 @@ class _HomeScreenState extends State<HomeScreen> {
                 SafeArea(
                   child: Padding(
                     padding: ui.screenPadding,
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onDoubleTap: _toggleDrawer,
-                          child: _TopPanel(
-                            provinceLabel: provinceLabel,
-                            districtLabel: districtLabel,
-                            nextLabel: next.label,
-                            nextTime: nextTime,
-                            countdown: countdown,
-                            dateYearLabel: dateYearLabel,
-                            dateDayMonthLabel: dateDayMonthLabel,
-                            timeLabel: timeLabel,
-                            onToggleDate: () =>
-                                setState(() => _showHijriDate = !_showHijriDate),
-                            onLocationTap: () => _openLocationSettings(location),
-                            onQibla: () => _openQibla(location),
-                            onSettings: _openSettings,
-                            style: ui.topPanel,
-                            padding: ui.topPanelPadding,
-                            settingsIconSize: ui.settingsIconSize,
-                            settingsIconBoxSize: ui.settingsIconBoxSize,
-                            settingsIconOpacity: ui.settingsIconOpacity,
-                            typography: ui.typography,
-                            cizgiColor: palette.cizgiColor,
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        const panelOverlap = 15.0;
+                        const handleAreaHeight = 22.0;
+                        const minDrawerHeight = handleAreaHeight;
+                        const maxDrawerHeightLimit = 320.0;
+                        final topRowHeight = math.max(
+                          ui.settingsIconBoxSize,
+                          ui.typography.locationSize + 8,
+                        );
+                        final lowerSectionHeight =
+                            ui.typography.nextTimeSize +
+                            ui.typography.nextLabelSize +
+                            20;
+                        final topPanelHeight =
+                            ui.topPanelPadding.vertical +
+                            topRowHeight +
+                            4 +
+                            1 +
+                            10 +
+                            lowerSectionHeight;
+                        final drawerTop = topPanelHeight - panelOverlap;
+                        final availableDrawerSpace =
+                            constraints.maxHeight - drawerTop;
+                        final maxDrawerHeight = math.max(
+                          minDrawerHeight,
+                          math.min(
+                            availableDrawerSpace,
+                            maxDrawerHeightLimit,
                           ),
-                        ),
-                        Transform.translate(
-                          offset: const Offset(0, -10),
-                          child: SizedBox(height: 10),
-                        ),
-                        Expanded(
-                          child: Transform.translate(
-                            offset: const Offset(0, -10),
-                            child: LayoutBuilder(
-                            builder: (context, constraints) {
-                              const minDrawerHeight = 24.0;
-                              const maxDrawerHeightLimit = 320.0;
-                              final maxDrawerHeight = constraints.maxHeight <
-                                      maxDrawerHeightLimit
-                                  ? constraints.maxHeight
-                                  : maxDrawerHeightLimit;
-                              final drawerHeight =
-                                  minDrawerHeight +
-                                  ((maxDrawerHeight - minDrawerHeight) *
-                                      _drawerProgress);
+                        );
+                        final drawerHeight =
+                            minDrawerHeight +
+                            ((maxDrawerHeight - minDrawerHeight) *
+                                _drawerProgress);
+                        final bandColor = Color.lerp(
+                          ui.listPanel.color,
+                          palette.zeminColor,
+                          0.16,
+                        )!;
 
-                              return Stack(
+                        void updateDrawerProgress(DragUpdateDetails details) {
+                          final travel = (maxDrawerHeight - minDrawerHeight)
+                              .clamp(1.0, double.infinity);
+                          setState(() {
+                            _drawerProgress = (_drawerProgress +
+                                    (details.delta.dy / travel))
+                                .clamp(0.0, 1.0)
+                                .toDouble();
+                          });
+                        }
+
+                        void settleDrawerProgress(DragEndDetails details) {
+                          final velocity = details.primaryVelocity ?? 0;
+                          setState(() {
+                            if (velocity > 250) {
+                              _drawerProgress = 1;
+                            } else if (velocity < -250) {
+                              _drawerProgress = 0;
+                            } else {
+                              _drawerProgress = _drawerProgress >= 0.35 ? 1 : 0;
+                            }
+                          });
+                        }
+
+                        Widget buildHandleBand({
+                          required bool pointUp,
+                          Border? border,
+                        }) {
+                          return GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: _toggleDrawer,
+                            onVerticalDragUpdate: updateDrawerProgress,
+                            onVerticalDragEnd: settleDrawerProgress,
+                            child: Container(
+                              height: handleAreaHeight,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    bandColor.withValues(alpha: 0.98),
+                                    ui.listPanel.color,
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(999),
+                                border: border,
+                              ),
+                              child: Stack(
+                                alignment: Alignment.center,
                                 children: [
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: AnimatedContainer(
-                                      duration: const Duration(milliseconds: 220),
-                                      curve: Curves.easeOutCubic,
-                                      height: drawerHeight,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 18,
+                                    ),
+                                    child: Container(
+                                      height: 2,
                                       decoration: BoxDecoration(
-                                        color: ui.listPanel.color,
-                                        borderRadius: const BorderRadius.only(
-                                          bottomLeft: Radius.circular(20),
-                                          bottomRight: Radius.circular(20),
+                                        color: Colors.white.withValues(
+                                          alpha: 0.18,
                                         ),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            color: Color(0x22000000),
-                                            blurRadius: 12,
-                                            offset: Offset(0, 8),
-                                          ),
-                                        ],
-                                      ),
-                                      clipBehavior: Clip.antiAlias,
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 7,
-                                            color: palette.zeminColor.withValues(
-                                              alpha: 0.55,
-                                            ),
-                                          ),
-                                          if (_drawerProgress > 0.02)
-                                            const SizedBox(height: 15),
-                                          if (_drawerProgress > 0.02)
-                                            Expanded(
-                                              child: _PrayerList(
-                                                items: items,
-                                                active: active,
-                                                style: ui.listPanel,
-                                                listPadding: ui.listPadding,
-                                                rowGap: ui.rowGap,
-                                                iconStyle: ui.iconToggle,
-                                                chipStyle: ui.reminderChip,
-                                                typography: ui.typography,
-                                                cizgiColor: palette.cizgiColor,
-                                                activeColor: palette.zeminColor,
-                                                showVoiceIcon:
-                                                    _reminderSettings.showVoiceIcon,
-                                                showVisualIcon:
-                                                    _reminderSettings.showVisualIcon,
-                                                showAzanIcon:
-                                                    _reminderSettings.showAzanIcon,
-                                                showVibrationIcon:
-                                                    _reminderSettings
-                                                        .showVibrationIcon,
-                                                onAddCustomPrayer: _addCustomPrayerRow,
-                                              ),
-                                            ),
-                                        ],
+                                        borderRadius: BorderRadius.circular(
+                                          999,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Transform.translate(
-                                      offset: Offset.zero,
-                                      child: GestureDetector(
-                                        behavior: HitTestBehavior.opaque,
-                                        onTap: _toggleDrawer,
-                                        onVerticalDragUpdate: (details) {
-                                          final travel =
-                                              (maxDrawerHeight - minDrawerHeight)
-                                                  .clamp(1.0, double.infinity);
-                                          setState(() {
-                                            _drawerProgress = (_drawerProgress +
-                                                    (details.delta.dy / travel))
-                                                .clamp(0.0, 1.0)
-                                                .toDouble();
-                                          });
-                                        },
-                                        onVerticalDragEnd: (details) {
-                                          final velocity =
-                                              details.primaryVelocity ?? 0;
-                                          setState(() {
-                                            if (velocity > 250) {
-                                              _drawerProgress = 1;
-                                            } else if (velocity < -250) {
-                                              _drawerProgress = 0;
-                                            } else {
-                                              _drawerProgress =
-                                                  _drawerProgress >= 0.35
-                                                  ? 1
-                                                  : 0;
-                                            }
-                                          });
-                                        },
-                                        child: SizedBox(
-                                          width: 148,
-                                          height: 40,
-                                          child: Center(
-                                            child: Transform.translate(
-                                              offset: const Offset(0, -7),
-                                              child: TweenAnimationBuilder<double>(
-                                                tween: Tween<double>(
-                                                  begin: 1,
-                                                  end: _drawerProgress > 0.35
-                                                      ? -1
-                                                      : 1,
-                                                ),
-                                                duration: const Duration(
-                                                  milliseconds: 180,
-                                                ),
-                                                builder: (context, scaleY, child) {
-                                                  return Transform(
-                                                    alignment: Alignment.center,
-                                                    transform:
-                                                        Matrix4.diagonal3Values(
-                                                          1,
-                                                          scaleY,
-                                                          1,
-                                                        ),
-                                                    child: child,
-                                                  );
-                                                },
-                                                child: CustomPaint(
-                                                  size: const Size(64, 11.1),
-                                                  painter: _DrawerHandlePainter(
-                                                    color: palette.cizgiColor
-                                                        .withValues(alpha: 0.78),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                  CustomPaint(
+                                    size: const Size(78, 12),
+                                    painter: _DrawerHandlePainter(
+                                      color: palette.cizgiColor.withValues(
+                                        alpha: 0.8,
                                       ),
+                                      pointUp: pointUp,
                                     ),
                                   ),
                                 ],
-                              );
-                            },
-                          ),
-                          ),
-                        ),
-                      ],
+                              ),
+                            ),
+                          );
+                        }
+
+                        return Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Positioned(
+                              top: drawerTop,
+                              left: 0,
+                              right: 0,
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 220),
+                                curve: Curves.easeOutCubic,
+                                height: drawerHeight,
+                                decoration: BoxDecoration(
+                                  color: ui.listPanel.color,
+                                  borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
+                                  ),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color(0x22000000),
+                                      blurRadius: 12,
+                                      offset: Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                clipBehavior: Clip.antiAlias,
+                                child: Column(
+                                  children: [
+                                    if (_drawerProgress > 0.02)
+                                      SizedBox(height: panelOverlap + 12),
+                                    if (_drawerProgress > 0.02)
+                                      Expanded(
+                                        child: _PrayerList(
+                                          items: items,
+                                          active: active,
+                                          style: ui.listPanel,
+                                          listPadding: ui.listPadding,
+                                          rowGap: ui.rowGap,
+                                          iconStyle: ui.iconToggle,
+                                          chipStyle: ui.reminderChip,
+                                          typography: ui.typography,
+                                          cizgiColor: palette.cizgiColor,
+                                          activeColor: palette.zeminColor,
+                                          showVoiceIcon:
+                                              _reminderSettings.showVoiceIcon,
+                                          showVisualIcon:
+                                              _reminderSettings.showVisualIcon,
+                                          showAzanIcon:
+                                              _reminderSettings.showAzanIcon,
+                                          showVibrationIcon:
+                                              _reminderSettings
+                                                  .showVibrationIcon,
+                                          onAddCustomPrayer:
+                                              _addCustomPrayerRow,
+                                        ),
+                                      ),
+                                    if (_drawerProgress > 0.02)
+                                      buildHandleBand(
+                                        pointUp: true,
+                                        border: Border(
+                                          top: BorderSide(
+                                            color: palette.cizgiColor
+                                                .withValues(alpha: 0.12),
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            if (_drawerProgress <= 0.02)
+                              Positioned(
+                                top: topPanelHeight - 1,
+                                left: 0,
+                                right: 0,
+                                child: buildHandleBand(
+                                  pointUp: false,
+                                  border: Border(
+                                    top: BorderSide(
+                                      color: palette.cizgiColor.withValues(
+                                        alpha: 0.12,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            Positioned(
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              child: GestureDetector(
+                                onDoubleTap: _toggleDrawer,
+                                child: _TopPanel(
+                                  provinceLabel: provinceLabel,
+                                  districtLabel: districtLabel,
+                                  nextLabel: next.label,
+                                  nextTime: nextTime,
+                                  countdown: countdown,
+                                  dateYearLabel: dateYearLabel,
+                                  dateDayMonthLabel: dateDayMonthLabel,
+                                  timeLabel: timeLabel,
+                                  onToggleDate: () => setState(
+                                    () => _showHijriDate = !_showHijriDate,
+                                  ),
+                                  onLocationTap: () =>
+                                      _openLocationSettings(location),
+                                  onQibla: () => _openQibla(location),
+                                  onSettings: _openSettings,
+                                  style: ui.topPanel,
+                                  padding: ui.topPanelPadding,
+                                  settingsIconSize: ui.settingsIconSize,
+                                  settingsIconBoxSize: ui.settingsIconBoxSize,
+                                  settingsIconOpacity: ui.settingsIconOpacity,
+                                  typography: ui.typography,
+                                  cizgiColor: palette.cizgiColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -845,8 +895,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         visualPrayerLabel: _visualLoopPrayerLabel,
                         visualMessage: _visualLoopMessage,
                         showVisualCard: _showVisualOverlay,
-                        onCloseVoice: _stopVoiceLoop,
-                        onCloseVisual: _stopVisualLoop,
+                        onCloseVoice: _dismissVoiceReminder,
+                        onCloseVisual: _dismissVisualReminder,
                       ),
                     ),
                   ),
@@ -902,7 +952,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  _PrayerNext _nextPrayer(PrayerTimes times, DateTime now, AppLocalizations l10n) {
+  _PrayerNext _nextPrayer(
+    PrayerTimes times,
+    DateTime now,
+    AppLocalizations l10n,
+  ) {
     final fajr = _atToday(times.fajr, now);
     final sunrise = _atToday(times.sunrise, now);
     final dhuhr = _atToday(times.dhuhr, now);
@@ -1040,10 +1094,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     if (rowSettings.vibrationEnabled &&
         (stage == _ReminderStage.reminder || rowSettings.reminderMinutes > 0)) {
-      await _playVibrationPulse(_reminderSettings.vibrationDurationSeconds * 1000);
-      if (stage == _ReminderStage.reminder &&
-          (rowSettings.voiceEnabled || rowSettings.visualEnabled)) {
-        _startVibrationLoop(prayerLabel: prayerLabel);
+      await _playVibrationPulse(
+        _reminderSettings.vibrationDurationSeconds * 1000,
+      );
+      if (stage == _ReminderStage.reminder) {
+        _startVibrationLoop(prayerLabel: prayerLabel, prayerTime: prayerTime);
       }
     }
     if (stage == _ReminderStage.prayer && rowSettings.azanEnabled) {
@@ -1064,8 +1119,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (stage == _ReminderStage.reminder &&
         rowSettings.visualEnabled &&
         mounted) {
-      final visualText = _effectiveVisualReminderText();
-      if (visualText.isEmpty) return;
+      final visualText = _effectiveVisualReminderText(prayerLabel);
       _startVisualLoop(
         prayerLabel: prayerLabel,
         message: visualText,
@@ -1077,19 +1131,23 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _canPlayVoiceReminder() {
     switch (_reminderSettings.audioMode) {
       case ReminderAudioMode.textToSpeech:
-        return _reminderSettings.voiceText.trim().isNotEmpty;
+        return true;
       case ReminderAudioMode.deviceAudio:
       case ReminderAudioMode.mp3File:
         return (_reminderSettings.selectedAudioPath ?? '').trim().isNotEmpty;
     }
   }
 
-  String _effectiveVisualReminderText() {
+  String _effectiveVisualReminderText(String prayerLabel) {
     final visualText = _reminderSettings.visualText.trim();
     if (visualText.isNotEmpty) {
       return visualText;
     }
-    return _reminderSettings.voiceText.trim();
+    final voiceText = _reminderSettings.voiceText.trim();
+    if (voiceText.isNotEmpty) {
+      return voiceText;
+    }
+    return '$prayerLabel vakti';
   }
 
   String _prayerLabel(Prayer prayer, AppLocalizations l10n) {
@@ -1264,7 +1322,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void _toggleVoiceReminder(Prayer prayer) {
     setState(() {
       final current = _settingsFor(prayer);
-      _rowSettings[prayer] = current.copyWith(voiceEnabled: !current.voiceEnabled);
+      _rowSettings[prayer] = current.copyWith(
+        voiceEnabled: !current.voiceEnabled,
+      );
     });
     unawaited(_persistPrayerRowSettings());
   }
@@ -1272,7 +1332,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void _toggleVisualReminder(Prayer prayer) {
     setState(() {
       final current = _settingsFor(prayer);
-      _rowSettings[prayer] = current.copyWith(visualEnabled: !current.visualEnabled);
+      _rowSettings[prayer] = current.copyWith(
+        visualEnabled: !current.visualEnabled,
+      );
     });
     unawaited(_persistPrayerRowSettings());
   }
@@ -1280,7 +1342,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void _toggleAzanReminder(Prayer prayer) {
     setState(() {
       final current = _settingsFor(prayer);
-      _rowSettings[prayer] = current.copyWith(azanEnabled: !current.azanEnabled);
+      _rowSettings[prayer] = current.copyWith(
+        azanEnabled: !current.azanEnabled,
+      );
     });
     unawaited(_persistPrayerRowSettings());
   }
@@ -1443,15 +1507,17 @@ class _HomeScreenState extends State<HomeScreen> {
       case _CustomPrayerTimeMode.beforePrayer:
         final anchor = rule.anchorPrayer;
         if (anchor == null) return null;
-        return _prayerTimeFor(anchor, times).subtract(
-          Duration(minutes: rule.offsetMinutes.abs()),
-        );
+        return _prayerTimeFor(
+          anchor,
+          times,
+        ).subtract(Duration(minutes: rule.offsetMinutes.abs()));
       case _CustomPrayerTimeMode.afterPrayer:
         final anchor = rule.anchorPrayer;
         if (anchor == null) return null;
-        return _prayerTimeFor(anchor, times).add(
-          Duration(minutes: rule.offsetMinutes.abs()),
-        );
+        return _prayerTimeFor(
+          anchor,
+          times,
+        ).add(Duration(minutes: rule.offsetMinutes.abs()));
       case _CustomPrayerTimeMode.midpointBetweenPrayers:
         final firstAnchor = rule.anchorPrayer;
         final secondAnchor = rule.secondaryAnchorPrayer;
@@ -1523,8 +1589,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     'Vakit zamani',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Wrap(
@@ -1561,11 +1627,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ChoiceChip(
                         label: const Text('Iki vaktin ortasi'),
                         selected:
-                            mode == _CustomPrayerTimeMode.midpointBetweenPrayers,
+                            mode ==
+                            _CustomPrayerTimeMode.midpointBetweenPrayers,
                         onSelected: (_) {
                           setSheetState(() {
-                            mode =
-                                _CustomPrayerTimeMode.midpointBetweenPrayers;
+                            mode = _CustomPrayerTimeMode.midpointBetweenPrayers;
                           });
                         },
                       ),
@@ -1583,7 +1649,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               FilteringTextInputFormatter.digitsOnly,
                               LengthLimitingTextInputFormatter(2),
                             ],
-                            decoration: const InputDecoration(labelText: 'Saat'),
+                            decoration: const InputDecoration(
+                              labelText: 'Saat',
+                            ),
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -1602,7 +1670,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     )
-                  else if (mode == _CustomPrayerTimeMode.midpointBetweenPrayers) ...[
+                  else if (mode ==
+                      _CustomPrayerTimeMode.midpointBetweenPrayers) ...[
                     Text(
                       'Birinci vakit',
                       style: Theme.of(context).textTheme.labelLarge,
@@ -1673,9 +1742,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       controller: offsetController,
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      decoration: const InputDecoration(
-                        labelText: 'Dakika',
-                      ),
+                      decoration: const InputDecoration(labelText: 'Dakika'),
                     ),
                   ],
                   const SizedBox(height: 20),
@@ -1684,7 +1751,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: FilledButton(
                       onPressed: () {
                         final hour = int.tryParse(hourController.text.trim());
-                        final minute = int.tryParse(minuteController.text.trim());
+                        final minute = int.tryParse(
+                          minuteController.text.trim(),
+                        );
                         final offsetMinutes =
                             int.tryParse(offsetController.text.trim()) ?? 0;
                         setState(() {
@@ -1694,19 +1763,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? null
                                 : anchorPrayer,
                             secondaryAnchorPrayer:
-                                mode == _CustomPrayerTimeMode.midpointBetweenPrayers
+                                mode ==
+                                    _CustomPrayerTimeMode.midpointBetweenPrayers
                                 ? secondaryAnchorPrayer
                                 : null,
                             offsetMinutes: offsetMinutes,
                             manualTime: mode == _CustomPrayerTimeMode.manual
                                 ? (hour == null ||
-                                        minute == null ||
-                                        hour < 0 ||
-                                        hour > 23 ||
-                                        minute < 0 ||
-                                        minute > 59
-                                    ? null
-                                    : TimeOfDay(hour: hour, minute: minute))
+                                          minute == null ||
+                                          hour < 0 ||
+                                          hour > 23 ||
+                                          minute < 0 ||
+                                          minute > 59
+                                      ? null
+                                      : TimeOfDay(hour: hour, minute: minute))
                                 : null,
                           );
                         });
@@ -1961,7 +2031,11 @@ class _HijriDate {
   final int month;
   final int day;
 
-  const _HijriDate({required this.year, required this.month, required this.day});
+  const _HijriDate({
+    required this.year,
+    required this.month,
+    required this.day,
+  });
 }
 
 class _TopPanel extends StatelessWidget {
@@ -2010,7 +2084,8 @@ class _TopPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final lowerSectionHeight = typography.nextTimeSize + typography.nextLabelSize + 20;
+    final lowerSectionHeight =
+        typography.nextTimeSize + typography.nextLabelSize + 20;
     final topRowHeight = settingsIconBoxSize > typography.locationSize + 8
         ? settingsIconBoxSize
         : typography.locationSize + 8;
@@ -2051,7 +2126,10 @@ class _TopPanel extends StatelessWidget {
                         Text.rich(
                           TextSpan(
                             children: [
-                              TextSpan(text: provinceLabel, style: locationTextStyle),
+                              TextSpan(
+                                text: provinceLabel,
+                                style: locationTextStyle,
+                              ),
                               if (districtLabel.trim().isNotEmpty) ...[
                                 TextSpan(text: ' / ', style: locationTextStyle),
                                 TextSpan(
@@ -2076,7 +2154,9 @@ class _TopPanel extends StatelessWidget {
                       onPressed: onSettings,
                       icon: Icon(
                         Icons.settings_outlined,
-                        color: cizgiColor.withValues(alpha: settingsIconOpacity),
+                        color: cizgiColor.withValues(
+                          alpha: settingsIconOpacity,
+                        ),
                         size: settingsIconSize * 1.3,
                       ),
                       tooltip: AppLocalizations.of(context)!.settingsTitle,
@@ -2092,10 +2172,7 @@ class _TopPanel extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          Container(
-            height: 1,
-            color: cizgiColor.withValues(alpha: 0.18),
-          ),
+          Container(height: 1, color: cizgiColor.withValues(alpha: 0.18)),
           const SizedBox(height: 10),
           SizedBox(
             height: lowerSectionHeight,
@@ -2112,19 +2189,19 @@ class _TopPanel extends StatelessWidget {
                         child: Text(
                           '$dateDayMonthLabel $dateYearLabel',
                           style: theme.textTheme.titleSmall?.copyWith(
-                                color: cizgiColor,
-                                fontWeight: FontWeight.w600,
-                                fontSize: (typography.methodSize + 1) * 1.2,
-                              ),
+                            color: cizgiColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: (typography.methodSize + 1) * 1.2,
+                          ),
                         ),
                       ),
                       Text(
                         timeLabel,
                         style: theme.textTheme.titleSmall?.copyWith(
-                              color: cizgiColor.withValues(alpha: 0.85),
-                              fontWeight: FontWeight.w300,
-                              fontSize: typography.nextLabelSize * 1.2,
-                            ),
+                          color: cizgiColor.withValues(alpha: 0.85),
+                          fontWeight: FontWeight.w300,
+                          fontSize: typography.nextLabelSize * 1.2,
+                        ),
                       ),
                     ],
                   ),
@@ -2141,30 +2218,30 @@ class _TopPanel extends StatelessWidget {
                           Text(
                             nextLabel,
                             style: theme.textTheme.titleSmall?.copyWith(
-                                  color: cizgiColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: typography.nextLabelSize,
-                                ),
+                              color: cizgiColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: typography.nextLabelSize,
+                            ),
                           ),
                           const SizedBox(width: 6),
                           Text(
                             nextTime,
                             style: theme.textTheme.titleSmall?.copyWith(
-                                  color: cizgiColor.withValues(alpha: 0.85),
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: typography.nextLabelSize,
-                                ),
+                              color: cizgiColor.withValues(alpha: 0.85),
+                              fontWeight: FontWeight.w300,
+                              fontSize: typography.nextLabelSize,
+                            ),
                           ),
                         ],
                       ),
                       Text(
                         countdown,
                         style: theme.textTheme.headlineSmall?.copyWith(
-                              color: cizgiColor,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 0.5,
-                              fontSize: typography.nextTimeSize,
-                            ),
+                          color: cizgiColor,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.5,
+                          fontSize: typography.nextTimeSize,
+                        ),
                       ),
                     ],
                   ),
@@ -2251,9 +2328,9 @@ class _PrayerList extends StatelessWidget {
       backgroundColor: iconStyle.backgroundColor,
       borderRadius: iconStyle.borderRadius,
     );
-    final baseLabelStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
-          fontSize: rowTextSize,
-        );
+    final baseLabelStyle = Theme.of(
+      context,
+    ).textTheme.titleSmall?.copyWith(fontSize: rowTextSize);
     final maxLabelWidth = items.fold<double>(
       0,
       (currentMax, item) => math.max(
@@ -2279,18 +2356,20 @@ class _PrayerList extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = items[index];
               final isPast =
-                  item.prayer != null && activeIndex != -1 && index < activeIndex;
+                  item.prayer != null &&
+                  activeIndex != -1 &&
+                  index < activeIndex;
               final isActive = item.prayer == active;
               final labelColor = isActive
                   ? cizgiColor
                   : isPast
-                      ? cizgiColor.withValues(alpha: 0.45)
-                      : cizgiColor;
+                  ? cizgiColor.withValues(alpha: 0.45)
+                  : cizgiColor;
               final timeColor = isActive
                   ? cizgiColor.withValues(alpha: 0.9)
                   : isPast
-                      ? cizgiColor.withValues(alpha: 0.5)
-                      : cizgiColor.withValues(alpha: 0.9);
+                  ? cizgiColor.withValues(alpha: 0.5)
+                  : cizgiColor.withValues(alpha: 0.9);
               final controlColor = cizgiColor;
               final chipBackgroundColor = isActive
                   ? activeColor.withValues(alpha: 0.12)
@@ -2298,7 +2377,8 @@ class _PrayerList extends StatelessWidget {
               final chipBorderColor = isActive
                   ? activeColor.withValues(alpha: 0.45)
                   : chipStyle.borderColor;
-              final labelStyle = Theme.of(context).textTheme.titleSmall?.copyWith(
+              final labelStyle = Theme.of(context).textTheme.titleSmall
+                  ?.copyWith(
                     color: labelColor,
                     fontWeight: isActive ? FontWeight.w700 : FontWeight.w300,
                     fontSize: rowTextSize,
@@ -2324,7 +2404,9 @@ class _PrayerList extends StatelessWidget {
                           },
                           textAlign: TextAlign.right,
                           textInputAction: TextInputAction.done,
-                          style: labelStyle?.copyWith(fontWeight: FontWeight.w600),
+                          style: labelStyle?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
                           decoration: const InputDecoration(
                             isDense: true,
                             border: InputBorder.none,
@@ -2338,7 +2420,8 @@ class _PrayerList extends StatelessWidget {
                       ? Text(
                           item.timeLabel,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(
                                 color: timeColor,
                                 fontWeight: isActive
                                     ? FontWeight.w700
@@ -2354,9 +2437,7 @@ class _PrayerList extends StatelessWidget {
                             child: Text(
                               item.timeLabel,
                               textAlign: TextAlign.center,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
+                              style: Theme.of(context).textTheme.titleSmall
                                   ?.copyWith(
                                     color: timeColor,
                                     fontWeight: FontWeight.w700,
@@ -2486,10 +2567,8 @@ class _PrayerList extends StatelessWidget {
                 ),
               );
             },
-            separatorBuilder: (_, _) => const Divider(
-              height: 1,
-              color: Color(0x22000000),
-            ),
+            separatorBuilder: (_, _) =>
+                const Divider(height: 1, color: Color(0x22000000)),
             itemCount: items.length,
           ),
         ),
@@ -2505,15 +2584,9 @@ class _PrayerList extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: cizgiColor.withValues(alpha: 0.12),
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: cizgiColor.withValues(alpha: 0.25),
-                  ),
+                  border: Border.all(color: cizgiColor.withValues(alpha: 0.25)),
                 ),
-                child: Icon(
-                  Icons.add,
-                  color: cizgiColor,
-                  size: 18,
-                ),
+                child: Icon(Icons.add, color: cizgiColor, size: 18),
               ),
             ),
           ),
@@ -2551,10 +2624,10 @@ class _ReminderChip extends StatelessWidget {
         keyboardType: TextInputType.number,
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: cizgiColor,
-              fontWeight: FontWeight.w700,
-              fontSize: style.fontSize,
-            ),
+          color: cizgiColor,
+          fontWeight: FontWeight.w700,
+          fontSize: style.fontSize,
+        ),
         decoration: InputDecoration(
           isDense: true,
           filled: true,
@@ -2572,7 +2645,6 @@ class _ReminderChip extends StatelessWidget {
       ),
     );
   }
-
 }
 
 double _measureTextWidth(String text, TextStyle? style) {
@@ -2601,7 +2673,9 @@ class _IconToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iconColor = isEnabled ? cizgiColor : cizgiColor.withValues(alpha: 0.4);
+    final iconColor = isEnabled
+        ? cizgiColor
+        : cizgiColor.withValues(alpha: 0.4);
     final hitSize = style.size * 1.3;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -2635,10 +2709,7 @@ class _ActiveReminderPanel extends StatelessWidget {
   });
 
   String _toTurkishUpper(String value) {
-    return value
-        .replaceAll('i', 'İ')
-        .replaceAll('ı', 'I')
-        .toUpperCase();
+    return value.replaceAll('i', 'İ').replaceAll('ı', 'I').toUpperCase();
   }
 
   @override
@@ -2649,9 +2720,13 @@ class _ActiveReminderPanel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (hasVisual && showVisualCard) ...[
-          FlashingReminderCard(
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onCloseVisual,
+            child: FlashingReminderCard(
             prayerLabel: '${_toTurkishUpper(visualPrayerLabel!)} VAKTİ',
             message: visualMessage ?? '',
+            ),
           ),
           const SizedBox(height: 8),
         ],
@@ -2697,8 +2772,9 @@ class _ActiveReminderPanel extends StatelessWidget {
 
 class _DrawerHandlePainter extends CustomPainter {
   final Color color;
+  final bool pointUp;
 
-  const _DrawerHandlePainter({required this.color});
+  const _DrawerHandlePainter({required this.color, required this.pointUp});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -2708,10 +2784,10 @@ class _DrawerHandlePainter extends CustomPainter {
       ..isAntiAlias = true;
 
     final path = Path()
-      ..moveTo(0, 0)
-      ..lineTo(size.width * 0.5, size.height * 0.46)
-      ..lineTo(size.width, 0)
-      ..lineTo(size.width * 0.5, size.height)
+      ..moveTo(0, pointUp ? size.height : 0)
+      ..lineTo(size.width * 0.5, pointUp ? size.height * 0.54 : size.height * 0.46)
+      ..lineTo(size.width, pointUp ? size.height : 0)
+      ..lineTo(size.width * 0.5, pointUp ? 0 : size.height)
       ..close();
 
     canvas.drawPath(path, paint);
@@ -2719,7 +2795,7 @@ class _DrawerHandlePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _DrawerHandlePainter oldDelegate) {
-    return oldDelegate.color != color;
+    return oldDelegate.color != color || oldDelegate.pointUp != pointUp;
   }
 }
 
@@ -2754,7 +2830,9 @@ class _QiblaScreen extends StatelessWidget {
     final latitude = _parse(location?.latitude);
     final longitude = _parse(location?.longitude);
     final hasLocation = latitude != null && longitude != null;
-    final qiblaBearing = hasLocation ? _bearingToKaaba(latitude!, longitude!) : null;
+    final qiblaBearing = hasLocation
+        ? _bearingToKaaba(latitude!, longitude!)
+        : null;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Kıble Yönü')),
@@ -2777,7 +2855,8 @@ class _QiblaScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                         );
                       }
-                      final rotation = ((qiblaBearing! - heading) * math.pi) / 180;
+                      final rotation =
+                          ((qiblaBearing! - heading) * math.pi) / 180;
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -2788,7 +2867,9 @@ class _QiblaScreen extends StatelessWidget {
                               shape: BoxShape.circle,
                               color: const Color(0xFFF5F0E6),
                               border: Border.all(
-                                color: const Color(0xFF1F7A3E).withValues(alpha: 0.22),
+                                color: const Color(
+                                  0xFF1F7A3E,
+                                ).withValues(alpha: 0.22),
                               ),
                               boxShadow: const [
                                 BoxShadow(

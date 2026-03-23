@@ -1,10 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum ReminderAudioMode {
-  textToSpeech,
-  deviceAudio,
-  mp3File,
-}
+const kDefaultVoiceReminderText = 'Namaz vakti yaklaşıyor.. Haydı hazırlan...';
+
+enum ReminderAudioMode { textToSpeech, deviceAudio, mp3File }
 
 extension ReminderAudioModeX on ReminderAudioMode {
   String get key {
@@ -59,7 +57,7 @@ class ReminderTextSettings {
     this.showAzanIcon = true,
     this.showVibrationIcon = true,
     this.sortCustomPrayersByTime = true,
-    this.voiceRepeatSeconds = 0,
+    this.voiceRepeatSeconds = 15,
     this.vibrationDurationSeconds = 3,
     this.vibrationPauseSeconds = 5,
     this.visualDisplaySeconds = 6,
@@ -89,19 +87,33 @@ class ReminderTextSettingsStorage {
       'reminder_vibration_duration_seconds';
   static const String _vibrationPauseSecondsKey =
       'reminder_vibration_pause_seconds';
-  static const String _visualDisplaySecondsKey = 'reminder_visual_display_seconds';
-  static const String _visualReopenSecondsKey = 'reminder_visual_reopen_seconds';
+  static const String _visualDisplaySecondsKey =
+      'reminder_visual_display_seconds';
+  static const String _visualReopenSecondsKey =
+      'reminder_visual_reopen_seconds';
   static const String _selectedVoiceNameKey = 'reminder_selected_voice_name';
-  static const String _selectedVoiceLocaleKey = 'reminder_selected_voice_locale';
+  static const String _selectedVoiceLocaleKey =
+      'reminder_selected_voice_locale';
   static const String _selectedAudioPathKey = 'reminder_selected_audio_path';
   static const String _selectedAudioLabelKey = 'reminder_selected_audio_label';
+  static const _legacyDefaultVoiceTexts = <String>{
+    '',
+    'Namaz vakti',
+    'Namaz vakti yaklaşıyor.. Haydi hazırlan..',
+    'Namaz vakti yaklasiyor.. Haydi hazirlan..',
+    'Namaz vakti yaklaÅŸÄ±yor.. Haydi hazÄ±rlan..',
+  };
 
   Future<ReminderTextSettings> read() async {
     final prefs = await SharedPreferences.getInstance();
     final legacyVoiceTextEnabled = prefs.getBool(_voiceTextEnabledKey) ?? true;
     final storedAudioMode = prefs.getString(_audioModeKey);
+    final storedVoiceText = prefs.getString(_voiceTextKey)?.trim() ?? '';
+    final storedVoiceRepeatSeconds = prefs.getInt(_voiceRepeatSecondsKey);
     return ReminderTextSettings(
-      voiceText: prefs.getString(_voiceTextKey) ?? '',
+      voiceText: _legacyDefaultVoiceTexts.contains(storedVoiceText)
+          ? kDefaultVoiceReminderText
+          : storedVoiceText,
       visualText: prefs.getString(_visualTextKey) ?? '',
       audioMode: storedAudioMode == null
           ? (legacyVoiceTextEnabled
@@ -115,15 +127,21 @@ class ReminderTextSettingsStorage {
       sortCustomPrayersByTime:
           prefs.getBool(_sortCustomPrayersByTimeKey) ?? true,
       voiceRepeatSeconds:
-          (prefs.getInt(_voiceRepeatSecondsKey) ?? 0).clamp(0, 3600),
+          (storedVoiceRepeatSeconds == null || storedVoiceRepeatSeconds <= 0)
+          ? 15
+          : storedVoiceRepeatSeconds.clamp(0, 3600),
       vibrationDurationSeconds:
           (prefs.getInt(_vibrationDurationSecondsKey) ?? 3).clamp(1, 3600),
-      vibrationPauseSeconds:
-          (prefs.getInt(_vibrationPauseSecondsKey) ?? 5).clamp(0, 3600),
-      visualDisplaySeconds:
-          (prefs.getInt(_visualDisplaySecondsKey) ?? 6).clamp(1, 3600),
-      visualReopenSeconds:
-          (prefs.getInt(_visualReopenSecondsKey) ?? 4).clamp(0, 3600),
+      vibrationPauseSeconds: (prefs.getInt(_vibrationPauseSecondsKey) ?? 5)
+          .clamp(0, 3600),
+      visualDisplaySeconds: (prefs.getInt(_visualDisplaySecondsKey) ?? 6).clamp(
+        1,
+        3600,
+      ),
+      visualReopenSeconds: (prefs.getInt(_visualReopenSecondsKey) ?? 4).clamp(
+        0,
+        3600,
+      ),
       selectedVoiceName: prefs.getString(_selectedVoiceNameKey),
       selectedVoiceLocale: prefs.getString(_selectedVoiceLocaleKey),
       selectedAudioPath: prefs.getString(_selectedAudioPathKey),
@@ -150,10 +168,14 @@ class ReminderTextSettingsStorage {
       _vibrationDurationSecondsKey,
       settings.vibrationDurationSeconds,
     );
-    await prefs.setInt(_vibrationPauseSecondsKey, settings.vibrationPauseSeconds);
+    await prefs.setInt(
+      _vibrationPauseSecondsKey,
+      settings.vibrationPauseSeconds,
+    );
     await prefs.setInt(_visualDisplaySecondsKey, settings.visualDisplaySeconds);
     await prefs.setInt(_visualReopenSecondsKey, settings.visualReopenSeconds);
-    if (settings.selectedVoiceName == null || settings.selectedVoiceName!.isEmpty) {
+    if (settings.selectedVoiceName == null ||
+        settings.selectedVoiceName!.isEmpty) {
       await prefs.remove(_selectedVoiceNameKey);
     } else {
       await prefs.setString(_selectedVoiceNameKey, settings.selectedVoiceName!);
@@ -162,9 +184,13 @@ class ReminderTextSettingsStorage {
         settings.selectedVoiceLocale!.isEmpty) {
       await prefs.remove(_selectedVoiceLocaleKey);
     } else {
-      await prefs.setString(_selectedVoiceLocaleKey, settings.selectedVoiceLocale!);
+      await prefs.setString(
+        _selectedVoiceLocaleKey,
+        settings.selectedVoiceLocale!,
+      );
     }
-    if (settings.selectedAudioPath == null || settings.selectedAudioPath!.isEmpty) {
+    if (settings.selectedAudioPath == null ||
+        settings.selectedAudioPath!.isEmpty) {
       await prefs.remove(_selectedAudioPathKey);
     } else {
       await prefs.setString(_selectedAudioPathKey, settings.selectedAudioPath!);
@@ -173,7 +199,10 @@ class ReminderTextSettingsStorage {
         settings.selectedAudioLabel!.isEmpty) {
       await prefs.remove(_selectedAudioLabelKey);
     } else {
-      await prefs.setString(_selectedAudioLabelKey, settings.selectedAudioLabel!);
+      await prefs.setString(
+        _selectedAudioLabelKey,
+        settings.selectedAudioLabel!,
+      );
     }
   }
 }

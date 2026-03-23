@@ -47,7 +47,7 @@ class PrayerService {
   }) async {
     _log('[Calc] method=$methodCode location=${location.province}/${location.district}');
     final params = _paramsFor(methodCode);
-    if (methodCode == 'turkey') {
+    if (methodCode == 'turkey' || methodCode == 'diyanet_tabanli') {
       final diyanetTimes = await _tryDiyanet(
         location: location,
         date: DateTime.now(),
@@ -77,6 +77,7 @@ class PrayerService {
   CalculationParameters _paramsFor(String code) {
     switch (code) {
       case 'turkey':
+      case 'diyanet_tabanli':
         return CalculationMethod.turkey();
       case 'muslim_world_league':
         return CalculationMethod.muslimWorldLeague();

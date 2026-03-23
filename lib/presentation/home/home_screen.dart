@@ -131,7 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final lat = double.tryParse(location.latitude);
     final lon = double.tryParse(location.longitude);
-    if (methodCode != 'turkey' && (lat == null || lon == null)) {
+    if (methodCode != 'turkey' &&
+        methodCode != 'diyanet_tabanli' &&
+        (lat == null || lon == null)) {
       return _HomeData(
         location: location,
         methodCode: methodCode,
@@ -1328,33 +1330,39 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          constraints: const BoxConstraints(minWidth: 150, maxWidth: 150),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          contentPadding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+          contentPadding: const EdgeInsets.fromLTRB(2, 8, 2, 8),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               const Text('Hatırlatma Süresi'),
               const SizedBox(height: 6),
               SizedBox(
-                width: 72,
-                child: TextField(
-                  controller: editController,
-                  autofocus: true,
-                  textAlign: TextAlign.center,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
-                  decoration: const InputDecoration(
-                    hintText: 'Dakika',
-                    border: OutlineInputBorder(),
-                    isDense: true,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 8,
+                width: 112,
+                child: Center(
+                  child: SizedBox(
+                    width: 72,
+                    child: TextField(
+                      controller: editController,
+                      autofocus: true,
+                      textAlign: TextAlign.center,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                      decoration: const InputDecoration(
+                        hintText: 'Dakika',
+                        border: OutlineInputBorder(),
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 8,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -1363,18 +1371,26 @@ class _HomeScreenState extends State<HomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    visualDensity: VisualDensity.compact,
-                    tooltip: 'Vazgeç',
-                    icon: const Icon(Icons.close_rounded),
+                  Material(
+                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    shape: const CircleBorder(),
+                    child: IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      visualDensity: VisualDensity.compact,
+                      tooltip: 'Vazgeç',
+                      icon: const Icon(Icons.close_rounded),
+                    ),
                   ),
                   const SizedBox(width: 6),
-                  IconButton(
-                    onPressed: () => Navigator.of(context).pop(editController.text),
-                    visualDensity: VisualDensity.compact,
-                    tooltip: 'Tamam',
-                    icon: const Icon(Icons.check_rounded),
+                  Material(
+                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.14),
+                    shape: const CircleBorder(),
+                    child: IconButton(
+                      onPressed: () => Navigator.of(context).pop(editController.text),
+                      visualDensity: VisualDensity.compact,
+                      tooltip: 'Tamam',
+                      icon: const Icon(Icons.check_rounded),
+                    ),
                   ),
                 ],
               ),

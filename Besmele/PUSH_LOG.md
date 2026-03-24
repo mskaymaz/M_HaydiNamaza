@@ -54,3 +54,4 @@
 | 2026-03-24 14:09 +03:00 | R.260324_1409 | Yeni yapilacaklar eklendi |
 | 2026-03-24 14:22 +03:00 | R.260324_1422 | Bilgilendirme paneli mimari karari kaydedildi |
 | 2026-03-24 15:20 +03:00 | R.260324_1520 | Ayet metinleri karsilastirma dosyasindan yeni JSON cikisina aktarildi |
+| 2026-03-24 15:49 +03:00 | R.260324_1549 | Ayet metin guncellemesi tamamlandi; 72 ayet hazir |

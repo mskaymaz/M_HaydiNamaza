@@ -1,9 +1,9 @@
 # BESMELE STATE
 
-last_update: 2026-03-24 17:24 +03:00
-active_task: TASK-040
-phase: Toplu commit/push hazirlandi; `hadisler.json` eklendi ve ciftleme kontrolu yapilmadigi not edildi.
-next_step: Push sonrasi yeni oturumda kalan arayuz duzeltmeleri ve veri uretimi devam edecek.
+last_update: 2026-03-24 17:29 +03:00
+active_task: TASK-041
+phase: `assets/audio/adhan/fajr_malmo.webm` silindi; commit/push hazir.
+next_step: Kullanicinin yeni ezan dosyalari eklendiginde onlar alinacak.
 blockers: NONE
-last_delivery: R.260324_1724
-handover: `hadisler.json` da eklendi. O nedenle Hadisler json olusturuldu. Ciftleme kontrolu yapilmadi. Kullanicinin istegiyle mevcut diger degisiklikler de ayni teslime dahil edildi.
+last_delivery: R.260324_1729
+handover: Kullanilmayacagi belirtilen `assets/audio/adhan/fajr_malmo.webm` dosyasi silindi. Dosya projede adiyla referanslanmiyordu; commit ve push ile uzak repodan da kaldirilacak.

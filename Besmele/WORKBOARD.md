@@ -31,3 +31,4 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-025 | done | 2026-03-19 22:15 +03:00 | Ust panel ve vakitler paneli gorsellestirme 1. asama tamamlandi |
 | TASK-026 | in_progress | 2026-03-23 14:33 +03:00 | Ayarlar paneli ve hesaplama yontemi secim ekrani sabit px olculerle sadeletiliyor |
 | TASK-027 | in_progress | 2026-03-23 14:33 +03:00 | `diyanet_tabanli` secenegi korunurken secim ve ozet ekranlari sadeletildi |
+| TASK-028 | done | 2026-03-24 13:42 +03:00 | Ayet/Hadis/Fikih icerik toplama akisi icin ayet promptu ve markdown kaydi baslatildi |

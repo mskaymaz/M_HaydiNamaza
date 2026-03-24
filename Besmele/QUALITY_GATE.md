@@ -87,3 +87,8 @@
 - Testler calisti mi? Hayir (son tur duzenleme sonrasi commit/push oncesi yeniden test calistirilmadi).
 - Temel akislarda regresyon var mi? Bilinmiyor (ayarlar paneli ve dakika balonu cihazda yeniden dogrulanacak).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-026` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-24 13:42 +03:00
+- Testler calisti mi? Hayir (yalniz markdown prompt kaydi eklendi).
+- Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-028` ve `PUSH_LOG` guncellendi).

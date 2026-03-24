@@ -92,3 +92,8 @@
 - Testler calisti mi? Hayir (yalniz markdown prompt kaydi eklendi).
 - Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-028` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-24 14:09 +03:00
+- Testler calisti mi? Hayir (yalniz backlog/plans markdown kayitlari guncellendi).
+- Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-029`..`TASK-032` ve `PUSH_LOG` guncellendi).

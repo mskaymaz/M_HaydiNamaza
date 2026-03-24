@@ -32,3 +32,7 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-026 | in_progress | 2026-03-23 14:33 +03:00 | Ayarlar paneli ve hesaplama yontemi secim ekrani sabit px olculerle sadeletiliyor |
 | TASK-027 | in_progress | 2026-03-23 14:33 +03:00 | `diyanet_tabanli` secenegi korunurken secim ve ozet ekranlari sadeletildi |
 | TASK-028 | done | 2026-03-24 13:42 +03:00 | Ayet/Hadis/Fikih icerik toplama akisi icin ayet promptu ve markdown kaydi baslatildi |
+| TASK-029 | planned | 2026-03-24 14:04 +03:00 | Erisilebilir buyutme modu: tum UI olceklenebilsin, tasan alan kaydirilabilsin |
+| TASK-030 | planned | 2026-03-24 14:04 +03:00 | Zemin icin secilebilir coklu cizgisel motif sistemi ve motif secici ekle |
+| TASK-031 | planned | 2026-03-24 14:04 +03:00 | Motif yerine kullanici resmi yerlestirme, onizleme, tasima ve olcekleme arayuzu ekle |
+| TASK-032 | planned | 2026-03-24 14:04 +03:00 | Ust panel, vakitler paneli ve bilgi paneli icin renk + alfa/seffaflik ayari ekle |

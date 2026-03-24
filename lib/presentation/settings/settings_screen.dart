@@ -253,7 +253,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 SizedBox(
                   width: 140,
                   child: DropdownButtonFormField<String>(
-                    value: codeFor(current),
+                    initialValue: codeFor(current),
                     decoration: _dropdownDecoration('Uygulama Dili'),
                     items: [
                       DropdownMenuItem(
@@ -498,7 +498,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   const SizedBox(height: 6),
                   DropdownButtonFormField<ReminderAudioMode>(
-                    value: _selectedAudioMode,
+                    initialValue: _selectedAudioMode,
                     decoration: const InputDecoration(
                       labelText: 'Ses Kaynağı',
                       border: OutlineInputBorder(),
@@ -522,7 +522,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   if (_selectedAudioMode == ReminderAudioMode.textToSpeech) ...[
                     const SizedBox(height: 6),
                     DropdownButtonFormField<String?>(
-                      value: _selectedVoiceKey,
+                      initialValue: _selectedVoiceKey,
                       decoration: const InputDecoration(
                         labelText: 'Sistem Sesi',
                         border: OutlineInputBorder(),

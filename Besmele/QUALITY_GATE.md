@@ -112,3 +112,8 @@
 - Testler calisti mi? Hayir (yalniz veri dosyasi isimlendirmesi ve final kayitlari guncellendi).
 - Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-037` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-24 17:24 +03:00
+- Testler calisti mi? Hayir (`hadisler.json` olusturuldu; ciftleme kontrolu yapilmadi; toplu teslim oncesi ek test calistirilmadi).
+- Temel akislarda regresyon var mi? Bilinmiyor (uygulama kodu ve veri dosyalari birlikte teslim ediliyor; son dogrulama yapilmadi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-040` ve `PUSH_LOG` guncellendi).

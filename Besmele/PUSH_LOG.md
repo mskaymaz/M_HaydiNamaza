@@ -55,3 +55,4 @@
 | 2026-03-24 14:22 +03:00 | R.260324_1422 | Bilgilendirme paneli mimari karari kaydedildi |
 | 2026-03-24 15:20 +03:00 | R.260324_1520 | Ayet metinleri karsilastirma dosyasindan yeni JSON cikisina aktarildi |
 | 2026-03-24 15:49 +03:00 | R.260324_1549 | Ayet metin guncellemesi tamamlandi; 72 ayet hazir |
+| 2026-03-24 17:24 +03:00 | R.260324_1724 | Hadisler json da eklendi. O nedenle Hadisler json olusturuldu. Ciftleme kontrolu yapilmadi. Mevcut diger degisiklikler de ayni teslime alindi |

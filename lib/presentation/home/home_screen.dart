@@ -2935,7 +2935,7 @@ class _QiblaScreen extends StatelessWidget {
     final longitude = _parse(location?.longitude);
     final hasLocation = latitude != null && longitude != null;
     final qiblaBearing = hasLocation
-        ? _bearingToKaaba(latitude!, longitude!)
+        ? _bearingToKaaba(latitude, longitude)
         : null;
 
     return Scaffold(

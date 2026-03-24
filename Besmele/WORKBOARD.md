@@ -41,3 +41,6 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-035 | done | 2026-03-24 15:04 +03:00 | Tekrarlanan ayetler ayiklandi, ids yeniden verildi ve sure/ayet envanteri cikartildi |
 | TASK-036 | done | 2026-03-24 15:26 +03:00 | `ayetkarsilastir.md` metinleriyle yeni `ayetler_guncel.json` cikisi uretildi |
 | TASK-037 | done | 2026-03-24 15:49 +03:00 | Ayet metin guncellemesi final dosya adlariyla sabitlendi; 72 ayet hazir |
+| TASK-038 | done | 2026-03-24 16:08 +03:00 | Hadis JSON uretim promptu `AyetHadisFıkıh.md` icine eklendi |
+| TASK-039 | done | 2026-03-24 16:18 +03:00 | Fikih JSON uretim promptu `AyetHadisFıkıh.md` icine eklendi |
+| TASK-040 | done | 2026-03-24 17:24 +03:00 | Toplu teslim hazirlandi; `hadisler.json` eklendi ve ciftleme kontrolu yapilmadigi not edildi |

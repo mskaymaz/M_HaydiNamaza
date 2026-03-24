@@ -97,3 +97,8 @@
 - Testler calisti mi? Hayir (yalniz backlog/plans markdown kayitlari guncellendi).
 - Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-029`..`TASK-032` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-24 14:22 +03:00
+- Testler calisti mi? Hayir (yalniz bilgilendirme paneli karar kayitlari guncellendi).
+- Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-033`, `ADR` ve `PUSH_LOG` guncellendi).

@@ -79,3 +79,14 @@ Numaralandırma kuralı:
 
 Şimdi {{START_NO}} numarasından başlayarak 50 kayıt üret.
 ```
+
+## Bilgilendirme Paneli Mimari Notu
+
+- Kapsam: ayet, hadis ve fikhi mesele icerikleri bilgi panelinde gosterilecek.
+- Ilk tercih: `local-first` yapi.
+- Icerikler uygulama ile birlikte yerel gelir; ilk acilista hazir olur.
+- Gunluk/random secim cihaz icinde yapilir.
+- Gorsel, foto ve ses eki planlanmaz; metin + kaynak odakli ilerlenir.
+- Panel tipleri buyuk oranda renk farki ile ayrisir.
+- Ileride yeni icerikler icin surumlu uzak icerik paketi guncellemesi eklenebilir.
+- Icerik akisi: `GPT taslak -> manuel/editoryal kontrol -> onayli veri -> uygulama`.

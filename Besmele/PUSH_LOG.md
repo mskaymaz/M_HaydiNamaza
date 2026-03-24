@@ -52,3 +52,4 @@
 | 2026-03-23 14:33 +03:00 | R.260323_1433 | Ayarlar paneli duzenleniyor |
 | 2026-03-24 13:42 +03:00 | R.260324_1342 | Ayet, Hadis ve Fikih calismasina baslandi |
 | 2026-03-24 14:09 +03:00 | R.260324_1409 | Yeni yapilacaklar eklendi |
+| 2026-03-24 14:22 +03:00 | R.260324_1422 | Bilgilendirme paneli mimari karari kaydedildi |

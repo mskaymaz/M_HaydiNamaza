@@ -102,3 +102,8 @@
 - Testler calisti mi? Hayir (yalniz bilgilendirme paneli karar kayitlari guncellendi).
 - Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-033`, `ADR` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-24 15:20 +03:00
+- Testler calisti mi? Hayir (veri dosyasi eslestirme ve yeni JSON cikisi; kod/test calistirilmasi gerekmedi).
+- Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-034`..`TASK-036` ve `PUSH_LOG` guncellendi).

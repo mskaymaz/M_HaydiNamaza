@@ -1,9 +1,9 @@
 # BESMELE STATE
 
-last_update: 2026-03-24 14:22 +03:00
-active_task: TASK-033
-phase: Bilgilendirme paneli icerik mimarisi local-first karar olarak kayda alindi; commit/push yapiliyor
-next_step: Icerikler hazir oldugunda bilgi paneli icin yerel veri modeli ve gosterim akisina gec.
+last_update: 2026-03-24 15:26 +03:00
+active_task: TASK-036
+phase: `ayetkarsilastir.md` metinleriyle `ayetler_guncel.json` olusturuldu; commit/push yapiliyor
+next_step: Yeni ayet uretimi veya kalan kayitlarin resmi kaynaga gore ek dogrulamasina gec.
 blockers: NONE
-last_delivery: R.260324_1422
-handover: Bilgilendirme paneli icin karar kaydi olusturuldu. Yapi: ayet/hadis/fikhi mesele icerikleri baslangicta uygulama ile birlikte yerel gelir; gorsel/foto/ses yok, panel farki agirlikla renk ile ayrisir, gunluk/random secim cihaz icinde yapilir, ileride istersek surumlu uzak icerik paketi guncellemesi eklenir. Yeni backlog: TASK-029..TASK-032 erisilebilirlik/tema gelistirmeleri; TASK-026 ve TASK-027 cihaz dogrulamasi bekleyen ayri UI calismalari olarak yerinde duruyor.
+last_delivery: R.260324_1520
+handover: `ayetkarsilastir.md` icindeki `Metin` alanlari `Sure No + Ayet No` bazli eslestirilerek yeni `ayetler_guncel.json` dosyasina aktarıldı. `ayetler.json` korunarak yerinde birakildi. Eslesme `72/72` tam oldu.

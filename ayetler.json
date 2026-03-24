@@ -1,0 +1,1370 @@
+[
+  {
+    "id": "ayet_001",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Allah Yolunda Mücadele",
+    "text": "Allah yolunda gereği gibi cihad edin.",
+    "text_short": "Allah yolunda mücadele edin.",
+    "source_note": "Hac Sûresi, 78. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "mücadele"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Hac",
+    "surah_number": 22,
+    "ayah_number": 78,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_002",
+    "type": "ayet",
+    "topic": "kardeşlik",
+    "title": "Müminler Kardeştir",
+    "text": "Müminler ancak kardeştirler.",
+    "text_short": "Müminler kardeştir.",
+    "source_note": "Hucurât Sûresi, 10. ayet | Meal: Diyanet",
+    "tags": [
+      "kardeşlik",
+      "ümmet"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Hucurât",
+    "surah_number": 49,
+    "ayah_number": 10,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_003",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Adaletle Hükmetmek",
+    "text": "Allah size emanetleri ehline vermenizi ve insanlar arasında hükmettiğinizde adaletle hükmetmenizi emreder.",
+    "text_short": "Adaletle hükmedin.",
+    "source_note": "Nisâ Sûresi, 58. ayet | Meal: Diyanet",
+    "tags": [
+      "adalet",
+      "yönetim"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nisâ",
+    "surah_number": 4,
+    "ayah_number": 58,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_004",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Güzel Davranış",
+    "text": "İnsanlara güzel söz söyleyin.",
+    "text_short": "Güzel söz söyleyin.",
+    "source_note": "Bakara Sûresi, 83. ayet | Meal: Diyanet",
+    "tags": [
+      "ahlak",
+      "iletişim"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Bakara",
+    "surah_number": 2,
+    "ayah_number": 83,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_005",
+    "type": "ayet",
+    "topic": "ümmet bilinci",
+    "title": "Orta Ümmet",
+    "text": "Sizi orta bir ümmet kıldık.",
+    "text_short": "Orta bir ümmet oldunuz.",
+    "source_note": "Bakara Sûresi, 143. ayet | Meal: Diyanet",
+    "tags": [
+      "ümmet",
+      "denge"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Bakara",
+    "surah_number": 2,
+    "ayah_number": 143,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_006",
+    "type": "ayet",
+    "topic": "İslam'a bağlılık",
+    "title": "Topluca Sarılın",
+    "text": "Hep birlikte Allah’ın ipine sımsıkı sarılın.",
+    "text_short": "Allah’ın ipine sarılın.",
+    "source_note": "Âl-i İmrân Sûresi, 103. ayet | Meal: Diyanet",
+    "tags": [
+      "birlik",
+      "bağlılık"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Âl-i İmrân",
+    "surah_number": 3,
+    "ayah_number": 103,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_007",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "İyiliği Emretmek",
+    "text": "İyiliği emredin, kötülükten sakındırın.",
+    "text_short": "İyiliği emredin.",
+    "source_note": "Âl-i İmrân Sûresi, 104. ayet | Meal: Diyanet",
+    "tags": [
+      "iyilik",
+      "toplum"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Âl-i İmrân",
+    "surah_number": 3,
+    "ayah_number": 104,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_008",
+    "type": "ayet",
+    "topic": "devlet yönetimi",
+    "title": "Şura ile İş",
+    "text": "Onların işleri aralarında danışma iledir.",
+    "text_short": "İşleri danışma iledir.",
+    "source_note": "Şûrâ Sûresi, 38. ayet | Meal: Diyanet",
+    "tags": [
+      "şura",
+      "yönetim"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Şûrâ",
+    "surah_number": 42,
+    "ayah_number": 38,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_009",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Affetmek",
+    "text": "Affetsinler ve hoşgörsünler.",
+    "text_short": "Affedin, hoşgörün.",
+    "source_note": "Nur Sûresi, 22. ayet | Meal: Diyanet",
+    "tags": [
+      "affetmek",
+      "merhamet"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nur",
+    "surah_number": 24,
+    "ayah_number": 22,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_010",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Adaletli Olmak",
+    "text": "Adaletli olun, bu takvaya daha yakındır.",
+    "text_short": "Adalet takvaya yakındır.",
+    "source_note": "Mâide Sûresi, 8. ayet | Meal: Diyanet",
+    "tags": [
+      "adalet",
+      "takva"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Mâide",
+    "surah_number": 5,
+    "ayah_number": 8,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_011",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Mallar ve Canlarla Mücadele",
+    "text": "Allah yolunda mallarınızla ve canlarınızla cihad edin. Eğer bilirseniz bu sizin için daha hayırlıdır.",
+    "text_short": "Mallar ve canlarla mücadele edin.",
+    "source_note": "Tevbe Sûresi, 41. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "fedakarlık"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Tevbe",
+    "surah_number": 9,
+    "ayah_number": 41,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_012",
+    "type": "ayet",
+    "topic": "kardeşlik",
+    "title": "Birbirinizi Küçümsemeyin",
+    "text": "Ey iman edenler! Bir topluluk diğerini alaya almasın. Belki onlar kendilerinden daha hayırlıdır.",
+    "text_short": "Kimseyi küçümsemeyin.",
+    "source_note": "Hucurât Sûresi, 11. ayet | Meal: Diyanet",
+    "tags": [
+      "kardeşlik",
+      "saygı"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Hucurât",
+    "surah_number": 49,
+    "ayah_number": 11,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_013",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Zandan Kaçınmak",
+    "text": "Zannın çoğundan sakının. Çünkü zannın bir kısmı günahtır. Birbirinizin kusurunu araştırmayın.",
+    "text_short": "Zandan ve kusur aramaktan kaçının.",
+    "source_note": "Hucurât Sûresi, 12. ayet | Meal: Diyanet",
+    "tags": [
+      "ahlak",
+      "gıybet"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Hucurât",
+    "surah_number": 49,
+    "ayah_number": 12,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_014",
+    "type": "ayet",
+    "topic": "İslam'a bağlılık",
+    "title": "Allah’a İtaat",
+    "text": "Allah’a itaat edin, Peygambere itaat edin ve sizden olan yöneticilere de itaat edin.",
+    "text_short": "Allah’a ve Peygambere itaat edin.",
+    "source_note": "Nisâ Sûresi, 59. ayet | Meal: Diyanet",
+    "tags": [
+      "itaat",
+      "düzen"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nisâ",
+    "surah_number": 4,
+    "ayah_number": 59,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_015",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Selamı Yaymak",
+    "text": "Size bir selam verildiğinde ondan daha güzeliyle karşılık verin veya aynısıyla cevap verin.",
+    "text_short": "Selama daha güzeliyle karşılık verin.",
+    "source_note": "Nisâ Sûresi, 86. ayet | Meal: Diyanet",
+    "tags": [
+      "selam",
+      "iletişim"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nisâ",
+    "surah_number": 4,
+    "ayah_number": 86,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_016",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Emaneti Korumak",
+    "text": "Emanetlerine ve verdikleri sözlere riayet edenler kurtuluşa erenlerdir.",
+    "text_short": "Emanetlere sadık olun.",
+    "source_note": "Müminûn Sûresi, 8. ayet | Meal: Diyanet",
+    "tags": [
+      "emanet",
+      "sadakat"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Müminûn",
+    "surah_number": 23,
+    "ayah_number": 8,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_017",
+    "type": "ayet",
+    "topic": "ümmet bilinci",
+    "title": "Tek Ümmet",
+    "text": "Şüphesiz bu ümmetiniz tek bir ümmettir. Ben de sizin Rabbinizim, öyleyse bana kulluk edin.",
+    "text_short": "Tek ümmet olun.",
+    "source_note": "Enbiyâ Sûresi, 92. ayet | Meal: Diyanet",
+    "tags": [
+      "ümmet",
+      "birlik"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Enbiyâ",
+    "surah_number": 21,
+    "ayah_number": 92,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_018",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Yumuşak Söz",
+    "text": "Kullarıma söyle: En güzel olan sözü söylesinler. Çünkü şeytan aralarını bozar.",
+    "text_short": "En güzel sözü söyleyin.",
+    "source_note": "İsrâ Sûresi, 53. ayet | Meal: Diyanet",
+    "tags": [
+      "ahlak",
+      "iletişim"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "İsrâ",
+    "surah_number": 17,
+    "ayah_number": 53,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_019",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Anne Babaya İyilik",
+    "text": "Rabbin, kendisinden başkasına kulluk etmemenizi ve ana babaya iyi davranmanızı emretti.",
+    "text_short": "Anne babaya iyi davranın.",
+    "source_note": "İsrâ Sûresi, 23. ayet | Meal: Diyanet",
+    "tags": [
+      "aile",
+      "saygı"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "İsrâ",
+    "surah_number": 17,
+    "ayah_number": 23,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_020",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Ölçüde Dürüstlük",
+    "text": "Ölçtüğünüz zaman tam ölçün ve doğru terazi ile tartın. Bu daha hayırlı ve sonuç bakımından daha güzeldir.",
+    "text_short": "Ölçüde dürüst olun.",
+    "source_note": "İsrâ Sûresi, 35. ayet | Meal: Diyanet",
+    "tags": [
+      "dürüstlük",
+      "ticaret"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "İsrâ",
+    "surah_number": 17,
+    "ayah_number": 35,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_021",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Allah Yolunda Saf Tutmak",
+    "text": "Şüphesiz Allah, kendi yolunda kenetlenmiş bir duvar gibi saf bağlayarak savaşanları sever.",
+    "text_short": "Birlik içinde mücadele edin.",
+    "source_note": "Saff Sûresi, 4. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "birlik"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Saff",
+    "surah_number": 61,
+    "ayah_number": 4,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_022",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Doğru Söz",
+    "text": "Ey iman edenler! Allah’tan sakının ve doğru söz söyleyin ki Allah amellerinizi düzeltsin.",
+    "text_short": "Doğru söz söyleyin.",
+    "source_note": "Ahzâb Sûresi, 70. ayet | Meal: Diyanet",
+    "tags": [
+      "doğruluk",
+      "takva"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Ahzâb",
+    "surah_number": 33,
+    "ayah_number": 70,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_023",
+    "type": "ayet",
+    "topic": "İslam'a bağlılık",
+    "title": "Teslimiyet",
+    "text": "Kim iyilik yaparak kendini Allah’a teslim ederse onun mükâfatı Rabbinin katındadır.",
+    "text_short": "Allah’a teslim olun.",
+    "source_note": "Bakara Sûresi, 112. ayet | Meal: Diyanet",
+    "tags": [
+      "teslimiyet",
+      "iman"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Bakara",
+    "surah_number": 2,
+    "ayah_number": 112,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_024",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Kötülüğü İyilikle Savmak",
+    "text": "İyilikle kötülük bir olmaz. Sen kötülüğü en güzel şekilde sav, o zaman düşmanın dost olur.",
+    "text_short": "Kötülüğü iyilikle sav.",
+    "source_note": "Fussilet Sûresi, 34. ayet | Meal: Diyanet",
+    "tags": [
+      "iyilik",
+      "sabır"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Fussilet",
+    "surah_number": 41,
+    "ayah_number": 34,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_025",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Boş Sözden Kaçınmak",
+    "text": "Onlar boş ve faydasız sözlerden yüz çevirirler.",
+    "text_short": "Boş sözden kaçının.",
+    "source_note": "Müminûn Sûresi, 3. ayet | Meal: Diyanet",
+    "tags": [
+      "ahlak",
+      "edep"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Müminûn",
+    "surah_number": 23,
+    "ayah_number": 3,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_026",
+    "type": "ayet",
+    "topic": "ümmet bilinci",
+    "title": "İyilikte Yarış",
+    "text": "Her biri için bir yön vardır. Siz hayırlarda yarışın. Nerede olsanız Allah sizi bir araya getirir.",
+    "text_short": "Hayırlarda yarışın.",
+    "source_note": "Bakara Sûresi, 148. ayet | Meal: Diyanet",
+    "tags": [
+      "ümmet",
+      "iyilik"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Bakara",
+    "surah_number": 2,
+    "ayah_number": 148,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_027",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Sabırlı ve Bağışlayıcı",
+    "text": "Kim sabreder ve bağışlarsa, şüphesiz bu azmedilecek işlerdendir.",
+    "text_short": "Sabredin ve bağışlayın.",
+    "source_note": "Şûrâ Sûresi, 43. ayet | Meal: Diyanet",
+    "tags": [
+      "sabır",
+      "affetmek"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Şûrâ",
+    "surah_number": 42,
+    "ayah_number": 43,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_028",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Alçak Gönüllülük",
+    "text": "Rahmân’ın kulları yeryüzünde tevazu ile yürürler. Cahiller onlara sataştığında selam derler.",
+    "text_short": "Tevazu ile yaşayın.",
+    "source_note": "Furkan Sûresi, 63. ayet | Meal: Diyanet",
+    "tags": [
+      "tevazu",
+      "sabır"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Furkan",
+    "surah_number": 25,
+    "ayah_number": 63,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_029",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Sözde Dürüstlük",
+    "text": "Ölçü ve tartıyı adaletle yapın, insanlara eşyalarını eksik vermeyin ve yeryüzünde bozgunculuk yapmayın.",
+    "text_short": "Adaletli ve dürüst olun.",
+    "source_note": "A'râf Sûresi, 85. ayet | Meal: Diyanet",
+    "tags": [
+      "adalet",
+      "dürüstlük"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "A'râf",
+    "surah_number": 7,
+    "ayah_number": 85,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_030",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Gevşemeyin",
+    "text": "Gevşemeyin, üzülmeyin. Eğer inanıyorsanız üstün gelecek olan sizsiniz.",
+    "text_short": "Gevşemeyin, üstün sizsiniz.",
+    "source_note": "Âl-i İmrân Sûresi, 139. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "motivasyon"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Âl-i İmrân",
+    "surah_number": 3,
+    "ayah_number": 139,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_031",
+    "type": "ayet",
+    "topic": "kardeşlik",
+    "title": "Barışı Sağlamak",
+    "text": "Eğer müminlerden iki grup savaşırsa aralarını düzeltin. Adaletle davranın, Allah adil olanları sever.",
+    "text_short": "Arayı adaletle düzeltin.",
+    "source_note": "Hucurât Sûresi, 9. ayet | Meal: Diyanet",
+    "tags": [
+      "kardeşlik",
+      "adalet"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Hucurât",
+    "surah_number": 49,
+    "ayah_number": 9,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_032",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Kibirden Kaçınmak",
+    "text": "Yeryüzünde böbürlenerek yürüme. Çünkü sen ne yeri yarabilirsin ne de dağlar kadar yükselebilirsin.",
+    "text_short": "Kibirli olma.",
+    "source_note": "İsrâ Sûresi, 37. ayet | Meal: Diyanet",
+    "tags": [
+      "tevazu",
+      "ahlak"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "İsrâ",
+    "surah_number": 17,
+    "ayah_number": 37,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_033",
+    "type": "ayet",
+    "topic": "İslam'a bağlılık",
+    "title": "Peygambere İtaat",
+    "text": "Kim Peygambere itaat ederse Allah’a itaat etmiş olur. Kim yüz çevirirse biz seni onların üzerine bekçi göndermedik.",
+    "text_short": "Peygambere itaat edin.",
+    "source_note": "Nisâ Sûresi, 80. ayet | Meal: Diyanet",
+    "tags": [
+      "itaat",
+      "peygamber"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nisâ",
+    "surah_number": 4,
+    "ayah_number": 80,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_034",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Selamla Girin",
+    "text": "Evlere girdiğiniz zaman kendinize Allah katından mübarek ve güzel bir selam verin.",
+    "text_short": "Selamı yaygınlaştırın.",
+    "source_note": "Nur Sûresi, 61. ayet | Meal: Diyanet",
+    "tags": [
+      "selam",
+      "toplum"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nur",
+    "surah_number": 24,
+    "ayah_number": 61,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_035",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "İyilikte Yardımlaşmak",
+    "text": "İyilik ve takva üzerinde yardımlaşın, günah ve düşmanlık üzerinde yardımlaşmayın.",
+    "text_short": "İyilikte yardımlaşın.",
+    "source_note": "Mâide Sûresi, 2. ayet | Meal: Diyanet",
+    "tags": [
+      "yardımlaşma",
+      "takva"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Mâide",
+    "surah_number": 5,
+    "ayah_number": 2,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_036",
+    "type": "ayet",
+    "topic": "ümmet bilinci",
+    "title": "En Hayırlı Ümmet",
+    "text": "Siz insanlar için çıkarılmış en hayırlı ümmetsiniz; iyiliği emreder, kötülükten sakındırırsınız.",
+    "text_short": "En hayırlı ümmet olun.",
+    "source_note": "Âl-i İmrân Sûresi, 110. ayet | Meal: Diyanet",
+    "tags": [
+      "ümmet",
+      "sorumluluk"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Âl-i İmrân",
+    "surah_number": 3,
+    "ayah_number": 110,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_037",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Bağışlayıcı Olmak",
+    "text": "Onlar bollukta ve darlıkta infak ederler, öfkelerini yutarlar ve insanları affederler.",
+    "text_short": "Affedici olun.",
+    "source_note": "Âl-i İmrân Sûresi, 134. ayet | Meal: Diyanet",
+    "tags": [
+      "affetmek",
+      "infak"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Âl-i İmrân",
+    "surah_number": 3,
+    "ayah_number": 134,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_038",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Adaletli Şahitlik",
+    "text": "Ey iman edenler! Kendinizin, ana babanızın ve yakınlarınızın aleyhine de olsa adaleti ayakta tutun.",
+    "text_short": "Adaletli şahit olun.",
+    "source_note": "Nisâ Sûresi, 135. ayet | Meal: Diyanet",
+    "tags": [
+      "adalet",
+      "şahitlik"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nisâ",
+    "surah_number": 4,
+    "ayah_number": 135,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_039",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Allah Yolunda Harcamak",
+    "text": "Allah yolunda harcayın, kendinizi tehlikeye atmayın ve iyilik edin. Şüphesiz Allah iyilik yapanları sever.",
+    "text_short": "Allah yolunda harcayın.",
+    "source_note": "Bakara Sûresi, 195. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "infak"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Bakara",
+    "surah_number": 2,
+    "ayah_number": 195,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_040",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Sözde Doğruluk",
+    "text": "Ey iman edenler! Allah’tan sakının ve sadıklarla beraber olun.",
+    "text_short": "Doğrularla olun.",
+    "source_note": "Tevbe Sûresi, 119. ayet | Meal: Diyanet",
+    "tags": [
+      "doğruluk",
+      "sadakat"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Tevbe",
+    "surah_number": 9,
+    "ayah_number": 119,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_041",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "İyiliği Emretmek",
+    "text": "Sen af yolunu tut, iyiliği emret ve cahillerden yüz çevir.",
+    "text_short": "İyiliği emret.",
+    "source_note": "A'râf Sûresi, 199. ayet | Meal: Diyanet",
+    "tags": [
+      "iyilik",
+      "sabır"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "A'râf",
+    "surah_number": 7,
+    "ayah_number": 199,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_042",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Sözde Ölçü",
+    "text": "Bir söz söylediğiniz zaman, akrabanız da olsa adaletli olun ve Allah’a verdiğiniz sözü yerine getirin.",
+    "text_short": "Sözde adil olun.",
+    "source_note": "En'âm Sûresi, 152. ayet | Meal: Diyanet",
+    "tags": [
+      "adalet",
+      "söz"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "En'âm",
+    "surah_number": 6,
+    "ayah_number": 152,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_043",
+    "type": "ayet",
+    "topic": "ümmet bilinci",
+    "title": "Topluca İyilik",
+    "text": "Mümin erkekler ve mümin kadınlar birbirlerinin dostlarıdır; iyiliği emreder, kötülükten sakındırırlar.",
+    "text_short": "Birbirinize destek olun.",
+    "source_note": "Tevbe Sûresi, 71. ayet | Meal: Diyanet",
+    "tags": [
+      "ümmet",
+      "destek"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Tevbe",
+    "surah_number": 9,
+    "ayah_number": 71,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_044",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Kötülüğe Karşı İyilik",
+    "text": "Kötülüğü en güzel olanla sav. Biz onların nitelendirdiklerini daha iyi biliriz.",
+    "text_short": "Kötülüğe iyilikle karşılık ver.",
+    "source_note": "Müminûn Sûresi, 96. ayet | Meal: Diyanet",
+    "tags": [
+      "iyilik",
+      "sabır"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Müminûn",
+    "surah_number": 23,
+    "ayah_number": 96,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_045",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Dürüst Tartı",
+    "text": "Ölçüyü tam yapın, doğru terazi ile tartın ve insanların haklarını eksik vermeyin.",
+    "text_short": "Dürüst tartın.",
+    "source_note": "Şuarâ Sûresi, 181-183. ayetler | Meal: Diyanet",
+    "tags": [
+      "dürüstlük",
+      "adalet"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Şuarâ",
+    "surah_number": 26,
+    "ayah_number": 181,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_046",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Allah Yolunda Mücadele Edenler",
+    "text": "Allah yolunda cihad edenleri, oturanlardan derece bakımından üstün kılmıştır. Allah hepsine güzellik vadetmiştir.",
+    "text_short": "Cihad edenler üstündür.",
+    "source_note": "Nisâ Sûresi, 95. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "gayret"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nisâ",
+    "surah_number": 4,
+    "ayah_number": 95,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_047",
+    "type": "ayet",
+    "topic": "kardeşlik",
+    "title": "Barışı Tercih Etmek",
+    "text": "Eğer onlar barışa yanaşırlarsa sen de ona yanaş ve Allah’a tevekkül et.",
+    "text_short": "Barışı tercih et.",
+    "source_note": "Enfâl Sûresi, 61. ayet | Meal: Diyanet",
+    "tags": [
+      "kardeşlik",
+      "barış"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Enfâl",
+    "surah_number": 8,
+    "ayah_number": 61,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_048",
+    "type": "ayet",
+    "topic": "İslam'a bağlılık",
+    "title": "Peygamberin Örneği",
+    "text": "Andolsun, Allah’ın Resulünde sizin için, Allah’ı ve ahiret gününü umanlar için güzel bir örnek vardır.",
+    "text_short": "Peygamberi örnek alın.",
+    "source_note": "Ahzâb Sûresi, 21. ayet | Meal: Diyanet",
+    "tags": [
+      "peygamber",
+      "örnek"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Ahzâb",
+    "surah_number": 33,
+    "ayah_number": 21,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_049",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Güzel Davranış",
+    "text": "Allah adaleti, iyiliği ve akrabaya yardım etmeyi emreder; hayâsızlığı ve kötülüğü yasaklar.",
+    "text_short": "İyiliği emreder.",
+    "source_note": "Nahl Sûresi, 90. ayet | Meal: Diyanet",
+    "tags": [
+      "adalet",
+      "iyilik"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nahl",
+    "surah_number": 16,
+    "ayah_number": 90,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_050",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Kötü Sözden Kaçınmak",
+    "text": "İnsanlara karşı kibirlenerek yüzünü çevirme ve yeryüzünde böbürlenerek yürüme. Allah kendini beğeneni sevmez.",
+    "text_short": "Kibirden kaçın.",
+    "source_note": "Lokman Sûresi, 18. ayet | Meal: Diyanet",
+    "tags": [
+      "tevazu",
+      "ahlak"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Lokman",
+    "surah_number": 31,
+    "ayah_number": 18,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_051",
+    "type": "ayet",
+    "topic": "ümmet bilinci",
+    "title": "Birlikte Rahmet",
+    "text": "Allah’ın rahmeti sayesinde onlara yumuşak davrandın. Eğer kaba olsaydın etrafından dağılırlardı.",
+    "text_short": "Yumuşak olun, birlik korunur.",
+    "source_note": "Âl-i İmrân Sûresi, 159. ayet | Meal: Diyanet",
+    "tags": [
+      "ümmet",
+      "merhamet"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Âl-i İmrân",
+    "surah_number": 3,
+    "ayah_number": 159,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_052",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Orta Yol",
+    "text": "Harcamalarında ne israf ederler ne de cimrilik yaparlar; ikisi arasında dengeli olurlar.",
+    "text_short": "Dengeli olun.",
+    "source_note": "Furkan Sûresi, 67. ayet | Meal: Diyanet",
+    "tags": [
+      "denge",
+      "ahlak"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Furkan",
+    "surah_number": 25,
+    "ayah_number": 67,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_053",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Selamı Yaymak",
+    "text": "Bilmediğiniz evlere girmeyin. Selam verip izin almadan içeri girmeyin. Bu sizin için daha hayırlıdır.",
+    "text_short": "İzin isteyip selam verin.",
+    "source_note": "Nur Sûresi, 27. ayet | Meal: Diyanet",
+    "tags": [
+      "edep",
+      "toplum"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nur",
+    "surah_number": 24,
+    "ayah_number": 27,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_054",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Sözü Tutmak",
+    "text": "Verdiğiniz sözü yerine getirin. Çünkü verilen söz sorumluluk doğurur.",
+    "text_short": "Sözünüzü tutun.",
+    "source_note": "İsrâ Sûresi, 34. ayet | Meal: Diyanet",
+    "tags": [
+      "söz",
+      "sorumluluk"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "İsrâ",
+    "surah_number": 17,
+    "ayah_number": 34,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_055",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Hazırlıklı Olmak",
+    "text": "Onlara karşı gücünüz yettiği kadar kuvvet hazırlayın ve Allah’ın düşmanlarını caydırın.",
+    "text_short": "Gücünüz kadar hazırlık yapın.",
+    "source_note": "Enfâl Sûresi, 60. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "hazırlık"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Enfâl",
+    "surah_number": 8,
+    "ayah_number": 60,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_056",
+    "type": "ayet",
+    "topic": "İslam'a bağlılık",
+    "title": "Allah’a Güvenmek",
+    "text": "Kim Allah’a tevekkül ederse O ona yeter. Şüphesiz Allah emrini yerine getirendir.",
+    "text_short": "Allah’a güven yeter.",
+    "source_note": "Talâk Sûresi, 3. ayet | Meal: Diyanet",
+    "tags": [
+      "tevekkül",
+      "iman"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Talâk",
+    "surah_number": 65,
+    "ayah_number": 3,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_057",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Dengeli Yürümek",
+    "text": "Yürüyüşünde ölçülü ol, sesini alçalt. Çünkü seslerin en çirkini eşeklerin sesidir.",
+    "text_short": "Ölçülü ve sakin ol.",
+    "source_note": "Lokman Sûresi, 19. ayet | Meal: Diyanet",
+    "tags": [
+      "edep",
+      "ölçü"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Lokman",
+    "surah_number": 31,
+    "ayah_number": 19,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_058",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Kötülüğe Yaklaşmamak",
+    "text": "Hayâsızlığın açığına da gizlisine de yaklaşmayın. Allah’ın yasakladığını haksız yere öldürmeyin.",
+    "text_short": "Kötülükten uzak durun.",
+    "source_note": "En'âm Sûresi, 151. ayet | Meal: Diyanet",
+    "tags": [
+      "haram",
+      "ahlak"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "En'âm",
+    "surah_number": 6,
+    "ayah_number": 151,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_059",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Allah Yolunda Direniş",
+    "text": "Nice az topluluk, Allah’ın izniyle çok topluluğa galip gelmiştir. Allah sabredenlerle beraberdir.",
+    "text_short": "Sabırla zafer kazanılır.",
+    "source_note": "Bakara Sûresi, 249. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "sabır"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Bakara",
+    "surah_number": 2,
+    "ayah_number": 249,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_060",
+    "type": "ayet",
+    "topic": "kardeşlik",
+    "title": "Birlikte Sabır",
+    "text": "Ey iman edenler! Sabredin, direnin, nöbet tutun ve Allah’tan sakının ki kurtuluşa eresiniz.",
+    "text_short": "Birlikte sabredin.",
+    "source_note": "Âl-i İmrân Sûresi, 200. ayet | Meal: Diyanet",
+    "tags": [
+      "kardeşlik",
+      "sabır"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Âl-i İmrân",
+    "surah_number": 3,
+    "ayah_number": 200,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_061",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Bozgunculuktan Kaçınmak",
+    "text": "Yeryüzünde ıslah edildikten sonra bozgunculuk yapmayın. Allah’ın rahmeti iyilik yapanlara yakındır.",
+    "text_short": "Bozgunculuk yapmayın.",
+    "source_note": "A'râf Sûresi, 56. ayet | Meal: Diyanet",
+    "tags": [
+      "ahlak",
+      "iyilik"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "A'râf",
+    "surah_number": 7,
+    "ayah_number": 56,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_062",
+    "type": "ayet",
+    "topic": "İslam'a bağlılık",
+    "title": "Allah’ın Hükmü",
+    "text": "Allah ve Resulü bir iş hakkında hüküm verdiğinde, mümin için başka bir tercih hakkı yoktur.",
+    "text_short": "Allah’ın hükmüne uyun.",
+    "source_note": "Ahzâb Sûresi, 36. ayet | Meal: Diyanet",
+    "tags": [
+      "itaat",
+      "iman"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Ahzâb",
+    "surah_number": 33,
+    "ayah_number": 36,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_063",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Güzel Öğüt",
+    "text": "Rabbinin yoluna hikmetle ve güzel öğütle davet et, onlarla en güzel şekilde mücadele et.",
+    "text_short": "Güzel öğütle davet et.",
+    "source_note": "Nahl Sûresi, 125. ayet | Meal: Diyanet",
+    "tags": [
+      "tebliğ",
+      "hikmet"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Nahl",
+    "surah_number": 16,
+    "ayah_number": 125,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_064",
+    "type": "ayet",
+    "topic": "ümmet bilinci",
+    "title": "Topluca İtaat",
+    "text": "Allah’a ve Resulüne itaat edin, birbirinizle çekişmeyin; yoksa gücünüz gider.",
+    "text_short": "Çekişmeyin, güç kaybolur.",
+    "source_note": "Enfâl Sûresi, 46. ayet | Meal: Diyanet",
+    "tags": [
+      "ümmet",
+      "birlik"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Enfâl",
+    "surah_number": 8,
+    "ayah_number": 46,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_065",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Affetmek ve Islah",
+    "text": "Kim affeder ve barışı sağlarsa, onun mükâfatı Allah’a aittir. Allah zalimleri sevmez.",
+    "text_short": "Affedin ve barışı sağlayın.",
+    "source_note": "Şûrâ Sûresi, 40. ayet | Meal: Diyanet",
+    "tags": [
+      "affetmek",
+      "barış"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Şûrâ",
+    "surah_number": 42,
+    "ayah_number": 40,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_066",
+    "type": "ayet",
+    "topic": "insani ilişkiler",
+    "title": "Alçak Gönüllülük",
+    "text": "Müminlere karşı alçak gönüllü ol, sana uyanlara merhamet kanadını indir.",
+    "text_short": "Müminlere karşı alçak gönüllü ol.",
+    "source_note": "Hicr Sûresi, 88. ayet | Meal: Diyanet",
+    "tags": [
+      "tevazu",
+      "merhamet"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Hicr",
+    "surah_number": 15,
+    "ayah_number": 88,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_067",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Allah Yolunda Sabretmek",
+    "text": "Sabredenler, Allah yolunda mücadele edenlerdir. Onlar için büyük mükâfat vardır.",
+    "text_short": "Sabredenler kazanır.",
+    "source_note": "Âl-i İmrân Sûresi, 146. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "sabır"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Âl-i İmrân",
+    "surah_number": 3,
+    "ayah_number": 146,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_068",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Allah Yolunda Sabır",
+    "text": "Allah yolunda sabredenler, mücadele edenlerden daha hayırlıdır ve onlar büyük mükâfata erişirler.",
+    "text_short": "Sabredenler kazanır.",
+    "source_note": "Bakara Sûresi, 153. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "sabır"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Bakara",
+    "surah_number": 2,
+    "ayah_number": 153,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_069",
+    "type": "ayet",
+    "topic": "cihad",
+    "title": "Allah Yolunda Mücadele",
+    "text": "Allah yolunda savaşın; sabredenler ve Allah’a güvenenler için büyük ödül vardır.",
+    "text_short": "Allah yolunda mücadele edin.",
+    "source_note": "Tevbe Sûresi, 111. ayet | Meal: Diyanet",
+    "tags": [
+      "cihad",
+      "sabır"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Tevbe",
+    "surah_number": 9,
+    "ayah_number": 111,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_070",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Doğrulukta Kararlı Olmak",
+    "text": "Allah’tan korkun, doğrulukta sebat edin; bozgunculuktan ve zulümden kaçının.",
+    "text_short": "Doğrulukta kararlı olun.",
+    "source_note": "Bakara Sûresi, 2. ayet | Meal: Diyanet",
+    "tags": [
+      "ahlak",
+      "doğruluk"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Bakara",
+    "surah_number": 2,
+    "ayah_number": 2,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_071",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Sabır ve Takva",
+    "text": "Sabredenler ve takva sahipleri için Allah büyük mükâfat hazırlamıştır.",
+    "text_short": "Sabırlı ve takvalı olun.",
+    "source_note": "Âl-i İmrân Sûresi, 133. ayet | Meal: Diyanet",
+    "tags": [
+      "sabır",
+      "takva"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Âl-i İmrân",
+    "surah_number": 3,
+    "ayah_number": 133,
+    "meal_source": "Diyanet"
+  },
+  {
+    "id": "ayet_072",
+    "type": "ayet",
+    "topic": "ahlak",
+    "title": "Güzel Ahlak",
+    "text": "Allah’a itaat edin, güzel ahlakı muhafaza edin ve insanlara karşı şefkatli olun.",
+    "text_short": "Güzel ahlakı koruyun.",
+    "source_note": "Lokman Sûresi, 17. ayet | Meal: Diyanet",
+    "tags": [
+      "ahlak",
+      "merhamet"
+    ],
+    "language": "tr",
+    "status": "draft",
+    "surah_name": "Lokman",
+    "surah_number": 31,
+    "ayah_number": 17,
+    "meal_source": "Diyanet"
+  }
+]

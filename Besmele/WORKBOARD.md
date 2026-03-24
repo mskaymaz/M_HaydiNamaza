@@ -37,3 +37,6 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-031 | planned | 2026-03-24 14:04 +03:00 | Motif yerine kullanici resmi yerlestirme, onizleme, tasima ve olcekleme arayuzu ekle |
 | TASK-032 | planned | 2026-03-24 14:04 +03:00 | Ust panel, vakitler paneli ve bilgi paneli icin renk + alfa/seffaflik ayari ekle |
 | TASK-033 | done | 2026-03-24 14:19 +03:00 | Bilgilendirme paneli icin local-first icerik mimarisi ve karar kaydi olusturuldu |
+| TASK-034 | done | 2026-03-24 14:53 +03:00 | `ayetler.json` tek parca gecerli JSON olarak temizlendi; tekrar analizi cikarildi |
+| TASK-035 | done | 2026-03-24 15:04 +03:00 | Tekrarlanan ayetler ayiklandi, ids yeniden verildi ve sure/ayet envanteri cikartildi |
+| TASK-036 | done | 2026-03-24 15:26 +03:00 | `ayetkarsilastir.md` metinleriyle yeni `ayetler_guncel.json` cikisi uretildi |

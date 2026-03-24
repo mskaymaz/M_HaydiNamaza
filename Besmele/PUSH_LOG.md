@@ -53,3 +53,4 @@
 | 2026-03-24 13:42 +03:00 | R.260324_1342 | Ayet, Hadis ve Fikih calismasina baslandi |
 | 2026-03-24 14:09 +03:00 | R.260324_1409 | Yeni yapilacaklar eklendi |
 | 2026-03-24 14:22 +03:00 | R.260324_1422 | Bilgilendirme paneli mimari karari kaydedildi |
+| 2026-03-24 15:20 +03:00 | R.260324_1520 | Ayet metinleri karsilastirma dosyasindan yeni JSON cikisina aktarildi |

@@ -45,3 +45,4 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-039 | done | 2026-03-24 16:18 +03:00 | Fikih JSON uretim promptu `AyetHadisFıkıh.md` icine eklendi |
 | TASK-040 | done | 2026-03-24 17:24 +03:00 | Toplu teslim hazirlandi; `hadisler.json` eklendi ve ciftleme kontrolu yapilmadigi not edildi |
 | TASK-041 | done | 2026-03-24 17:29 +03:00 | `assets/audio/adhan/fajr_malmo.webm` yerelden ve uzak repodan kaldirilmak uzere silindi |
+| TASK-042 | done | 2026-03-25 16:28 +03:00 | `ayetler.json` tek gecerli JSON dizisine indirildi; 101 tekrar satiri ayiklanip ids `ayet_001..ayet_301` olarak yeniden siralandi |

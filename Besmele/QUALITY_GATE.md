@@ -122,3 +122,8 @@
 - Testler calisti mi? Hayir (yalniz kullanilmayacak ezan dosyasi silindi).
 - Temel akislarda regresyon var mi? Hayir (dosya projede adiyla referanslanmiyordu; yalniz asset kaldirildi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-041` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-25 16:53 +03:00
+- Testler calisti mi? Hayir (yalniz `ayetler.json` veri temizligi ve Besmele kayitlari guncellendi).
+- Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi; veri dosyasi gecerli JSON ve tekillik kontrolunden gecirildi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-042`, `PUSH_LOG` ve commit/push etiketi hazirlandi).

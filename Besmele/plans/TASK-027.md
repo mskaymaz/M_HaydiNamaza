@@ -1,7 +1,7 @@
 # TASK-027
 
-status: in_progress
-updated: 2026-03-23 14:33 +03:00
+status: planned
+updated: 2026-03-26 16:42 +03:00
 scope: Mevcut `turkey` secenegine dokunmadan ayri `diyanet_tabanli` hesaplama yontemini deneysel secenek olarak ekle.
 
 done_summary:
@@ -13,10 +13,10 @@ done_summary:
 - Ayarlar panelindeki hesaplama yontemi ozeti ve secim ekrani sadeletildi; mevcut `turkey` secenegi korunurken `diyanet_tabanli` ayrik secenek olarak tutuldu.
 
 now:
-- Commit/push hazir; cihazda `diyanet_tabanli` secenegi ve hesaplama yontemi ekraninin gorunumu dogrulanacak.
+- Kullanici yonlendirmesiyle sonraya alindi; mevcut calisan sistem korunuyor.
 
 next:
-- `diyanet_tabanli` secildiginde vakitlerin beklendigi gibi gelip gelmedigini cihazda kontrol et.
+- Daha sonra `diyanet_tabanli` secildiginde vakitlerin beklendigi gibi gelip gelmedigini cihazda kontrol et.
 
 refs:
 - `lib/app/prayer_service.dart`

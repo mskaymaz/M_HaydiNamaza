@@ -142,3 +142,8 @@
 - Testler calisti mi? Kismen (`home_screen.dart` analyze temiz; `settings_screen.dart` icin 5 adet mevcut `unused_element` uyarisi var, yeni hata yok).
 - Temel akislarda regresyon var mi? Hayir (yeni nafile eklenince liste otomatik alta kayiyor; titreşim tespiti icin eklenen deneysel kodlar geri alindi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-004`, `PUSH_LOG` ve teslim etiketi guncellendi).
+
+## 2026-03-26 16:44 +03:00
+- Testler calisti mi? Kismen (telefon ve tablette fiziksel cihaz debug akisi ile manuel UI dogrulamasi yapildi; ek otomatik test calistirilmadi).
+- Temel akislarda regresyon var mi? Hayir (telefon/tablet cihaz dogrulamalari olumlu; `TASK-027` riski artirmamak icin ertelendi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, ilgili `TASK` kayitlari ve `PUSH_LOG` push oncesi guncellendi).

@@ -1,10 +1,10 @@
 # BESMELE STATE
 
-last_update: 2026-03-26 14:50 +03:00
-active_task: TASK-004
-phase: `TASK-004` final polish tamamlandi; yeni nafile satiri eklenince liste alta kayiyor, titreşim-kontrol denemeleri geri alindi ve teslim kayitlari hazirlandi.
-next_step: Kullanici isterse siradaki acik is olarak `TASK-021`, `TASK-024` veya `TASK-026` devralinabilir.
+last_update: 2026-03-26 16:44 +03:00
+active_task: NONE
+phase: `TASK-021`, `TASK-024` ve `TASK-026` kapatildi; `TASK-027` ertelendi ve commit/push hazirligi tamamlandi.
+next_step: Commit ve push.
 blockers: NONE
 operation_note: Ilk turda cekirdek dosyalar disi ek baglam yuklenmez; yalniz is dogrudan gerektiriyorsa minimum ek dosya okunur.
-last_delivery: R.260326_1450
-handover: `TASK-004` son turda tamamlandi. `home_screen.dart` icinde yeni nafile satiri eklendiginde vakitler paneli otomatik alta kayarak yeni satiri gorunur yapiyor; ust panel ve satir hizalari telefon/tablet dogrulamasindan gecti. Titreşim destegi tespiti icin denenen ek korumalar geri alindi; Android `MainActivity` tekrar sade hale getirildi.
+last_delivery: R.260326_1644
+handover: `TASK-021`, `TASK-024` ve `TASK-026` cihaz dogrulamalariyla kapatildi. `tools/run_m.ps1` ek arguman gecisli hale getirildi. `TASK-027` mevcut calisan sistemi riske atmamak icin sonraya alindi; bu haliyle push hazir.

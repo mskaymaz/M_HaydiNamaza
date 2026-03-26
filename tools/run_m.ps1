@@ -1,5 +1,7 @@
 param(
-  [string]$DeviceId = "emulator-5554"
+  [string]$DeviceId = "emulator-5554",
+  [Parameter(ValueFromRemainingArguments = $true)]
+  [string[]]$FlutterArgs = @()
 )
 
 $ErrorActionPreference = "Stop"
@@ -32,4 +34,4 @@ if (Test-Path $localPropertiesPath) {
   }
 }
 
-flutter run -d $DeviceId
+flutter run -d $DeviceId @FlutterArgs

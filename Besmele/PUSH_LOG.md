@@ -62,3 +62,9 @@
 | 2026-03-26 11:41 +03:00 | R.260326_1141 | Ilk tur ekonomik modda cekirdek disi baglam yukleme kisiti `STATE.md` icine kalici `operation_note` olarak eklendi |
 | 2026-03-26 12:35 +03:00 | R.260326_1235 | `TASK-004` yerel handover: ust panel ve vakit satiri hizalari telefon-tablet dogrulamasi ile kapatildi |
 | 2026-03-26 14:50 +03:00 | R.260326_1450 | `TASK-004` final polish: yeni nafile eklenince liste otomatik alta kayiyor; titreşim tespit denemeleri geri alinarak temiz teslim hazirlandi |
+| 2026-03-26 16:25 +03:00 | R.260326_1625 | `TASK-021` yerel handover: telefon ve tablet fiziksel cihaz debug akisi dogrulandi; `run_m.ps1` ek arguman gecisli hale getirildi |
+| 2026-03-26 16:36 +03:00 | R.260326_1636 | `TASK-024` yerel handover: vakit satiri dengesi telefon ve tablette gorsel olarak dogrulandi; aktif is `TASK-026`ya alindi |
+| 2026-03-26 16:39 +03:00 | R.260326_1639 | `TASK-026` yerel handover: ayarlar paneli ve hesaplama yontemi secim ekrani telefon ve tablette dogrulandi |
+| 2026-03-26 16:40 +03:00 | R.260326_1640 | `TASK-027` devralindi; `diyanet_tabanli` secenegi ve sonuc vakitleri icin cihaz dogrulamasi bekleniyor |
+| 2026-03-26 16:42 +03:00 | R.260326_1642 | `TASK-027` kullanici yonlendirmesiyle sonraya alindi; mevcut calisan akis korunuyor |
+| 2026-03-26 16:44 +03:00 | R.260326_1644 | `TASK-021`, `TASK-024` ve `TASK-026` kapatilip `TASK-027` ertelenmis haliyle commit/push hazirlandi |

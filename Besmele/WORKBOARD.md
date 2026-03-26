@@ -24,13 +24,13 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-018 | done | 2026-03-19 00:00 +03:00 | AGENTS ekonomik token kuralini en ust oncelikte sertlestir |
 | TASK-019 | done | 2026-03-19 10:08 +03:00 | Ekonomik token preflight metni kisaltildi |
 | TASK-020 | done | 2026-03-19 10:20 +03:00 | Exact scope talimati zorunlu preflight olarak sabitlendi |
-| TASK-021 | blocked | 2026-03-19 17:52 +03:00 | Telefon ADB baglantisi scriptte duzeltildi; cihaz halen `unauthorized` |
+| TASK-021 | done | 2026-03-26 16:25 +03:00 | Telefon ve tablet fiziksel cihaz debug akisi dogrulandi; `run_m.ps1` ek arguman gecisli hale getirildi |
 | TASK-022 | done | 2026-03-19 17:52 +03:00 | Ilk acilista varsayilan konum Amasya/Merzifon fallback olarak eklendi |
 | TASK-023 | done | 2026-03-19 17:52 +03:00 | Ayarlar ve konum ayarlari panel renkleri softlastirildi |
-| TASK-024 | in_progress | 2026-03-19 17:52 +03:00 | Vakit satiri objeleri esit aralikli ve merkezli dagitiliyor |
+| TASK-024 | done | 2026-03-26 16:36 +03:00 | Vakit satiri dengesi telefon ve tablette gorsel olarak dogrulandi |
 | TASK-025 | done | 2026-03-19 22:15 +03:00 | Ust panel ve vakitler paneli gorsellestirme 1. asama tamamlandi |
-| TASK-026 | in_progress | 2026-03-23 14:33 +03:00 | Ayarlar paneli ve hesaplama yontemi secim ekrani sabit px olculerle sadeletiliyor |
-| TASK-027 | in_progress | 2026-03-23 14:33 +03:00 | `diyanet_tabanli` secenegi korunurken secim ve ozet ekranlari sadeletildi |
+| TASK-026 | done | 2026-03-26 16:39 +03:00 | Ayarlar paneli ve hesaplama yontemi secim ekrani telefon ve tablette dogrulandi |
+| TASK-027 | planned | 2026-03-26 16:42 +03:00 | `diyanet_tabanli` secenegi sonraya alindi; mevcut calisan akis korunuyor |
 | TASK-028 | done | 2026-03-24 13:42 +03:00 | Ayet/Hadis/Fikih icerik toplama akisi icin ayet promptu ve markdown kaydi baslatildi |
 | TASK-029 | planned | 2026-03-24 14:04 +03:00 | Erisilebilir buyutme modu: tum UI olceklenebilsin, tasan alan kaydirilabilsin |
 | TASK-030 | planned | 2026-03-24 14:04 +03:00 | Zemin icin secilebilir coklu cizgisel motif sistemi ve motif secici ekle |

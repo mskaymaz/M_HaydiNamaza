@@ -1,7 +1,7 @@
 # TASK-026
 
-status: in_progress
-updated: 2026-03-23 14:33 +03:00
+status: done
+updated: 2026-03-26 16:39 +03:00
 scope: Ust panel ve vakitler paneli gorsellestirme 1. asama sonrasi cekmece yapisinin panel akisini ve ilk iskeletini kur.
 
 done_summary:
@@ -24,10 +24,10 @@ done_summary:
 - Gorunen Turkce metinlerdeki encoding bozulmalari temizlendi; `AGENTS.md` icine `TR-UTF8-CRITICAL` ve `RATIO-TO-PX-CRITICAL` kurallari eklendi.
 
 now:
-- Commit/push hazir; cihazda ayarlar paneli ve hesaplama yontemi ekraninin gorunumu dogrulanacak.
+- Gorev tamamlandi; ayarlar paneli ve hesaplama yontemi ekraninin gorunumu telefon ve tablette dogrulandi.
 
 next:
-- Ayarlar paneli ve hesaplama yontemi secim ekranini cihazda son kez dogrula.
+- Siradaki acik is olarak `TASK-027` devralinabilir.
 
 refs:
 - `lib/presentation/home/home_screen.dart`

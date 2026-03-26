@@ -60,3 +60,5 @@
 | 2026-03-25 16:28 +03:00 | R.260325_1628 | `ayetler.json` yapisal olarak temizlendi; 101 tekrar satiri kaldirildi ve ids `ayet_001..ayet_301` olarak yeniden siralandi |
 | 2026-03-25 16:53 +03:00 | R.260325_1653 | 300 ayet girildi; `ayetler.json` tekillestirildi, tekrarlar kaldirildi ve ids yeniden siralandi |
 | 2026-03-26 11:41 +03:00 | R.260326_1141 | Ilk tur ekonomik modda cekirdek disi baglam yukleme kisiti `STATE.md` icine kalici `operation_note` olarak eklendi |
+| 2026-03-26 12:35 +03:00 | R.260326_1235 | `TASK-004` yerel handover: ust panel ve vakit satiri hizalari telefon-tablet dogrulamasi ile kapatildi |
+| 2026-03-26 14:50 +03:00 | R.260326_1450 | `TASK-004` final polish: yeni nafile eklenince liste otomatik alta kayiyor; titreşim tespit denemeleri geri alinarak temiz teslim hazirlandi |

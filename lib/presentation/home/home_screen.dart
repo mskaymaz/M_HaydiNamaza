@@ -53,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final Map<Prayer, TextEditingController> _reminderControllers = {};
   final Map<String, String> _triggerLog = {};
   final List<_CustomPrayerDraft> _customPrayerRows = [];
+  final ScrollController _prayerListScrollController = ScrollController();
 
   late Future<_HomeData> _future;
   Timer? _ticker;
@@ -111,6 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _visualCycleTimer?.cancel();
     _vibrationRepeatTimer?.cancel();
     _reminderAudioService.dispose();
+    _prayerListScrollController.dispose();
     for (final controller in _reminderControllers.values) {
       controller.dispose();
     }
@@ -294,7 +296,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _playVibrationPulse(int durationMilliseconds) async {
     try {
-      final hasVibrator = await Vibration.hasVibrator() ?? false;
+      final hasVibrator = await Vibration.hasVibrator();
       if (hasVibrator) {
         await Vibration.vibrate(duration: durationMilliseconds);
         return;
@@ -584,9 +586,6 @@ class _HomeScreenState extends State<HomeScreen> {
           final location = data.location!;
           final provinceLabel = _titleCase(location.province, l10n.localeName);
           final districtLabel = _titleCase(location.district, l10n.localeName);
-          final displayName = districtLabel.trim().isEmpty
-              ? provinceLabel
-              : '$provinceLabel / $districtLabel';
           final dateYearLabel = _showHijriDate
               ? _formatHijriYear(_now)
               : _formatGregorianYear(_now, l10n);
@@ -794,6 +793,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     if (_drawerProgress > 0.02)
                                       Expanded(
                                         child: _PrayerList(
+                                          controller:
+                                              _prayerListScrollController,
                                           items: items,
                                           active: active,
                                           style: ui.listPanel,
@@ -1467,7 +1468,30 @@ class _HomeScreenState extends State<HomeScreen> {
       _customPrayerRows.add(row);
       _drawerProgress = 1;
     });
+    _scrollPrayerListToBottom();
     unawaited(_persistCustomPrayerRows());
+  }
+
+  void _scrollPrayerListToBottom([int attempt = 0]) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (!_prayerListScrollController.hasClients) {
+        if (attempt < 4) {
+          Future<void>.delayed(
+            const Duration(milliseconds: 120),
+            () => _scrollPrayerListToBottom(attempt + 1),
+          );
+        }
+        return;
+      }
+      final maxScrollExtent =
+          _prayerListScrollController.position.maxScrollExtent;
+      _prayerListScrollController.animateTo(
+        maxScrollExtent,
+        duration: const Duration(milliseconds: 260),
+        curve: Curves.easeOutCubic,
+      );
+    });
   }
 
   int _nextAvailableNafileIndex({String? excludingId}) {
@@ -1617,12 +1641,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 2);
         return DateTime.fromMillisecondsSinceEpoch(midpointMillis);
     }
-  }
-
-  String _formatTimeOfDay(TimeOfDay time) {
-    final h = time.hour.toString().padLeft(2, '0');
-    final m = time.minute.toString().padLeft(2, '0');
-    return '$h:$m';
   }
 
   Future<void> _openCustomTimeEditor(
@@ -2195,6 +2213,18 @@ class _TopPanel extends StatelessWidget {
       fontWeight: FontWeight.w500,
       fontSize: typography.locationSize,
     );
+    final dateTextStyle = theme.textTheme.titleSmall?.copyWith(
+      color: cizgiColor,
+      fontWeight: FontWeight.w600,
+      fontSize: (typography.methodSize + 1) * 1.2,
+      letterSpacing: -0.2,
+    );
+    final clockTextStyle = theme.textTheme.titleSmall?.copyWith(
+      color: cizgiColor.withValues(alpha: 0.85),
+      fontWeight: FontWeight.w300,
+      fontSize: typography.nextLabelSize * 1.2,
+      letterSpacing: -0.6,
+    );
 
     return Container(
       padding: padding,
@@ -2277,97 +2307,119 @@ class _TopPanel extends StatelessWidget {
           const SizedBox(height: 10),
           SizedBox(
             height: lowerSectionHeight,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                        onTap: onToggleDate,
-                        child: Text(
-                          '$dateDayMonthLabel $dateYearLabel',
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            color: cizgiColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: (typography.methodSize + 1) * 1.2,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        timeLabel,
-                        style: theme.textTheme.titleSmall?.copyWith(
-                          color: cizgiColor.withValues(alpha: 0.85),
-                          fontWeight: FontWeight.w300,
-                          fontSize: typography.nextLabelSize * 1.2,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: const Alignment(1 / 3, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            nextLabel,
-                            style: theme.textTheme.titleSmall?.copyWith(
-                              color: cizgiColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: typography.nextLabelSize,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isCompactWidth = constraints.maxWidth < 420;
+                final leftSlotWidth = isCompactWidth
+                    ? 88.0
+                    : math.min(
+                        math.max(constraints.maxWidth * 0.27, 108.0),
+                        160.0,
+                      );
+                final rightSlotWidth = isCompactWidth
+                    ? 64.0
+                    : leftSlotWidth;
+                final qiblaOffsetX = isCompactWidth ? 4.0 : 13.0;
+
+                return Row(
+                  children: [
+                    SizedBox(
+                      width: leftSlotWidth,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: leftSlotWidth,
+                              child: GestureDetector(
+                                onTap: onToggleDate,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '$dateDayMonthLabel $dateYearLabel',
+                                    style: dateTextStyle,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            nextTime,
-                            style: theme.textTheme.titleSmall?.copyWith(
-                              color: cizgiColor.withValues(alpha: 0.85),
-                              fontWeight: FontWeight.w300,
-                              fontSize: typography.nextLabelSize,
+                            Text(
+                              timeLabel,
+                              style: clockTextStyle,
                             ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        countdown,
-                        style: theme.textTheme.headlineSmall?.copyWith(
-                          color: cizgiColor,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 0.5,
-                          fontSize: typography.nextTimeSize,
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Transform.translate(
-                    offset: const Offset(13, 0),
-                    child: IconButton(
-                      onPressed: onQibla,
-                      icon: Icon(
-                        Icons.explore_outlined,
-                        color: cizgiColor.withValues(alpha: 0.92),
-                        size: settingsIconSize * 2.16,
-                      ),
-                      tooltip: 'Kıble Yönü',
-                      padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(
-                        minWidth: settingsIconBoxSize * 1.5,
-                        minHeight: settingsIconBoxSize * 1.5,
                       ),
                     ),
-                  ),
-                ),
-              ],
+                    Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  nextLabel,
+                                  style: theme.textTheme.titleSmall?.copyWith(
+                                    color: cizgiColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: typography.nextLabelSize,
+                                  ),
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  nextTime,
+                                  style: theme.textTheme.titleSmall?.copyWith(
+                                    color: cizgiColor.withValues(alpha: 0.85),
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: typography.nextLabelSize,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              countdown,
+                              style: theme.textTheme.headlineSmall?.copyWith(
+                                color: cizgiColor,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.5,
+                                fontSize: typography.nextTimeSize,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: rightSlotWidth,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Transform.translate(
+                          offset: Offset(qiblaOffsetX, 0),
+                          child: IconButton(
+                            onPressed: onQibla,
+                            icon: Icon(
+                              Icons.explore_outlined,
+                              color: cizgiColor.withValues(alpha: 0.92),
+                              size: settingsIconSize * 2.16,
+                            ),
+                            tooltip: 'Kıble Yönü',
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(
+                              minWidth: settingsIconBoxSize * 1.5,
+                              minHeight: settingsIconBoxSize * 1.5,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ],
@@ -2377,6 +2429,7 @@ class _TopPanel extends StatelessWidget {
 }
 
 class _PrayerList extends StatelessWidget {
+  final ScrollController controller;
   final List<_PrayerItem> items;
   final Prayer active;
   final SurfaceStyle style;
@@ -2394,6 +2447,7 @@ class _PrayerList extends StatelessWidget {
   final VoidCallback onAddCustomPrayer;
 
   const _PrayerList({
+    required this.controller,
     required this.items,
     required this.active,
     required this.style,
@@ -2453,6 +2507,7 @@ class _PrayerList extends StatelessWidget {
       children: [
         Expanded(
           child: ListView.separated(
+            controller: controller,
             padding: listPadding,
             itemBuilder: (context, index) {
               final item = items[index];
@@ -2641,26 +2696,28 @@ class _PrayerList extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        alignment: Alignment.centerRight,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            for (var i = 0; i < rowWidgets.length; i++) ...[
-                              if (i > 0)
-                                SizedBox(
-                                  width: i == 3
-                                      ? 8
-                                      : i <= 2
-                                      ? 10
-                                      : 0,
-                                ),
-                              rowWidgets[i],
+                      child: Center(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              for (var i = 0; i < rowWidgets.length; i++) ...[
+                                if (i > 0)
+                                  SizedBox(
+                                    width: i == 3
+                                        ? 8
+                                        : i <= 2
+                                        ? 10
+                                        : 0,
+                                  ),
+                                rowWidgets[i],
+                              ],
                             ],
-                          ],
+                          ),
                         ),
                       ),
                     ),

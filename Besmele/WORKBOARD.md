@@ -7,7 +7,7 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-001 | planned | 2026-03-13 00:00 +03:00 | Istisare + gereksinim taslagi |
 | TASK-002 | done | 2026-03-13 00:58 +03:00 | Repo init + tam icerik push |
 | TASK-003 | done | 2026-03-14 16:17 +03:00 | Faz 1: Adhan portu + altin test seti |
-| TASK-004 | in_progress | 2026-03-19 14:19 +03:00 | Faz 2: Vakitler paneli ikon yerlesimi merkezlendi |
+| TASK-004 | done | 2026-03-26 14:50 +03:00 | Vakitler paneli ikon/hiza polishleri ve yeni nafile eklenince otomatik gorunurluk akisi kapatildi |
 | TASK-005 | planned | 2026-03-14 16:17 +03:00 | UI/UX temel ekranlar + tasarim sistemi |
 | TASK-006 | planned | 2026-03-14 16:17 +03:00 | Konum/zaman + offline-first veri katmani |
 | TASK-007 | planned | 2026-03-14 16:17 +03:00 | Bildirim + ezan/ses altyapisi |

@@ -132,3 +132,13 @@
 - Testler calisti mi? Hayir (yalniz Besmele markdown kayitlari guncellendi).
 - Temel akislarda regresyon var mi? Hayir (uygulama koduna dokunulmadi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-043` ve `PUSH_LOG` guncellendi).
+
+## 2026-03-26 12:35 +03:00
+- Testler calisti mi? Kismen (`flutter analyze lib/presentation/home/home_screen.dart` temiz; telefon ve tablette manuel UI dogrulamasi yapildi).
+- Temel akislarda regresyon var mi? Hayir (tablet hizasi duzeldi; telefonda dar ekran uyumu korunarak takvim-saat gecisi sabitlendi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-004` ve handover kayitlari guncellendi).
+
+## 2026-03-26 14:50 +03:00
+- Testler calisti mi? Kismen (`home_screen.dart` analyze temiz; `settings_screen.dart` icin 5 adet mevcut `unused_element` uyarisi var, yeni hata yok).
+- Temel akislarda regresyon var mi? Hayir (yeni nafile eklenince liste otomatik alta kayiyor; titreşim tespiti icin eklenen deneysel kodlar geri alindi).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-004`, `PUSH_LOG` ve teslim etiketi guncellendi).

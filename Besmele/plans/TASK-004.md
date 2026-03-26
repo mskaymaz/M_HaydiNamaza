@@ -1,7 +1,7 @@
 # TASK-004
 
-status: in_progress
-updated: 2026-03-19 14:19 +03:00
+status: done
+updated: 2026-03-26 14:50 +03:00
 scope: Faz 2 - Flutter uygulama iskeleti ve temel mimari girisi.
 
 done_summary:
@@ -40,16 +40,17 @@ done_summary:
 - Ayarlara ses kaynagi secimi, gorsel-ses metinleri, sesli-gorsel periyotlar ve global ikon gorunurluk secenekleri eklendi.
 - Ust panele pusula ikonu ve cihaz pusulasiyla qibla yonu gosteren ekran baglandi.
 - Vakitler panelinde ikon grubu sabit alan icinde merkezlenerek, ikonlar gizlendiginde vakit adi ile saat arasindaki boslugun buyumesi engellendi.
+- Tablet gorunumunde saga yigilan vakit satirlari merkezlendi; ust panelde `Siradaki Vakit` blogu ortaya yaklastirildi.
+- Dar ekranlarda ust panelin tarih/saat ve qibla alanlari kompaktlestirildi; takvim gecisinde saat satirinin oynamasi kaldirildi.
+- Manuel cihaz dogrulamasi telefonda ve tablette olumlu tamamlandi.
+- `+` ile yeni nafile satiri eklendiginde vakitler listesi otomatik alta kayarak yeni satiri gorunur hale getirildi.
+- Titreşim destegi tespiti icin eklenen deneysel Android/Flutter korumalari geri alindi; `MainActivity` ve ilgili ekranlar sade duruma donduruldu.
 
 now:
-- Uygulamada kalinan nokta: ikon yerlesimi merkezlendi; commit/push ve bundle hazir.
+- TASK-004 kapanmis durumda; ust panel, vakit listesi ve yeni nafile gorunurlugu cihazlarda beklenen davranista.
 
 next:
-- Telefonda satir bazli hatirlatmalarin dogru vakitte ve secili ikonlarla calistigini dogrula.
-- Telefonda titresim suresi ve araligi davranisini dogrula.
-- Qibla ekraninda pusula izni ve yon gosterimini dogrula.
-- Ust panel yerlesimini ve pusula ikon konumunu cihazda gorsel olarak dogrula.
-- Vakitler panelinde ikonlar azaltildiginda satir dengesinin merkezde korundugunu cihazda dogrula.
+- Sonraki uygulama isi olarak acik backlog gorevlerinden biri devralinabilir.
 
 refs:
 - `Proje/UI_Ayarlar.md`

@@ -59,3 +59,4 @@
 | 2026-03-24 17:29 +03:00 | R.260324_1729 | Kullanilmayacak `assets/audio/adhan/fajr_malmo.webm` dosyasi silindi; uzak repodan da kaldiriliyor |
 | 2026-03-25 16:28 +03:00 | R.260325_1628 | `ayetler.json` yapisal olarak temizlendi; 101 tekrar satiri kaldirildi ve ids `ayet_001..ayet_301` olarak yeniden siralandi |
 | 2026-03-25 16:53 +03:00 | R.260325_1653 | 300 ayet girildi; `ayetler.json` tekillestirildi, tekrarlar kaldirildi ve ids yeniden siralandi |
+| 2026-03-26 11:41 +03:00 | R.260326_1141 | Ilk tur ekonomik modda cekirdek disi baglam yukleme kisiti `STATE.md` icine kalici `operation_note` olarak eklendi |

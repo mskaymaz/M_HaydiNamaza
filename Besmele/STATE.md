@@ -1,9 +1,10 @@
 # BESMELE STATE
 
-last_update: 2026-03-25 16:53 +03:00
-active_task: TASK-042
-phase: `ayetler.json` tek gecerli JSON dizisine indirildi; cift temizligi ve id yeniden siralama tamamlandi.
-next_step: Kullanici isterse kalan ayet metinleri ayet bazinda ayrica icerik dogrulugundan gecirilebilir.
+last_update: 2026-03-26 11:41 +03:00
+active_task: TASK-043
+phase: Ilk tur ekonomik mod kapsam notu `operation_note` olarak kalicilastirildi; commit/push kayitlari hazirlandi.
+next_step: Kullanici yeni bir is verirse yalniz dogrudan gereken minimum ek baglam okunacak.
 blockers: NONE
-last_delivery: R.260325_1653
-handover: `ayetler.json` icindeki 402 ham kayit ayristirildi; ayni sure/ayet ciftine dusen 101 tekrar satiri kaldirildi. Dosya artik 301 benzersiz kayitli tek gecerli JSON dizisi ve ids `ayet_001..ayet_301` seklinde sirali. Commit/push etiketi `R.260325_1653` olarak hazirlandi.
+operation_note: Ilk turda cekirdek dosyalar disi ek baglam yuklenmez; yalniz is dogrudan gerektiriyorsa minimum ek dosya okunur.
+last_delivery: R.260326_1141
+handover: Ilk tur ekonomik mod sertlestirildi; `STATE.md` icine cekirdek disi baglamin ilk turda yuklenmeyecegini belirten kalici `operation_note` eklendi. Besmele kayitlari `TASK-043` altinda commit/push icin hizalandi.

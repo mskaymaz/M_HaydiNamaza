@@ -46,3 +46,4 @@ Allowed status: planned | in_progress | blocked | done
 | TASK-040 | done | 2026-03-24 17:24 +03:00 | Toplu teslim hazirlandi; `hadisler.json` eklendi ve ciftleme kontrolu yapilmadigi not edildi |
 | TASK-041 | done | 2026-03-24 17:29 +03:00 | `assets/audio/adhan/fajr_malmo.webm` yerelden ve uzak repodan kaldirilmak uzere silindi |
 | TASK-042 | done | 2026-03-25 16:28 +03:00 | `ayetler.json` tek gecerli JSON dizisine indirildi; 101 tekrar satiri ayiklanip ids `ayet_001..ayet_301` olarak yeniden siralandi |
+| TASK-043 | done | 2026-03-26 11:41 +03:00 | Ilk tur ekonomik mod icin cekirdek disi baglam yukleme kisiti `operation_note` olarak kalicilastirildi |

@@ -3,6 +3,7 @@ import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../presentation/home/home_screen.dart';
 import 'locale_controller.dart';
+import 'runtime_monitor.dart';
 import 'ui_palette_controller.dart';
 
 class App extends StatefulWidget {
@@ -21,6 +22,9 @@ class _AppState extends State<App> {
     super.initState();
     _localeController.load();
     _uiPaletteController.load();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      RuntimeMonitor.instance.markFirstFrameRendered();
+    });
   }
 
   @override

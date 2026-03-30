@@ -72,3 +72,6 @@
 | 2026-03-30 14:08 +03:00 | R.260330_1408 | `TASK-006` yerel handover: timezone saklama ve gunluk offline-first prayer cache eklendi; veri kaynagi fallback kurali netlesti |
 | 2026-03-30 14:24 +03:00 | R.260330_1424 | `TASK-006` ek handover: `turkey`/`diyanet_tabanli` icin Diyanet -> Aladhan turkey -> Aladhan shafii -> local engine fallback zinciri uygulandi |
 | 2026-03-30 14:26 +03:00 | R.260330_1426 | `TASK-005` ve `TASK-006` teslim edildi; bu asamada `TASK-007` sirasinda kalindi ve commit/push yapildi |
+| 2026-03-30 14:44 +03:00 | R.260330_1444 | `TASK-008` yerel handover: ileri hesap ayarlari kalici saklama + prayer_engine entegrasyonu tamamlandi |
+| 2026-03-30 15:01 +03:00 | R.260330_1501 | `TASK-010` yerel handover: startup profil, pluggable hata izleme ve hesap cache iyilestirmesi eklendi |
+| 2026-03-30 15:11 +03:00 | R.260330_1511 | `TASK-008` ve `TASK-010` tamamlandi; commit ve push ile teslim edildi |

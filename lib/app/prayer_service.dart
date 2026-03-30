@@ -4,13 +4,19 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'calculation_advanced_settings_storage.dart';
 import '../core/config/config_registry.dart';
 import '../core/prayer_engine/calculation_method.dart';
 import '../core/prayer_engine/calculation_parameters.dart';
 import '../core/prayer_engine/coordinates.dart';
+import '../core/prayer_engine/high_latitude_rule.dart';
+import '../core/prayer_engine/madhab.dart';
 import '../core/prayer_engine/prayer_engine.dart';
 import '../core/prayer_engine/prayer_times.dart';
+import '../core/prayer_engine/rounding.dart';
+import '../core/prayer_engine/shafaq.dart';
 import 'location_storage.dart';
+import 'runtime_monitor.dart';
 
 class _DiyanetIds {
   final String stateId;
@@ -29,11 +35,19 @@ class PrayerService {
   };
 
   final PrayerEngine _engine;
+  final CalculationAdvancedSettingsStorage _advancedSettingsStorage;
 
   static final Map<String, String> _stateIdCache = {};
   static final Map<String, String> _districtIdCache = {};
+  static String? _memoryCacheFingerprint;
+  static PrayerTimes? _memoryCacheTimes;
 
-  PrayerService({PrayerEngine? engine}) : _engine = engine ?? const PrayerEngine();
+  PrayerService({
+    PrayerEngine? engine,
+    CalculationAdvancedSettingsStorage? advancedSettingsStorage,
+  }) : _engine = engine ?? const PrayerEngine(),
+       _advancedSettingsStorage =
+           advancedSettingsStorage ?? CalculationAdvancedSettingsStorage();
 
   void _log(String message) {
     if (kDebugMode) {
@@ -48,39 +62,54 @@ class PrayerService {
     required String timeZone,
     required String methodCode,
   }) async {
-    _log('[Calc] method=$methodCode location=${location.province}/${location.district}');
-    final now = DateTime.now();
-    final params = _paramsFor(methodCode);
-    final fingerprint = _buildCacheFingerprint(
-      location: location,
-      methodCode: methodCode,
-      latitude: latitude,
-      longitude: longitude,
-      timeZone: timeZone,
-      date: now,
-    );
-    final cached = await _readDailyCache(
-      fingerprint: fingerprint,
-      coordinates: Coordinates(latitude, longitude),
-      date: now,
-      calculationParameters: params,
-    );
-    if (cached != null) {
-      _log('[Cache] hit for today');
-      return cached;
-    }
+    return RuntimeMonitor.instance.profileAsync('prayer_calculate_today', () async {
+      _log('[Calc] method=$methodCode location=${location.province}/${location.district}');
+      final now = DateTime.now();
+      final advancedSettings = await _advancedSettingsStorage.read();
+      final params = _applyAdvancedSettings(
+        _paramsFor(methodCode),
+        advancedSettings,
+      );
+      final fingerprint = _buildCacheFingerprint(
+        location: location,
+        methodCode: methodCode,
+        latitude: latitude,
+        longitude: longitude,
+        timeZone: timeZone,
+        date: now,
+        advancedSettings: advancedSettings,
+      );
+      if (_memoryCacheFingerprint == fingerprint && _memoryCacheTimes != null) {
+        _log('[Cache] memory hit for today');
+        return _memoryCacheTimes!;
+      }
+      final cached = await _readDailyCache(
+        fingerprint: fingerprint,
+        coordinates: Coordinates(latitude, longitude),
+        date: now,
+        calculationParameters: params,
+      );
+      if (cached != null) {
+        _log('[Cache] persistent hit for today');
+        _memoryCacheFingerprint = fingerprint;
+        _memoryCacheTimes = cached;
+        return cached;
+      }
 
-    final fresh = await _calculateFresh(
-      location: location,
-      latitude: latitude,
-      longitude: longitude,
-      timeZone: timeZone,
-      methodCode: methodCode,
-      date: now,
-      params: params,
-    );
-    await _writeDailyCache(fingerprint: fingerprint, times: fresh);
-    return fresh;
+      final fresh = await _calculateFresh(
+        location: location,
+        latitude: latitude,
+        longitude: longitude,
+        timeZone: timeZone,
+        methodCode: methodCode,
+        date: now,
+        params: params,
+      );
+      await _writeDailyCache(fingerprint: fingerprint, times: fresh);
+      _memoryCacheFingerprint = fingerprint;
+      _memoryCacheTimes = fresh;
+      return fresh;
+    });
   }
 
   Future<PrayerTimes> _calculateFresh({
@@ -254,6 +283,7 @@ class PrayerService {
     required double longitude,
     required String timeZone,
     required DateTime date,
+    required CalculationAdvancedSettings advancedSettings,
   }) {
     final dayKey = '${date.year.toString().padLeft(4, '0')}-'
         '${date.month.toString().padLeft(2, '0')}-'
@@ -263,7 +293,69 @@ class PrayerService {
     final district = _normalizeName(location.district);
     final lat = latitude.toStringAsFixed(4);
     final lon = longitude.toStringAsFixed(4);
-    return '$dayKey|$methodCode|$timeZone|$countryId|$province|$district|$lat|$lon';
+    final offsets = [
+      advancedSettings.fajrOffsetMinutes,
+      advancedSettings.sunriseOffsetMinutes,
+      advancedSettings.dhuhrOffsetMinutes,
+      advancedSettings.asrOffsetMinutes,
+      advancedSettings.maghribOffsetMinutes,
+      advancedSettings.ishaOffsetMinutes,
+    ].join(',');
+    return '$dayKey|$methodCode|$timeZone|$countryId|$province|$district|$lat|$lon'
+        '|${advancedSettings.madhabCode}|${advancedSettings.highLatitudeRuleCode}'
+        '|${advancedSettings.shafaqCode}|${advancedSettings.roundingCode}|$offsets';
+  }
+
+  CalculationParameters _applyAdvancedSettings(
+    CalculationParameters params,
+    CalculationAdvancedSettings settings,
+  ) {
+    params.madhab = settings.madhabCode == 'hanafi' ? Madhab.hanafi : Madhab.shafi;
+    switch (settings.highLatitudeRuleCode) {
+      case 'seventh_of_the_night':
+        params.highLatitudeRule = HighLatitudeRule.seventhOfTheNight;
+        break;
+      case 'twilight_angle':
+        params.highLatitudeRule = HighLatitudeRule.twilightAngle;
+        break;
+      case 'middle_of_the_night':
+      default:
+        params.highLatitudeRule = HighLatitudeRule.middleOfTheNight;
+        break;
+    }
+    switch (settings.shafaqCode) {
+      case 'ahmer':
+        params.shafaq = Shafaq.ahmer;
+        break;
+      case 'abyad':
+        params.shafaq = Shafaq.abyad;
+        break;
+      case 'general':
+      default:
+        params.shafaq = Shafaq.general;
+        break;
+    }
+    switch (settings.roundingCode) {
+      case 'up':
+        params.rounding = Rounding.up;
+        break;
+      case 'none':
+        params.rounding = Rounding.none;
+        break;
+      case 'nearest':
+      default:
+        params.rounding = Rounding.nearest;
+        break;
+    }
+    params.adjustments = <String, int>{
+      'fajr': settings.fajrOffsetMinutes,
+      'sunrise': settings.sunriseOffsetMinutes,
+      'dhuhr': settings.dhuhrOffsetMinutes,
+      'asr': settings.asrOffsetMinutes,
+      'maghrib': settings.maghribOffsetMinutes,
+      'isha': settings.ishaOffsetMinutes,
+    };
+    return params;
   }
 
   Future<PrayerTimes?> _readDailyCache({

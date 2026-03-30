@@ -152,3 +152,8 @@
 - Testler calisti mi? Hayir (`dart` komutlari bu ortamda timeout verdigi icin otomatik test/format kosulmadi).
 - Temel akislarda regresyon var mi? Bilinmiyor (fallback zinciri degisikligi manuel cihaz dogrulamasi sonraki adimda yapilacak).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-005`, `TASK-006` ve `PUSH_LOG` guncel).
+
+## 2026-03-30 15:11 +03:00
+- Testler calisti mi? Hayir (`dart` komutlari bu ortamda timeout verdigi icin otomatik test/format kosulmadi).
+- Temel akislarda regresyon var mi? Bilinmiyor (izleme ve cache katmani degisikligi cihazda kisa smoke test ile dogrulanacak).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-008`, `TASK-010` ve `PUSH_LOG` guncel).

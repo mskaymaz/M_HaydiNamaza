@@ -7,6 +7,8 @@ class LocationData {
   final String district;
   final String latitude;
   final String longitude;
+  final String timeZoneName;
+  final String timeZoneOffset;
 
   const LocationData({
     this.countryId,
@@ -15,6 +17,8 @@ class LocationData {
     required this.district,
     required this.latitude,
     required this.longitude,
+    this.timeZoneName = '',
+    this.timeZoneOffset = '',
   });
 
   String get displayName {
@@ -33,6 +37,8 @@ class LocationStorage {
   static const String _districtKey = 'location_district';
   static const String _latKey = 'location_latitude';
   static const String _lonKey = 'location_longitude';
+  static const String _timeZoneNameKey = 'location_time_zone_name';
+  static const String _timeZoneOffsetKey = 'location_time_zone_offset';
   static const LocationData _defaultLocation = LocationData(
     countryId: '2',
     countryName: 'Turkiye',
@@ -40,6 +46,8 @@ class LocationStorage {
     district: 'Merzifon',
     latitude: '40.8744',
     longitude: '35.4635',
+    timeZoneName: 'Europe/Istanbul',
+    timeZoneOffset: '+03:00',
   );
 
   Future<LocationData?> read() async {
@@ -50,6 +58,10 @@ class LocationStorage {
     final district = prefs.getString(_districtKey);
     final lat = prefs.getString(_latKey);
     final lon = prefs.getString(_lonKey);
+    final storedTimeZoneName = prefs.getString(_timeZoneNameKey);
+    final storedTimeZoneOffset = prefs.getString(_timeZoneOffsetKey);
+    final timeZoneName = _resolveTimeZoneName(storedTimeZoneName);
+    final timeZoneOffset = _resolveTimeZoneOffset(storedTimeZoneOffset);
     if (province == null) {
       final legacyCity = prefs.getString(_cityKey);
       if (legacyCity == null || lat == null || lon == null) {
@@ -62,6 +74,8 @@ class LocationStorage {
         district: '',
         latitude: lat,
         longitude: lon,
+        timeZoneName: timeZoneName,
+        timeZoneOffset: timeZoneOffset,
       );
     }
     if (lat == null || lon == null) {
@@ -74,6 +88,8 @@ class LocationStorage {
       district: district ?? '',
       latitude: lat,
       longitude: lon,
+      timeZoneName: timeZoneName,
+      timeZoneOffset: timeZoneOffset,
     );
   }
 
@@ -90,5 +106,32 @@ class LocationStorage {
     await prefs.setString(_latKey, data.latitude);
     await prefs.setString(_lonKey, data.longitude);
     await prefs.setString(_cityKey, data.province);
+    await prefs.setString(_timeZoneNameKey, _resolveTimeZoneName(data.timeZoneName));
+    await prefs.setString(
+      _timeZoneOffsetKey,
+      _resolveTimeZoneOffset(data.timeZoneOffset),
+    );
+  }
+
+  String _resolveTimeZoneName(String? input) {
+    final value = (input ?? '').trim();
+    if (value.isNotEmpty) return value;
+    return DateTime.now().timeZoneName;
+  }
+
+  String _resolveTimeZoneOffset(String? input) {
+    final value = (input ?? '').trim();
+    final re = RegExp(r'^([+-])(\d{2}):(\d{2})$');
+    if (re.hasMatch(value)) return value;
+    return _offsetToTz(DateTime.now().timeZoneOffset);
+  }
+
+  String _offsetToTz(Duration offset) {
+    final totalMinutes = offset.inMinutes;
+    final sign = totalMinutes < 0 ? '-' : '+';
+    final total = totalMinutes.abs();
+    final hours = (total ~/ 60).toString().padLeft(2, '0');
+    final mins = (total % 60).toString().padLeft(2, '0');
+    return '$sign$hours:$mins';
   }
 }

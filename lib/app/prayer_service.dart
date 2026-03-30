@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/config/config_registry.dart';
 import '../core/prayer_engine/calculation_method.dart';
@@ -20,6 +21,8 @@ class _DiyanetIds {
 
 class PrayerService {
   static const Duration _diyanetTimeout = Duration(seconds: 12);
+  static const Duration _aladhanTimeout = Duration(seconds: 12);
+  static const String _dailyCacheKey = 'prayer_daily_cache_v1';
   static const Map<String, String> _diyanetHeaders = <String, String>{
     'Accept': 'application/json',
     'User-Agent': 'HaydiNamaza/1.0',
@@ -46,11 +49,53 @@ class PrayerService {
     required String methodCode,
   }) async {
     _log('[Calc] method=$methodCode location=${location.province}/${location.district}');
+    final now = DateTime.now();
     final params = _paramsFor(methodCode);
+    final fingerprint = _buildCacheFingerprint(
+      location: location,
+      methodCode: methodCode,
+      latitude: latitude,
+      longitude: longitude,
+      timeZone: timeZone,
+      date: now,
+    );
+    final cached = await _readDailyCache(
+      fingerprint: fingerprint,
+      coordinates: Coordinates(latitude, longitude),
+      date: now,
+      calculationParameters: params,
+    );
+    if (cached != null) {
+      _log('[Cache] hit for today');
+      return cached;
+    }
+
+    final fresh = await _calculateFresh(
+      location: location,
+      latitude: latitude,
+      longitude: longitude,
+      timeZone: timeZone,
+      methodCode: methodCode,
+      date: now,
+      params: params,
+    );
+    await _writeDailyCache(fingerprint: fingerprint, times: fresh);
+    return fresh;
+  }
+
+  Future<PrayerTimes> _calculateFresh({
+    required LocationData location,
+    required double latitude,
+    required double longitude,
+    required String timeZone,
+    required String methodCode,
+    required DateTime date,
+    required CalculationParameters params,
+  }) async {
     if (methodCode == 'turkey' || methodCode == 'diyanet_tabanli') {
       final diyanetTimes = await _tryDiyanet(
         location: location,
-        date: DateTime.now(),
+        date: date,
         fallbackParams: params,
       );
       if (diyanetTimes != null) {
@@ -63,15 +108,217 @@ class PrayerService {
             'Isha ${_fmt(diyanetTimes.isha)}');
         return diyanetTimes;
       }
+
+      final aladhanTurkey = await _tryAladhan(
+        date: date,
+        latitude: latitude,
+        longitude: longitude,
+        methodCode: 'turkey',
+        school: 1,
+        fallbackParams: params,
+      );
+      if (aladhanTurkey != null) {
+        _log('[Aladhan:turkey] '
+            'Fajr ${_fmt(aladhanTurkey.fajr)} '
+            'Sunrise ${_fmt(aladhanTurkey.sunrise)} '
+            'Dhuhr ${_fmt(aladhanTurkey.dhuhr)} '
+            'Asr ${_fmt(aladhanTurkey.asr)} '
+            'Maghrib ${_fmt(aladhanTurkey.maghrib)} '
+            'Isha ${_fmt(aladhanTurkey.isha)}');
+        return aladhanTurkey;
+      }
+
+      final aladhanShafii = await _tryAladhan(
+        date: date,
+        latitude: latitude,
+        longitude: longitude,
+        methodCode: 'turkey',
+        school: 0,
+        fallbackParams: params,
+      );
+      if (aladhanShafii != null) {
+        _log('[Aladhan:shafii] '
+            'Fajr ${_fmt(aladhanShafii.fajr)} '
+            'Sunrise ${_fmt(aladhanShafii.sunrise)} '
+            'Dhuhr ${_fmt(aladhanShafii.dhuhr)} '
+            'Asr ${_fmt(aladhanShafii.asr)} '
+            'Maghrib ${_fmt(aladhanShafii.maghrib)} '
+            'Isha ${_fmt(aladhanShafii.isha)}');
+        return aladhanShafii;
+      }
     }
 
     _log('[Calc] fallback local engine');
     return _engine.calculate(
-      date: DateTime.now(),
+      date: date,
       coordinates: Coordinates(latitude, longitude),
       timeZone: timeZone,
       params: params,
     );
+  }
+
+  Future<PrayerTimes?> _tryAladhan({
+    required DateTime date,
+    required double latitude,
+    required double longitude,
+    required String methodCode,
+    required int school,
+    required CalculationParameters fallbackParams,
+  }) async {
+    if (!latitude.isFinite || !longitude.isFinite) {
+      return null;
+    }
+    final config = ConfigRegistry.dataSources.aladhan;
+    final methodId = config.methodIds[methodCode];
+    if (methodId == null) {
+      return null;
+    }
+    final datePath =
+        '${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year.toString().padLeft(4, '0')}';
+    final query = <String, String>{
+      'latitude': latitude.toString(),
+      'longitude': longitude.toString(),
+      'method': methodId.toString(),
+      'school': school.toString(),
+      'timezonestring': config.timeZone,
+    };
+    if (config.tune.trim().isNotEmpty) {
+      query['tune'] = config.tune;
+    }
+    if (config.shafaq.trim().isNotEmpty) {
+      query['shafaq'] = config.shafaq;
+    }
+    final uri =
+        Uri.parse('${config.baseUrl}/timings/$datePath').replace(queryParameters: query);
+
+    try {
+      final response =
+          await http.get(uri, headers: _diyanetHeaders).timeout(_aladhanTimeout);
+      if (response.statusCode != 200) {
+        return null;
+      }
+      final payload = jsonDecode(response.body);
+      if (payload is! Map<String, dynamic>) {
+        return null;
+      }
+      final data = payload['data'];
+      if (data is! Map<String, dynamic>) {
+        return null;
+      }
+      final timings = data['timings'];
+      if (timings is! Map<String, dynamic>) {
+        return null;
+      }
+
+      DateTime? parseTime(String key) {
+        final raw = timings[key];
+        if (raw is! String) return null;
+        final match = RegExp(r'(\d{1,2}):(\d{2})').firstMatch(raw);
+        if (match == null) return null;
+        final hour = int.parse(match.group(1)!);
+        final minute = int.parse(match.group(2)!);
+        return DateTime(date.year, date.month, date.day, hour, minute);
+      }
+
+      final fajr = parseTime('Fajr');
+      final sunrise = parseTime('Sunrise');
+      final dhuhr = parseTime('Dhuhr');
+      final asr = parseTime('Asr');
+      final maghrib = parseTime('Maghrib');
+      final isha = parseTime('Isha');
+      if ([fajr, sunrise, dhuhr, asr, maghrib, isha].contains(null)) {
+        return null;
+      }
+
+      return PrayerTimes.fromTimings(
+        coordinates: Coordinates(latitude, longitude),
+        date: date,
+        calculationParameters: fallbackParams,
+        fajr: fajr!,
+        sunrise: sunrise!,
+        dhuhr: dhuhr!,
+        asr: asr!,
+        sunset: maghrib!,
+        maghrib: maghrib,
+        isha: isha!,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  String _buildCacheFingerprint({
+    required LocationData location,
+    required String methodCode,
+    required double latitude,
+    required double longitude,
+    required String timeZone,
+    required DateTime date,
+  }) {
+    final dayKey = '${date.year.toString().padLeft(4, '0')}-'
+        '${date.month.toString().padLeft(2, '0')}-'
+        '${date.day.toString().padLeft(2, '0')}';
+    final countryId = (location.countryId ?? '').trim();
+    final province = _normalizeName(location.province);
+    final district = _normalizeName(location.district);
+    final lat = latitude.toStringAsFixed(4);
+    final lon = longitude.toStringAsFixed(4);
+    return '$dayKey|$methodCode|$timeZone|$countryId|$province|$district|$lat|$lon';
+  }
+
+  Future<PrayerTimes?> _readDailyCache({
+    required String fingerprint,
+    required Coordinates coordinates,
+    required DateTime date,
+    required CalculationParameters calculationParameters,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_dailyCacheKey);
+    if (raw == null || raw.trim().isEmpty) return null;
+    try {
+      final payload = jsonDecode(raw);
+      if (payload is! Map<String, dynamic>) return null;
+      if (payload['fingerprint'] != fingerprint) return null;
+      final fajr = DateTime.tryParse((payload['fajr'] ?? '').toString());
+      final sunrise = DateTime.tryParse((payload['sunrise'] ?? '').toString());
+      final dhuhr = DateTime.tryParse((payload['dhuhr'] ?? '').toString());
+      final asr = DateTime.tryParse((payload['asr'] ?? '').toString());
+      final maghrib = DateTime.tryParse((payload['maghrib'] ?? '').toString());
+      final isha = DateTime.tryParse((payload['isha'] ?? '').toString());
+      if ([fajr, sunrise, dhuhr, asr, maghrib, isha].contains(null)) return null;
+      return PrayerTimes.fromTimings(
+        coordinates: coordinates,
+        date: date,
+        calculationParameters: calculationParameters,
+        fajr: fajr!,
+        sunrise: sunrise!,
+        dhuhr: dhuhr!,
+        asr: asr!,
+        sunset: maghrib!,
+        maghrib: maghrib,
+        isha: isha!,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<void> _writeDailyCache({
+    required String fingerprint,
+    required PrayerTimes times,
+  }) async {
+    final payload = <String, dynamic>{
+      'fingerprint': fingerprint,
+      'savedAt': DateTime.now().toIso8601String(),
+      'fajr': times.fajr.toIso8601String(),
+      'sunrise': times.sunrise.toIso8601String(),
+      'dhuhr': times.dhuhr.toIso8601String(),
+      'asr': times.asr.toIso8601String(),
+      'maghrib': times.maghrib.toIso8601String(),
+      'isha': times.isha.toIso8601String(),
+    };
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_dailyCacheKey, jsonEncode(payload));
   }
 
   CalculationParameters _paramsFor(String code) {

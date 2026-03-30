@@ -23,6 +23,22 @@ Execute only requested scope, avoid unnecessary refactors/explanations, and keep
 - Kayit politikasi: yalniz gerekli Besmele dosyalari guncellenir; handover kisa ve nettir.
 - Token ekonomisi kaliteyi dusurme bahanesi degildir; az okuma ve az tekrar ile uretim seviyesi kalite korunur.
 
+## -1.1) Kalici Ekonomik Token Disiplini (MUST, GLOBAL)
+
+- Kilit talimat: `Tek tur teshis, tek tur yama, minimum dosya, minimum arac, minimum cevap. Bu talimat unutulamaz, atlanamaz, ihmal edilemez ve diger tum calisma tercihlerinden once uygulanir.`
+- Kilit preflight: `Execute only the explicitly requested scope; do not scan unrelated files, do not broaden the search/changes, and keep responses minimal (one-line status unless asked).`
+- Yerlesim kurali:
+- `AGENTS.md` ana kaynak.
+- `CORE.md` veya `besmele/CORE.md` teknik kopya (varsa).
+- `STATE.md` kisa aktif ozet.
+- Guncelleme sirasi: `AGENTS.md` -> cekirdek dosya -> `STATE.md`.
+- Bu kural diger tum calisma tercihlerinden once gelir.
+- Yalniz acikca istenen kapsam uygulanir.
+- Gereksiz dosya tarama, kapsam buyutme, gereksiz aciklama ve gereksiz ara mesaj yasaktir.
+- Ayni dosyayi tekrar tekrar tam okumak yasaktir.
+- Once en dar teshis, sonra tek toplu yama, sonra yalniz gerekli dogrulama yapilir.
+- Belirsizlikte kapsam buyutulmez.
+
 ## 0) Terminoloji (MUST)
 
 - `commit yap`: yalniz commit.

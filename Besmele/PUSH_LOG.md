@@ -68,3 +68,7 @@
 | 2026-03-26 16:40 +03:00 | R.260326_1640 | `TASK-027` devralindi; `diyanet_tabanli` secenegi ve sonuc vakitleri icin cihaz dogrulamasi bekleniyor |
 | 2026-03-26 16:42 +03:00 | R.260326_1642 | `TASK-027` kullanici yonlendirmesiyle sonraya alindi; mevcut calisan akis korunuyor |
 | 2026-03-26 16:44 +03:00 | R.260326_1644 | `TASK-021`, `TASK-024` ve `TASK-026` kapatilip `TASK-027` ertelenmis haliyle commit/push hazirlandi |
+| 2026-03-30 13:54 +03:00 | R.260330_1354 | `TASK-005` yerel handover: UI/UX temel ekranlar ve tasarim sistemi kabul kriterleri dogrulandi, gorev kapatildi |
+| 2026-03-30 14:08 +03:00 | R.260330_1408 | `TASK-006` yerel handover: timezone saklama ve gunluk offline-first prayer cache eklendi; veri kaynagi fallback kurali netlesti |
+| 2026-03-30 14:24 +03:00 | R.260330_1424 | `TASK-006` ek handover: `turkey`/`diyanet_tabanli` icin Diyanet -> Aladhan turkey -> Aladhan shafii -> local engine fallback zinciri uygulandi |
+| 2026-03-30 14:26 +03:00 | R.260330_1426 | `TASK-005` ve `TASK-006` teslim edildi; bu asamada `TASK-007` sirasinda kalindi ve commit/push yapildi |

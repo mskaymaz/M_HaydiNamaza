@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    final timeZone = _offsetToTz(DateTime.now().timeZoneOffset);
+    final timeZone = location.timeZoneOffset;
     final times = await _prayerService.calculateToday(
       location: location,
       latitude: lat ?? 0,
@@ -334,15 +334,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
       _scheduleVisualPhase(isVisible: !isVisible);
     });
-  }
-
-  String _offsetToTz(Duration offset) {
-    final totalMinutes = offset.inMinutes;
-    final sign = totalMinutes < 0 ? '-' : '+';
-    final total = totalMinutes.abs();
-    final hours = (total ~/ 60).toString().padLeft(2, '0');
-    final mins = (total % 60).toString().padLeft(2, '0');
-    return '$sign$hours:$mins';
   }
 
   String _formatTime(DateTime dt) {

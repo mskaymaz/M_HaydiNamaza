@@ -147,3 +147,8 @@
 - Testler calisti mi? Kismen (telefon ve tablette fiziksel cihaz debug akisi ile manuel UI dogrulamasi yapildi; ek otomatik test calistirilmadi).
 - Temel akislarda regresyon var mi? Hayir (telefon/tablet cihaz dogrulamalari olumlu; `TASK-027` riski artirmamak icin ertelendi).
 - Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, ilgili `TASK` kayitlari ve `PUSH_LOG` push oncesi guncellendi).
+
+## 2026-03-30 14:26 +03:00
+- Testler calisti mi? Hayir (`dart` komutlari bu ortamda timeout verdigi icin otomatik test/format kosulmadi).
+- Temel akislarda regresyon var mi? Bilinmiyor (fallback zinciri degisikligi manuel cihaz dogrulamasi sonraki adimda yapilacak).
+- Surumleme ve notlar hazir mi? Evet (`STATE`, `WORKBOARD`, `TASK-005`, `TASK-006` ve `PUSH_LOG` guncel).

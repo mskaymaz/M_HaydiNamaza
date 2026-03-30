@@ -75,3 +75,5 @@
 | 2026-03-30 14:44 +03:00 | R.260330_1444 | `TASK-008` yerel handover: ileri hesap ayarlari kalici saklama + prayer_engine entegrasyonu tamamlandi |
 | 2026-03-30 15:01 +03:00 | R.260330_1501 | `TASK-010` yerel handover: startup profil, pluggable hata izleme ve hesap cache iyilestirmesi eklendi |
 | 2026-03-30 15:11 +03:00 | R.260330_1511 | `TASK-008` ve `TASK-010` tamamlandi; commit ve push ile teslim edildi |
+| 2026-03-30 15:20 +03:00 | R.260330_1520 | Kalan backlog onceligi kullanici listesine gore sabitlendi; kayitlar `TASK-007` odakli guncellendi |
+| 2026-03-30 15:22 +03:00 | R.260330_1522 | Molaya gecis oncesi tasklar guncellendi ve siralandi; commit ve push ile kayitlandi |

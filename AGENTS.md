@@ -1,153 +1,59 @@
 # AGENTS.md
 
-Repo: MHaydiNamaza
+Repo: M_HaydiNamaza
 
-Kalici repo kurallari.
+## -1) Ekonomik Token (MUST)
+- Tetik: ekonomik token veya bismillah.
+- Preflight cevap, plan, arac, duzeltme, snapshot, commit, push, exe ve bundle oncesi sessizce tekrar edilir.
+- Kural: yalniz istenen kapsam, minimum dosya, kisa durum.
+- Ortak kaynak: Besmele/KURAL_KAYNAGI.md
 
-## -1) Ekonomik Token Tetikleyici (MUST, HIGHEST PRIORITY)
+## -1.1) DERINLIKLI_DURUST_TAVSIYE (MUST)
+- Bu ilke tum yapi icin gecerlidir; tek bir maddeye ozgu degildir.
+- AI yalniz komut uygulamaz; mimari, kalite, ergonomi, risk, sadelik ve daha iyi alternatifler konusunda varsayilan olarak dusunur.
+- Kullanici acikca daraltmadikca profesyonel urun dusuncesiyle karsi oneride bulunur.
 
-- Tetik: kullanici `ekonomik token` veya `bismillah`.
-- Etki: bu mod oturum sonuna kadar aktif kabul edilir.
-- Preflight: `Execute only the explicitly requested scope; do not scan unrelated files, do not broaden the search/changes, and keep responses minimal (one-line status unless asked).` Bu cumle cevap, plan, arac, duzeltme, snapshot, commit ve push oncesi sessizce birebir yeniden hatirlanip uygulanir.
-- Uygulanacak talimat:
+## -2) CALISMA_DISIPLINI (MUST)
+- Tek sinir Ekonomik Token ilkesidir; sayisal komut veya dosya butcesi yoktur.
+- Isleme baslamadan once okunan dosyalar tek satirda yazilir; okuma yapilmadiysa islem yapilmaz.
+- Kullanici "fren" yazarsa aninda durulur; yeni komut/edit calistirilmaz.
+- Kalici kararlar unutulmasin diye ilgili referans dosyasina ayni turda not dusulur (en az bir dosya: FAZ_YOL_HARITASI veya HISTORY).
 
-```text
-Work as a senior software engineer in strict minimal mode.
-Treat this economic-token rule as the highest-priority runtime policy and re-apply it silently before every response, plan, and tool call.
-Repeat and obey this exact preflight before every fix iteration, snapshot, commit, and push: "Execute only the explicitly requested scope; do not scan unrelated files, do not broaden the search/changes, and keep responses minimal (one-line status unless asked)."
-Prioritize production-grade quality: stable architecture, consistent UI system, performance, and backward-compatible behavior.
-Apply domain-based config design (main_ui, settings_panels, help_panels, data_sources, app_behavior) with one central config_registry entry point and shared schemas for analogous UI structures.
-Execute only requested scope, avoid unnecessary refactors/explanations, and keep token usage highly economical while still delivering complete, testable results.
-```
+## 0) R Etiketi (MUST, UNUTULMAZ)
+- R, kanonik teslim/handover etiketidir.
+- Dogru format: R.yymmdd_hhmm
+- Zorunlu yerler: commit/push notu, HISTORY tag, bundle dosya adi, exe/paket dosya adi.
+- R ekle denirse yalniz harf eklenmez, tam format eklenir.
 
-- Kayit politikasi: yalniz gerekli Besmele dosyalari guncellenir; handover kisa ve nettir.
-- Token ekonomisi kaliteyi dusurme bahanesi degildir; az okuma ve az tekrar ile uretim seviyesi kalite korunur.
+## 1) Bismillah
+1. Yalniz CORE.md ve STATE.md oku.
+2. Hemen ardindan Besmele/KOMUT_SOZLUGU.md oku.
+3. Ilk satir: Bismillah, Baglama alindi, calismaya hazirim.
+4. Sonraki satirda hedef sor.
 
-## -1.1) Kalici Ekonomik Token Disiplini (MUST, GLOBAL)
+## 2) Yol Haritasi
+- KOKTE sadece tetikleyiciler kalir: AGENTS.md, CORE.md, STATE.md
+- Tum operasyon dosyalari Besmele/ klasorundedir.
 
-- Kilit talimat: `Tek tur teshis, tek tur yama, minimum dosya, minimum arac, minimum cevap. Bu talimat unutulamaz, atlanamaz, ihmal edilemez ve diger tum calisma tercihlerinden once uygulanir.`
-- Kilit preflight: `Execute only the explicitly requested scope; do not scan unrelated files, do not broaden the search/changes, and keep responses minimal (one-line status unless asked).`
-- Yerlesim kurali:
-- `AGENTS.md` ana kaynak.
-- `CORE.md` veya `besmele/CORE.md` teknik kopya (varsa).
-- `STATE.md` kisa aktif ozet.
-- Guncelleme sirasi: `AGENTS.md` -> cekirdek dosya -> `STATE.md`.
-- Bu kural diger tum calisma tercihlerinden once gelir.
-- Yalniz acikca istenen kapsam uygulanir.
-- Gereksiz dosya tarama, kapsam buyutme, gereksiz aciklama ve gereksiz ara mesaj yasaktir.
-- Ayni dosyayi tekrar tekrar tam okumak yasaktir.
-- Once en dar teshis, sonra tek toplu yama, sonra yalniz gerekli dogrulama yapilir.
-- Belirsizlikte kapsam buyutulmez.
+## 3) Operasyon Dosya Yollari
+- Besmele/README.md
+- Besmele/KURAL_KAYNAGI.md
+- Besmele/HEDEF_MIMARI.md
+- Besmele/KOMUT_SOZLUGU.md
+- Besmele/OPTIMIZE_POLITIKASI.md
+- Besmele/PROFIL_REHBERI.md
+- Besmele/ENTEGRASYON_REHBERI.md
+- Besmele/ENTEGRASYON_HARITASI.md
+- Besmele/WORKBOARD.md
+- Besmele/HISTORY.md
+- Besmele/FAZ_YOL_HARITASI.md
+- Besmele/optional/CIHAZ_TESTI.md
+- Besmele/plans/TASK-xxx.md
+- Besmele/plans/TASK-SABLON.md
+- Besmele/tools/validate_besmele.py
 
-## 0) Terminoloji (MUST)
+## 4) Turkce Adlandirma ve Ilk Kullanim Aciklamasi (MUST)
+- Derleyici/dil/runtime anahtar sozcukleri disindaki tum adlandirmalar Turkce secilir.
+- Her yeni ad, ilk kullaniminda kisa Turkce teknik aciklama tasir (ne icin var + nasil kullanilir).
 
-- `commit yap`: yalniz commit.
-- `commit ve push yap`: once commit, sonra push.
-- Commit/push notu: `<kisa-aciklama> | TASK-xxx[,TASK-yyy] | R.yymmdd_hhmm`
-- `R.yymmdd_hhmm`: kanonik teslim/push isareti; kullanici yazmasa da eklenir.
-- EXE dosya adina da `R.yymmdd_hhmm` eklenir.
-
-## 1) Bismillah Tetikleyici (MUST)
-
-- `Besmele/` veya `besmele/` varsa `bismillah` ailesi otomatik baslangictir.
-- `bismillah`:
-1. Repo kontrolu YAPILMAZ.
-2. Yalniz `Besmele/PROTOKOL.md` ve `Besmele/STATE.md` okunur; `Besmele/ADR.md` sadece gerekirse okunur.
-3. Ilk satir zorunlu: `Bismillah, Baglama alindi, calismaya hazirim.`
-4. Ikinci satirda gorev/hedef sorulur.
-- `bismillah kontrol` veya `bismillah kontrol et`:
-1. `git fetch --prune origin`
-2. `git status --short --branch`
-3. `Besmele/STATE.md` okunur; `Besmele/ADR.md` sadece gerekirse okunur.
-4. Once cok kisa repo ozeti verilir: `Uzak repo ile yerel repo esit.` veya `X commit onde, Y commit geride.`
-5. Sonraki satir zorunlu: `Baglama alindi, calismaya hazirim.`
-6. Hemen sonra gorev/hedef sorulur.
-
-## 2) Besmele Operasyon Akisi (MUST)
-
-- Bootstrap akisi: `Besmele/PROTOKOL.md` -> `Besmele/STATE.md`.
-- Global durum/handover tek kaynagi: `Besmele/STATE.md`.
-- Gorev listesi tek kaynagi: `Besmele/WORKBOARD.md`.
-- Gorev listesi sorulursa `WORKBOARD.md` eksiksiz aktarilir; yoksa bu acikca belirtilir.
-- Kod degisikligi oncesi yalniz ilgili `Besmele/plans/TASK-xxx.md` okunur.
-- `Besmele/TOKEN_RULES.md`, `Besmele/CONVENTIONS.md`, `Besmele/ARCH_BASE.md`, `Besmele/UI_SYSTEM.md`, `Besmele/DECISIONS.md` ve `Proje/*.md` yalniz gorev dogrudan gerektiriyorsa okunur.
-- Snapshot tetigi:
-  - kullanici `snapshot al` derse hemen snapshot yazilir
-  - arada snapshot yazilmadiysa kullanicinin 8 anlamli talimati tamamlandiginda otomatik snapshot yazilir
-  - gorev degisimi, oturum kapatisi, commit/push veya `usb ye yedekle` oncesi snapshot zorunludur
-- Snapshot sayaci her yeni snapshot yaziminda sifirlanir.
-- Push/teslim gecmisi tek kaynagi: `Besmele/PUSH_LOG.md`.
-- Push oncesi kalite kapanisi: `Besmele/QUALITY_GATE.md`.
-
-## 3) Codex Ekip Disiplini (MUST)
-
-- Kod degisikligi oncesi aktif gorev bulunur veya yeni `TASK-xxx` acilir.
-- Her bagimsiz is icin ayri plan dosyasi zorunludur.
-- `STATE.md`, `WORKBOARD.md` ve ilgili `TASK-xxx.md` birbiriyle tutarli tutulur.
-- `in_progress` gorev, acik kullanici yonlendirmesi olmadan devralinmaz.
-- Her anlamli devir veya push oncesi en az su dosyalar guncellenir:
-  - `Besmele/STATE.md`
-  - `Besmele/WORKBOARD.md`
-  - ilgili `Besmele/plans/TASK-xxx.md`
-  - `Besmele/PUSH_LOG.md`
-- Mimari karar varsa `Besmele/ADR.md` append-only guncellenir.
-
-## 4) Kapsam ve Minimalizm (MUST)
-
-- Yalniz istenen kapsam degistirilir.
-- Kapsam disi refactor yapilmaz.
-- Cikti kisa, net, test edilebilir tutulur.
-- Minimum gerekli dosya okunur; ayni bilgi tekrar yazilmaz.
-- Secret/token/sifre, makineye ozel gizli bilgi ve gereksiz binary artefakt commitlenmez.
-- UI duzenlemede yuzde/oran istenirse son sayisal deger yazilir; kodda carpansal ifade kullanilmaz.
-- Kanonik hafiza sohbette degil repo markdown kayitlarindadir; tekrar tekrar uzun aciklama yerine delta + karar + sonraki adim yazilir.
-
-## 4.1) TR-UTF8-CRITICAL (MUST, COK ONEMLI KODU)
-
-- Turkce UI metni, markdown kaydi ve kullaniciya gorunen hicbir yazi mojibake/encoding bozulmasi (`Ã`, `Ä`, `Å` vb.) iceremez.
-- Turkce karakter gereken yerde dogrudan Unicode karakter kullanilir: `Ç Ğ İ Ö Ş Ü ç ğ ı ö ş ü`.
-- Boyle bir bozulma gorulurse gorev tamamlanmis sayilmaz; teslimden once ilgili dosya UTF-8 olarak duzeltilir ve tekrar kontrol edilir.
-
-## 4.2) RATIO-TO-PX-CRITICAL (MUST, COK ONEMLI KODU)
-
-- Kullanici oran, yuzde veya `1/3` gibi bir tarif verirse bu ifade koda dogrudan yazilmaz.
-- Once tek bir nihai px degeri hesaplanir, kullaniciya bu px degeriyle bilgi verilir ve kodda yalniz bu px degeri kullanilir.
-- UI boyut kararlarinda `flex`, bolme, carpma, yuzde veya turetilmis oranla ayni niyet ikinci kez kodlanmaz.
-
-## 5) Platform Onekleri (MUST)
-
-- `D`: Desktop
-- `W`: Web
-- `M`: Mobil
-- `MA`: Mobil Android
-- `MI`: Mobil iOS
-
-## 5.1) Calistirma Terminolojisi (MUST)
-
-- `M de calistir`: emulator.
-- `tel de calistir`: fiziksel telefon.
-- Varsayilan: genelde `M de calistir`, genel kontrol `tel de calistir`.
-
-## 5.2) M Calistirma Varsayilani (MUST)
-
-- Varsayilan emulator seri no: `emulator-5554` (Pixel 7a).
-- Varsayilan komut: `flutter run -d emulator-5554`.
-- Seri no yoksa `adb devices` ile dogrula ve kullanicidan seri iste.
-- Kalici cache icin `tools/run_m.ps1` kullan; gradle/pub cache `.cache/` altinda tutulur.
-
-## 6) USB Bundle Yedek (MUST)
-
-- Uzak repo yerine USB yedek tercih edilir.
-- `usb ye yedekle`: `git bundle` ile tek dosya, ada `R.yymmdd_hhmm` eklenir.
-- `usb den al`: bundle dosyasindan yerel repo acilir.
-- `en guncelini`: en son `R.yymmdd_hhmm` etiketli bundle/teslim secilir.
-
-## 7) ProjeOrj Arsiv (MUST)
-
-- `ProjeOrj/` arsivdir; silinmez, guncellenmez.
-- Aktif dokumanlar `Proje/` altinda tutulur.
-
-## 8) Token Ekonomisi (Tercih)
-
-- Gunluk tasima icin USB `.bundle` en ekonomik yoldur.
-- Uzak repo push yalniz yedek/teslim amaclidir.
+Not: Varsayilan teknoloji listesi sinirlayici degildir; asistan gerekceyle farkli dil/cati onerebilir. Son karar her zaman kullanicidadir.

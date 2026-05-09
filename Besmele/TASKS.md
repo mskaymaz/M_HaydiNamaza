@@ -98,7 +98,7 @@ Goal: split oversized files safely.
 - [x] Extract settings reminder sections group.
 - [x] Extract settings top settings section.
 - [x] Stop tiny UI extraction to avoid over-fragmentation.
-- [ ] Audit settings orchestration/load-save/service separation.
+- [x] Audit settings orchestration/load-save/service separation.
 
 Acceptance:
 - No file remains above 600 lines unless documented.

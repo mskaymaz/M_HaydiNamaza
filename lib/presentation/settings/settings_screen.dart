@@ -23,8 +23,11 @@ import 'widgets/settings_color_action_widgets.dart';
 import 'widgets/settings_reminder_fields.dart';
 import 'widgets/settings_reminder_options_section.dart';
 import 'settings_audio_mode_texts.dart';
+import 'settings_color_formatters.dart';
 import 'settings_favorite_matcher.dart';
 import 'settings_reminder_text_mapper.dart';
+import 'settings_text_formatters.dart';
+import 'settings_voice_key.dart';
 import 'widgets/settings_section_header.dart';
 import 'widgets/settings_visual_reminder_section.dart';
 import 'widgets/settings_voice_reminder_section.dart';
@@ -142,7 +145,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _sortCustomPrayersByTime = settings.sortCustomPrayersByTime;
     if (settings.selectedVoiceName != null &&
         settings.selectedVoiceLocale != null) {
-      _selectedVoiceKey = _voiceKey(
+      _selectedVoiceKey = voiceKey(
         settings.selectedVoiceName!,
         settings.selectedVoiceLocale!,
       );
@@ -565,10 +568,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return _voiceReminderController.text.trim();
   }
 
-  String _toTurkishUpper(String value) {
-    return value.replaceAll('i', 'İ').replaceAll('ı', 'I').toUpperCase();
-  }
-
   Future<void> _playVoiceReminderTest(
     BuildContext context,
     AppLocalizations l10n,
@@ -637,7 +636,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         return AlertDialog(
           contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
           content: FlashingReminderCard(
-            prayerLabel: '${_toTurkishUpper(l10n.prayerDhuhr)} VAKTİ',
+            prayerLabel: '${toTurkishUpper(l10n.prayerDhuhr)} VAKTİ',
             message: effectiveText,
           ),
           actions: [
@@ -650,8 +649,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       },
     );
   }
-
-  String _voiceKey(String name, String locale) => '$locale|$name';
 
   _VoiceOption? _selectedVoice() {
     final key = _selectedVoiceKey;
@@ -738,7 +735,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       alignment: Alignment.center,
                       child: Text(
-                        _hexColor(draft.toColor()),
+                        hexColor(draft.toColor()),
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: draft.value > 0.6
                               ? Colors.black87
@@ -803,10 +800,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  String _hexColor(Color color) {
-    final value = color.toARGB32() & 0xFFFFFF;
-    return '#${value.toRadixString(16).padLeft(6, '0').toUpperCase()}';
-  }
 }
 
 class _VoiceOption {

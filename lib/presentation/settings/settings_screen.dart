@@ -353,9 +353,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
             onPickAudio: () => _pickReminderAudio(context),
             audioPickerButtonLabel: audioPickerButtonLabel(_selectedAudioMode),
-            audioInfoText: _selectedAudioLabel?.trim().isNotEmpty == true
-                ? 'Seçilen dosya: '
-                : audioPickerHelpText(_selectedAudioMode),
+            audioInfoText: audioInfoTextForSelection(
+              selectedAudioLabel: _selectedAudioLabel,
+              selectedAudioMode: _selectedAudioMode,
+            ),
             onVoiceTest: () => _playVoiceReminderTest(context, l10n),
             voiceTextField: SettingsReminderTextField(
               label: 'Sesli Hatırlatma Metni',

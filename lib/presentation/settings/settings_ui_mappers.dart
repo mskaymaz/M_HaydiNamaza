@@ -1,6 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
+import '../../app/reminder_text_settings_storage.dart';
+import 'settings_audio_mode_texts.dart';
+
 String methodSubtitleForCode(String? methodCode, AppLocalizations l10n) {
   switch (methodCode) {
     case 'turkey':
@@ -52,4 +55,14 @@ Locale? localeForCode(String code) {
     default:
       return null;
   }
+}
+
+String audioInfoTextForSelection({
+  required String? selectedAudioLabel,
+  required ReminderAudioMode selectedAudioMode,
+}) {
+  if (selectedAudioLabel?.trim().isNotEmpty == true) {
+    return 'Se\u00e7ilen dosya: ';
+  }
+  return audioPickerHelpText(selectedAudioMode);
 }

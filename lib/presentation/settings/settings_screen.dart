@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
@@ -39,7 +38,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final ReminderTextSettingsStorage _reminderTextStorage =
       ReminderTextSettingsStorage();
   final ReminderAudioService _reminderAudioService = ReminderAudioService();
-  final FlutterTts _flutterTts = FlutterTts();
   final TextEditingController _voiceReminderController =
       TextEditingController();
   final TextEditingController _visualReminderController =
@@ -178,16 +176,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final current = widget.localeController.value;
     final palette = widget.uiPaletteController.value;
     final ui = ConfigRegistry.settingsPanelsFor(palette);
-
-    String locationSubtitle() {
-      final data = _location;
-      if (data == null) return l10n.locationNotSet;
-      final coords =
-          data.latitude.trim().isEmpty || data.longitude.trim().isEmpty
-          ? ''
-          : '\n${data.latitude}, ${data.longitude}';
-      return '${_formatLocationSummary(data)}$coords';
-    }
 
     String methodSubtitle() {
         switch (_methodCode) {
@@ -870,112 +858,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
-  Future<void> _speakReminderPreview({
-    required BuildContext context,
-    required String previewText,
-    String prayerLabel = 'Öğle',
-  }) async {
-    final trimmed = previewText.trim();
-    if (trimmed.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Test için önce metin girin.')),
-      );
-      return;
-    }
-    final spokenText = '$prayerLabel vakti. $trimmed';
-    try {
-      await _speakWithFallback(spokenText);
-    } catch (_) {
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sesli test başlatılamadı.')),
-      );
-    }
-  }
-
-  Future<void> _applyPreferredVoice() async {
-    final selectedVoice = _selectedVoice();
-    final selected = widget.localeController.value;
-    final deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
-    final locale = selected ?? deviceLocale;
-    final localeKey = locale.countryCode == null || locale.countryCode!.isEmpty
-        ? locale.languageCode
-        : '${locale.languageCode}-${locale.countryCode}';
-    try {
-      await _flutterTts.setLanguage(selectedVoice?.locale ?? localeKey);
-    } catch (_) {
-      try {
-        await _flutterTts.setLanguage(locale.languageCode);
-      } catch (_) {}
-    }
-    if (selectedVoice != null) {
-      try {
-        await _flutterTts.setVoice({
-          'name': selectedVoice.name,
-          'locale': selectedVoice.locale,
-        });
-        return;
-      } catch (_) {}
-    }
-    dynamic voices;
-    try {
-      voices = await _flutterTts.getVoices;
-    } catch (_) {
-      return;
-    }
-    if (voices is! List) return;
-    Map<String, dynamic>? matchedVoice;
-    for (final voice in voices) {
-      if (voice is! Map) continue;
-      final name = (voice['name'] ?? '').toString().toLowerCase();
-      final localeName = (voice['locale'] ?? '').toString().toLowerCase();
-      final sameLocale = localeName.startsWith(
-        locale.languageCode.toLowerCase(),
-      );
-      if (!sameLocale) continue;
-      if (name.contains('male') ||
-          name.contains('erkek') ||
-          name.contains('man')) {
-        matchedVoice = Map<String, dynamic>.from(voice);
-        break;
-      }
-      matchedVoice ??= Map<String, dynamic>.from(voice);
-    }
-    if (matchedVoice == null) return;
-    try {
-      await _flutterTts.setVoice({
-        'name': (matchedVoice['name'] ?? '').toString(),
-        'locale': (matchedVoice['locale'] ?? localeKey).toString(),
-      });
-    } catch (_) {}
-  }
-
-  Future<void> _speakWithFallback(String spokenText) async {
-    await _flutterTts.stop();
-    try {
-      await _flutterTts.awaitSpeakCompletion(true);
-    } catch (_) {}
-    try {
-      await _applyPreferredVoice();
-    } catch (_) {}
-    try {
-      await _flutterTts.setPitch(0.95);
-    } catch (_) {}
-    try {
-      await _flutterTts.setSpeechRate(0.45);
-    } catch (_) {}
-    final result = await _flutterTts.speak(spokenText);
-    if (result == 1 || result == null) {
-      return;
-    }
-    await _flutterTts.setVoice(const <String, String>{});
-    final retry = await _flutterTts.speak(spokenText);
-    if (retry == 1 || retry == null) {
-      return;
-    }
-    throw Exception('tts_failed');
-  }
-
   Future<void> _showVisualReminderPreview(
     BuildContext context,
     AppLocalizations l10n,
@@ -1201,62 +1083,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         );
       },
     );
-  }
-
-  String _formatDisplayName(String input) {
-    final trimmed = _normalizeSpacing(input);
-    if (trimmed.isEmpty) return trimmed;
-    final lower = trimmed
-        .replaceAll('I', String.fromCharCode(0x0131))
-        .replaceAll(String.fromCharCode(0x0130), 'i')
-        .toLowerCase();
-    final parts = lower.split(RegExp(r'(\s+|/|-)'));
-    final buffer = StringBuffer();
-    for (final part in parts) {
-      if (part.isEmpty) continue;
-      final isSeparator = RegExp(r'^\s+$|^/$|^-$').hasMatch(part);
-      if (isSeparator) {
-        buffer.write(part);
-        continue;
-      }
-      buffer.write(_capitalizeFirst(part[0]));
-      if (part.length > 1) {
-        buffer.write(part.substring(1));
-      }
-    }
-    return buffer.toString();
-  }
-
-  String _capitalizeFirst(String char) {
-    if (char == 'i') return String.fromCharCode(0x0130);
-    if (char == String.fromCharCode(0x0131)) return 'I';
-    return char.toUpperCase();
-  }
-
-  String _formatLocationSummary(LocationData data) {
-    final province = _formatDisplayName(data.province);
-    final district = _formatDisplayName(data.district);
-    if (district.isEmpty) return province;
-    return '$province / $district';
-  }
-
-  String _formatFavoriteLabel(LocationFavorite favorite) {
-    return _formatLocationSummary(
-      LocationData(
-        countryId: favorite.countryId,
-        countryName: favorite.countryName,
-        province: favorite.province,
-        district: favorite.district,
-        latitude: favorite.latitude,
-        longitude: favorite.longitude,
-      ),
-    );
-  }
-
-  String _currentFavoriteClosedLabel(AppLocalizations l10n) {
-    final data = _location;
-    if (data == null) return l10n.locationFavoritesLabel;
-    return _formatLocationSummary(data);
   }
 
   String _normalizeSpacing(String input) {
@@ -1607,38 +1433,6 @@ class _FlashingReminderPreviewState extends State<_FlashingReminderPreview> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _ColorSlider extends StatelessWidget {
-  final String label;
-  final double value;
-  final Color activeColor;
-  final ValueChanged<double> onChanged;
-
-  const _ColorSlider({
-    required this.label,
-    required this.value,
-    required this.activeColor,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(width: 18, child: Text(label)),
-        Expanded(
-          child: Slider(
-            min: 0,
-            max: 255,
-            activeColor: activeColor,
-            value: value,
-            onChanged: onChanged,
-          ),
-        ),
-      ],
     );
   }
 }

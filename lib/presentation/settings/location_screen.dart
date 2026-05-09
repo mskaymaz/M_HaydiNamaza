@@ -284,10 +284,11 @@ class _LocationScreenState extends State<LocationScreen> {
         const SnackBar(content: Text('Mevcut konum alinamadi.')),
       );
     } finally {
-      if (!mounted) return;
-      setState(() {
-        _locating = false;
-      });
+      if (mounted) {
+        setState(() {
+          _locating = false;
+        });
+      }
     }
   }
 

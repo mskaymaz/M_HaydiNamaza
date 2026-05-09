@@ -152,6 +152,14 @@ Completed:
   - Pure date/text/hijri helpers extracted to `lib/presentation/home/home_date_text_helpers.dart`.
   - No behavior change intended.
   - TASK-03 is still not complete.
+- Final note for now:
+  - TASK-03C `home_screen.dart` decomposition checkpoint is sufficiently completed for now.
+  - `home_screen.dart` reduced to `1920` lines.
+  - Further extraction is intentionally paused.
+  - Reason: remaining large sections are protected high-coupling parent orchestration/state/dialog/storage/notification/location/prayer-time/reminder logic.
+  - Type/data block is not extracted now because benefit is modest versus visibility/API churn.
+  - No behavior change intended.
+  - TASK-03 main status remains unchanged.
 
 Notes:
 - This checkpoint does not complete TASK-03.

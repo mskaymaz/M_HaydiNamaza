@@ -109,6 +109,32 @@ Goal: split oversized files safely.
 - [x] Stop further micro UI/helper extraction to avoid over-fragmentation.
 - [x] Audit location orchestration/service/repository boundaries.
 
+### TASK-03C — home_screen.dart first presentational extraction checkpoint
+
+Status: In progress checkpoint completed, TASK-03 not finished.
+
+Completed:
+- Extracted only self-contained presentational UI blocks from `home_screen.dart`.
+- Added/updated `lib/presentation/home/widgets/home_presentational_widgets.dart`.
+- Extracted:
+  - `HomeReminderChip`
+  - `HomeIconToggle`
+  - `HomeActiveReminderPanel`
+  - `HomeDrawerHandlePainter`
+- Kept parent state, callbacks, orchestration, navigation, dialogs, snackbars, mounted checks, and business logic inside `home_screen.dart`.
+- No behavior change intended.
+- Local validation completed by user:
+  - `flutter analyze`
+  - Result: `No issues found!`
+- `home_screen.dart` line count after checkpoint: `2754`.
+
+Notes:
+- This checkpoint does not complete TASK-03.
+- Further decomposition must continue in small, safe phases.
+- Do not move service/storage/notification/location/prayer-time calculation logic.
+- Do not move Navigator/SnackBar/Dialog/setState/mounted flows.
+- Avoid tiny low-value extractions.
+
 Acceptance:
 - No file remains above 600 lines unless documented.
 - Main screens become readable and testable.

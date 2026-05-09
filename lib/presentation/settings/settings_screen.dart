@@ -22,6 +22,7 @@ import 'widgets/settings_background_colors_section.dart';
 import 'widgets/settings_color_action_widgets.dart';
 import 'widgets/settings_reminder_fields.dart';
 import 'widgets/settings_reminder_options_section.dart';
+import 'settings_reminder_text_mapper.dart';
 import 'widgets/settings_section_header.dart';
 import 'widgets/settings_visual_reminder_section.dart';
 import 'widgets/settings_voice_reminder_section.dart';
@@ -532,33 +533,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _persistReminderTexts() async {
     final selectedVoice = _selectedVoice();
     await _reminderTextStorage.write(
-      ReminderTextSettings(
-        voiceText: _voiceReminderController.text.trim(),
-        visualText: _visualReminderController.text.trim(),
-        audioMode: _selectedAudioMode,
-        showVoiceIcon: _showVoiceIcon,
-        showVisualIcon: _showVisualIcon,
-        showAzanIcon: _showAzanIcon,
-        showVibrationIcon: _showVibrationIcon,
-        sortCustomPrayersByTime: _sortCustomPrayersByTime,
-        voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 15),
-        vibrationDurationSeconds: _readSeconds(
-          _vibrationDurationController,
-          fallback: 3,
+      mapReminderTextSettings(
+        ReminderTextSettingsMapperInput(
+          voiceText: _voiceReminderController.text,
+          visualText: _visualReminderController.text,
+          audioMode: _selectedAudioMode,
+          showVoiceIcon: _showVoiceIcon,
+          showVisualIcon: _showVisualIcon,
+          showAzanIcon: _showAzanIcon,
+          showVibrationIcon: _showVibrationIcon,
+          sortCustomPrayersByTime: _sortCustomPrayersByTime,
+          voiceRepeatSecondsText: _voiceRepeatController.text,
+          vibrationDurationSecondsText: _vibrationDurationController.text,
+          vibrationPauseSecondsText: _vibrationPauseController.text,
+          visualDisplaySecondsText: _visualDisplayController.text,
+          visualReopenSecondsText: _visualReopenController.text,
+          selectedVoiceName: selectedVoice?.name,
+          selectedVoiceLocale: selectedVoice?.locale,
+          selectedAudioPath: _selectedAudioPath,
+          selectedAudioLabel: _selectedAudioLabel,
         ),
-        vibrationPauseSeconds: _readSeconds(
-          _vibrationPauseController,
-          fallback: 5,
-        ),
-        visualDisplaySeconds: _readSeconds(
-          _visualDisplayController,
-          fallback: 6,
-        ),
-        visualReopenSeconds: _readSeconds(_visualReopenController, fallback: 4),
-        selectedVoiceName: selectedVoice?.name,
-        selectedVoiceLocale: selectedVoice?.locale,
-        selectedAudioPath: _selectedAudioPath,
-        selectedAudioLabel: _selectedAudioLabel,
       ),
     );
   }
@@ -577,30 +571,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
     BuildContext context,
     AppLocalizations l10n,
   ) async {
-    final settings = ReminderTextSettings(
-      voiceText: _voiceReminderController.text.trim(),
-      visualText: _visualReminderController.text.trim(),
-      audioMode: _selectedAudioMode,
-      showVoiceIcon: _showVoiceIcon,
-      showVisualIcon: _showVisualIcon,
-      showAzanIcon: _showAzanIcon,
-      showVibrationIcon: _showVibrationIcon,
-      sortCustomPrayersByTime: _sortCustomPrayersByTime,
-      voiceRepeatSeconds: _readSeconds(_voiceRepeatController, fallback: 15),
-      vibrationDurationSeconds: _readSeconds(
-        _vibrationDurationController,
-        fallback: 3,
+    final selectedVoice = _selectedVoice();
+    final settings = mapReminderTextSettings(
+      ReminderTextSettingsMapperInput(
+        voiceText: _voiceReminderController.text,
+        visualText: _visualReminderController.text,
+        audioMode: _selectedAudioMode,
+        showVoiceIcon: _showVoiceIcon,
+        showVisualIcon: _showVisualIcon,
+        showAzanIcon: _showAzanIcon,
+        showVibrationIcon: _showVibrationIcon,
+        sortCustomPrayersByTime: _sortCustomPrayersByTime,
+        voiceRepeatSecondsText: _voiceRepeatController.text,
+        vibrationDurationSecondsText: _vibrationDurationController.text,
+        vibrationPauseSecondsText: _vibrationPauseController.text,
+        visualDisplaySecondsText: _visualDisplayController.text,
+        visualReopenSecondsText: _visualReopenController.text,
+        selectedVoiceName: selectedVoice?.name,
+        selectedVoiceLocale: selectedVoice?.locale,
+        selectedAudioPath: _selectedAudioPath,
+        selectedAudioLabel: _selectedAudioLabel,
       ),
-      vibrationPauseSeconds: _readSeconds(
-        _vibrationPauseController,
-        fallback: 5,
-      ),
-      visualDisplaySeconds: _readSeconds(_visualDisplayController, fallback: 6),
-      visualReopenSeconds: _readSeconds(_visualReopenController, fallback: 4),
-      selectedVoiceName: _selectedVoice()?.name,
-      selectedVoiceLocale: _selectedVoice()?.locale,
-      selectedAudioPath: _selectedAudioPath,
-      selectedAudioLabel: _selectedAudioLabel,
     );
     if (settings.audioMode != ReminderAudioMode.textToSpeech &&
         (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
@@ -723,15 +714,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       case ReminderAudioMode.mp3File:
         return 'Yalniz mp3 dosyasi secilir.';
     }
-  }
-
-  int _readSeconds(TextEditingController controller, {required int fallback}) {
-    final parsed = int.tryParse(controller.text.trim());
-    if (parsed == null) return fallback;
-    if (fallback == 0) {
-      return parsed.clamp(0, 3600);
-    }
-    return parsed.clamp(1, 3600);
   }
 
   InputDecoration _dropdownDecoration(String label) {

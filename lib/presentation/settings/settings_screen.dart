@@ -15,8 +15,6 @@ import '../../core/config/config_registry.dart';
 import '../reminders/flashing_reminder_card.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
-import 'widgets/settings_calculation_method_row.dart';
-import 'widgets/settings_language_location_row.dart';
 import 'widgets/settings_color_sections_group.dart';
 import 'settings_audio_mode_texts.dart';
 import 'settings_color_formatters.dart';
@@ -26,6 +24,7 @@ import 'settings_text_formatters.dart';
 import 'settings_ui_mappers.dart';
 import 'settings_voice_key.dart';
 import 'widgets/settings_reminder_sections_group.dart';
+import 'widgets/settings_top_settings_section.dart';
 
 class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -191,7 +190,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: ListView(
         children: [
-          SettingsLanguageLocationRow(
+          SettingsTopSettingsSection(
             initialLanguageCode: codeForLocale(current),
             languageDecoration: _dropdownDecoration('Uygulama Dili'),
             languageSystemLabel: l10n.languageSystem,
@@ -214,12 +213,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 await _loadLocation();
               }
             },
-          ),
-          SettingsCalculationMethodRow(
-            itemPanelStyle: ui.itemPanel,
-            title: l10n.calculationMethodLabel,
-            subtitle: methodSubtitleForCode(_methodCode, l10n),
-            onTap: () async {
+            calculationItemPanelStyle: ui.itemPanel,
+            calculationTitle: l10n.calculationMethodLabel,
+            calculationSubtitle: methodSubtitleForCode(_methodCode, l10n),
+            onOpenCalculationMethod: () async {
               final changed = await Navigator.of(context).push<bool>(
                 MaterialPageRoute(
                   builder: (_) => CalculationMethodScreen(initialCode: _methodCode),
@@ -230,7 +227,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               }
             },
           ),
-          const Divider(height: 32),
           SettingsReminderSectionsGroup(
             screenPadding: ui.screenPadding,
             panelStyle: ui.panel,

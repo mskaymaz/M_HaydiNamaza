@@ -1,10 +1,21 @@
-# BESMELE STATE
+﻿# STATE.md
 
-last_update: 2026-04-16 13:35 +03:00
-active_task: TASK-007
-phase: Besmele kok omurgasi yerlestirildi; mevcut Besmele, BesmeleGenel ve ContextKit hafizasi korunarak yeni cekirdege baglandi.
-next_step: TASK-007 icin bildirim + ezan/ses altyapisini mevcut uygulama ici hatirlatma yapisindan platform seviyesine ayiracak kapsam netlestirilecek.
-blockers: NONE
-active_owner: UNASSIGNED
-last_delivery: R.260416_1335
-handover: Yeni oturumda once STATE, sonra Besmele/ENTEGRASYON_HARITASI.md, Besmele/WORKBOARD.md, Besmele/STATE.md ve siradaki tasklar (TASK-007, TASK-009, TASK-011) okunarak devam edilmeli.
+last_update: 2026-05-09
+project: M_HaydiNamaza
+status: instruction_cleanup_ready
+active_phase: advanced_architecture_upgrade
+active_task: TASK-00-baseline-and-instruction-cleanup
+blockers:
+  - Official Diyanet prayer-time data access is unresolved and must be settled before release.
+next_step:
+  - Apply clean instruction structure.
+  - Archive old duplicated markdown/task/Besmele files.
+  - Start baseline audit from `Besmele/TASKS.md`.
+
+## Current known risks
+- Instruction/task files are duplicated and can confuse AI assistants.
+- Existing large UI files must be split safely.
+- Prayer-time data source must not rely on fragile hidden endpoints.
+- Existing ayah/hadith content will be replaced later with a new approved 400 + 400 dataset.
+- Qibla direction must distinguish mathematical bearing from sensor accuracy.
+

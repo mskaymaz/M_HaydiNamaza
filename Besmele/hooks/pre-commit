@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-# pre_commit_dogrula: Commit oncesi Besmele yapisini dogrular; hata varsa commiti durdurur.
-set -eu
-python "Besmele/tools/validate_besmele.py"

@@ -1,10 +1,8 @@
-# BESMELE HISTORY
+﻿# HISTORY.md
 
-Amac: Teslim, handover, snapshot ve kararlar icin tek append-only gecmis tutmak.
+## 2026-05-09
+- Instruction cleanup package prepared.
+- Advanced upgrade task structure consolidated.
+- Diyanet official data access added as a release blocker.
+- Daily ayah/hadith and qibla engine upgrades added to the plan.
 
-| Date | Tag | Type | Ref | Summary |
-| --- | --- | --- | --- | --- |
-| 2026-04-16 13:35 +03:00 | R.260416_1335 | snapshot | ENTEGRASYON | Kokte AGENTS/CORE/STATE yerlestirildi; mevcut Besmele, BesmeleGenel ve ContextKit hafizasi korunup yeni Besmele omurgasina baglandi |
-
-Ne zaman acilir?
-- Anlamli teslim, karar, snapshot veya handover kaydi ekleneceginde.

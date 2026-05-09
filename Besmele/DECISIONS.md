@@ -1,8 +1,18 @@
-# BESMELE DECISIONS (Ekonomik)
+﻿# DECISIONS.md
 
-Format (tek satir):
-- YYYY-MM-DD | konu | karar | neden
+## ADR-001 â€” Single instruction source
+Decision: root `AGENTS.md`, `CORE.md`, `STATE.md` plus `Besmele/` are the only active instruction sources.
+Reason: duplicated markdown structures confuse AI coding assistants.
 
-- 2026-03-15 | Ana ekran UI | Ucretsiz/sosyal odak, uyelik/odeme yok; ana ekran: geri sayim + vakit listesi + (ops) gunun ayeti + CTA | Sosyal proje hedefi
-- 2026-03-15 | Zemin motif | Cizgisel beyaz zemin + yesil ton (bg_line_motif02) | Temiz ve hafif gorunum
-- 2026-03-17 | Diyanet veri kaynagi | Diyanet uyumu icin imsakiyem API (ulke/sehir/ilce + prayer-times) kullanilacak | Diyanet sayfasinda acik JSON endpoint yok
+## ADR-002 â€” Prayer-time data must be explicit
+Decision: the app must clearly distinguish official Diyanet data, verified cached data, third-party data, and approximate calculated data.
+Reason: user trust depends on prayer-time accuracy and source transparency.
+
+## ADR-003 â€” Daily religious content requires approval state
+Decision: app shows only approved ayah/hadith records. Draft content is never displayed in production.
+Reason: religious content needs source discipline.
+
+## ADR-004 â€” Qibla accuracy must be honest
+Decision: qibla screen must separate location-based Kaaba bearing from sensor-only approximate mode.
+Reason: phone compass accuracy depends on environment and calibration.
+

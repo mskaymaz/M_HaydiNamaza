@@ -1,33 +1,56 @@
-# BESMELE CORE
+﻿# CORE.md
 
-Amac: Bismillah akisinda minimum okuma ile guvenli ve ekonomik token calisma omurgasi saglamak.
+Purpose: keep M_HaydiNamaza maintainable, reliable, respectful, and easy for AI assistants to improve without drowning in duplicated instructions.
 
-Ortak kural kaynagi: Besmele/KURAL_KAYNAGI.md
+## Product direction
+M_HaydiNamaza is a Flutter prayer-time application. It should become a clean, professional, offline-capable, user-trust-first mobile app.
 
-## 1) Ekonomik Token
-- Tetik: ekonomik token veya bismillah
-- Preflight cevap, plan, arac, duzeltme, snapshot, commit, push, exe ve bundle oncesi uygulanir.
-- Ilk okuma ust siniri: toplam baglam tokeni en fazla %1.
-- Ilk okumada mikro-ozet uygulanir:
-  - CORE.md: Amac, Ekonomik Token ve Bootstrap satirlari
-  - STATE.md: last_update, active_task, next_step, blockers, last_delivery
+## Core engineering principles
+- Working app first, then refactor.
+- No instruction sprawl.
+- No giant UI files.
+- No hidden or fragile prayer-time data dependency.
+- No religious content without source metadata and approval state.
+- No false accuracy claims for qibla direction.
+- No manipulative monetization or intrusive ads.
 
-## 2) R Etiketi
-- R kanonik teslim/handover etiketidir.
-- Format: R.yymmdd_hhmm
-- Zorunlu kullanim: commit/push notu, HISTORY tag, bundle adi, exe/paket adi.
+## Target architecture
+Use feature-based clean architecture gradually:
 
-## 3) KOK ve Operasyon Ayrimi
-- KOKTE yalniz tetikleyiciler vardir: AGENTS.md, CORE.md, STATE.md
-- Tum operasyon dosyalari Besmele/ klasorundedir.
+```text
+lib/
+  app/
+  core/
+  features/
+    prayer_times/
+    qibla/
+    daily_content/
+    shared_settings/
+    location/
+    notifications/
+assets/
+  data/
+    daily_content/
+    prayer_times/
+docs/
+  architecture/
+Besmele/
+```
 
-## 4) Bootstrap
-1. bismillah sonrasi yalniz CORE.md ve STATE.md okunur; cikti asgari tutulur, listeleme/aciklama yapilmaz.
-2. Hemen ardindan yalniz `Besmele/KOMUT_SOZLUGU.md` okunur; aktif tetikler kisa baglama alinmis olur.
-3. Ilk cevap yalnizca iki satirdir: "Bismillah, Baglama alindi, calismaya hazirim." + "Hedef nedir?"
-4. Operasyon baslayana kadar ek aciklama, dosya listesi, durum raporu uretilmez.
-5. Operasyon gerektiginde Besmele/ altindaki ilgili dosyaya inilir; tam kapsam ve profesyonellik korunur.
+## Priority refactors
+1. Split oversized UI files.
+2. Extract prayer-time logic from UI.
+3. Build official prayer-time data strategy before release.
+4. Add daily ayah/hadith panel architecture without publishing unapproved content.
+5. Upgrade qibla engine with location-based bearing and sensor fallback.
+6. Add shared settings modules based on reusable AllApp contracts.
+7. Improve tests and release readiness.
 
-## 5) Turkce Adlandirma
-- Derleyici/dil/runtime anahtar sozcukleri disindaki adlandirmalar Turkce secilir.
-- Her yeni ad, ilk kullaniminda kisa Turkce teknik aciklama tasir (ne icin var + nasil kullanilir).
+## Active instruction source
+- Root: `AGENTS.md`, `CORE.md`, `STATE.md`
+- Work plan: `Besmele/TASKS.md`
+- Current handoff: `Besmele/HANDOFF.md`
+- Quality gate: `Besmele/QUALITY_GATE.md`
+
+Do not create new competing instruction folders unless explicitly requested.
+

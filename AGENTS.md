@@ -1,59 +1,34 @@
-# AGENTS.md
+﻿# AGENTS.md
 
 Repo: M_HaydiNamaza
 
-## -1) Ekonomik Token (MUST)
-- Tetik: ekonomik token veya bismillah.
-- Preflight cevap, plan, arac, duzeltme, snapshot, commit, push, exe ve bundle oncesi sessizce tekrar edilir.
-- Kural: yalniz istenen kapsam, minimum dosya, kisa durum.
-- Ortak kaynak: Besmele/KURAL_KAYNAGI.md
+This file is the only bootstrap file for AI coding assistants.
 
-## -1.1) DERINLIKLI_DURUST_TAVSIYE (MUST)
-- Bu ilke tum yapi icin gecerlidir; tek bir maddeye ozgu degildir.
-- AI yalniz komut uygulamaz; mimari, kalite, ergonomi, risk, sadelik ve daha iyi alternatifler konusunda varsayilan olarak dusunur.
-- Kullanici acikca daraltmadikca profesyonel urun dusuncesiyle karsi oneride bulunur.
+## Mandatory startup
+1. Read `CORE.md`.
+2. Read `STATE.md`.
+3. Read `Besmele/TASKS.md` only for implementation planning.
+4. Read only task-relevant source files before editing.
 
-## -2) CALISMA_DISIPLINI (MUST)
-- Tek sinir Ekonomik Token ilkesidir; sayisal komut veya dosya butcesi yoktur.
-- Isleme baslamadan once okunan dosyalar tek satirda yazilir; okuma yapilmadiysa islem yapilmaz.
-- Kullanici "fren" yazarsa aninda durulur; yeni komut/edit calistirilmaz.
-- Kalici kararlar unutulmasin diye ilgili referans dosyasina ayni turda not dusulur (en az bir dosya: FAZ_YOL_HARITASI veya HISTORY).
+## Runtime commands
+- `bismillah` or `eko`: strict scoped mode.
+  - Required response: `Bismillah, baglam alindi, calismaya hazirim.`
+  - Work only on the requested scope.
+  - Use minimum files and minimum explanation.
+  - Do not propose unrelated features.
+- `fren`: stop immediately.
 
-## 0) R Etiketi (MUST, UNUTULMAZ)
-- R, kanonik teslim/handover etiketidir.
-- Dogru format: R.yymmdd_hhmm
-- Zorunlu yerler: commit/push notu, HISTORY tag, bundle dosya adi, exe/paket dosya adi.
-- R ekle denirse yalniz harf eklenmez, tam format eklenir.
+## Editing rules
+- Do not rewrite the full app in one step.
+- Preserve working behavior before improving it.
+- Keep files preferably under 400 lines; 600 lines only if unavoidable.
+- UI renders state and sends actions; business logic belongs to services/domain.
+- Do not hardcode app-specific text inside reusable shared modules.
+- Never commit secrets, service-account files, local build folders, generated zip files, or private credentials.
 
-## 1) Bismillah
-1. Yalniz CORE.md ve STATE.md oku.
-2. Hemen ardindan Besmele/KOMUT_SOZLUGU.md oku.
-3. Ilk satir: Bismillah, Baglama alindi, calismaya hazirim.
-4. Sonraki satirda hedef sor.
+## Output rules
+- Be brief and factual.
+- Always list changed files.
+- Always list validation command results or say clearly that validation was not run.
+- Update `STATE.md` and `Besmele/HANDOFF.md` only when the task changes project status.
 
-## 2) Yol Haritasi
-- KOKTE sadece tetikleyiciler kalir: AGENTS.md, CORE.md, STATE.md
-- Tum operasyon dosyalari Besmele/ klasorundedir.
-
-## 3) Operasyon Dosya Yollari
-- Besmele/README.md
-- Besmele/KURAL_KAYNAGI.md
-- Besmele/HEDEF_MIMARI.md
-- Besmele/KOMUT_SOZLUGU.md
-- Besmele/OPTIMIZE_POLITIKASI.md
-- Besmele/PROFIL_REHBERI.md
-- Besmele/ENTEGRASYON_REHBERI.md
-- Besmele/ENTEGRASYON_HARITASI.md
-- Besmele/WORKBOARD.md
-- Besmele/HISTORY.md
-- Besmele/FAZ_YOL_HARITASI.md
-- Besmele/optional/CIHAZ_TESTI.md
-- Besmele/plans/TASK-xxx.md
-- Besmele/plans/TASK-SABLON.md
-- Besmele/tools/validate_besmele.py
-
-## 4) Turkce Adlandirma ve Ilk Kullanim Aciklamasi (MUST)
-- Derleyici/dil/runtime anahtar sozcukleri disindaki tum adlandirmalar Turkce secilir.
-- Her yeni ad, ilk kullaniminda kisa Turkce teknik aciklama tasir (ne icin var + nasil kullanilir).
-
-Not: Varsayilan teknoloji listesi sinirlayici degildir; asistan gerekceyle farkli dil/cati onerebilir. Son karar her zaman kullanicidadir.

@@ -12,6 +12,7 @@ import '../../app/location_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
 import 'location_name_formatters.dart';
+import 'location_selection_item_builders.dart';
 import 'widgets/location_coordinates_section.dart';
 import 'widgets/location_current_location_tile.dart';
 import 'widgets/location_favorites_section.dart';
@@ -563,30 +564,21 @@ class _LocationScreenState extends State<LocationScreen> {
             selectedCountryId: countryValue,
             selectedStateId: stateValue,
             selectedDistrictId: districtValue,
-            countryItems: _countries
-                .map(
-                  (item) => DropdownMenuItem<String>(
-                    value: item.id,
-                    child: Text(formatLocationDisplayName(item.name)),
-                  ),
-                )
-                .toList(),
-            stateItems: _states
-                .map(
-                  (item) => DropdownMenuItem<String>(
-                    value: item.id,
-                    child: Text(formatLocationDisplayName(item.name)),
-                  ),
-                )
-                .toList(),
-            districtItems: _districts
-                .map(
-                  (item) => DropdownMenuItem<String>(
-                    value: item.id,
-                    child: Text(formatLocationDisplayName(item.name)),
-                  ),
-                )
-                .toList(),
+            countryItems: buildStringDropdownItems<_DiyanetItem>(
+              items: _countries,
+              valueOf: (item) => item.id,
+              labelOf: (item) => formatLocationDisplayName(item.name),
+            ),
+            stateItems: buildStringDropdownItems<_DiyanetItem>(
+              items: _states,
+              valueOf: (item) => item.id,
+              labelOf: (item) => formatLocationDisplayName(item.name),
+            ),
+            districtItems: buildStringDropdownItems<_DiyanetItem>(
+              items: _districts,
+              valueOf: (item) => item.id,
+              labelOf: (item) => formatLocationDisplayName(item.name),
+            ),
             onCountryChanged: _loadingCountries
                 ? null
                 : (value) async {

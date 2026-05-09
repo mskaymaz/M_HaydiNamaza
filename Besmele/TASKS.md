@@ -107,7 +107,7 @@ Goal: split oversized files safely.
 - [x] Extract location selection composer.
 - [x] Extract generic dropdown item builder.
 - [x] Stop further micro UI/helper extraction to avoid over-fragmentation.
-- [ ] Audit location orchestration/service/repository boundaries.
+- [x] Audit location orchestration/service/repository boundaries.
 
 Acceptance:
 - No file remains above 600 lines unless documented.

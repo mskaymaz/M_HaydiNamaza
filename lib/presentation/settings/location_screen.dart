@@ -15,6 +15,7 @@ import 'location_name_formatters.dart';
 import 'widgets/location_coordinates_section.dart';
 import 'widgets/location_current_location_tile.dart';
 import 'widgets/location_favorites_section.dart';
+import 'widgets/location_add_favorite_button.dart';
 import 'widgets/location_selection_section.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -644,10 +645,9 @@ class _LocationScreenState extends State<LocationScreen> {
             onSave: _save,
           ),
           SizedBox(height: ui.sectionGap),
-          FilledButton.tonalIcon(
+          LocationAddFavoriteButton(
             onPressed: _addFavorite,
-            icon: const Icon(Icons.star_border),
-            label: Text(l10n.locationAddFavorite),
+            label: l10n.locationAddFavorite,
           ),
           SizedBox(height: ui.sectionGap),
           LocationFavoritesSection(

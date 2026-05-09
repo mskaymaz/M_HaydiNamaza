@@ -19,6 +19,8 @@ import 'location_screen.dart';
 import 'widgets/settings_calculation_method_row.dart';
 import 'widgets/settings_language_location_row.dart';
 import 'widgets/settings_reminder_options_section.dart';
+import 'widgets/settings_visual_reminder_section.dart';
+import 'widgets/settings_voice_reminder_section.dart';
 
 class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -348,163 +350,94 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChanged: (_) => _persistReminderTexts(),
             ),
           ),
-          Padding(
-            padding: ui.screenPadding.copyWith(top: 0),
-            child: _SettingsPanel(
-              style: ui.panel,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _SectionHeader(
-                    title: 'Sesli Hatırlatma',
-                    tooltip:
-                        'Metni Oku açıldığında sesli hatırlatma metni ve sistem sesi seçimi görünür. Seçilen ses sesli testte ve hatırlatma okumasında kullanılır.',
+          SettingsVoiceReminderSection(
+            outerPadding: ui.screenPadding.copyWith(top: 0),
+            panelStyle: ui.panel,
+            header: const _SectionHeader(
+              title: 'Sesli Hatırlatma',
+              tooltip:
+                  'Metni Oku açıldığında sesli hatırlatma metni ve sistem sesi seçimi görünür. Seçilen ses sesli testte ve hatırlatma okumasında kullanılır.',
+            ),
+            selectedAudioMode: _selectedAudioMode,
+            audioModeItems: ReminderAudioMode.values
+                .map(
+                  (mode) => DropdownMenuItem<ReminderAudioMode>(
+                    value: mode,
+                    child: Text(_audioModeLabel(mode)),
                   ),
-                  const SizedBox(height: 6),
-                  DropdownButtonFormField<ReminderAudioMode>(
-                    initialValue: _selectedAudioMode,
-                    decoration: const InputDecoration(
-                      labelText: 'Ses Kaynağı',
-                      border: OutlineInputBorder(),
-                    ),
-                    items: ReminderAudioMode.values
-                        .map(
-                          (mode) => DropdownMenuItem<ReminderAudioMode>(
-                            value: mode,
-                            child: Text(_audioModeLabel(mode)),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (value) {
-                      if (value == null) return;
-                      setState(() {
-                        _selectedAudioMode = value;
-                      });
-                      _persistReminderTexts();
-                    },
-                  ),
-                  if (_selectedAudioMode == ReminderAudioMode.textToSpeech) ...[
-                    const SizedBox(height: 6),
-                    DropdownButtonFormField<String?>(
-                      initialValue: _selectedVoiceKey,
-                      decoration: const InputDecoration(
-                        labelText: 'Sistem Sesi',
-                        border: OutlineInputBorder(),
-                      ),
-                      items: [
-                        const DropdownMenuItem<String?>(
-                          value: null,
-                          child: Text('Sistem Varsayılanı'),
-                        ),
-                        ..._voiceOptions.map(
-                          (voice) => DropdownMenuItem<String?>(
-                            value: voice.key,
-                            child: Text(voice.label),
-                          ),
-                        ),
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedVoiceKey = value;
-                        });
-                        _persistReminderTexts();
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    _ReminderTextField(
-                      label: 'Sesli Hatırlatma Metni',
-                      controller: _voiceReminderController,
-                      hintText: 'Sesli hatırlatmada okunacak metni girin.',
-                      onChanged: (_) => _persistReminderTexts(),
-                    ),
-                    const SizedBox(height: 8),
-                    _ReminderNumberField(
-                      label: 'Sesli Hatırlatma Periyodu (sn)',
-                      controller: _voiceRepeatController,
-                      onChanged: (_) => _persistReminderTexts(),
-                    ),
-                  ] else ...[
-                    const SizedBox(height: 10),
-                    OutlinedButton.icon(
-                      onPressed: () => _pickReminderAudio(context),
-                      icon: const Icon(Icons.library_music_outlined),
-                      label: Text(_audioPickerButtonLabel(_selectedAudioMode)),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      _selectedAudioLabel?.trim().isNotEmpty == true
-                          ? 'Seçilen dosya: '
-                          : _audioPickerHelpText(_selectedAudioMode),
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: OutlinedButton.icon(
-                      onPressed: () => _playVoiceReminderTest(context, l10n),
-                      icon: const Icon(Icons.play_arrow_rounded),
-                      label: const Text('Sesli Test'),
-                    ),
-                  ),
-                ],
+                )
+                .toList(),
+            onAudioModeChanged: (value) {
+              if (value == null) return;
+              setState(() {
+                _selectedAudioMode = value;
+              });
+              _persistReminderTexts();
+            },
+            selectedVoiceKey: _selectedVoiceKey,
+            voiceItems: [
+              const DropdownMenuItem<String?>(
+                value: null,
+                child: Text('Sistem Varsayılanı'),
               ),
+              ..._voiceOptions.map(
+                (voice) => DropdownMenuItem<String?>(
+                  value: voice.key,
+                  child: Text(voice.label),
+                ),
+              ),
+            ],
+            onVoiceChanged: (value) {
+              setState(() {
+                _selectedVoiceKey = value;
+              });
+              _persistReminderTexts();
+            },
+            onPickAudio: () => _pickReminderAudio(context),
+            audioPickerButtonLabel: _audioPickerButtonLabel(_selectedAudioMode),
+            audioInfoText: _selectedAudioLabel?.trim().isNotEmpty == true
+                ? 'Seçilen dosya: '
+                : _audioPickerHelpText(_selectedAudioMode),
+            onVoiceTest: () => _playVoiceReminderTest(context, l10n),
+            voiceTextField: _ReminderTextField(
+              label: 'Sesli Hatırlatma Metni',
+              controller: _voiceReminderController,
+              hintText: 'Sesli hatırlatmada okunacak metni girin.',
+              onChanged: (_) => _persistReminderTexts(),
+            ),
+            voiceRepeatField: _ReminderNumberField(
+              label: 'Sesli Hatırlatma Periyodu (sn)',
+              controller: _voiceRepeatController,
+              onChanged: (_) => _persistReminderTexts(),
             ),
           ),
-          Padding(
-            padding: ui.screenPadding.copyWith(top: 0),
-            child: _SettingsPanel(
-              style: ui.panel,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _SectionHeader(
-                    title: 'Görsel Hatırlatma',
-                    tooltip:
-                        'Görsel hatırlatma ayrı tutulur. Bu alan boşsa sesli hatırlatma metni kullanılır.',
-                  ),
-                  const SizedBox(height: 10),
-                  _ReminderTextField(
-                    label: 'Görsel Hatırlatma Metni',
-                    controller: _visualReminderController,
-                    hintText:
-                        'Buraya herhangi bir metin girilmediğinde sesli hatırlatmadaki metin kullanılacaktır.',
-                    onChanged: (_) => _persistReminderTexts(),
-                    maxLines: 3,
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _ReminderNumberField(
-                          label: 'Ekranda Kalma (sn)',
-                          controller: _visualDisplayController,
-                          onChanged: (_) => _persistReminderTexts(),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: _ReminderNumberField(
-                          label: 'Kapanıp Açılma (sn)',
-                          controller: _visualReopenController,
-                          onChanged: (_) => _persistReminderTexts(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: OutlinedButton.icon(
-                      onPressed: () =>
-                          _showVisualReminderPreview(context, l10n),
-                      icon: const Icon(Icons.visibility_outlined),
-                      label: const Text('Görsel Yapıyı Göster'),
-                    ),
-                  ),
-                ],
-              ),
+          SettingsVisualReminderSection(
+            outerPadding: ui.screenPadding.copyWith(top: 0),
+            panelStyle: ui.panel,
+            header: const _SectionHeader(
+              title: 'Görsel Hatırlatma',
+              tooltip:
+                  'Görsel hatırlatma ayrı tutulur. Bu alan boşsa sesli hatırlatma metni kullanılır.',
             ),
+            visualTextField: _ReminderTextField(
+              label: 'Görsel Hatırlatma Metni',
+              controller: _visualReminderController,
+              hintText:
+                  'Buraya herhangi bir metin girilmediğinde sesli hatırlatmadaki metin kullanılacaktır.',
+              onChanged: (_) => _persistReminderTexts(),
+              maxLines: 3,
+            ),
+            visualDisplayField: _ReminderNumberField(
+              label: 'Ekranda Kalma (sn)',
+              controller: _visualDisplayController,
+              onChanged: (_) => _persistReminderTexts(),
+            ),
+            visualReopenField: _ReminderNumberField(
+              label: 'Kapanıp Açılma (sn)',
+              controller: _visualReopenController,
+              onChanged: (_) => _persistReminderTexts(),
+            ),
+            onShowPreview: () => _showVisualReminderPreview(context, l10n),
           ),
           Padding(
             padding: ui.screenPadding.copyWith(top: 0),

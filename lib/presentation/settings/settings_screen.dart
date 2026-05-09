@@ -19,7 +19,7 @@ import 'widgets/settings_calculation_method_row.dart';
 import 'widgets/settings_language_location_row.dart';
 import 'widgets/settings_color_sections_group.dart';
 import 'widgets/settings_reminder_fields.dart';
-import 'widgets/settings_reminder_options_section.dart';
+import 'widgets/settings_reminder_options_group.dart';
 import 'settings_audio_mode_texts.dart';
 import 'settings_color_formatters.dart';
 import 'settings_favorite_matcher.dart';
@@ -235,76 +235,48 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           const Divider(height: 32),
-          SettingsReminderOptionsSection(
+          SettingsReminderOptionsGroup(
             outerPadding: ui.screenPadding,
             panelStyle: ui.panel,
-            reminderOptionsHeader: const SettingsSectionHeader(
-              title: 'Hatırlatma Seçenekleri',
-              tooltip:
-                  'Buradaki seçimler vakitler panelinde hangi hatırlatıcı ikonlarının görüneceğini belirler.',
-            ),
-            vibrationHeader: const SettingsSectionHeader(
-              title: 'Titreşimle Uyarı Ayarları',
-              tooltip:
-                  'Titreşim süresi ve tekrar aralığı bu bölümden ayarlanır.',
-            ),
-            voiceToggle: SettingsReminderOptionToggle(
-              label: 'Sesli',
-              value: _showVoiceIcon,
-              onChanged: (value) {
-                setState(() {
-                  _showVoiceIcon = value;
-                });
-                _persistReminderTexts();
-              },
-            ),
-            visualToggle: SettingsReminderOptionToggle(
-              label: 'Görsel',
-              value: _showVisualIcon,
-              onChanged: (value) {
-                setState(() {
-                  _showVisualIcon = value;
-                });
-                _persistReminderTexts();
-              },
-            ),
-            azanToggle: SettingsReminderOptionToggle(
-              label: 'Ezan',
-              value: _showAzanIcon,
-              onChanged: (value) {
-                setState(() {
-                  _showAzanIcon = value;
-                });
-                _persistReminderTexts();
-              },
-            ),
-            vibrationToggle: SettingsReminderOptionToggle(
-              label: 'Titreşim',
-              value: _showVibrationIcon,
-              onChanged: (value) {
-                setState(() {
-                  _showVibrationIcon = value;
-                });
-                _persistReminderTexts();
-              },
-            ),
+            showVoiceIcon: _showVoiceIcon,
+            showVisualIcon: _showVisualIcon,
+            showAzanIcon: _showAzanIcon,
+            showVibrationIcon: _showVibrationIcon,
             sortCustomPrayersByTime: _sortCustomPrayersByTime,
+            vibrationDurationController: _vibrationDurationController,
+            vibrationPauseController: _vibrationPauseController,
+            onVoiceToggleChanged: (value) {
+              setState(() {
+                _showVoiceIcon = value;
+              });
+              _persistReminderTexts();
+            },
+            onVisualToggleChanged: (value) {
+              setState(() {
+                _showVisualIcon = value;
+              });
+              _persistReminderTexts();
+            },
+            onAzanToggleChanged: (value) {
+              setState(() {
+                _showAzanIcon = value;
+              });
+              _persistReminderTexts();
+            },
+            onVibrationToggleChanged: (value) {
+              setState(() {
+                _showVibrationIcon = value;
+              });
+              _persistReminderTexts();
+            },
             onSortChanged: (value) {
               setState(() {
                 _sortCustomPrayersByTime = value ?? true;
               });
               _persistReminderTexts();
             },
-            vibrationDurationField: SettingsReminderNumberField(
-              label: 'Titreşim Süresi (sn)',
-              controller: _vibrationDurationController,
-              onChanged: (_) => _persistReminderTexts(),
-            ),
-            vibrationPauseField: SettingsReminderNumberField(
-              label: 'Titreşim Aralığı (sn)',
-              controller: _vibrationPauseController,
-              onChanged: (_) => _persistReminderTexts(),
-            ),
+            onVibrationDurationChanged: (_) => _persistReminderTexts(),
+            onVibrationPauseChanged: (_) => _persistReminderTexts(),
           ),
           SettingsVoiceReminderSection(
             outerPadding: ui.screenPadding.copyWith(top: 0),

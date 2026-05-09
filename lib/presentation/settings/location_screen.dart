@@ -16,7 +16,7 @@ import 'widgets/location_coordinates_section.dart';
 import 'widgets/location_current_location_tile.dart';
 import 'widgets/location_favorites_section.dart';
 import 'widgets/location_add_favorite_button.dart';
-import 'widgets/location_selection_section.dart';
+import 'widgets/location_selection_composer.dart';
 
 class LocationScreen extends StatefulWidget {
   final LocationData? initial;
@@ -553,7 +553,7 @@ class _LocationScreenState extends State<LocationScreen> {
             onChanged: (value) => _setUseCurrentLocation(value ?? false),
           ),
           SizedBox(height: ui.sectionGap),
-          LocationSelectionSection(
+          LocationSelectionComposer(
             ui: ui,
             palette: palette,
             title: l10n.locationSelectLabel,

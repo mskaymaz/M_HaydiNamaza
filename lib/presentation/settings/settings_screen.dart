@@ -22,6 +22,7 @@ import 'widgets/settings_background_colors_section.dart';
 import 'widgets/settings_color_action_widgets.dart';
 import 'widgets/settings_reminder_fields.dart';
 import 'widgets/settings_reminder_options_section.dart';
+import 'settings_audio_mode_texts.dart';
 import 'settings_reminder_text_mapper.dart';
 import 'widgets/settings_section_header.dart';
 import 'widgets/settings_visual_reminder_section.dart';
@@ -366,9 +367,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             selectedAudioMode: _selectedAudioMode,
             audioModeItems: ReminderAudioMode.values
                 .map(
-                  (mode) => DropdownMenuItem<ReminderAudioMode>(
+                    (mode) => DropdownMenuItem<ReminderAudioMode>(
                     value: mode,
-                    child: Text(_audioModeLabel(mode)),
+                    child: Text(audioModeLabel(mode)),
                   ),
                 )
                 .toList(),
@@ -399,10 +400,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _persistReminderTexts();
             },
             onPickAudio: () => _pickReminderAudio(context),
-            audioPickerButtonLabel: _audioPickerButtonLabel(_selectedAudioMode),
+            audioPickerButtonLabel: audioPickerButtonLabel(_selectedAudioMode),
             audioInfoText: _selectedAudioLabel?.trim().isNotEmpty == true
                 ? 'Seçilen dosya: '
-                : _audioPickerHelpText(_selectedAudioMode),
+                : audioPickerHelpText(_selectedAudioMode),
             onVoiceTest: () => _playVoiceReminderTest(context, l10n),
             voiceTextField: SettingsReminderTextField(
               label: 'Sesli Hatırlatma Metni',
@@ -681,39 +682,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _selectedAudioLabel = file?.name ?? path.split('\\').last;
     });
     await _persistReminderTexts();
-  }
-
-  String _audioModeLabel(ReminderAudioMode mode) {
-    switch (mode) {
-      case ReminderAudioMode.textToSpeech:
-        return 'Metni Oku';
-      case ReminderAudioMode.deviceAudio:
-        return 'Telefon Melodisi';
-      case ReminderAudioMode.mp3File:
-        return 'MP3 Dosyasi';
-    }
-  }
-
-  String _audioPickerButtonLabel(ReminderAudioMode mode) {
-    switch (mode) {
-      case ReminderAudioMode.textToSpeech:
-        return 'Ses Dosyasi Sec';
-      case ReminderAudioMode.deviceAudio:
-        return 'Telefon Melodisi Sec';
-      case ReminderAudioMode.mp3File:
-        return 'MP3 Dosyasi Sec';
-    }
-  }
-
-  String _audioPickerHelpText(ReminderAudioMode mode) {
-    switch (mode) {
-      case ReminderAudioMode.textToSpeech:
-        return '';
-      case ReminderAudioMode.deviceAudio:
-        return 'Telefonunuzdaki ses dosyalarindan bir melodi secin.';
-      case ReminderAudioMode.mp3File:
-        return 'Yalniz mp3 dosyasi secilir.';
-    }
   }
 
   InputDecoration _dropdownDecoration(String label) {

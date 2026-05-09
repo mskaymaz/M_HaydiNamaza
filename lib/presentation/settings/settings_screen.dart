@@ -23,6 +23,7 @@ import 'widgets/settings_color_action_widgets.dart';
 import 'widgets/settings_reminder_fields.dart';
 import 'widgets/settings_reminder_options_section.dart';
 import 'settings_audio_mode_texts.dart';
+import 'settings_favorite_matcher.dart';
 import 'settings_reminder_text_mapper.dart';
 import 'widgets/settings_section_header.dart';
 import 'widgets/settings_visual_reminder_section.dart';
@@ -89,7 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _loadLocation() async {
     final data = await _locationStorage.read();
     if (!mounted) return;
-    final matched = _matchFavorite(data, _favorites);
+    final matched = matchFavorite(data, _favorites);
     setState(() {
       _location = data;
       _selectedFavorite = matched;
@@ -99,7 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _loadFavorites() async {
     final favorites = await _favoritesStorage.read();
     if (!mounted) return;
-    final matched = _matchFavorite(_location, favorites);
+    final matched = matchFavorite(_location, favorites);
     setState(() {
       _favorites = favorites;
       _selectedFavorite =
@@ -802,33 +803,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  String _normalizeSpacing(String input) {
-    return input.trim().replaceAll(RegExp(r'\s+'), ' ');
-  }
-
   String _hexColor(Color color) {
     final value = color.toARGB32() & 0xFFFFFF;
     return '#${value.toRadixString(16).padLeft(6, '0').toUpperCase()}';
-  }
-
-  LocationFavorite? _matchFavorite(
-    LocationData? data,
-    List<LocationFavorite> favorites,
-  ) {
-    if (data == null) return null;
-    for (final favorite in favorites) {
-      final sameCountry = (favorite.countryId ?? '') == (data.countryId ?? '');
-      final sameProvince =
-          _normalizeSpacing(favorite.province).toUpperCase() ==
-          _normalizeSpacing(data.province).toUpperCase();
-      final sameDistrict =
-          _normalizeSpacing(favorite.district).toUpperCase() ==
-          _normalizeSpacing(data.district).toUpperCase();
-      if (sameCountry && sameProvince && sameDistrict) {
-        return favorite;
-      }
-    }
-    return null;
   }
 }
 

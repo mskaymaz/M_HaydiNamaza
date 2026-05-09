@@ -22,9 +22,9 @@ import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
 import '../../core/prayer_engine/prayer.dart';
 import '../../core/prayer_engine/prayer_times.dart';
-import '../reminders/flashing_reminder_card.dart';
 import '../settings/location_screen.dart';
 import '../settings/settings_screen.dart';
+import 'widgets/home_presentational_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -738,7 +738,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   CustomPaint(
                                     size: const Size(78, 12),
-                                    painter: _DrawerHandlePainter(
+                                    painter: HomeDrawerHandlePainter(
                                       color: palette.cizgiColor.withValues(
                                         alpha: 0.8,
                                       ),
@@ -884,7 +884,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     bottom: 16,
                     child: SafeArea(
                       top: false,
-                      child: _ActiveReminderPanel(
+                      child: HomeActiveReminderPanel(
                         voicePrayerLabel: _voiceLoopPrayerLabel,
                         visualPrayerLabel: _visualLoopPrayerLabel,
                         visualMessage: _visualLoopMessage,
@@ -2597,7 +2597,7 @@ class _PrayerList extends StatelessWidget {
                 ),
                 SizedBox(
                   width: chipStyle.width,
-                  child: _ReminderChip(
+                  child: HomeReminderChip(
                     controller: item.reminderController,
                     style: scaledChipStyle,
                     cizgiColor: controlColor,
@@ -2609,7 +2609,7 @@ class _PrayerList extends StatelessWidget {
                 if (showVoiceIcon)
                   SizedBox(
                     width: iconSlotWidth,
-                    child: _IconToggle(
+                    child: HomeIconToggle(
                       icon: Icons.volume_up_outlined,
                       style: scaledIconStyle,
                       isEnabled: item.voiceEnabled,
@@ -2620,7 +2620,7 @@ class _PrayerList extends StatelessWidget {
                 if (showVisualIcon)
                   SizedBox(
                     width: iconSlotWidth,
-                    child: _IconToggle(
+                    child: HomeIconToggle(
                       icon: Icons.desktop_windows_outlined,
                       style: scaledIconStyle,
                       isEnabled: item.visualEnabled,
@@ -2631,7 +2631,7 @@ class _PrayerList extends StatelessWidget {
                 if (showAzanIcon)
                   SizedBox(
                     width: iconSlotWidth,
-                    child: _IconToggle(
+                    child: HomeIconToggle(
                       icon: Icons.mosque_outlined,
                       style: scaledIconStyle,
                       isEnabled: item.azanEnabled,
@@ -2642,7 +2642,7 @@ class _PrayerList extends StatelessWidget {
                 if (showVibrationIcon)
                   SizedBox(
                     width: iconSlotWidth,
-                    child: _IconToggle(
+                    child: HomeIconToggle(
                       icon: Icons.vibration_outlined,
                       style: scaledIconStyle,
                       isEnabled: item.vibrationEnabled,
@@ -2654,7 +2654,7 @@ class _PrayerList extends StatelessWidget {
                   width: iconStyle.iconSize * rowScale + 2,
                   child: item.onDelete == null
                       ? const SizedBox.shrink()
-                      : _IconToggle(
+                      : HomeIconToggle(
                           icon: Icons.delete_outline,
                           style: InlineIconStyle(
                             size: scaledIconStyle.iconSize + 2,
@@ -2745,60 +2745,6 @@ class _PrayerList extends StatelessWidget {
   }
 }
 
-class _ReminderChip extends StatelessWidget {
-  final TextEditingController controller;
-  final InlineChipStyle style;
-  final Color cizgiColor;
-  final Color backgroundColor;
-  final Color borderColor;
-  final VoidCallback onTap;
-
-  const _ReminderChip({
-    required this.controller,
-    required this.style,
-    required this.cizgiColor,
-    required this.backgroundColor,
-    required this.borderColor,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: style.width,
-      child: InkWell(
-        borderRadius: style.borderRadius,
-        onTap: onTap,
-        child: InputDecorator(
-          decoration: InputDecoration(
-            isDense: true,
-            filled: true,
-            fillColor: backgroundColor,
-            contentPadding: EdgeInsets.symmetric(vertical: style.verticalPadding),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: style.borderRadius,
-              borderSide: BorderSide(color: borderColor),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: style.borderRadius,
-              borderSide: BorderSide(color: cizgiColor),
-            ),
-          ),
-          child: Text(
-            controller.text,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: cizgiColor,
-              fontWeight: FontWeight.w700,
-              fontSize: style.fontSize,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 double _measureTextWidth(String text, TextStyle? style) {
   final painter = TextPainter(
     text: TextSpan(text: text, style: style),
@@ -2806,149 +2752,6 @@ double _measureTextWidth(String text, TextStyle? style) {
     textDirection: ui.TextDirection.ltr,
   )..layout(minWidth: 0, maxWidth: double.infinity);
   return painter.width;
-}
-
-class _IconToggle extends StatelessWidget {
-  final IconData icon;
-  final InlineIconStyle style;
-  final bool isEnabled;
-  final Color cizgiColor;
-  final VoidCallback onTap;
-
-  const _IconToggle({
-    required this.icon,
-    required this.style,
-    required this.isEnabled,
-    required this.cizgiColor,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final iconColor = isEnabled
-        ? cizgiColor
-        : cizgiColor.withValues(alpha: 0.4);
-    final hitSize = style.size * 1.3;
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: SizedBox(
-        width: hitSize,
-        height: hitSize,
-        child: Center(
-          child: Icon(icon, size: style.iconSize, color: iconColor),
-        ),
-      ),
-    );
-  }
-}
-
-class _ActiveReminderPanel extends StatelessWidget {
-  final String? voicePrayerLabel;
-  final String? visualPrayerLabel;
-  final String? visualMessage;
-  final bool showVisualCard;
-  final VoidCallback onCloseVoice;
-  final VoidCallback onCloseVisual;
-
-  const _ActiveReminderPanel({
-    required this.voicePrayerLabel,
-    required this.visualPrayerLabel,
-    required this.visualMessage,
-    required this.showVisualCard,
-    required this.onCloseVoice,
-    required this.onCloseVisual,
-  });
-
-  String _toTurkishUpper(String value) {
-    return value.replaceAll('i', 'İ').replaceAll('ı', 'I').toUpperCase();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final hasVoice = (voicePrayerLabel ?? '').trim().isNotEmpty;
-    final hasVisual = (visualPrayerLabel ?? '').trim().isNotEmpty;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (hasVisual && showVisualCard) ...[
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onCloseVisual,
-            child: FlashingReminderCard(
-              prayerLabel: '${_toTurkishUpper(visualPrayerLabel!)} VAKTİ',
-              message: visualMessage ?? '',
-            ),
-          ),
-          const SizedBox(height: 8),
-        ],
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.96),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x22000000),
-                blurRadius: 14,
-                offset: Offset(0, 6),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              if (hasVoice)
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: onCloseVoice,
-                    icon: const Icon(Icons.volume_off_outlined),
-                    label: Text('${voicePrayerLabel!} Sesli Kapat'),
-                  ),
-                ),
-              if (hasVoice && hasVisual) const SizedBox(width: 8),
-              if (hasVisual)
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: onCloseVisual,
-                    icon: const Icon(Icons.close_fullscreen_outlined),
-                    label: Text('${visualPrayerLabel!} Görsel Kapat'),
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _DrawerHandlePainter extends CustomPainter {
-  final Color color;
-  final bool pointUp;
-
-  const _DrawerHandlePainter({required this.color, required this.pointUp});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill
-      ..isAntiAlias = true;
-
-    final path = Path()
-      ..moveTo(0, pointUp ? size.height : 0)
-      ..lineTo(size.width * 0.5, pointUp ? size.height * 0.54 : size.height * 0.46)
-      ..lineTo(size.width, pointUp ? size.height : 0)
-      ..lineTo(size.width * 0.5, pointUp ? 0 : size.height)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _DrawerHandlePainter oldDelegate) {
-    return oldDelegate.color != color || oldDelegate.pointUp != pointUp;
-  }
 }
 
 class _QiblaScreen extends StatelessWidget {

@@ -21,6 +21,7 @@ import 'widgets/settings_interface_colors_section.dart';
 import 'widgets/settings_language_location_row.dart';
 import 'widgets/settings_background_colors_section.dart';
 import 'widgets/settings_reminder_options_section.dart';
+import 'widgets/settings_section_header.dart';
 import 'widgets/settings_visual_reminder_section.dart';
 import 'widgets/settings_voice_reminder_section.dart';
 
@@ -284,12 +285,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsReminderOptionsSection(
             outerPadding: ui.screenPadding,
             panelStyle: ui.panel,
-            reminderOptionsHeader: const _SectionHeader(
+            reminderOptionsHeader: const SettingsSectionHeader(
               title: 'Hatırlatma Seçenekleri',
               tooltip:
                   'Buradaki seçimler vakitler panelinde hangi hatırlatıcı ikonlarının görüneceğini belirler.',
             ),
-            vibrationHeader: const _SectionHeader(
+            vibrationHeader: const SettingsSectionHeader(
               title: 'Titreşimle Uyarı Ayarları',
               tooltip:
                   'Titreşim süresi ve tekrar aralığı bu bölümden ayarlanır.',
@@ -355,7 +356,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsVoiceReminderSection(
             outerPadding: ui.screenPadding.copyWith(top: 0),
             panelStyle: ui.panel,
-            header: const _SectionHeader(
+            header: const SettingsSectionHeader(
               title: 'Sesli Hatırlatma',
               tooltip:
                   'Metni Oku açıldığında sesli hatırlatma metni ve sistem sesi seçimi görünür. Seçilen ses sesli testte ve hatırlatma okumasında kullanılır.',
@@ -416,7 +417,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsVisualReminderSection(
             outerPadding: ui.screenPadding.copyWith(top: 0),
             panelStyle: ui.panel,
-            header: const _SectionHeader(
+            header: const SettingsSectionHeader(
               title: 'Görsel Hatırlatma',
               tooltip:
                   'Görsel hatırlatma ayrı tutulur. Bu alan boşsa sesli hatırlatma metni kullanılır.',
@@ -444,7 +445,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsInterfaceColorsSection(
             outerPadding: ui.screenPadding.copyWith(top: 0),
             panelStyle: ui.panel,
-            header: _SectionHeader(
+            header: const SettingsSectionHeader(
               title: 'Arayüz Renkleri',
               tooltip: 'Panel ve yazı renklerini değiştir.',
             ),
@@ -484,7 +485,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsBackgroundColorsSection(
             outerPadding: ui.screenPadding.copyWith(top: 0),
             panelStyle: ui.panel,
-            header: _SectionHeader(
+            header: const SettingsSectionHeader(
               title: 'Arka Plan Renkleri',
               tooltip:
                   'Geometrik arka planın zemin ve çizgi renklerini değiştir.',
@@ -877,53 +878,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
     }
     return null;
-  }
-}
-
-class _SectionHeader extends StatelessWidget {
-  final String title;
-  final String tooltip;
-
-  const _SectionHeader({required this.title, required this.tooltip});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          title,
-          style: Theme.of(
-            context,
-          ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
-        ),
-        const SizedBox(width: 10),
-        InkWell(
-          borderRadius: BorderRadius.circular(16),
-          onTap: () {
-            showDialog<void>(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text(title),
-                  content: Text(tooltip),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('Tamam'),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-          child: const Padding(
-            padding: EdgeInsets.all(2),
-            child: Icon(Icons.info_outline, size: 19.2),
-          ),
-        ),
-      ],
-    );
   }
 }
 

@@ -127,6 +127,11 @@ Completed:
   - `flutter analyze`
   - Result: `No issues found!`
 - `home_screen.dart` line count after checkpoint: `2754`.
+- Continuation checkpoint:
+  - `_TopPanel` extracted to `lib/presentation/home/widgets/home_top_panel.dart`.
+  - Renamed `_TopPanel` to `HomeTopPanel`.
+  - No behavior change intended.
+  - TASK-03 is still not complete.
 
 Notes:
 - This checkpoint does not complete TASK-03.

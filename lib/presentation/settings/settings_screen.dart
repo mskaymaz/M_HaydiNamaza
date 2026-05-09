@@ -17,7 +17,9 @@ import '../reminders/flashing_reminder_card.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
 import 'widgets/settings_calculation_method_row.dart';
+import 'widgets/settings_interface_colors_section.dart';
 import 'widgets/settings_language_location_row.dart';
+import 'widgets/settings_background_colors_section.dart';
 import 'widgets/settings_reminder_options_section.dart';
 import 'widgets/settings_visual_reminder_section.dart';
 import 'widgets/settings_voice_reminder_section.dart';
@@ -439,131 +441,85 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onShowPreview: () => _showVisualReminderPreview(context, l10n),
           ),
-          Padding(
-            padding: ui.screenPadding.copyWith(top: 0),
-            child: _SettingsPanel(
-              style: ui.panel,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _SectionHeader(
-                    title: 'Arayüz Renkleri',
-                    tooltip: 'Panel ve yazı renklerini değiştir.',
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _ColorActionTile(
-                          title: 'Panel Rengi',
-                          color: palette.zeminColor,
-                          onTap: () => _editColor(
-                            context: context,
-                            title: 'Panel Rengi',
-                            initialColor: palette.zeminColor,
-                            onApply: widget.uiPaletteController.setZeminColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: _ColorActionTile(
-                          title: 'Yazı Rengi',
-                          color: palette.cizgiColor,
-                          onTap: () => _editColor(
-                            context: context,
-                            title: 'Yazı Rengi',
-                            initialColor: palette.cizgiColor,
-                            onApply: widget.uiPaletteController.setCizgiColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      _ResetIconButton(
-                        onTap: () async {
-                          await widget.uiPaletteController.setZeminColor(
-                            ConfigRegistry.defaultPalette.zeminColor,
-                          );
-                          await widget.uiPaletteController.setCizgiColor(
-                            ConfigRegistry.defaultPalette.cizgiColor,
-                          );
-                          if (!context.mounted) return;
-                          setState(() {});
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+          SettingsInterfaceColorsSection(
+            outerPadding: ui.screenPadding.copyWith(top: 0),
+            panelStyle: ui.panel,
+            header: _SectionHeader(
+              title: 'Arayüz Renkleri',
+              tooltip: 'Panel ve yazı renklerini değiştir.',
+            ),
+            panelColorTile: _ColorActionTile(
+              title: 'Panel Rengi',
+              color: palette.zeminColor,
+              onTap: () => _editColor(
+                context: context,
+                title: 'Panel Rengi',
+                initialColor: palette.zeminColor,
+                onApply: widget.uiPaletteController.setZeminColor,
               ),
             ),
-          ),
-          Padding(
-            padding: ui.screenPadding.copyWith(top: 0),
-            child: _SettingsPanel(
-              style: ui.panel,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _SectionHeader(
-                    title: 'Arka Plan Renkleri',
-                    tooltip:
-                        'Geometrik arka planın zemin ve çizgi renklerini değiştir.',
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _ColorActionTile(
-                          title: 'Zemin Rengi',
-                          color: palette.backgroundZeminColor,
-                          onTap: () => _editColor(
-                            context: context,
-                            title: 'Arka Plan Zemin',
-                            initialColor: palette.backgroundZeminColor,
-                            onApply: widget
-                                .uiPaletteController
-                                .setBackgroundZeminColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: _ColorActionTile(
-                          title: 'Çizgi Rengi',
-                          color: palette.backgroundCizgiColor,
-                          onTap: () => _editColor(
-                            context: context,
-                            title: 'Arka Plan Çizgi Rengi',
-                            initialColor: palette.backgroundCizgiColor,
-                            onApply: widget
-                                .uiPaletteController
-                                .setBackgroundCizgiColor,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      _ResetIconButton(
-                        onTap: () async {
-                          await widget.uiPaletteController
-                              .setBackgroundZeminColor(
-                                ConfigRegistry
-                                    .defaultPalette
-                                    .backgroundZeminColor,
-                              );
-                          await widget.uiPaletteController
-                              .setBackgroundCizgiColor(
-                                ConfigRegistry
-                                    .defaultPalette
-                                    .backgroundCizgiColor,
-                              );
-                          if (!context.mounted) return;
-                          setState(() {});
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+            textColorTile: _ColorActionTile(
+              title: 'Yazı Rengi',
+              color: palette.cizgiColor,
+              onTap: () => _editColor(
+                context: context,
+                title: 'Yazı Rengi',
+                initialColor: palette.cizgiColor,
+                onApply: widget.uiPaletteController.setCizgiColor,
               ),
+            ),
+            resetButton: _ResetIconButton(
+              onTap: () async {
+                await widget.uiPaletteController.setZeminColor(
+                  ConfigRegistry.defaultPalette.zeminColor,
+                );
+                await widget.uiPaletteController.setCizgiColor(
+                  ConfigRegistry.defaultPalette.cizgiColor,
+                );
+                if (!context.mounted) return;
+                setState(() {});
+              },
+            ),
+          ),
+          SettingsBackgroundColorsSection(
+            outerPadding: ui.screenPadding.copyWith(top: 0),
+            panelStyle: ui.panel,
+            header: _SectionHeader(
+              title: 'Arka Plan Renkleri',
+              tooltip:
+                  'Geometrik arka planın zemin ve çizgi renklerini değiştir.',
+            ),
+            backgroundColorTile: _ColorActionTile(
+              title: 'Zemin Rengi',
+              color: palette.backgroundZeminColor,
+              onTap: () => _editColor(
+                context: context,
+                title: 'Arka Plan Zemin',
+                initialColor: palette.backgroundZeminColor,
+                onApply: widget.uiPaletteController.setBackgroundZeminColor,
+              ),
+            ),
+            lineColorTile: _ColorActionTile(
+              title: 'Çizgi Rengi',
+              color: palette.backgroundCizgiColor,
+              onTap: () => _editColor(
+                context: context,
+                title: 'Arka Plan Çizgi Rengi',
+                initialColor: palette.backgroundCizgiColor,
+                onApply: widget.uiPaletteController.setBackgroundCizgiColor,
+              ),
+            ),
+            resetButton: _ResetIconButton(
+              onTap: () async {
+                await widget.uiPaletteController.setBackgroundZeminColor(
+                  ConfigRegistry.defaultPalette.backgroundZeminColor,
+                );
+                await widget.uiPaletteController.setBackgroundCizgiColor(
+                  ConfigRegistry.defaultPalette.backgroundCizgiColor,
+                );
+                if (!context.mounted) return;
+                setState(() {});
+              },
             ),
           ),
         ],
@@ -921,25 +877,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       }
     }
     return null;
-  }
-}
-
-class _SettingsPanel extends StatelessWidget {
-  final SurfaceStyle style;
-  final Widget child;
-
-  const _SettingsPanel({required this.style, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: style.color,
-        borderRadius: style.borderRadius,
-        boxShadow: style.shadows,
-      ),
-      child: Padding(padding: const EdgeInsets.all(12), child: child),
-    );
   }
 }
 

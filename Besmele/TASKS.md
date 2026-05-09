@@ -99,6 +99,7 @@ Goal: split oversized files safely.
 - [x] Extract settings top settings section.
 - [x] Stop tiny UI extraction to avoid over-fragmentation.
 - [x] Audit settings orchestration/load-save/service separation.
+- [x] Continuation checkpoint: extracted internal color dialog UI widgets (`ColorSpectrum`, `HueStrip`) and moved `FlashingReminderPreview` into settings widgets files; orchestration stayed in `settings_screen.dart`.
 
 ### TASK-03B — location_screen.dart safe UI/helper extraction checkpoint
 
@@ -160,6 +161,28 @@ Completed:
   - Type/data block is not extracted now because benefit is modest versus visibility/API churn.
   - No behavior change intended.
   - TASK-03 main status remains unchanged.
+- Continuation checkpoint:
+  - Bottom private model/type block extracted to `lib/presentation/home/home_models.dart` via `part/part of`.
+  - Moved: `_HomeData`, `_PrayerRowSettings`, `_CustomPrayerDraft`, `_CustomPrayerTimeMode`, `_CustomPrayerTimeRule`, `_ReminderStage`, `_PrayerNext`.
+  - No behavior change intended.
+  - TASK-03 is still not complete.
+- Continuation checkpoint:
+  - Pure prayer-time helper methods extracted to `lib/presentation/home/home_prayer_time_helpers.dart` via `part/part of`.
+  - Moved: `_activePrayer`, `_nextPrayer`, `_formatCountdown`, `_atToday`, `_prayerTimeFor`, `_prayerLabel`.
+  - No behavior change intended.
+  - TASK-03 is still not complete.
+- Continuation checkpoint:
+  - Pure custom-prayer time resolve helper extracted to `lib/presentation/home/home_custom_time_helpers.dart` via `part/part of`.
+  - Moved: `_resolveCustomPrayerTime`.
+  - `openCustomTimeEditor` and bottom-sheet/state orchestration kept in `home_screen.dart`.
+  - No behavior change intended.
+  - TASK-03 is still not complete.
+- Continuation checkpoint:
+  - Pure drawer layout calculation helper extracted to `lib/presentation/home/home_drawer_layout_helpers.dart` via `part/part of`.
+  - Moved: pure drawer size/position constants and `_computeDrawerLayout`.
+  - Gesture callbacks and drawer `setState` orchestration kept in `home_screen.dart`.
+  - No behavior change intended.
+  - TASK-03 is still not complete.
 
 Notes:
 - This checkpoint does not complete TASK-03.

@@ -28,6 +28,11 @@ import 'widgets/home_qibla_screen.dart';
 import 'widgets/home_state_panels.dart';
 import 'widgets/home_top_panel.dart';
 
+part 'home_models.dart';
+part 'home_prayer_time_helpers.dart';
+part 'home_custom_time_helpers.dart';
+part 'home_drawer_layout_helpers.dart';
+
 class HomeScreen extends StatefulWidget {
   final LocaleController localeController;
   final UiPaletteController uiPaletteController;
@@ -459,39 +464,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: ui.screenPadding,
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        const panelOverlap = 15.0;
-                        const handleAreaHeight = 22.0;
-                        const minDrawerHeight = handleAreaHeight;
-                        const maxDrawerHeightLimit = 320.0;
-                        final topRowHeight = math.max(
-                          ui.settingsIconBoxSize,
-                          ui.typography.locationSize + 8,
+                        final drawerLayout = _computeDrawerLayout(
+                          settingsIconBoxSize: ui.settingsIconBoxSize,
+                          locationTextSize: ui.typography.locationSize,
+                          nextTimeTextSize: ui.typography.nextTimeSize,
+                          nextLabelTextSize: ui.typography.nextLabelSize,
+                          topPanelVerticalPadding: ui.topPanelPadding.vertical,
+                          constraintsMaxHeight: constraints.maxHeight,
+                          drawerProgress: _drawerProgress,
                         );
-                        final lowerSectionHeight =
-                            ui.typography.nextTimeSize +
-                            ui.typography.nextLabelSize +
-                            20;
-                        final topPanelHeight =
-                            ui.topPanelPadding.vertical +
-                            topRowHeight +
-                            4 +
-                            1 +
-                            10 +
-                            lowerSectionHeight;
-                        final drawerTop = topPanelHeight - panelOverlap;
-                        final availableDrawerSpace =
-                            constraints.maxHeight - drawerTop;
-                        final maxDrawerHeight = math.max(
-                          minDrawerHeight,
-                          math.min(
-                            availableDrawerSpace,
-                            maxDrawerHeightLimit,
-                          ),
-                        );
-                        final drawerHeight =
-                            minDrawerHeight +
-                            ((maxDrawerHeight - minDrawerHeight) *
-                                _drawerProgress);
                         final bandColor = Color.lerp(
                           ui.listPanel.color,
                           palette.zeminColor,
@@ -499,7 +480,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         )!;
 
                         void updateDrawerProgress(DragUpdateDetails details) {
-                          final travel = (maxDrawerHeight - minDrawerHeight)
+                          final travel = (drawerLayout.maxDrawerHeight -
+                                  drawerLayout.minDrawerHeight)
                               .clamp(1.0, double.infinity);
                           setState(() {
                             _drawerProgress = (_drawerProgress +
@@ -532,7 +514,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onVerticalDragUpdate: updateDrawerProgress,
                             onVerticalDragEnd: settleDrawerProgress,
                             child: Container(
-                              height: handleAreaHeight,
+                              height: drawerLayout.handleAreaHeight,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -584,13 +566,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           clipBehavior: Clip.none,
                           children: [
                             Positioned(
-                              top: drawerTop,
+                              top: drawerLayout.drawerTop,
                               left: 0,
                               right: 0,
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 220),
                                 curve: Curves.easeOutCubic,
-                                height: drawerHeight,
+                                height: drawerLayout.drawerHeight,
                                 decoration: BoxDecoration(
                                   color: ui.listPanel.color,
                                   borderRadius: const BorderRadius.only(
@@ -609,7 +591,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Column(
                                   children: [
                                     if (_drawerProgress > 0.02)
-                                      SizedBox(height: panelOverlap + 12),
+                                      SizedBox(
+                                        height: drawerLayout.panelOverlap + 12,
+                                      ),
                                     if (_drawerProgress > 0.02)
                                       Expanded(
                                         child: HomePrayerList(
@@ -654,7 +638,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             if (_drawerProgress <= 0.02)
                               Positioned(
-                                top: topPanelHeight - 1,
+                                top: drawerLayout.topPanelHeight - 1,
                                 left: 0,
                                 right: 0,
                                 child: buildHandleBand(
@@ -731,34 +715,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Prayer _activePrayer(PrayerTimes times, DateTime now) {
-    final fajr = _atToday(times.fajr, now);
-    final sunrise = _atToday(times.sunrise, now);
-    final dhuhr = _atToday(times.dhuhr, now);
-    final asr = _atToday(times.asr, now);
-    final maghrib = _atToday(times.maghrib, now);
-    final isha = _atToday(times.isha, now);
-    if (!now.isBefore(isha)) {
-      return Prayer.isha;
-    }
-    if (!now.isBefore(maghrib)) {
-      return Prayer.maghrib;
-    }
-    if (!now.isBefore(asr)) {
-      return Prayer.asr;
-    }
-    if (!now.isBefore(dhuhr)) {
-      return Prayer.dhuhr;
-    }
-    if (!now.isBefore(sunrise)) {
-      return Prayer.sunrise;
-    }
-    if (!now.isBefore(fajr)) {
-      return Prayer.fajr;
-    }
-    return Prayer.fajr;
-  }
-
   Future<void> _openLocationSettings(LocationData? location) async {
     final changed = await Navigator.of(context).push<bool>(
       MaterialPageRoute(
@@ -773,61 +729,6 @@ class _HomeScreenState extends State<HomeScreen> {
         _future = _loadData();
       });
     }
-  }
-
-  _PrayerNext _nextPrayer(
-    PrayerTimes times,
-    DateTime now,
-    AppLocalizations l10n,
-  ) {
-    final fajr = _atToday(times.fajr, now);
-    final sunrise = _atToday(times.sunrise, now);
-    final dhuhr = _atToday(times.dhuhr, now);
-    final asr = _atToday(times.asr, now);
-    final maghrib = _atToday(times.maghrib, now);
-    final isha = _atToday(times.isha, now);
-    if (now.isBefore(fajr)) {
-      return _PrayerNext(label: l10n.prayerFajr, time: fajr);
-    }
-    if (now.isBefore(sunrise)) {
-      return _PrayerNext(label: l10n.prayerSunrise, time: sunrise);
-    }
-    if (now.isBefore(dhuhr)) {
-      return _PrayerNext(label: l10n.prayerDhuhr, time: dhuhr);
-    }
-    if (now.isBefore(asr)) {
-      return _PrayerNext(label: l10n.prayerAsr, time: asr);
-    }
-    if (now.isBefore(maghrib)) {
-      return _PrayerNext(label: l10n.prayerMaghrib, time: maghrib);
-    }
-    if (now.isBefore(isha)) {
-      return _PrayerNext(label: l10n.prayerIsha, time: isha);
-    }
-    return _PrayerNext(
-      label: l10n.prayerFajr,
-      time: fajr.add(const Duration(days: 1)),
-    );
-  }
-
-  String _formatCountdown(DateTime now, DateTime nextTime) {
-    final diff = nextTime.difference(now);
-    final totalSeconds = diff.inSeconds.clamp(0, 86400);
-    final hours = (totalSeconds ~/ 3600).toString().padLeft(2, '0');
-    final minutes = ((totalSeconds % 3600) ~/ 60).toString().padLeft(2, '0');
-    final seconds = (totalSeconds % 60).toString().padLeft(2, '0');
-    return '$hours:$minutes:$seconds';
-  }
-
-  DateTime _atToday(DateTime source, DateTime now) {
-    return DateTime(
-      now.year,
-      now.month,
-      now.day,
-      source.hour,
-      source.minute,
-      source.second,
-    );
   }
 
   Future<void> _checkAndTriggerReminders(
@@ -971,25 +872,6 @@ class _HomeScreenState extends State<HomeScreen> {
       return voiceText;
     }
     return '$prayerLabel vakti';
-  }
-
-  String _prayerLabel(Prayer prayer, AppLocalizations l10n) {
-    switch (prayer) {
-      case Prayer.none:
-        return '';
-      case Prayer.fajr:
-        return l10n.prayerFajr;
-      case Prayer.sunrise:
-        return l10n.prayerSunrise;
-      case Prayer.dhuhr:
-        return l10n.prayerDhuhr;
-      case Prayer.asr:
-        return l10n.prayerAsr;
-      case Prayer.maghrib:
-        return l10n.prayerMaghrib;
-      case Prayer.isha:
-        return l10n.prayerIsha;
-    }
   }
 
   String _triggerId(Prayer prayer, String stage) => '${prayer.name}|$stage';
@@ -1400,69 +1282,6 @@ class _HomeScreenState extends State<HomeScreen> {
     unawaited(_persistCustomPrayerRows());
   }
 
-  DateTime _prayerTimeFor(Prayer prayer, PrayerTimes times) {
-    switch (prayer) {
-      case Prayer.fajr:
-        return _atToday(times.fajr, _now);
-      case Prayer.sunrise:
-        return _atToday(times.sunrise, _now);
-      case Prayer.dhuhr:
-        return _atToday(times.dhuhr, _now);
-      case Prayer.asr:
-        return _atToday(times.asr, _now);
-      case Prayer.maghrib:
-        return _atToday(times.maghrib, _now);
-      case Prayer.isha:
-        return _atToday(times.isha, _now);
-      case Prayer.none:
-        return _now;
-    }
-  }
-
-  DateTime? _resolveCustomPrayerTime(
-    _CustomPrayerTimeRule rule,
-    PrayerTimes times,
-  ) {
-    switch (rule.mode) {
-      case _CustomPrayerTimeMode.manual:
-        final manualTime = rule.manualTime;
-        if (manualTime == null) return null;
-        return DateTime(
-          _now.year,
-          _now.month,
-          _now.day,
-          manualTime.hour,
-          manualTime.minute,
-        );
-      case _CustomPrayerTimeMode.beforePrayer:
-        final anchor = rule.anchorPrayer;
-        if (anchor == null) return null;
-        return _prayerTimeFor(
-          anchor,
-          times,
-        ).subtract(Duration(minutes: rule.offsetMinutes.abs()));
-      case _CustomPrayerTimeMode.afterPrayer:
-        final anchor = rule.anchorPrayer;
-        if (anchor == null) return null;
-        return _prayerTimeFor(
-          anchor,
-          times,
-        ).add(Duration(minutes: rule.offsetMinutes.abs()));
-      case _CustomPrayerTimeMode.midpointBetweenPrayers:
-        final firstAnchor = rule.anchorPrayer;
-        final secondAnchor = rule.secondaryAnchorPrayer;
-        if (firstAnchor == null || secondAnchor == null) return null;
-        final firstTime = _prayerTimeFor(firstAnchor, times);
-        final secondTime = _prayerTimeFor(secondAnchor, times);
-        final midpointMillis =
-            firstTime.millisecondsSinceEpoch +
-            ((secondTime.millisecondsSinceEpoch -
-                    firstTime.millisecondsSinceEpoch) ~/
-                2);
-        return DateTime.fromMillisecondsSinceEpoch(midpointMillis);
-    }
-  }
-
   Future<void> _openCustomTimeEditor(
     _CustomPrayerDraft row,
     AppLocalizations l10n,
@@ -1815,106 +1634,4 @@ class _HomeScreenState extends State<HomeScreen> {
     return ordered;
   }
 }
-
-class _HomeData {
-  final LocationData? location;
-  final String? methodCode;
-  final PrayerTimes? times;
-  final String? error;
-
-  _HomeData({
-    required this.location,
-    required this.methodCode,
-    this.times,
-    this.error,
-  });
-}
-
-class _PrayerRowSettings {
-  final int reminderMinutes;
-  final bool voiceEnabled;
-  final bool visualEnabled;
-  final bool azanEnabled;
-  final bool vibrationEnabled;
-
-  const _PrayerRowSettings({
-    required this.reminderMinutes,
-    this.voiceEnabled = false,
-    this.visualEnabled = false,
-    this.azanEnabled = false,
-    this.vibrationEnabled = false,
-  });
-
-  _PrayerRowSettings copyWith({
-    int? reminderMinutes,
-    bool? voiceEnabled,
-    bool? visualEnabled,
-    bool? azanEnabled,
-    bool? vibrationEnabled,
-  }) {
-    return _PrayerRowSettings(
-      reminderMinutes: reminderMinutes ?? this.reminderMinutes,
-      voiceEnabled: voiceEnabled ?? this.voiceEnabled,
-      visualEnabled: visualEnabled ?? this.visualEnabled,
-      azanEnabled: azanEnabled ?? this.azanEnabled,
-      vibrationEnabled: vibrationEnabled ?? this.vibrationEnabled,
-    );
-  }
-}
-
-class _CustomPrayerDraft {
-  final String id;
-  final TextEditingController labelController;
-  final TextEditingController reminderController;
-  _PrayerRowSettings settings;
-  _CustomPrayerTimeRule timeRule;
-
-  _CustomPrayerDraft({
-    required this.id,
-    required this.labelController,
-    required this.reminderController,
-    required this.settings,
-    required this.timeRule,
-  });
-}
-
-enum _CustomPrayerTimeMode {
-  manual,
-  beforePrayer,
-  afterPrayer,
-  midpointBetweenPrayers,
-}
-
-_CustomPrayerTimeMode _customPrayerTimeModeFromKey(String key) {
-  for (final mode in _CustomPrayerTimeMode.values) {
-    if (mode.name == key) return mode;
-  }
-  return _CustomPrayerTimeMode.manual;
-}
-
-class _CustomPrayerTimeRule {
-  final _CustomPrayerTimeMode mode;
-  final Prayer? anchorPrayer;
-  final Prayer? secondaryAnchorPrayer;
-  final int offsetMinutes;
-  final TimeOfDay? manualTime;
-
-  const _CustomPrayerTimeRule({
-    required this.mode,
-    this.anchorPrayer,
-    this.secondaryAnchorPrayer,
-    this.offsetMinutes = 0,
-    this.manualTime,
-  });
-}
-
-enum _ReminderStage { reminder, prayer }
-
-class _PrayerNext {
-  final String label;
-  final DateTime time;
-
-  _PrayerNext({required this.label, required this.time});
-}
-
 

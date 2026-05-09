@@ -1,6 +1,4 @@
-﻿import 'dart:async';
-
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
@@ -15,6 +13,7 @@ import '../../core/config/config_registry.dart';
 import '../reminders/flashing_reminder_card.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
+import 'widgets/settings_color_picker_widgets.dart';
 import 'widgets/settings_color_sections_group.dart';
 import 'settings_audio_mode_texts.dart';
 import 'settings_color_formatters.dart';
@@ -557,7 +556,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: _ColorSpectrum(
+                            child: ColorSpectrum(
                               hsv: draft,
                               onChanged: (saturation, value) {
                                 setState(() {
@@ -569,7 +568,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                           const SizedBox(width: 12),
-                          _HueStrip(
+                          HueStrip(
                             hue: draft.hue,
                             onChanged: (hue) {
                               setState(() {
@@ -618,227 +617,5 @@ class _VoiceOption {
   String get key => '$locale|$name';
   String get label => '$name ($locale)';
 }
-
-class _FlashingReminderPreview extends StatefulWidget {
-  final String prayerLabel;
-  final String message;
-
-  const _FlashingReminderPreview({
-    required this.prayerLabel,
-    required this.message,
-  });
-
-  @override
-  State<_FlashingReminderPreview> createState() =>
-      _FlashingReminderPreviewState();
-}
-
-class _FlashingReminderPreviewState extends State<_FlashingReminderPreview> {
-  Timer? _timer;
-  bool _isBright = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(const Duration(milliseconds: 450), (_) {
-      if (!mounted) return;
-      setState(() {
-        _isBright = !_isBright;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final backgroundColor = _isBright ? const Color(0xFFFFF2F2) : Colors.white;
-    final borderColor = _isBright
-        ? Colors.redAccent.withValues(alpha: 0.9)
-        : Colors.redAccent.withValues(alpha: 0.5);
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 180),
-      width: 320,
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: borderColor, width: _isBright ? 2 : 1),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            widget.prayerLabel,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w800,
-              letterSpacing: 0.6,
-            ),
-          ),
-          const SizedBox(height: 14),
-          Text(
-            widget.message,
-            textAlign: TextAlign.center,
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ColorSpectrum extends StatelessWidget {
-  final HSVColor hsv;
-  final void Function(double saturation, double value) onChanged;
-
-  const _ColorSpectrum({required this.hsv, required this.onChanged});
-
-  void _update(Offset localPosition, Size size) {
-    final dx = localPosition.dx.clamp(0.0, size.width);
-    final dy = localPosition.dy.clamp(0.0, size.height);
-    final saturation = size.width == 0 ? 0.0 : dx / size.width;
-    final value = size.height == 0 ? 0.0 : 1 - (dy / size.height);
-    onChanged(saturation.clamp(0.0, 1.0), value.clamp(0.0, 1.0));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final size = Size(constraints.maxWidth, constraints.maxHeight);
-        final indicatorOffset = Offset(
-          hsv.saturation * size.width,
-          (1 - hsv.value) * size.height,
-        );
-        return GestureDetector(
-          onPanDown: (details) => _update(details.localPosition, size),
-          onPanUpdate: (details) => _update(details.localPosition, size),
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.white,
-                        HSVColor.fromAHSV(1, hsv.hue, 1, 1).toColor(),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [Colors.transparent, Colors.black],
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: indicatorOffset.dx - 9,
-                top: indicatorOffset.dy - 9,
-                child: Container(
-                  width: 18,
-                  height: 18,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2),
-                    boxShadow: const [
-                      BoxShadow(color: Color(0x33000000), blurRadius: 4),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _HueStrip extends StatelessWidget {
-  final double hue;
-  final ValueChanged<double> onChanged;
-
-  const _HueStrip({required this.hue, required this.onChanged});
-
-  void _update(Offset localPosition, double height) {
-    final dy = localPosition.dy.clamp(0.0, height);
-    final nextHue = height == 0 ? 0.0 : (dy / height) * 360;
-    onChanged(nextHue.clamp(0.0, 360.0));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final height = constraints.maxHeight;
-        final top = ((hue / 360) * height).clamp(0.0, height);
-        return SizedBox(
-          width: 28,
-          child: GestureDetector(
-            onPanDown: (details) => _update(details.localPosition, height),
-            onPanUpdate: (details) => _update(details.localPosition, height),
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color(0xFFFF0000),
-                          Color(0xFFFFFF00),
-                          Color(0xFF00FF00),
-                          Color(0xFF00FFFF),
-                          Color(0xFF0000FF),
-                          Color(0xFFFF00FF),
-                          Color(0xFFFF0000),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  top: top - 2,
-                  child: Container(
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(4),
-                      boxShadow: const [
-                        BoxShadow(color: Color(0x33000000), blurRadius: 3),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-
 
 

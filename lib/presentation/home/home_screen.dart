@@ -25,6 +25,7 @@ import '../../core/prayer_engine/prayer_times.dart';
 import '../settings/location_screen.dart';
 import '../settings/settings_screen.dart';
 import 'widgets/home_presentational_widgets.dart';
+import 'widgets/home_state_panels.dart';
 import 'widgets/home_top_panel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -526,43 +527,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
           final data = snapshot.data!;
           if (data.location == null) {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(l10n.locationNotSet, textAlign: TextAlign.center),
-                  const SizedBox(height: 12),
-                  ElevatedButton.icon(
-                    onPressed: _openSettings,
-                    icon: const Icon(Icons.settings_outlined),
-                    label: Text(l10n.settingsTitle),
-                  ),
-                ],
-              ),
+            return HomeMissingLocationPanel(
+              message: l10n.locationNotSet,
+              settingsLabel: l10n.settingsTitle,
+              onOpenSettings: _openSettings,
             );
           }
 
           if (data.error == 'invalid_location') {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(l10n.locationFillAll, textAlign: TextAlign.center),
-                  const SizedBox(height: 12),
-                  ElevatedButton.icon(
-                    onPressed: _openSettings,
-                    icon: const Icon(Icons.settings_outlined),
-                    label: Text(l10n.settingsTitle),
-                  ),
-                ],
-              ),
+            return HomeInvalidLocationPanel(
+              message: l10n.locationFillAll,
+              settingsLabel: l10n.settingsTitle,
+              onOpenSettings: _openSettings,
             );
           }
 
           final times = data.times;
           if (times == null) {
-            return Center(
-              child: Text(l10n.comingSoon, textAlign: TextAlign.center),
+            return HomePrayerTimesUnavailablePanel(
+              message: l10n.comingSoon,
             );
           }
 

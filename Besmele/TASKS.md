@@ -132,6 +132,10 @@ Completed:
   - Renamed `_TopPanel` to `HomeTopPanel`.
   - No behavior change intended.
   - TASK-03 is still not complete.
+- Continuation checkpoint:
+  - Fallback/state panels extracted to `lib/presentation/home/widgets/home_state_panels.dart`.
+  - No behavior change intended.
+  - TASK-03 is still not complete.
 
 Notes:
 - This checkpoint does not complete TASK-03.

@@ -27,6 +27,7 @@ import 'settings_color_formatters.dart';
 import 'settings_favorite_matcher.dart';
 import 'settings_reminder_snapshot.dart';
 import 'settings_text_formatters.dart';
+import 'settings_ui_mappers.dart';
 import 'settings_voice_key.dart';
 import 'widgets/settings_section_header.dart';
 import 'widgets/settings_visual_reminder_section.dart';
@@ -192,72 +193,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final palette = widget.uiPaletteController.value;
     final ui = ConfigRegistry.settingsPanelsFor(palette);
 
-    String methodSubtitle() {
-        switch (_methodCode) {
-        case 'turkey':
-          return 'Türkiye (Diyanet)';
-        case 'diyanet_tabanli':
-          return 'Diyanet tabanlı';
-        case 'aladhan':
-          return l10n.methodAladhan;
-        case 'muslim_world_league':
-          return l10n.methodMuslimWorldLeague;
-        case 'umm_al_qura':
-          return l10n.methodUmmAlQura;
-        case 'dubai':
-          return l10n.methodDubai;
-        case 'kuwait':
-          return l10n.methodKuwait;
-        case 'qatar':
-          return l10n.methodQatar;
-        case 'singapore':
-          return l10n.methodSingapore;
-        case 'tehran':
-          return l10n.methodTehran;
-        case 'moonsighting':
-          return l10n.methodMoonsighting;
-        case 'north_america':
-          return l10n.methodNorthAmerica;
-        case 'egyptian':
-          return l10n.methodEgyptian;
-        case 'karachi':
-          return l10n.methodKarachi;
-        case 'other':
-          return l10n.methodOther;
-        default:
-          return l10n.methodNotSet;
-      }
-    }
-
-    String codeFor(Locale? locale) => locale?.languageCode ?? 'system';
-
-    Locale? localeFor(String code) {
-      switch (code) {
-        case 'tr':
-          return const Locale('tr');
-        case 'en':
-          return const Locale('en');
-        case 'ar':
-          return const Locale('ar');
-        case 'system':
-        default:
-          return null;
-      }
-    }
-
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: ListView(
         children: [
           SettingsLanguageLocationRow(
-            initialLanguageCode: codeFor(current),
+            initialLanguageCode: codeForLocale(current),
             languageDecoration: _dropdownDecoration('Uygulama Dili'),
             languageSystemLabel: l10n.languageSystem,
             languageTurkishLabel: l10n.languageTurkish,
             languageEnglishLabel: l10n.languageEnglish,
             languageArabicLabel: l10n.languageArabic,
             onLanguageChanged: (value) async {
-              await widget.localeController.setLocale(localeFor(value));
+              await widget.localeController.setLocale(localeForCode(value));
             },
             onOpenLocation: () async {
               final changed = await Navigator.of(context).push<bool>(
@@ -276,7 +224,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsCalculationMethodRow(
             itemPanelStyle: ui.itemPanel,
             title: l10n.calculationMethodLabel,
-            subtitle: methodSubtitle(),
+            subtitle: methodSubtitleForCode(_methodCode, l10n),
             onTap: () async {
               final changed = await Navigator.of(context).push<bool>(
                 MaterialPageRoute(

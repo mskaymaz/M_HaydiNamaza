@@ -18,8 +18,6 @@ import 'location_screen.dart';
 import 'widgets/settings_calculation_method_row.dart';
 import 'widgets/settings_language_location_row.dart';
 import 'widgets/settings_color_sections_group.dart';
-import 'widgets/settings_reminder_fields.dart';
-import 'widgets/settings_reminder_options_group.dart';
 import 'settings_audio_mode_texts.dart';
 import 'settings_color_formatters.dart';
 import 'settings_favorite_matcher.dart';
@@ -27,9 +25,7 @@ import 'settings_reminder_snapshot.dart';
 import 'settings_text_formatters.dart';
 import 'settings_ui_mappers.dart';
 import 'settings_voice_key.dart';
-import 'widgets/settings_section_header.dart';
-import 'widgets/settings_visual_reminder_section.dart';
-import 'widgets/settings_voice_reminder_section.dart';
+import 'widgets/settings_reminder_sections_group.dart';
 
 class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -235,8 +231,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           const Divider(height: 32),
-          SettingsReminderOptionsGroup(
-            outerPadding: ui.screenPadding,
+          SettingsReminderSectionsGroup(
+            screenPadding: ui.screenPadding,
             panelStyle: ui.panel,
             showVoiceIcon: _showVoiceIcon,
             showVisualIcon: _showVisualIcon,
@@ -277,24 +273,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
             onVibrationDurationChanged: (_) => _persistReminderTexts(),
             onVibrationPauseChanged: (_) => _persistReminderTexts(),
-          ),
-          SettingsVoiceReminderSection(
-            outerPadding: ui.screenPadding.copyWith(top: 0),
-            panelStyle: ui.panel,
-            header: const SettingsSectionHeader(
-              title: 'Sesli Hatırlatma',
-              tooltip:
-                  'Metni Oku açıldığında sesli hatırlatma metni ve sistem sesi seçimi görünür. Seçilen ses sesli testte ve hatırlatma okumasında kullanılır.',
-            ),
             selectedAudioMode: _selectedAudioMode,
-            audioModeItems: ReminderAudioMode.values
-                .map(
-                    (mode) => DropdownMenuItem<ReminderAudioMode>(
-                    value: mode,
-                    child: Text(audioModeLabel(mode)),
-                  ),
-                )
-                .toList(),
             onAudioModeChanged: (value) {
               if (value == null) return;
               setState(() {
@@ -328,44 +307,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               selectedAudioMode: _selectedAudioMode,
             ),
             onVoiceTest: () => _playVoiceReminderTest(context, l10n),
-            voiceTextField: SettingsReminderTextField(
-              label: 'Sesli Hatırlatma Metni',
-              controller: _voiceReminderController,
-              hintText: 'Sesli hatırlatmada okunacak metni girin.',
-              onChanged: (_) => _persistReminderTexts(),
-            ),
-            voiceRepeatField: SettingsReminderNumberField(
-              label: 'Sesli Hatırlatma Periyodu (sn)',
-              controller: _voiceRepeatController,
-              onChanged: (_) => _persistReminderTexts(),
-            ),
-          ),
-          SettingsVisualReminderSection(
-            outerPadding: ui.screenPadding.copyWith(top: 0),
-            panelStyle: ui.panel,
-            header: const SettingsSectionHeader(
-              title: 'Görsel Hatırlatma',
-              tooltip:
-                  'Görsel hatırlatma ayrı tutulur. Bu alan boşsa sesli hatırlatma metni kullanılır.',
-            ),
-            visualTextField: SettingsReminderTextField(
-              label: 'Görsel Hatırlatma Metni',
-              controller: _visualReminderController,
-              hintText:
-                  'Buraya herhangi bir metin girilmediğinde sesli hatırlatmadaki metin kullanılacaktır.',
-              onChanged: (_) => _persistReminderTexts(),
-              maxLines: 3,
-            ),
-            visualDisplayField: SettingsReminderNumberField(
-              label: 'Ekranda Kalma (sn)',
-              controller: _visualDisplayController,
-              onChanged: (_) => _persistReminderTexts(),
-            ),
-            visualReopenField: SettingsReminderNumberField(
-              label: 'Kapanıp Açılma (sn)',
-              controller: _visualReopenController,
-              onChanged: (_) => _persistReminderTexts(),
-            ),
+            voiceReminderController: _voiceReminderController,
+            voiceRepeatController: _voiceRepeatController,
+            onVoiceTextChanged: (_) => _persistReminderTexts(),
+            onVoiceRepeatChanged: (_) => _persistReminderTexts(),
+            visualReminderController: _visualReminderController,
+            visualDisplayController: _visualDisplayController,
+            visualReopenController: _visualReopenController,
+            onVisualTextChanged: (_) => _persistReminderTexts(),
+            onVisualDisplayChanged: (_) => _persistReminderTexts(),
+            onVisualReopenChanged: (_) => _persistReminderTexts(),
             onShowPreview: () => _showVisualReminderPreview(context, l10n),
           ),
           SettingsColorSectionsGroup(

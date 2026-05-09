@@ -19,6 +19,7 @@ import 'widgets/settings_color_sections_group.dart';
 import 'settings_audio_mode_texts.dart';
 import 'settings_color_formatters.dart';
 import 'settings_favorite_matcher.dart';
+import 'settings_reminder_runtime_helpers.dart';
 import 'settings_reminder_snapshot.dart';
 import 'settings_text_formatters.dart';
 import 'settings_ui_mappers.dart';
@@ -376,12 +377,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     await _reminderTextStorage.write(_currentReminderSettingsSnapshot());
   }
 
-  String _effectiveVisualReminderText() {
-    final visualText = _visualReminderController.text.trim();
-    if (visualText.isNotEmpty) return visualText;
-    return _voiceReminderController.text.trim();
-  }
-
   Future<void> _playVoiceReminderTest(
     BuildContext context,
     AppLocalizations l10n,
@@ -411,7 +406,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   ReminderTextSettings _currentReminderSettingsSnapshot() {
-    final selectedVoice = _selectedVoice();
+    final selectedVoice = selectedVoiceOption<_VoiceOption>(
+      selectedVoiceKey: _selectedVoiceKey,
+      voiceOptions: _voiceOptions,
+      keyOf: (voice) => voice.key,
+    );
     return buildReminderSettingsSnapshot(
       voiceText: _voiceReminderController.text,
       visualText: _visualReminderController.text,
@@ -437,7 +436,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     BuildContext context,
     AppLocalizations l10n,
   ) async {
-    final effectiveText = _effectiveVisualReminderText().trim();
+    final effectiveText = effectiveVisualReminderText(
+      visualText: _visualReminderController.text,
+      voiceText: _voiceReminderController.text,
+    ).trim();
     if (effectiveText.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -464,17 +466,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         );
       },
     );
-  }
-
-  _VoiceOption? _selectedVoice() {
-    final key = _selectedVoiceKey;
-    if (key == null) return null;
-    for (final voice in _voiceOptions) {
-      if (voice.key == key) {
-        return voice;
-      }
-    }
-    return null;
   }
 
   Future<void> _pickReminderAudio(BuildContext context) async {

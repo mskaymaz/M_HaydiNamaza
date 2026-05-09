@@ -16,6 +16,8 @@ import '../../core/config/config_registry.dart';
 import '../reminders/flashing_reminder_card.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
+import 'widgets/settings_calculation_method_row.dart';
+import 'widgets/settings_language_location_row.dart';
 
 class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -234,121 +236,44 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 140,
-                  child: DropdownButtonFormField<String>(
-                    initialValue: codeFor(current),
-                    decoration: _dropdownDecoration('Uygulama Dili'),
-                    items: [
-                      DropdownMenuItem(
-                        value: 'system',
-                        child: Text(l10n.languageSystem),
-                      ),
-                      DropdownMenuItem(
-                        value: 'tr',
-                        child: Text(l10n.languageTurkish),
-                      ),
-                      DropdownMenuItem(
-                        value: 'en',
-                        child: Text(l10n.languageEnglish),
-                      ),
-                      DropdownMenuItem(
-                        value: 'ar',
-                        child: Text(l10n.languageArabic),
-                      ),
-                    ],
-                    onChanged: (value) async {
-                      if (value == null) return;
-                      await widget.localeController.setLocale(
-                        localeFor(value),
-                      );
-                    },
+          SettingsLanguageLocationRow(
+            initialLanguageCode: codeFor(current),
+            languageDecoration: _dropdownDecoration('Uygulama Dili'),
+            languageSystemLabel: l10n.languageSystem,
+            languageTurkishLabel: l10n.languageTurkish,
+            languageEnglishLabel: l10n.languageEnglish,
+            languageArabicLabel: l10n.languageArabic,
+            onLanguageChanged: (value) async {
+              await widget.localeController.setLocale(localeFor(value));
+            },
+            onOpenLocation: () async {
+              final changed = await Navigator.of(context).push<bool>(
+                MaterialPageRoute(
+                  builder: (_) => LocationScreen(
+                    initial: _location,
+                    uiPaletteController: widget.uiPaletteController,
                   ),
                 ),
-                const SizedBox(width: 35),
-                SizedBox(
-                  width: 160,
-                  child: OutlinedButton.icon(
-                    onPressed: () async {
-                      final changed = await Navigator.of(context).push<bool>(
-                        MaterialPageRoute(
-                          builder: (_) => LocationScreen(
-                            initial: _location,
-                            uiPaletteController: widget.uiPaletteController,
-                          ),
-                        ),
-                      );
-                      if (changed == true) {
-                        await _loadLocation();
-                      }
-                    },
-                    icon: const Icon(Icons.settings),
-                    label: const Text('Konum'),
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: const Color(0xFFE4F3E6),
-                      minimumSize: const Size(160, 50),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              );
+              if (changed == true) {
+                await _loadLocation();
+              }
+            },
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: ui.itemPanel.borderRadius,
-                onTap: () async {
-                  final changed = await Navigator.of(context).push<bool>(
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          CalculationMethodScreen(initialCode: _methodCode),
-                    ),
-                  );
-                  if (changed == true) {
-                    await _loadMethod();
-                  }
-                },
-                child: Ink(
-                  decoration: BoxDecoration(
-                    color: ui.itemPanel.color,
-                    borderRadius: ui.itemPanel.borderRadius,
-                  ),
-                  child: SizedBox(
-                    height: 56,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Row(
-                        children: [
-                          Text(
-                            l10n.calculationMethodLabel,
-                            style: const TextStyle(fontWeight: FontWeight.w700),
-                          ),
-                          const SizedBox(width: 20),
-                          const Icon(
-                            Icons.play_arrow_rounded,
-                            size: 22,
-                            color: Color(0xFF2F6F4F),
-                          ),
-                          const SizedBox(width: 6),
-                          Expanded(
-                            child: Text(
-                              methodSubtitle(),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+          SettingsCalculationMethodRow(
+            itemPanelStyle: ui.itemPanel,
+            title: l10n.calculationMethodLabel,
+            subtitle: methodSubtitle(),
+            onTap: () async {
+              final changed = await Navigator.of(context).push<bool>(
+                MaterialPageRoute(
+                  builder: (_) => CalculationMethodScreen(initialCode: _methodCode),
                 ),
-              ),
-            ),
+              );
+              if (changed == true) {
+                await _loadMethod();
+              }
+            },
           ),
           const Divider(height: 32),
           Padding(

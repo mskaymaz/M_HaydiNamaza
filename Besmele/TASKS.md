@@ -142,6 +142,12 @@ Completed:
   - `_measureTextWidth` moved with the widget.
   - No behavior change intended.
   - TASK-03 is still not complete.
+- Continuation checkpoint:
+  - `_QiblaScreen` extracted to `lib/presentation/home/widgets/home_qibla_screen.dart`.
+  - Renamed `_QiblaScreen` to `HomeQiblaScreen`.
+  - Qibla calculation helpers kept inside extracted screen.
+  - No behavior change intended.
+  - TASK-03 is still not complete.
 
 Notes:
 - This checkpoint does not complete TASK-03.

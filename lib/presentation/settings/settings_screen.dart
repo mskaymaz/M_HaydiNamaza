@@ -19,6 +19,7 @@ import 'widgets/settings_calculation_method_row.dart';
 import 'widgets/settings_interface_colors_section.dart';
 import 'widgets/settings_language_location_row.dart';
 import 'widgets/settings_background_colors_section.dart';
+import 'widgets/settings_color_action_widgets.dart';
 import 'widgets/settings_reminder_fields.dart';
 import 'widgets/settings_reminder_options_section.dart';
 import 'widgets/settings_section_header.dart';
@@ -449,7 +450,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               title: 'Arayüz Renkleri',
               tooltip: 'Panel ve yazı renklerini değiştir.',
             ),
-            panelColorTile: _ColorActionTile(
+            panelColorTile: SettingsColorActionTile(
               title: 'Panel Rengi',
               color: palette.zeminColor,
               onTap: () => _editColor(
@@ -459,7 +460,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onApply: widget.uiPaletteController.setZeminColor,
               ),
             ),
-            textColorTile: _ColorActionTile(
+            textColorTile: SettingsColorActionTile(
               title: 'Yazı Rengi',
               color: palette.cizgiColor,
               onTap: () => _editColor(
@@ -469,7 +470,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onApply: widget.uiPaletteController.setCizgiColor,
               ),
             ),
-            resetButton: _ResetIconButton(
+            resetButton: SettingsResetIconButton(
               onTap: () async {
                 await widget.uiPaletteController.setZeminColor(
                   ConfigRegistry.defaultPalette.zeminColor,
@@ -490,7 +491,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               tooltip:
                   'Geometrik arka planın zemin ve çizgi renklerini değiştir.',
             ),
-            backgroundColorTile: _ColorActionTile(
+            backgroundColorTile: SettingsColorActionTile(
               title: 'Zemin Rengi',
               color: palette.backgroundZeminColor,
               onTap: () => _editColor(
@@ -500,7 +501,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onApply: widget.uiPaletteController.setBackgroundZeminColor,
               ),
             ),
-            lineColorTile: _ColorActionTile(
+            lineColorTile: SettingsColorActionTile(
               title: 'Çizgi Rengi',
               color: palette.backgroundCizgiColor,
               onTap: () => _editColor(
@@ -510,7 +511,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onApply: widget.uiPaletteController.setBackgroundCizgiColor,
               ),
             ),
-            resetButton: _ResetIconButton(
+            resetButton: SettingsResetIconButton(
               onTap: () async {
                 await widget.uiPaletteController.setBackgroundZeminColor(
                   ConfigRegistry.defaultPalette.backgroundZeminColor,
@@ -881,71 +882,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-class _ColorActionTile extends StatelessWidget {
-  final String title;
-  final Color color;
-  final VoidCallback onTap;
-
-  const _ColorActionTile({
-    required this.title,
-    required this.color,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(14),
-      onTap: onTap,
-      child: Ink(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.14),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: color.withValues(alpha: 0.45)),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 22,
-              height: 22,
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(child: Text(title)),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ResetIconButton extends StatelessWidget {
-  final Future<void> Function() onTap;
-
-  const _ResetIconButton({required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(14),
-      onTap: onTap,
-      child: Ink(
-        width: 42,
-        height: 42,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.black12),
-        ),
-        child: const Icon(Icons.restart_alt_rounded),
-      ),
-    );
-  }
-}
-
 class _VoiceOption {
   final String name;
   final String locale;
@@ -1175,6 +1111,7 @@ class _HueStrip extends StatelessWidget {
     );
   }
 }
+
 
 
 

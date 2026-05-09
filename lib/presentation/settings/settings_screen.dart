@@ -1,7 +1,6 @@
 ﻿import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
@@ -20,6 +19,7 @@ import 'widgets/settings_calculation_method_row.dart';
 import 'widgets/settings_interface_colors_section.dart';
 import 'widgets/settings_language_location_row.dart';
 import 'widgets/settings_background_colors_section.dart';
+import 'widgets/settings_reminder_fields.dart';
 import 'widgets/settings_reminder_options_section.dart';
 import 'widgets/settings_section_header.dart';
 import 'widgets/settings_visual_reminder_section.dart';
@@ -295,7 +295,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               tooltip:
                   'Titreşim süresi ve tekrar aralığı bu bölümden ayarlanır.',
             ),
-            voiceToggle: _ReminderOptionToggle(
+            voiceToggle: SettingsReminderOptionToggle(
               label: 'Sesli',
               value: _showVoiceIcon,
               onChanged: (value) {
@@ -305,7 +305,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _persistReminderTexts();
               },
             ),
-            visualToggle: _ReminderOptionToggle(
+            visualToggle: SettingsReminderOptionToggle(
               label: 'Görsel',
               value: _showVisualIcon,
               onChanged: (value) {
@@ -315,7 +315,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _persistReminderTexts();
               },
             ),
-            azanToggle: _ReminderOptionToggle(
+            azanToggle: SettingsReminderOptionToggle(
               label: 'Ezan',
               value: _showAzanIcon,
               onChanged: (value) {
@@ -325,7 +325,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _persistReminderTexts();
               },
             ),
-            vibrationToggle: _ReminderOptionToggle(
+            vibrationToggle: SettingsReminderOptionToggle(
               label: 'Titreşim',
               value: _showVibrationIcon,
               onChanged: (value) {
@@ -342,12 +342,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               });
               _persistReminderTexts();
             },
-            vibrationDurationField: _ReminderNumberField(
+            vibrationDurationField: SettingsReminderNumberField(
               label: 'Titreşim Süresi (sn)',
               controller: _vibrationDurationController,
               onChanged: (_) => _persistReminderTexts(),
             ),
-            vibrationPauseField: _ReminderNumberField(
+            vibrationPauseField: SettingsReminderNumberField(
               label: 'Titreşim Aralığı (sn)',
               controller: _vibrationPauseController,
               onChanged: (_) => _persistReminderTexts(),
@@ -402,13 +402,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ? 'Seçilen dosya: '
                 : _audioPickerHelpText(_selectedAudioMode),
             onVoiceTest: () => _playVoiceReminderTest(context, l10n),
-            voiceTextField: _ReminderTextField(
+            voiceTextField: SettingsReminderTextField(
               label: 'Sesli Hatırlatma Metni',
               controller: _voiceReminderController,
               hintText: 'Sesli hatırlatmada okunacak metni girin.',
               onChanged: (_) => _persistReminderTexts(),
             ),
-            voiceRepeatField: _ReminderNumberField(
+            voiceRepeatField: SettingsReminderNumberField(
               label: 'Sesli Hatırlatma Periyodu (sn)',
               controller: _voiceRepeatController,
               onChanged: (_) => _persistReminderTexts(),
@@ -422,7 +422,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               tooltip:
                   'Görsel hatırlatma ayrı tutulur. Bu alan boşsa sesli hatırlatma metni kullanılır.',
             ),
-            visualTextField: _ReminderTextField(
+            visualTextField: SettingsReminderTextField(
               label: 'Görsel Hatırlatma Metni',
               controller: _visualReminderController,
               hintText:
@@ -430,12 +430,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChanged: (_) => _persistReminderTexts(),
               maxLines: 3,
             ),
-            visualDisplayField: _ReminderNumberField(
+            visualDisplayField: SettingsReminderNumberField(
               label: 'Ekranda Kalma (sn)',
               controller: _visualDisplayController,
               onChanged: (_) => _persistReminderTexts(),
             ),
-            visualReopenField: _ReminderNumberField(
+            visualReopenField: SettingsReminderNumberField(
               label: 'Kapanıp Açılma (sn)',
               controller: _visualReopenController,
               onChanged: (_) => _persistReminderTexts(),
@@ -946,112 +946,6 @@ class _ResetIconButton extends StatelessWidget {
   }
 }
 
-class _ReminderTextField extends StatelessWidget {
-  final String label;
-  final TextEditingController controller;
-  final String hintText;
-  final ValueChanged<String> onChanged;
-  final int maxLines;
-
-  const _ReminderTextField({
-    required this.label,
-    required this.controller,
-    required this.hintText,
-    required this.onChanged,
-    this.maxLines = 2,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      onChanged: onChanged,
-      minLines: maxLines,
-      maxLines: maxLines,
-      style: Theme.of(
-        context,
-      ).textTheme.bodyMedium?.copyWith(color: Colors.black87),
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hintText,
-        filled: true,
-        fillColor: const Color(0xFFF4F1EA),
-        hintStyle: Theme.of(
-          context,
-        ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade400),
-        labelStyle: Theme.of(
-          context,
-        ).textTheme.bodyMedium?.copyWith(color: Colors.black87),
-        alignLabelWithHint: true,
-        border: const OutlineInputBorder(),
-      ),
-    );
-  }
-}
-
-class _ReminderNumberField extends StatelessWidget {
-  final String label;
-  final TextEditingController controller;
-  final ValueChanged<String> onChanged;
-
-  const _ReminderNumberField({
-    required this.label,
-    required this.controller,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      onChanged: onChanged,
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-      style: Theme.of(
-        context,
-      ).textTheme.bodyMedium?.copyWith(color: Colors.black87),
-      decoration: InputDecoration(
-        labelText: label,
-        filled: true,
-        fillColor: const Color(0xFFF4F1EA),
-        labelStyle: Theme.of(
-          context,
-        ).textTheme.bodyMedium?.copyWith(color: Colors.black87),
-        border: const OutlineInputBorder(),
-      ),
-    );
-  }
-}
-
-class _ReminderOptionToggle extends StatelessWidget {
-  final String label;
-  final bool value;
-  final ValueChanged<bool> onChanged;
-
-  const _ReminderOptionToggle({
-    required this.label,
-    required this.value,
-    required this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Checkbox(value: value, onChanged: (next) => onChanged(next ?? false)),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: Theme.of(
-            context,
-          ).textTheme.bodySmall?.copyWith(color: Colors.black87),
-        ),
-      ],
-    );
-  }
-}
-
 class _VoiceOption {
   final String name;
   final String locale;
@@ -1281,4 +1175,6 @@ class _HueStrip extends StatelessWidget {
     );
   }
 }
+
+
 

@@ -18,6 +18,7 @@ import 'calculation_method_screen.dart';
 import 'location_screen.dart';
 import 'widgets/settings_calculation_method_row.dart';
 import 'widgets/settings_language_location_row.dart';
+import 'widgets/settings_reminder_options_section.dart';
 
 class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -276,125 +277,75 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           const Divider(height: 32),
-          Padding(
-            padding: ui.screenPadding,
-            child: _SettingsPanel(
-              style: ui.panel,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const _SectionHeader(
-                    title: 'Hatırlatma Seçenekleri',
-                    tooltip:
-                        'Buradaki seçimler vakitler panelinde hangi hatırlatıcı ikonlarının görüneceğini belirler.',
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _ReminderOptionToggle(
-                          label: 'Sesli',
-                          value: _showVoiceIcon,
-                          onChanged: (value) {
-                            setState(() {
-                              _showVoiceIcon = value;
-                            });
-                            _persistReminderTexts();
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: _ReminderOptionToggle(
-                          label: 'Görsel',
-                          value: _showVisualIcon,
-                          onChanged: (value) {
-                            setState(() {
-                              _showVisualIcon = value;
-                            });
-                            _persistReminderTexts();
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: _ReminderOptionToggle(
-                          label: 'Ezan',
-                          value: _showAzanIcon,
-                          onChanged: (value) {
-                            setState(() {
-                              _showAzanIcon = value;
-                            });
-                            _persistReminderTexts();
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: _ReminderOptionToggle(
-                          label: 'Titreşim',
-                          value: _showVibrationIcon,
-                          onChanged: (value) {
-                            setState(() {
-                              _showVibrationIcon = value;
-                            });
-                            _persistReminderTexts();
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Divider(
-                    color: Colors.white.withValues(alpha: 0.9),
-                    height: 1,
-                  ),
-                  const SizedBox(height: 10),
-                  CheckboxListTile(
-                    value: _sortCustomPrayersByTime,
-                    contentPadding: EdgeInsets.zero,
-                    controlAffinity: ListTileControlAffinity.leading,
-                    title: const Text('Nafileler vakitlere göre sıralansın'),
-                    subtitle: const Text(
-                      'Kapalıysa nafileler listenin en altında kalır.',
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        _sortCustomPrayersByTime = value ?? true;
-                      });
-                      _persistReminderTexts();
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                  Divider(
-                    color: Colors.white.withValues(alpha: 0.9),
-                    height: 1,
-                  ),
-                  const SizedBox(height: 10),
-                  const _SectionHeader(
-                    title: 'Titreşimle Uyarı Ayarları',
-                    tooltip:
-                        'Titreşim süresi ve tekrar aralığı bu bölümden ayarlanır.',
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _ReminderNumberField(
-                          label: 'Titreşim Süresi (sn)',
-                          controller: _vibrationDurationController,
-                          onChanged: (_) => _persistReminderTexts(),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: _ReminderNumberField(
-                          label: 'Titreşim Aralığı (sn)',
-                          controller: _vibrationPauseController,
-                          onChanged: (_) => _persistReminderTexts(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+          SettingsReminderOptionsSection(
+            outerPadding: ui.screenPadding,
+            panelStyle: ui.panel,
+            reminderOptionsHeader: const _SectionHeader(
+              title: 'Hatırlatma Seçenekleri',
+              tooltip:
+                  'Buradaki seçimler vakitler panelinde hangi hatırlatıcı ikonlarının görüneceğini belirler.',
+            ),
+            vibrationHeader: const _SectionHeader(
+              title: 'Titreşimle Uyarı Ayarları',
+              tooltip:
+                  'Titreşim süresi ve tekrar aralığı bu bölümden ayarlanır.',
+            ),
+            voiceToggle: _ReminderOptionToggle(
+              label: 'Sesli',
+              value: _showVoiceIcon,
+              onChanged: (value) {
+                setState(() {
+                  _showVoiceIcon = value;
+                });
+                _persistReminderTexts();
+              },
+            ),
+            visualToggle: _ReminderOptionToggle(
+              label: 'Görsel',
+              value: _showVisualIcon,
+              onChanged: (value) {
+                setState(() {
+                  _showVisualIcon = value;
+                });
+                _persistReminderTexts();
+              },
+            ),
+            azanToggle: _ReminderOptionToggle(
+              label: 'Ezan',
+              value: _showAzanIcon,
+              onChanged: (value) {
+                setState(() {
+                  _showAzanIcon = value;
+                });
+                _persistReminderTexts();
+              },
+            ),
+            vibrationToggle: _ReminderOptionToggle(
+              label: 'Titreşim',
+              value: _showVibrationIcon,
+              onChanged: (value) {
+                setState(() {
+                  _showVibrationIcon = value;
+                });
+                _persistReminderTexts();
+              },
+            ),
+            sortCustomPrayersByTime: _sortCustomPrayersByTime,
+            onSortChanged: (value) {
+              setState(() {
+                _sortCustomPrayersByTime = value ?? true;
+              });
+              _persistReminderTexts();
+            },
+            vibrationDurationField: _ReminderNumberField(
+              label: 'Titreşim Süresi (sn)',
+              controller: _vibrationDurationController,
+              onChanged: (_) => _persistReminderTexts(),
+            ),
+            vibrationPauseField: _ReminderNumberField(
+              label: 'Titreşim Aralığı (sn)',
+              controller: _vibrationPauseController,
+              onChanged: (_) => _persistReminderTexts(),
             ),
           ),
           Padding(

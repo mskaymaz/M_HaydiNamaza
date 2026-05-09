@@ -100,6 +100,15 @@ Goal: split oversized files safely.
 - [x] Stop tiny UI extraction to avoid over-fragmentation.
 - [x] Audit settings orchestration/load-save/service separation.
 
+### TASK-03B — location_screen.dart safe UI/helper extraction checkpoint
+
+- [x] Extract location name formatting helpers.
+- [x] Extract location add-favorite button.
+- [x] Extract location selection composer.
+- [x] Extract generic dropdown item builder.
+- [x] Stop further micro UI/helper extraction to avoid over-fragmentation.
+- [ ] Audit location orchestration/service/repository boundaries.
+
 Acceptance:
 - No file remains above 600 lines unless documented.
 - Main screens become readable and testable.
@@ -302,4 +311,3 @@ Goal: prepare for real users.
 
 Acceptance:
 - A new developer or AI assistant can understand, build, and safely continue the project.
-

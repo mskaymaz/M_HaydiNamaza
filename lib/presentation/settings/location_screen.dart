@@ -11,6 +11,7 @@ import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
+import 'location_name_formatters.dart';
 import 'widgets/location_coordinates_section.dart';
 import 'widgets/location_current_location_tile.dart';
 import 'widgets/location_favorites_section.dart';
@@ -565,7 +566,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 .map(
                   (item) => DropdownMenuItem<String>(
                     value: item.id,
-                    child: Text(_formatDisplayName(item.name)),
+                    child: Text(formatLocationDisplayName(item.name)),
                   ),
                 )
                 .toList(),
@@ -573,7 +574,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 .map(
                   (item) => DropdownMenuItem<String>(
                     value: item.id,
-                    child: Text(_formatDisplayName(item.name)),
+                    child: Text(formatLocationDisplayName(item.name)),
                   ),
                 )
                 .toList(),
@@ -581,7 +582,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 .map(
                   (item) => DropdownMenuItem<String>(
                     value: item.id,
-                    child: Text(_formatDisplayName(item.name)),
+                    child: Text(formatLocationDisplayName(item.name)),
                   ),
                 )
                 .toList(),
@@ -676,44 +677,14 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 
-  String _formatDisplayName(String input) {
-    final trimmed = input.trim();
-    if (trimmed.isEmpty) return trimmed;
-    final lower = trimmed
-        .replaceAll('I', String.fromCharCode(0x0131))
-        .replaceAll(String.fromCharCode(0x0130), 'i')
-        .toLowerCase();
-    final parts = lower.split(RegExp(r'(\s+|/|-)'));
-    final buffer = StringBuffer();
-    for (final part in parts) {
-      if (part.isEmpty) continue;
-      final isSeparator = RegExp(r'^\s+$|^/$|^-$').hasMatch(part);
-      if (isSeparator) {
-        buffer.write(part);
-        continue;
-      }
-      buffer.write(_capitalizeFirst(part[0]));
-      if (part.length > 1) {
-        buffer.write(part.substring(1));
-      }
-    }
-    return buffer.toString();
-  }
-
-  String _capitalizeFirst(String char) {
-    if (char == 'i') return String.fromCharCode(0x0130);
-    if (char == String.fromCharCode(0x0131)) return 'I';
-    return char.toUpperCase();
-  }
-
   String _favoriteLabel(LocationFavorite favorite) {
-    return '${_formatDisplayName(favorite.province)} / '
-        '${_formatDisplayName(favorite.district)}';
+    return '${formatLocationDisplayName(favorite.province)} / '
+        '${formatLocationDisplayName(favorite.district)}';
   }
 
   String _currentFavoriteClosedLabel(AppLocalizations l10n) {
-    final province = _formatDisplayName(_provinceController.text);
-    final district = _formatDisplayName(_districtController.text);
+    final province = formatLocationDisplayName(_provinceController.text);
+    final district = formatLocationDisplayName(_districtController.text);
     if (province.isEmpty) return l10n.locationFavoritesLabel;
     if (district.isEmpty) return province;
     return '$province / $district';

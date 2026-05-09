@@ -536,28 +536,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _persistReminderTexts() async {
-    final selectedVoice = _selectedVoice();
-    await _reminderTextStorage.write(
-      buildReminderSettingsSnapshot(
-        voiceText: _voiceReminderController.text,
-        visualText: _visualReminderController.text,
-        audioMode: _selectedAudioMode,
-        showVoiceIcon: _showVoiceIcon,
-        showVisualIcon: _showVisualIcon,
-        showAzanIcon: _showAzanIcon,
-        showVibrationIcon: _showVibrationIcon,
-        sortCustomPrayersByTime: _sortCustomPrayersByTime,
-        voiceRepeatSecondsText: _voiceRepeatController.text,
-        vibrationDurationSecondsText: _vibrationDurationController.text,
-        vibrationPauseSecondsText: _vibrationPauseController.text,
-        visualDisplaySecondsText: _visualDisplayController.text,
-        visualReopenSecondsText: _visualReopenController.text,
-        selectedVoiceName: selectedVoice?.name,
-        selectedVoiceLocale: selectedVoice?.locale,
-        selectedAudioPath: _selectedAudioPath,
-        selectedAudioLabel: _selectedAudioLabel,
-      ),
-    );
+    await _reminderTextStorage.write(_currentReminderSettingsSnapshot());
   }
 
   String _effectiveVisualReminderText() {
@@ -570,26 +549,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     BuildContext context,
     AppLocalizations l10n,
   ) async {
-    final selectedVoice = _selectedVoice();
-    final settings = buildReminderSettingsSnapshot(
-      voiceText: _voiceReminderController.text,
-      visualText: _visualReminderController.text,
-      audioMode: _selectedAudioMode,
-      showVoiceIcon: _showVoiceIcon,
-      showVisualIcon: _showVisualIcon,
-      showAzanIcon: _showAzanIcon,
-      showVibrationIcon: _showVibrationIcon,
-      sortCustomPrayersByTime: _sortCustomPrayersByTime,
-      voiceRepeatSecondsText: _voiceRepeatController.text,
-      vibrationDurationSecondsText: _vibrationDurationController.text,
-      vibrationPauseSecondsText: _vibrationPauseController.text,
-      visualDisplaySecondsText: _visualDisplayController.text,
-      visualReopenSecondsText: _visualReopenController.text,
-      selectedVoiceName: selectedVoice?.name,
-      selectedVoiceLocale: selectedVoice?.locale,
-      selectedAudioPath: _selectedAudioPath,
-      selectedAudioLabel: _selectedAudioLabel,
-    );
+    final settings = _currentReminderSettingsSnapshot();
     if (settings.audioMode != ReminderAudioMode.textToSpeech &&
         (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -611,6 +571,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
         const SnackBar(content: Text('Sesli test başlatılamadı.')),
       );
     }
+  }
+
+  ReminderTextSettings _currentReminderSettingsSnapshot() {
+    final selectedVoice = _selectedVoice();
+    return buildReminderSettingsSnapshot(
+      voiceText: _voiceReminderController.text,
+      visualText: _visualReminderController.text,
+      audioMode: _selectedAudioMode,
+      showVoiceIcon: _showVoiceIcon,
+      showVisualIcon: _showVisualIcon,
+      showAzanIcon: _showAzanIcon,
+      showVibrationIcon: _showVibrationIcon,
+      sortCustomPrayersByTime: _sortCustomPrayersByTime,
+      voiceRepeatSecondsText: _voiceRepeatController.text,
+      vibrationDurationSecondsText: _vibrationDurationController.text,
+      vibrationPauseSecondsText: _vibrationPauseController.text,
+      visualDisplaySecondsText: _visualDisplayController.text,
+      visualReopenSecondsText: _visualReopenController.text,
+      selectedVoiceName: selectedVoice?.name,
+      selectedVoiceLocale: selectedVoice?.locale,
+      selectedAudioPath: _selectedAudioPath,
+      selectedAudioLabel: _selectedAudioLabel,
+    );
   }
 
   Future<void> _showVisualReminderPreview(

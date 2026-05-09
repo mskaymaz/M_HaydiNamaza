@@ -79,12 +79,26 @@ Acceptance:
 Goal: split oversized files safely.
 
 - [ ] Split `home_screen.dart` into layout, panels, actions, and state helpers.
-- [ ] Split `settings_screen.dart` into focused settings cards/sections.
+- [x] Split `settings_screen.dart` into focused settings cards/sections.
 - [ ] Split `location_screen.dart` into permission view, search view, result view, and controller/service logic.
-- [ ] Move pure UI widgets first.
+- [x] Move pure UI widgets first.
 - [ ] Move business logic only after widget extraction is stable.
 - [ ] Keep each step compile-safe.
 - [ ] Delete dead code only after validation.
+
+### TASK-03A — settings_screen.dart UI decomposition
+
+- [x] Extract settings section panel/header helpers.
+- [x] Extract reminder field/toggle helpers.
+- [x] Extract color action/reset helpers.
+- [x] Extract reminder text settings mapper/snapshot helpers.
+- [x] Extract pure formatter/helper functions.
+- [x] Extract settings color sections group.
+- [x] Extract settings reminder options group.
+- [x] Extract settings reminder sections group.
+- [x] Extract settings top settings section.
+- [x] Stop tiny UI extraction to avoid over-fragmentation.
+- [ ] Audit settings orchestration/load-save/service separation.
 
 Acceptance:
 - No file remains above 600 lines unless documented.

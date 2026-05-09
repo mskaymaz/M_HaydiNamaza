@@ -136,6 +136,12 @@ Completed:
   - Fallback/state panels extracted to `lib/presentation/home/widgets/home_state_panels.dart`.
   - No behavior change intended.
   - TASK-03 is still not complete.
+- Continuation checkpoint:
+  - `_PrayerList` extracted to `lib/presentation/home/widgets/home_prayer_list.dart`.
+  - `_PrayerItem` renamed to `HomePrayerListItem`.
+  - `_measureTextWidth` moved with the widget.
+  - No behavior change intended.
+  - TASK-03 is still not complete.
 
 Notes:
 - This checkpoint does not complete TASK-03.

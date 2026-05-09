@@ -1,6 +1,5 @@
 ﻿import 'dart:async';
 import 'dart:math' as math;
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +24,7 @@ import '../../core/prayer_engine/prayer_times.dart';
 import '../settings/location_screen.dart';
 import '../settings/settings_screen.dart';
 import 'widgets/home_presentational_widgets.dart';
+import 'widgets/home_prayer_list.dart';
 import 'widgets/home_state_panels.dart';
 import 'widgets/home_top_panel.dart';
 
@@ -767,7 +767,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       SizedBox(height: panelOverlap + 12),
                                     if (_drawerProgress > 0.02)
                                       Expanded(
-                                        child: _PrayerList(
+                                        child: HomePrayerList(
                                           controller:
                                               _prayerListScrollController,
                                           items: items,
@@ -1883,10 +1883,10 @@ class _HomeScreenState extends State<HomeScreen> {
     minuteController.dispose();
   }
 
-  List<_PrayerItem> _buildItems(AppLocalizations l10n, PrayerTimes times) {
-    _PrayerItem itemFor(Prayer prayer, String label, DateTime time) {
+  List<HomePrayerListItem> _buildItems(AppLocalizations l10n, PrayerTimes times) {
+    HomePrayerListItem itemFor(Prayer prayer, String label, DateTime time) {
       final settings = _settingsFor(prayer);
-      return _PrayerItem(
+      return HomePrayerListItem(
         id: prayer.name,
         prayer: prayer,
         label: label,
@@ -1921,7 +1921,7 @@ class _HomeScreenState extends State<HomeScreen> {
     for (final row in _customPrayerRows) {
       final resolvedTime = _resolveCustomPrayerTime(row.timeRule, times);
       items.add(
-        _PrayerItem(
+        HomePrayerListItem(
           id: row.id,
           prayer: null,
           label: row.labelController.text.trim(),
@@ -1954,7 +1954,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return items;
     }
 
-    final ordered = List<_PrayerItem>.from(items);
+    final ordered = List<HomePrayerListItem>.from(items);
     ordered.sort((a, b) {
       final aTime = a.sortTime;
       final bTime = b.sortTime;
@@ -1982,54 +1982,6 @@ class _HomeData {
     required this.methodCode,
     this.times,
     this.error,
-  });
-}
-
-class _PrayerItem {
-  final String id;
-  final Prayer? prayer;
-  final String label;
-  final DateTime? sortTime;
-  final TextEditingController? labelController;
-  final ValueChanged<String>? onLabelChanged;
-  final VoidCallback? onLabelEditingComplete;
-  final String timeLabel;
-  final VoidCallback? onTimeTap;
-  final TextEditingController reminderController;
-  final ValueChanged<String> onReminderChanged;
-  final VoidCallback onReminderTap;
-  final bool voiceEnabled;
-  final bool visualEnabled;
-  final bool azanEnabled;
-  final bool vibrationEnabled;
-  final VoidCallback onVoiceToggle;
-  final VoidCallback onVisualToggle;
-  final VoidCallback onAzanToggle;
-  final VoidCallback onVibrationToggle;
-  final VoidCallback? onDelete;
-
-  _PrayerItem({
-    required this.id,
-    required this.prayer,
-    required this.label,
-    this.sortTime,
-    this.labelController,
-    this.onLabelChanged,
-    this.onLabelEditingComplete,
-    required this.timeLabel,
-    this.onTimeTap,
-    required this.reminderController,
-    required this.onReminderChanged,
-    required this.onReminderTap,
-    required this.voiceEnabled,
-    required this.visualEnabled,
-    required this.azanEnabled,
-    required this.vibrationEnabled,
-    required this.onVoiceToggle,
-    required this.onVisualToggle,
-    required this.onAzanToggle,
-    required this.onVibrationToggle,
-    this.onDelete,
   });
 }
 
@@ -2130,341 +2082,6 @@ class _HijriDate {
     required this.month,
     required this.day,
   });
-}
-
-class _PrayerList extends StatelessWidget {
-  final ScrollController controller;
-  final List<_PrayerItem> items;
-  final Prayer active;
-  final SurfaceStyle style;
-  final EdgeInsets listPadding;
-  final double rowGap;
-  final InlineIconStyle iconStyle;
-  final InlineChipStyle chipStyle;
-  final HomeTypography typography;
-  final Color cizgiColor;
-  final Color activeColor;
-  final bool showVoiceIcon;
-  final bool showVisualIcon;
-  final bool showAzanIcon;
-  final bool showVibrationIcon;
-  final VoidCallback onAddCustomPrayer;
-
-  const _PrayerList({
-    required this.controller,
-    required this.items,
-    required this.active,
-    required this.style,
-    required this.listPadding,
-    required this.rowGap,
-    required this.iconStyle,
-    required this.chipStyle,
-    required this.typography,
-    required this.cizgiColor,
-    required this.activeColor,
-    required this.showVoiceIcon,
-    required this.showVisualIcon,
-    required this.showAzanIcon,
-    required this.showVibrationIcon,
-    required this.onAddCustomPrayer,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    const rowScale = 0.85;
-    final rowTextSize = typography.nextLabelSize * rowScale;
-    final scaledChipStyle = InlineChipStyle(
-      width: chipStyle.width,
-      verticalPadding: chipStyle.verticalPadding * rowScale,
-      fontSize: chipStyle.fontSize * rowScale,
-      backgroundColor: chipStyle.backgroundColor,
-      borderColor: chipStyle.borderColor,
-      borderRadius: chipStyle.borderRadius,
-    );
-    final scaledIconStyle = InlineIconStyle(
-      size: iconStyle.size * rowScale,
-      iconSize: iconStyle.iconSize * rowScale,
-      backgroundColor: iconStyle.backgroundColor,
-      borderRadius: iconStyle.borderRadius,
-    );
-    final baseLabelStyle = Theme.of(
-      context,
-    ).textTheme.titleSmall?.copyWith(fontSize: rowTextSize);
-    final maxLabelWidth = items.fold<double>(
-      0,
-      (currentMax, item) => math.max(
-        currentMax,
-        _measureTextWidth(
-          item.labelController?.text.trim().isNotEmpty == true
-              ? item.labelController!.text.trim()
-              : item.label,
-          baseLabelStyle,
-        ),
-      ),
-    );
-    final labelSlotWidth = math.max(maxLabelWidth, 88.0);
-    final timeSlotWidth = typography.nextLabelSize * 2.8;
-    final iconSlotWidth = iconStyle.size * 1.3;
-    final activeIndex = items.indexWhere((entry) => entry.prayer == active);
-
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.separated(
-            controller: controller,
-            padding: listPadding,
-            itemBuilder: (context, index) {
-              final item = items[index];
-              final isPast =
-                  item.prayer != null &&
-                  activeIndex != -1 &&
-                  index < activeIndex;
-              final isActive = item.prayer == active;
-              final labelColor = isActive
-                  ? cizgiColor
-                  : isPast
-                  ? cizgiColor.withValues(alpha: 0.45)
-                  : cizgiColor;
-              final timeColor = isActive
-                  ? cizgiColor.withValues(alpha: 0.9)
-                  : isPast
-                  ? cizgiColor.withValues(alpha: 0.5)
-                  : cizgiColor.withValues(alpha: 0.9);
-              final controlColor = cizgiColor;
-              final chipBackgroundColor = isActive
-                  ? activeColor.withValues(alpha: 0.12)
-                  : chipStyle.backgroundColor;
-              final chipBorderColor = isActive
-                  ? activeColor.withValues(alpha: 0.45)
-                  : chipStyle.borderColor;
-              final labelStyle = Theme.of(context).textTheme.titleSmall
-                  ?.copyWith(
-                    color: labelColor,
-                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w300,
-                    fontSize: rowTextSize,
-                  );
-              final rowWidgets = <Widget>[
-                SizedBox(
-                  width: labelSlotWidth,
-                  child: item.labelController == null
-                      ? Text(
-                          item.label,
-                          textAlign: TextAlign.right,
-                          style: labelStyle,
-                        )
-                      : TextField(
-                          controller: item.labelController,
-                          onChanged: item.onLabelChanged,
-                          onEditingComplete: () {
-                            item.onLabelEditingComplete?.call();
-                            FocusScope.of(context).unfocus();
-                          },
-                          onSubmitted: (_) {
-                            item.onLabelEditingComplete?.call();
-                          },
-                          textAlign: TextAlign.right,
-                          textInputAction: TextInputAction.done,
-                          style: labelStyle?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                          decoration: const InputDecoration(
-                            isDense: true,
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.zero,
-                          ),
-                        ),
-                ),
-                SizedBox(
-                  width: timeSlotWidth,
-                  child: item.onTimeTap == null
-                      ? Text(
-                          item.timeLabel,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.titleSmall
-                              ?.copyWith(
-                                color: timeColor,
-                                fontWeight: isActive
-                                    ? FontWeight.w700
-                                    : FontWeight.w600,
-                                fontSize: rowTextSize,
-                              ),
-                        )
-                      : InkWell(
-                          borderRadius: BorderRadius.circular(10),
-                          onTap: item.onTimeTap,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 2),
-                            child: Text(
-                              item.timeLabel,
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.titleSmall
-                                  ?.copyWith(
-                                    color: timeColor,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: rowTextSize,
-                                    decoration: TextDecoration.underline,
-                                  ),
-                            ),
-                          ),
-                        ),
-                ),
-                SizedBox(
-                  width: chipStyle.width,
-                  child: HomeReminderChip(
-                    controller: item.reminderController,
-                    style: scaledChipStyle,
-                    cizgiColor: controlColor,
-                    backgroundColor: chipBackgroundColor,
-                    borderColor: chipBorderColor,
-                    onTap: item.onReminderTap,
-                  ),
-                ),
-                if (showVoiceIcon)
-                  SizedBox(
-                    width: iconSlotWidth,
-                    child: HomeIconToggle(
-                      icon: Icons.volume_up_outlined,
-                      style: scaledIconStyle,
-                      isEnabled: item.voiceEnabled,
-                      cizgiColor: controlColor,
-                      onTap: item.onVoiceToggle,
-                    ),
-                  ),
-                if (showVisualIcon)
-                  SizedBox(
-                    width: iconSlotWidth,
-                    child: HomeIconToggle(
-                      icon: Icons.desktop_windows_outlined,
-                      style: scaledIconStyle,
-                      isEnabled: item.visualEnabled,
-                      cizgiColor: controlColor,
-                      onTap: item.onVisualToggle,
-                    ),
-                  ),
-                if (showAzanIcon)
-                  SizedBox(
-                    width: iconSlotWidth,
-                    child: HomeIconToggle(
-                      icon: Icons.mosque_outlined,
-                      style: scaledIconStyle,
-                      isEnabled: item.azanEnabled,
-                      cizgiColor: controlColor,
-                      onTap: item.onAzanToggle,
-                    ),
-                  ),
-                if (showVibrationIcon)
-                  SizedBox(
-                    width: iconSlotWidth,
-                    child: HomeIconToggle(
-                      icon: Icons.vibration_outlined,
-                      style: scaledIconStyle,
-                      isEnabled: item.vibrationEnabled,
-                      cizgiColor: controlColor,
-                      onTap: item.onVibrationToggle,
-                    ),
-                  ),
-                SizedBox(
-                  width: iconStyle.iconSize * rowScale + 2,
-                  child: item.onDelete == null
-                      ? const SizedBox.shrink()
-                      : HomeIconToggle(
-                          icon: Icons.delete_outline,
-                          style: InlineIconStyle(
-                            size: scaledIconStyle.iconSize + 2,
-                            iconSize: scaledIconStyle.iconSize,
-                            backgroundColor: scaledIconStyle.backgroundColor,
-                            borderRadius: scaledIconStyle.borderRadius,
-                          ),
-                          isEnabled: true,
-                          cizgiColor: controlColor,
-                          onTap: item.onDelete!,
-                        ),
-                ),
-              ];
-
-              return AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                decoration: BoxDecoration(
-                  color: isActive
-                      ? Colors.white.withValues(alpha: 0.12)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(14),
-                  border: isActive
-                      ? Border.all(
-                          color: Colors.white.withValues(alpha: 0.45),
-                          width: 1,
-                        )
-                      : null,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          alignment: Alignment.center,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              for (var i = 0; i < rowWidgets.length; i++) ...[
-                                if (i > 0)
-                                  SizedBox(
-                                    width: i == 3
-                                        ? 8
-                                        : i <= 2
-                                        ? 10
-                                        : 0,
-                                  ),
-                                rowWidgets[i],
-                              ],
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            separatorBuilder: (_, _) =>
-                const Divider(height: 1, color: Color(0x22000000)),
-            itemCount: items.length,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 2, 0, 12),
-          child: Center(
-            child: InkWell(
-              borderRadius: BorderRadius.circular(999),
-              onTap: onAddCustomPrayer,
-              child: Container(
-                width: 34,
-                height: 34,
-                decoration: BoxDecoration(
-                  color: cizgiColor.withValues(alpha: 0.12),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: cizgiColor.withValues(alpha: 0.25)),
-                ),
-                child: Icon(Icons.add, color: cizgiColor, size: 18),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-double _measureTextWidth(String text, TextStyle? style) {
-  final painter = TextPainter(
-    text: TextSpan(text: text, style: style),
-    maxLines: 1,
-    textDirection: ui.TextDirection.ltr,
-  )..layout(minWidth: 0, maxWidth: double.infinity);
-  return painter.width;
 }
 
 class _QiblaScreen extends StatelessWidget {

@@ -148,6 +148,10 @@ Completed:
   - Qibla calculation helpers kept inside extracted screen.
   - No behavior change intended.
   - TASK-03 is still not complete.
+- Continuation checkpoint:
+  - Pure date/text/hijri helpers extracted to `lib/presentation/home/home_date_text_helpers.dart`.
+  - No behavior change intended.
+  - TASK-03 is still not complete.
 
 Notes:
 - This checkpoint does not complete TASK-03.

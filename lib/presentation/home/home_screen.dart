@@ -3,7 +3,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 import 'package:vibration/vibration.dart';
 
@@ -22,6 +21,7 @@ import '../../core/prayer_engine/prayer.dart';
 import '../../core/prayer_engine/prayer_times.dart';
 import '../settings/location_screen.dart';
 import '../settings/settings_screen.dart';
+import 'home_date_text_helpers.dart';
 import 'widgets/home_presentational_widgets.dart';
 import 'widgets/home_prayer_list.dart';
 import 'widgets/home_qibla_screen.dart';
@@ -338,161 +338,6 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  String _formatTime(DateTime dt) {
-    final h = dt.hour.toString().padLeft(2, '0');
-    final m = dt.minute.toString().padLeft(2, '0');
-    return '$h:$m';
-  }
-
-  String _formatClock(DateTime dt) {
-    final h = dt.hour.toString().padLeft(2, '0');
-    final m = dt.minute.toString().padLeft(2, '0');
-    final s = dt.second.toString().padLeft(2, '0');
-    return '$h:$m:$s';
-  }
-
-  String _formatGregorianYear(DateTime dt, AppLocalizations l10n) {
-    return DateFormat.y(l10n.localeName).format(dt);
-  }
-
-  String _formatGregorianDayMonth(DateTime dt, AppLocalizations l10n) {
-    return DateFormat.MMMMd(l10n.localeName).format(dt);
-  }
-
-  String _formatHijriYear(DateTime dt) {
-    final hijri = _toHijri(dt);
-    return hijri.year.toString();
-  }
-
-  String _formatHijriDayMonth(DateTime dt, AppLocalizations l10n) {
-    final hijri = _toHijri(dt);
-    final months = _hijriMonths(l10n.localeName);
-    final monthName = (hijri.month >= 1 && hijri.month <= 12)
-        ? months[hijri.month - 1]
-        : '';
-    return '${hijri.day} $monthName';
-  }
-
-  String _titleCase(String input, String locale) {
-    final isTr = locale.startsWith('tr');
-    final lower = _lowerLocale(input.trim(), isTr);
-    if (lower.isEmpty) return lower;
-    final buffer = StringBuffer();
-    var capitalizeNext = true;
-    for (final rune in lower.runes) {
-      final ch = String.fromCharCode(rune);
-      if (_isWordChar(ch)) {
-        if (capitalizeNext) {
-          buffer.write(_upperLocale(ch, isTr));
-          capitalizeNext = false;
-        } else {
-          buffer.write(ch);
-        }
-      } else {
-        buffer.write(ch);
-        capitalizeNext = ch == ' ' || ch == '/' || ch == '-' || ch == '.';
-      }
-    }
-    return buffer.toString();
-  }
-
-  String _lowerLocale(String value, bool isTr) {
-    if (!isTr) return value.toLowerCase();
-    return value.replaceAll('I', 'ı').replaceAll('İ', 'i').toLowerCase();
-  }
-
-  String _upperLocale(String value, bool isTr) {
-    if (!isTr) return value.toUpperCase();
-    if (value == 'i') return 'İ';
-    if (value == 'ı') return 'I';
-    return value.toUpperCase();
-  }
-
-  bool _isWordChar(String ch) {
-    return RegExp(r'[0-9A-Za-zÇĞİÖŞÜçğıöşü]').hasMatch(ch);
-  }
-
-  List<String> _hijriMonths(String locale) {
-    if (locale.startsWith('ar')) {
-      return const [
-        'Ù…Ø­Ø±Ù…',
-        'ØµÙØ±',
-        'Ø±Ø¨ÙŠØ¹ Ø§Ù„Ø£ÙˆÙ„',
-        'Ø±Ø¨ÙŠØ¹ Ø§Ù„Ø¢Ø®Ø±',
-        'Ø¬Ù…Ø§Ø¯Ù‰ Ø§Ù„Ø£ÙˆÙ„Ù‰',
-        'Ø¬Ù…Ø§Ø¯Ù‰ Ø§Ù„Ø¢Ø®Ø±Ø©',
-        'Ø±Ø¬Ø¨',
-        'Ø´Ø¹Ø¨Ø§Ù†',
-        'Ø±Ù…Ø¶Ø§Ù†',
-        'Ø´ÙˆØ§Ù„',
-        'Ø°Ùˆ Ø§Ù„Ù‚Ø¹Ø¯Ø©',
-        'Ø°Ùˆ Ø§Ù„Ø­Ø¬Ø©',
-      ];
-    }
-    if (locale.startsWith('tr')) {
-      return const [
-        'Muharrem',
-        'Safer',
-        'Rebiülevvel',
-        'Rebiülahir',
-        'Cemaziyelevvel',
-        'Cemaziyelahir',
-        'Recep',
-        'Şaban',
-        'Ramazan',
-        'Şevval',
-        'Zilkade',
-        'Zilhicce',
-      ];
-    }
-    return const [
-      'Muharram',
-      'Safar',
-      'RabiÊ» al-awwal',
-      'RabiÊ» al-thani',
-      'Jumada al-awwal',
-      'Jumada al-thani',
-      'Rajab',
-      'ShaÊ»ban',
-      'Ramadan',
-      'Shawwal',
-      'Dhu al-Qadah',
-      'Dhu al-Hijjah',
-    ];
-  }
-
-  _HijriDate _toHijri(DateTime date) {
-    final y = date.year;
-    final m = date.month;
-    final d = date.day;
-    final a = ((14 - m) / 12).floor();
-    final y2 = y + 4800 - a;
-    final m2 = m + 12 * a - 3;
-    final jd =
-        d +
-        ((153 * m2 + 2) / 5).floor() +
-        365 * y2 +
-        (y2 / 4).floor() -
-        (y2 / 100).floor() +
-        (y2 / 400).floor() -
-        32045;
-    var l = jd - 1948440 + 10632;
-    final n = ((l - 1) / 10631).floor();
-    l = l - 10631 * n + 354;
-    final j =
-        (((10985 - l) / 5316).floor()) * (((50 * l) / 17719).floor()) +
-        (((l / 5670).floor()) * (((43 * l) / 15238).floor()));
-    l =
-        l -
-        (((30 - j) / 15).floor()) * (((17719 * j) / 50).floor()) -
-        ((j / 16).floor()) * (((15238 * j) / 43).floor()) +
-        29;
-    final month = ((24 * l) / 709).floor();
-    final day = l - ((709 * month) / 24).floor();
-    final year = 30 * n + j - 30;
-    return _HijriDate(year: year, month: month, day: day);
-  }
-
   Future<void> _openSettings() async {
     await Navigator.of(context).push(
       MaterialPageRoute(
@@ -557,17 +402,17 @@ class _HomeScreenState extends State<HomeScreen> {
           final active = _activePrayer(times, _now);
           final next = _nextPrayer(times, _now, l10n);
           final countdown = _formatCountdown(_now, next.time);
-          final nextTime = _formatTime(next.time);
+          final nextTime = homeFormatTime(next.time);
           final location = data.location!;
-          final provinceLabel = _titleCase(location.province, l10n.localeName);
-          final districtLabel = _titleCase(location.district, l10n.localeName);
+          final provinceLabel = homeTitleCase(location.province, l10n.localeName);
+          final districtLabel = homeTitleCase(location.district, l10n.localeName);
           final dateYearLabel = _showHijriDate
-              ? _formatHijriYear(_now)
-              : _formatGregorianYear(_now, l10n);
+              ? homeFormatHijriYear(_now)
+              : homeFormatGregorianYear(_now, l10n);
           final dateDayMonthLabel = _showHijriDate
-              ? _formatHijriDayMonth(_now, l10n)
-              : _formatGregorianDayMonth(_now, l10n);
-          final timeLabel = _formatClock(_now);
+              ? homeFormatHijriDayMonth(_now, l10n)
+              : homeFormatGregorianDayMonth(_now, l10n);
+          final timeLabel = homeFormatClock(_now);
           final palette = widget.uiPaletteController.value;
           final ui = ConfigRegistry.mainUiFor(palette);
           final statusBarColor =
@@ -1891,7 +1736,7 @@ class _HomeScreenState extends State<HomeScreen> {
         prayer: prayer,
         label: label,
         sortTime: time,
-        timeLabel: _formatTime(time),
+        timeLabel: homeFormatTime(time),
         reminderController: _controllerFor(prayer),
         onReminderChanged: (value) => _setReminderMinutes(prayer, value),
         onReminderTap: () => _editReminderMinutes(
@@ -1929,7 +1774,7 @@ class _HomeScreenState extends State<HomeScreen> {
           labelController: row.labelController,
           onLabelChanged: (value) => _setCustomPrayerLabel(row, value),
           onLabelEditingComplete: () => _normalizeCustomPrayerLabel(row),
-          timeLabel: resolvedTime == null ? '--:--' : _formatTime(resolvedTime),
+          timeLabel: resolvedTime == null ? '--:--' : homeFormatTime(resolvedTime),
           onTimeTap: () => _openCustomTimeEditor(row, l10n),
           reminderController: row.reminderController,
           onReminderChanged: (value) => _setCustomReminderMinutes(row, value),
@@ -2070,18 +1915,6 @@ class _PrayerNext {
   final DateTime time;
 
   _PrayerNext({required this.label, required this.time});
-}
-
-class _HijriDate {
-  final int year;
-  final int month;
-  final int day;
-
-  const _HijriDate({
-    required this.year,
-    required this.month,
-    required this.day,
-  });
 }
 
 

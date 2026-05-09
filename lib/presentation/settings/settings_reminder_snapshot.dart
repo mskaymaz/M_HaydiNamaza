@@ -1,0 +1,44 @@
+import '../../app/reminder_text_settings_storage.dart';
+import 'settings_reminder_text_mapper.dart';
+
+ReminderTextSettings buildReminderSettingsSnapshot({
+  required String voiceText,
+  required String visualText,
+  required ReminderAudioMode audioMode,
+  required bool showVoiceIcon,
+  required bool showVisualIcon,
+  required bool showAzanIcon,
+  required bool showVibrationIcon,
+  required bool sortCustomPrayersByTime,
+  required String voiceRepeatSecondsText,
+  required String vibrationDurationSecondsText,
+  required String vibrationPauseSecondsText,
+  required String visualDisplaySecondsText,
+  required String visualReopenSecondsText,
+  required String? selectedVoiceName,
+  required String? selectedVoiceLocale,
+  required String? selectedAudioPath,
+  required String? selectedAudioLabel,
+}) {
+  return mapReminderTextSettings(
+    ReminderTextSettingsMapperInput(
+      voiceText: voiceText,
+      visualText: visualText,
+      audioMode: audioMode,
+      showVoiceIcon: showVoiceIcon,
+      showVisualIcon: showVisualIcon,
+      showAzanIcon: showAzanIcon,
+      showVibrationIcon: showVibrationIcon,
+      sortCustomPrayersByTime: sortCustomPrayersByTime,
+      voiceRepeatSecondsText: voiceRepeatSecondsText,
+      vibrationDurationSecondsText: vibrationDurationSecondsText,
+      vibrationPauseSecondsText: vibrationPauseSecondsText,
+      visualDisplaySecondsText: visualDisplaySecondsText,
+      visualReopenSecondsText: visualReopenSecondsText,
+      selectedVoiceName: selectedVoiceName,
+      selectedVoiceLocale: selectedVoiceLocale,
+      selectedAudioPath: selectedAudioPath,
+      selectedAudioLabel: selectedAudioLabel,
+    ),
+  );
+}

@@ -25,7 +25,7 @@ import 'widgets/settings_reminder_options_section.dart';
 import 'settings_audio_mode_texts.dart';
 import 'settings_color_formatters.dart';
 import 'settings_favorite_matcher.dart';
-import 'settings_reminder_text_mapper.dart';
+import 'settings_reminder_snapshot.dart';
 import 'settings_text_formatters.dart';
 import 'settings_voice_key.dart';
 import 'widgets/settings_section_header.dart';
@@ -538,43 +538,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _persistReminderTexts() async {
     final selectedVoice = _selectedVoice();
     await _reminderTextStorage.write(
-      mapReminderTextSettings(
-        ReminderTextSettingsMapperInput(
-          voiceText: _voiceReminderController.text,
-          visualText: _visualReminderController.text,
-          audioMode: _selectedAudioMode,
-          showVoiceIcon: _showVoiceIcon,
-          showVisualIcon: _showVisualIcon,
-          showAzanIcon: _showAzanIcon,
-          showVibrationIcon: _showVibrationIcon,
-          sortCustomPrayersByTime: _sortCustomPrayersByTime,
-          voiceRepeatSecondsText: _voiceRepeatController.text,
-          vibrationDurationSecondsText: _vibrationDurationController.text,
-          vibrationPauseSecondsText: _vibrationPauseController.text,
-          visualDisplaySecondsText: _visualDisplayController.text,
-          visualReopenSecondsText: _visualReopenController.text,
-          selectedVoiceName: selectedVoice?.name,
-          selectedVoiceLocale: selectedVoice?.locale,
-          selectedAudioPath: _selectedAudioPath,
-          selectedAudioLabel: _selectedAudioLabel,
-        ),
-      ),
-    );
-  }
-
-  String _effectiveVisualReminderText() {
-    final visualText = _visualReminderController.text.trim();
-    if (visualText.isNotEmpty) return visualText;
-    return _voiceReminderController.text.trim();
-  }
-
-  Future<void> _playVoiceReminderTest(
-    BuildContext context,
-    AppLocalizations l10n,
-  ) async {
-    final selectedVoice = _selectedVoice();
-    final settings = mapReminderTextSettings(
-      ReminderTextSettingsMapperInput(
+      buildReminderSettingsSnapshot(
         voiceText: _voiceReminderController.text,
         visualText: _visualReminderController.text,
         audioMode: _selectedAudioMode,
@@ -593,6 +557,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
         selectedAudioPath: _selectedAudioPath,
         selectedAudioLabel: _selectedAudioLabel,
       ),
+    );
+  }
+
+  String _effectiveVisualReminderText() {
+    final visualText = _visualReminderController.text.trim();
+    if (visualText.isNotEmpty) return visualText;
+    return _voiceReminderController.text.trim();
+  }
+
+  Future<void> _playVoiceReminderTest(
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
+    final selectedVoice = _selectedVoice();
+    final settings = buildReminderSettingsSnapshot(
+      voiceText: _voiceReminderController.text,
+      visualText: _visualReminderController.text,
+      audioMode: _selectedAudioMode,
+      showVoiceIcon: _showVoiceIcon,
+      showVisualIcon: _showVisualIcon,
+      showAzanIcon: _showAzanIcon,
+      showVibrationIcon: _showVibrationIcon,
+      sortCustomPrayersByTime: _sortCustomPrayersByTime,
+      voiceRepeatSecondsText: _voiceRepeatController.text,
+      vibrationDurationSecondsText: _vibrationDurationController.text,
+      vibrationPauseSecondsText: _vibrationPauseController.text,
+      visualDisplaySecondsText: _visualDisplayController.text,
+      visualReopenSecondsText: _visualReopenController.text,
+      selectedVoiceName: selectedVoice?.name,
+      selectedVoiceLocale: selectedVoice?.locale,
+      selectedAudioPath: _selectedAudioPath,
+      selectedAudioLabel: _selectedAudioLabel,
     );
     if (settings.audioMode != ReminderAudioMode.textToSpeech &&
         (settings.selectedAudioPath?.trim().isEmpty ?? true)) {

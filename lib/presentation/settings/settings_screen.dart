@@ -16,10 +16,8 @@ import '../reminders/flashing_reminder_card.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
 import 'widgets/settings_calculation_method_row.dart';
-import 'widgets/settings_interface_colors_section.dart';
 import 'widgets/settings_language_location_row.dart';
-import 'widgets/settings_background_colors_section.dart';
-import 'widgets/settings_color_action_widgets.dart';
+import 'widgets/settings_color_sections_group.dart';
 import 'widgets/settings_reminder_fields.dart';
 import 'widgets/settings_reminder_options_section.dart';
 import 'settings_audio_mode_texts.dart';
@@ -398,86 +396,57 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onShowPreview: () => _showVisualReminderPreview(context, l10n),
           ),
-          SettingsInterfaceColorsSection(
+          SettingsColorSectionsGroup(
             outerPadding: ui.screenPadding.copyWith(top: 0),
             panelStyle: ui.panel,
-            header: const SettingsSectionHeader(
-              title: 'Arayüz Renkleri',
-              tooltip: 'Panel ve yazı renklerini değiştir.',
-            ),
-            panelColorTile: SettingsColorActionTile(
+            panelColor: palette.zeminColor,
+            textColor: palette.cizgiColor,
+            backgroundColor: palette.backgroundZeminColor,
+            backgroundLineColor: palette.backgroundCizgiColor,
+            onEditPanelColor: () => _editColor(
+              context: context,
               title: 'Panel Rengi',
-              color: palette.zeminColor,
-              onTap: () => _editColor(
-                context: context,
-                title: 'Panel Rengi',
-                initialColor: palette.zeminColor,
-                onApply: widget.uiPaletteController.setZeminColor,
-              ),
+              initialColor: palette.zeminColor,
+              onApply: widget.uiPaletteController.setZeminColor,
             ),
-            textColorTile: SettingsColorActionTile(
+            onEditTextColor: () => _editColor(
+              context: context,
               title: 'Yazı Rengi',
-              color: palette.cizgiColor,
-              onTap: () => _editColor(
-                context: context,
-                title: 'Yazı Rengi',
-                initialColor: palette.cizgiColor,
-                onApply: widget.uiPaletteController.setCizgiColor,
-              ),
+              initialColor: palette.cizgiColor,
+              onApply: widget.uiPaletteController.setCizgiColor,
             ),
-            resetButton: SettingsResetIconButton(
-              onTap: () async {
-                await widget.uiPaletteController.setZeminColor(
-                  ConfigRegistry.defaultPalette.zeminColor,
-                );
-                await widget.uiPaletteController.setCizgiColor(
-                  ConfigRegistry.defaultPalette.cizgiColor,
-                );
-                if (!context.mounted) return;
-                setState(() {});
-              },
+            onEditBackgroundColor: () => _editColor(
+              context: context,
+              title: 'Arka Plan Zemin',
+              initialColor: palette.backgroundZeminColor,
+              onApply: widget.uiPaletteController.setBackgroundZeminColor,
             ),
-          ),
-          SettingsBackgroundColorsSection(
-            outerPadding: ui.screenPadding.copyWith(top: 0),
-            panelStyle: ui.panel,
-            header: const SettingsSectionHeader(
-              title: 'Arka Plan Renkleri',
-              tooltip:
-                  'Geometrik arka planın zemin ve çizgi renklerini değiştir.',
+            onEditBackgroundLineColor: () => _editColor(
+              context: context,
+              title: 'Arka Plan Çizgi Rengi',
+              initialColor: palette.backgroundCizgiColor,
+              onApply: widget.uiPaletteController.setBackgroundCizgiColor,
             ),
-            backgroundColorTile: SettingsColorActionTile(
-              title: 'Zemin Rengi',
-              color: palette.backgroundZeminColor,
-              onTap: () => _editColor(
-                context: context,
-                title: 'Arka Plan Zemin',
-                initialColor: palette.backgroundZeminColor,
-                onApply: widget.uiPaletteController.setBackgroundZeminColor,
-              ),
-            ),
-            lineColorTile: SettingsColorActionTile(
-              title: 'Çizgi Rengi',
-              color: palette.backgroundCizgiColor,
-              onTap: () => _editColor(
-                context: context,
-                title: 'Arka Plan Çizgi Rengi',
-                initialColor: palette.backgroundCizgiColor,
-                onApply: widget.uiPaletteController.setBackgroundCizgiColor,
-              ),
-            ),
-            resetButton: SettingsResetIconButton(
-              onTap: () async {
-                await widget.uiPaletteController.setBackgroundZeminColor(
-                  ConfigRegistry.defaultPalette.backgroundZeminColor,
-                );
-                await widget.uiPaletteController.setBackgroundCizgiColor(
-                  ConfigRegistry.defaultPalette.backgroundCizgiColor,
-                );
-                if (!context.mounted) return;
-                setState(() {});
-              },
-            ),
+            onResetInterfaceColors: () async {
+              await widget.uiPaletteController.setZeminColor(
+                ConfigRegistry.defaultPalette.zeminColor,
+              );
+              await widget.uiPaletteController.setCizgiColor(
+                ConfigRegistry.defaultPalette.cizgiColor,
+              );
+              if (!context.mounted) return;
+              setState(() {});
+            },
+            onResetBackgroundColors: () async {
+              await widget.uiPaletteController.setBackgroundZeminColor(
+                ConfigRegistry.defaultPalette.backgroundZeminColor,
+              );
+              await widget.uiPaletteController.setBackgroundCizgiColor(
+                ConfigRegistry.defaultPalette.backgroundCizgiColor,
+              );
+              if (!context.mounted) return;
+              setState(() {});
+            },
           ),
         ],
       ),

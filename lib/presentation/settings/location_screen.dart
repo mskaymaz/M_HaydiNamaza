@@ -11,6 +11,10 @@ import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
+import 'widgets/location_coordinates_section.dart';
+import 'widgets/location_current_location_tile.dart';
+import 'widgets/location_favorites_section.dart';
+import 'widgets/location_selection_section.dart';
 
 class LocationScreen extends StatefulWidget {
   final LocationData? initial;
@@ -519,6 +523,15 @@ class _LocationScreenState extends State<LocationScreen> {
     final l10n = AppLocalizations.of(context)!;
     final palette = widget.uiPaletteController.value;
     final ui = ConfigRegistry.settingsPanelsFor(palette);
+    final countryValue = _countries.any((item) => item.id == _selectedCountryId)
+        ? _selectedCountryId
+        : null;
+    final stateValue = _states.any((item) => item.id == _selectedStateId)
+        ? _selectedStateId
+        : null;
+    final districtValue = _districts.any((item) => item.id == _selectedDistrictId)
+        ? _selectedDistrictId
+        : null;
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.locationEditTitle),
@@ -532,209 +545,102 @@ class _LocationScreenState extends State<LocationScreen> {
       body: ListView(
         padding: ui.screenPadding,
         children: [
-          CheckboxListTile(
-            value: _useCurrentLocation,
-            onChanged: _locating
+          LocationCurrentLocationTile(
+            useCurrentLocation: _useCurrentLocation,
+            locating: _locating,
+            onChanged: (value) => _setUseCurrentLocation(value ?? false),
+          ),
+          SizedBox(height: ui.sectionGap),
+          LocationSelectionSection(
+            ui: ui,
+            palette: palette,
+            title: l10n.locationSelectLabel,
+            countryLabel: l10n.locationCountryLabel,
+            cityLabel: l10n.locationCityLabel,
+            districtLabel: l10n.locationDistrictLabel,
+            selectedCountryId: countryValue,
+            selectedStateId: stateValue,
+            selectedDistrictId: districtValue,
+            countryItems: _countries
+                .map(
+                  (item) => DropdownMenuItem<String>(
+                    value: item.id,
+                    child: Text(_formatDisplayName(item.name)),
+                  ),
+                )
+                .toList(),
+            stateItems: _states
+                .map(
+                  (item) => DropdownMenuItem<String>(
+                    value: item.id,
+                    child: Text(_formatDisplayName(item.name)),
+                  ),
+                )
+                .toList(),
+            districtItems: _districts
+                .map(
+                  (item) => DropdownMenuItem<String>(
+                    value: item.id,
+                    child: Text(_formatDisplayName(item.name)),
+                  ),
+                )
+                .toList(),
+            onCountryChanged: _loadingCountries
                 ? null
-                : (value) => _setUseCurrentLocation(value ?? false),
-            title: const Text('Mevcut Konumu Al'),
-            controlAffinity: ListTileControlAffinity.leading,
-            secondary: _locating
-                ? const SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : const Icon(Icons.my_location_outlined),
-            contentPadding: EdgeInsets.zero,
+                : (value) async {
+                    if (value == null) return;
+                    final selected = _countries.firstWhere((item) => item.id == value);
+                    setState(() {
+                      _selectedFavorite = null;
+                      _selectedCountryId = value;
+                      _selectedCountryName = selected.name;
+                      _selectedStateId = null;
+                      _selectedDistrictId = null;
+                      _states = [];
+                      _districts = [];
+                      _provinceController.text = '';
+                      _districtController.text = '';
+                    });
+                    await _loadStates(value);
+                  },
+            onStateChanged: _loadingStates
+                ? null
+                : (value) async {
+                    if (value == null) return;
+                    final selected = _states.firstWhere((item) => item.id == value);
+                    setState(() {
+                      _selectedFavorite = null;
+                      _selectedStateId = value;
+                      _selectedDistrictId = null;
+                      _districts = [];
+                      _provinceController.text = selected.name;
+                      _districtController.text = '';
+                    });
+                    await _loadDistricts(value);
+                  },
+            onDistrictChanged: _loadingDistricts
+                ? null
+                : (value) {
+                    if (value == null) return;
+                    final selected = _districts.firstWhere((item) => item.id == value);
+                    setState(() {
+                      _selectedFavorite = null;
+                      _selectedDistrictId = value;
+                      _districtController.text = selected.name;
+                    });
+                  },
+            listLoadError: _listLoadError,
+            onRetry: _retryLocationLoad,
           ),
           SizedBox(height: ui.sectionGap),
-          _SectionCard(
-            style: ui.panel,
-            padding: ui.sectionPadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  l10n.locationSelectLabel,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontSize: ui.sectionTitleSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
-                SizedBox(height: ui.fieldGap),
-                _CompactDropdown<String>(
-                  value:
-                      _countries.any((item) => item.id == _selectedCountryId)
-                          ? _selectedCountryId
-                          : null,
-                  palette: palette,
-                  label: l10n.locationCountryLabel,
-                  items: _countries
-                      .map(
-                        (item) => DropdownMenuItem<String>(
-                          value: item.id,
-                          child: Text(_formatDisplayName(item.name)),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: _loadingCountries
-                      ? null
-                      : (value) async {
-                          if (value == null) return;
-                          final selected = _countries.firstWhere(
-                            (item) => item.id == value,
-                          );
-                          setState(() {
-                            _selectedFavorite = null;
-                            _selectedCountryId = value;
-                            _selectedCountryName = selected.name;
-                            _selectedStateId = null;
-                            _selectedDistrictId = null;
-                            _states = [];
-                            _districts = [];
-                            _provinceController.text = '';
-                            _districtController.text = '';
-                          });
-                          await _loadStates(value);
-                        },
-                ),
-                SizedBox(height: ui.fieldGap),
-                _CompactDropdown<String>(
-                  value:
-                      _states.any((item) => item.id == _selectedStateId)
-                          ? _selectedStateId
-                          : null,
-                  palette: palette,
-                  label: l10n.locationCityLabel,
-                  items: _states
-                      .map(
-                        (item) => DropdownMenuItem<String>(
-                          value: item.id,
-                          child: Text(_formatDisplayName(item.name)),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: _loadingStates
-                      ? null
-                      : (value) async {
-                          if (value == null) return;
-                          final selected = _states.firstWhere(
-                            (item) => item.id == value,
-                          );
-                          setState(() {
-                            _selectedFavorite = null;
-                            _selectedStateId = value;
-                            _selectedDistrictId = null;
-                            _districts = [];
-                            _provinceController.text = selected.name;
-                            _districtController.text = '';
-                          });
-                          await _loadDistricts(value);
-                        },
-                ),
-                SizedBox(height: ui.fieldGap),
-                _CompactDropdown<String>(
-                  value:
-                      _districts.any((item) => item.id == _selectedDistrictId)
-                          ? _selectedDistrictId
-                          : null,
-                  palette: palette,
-                  label: l10n.locationDistrictLabel,
-                  items: _districts
-                      .map(
-                        (item) => DropdownMenuItem<String>(
-                          value: item.id,
-                          child: Text(_formatDisplayName(item.name)),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: _loadingDistricts
-                      ? null
-                      : (value) {
-                          if (value == null) return;
-                          final selected = _districts.firstWhere(
-                            (item) => item.id == value,
-                          );
-                          setState(() {
-                            _selectedFavorite = null;
-                            _selectedDistrictId = value;
-                            _districtController.text = selected.name;
-                          });
-                        },
-                ),
-                if (_listLoadError != null) ...[
-                  SizedBox(height: ui.fieldGap),
-                  Text(
-                    _listLoadError!,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: _retryLocationLoad,
-                      child: const Text('Tekrar dene'),
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          SizedBox(height: ui.sectionGap),
-          _SectionCard(
-            style: ui.panel,
-            padding: ui.sectionPadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${l10n.locationLatitudeLabel} / ${l10n.locationLongitudeLabel}',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontSize: ui.sectionTitleSize,
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
-                SizedBox(height: ui.fieldGap),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _latController,
-                        decoration: _coordinateDecoration(
-                          ui,
-                          palette,
-                          l10n.locationLatitudeLabel,
-                        ),
-                        keyboardType: const TextInputType.numberWithOptions(
-                          decimal: true,
-                          signed: true,
-                        ),
-                        textInputAction: TextInputAction.next,
-                      ),
-                    ),
-                    SizedBox(width: ui.coordinateGap),
-                    Expanded(
-                      child: TextField(
-                        controller: _lonController,
-                        decoration: _coordinateDecoration(
-                          ui,
-                          palette,
-                          l10n.locationLongitudeLabel,
-                        ),
-                        keyboardType: const TextInputType.numberWithOptions(
-                          decimal: true,
-                          signed: true,
-                        ),
-                        textInputAction: TextInputAction.done,
-                        onSubmitted: (_) => _save(),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          LocationCoordinatesSection(
+            ui: ui,
+            palette: palette,
+            latitudeLabel: l10n.locationLatitudeLabel,
+            longitudeLabel: l10n.locationLongitudeLabel,
+            latitudeController: _latController,
+            longitudeController: _lonController,
+            onSave: _save,
           ),
           SizedBox(height: ui.sectionGap),
           FilledButton.tonalIcon(
@@ -743,108 +649,29 @@ class _LocationScreenState extends State<LocationScreen> {
             label: Text(l10n.locationAddFavorite),
           ),
           SizedBox(height: ui.sectionGap),
-          _SectionCard(
-            style: ui.panel,
-            padding: ui.sectionPadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  l10n.locationFavoritesLabel,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
-                SizedBox(height: ui.fieldGap),
-                if (_favorites.isEmpty)
-                  Text(l10n.locationNotSet)
-                else
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _CompactDropdown<LocationFavorite>(
-                          value: _favorites.contains(_selectedFavorite)
-                              ? _selectedFavorite
-                              : null,
-                          palette: palette,
-                          label: _currentFavoriteClosedLabel(l10n),
-                          items: _favorites
-                              .map(
-                                (favorite) => DropdownMenuItem<LocationFavorite>(
-                                  value: favorite,
-                                  child: Text(_favoriteLabel(favorite)),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (favorite) {
-                            if (favorite == null) return;
-                            setState(() {
-                              _selectedFavorite = favorite;
-                            });
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      TextButton(
-                        onPressed: _selectedFavorite == null
-                            ? null
-                            : _applySelectedFavorite,
-                        style: TextButton.styleFrom(
-                          minimumSize: const Size(0, 40),
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          visualDensity: VisualDensity.compact,
-                        ),
-                        child: Text(l10n.locationFavoriteApplyLabel),
-                      ),
-                      IconButton(
-                        onPressed: _selectedFavorite == null
-                            ? null
-                            : () => _removeFavorite(_selectedFavorite!),
-                        icon: const Icon(Icons.delete_outline),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints.tightFor(
-                          width: 40,
-                          height: 40,
-                        ),
-                        visualDensity: VisualDensity.compact,
-                        tooltip: l10n.locationFavoriteRemoveLabel,
-                      ),
-                    ],
-                  ),
-              ],
-            ),
+          LocationFavoritesSection(
+            ui: ui,
+            palette: palette,
+            title: l10n.locationFavoritesLabel,
+            emptyText: l10n.locationNotSet,
+            closedLabel: _currentFavoriteClosedLabel(l10n),
+            applyLabel: l10n.locationFavoriteApplyLabel,
+            removeTooltip: l10n.locationFavoriteRemoveLabel,
+            favorites: _favorites,
+            selectedFavorite: _selectedFavorite,
+            labelBuilder: _favoriteLabel,
+            onChanged: (favorite) {
+              if (favorite == null) return;
+              setState(() {
+                _selectedFavorite = favorite;
+              });
+            },
+            onApply: _selectedFavorite == null ? null : _applySelectedFavorite,
+            onRemove: _selectedFavorite == null
+                ? null
+                : () => _removeFavorite(_selectedFavorite!),
           ),
         ],
-      ),
-    );
-  }
-
-  InputDecoration _coordinateDecoration(
-    SettingsPanelsConfig ui,
-    UiPaletteConfig palette,
-    String label,
-  ) {
-    return InputDecoration(
-      labelText: label,
-      isDense: true,
-      filled: true,
-      fillColor: ui.itemPanel.color,
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 10,
-      ),
-      border: OutlineInputBorder(
-        borderRadius: ui.itemPanel.borderRadius,
-        borderSide: BorderSide.none,
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: ui.itemPanel.borderRadius,
-        borderSide: BorderSide.none,
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: ui.itemPanel.borderRadius,
-        borderSide: BorderSide(color: palette.zeminColor),
       ),
     );
   }
@@ -937,81 +764,4 @@ class _DiyanetItem {
   final String name;
 
   const _DiyanetItem({required this.id, required this.name});
-}
-
-class _CompactDropdown<T> extends StatelessWidget {
-  final T? value;
-  final String label;
-  final List<DropdownMenuItem<T>> items;
-  final ValueChanged<T?>? onChanged;
-  final UiPaletteConfig palette;
-
-  const _CompactDropdown({
-    required this.value,
-    required this.label,
-    required this.items,
-    required this.onChanged,
-    required this.palette,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField<T>(
-      initialValue: value,
-      isExpanded: true,
-      decoration: InputDecoration(
-        labelText: label,
-        isDense: true,
-        filled: true,
-        fillColor: ConfigRegistry.settingsPanelsFor(palette).itemPanel.color,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 10,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(color: palette.zeminColor),
-        ),
-      ),
-      icon: const Icon(Icons.keyboard_arrow_down_rounded),
-      menuMaxHeight: 280,
-      items: items,
-      onChanged: onChanged,
-    );
-  }
-}
-
-class _SectionCard extends StatelessWidget {
-  final SurfaceStyle style;
-  final EdgeInsets padding;
-  final Widget child;
-
-  const _SectionCard({
-    required this.style,
-    required this.padding,
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: style.color,
-        borderRadius: style.borderRadius,
-        boxShadow: style.shadows,
-      ),
-      child: Padding(
-        padding: padding,
-        child: child,
-      ),
-    );
-  }
 }

@@ -109,6 +109,7 @@ Goal: split oversized files safely.
 - [x] Extract generic dropdown item builder.
 - [x] Stop further micro UI/helper extraction to avoid over-fragmentation.
 - [x] Audit location orchestration/service/repository boundaries.
+- [x] Continuation checkpoint: extracted pure location parser/normalization helpers to `location_data_parsers.dart`, favorite label helpers to `location_label_helpers.dart`, and `_DiyanetItem` model to `location_models.dart`; orchestration/state/network/navigation remained in `location_screen.dart`.
 
 ### TASK-03C — home_screen.dart first presentational extraction checkpoint
 

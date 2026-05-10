@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -11,6 +10,9 @@ import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
+import 'location_data_parsers.dart';
+import 'location_label_helpers.dart';
+import 'location_models.dart';
 import 'location_name_formatters.dart';
 import 'location_selection_item_builders.dart';
 import 'widgets/location_coordinates_section.dart';
@@ -52,9 +54,9 @@ class _LocationScreenState extends State<LocationScreen> {
   bool _loadingCountries = false;
   bool _loadingStates = false;
   bool _loadingDistricts = false;
-  List<_DiyanetItem> _countries = [];
-  List<_DiyanetItem> _states = [];
-  List<_DiyanetItem> _districts = [];
+  List<DiyanetItem> _countries = [];
+  List<DiyanetItem> _states = [];
+  List<DiyanetItem> _districts = [];
   String? _selectedCountryId;
   String _selectedCountryName = '';
   String? _selectedStateId;
@@ -96,7 +98,7 @@ class _LocationScreenState extends State<LocationScreen> {
   Future<void> _loadFavorites() async {
     final favorites = await _favoritesStorage.read();
     favorites.sort(
-      (a, b) => _normalizeName(a.label).compareTo(_normalizeName(b.label)),
+      (a, b) => normalizeName(a.label).compareTo(normalizeName(b.label)),
     );
     if (!_isMounted) return;
     final selected = _selectedFavorite != null && favorites.contains(_selectedFavorite)
@@ -185,25 +187,25 @@ class _LocationScreenState extends State<LocationScreen> {
     }
   }
 
-  Future<List<_DiyanetItem>> _fetchItems(Uri uri) async {
+  Future<List<DiyanetItem>> _fetchItems(Uri uri) async {
     try {
       final response =
           await http.get(uri, headers: _diyanetHeaders).timeout(_diyanetTimeout);
       if (response.statusCode != 200) {
         _setListLoadError(_listLoadErrorMessage);
-        return const <_DiyanetItem>[];
+        return const <DiyanetItem>[];
       }
-      final items = _parseItems(response.body);
+      final items = parseItems(response.body);
       if (items.isEmpty) {
         _setListLoadError(_listLoadErrorMessage);
-        return const <_DiyanetItem>[];
+        return const <DiyanetItem>[];
       }
       _setListLoadError(null);
       return items;
     } catch (error) {
       debugPrint('Location list load failed: $error');
       _setListLoadError(_listLoadErrorMessage);
-      return const <_DiyanetItem>[];
+      return const <DiyanetItem>[];
     }
   }
 
@@ -261,7 +263,7 @@ class _LocationScreenState extends State<LocationScreen> {
       ).timeout(const Duration(seconds: 3), onTimeout: () => <Placemark>[]);
       final placemark = placemarks.isEmpty ? null : placemarks.first;
       final province = (placemark?.administrativeArea ?? '').trim();
-      final district = _pickDistrictName(placemark);
+      final district = pickDistrictName(placemark);
       setState(() {
         _selectedFavorite = null;
         _selectedCountryId = ConfigRegistry.dataSources.diyanet.countryId;
@@ -299,46 +301,6 @@ class _LocationScreenState extends State<LocationScreen> {
     }
   }
 
-  String _pickDistrictName(Placemark? placemark) {
-    final candidates = <String>[
-      placemark?.subAdministrativeArea ?? '',
-      placemark?.locality ?? '',
-      placemark?.subLocality ?? '',
-      placemark?.street ?? '',
-      placemark?.name ?? '',
-    ];
-    for (final value in candidates) {
-      final trimmed = value.trim();
-      if (trimmed.isNotEmpty) {
-        return trimmed;
-      }
-    }
-    return '';
-  }
-
-  List<_DiyanetItem> _parseItems(String raw) {
-    try {
-      final decoded = jsonDecode(raw);
-      if (decoded is! Map<String, dynamic>) return [];
-      final data = decoded['data'];
-      if (data is! List) return [];
-      final items = <_DiyanetItem>[];
-      for (final entry in data) {
-        if (entry is! Map<String, dynamic>) continue;
-        final id = entry['_id']?.toString();
-        final name = entry['name'] ?? entry['name_en'];
-        if (id == null || name is! String) continue;
-        items.add(_DiyanetItem(id: id, name: name));
-      }
-      items.sort(
-        (a, b) => _normalizeName(a.name).compareTo(_normalizeName(b.name)),
-      );
-      return items;
-    } catch (_) {
-      return [];
-    }
-  }
-
   void _syncCountrySelection() {
     if (_countries.isEmpty) return;
     if (_selectedCountryId != null) {
@@ -356,10 +318,10 @@ class _LocationScreenState extends State<LocationScreen> {
         return;
       }
     }
-    final target = _normalizeName(_selectedCountryName);
+    final target = normalizeName(_selectedCountryName);
     if (target.isEmpty) return;
     for (final item in _countries) {
-      if (_normalizeName(item.name) == target) {
+      if (normalizeName(item.name) == target) {
         setState(() {
           _selectedCountryId = item.id;
           _selectedCountryName = item.name;
@@ -376,10 +338,10 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void _syncStateSelection() {
     if (_selectedCountryId == null) return;
-    final target = _normalizeName(_provinceController.text);
+    final target = normalizeName(_provinceController.text);
     if (target.isEmpty) return;
     for (final item in _states) {
-      if (_normalizeName(item.name) == target) {
+      if (normalizeName(item.name) == target) {
         if (_selectedStateId != item.id) {
           setState(() {
             _selectedStateId = item.id;
@@ -394,10 +356,10 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   void _syncDistrictSelection() {
-    final target = _normalizeName(_districtController.text);
+    final target = normalizeName(_districtController.text);
     if (target.isEmpty) return;
     for (final item in _districts) {
-      if (_normalizeName(item.name) == target) {
+      if (normalizeName(item.name) == target) {
         setState(() {
           _selectedDistrictId = item.id;
         });
@@ -564,17 +526,17 @@ class _LocationScreenState extends State<LocationScreen> {
             selectedCountryId: countryValue,
             selectedStateId: stateValue,
             selectedDistrictId: districtValue,
-            countryItems: buildStringDropdownItems<_DiyanetItem>(
+            countryItems: buildStringDropdownItems<DiyanetItem>(
               items: _countries,
               valueOf: (item) => item.id,
               labelOf: (item) => formatLocationDisplayName(item.name),
             ),
-            stateItems: buildStringDropdownItems<_DiyanetItem>(
+            stateItems: buildStringDropdownItems<DiyanetItem>(
               items: _states,
               valueOf: (item) => item.id,
               labelOf: (item) => formatLocationDisplayName(item.name),
             ),
-            districtItems: buildStringDropdownItems<_DiyanetItem>(
+            districtItems: buildStringDropdownItems<DiyanetItem>(
               items: _districts,
               valueOf: (item) => item.id,
               labelOf: (item) => formatLocationDisplayName(item.name),
@@ -647,12 +609,16 @@ class _LocationScreenState extends State<LocationScreen> {
             palette: palette,
             title: l10n.locationFavoritesLabel,
             emptyText: l10n.locationNotSet,
-            closedLabel: _currentFavoriteClosedLabel(l10n),
+            closedLabel: currentFavoriteClosedLabel(
+              favoritesLabel: l10n.locationFavoritesLabel,
+              provinceText: _provinceController.text,
+              districtText: _districtController.text,
+            ),
             applyLabel: l10n.locationFavoriteApplyLabel,
             removeTooltip: l10n.locationFavoriteRemoveLabel,
             favorites: _favorites,
             selectedFavorite: _selectedFavorite,
-            labelBuilder: _favoriteLabel,
+            labelBuilder: favoriteLabel,
             onChanged: (favorite) {
               if (favorite == null) return;
               setState(() {
@@ -668,63 +634,4 @@ class _LocationScreenState extends State<LocationScreen> {
       ),
     );
   }
-
-  String _favoriteLabel(LocationFavorite favorite) {
-    return '${formatLocationDisplayName(favorite.province)} / '
-        '${formatLocationDisplayName(favorite.district)}';
-  }
-
-  String _currentFavoriteClosedLabel(AppLocalizations l10n) {
-    final province = formatLocationDisplayName(_provinceController.text);
-    final district = formatLocationDisplayName(_districtController.text);
-    if (province.isEmpty) return l10n.locationFavoritesLabel;
-    if (district.isEmpty) return province;
-    return '$province / $district';
-  }
-
-  String _normalizeName(String input) {
-    final upper = input.trim().toUpperCase();
-    final buffer = StringBuffer();
-    for (final rune in upper.runes) {
-      switch (rune) {
-        case 0x00C7:
-          buffer.write('C');
-          break;
-        case 0x011E:
-          buffer.write('G');
-          break;
-        case 0x0130:
-          buffer.write('I');
-          break;
-        case 0x00D6:
-          buffer.write('O');
-          break;
-        case 0x015E:
-          buffer.write('S');
-          break;
-        case 0x00DC:
-          buffer.write('U');
-          break;
-        case 0x00C2:
-          buffer.write('A');
-          break;
-        case 0x00CE:
-          buffer.write('I');
-          break;
-        case 0x00DB:
-          buffer.write('U');
-          break;
-        default:
-          buffer.write(String.fromCharCode(rune));
-      }
-    }
-    return buffer.toString().replaceAll(RegExp(r'[^A-Z0-9]'), '');
-  }
-}
-
-class _DiyanetItem {
-  final String id;
-  final String name;
-
-  const _DiyanetItem({required this.id, required this.name});
 }

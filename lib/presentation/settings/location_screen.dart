@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -101,9 +100,10 @@ class _LocationScreenState extends State<LocationScreen> {
       (a, b) => normalizeName(a.label).compareTo(normalizeName(b.label)),
     );
     if (!_isMounted) return;
-    final selected = _selectedFavorite != null && favorites.contains(_selectedFavorite)
-        ? _selectedFavorite
-        : null;
+    final selected =
+        _selectedFavorite != null && favorites.contains(_selectedFavorite)
+            ? _selectedFavorite
+            : null;
     setState(() {
       _favorites = favorites;
       _selectedFavorite = selected;
@@ -280,18 +280,14 @@ class _LocationScreenState extends State<LocationScreen> {
       await _loadStates(_selectedCountryId!);
       if (province.isEmpty || district.isEmpty) {
         if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Koordinatlar alindi, il / ilce cozulemedi.')),
-        );
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Koordinatlar alindi, il / ilce cozulemedi.')));
       }
     } catch (_) {
       if (!mounted) return;
       setState(() {
         _useCurrentLocation = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Mevcut konum alinamadi.')),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Mevcut konum alinamadi.')));
     } finally {
       if (mounted) {
         setState(() {
@@ -312,9 +308,7 @@ class _LocationScreenState extends State<LocationScreen> {
             _selectedCountryName = item.name;
           });
         }
-        if (_states.isEmpty) {
-          _loadStates(_selectedCountryId!);
-        }
+        if (_states.isEmpty) _loadStates(_selectedCountryId!);
         return;
       }
     }
@@ -375,8 +369,7 @@ class _LocationScreenState extends State<LocationScreen> {
     final latitude = _latController.text.trim();
     final longitude = _lonController.text.trim();
     if (_selectedCountryId == null || province.isEmpty || district.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(l10n.locationFillAll)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.locationFillAll)));
       return;
     }
     final added = await _favoritesStorage.add(
@@ -411,9 +404,7 @@ class _LocationScreenState extends State<LocationScreen> {
     }
     await _loadFavorites();
     if (!mounted || !removed) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(AppLocalizations.of(context)!.locationFavoriteRemoved)),
-    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.locationFavoriteRemoved)));
   }
 
   void _applyFavorite(LocationFavorite favorite) {
@@ -428,9 +419,7 @@ class _LocationScreenState extends State<LocationScreen> {
       _provinceController.text = favorite.province;
       _districtController.text = favorite.district;
     });
-    if (_selectedCountryId != null) {
-      _loadStates(_selectedCountryId!);
-    }
+    if (_selectedCountryId != null) _loadStates(_selectedCountryId!);
   }
 
   Future<void> _applySelectedFavorite() async {
@@ -465,8 +454,7 @@ class _LocationScreenState extends State<LocationScreen> {
         countryName.isEmpty ||
         province.isEmpty ||
         district.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(l10n.locationFillAll)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.locationFillAll)));
       return;
     }
     await _storage.write(
@@ -488,15 +476,12 @@ class _LocationScreenState extends State<LocationScreen> {
     final l10n = AppLocalizations.of(context)!;
     final palette = widget.uiPaletteController.value;
     final ui = ConfigRegistry.settingsPanelsFor(palette);
-    final countryValue = _countries.any((item) => item.id == _selectedCountryId)
-        ? _selectedCountryId
-        : null;
-    final stateValue = _states.any((item) => item.id == _selectedStateId)
-        ? _selectedStateId
-        : null;
-    final districtValue = _districts.any((item) => item.id == _selectedDistrictId)
-        ? _selectedDistrictId
-        : null;
+    final countryValue =
+        _countries.any((item) => item.id == _selectedCountryId) ? _selectedCountryId : null;
+    final stateValue =
+        _states.any((item) => item.id == _selectedStateId) ? _selectedStateId : null;
+    final districtValue =
+        _districts.any((item) => item.id == _selectedDistrictId) ? _selectedDistrictId : null;
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.locationEditTitle),

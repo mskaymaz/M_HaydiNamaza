@@ -126,6 +126,8 @@ Goal: split oversized files safely.
 - [x] Stop further micro UI/helper extraction to avoid over-fragmentation.
 - [x] Audit location orchestration/service/repository boundaries.
 - [x] Continuation checkpoint: extracted pure location parser/normalization helpers to `location_data_parsers.dart`, favorite label helpers to `location_label_helpers.dart`, and `_DiyanetItem` model to `location_models.dart`; orchestration/state/network/navigation remained in `location_screen.dart`.
+- Continuation checkpoint: tiny safe line compaction only (no behavior change, no orchestration move).
+- location_screen.dart reduced below 600 in this pass (~596 lines).
 
 ### TASK-03C — home_screen.dart first presentational extraction checkpoint
 

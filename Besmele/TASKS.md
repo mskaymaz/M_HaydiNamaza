@@ -82,25 +82,29 @@ Goal: split oversized files safely.
 - [x] Split `settings_screen.dart` into focused settings cards/sections.
 - [x] Split `location_screen.dart` with safe UI/helper/model extraction.
 - [x] Move pure UI widgets first.
-- [ ] Documented exception: business-logic/service-controller/view-model extraction is deferred to later tasks (`TASK-04` or future architecture tasks) to avoid high-risk behavior changes.
+- [x] Documented exception recorded: deeper HomeController/ViewModel/ReminderEngine extraction is deferred to a future dedicated architecture task (not TASK-03) to avoid high-risk behavior changes.
 - [x] Keep each step compile-safe.
-- [ ] Documented exception: no dedicated dead-code deletion pass was executed in `TASK-03`; cleanup is deferred to a later validated phase.
+- [x] Documented exception recorded: no dedicated dead-code deletion pass was executed in `TASK-03`; cleanup is deferred to a later validated phase.
 
 ### TASK-03 Final Audit and Closure (2026-05-10)
 
+Status: Closed after safe decomposition checkpoints and documented exception handling.
+
 - Final known line counts:
-  - `home_screen.dart`: ~1316
-  - `settings_screen.dart`: ~594
-  - `location_screen.dart`: ~610
+  - home_screen.dart: ~1316
+  - settings_screen.dart: ~594
+  - location_screen.dart: ~596
+  - prayer_service.dart: ~581
 - Documented >600 line exceptions:
-  - `home_screen.dart` keeps protected parent orchestration/state/dialog/storage/notification/location/prayer-time/reminder flows.
-  - `location_screen.dart` keeps permission/network/location/storage/navigation/state orchestration.
-- `settings_screen.dart` is reduced below 600 lines (~594) in current state.
+  - home_screen.dart remains above 600 because it still owns protected parent orchestration, lifecycle, reminders, dialogs, storage, notification/audio/vibration, and location/prayer coordination flows.
+- settings_screen.dart is reduced below 600 lines (~594) in current state.
+- location_screen.dart is reduced below 600 lines (~596) in current state.
+- prayer_service.dart is reduced below 600 lines (~581) in current state.
 - Final closure note:
   - Pure UI/widgets/helpers/models were extracted in safe phases.
-  - High-risk orchestration intentionally stayed in parent screens.
+  - High-risk parent orchestration intentionally stayed in home_screen.dart.
   - No behavior change intended.
-  - Deeper service/controller/view-model extraction is deferred to later tasks, especially `TASK-04` or a future architecture task.
+  - Deeper HomeController/ViewModel/ReminderEngine extraction is deferred to a future dedicated architecture task, not TASK-03.
 
 ### TASK-03A — settings_screen.dart UI decomposition
 

@@ -32,6 +32,7 @@ part 'home_models.dart';
 part 'home_prayer_time_helpers.dart';
 part 'home_custom_time_helpers.dart';
 part 'home_drawer_layout_helpers.dart';
+part 'home_custom_time_editor_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -1286,265 +1287,21 @@ class _HomeScreenState extends State<HomeScreen> {
     _CustomPrayerDraft row,
     AppLocalizations l10n,
   ) async {
-    var mode = row.timeRule.mode;
-    var anchorPrayer = row.timeRule.anchorPrayer ?? Prayer.fajr;
-    var secondaryAnchorPrayer =
-        row.timeRule.secondaryAnchorPrayer ?? Prayer.sunrise;
-    final prayerOptions = <MapEntry<Prayer, String>>[
-      MapEntry(Prayer.fajr, l10n.prayerFajr),
-      MapEntry(Prayer.sunrise, l10n.prayerSunrise),
-      MapEntry(Prayer.dhuhr, l10n.prayerDhuhr),
-      MapEntry(Prayer.asr, l10n.prayerAsr),
-      MapEntry(Prayer.maghrib, l10n.prayerMaghrib),
-      MapEntry(Prayer.isha, l10n.prayerIsha),
-    ];
-    final offsetController = TextEditingController(
-      text: row.timeRule.offsetMinutes.toString(),
-    );
-    final hourController = TextEditingController(
-      text: row.timeRule.manualTime == null
-          ? ''
-          : row.timeRule.manualTime!.hour.toString().padLeft(2, '0'),
-    );
-    final minuteController = TextEditingController(
-      text: row.timeRule.manualTime == null
-          ? ''
-          : row.timeRule.manualTime!.minute.toString().padLeft(2, '0'),
-    );
-
-    await showModalBottomSheet<void>(
+    final savedRule = await showModalBottomSheet<_CustomPrayerTimeRule>(
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setSheetState) {
-            return Padding(
-              padding: EdgeInsets.fromLTRB(
-                20,
-                20,
-                20,
-                20 + MediaQuery.of(context).viewInsets.bottom,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Vakit zamani',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      ChoiceChip(
-                        label: const Text('Sabit saat'),
-                        selected: mode == _CustomPrayerTimeMode.manual,
-                        onSelected: (_) {
-                          setSheetState(() {
-                            mode = _CustomPrayerTimeMode.manual;
-                          });
-                        },
-                      ),
-                      ChoiceChip(
-                        label: const Text('Vakitten once'),
-                        selected: mode == _CustomPrayerTimeMode.beforePrayer,
-                        onSelected: (_) {
-                          setSheetState(() {
-                            mode = _CustomPrayerTimeMode.beforePrayer;
-                          });
-                        },
-                      ),
-                      ChoiceChip(
-                        label: const Text('Vakitten sonra'),
-                        selected: mode == _CustomPrayerTimeMode.afterPrayer,
-                        onSelected: (_) {
-                          setSheetState(() {
-                            mode = _CustomPrayerTimeMode.afterPrayer;
-                          });
-                        },
-                      ),
-                      ChoiceChip(
-                        label: const Text('Iki vaktin ortasi'),
-                        selected:
-                            mode ==
-                            _CustomPrayerTimeMode.midpointBetweenPrayers,
-                        onSelected: (_) {
-                          setSheetState(() {
-                            mode = _CustomPrayerTimeMode.midpointBetweenPrayers;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  if (mode == _CustomPrayerTimeMode.manual)
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: hourController,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(2),
-                            ],
-                            decoration: const InputDecoration(
-                              labelText: 'Saat',
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: TextField(
-                            controller: minuteController,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(2),
-                            ],
-                            decoration: const InputDecoration(
-                              labelText: 'Dakika',
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  else if (mode ==
-                      _CustomPrayerTimeMode.midpointBetweenPrayers) ...[
-                    Text(
-                      'Birinci vakit',
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    const SizedBox(height: 8),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final option in prayerOptions)
-                          ChoiceChip(
-                            label: Text(option.value),
-                            selected: anchorPrayer == option.key,
-                            onSelected: (_) {
-                              setSheetState(() {
-                                anchorPrayer = option.key;
-                              });
-                            },
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      'Ikinci vakit',
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    const SizedBox(height: 8),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final option in prayerOptions)
-                          ChoiceChip(
-                            label: Text(option.value),
-                            selected: secondaryAnchorPrayer == option.key,
-                            onSelected: (_) {
-                              setSheetState(() {
-                                secondaryAnchorPrayer = option.key;
-                              });
-                            },
-                          ),
-                      ],
-                    ),
-                  ] else ...[
-                    Text(
-                      'Referans vakit',
-                      style: Theme.of(context).textTheme.labelLarge,
-                    ),
-                    const SizedBox(height: 8),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: [
-                        for (final option in prayerOptions)
-                          ChoiceChip(
-                            label: Text(option.value),
-                            selected: anchorPrayer == option.key,
-                            onSelected: (_) {
-                              setSheetState(() {
-                                anchorPrayer = option.key;
-                              });
-                            },
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    TextField(
-                      controller: offsetController,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      decoration: const InputDecoration(labelText: 'Dakika'),
-                    ),
-                  ],
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-              style: FilledButton.styleFrom(
-                minimumSize: Size(52, 28),
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
-                      onPressed: () {
-                        final hour = int.tryParse(hourController.text.trim());
-                        final minute = int.tryParse(
-                          minuteController.text.trim(),
-                        );
-                        final offsetMinutes =
-                            int.tryParse(offsetController.text.trim()) ?? 0;
-                        setState(() {
-                          row.timeRule = _CustomPrayerTimeRule(
-                            mode: mode,
-                            anchorPrayer: mode == _CustomPrayerTimeMode.manual
-                                ? null
-                                : anchorPrayer,
-                            secondaryAnchorPrayer:
-                                mode ==
-                                    _CustomPrayerTimeMode.midpointBetweenPrayers
-                                ? secondaryAnchorPrayer
-                                : null,
-                            offsetMinutes: offsetMinutes,
-                            manualTime: mode == _CustomPrayerTimeMode.manual
-                                ? (hour == null ||
-                                          minute == null ||
-                                          hour < 0 ||
-                                          hour > 23 ||
-                                          minute < 0 ||
-                                          minute > 59
-                                      ? null
-                                      : TimeOfDay(hour: hour, minute: minute))
-                                : null,
-                          );
-                        });
-                        unawaited(_persistCustomPrayerRows());
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Kaydet'),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
+        return _HomeCustomTimeEditorSheet(
+          l10n: l10n,
+          initialRule: row.timeRule,
         );
       },
     );
-
-    offsetController.dispose();
-    hourController.dispose();
-    minuteController.dispose();
+    if (savedRule == null) return;
+    setState(() {
+      row.timeRule = savedRule;
+    });
+    unawaited(_persistCustomPrayerRows());
   }
 
   List<HomePrayerListItem> _buildItems(AppLocalizations l10n, PrayerTimes times) {

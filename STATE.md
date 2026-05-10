@@ -2,13 +2,14 @@
 
 last_update: 2026-05-10
 project: M_HaydiNamaza
-status: task_00_completed_with_documented_exceptions
+status: task_01_completed_architecture_map_ready
 active_phase: advanced_architecture_upgrade
-active_task: TASK-00-closed-awaiting-task-01-start
+active_task: TASK-01-current-architecture-map-closed
 blockers:
   - Official Diyanet prayer-time data access is unresolved and must be settled before release.
 next_step:
-  - Do not start TASK-01/TASK-02/TASK-04 until explicit user instruction.
+  - Do not start TASK-02/TASK-04 until explicit user instruction.
+  - Keep TASK-01 architecture map as baseline for later refactors.
   - Continue work from `Besmele/TASKS.md`.
 
 ## Current known risks

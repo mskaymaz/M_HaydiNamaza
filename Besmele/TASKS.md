@@ -46,14 +46,14 @@ Acceptance:
 
 Goal: understand the app before refactoring.
 
-- [ ] Create `docs/architecture/CURRENT_ARCHITECTURE.md`.
-- [ ] List main app entry points.
-- [ ] List current feature folders.
-- [ ] List all files over 600 lines.
-- [ ] Identify UI files that contain business logic.
-- [ ] Identify services that mix unrelated responsibilities.
-- [ ] Identify prayer-time, qibla, settings, notification, location, and content flows.
-- [ ] Record safe refactor order.
+- [x] Create `docs/architecture/CURRENT_ARCHITECTURE.md`.
+- [x] List main app entry points.
+- [x] List current feature folders.
+- [x] List all files over 600 lines.
+- [x] Identify UI files that contain business logic.
+- [x] Identify services that mix unrelated responsibilities.
+- [x] Identify prayer-time, qibla, settings, notification, location, and content flows.
+- [x] Record safe refactor order.
 
 Acceptance:
 - Refactor order is documented.
@@ -453,5 +453,6 @@ Goal: prepare for real users.
 
 Acceptance:
 - A new developer or AI assistant can understand, build, and safely continue the project.
+
 
 

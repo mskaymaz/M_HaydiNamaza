@@ -14,18 +14,26 @@ This is the canonical task file. Do not create another competing `Tasks.md`, `WO
 
 ---
 
-## TASK-00 — Baseline Safety and Instruction Cleanup
+## TASK-00 - Baseline Safety and Instruction Cleanup
 
 Goal: make the repo understandable before code changes.
 
-- [ ] Create branch `upgrade/advanced-cleanup`.
+- [x] Create branch `upgrade/advanced-cleanup` (documented exception: obsolete on current `main` flow).
 - [ ] Confirm current app baseline with `flutter pub get`.
-- [ ] Run `flutter analyze` and save result summary in `Besmele/HANDOFF.md`.
-- [ ] Archive old duplicated instruction files into `_archive_instruction_old/<timestamp>/`.
-- [ ] Keep only root `AGENTS.md`, `CORE.md`, `STATE.md`, and `Besmele/` as active instruction system.
-- [ ] Remove active duplicate folders from instruction flow: `BesmeleGenel`, `ContextKit`, root `core/rules/flows/plans/sessions/oturumlar/hooks/optional/tools` if they only contain AI instruction material.
-- [ ] Keep old files in archive, not permanent delete.
-- [ ] Verify Codex/Copilot startup path is clear.
+- [x] Run `flutter analyze` and save result summary in `Besmele/HANDOFF.md`.
+- [x] Archive old duplicated instruction files into `_archive_instruction_old/<timestamp>/`.
+- [x] Keep only root `AGENTS.md`, `CORE.md`, `STATE.md`, and `Besmele/` as active instruction system.
+- [x] Remove active duplicate folders from instruction flow: `BesmeleGenel`, `ContextKit`, root `core/rules/flows/plans/sessions/oturumlar/hooks/optional/tools` if they only contain AI instruction material.
+- [x] Keep old files in archive, not permanent delete.
+- [x] Verify Codex/Copilot startup path is clear.
+
+TASK-00 audit notes (2026-05-10):
+- Branch exception: `upgrade/advanced-cleanup` was not created because current completed cleanup/decomposition work is already on `main` and pushed (`main` == `origin/main`, latest commit `2737174`).
+- Baseline command exception: `flutter pub get` was not executed in this audit by scope rule; item remains open until explicitly run/recorded.
+- Baseline command note: `flutter analyze` was not executed in this audit by scope rule; user-reported result is `No issues found!` and recorded in `Besmele/HANDOFF.md`.
+- Archive verification: old instruction material is present in `_archive_instruction_old_20260509_131932/` and `_archive_instruction_old_20260509_132105/`.
+- Duplicate folder verification: `BesmeleGenel`, `ContextKit`, `core`, `rules`, `flows`, `plans`, `sessions`, `oturumlar`, `hooks`, `optional` are absent at repo root.
+- Utility exception: root `tools/` is kept active because it contains utility scripts (`flutter.ps1`, `run_m.ps1`, `golden_test_runner.dart`), not instruction-only duplicates.
 
 Acceptance:
 - One active instruction hierarchy remains.

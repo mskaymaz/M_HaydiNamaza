@@ -206,6 +206,31 @@ Completed:
   - Drawer handle band extraction was intentionally skipped in this sweep to avoid unnecessary orchestration coupling.
   - No behavior change intended.
 
+### TASK-03D - prayer_service.dart safe helper extraction checkpoint (2026-05-10)
+
+- Scope:
+  - One safe decomposition phase for lib/app/prayer_service.dart without behavior changes.
+- Extracted to new file:
+  - lib/app/prayer_service_pure_helpers.dart
+  - DiyanetIds value class
+  - Pure clock-time parser helper
+  - Pure minute-offset helper
+  - Pure Diyanet list ID lookup helper
+  - Pure location-name normalization helper
+  - Pure HH:mm formatting helper
+- Updated in prayer_service.dart:
+  - Replaced duplicated inline parse/offset/name/format logic with helper calls.
+  - Kept service API and async orchestration unchanged.
+- Intentionally kept in prayer_service.dart (risk-managed):
+  - calculateToday public flow
+  - Diyanet/Aladhan request sequencing and fallback order
+  - Cache read/write side effects
+  - Error handling and null-return semantics
+  - Prayer-time assembly behavior (PrayerTimes.fromTimings call flow)
+- Result:
+  - prayer_service.dart reduced to ~581 lines.
+  - No behavior change intended.
+
 Notes:
 - TASK-03 safe decomposition closure is recorded in this file with documented exceptions.
 - Do not move service/storage/notification/location/prayer-time calculation logic.

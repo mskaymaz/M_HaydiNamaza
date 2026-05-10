@@ -16,14 +16,8 @@ import '../core/prayer_engine/prayer_times.dart';
 import '../core/prayer_engine/rounding.dart';
 import '../core/prayer_engine/shafaq.dart';
 import 'location_storage.dart';
+import 'prayer_service_pure_helpers.dart';
 import 'runtime_monitor.dart';
-
-class _DiyanetIds {
-  final String stateId;
-  final String districtId;
-
-  const _DiyanetIds({required this.stateId, required this.districtId});
-}
 
 class PrayerService {
   static const Duration _diyanetTimeout = Duration(seconds: 12);
@@ -129,12 +123,12 @@ class PrayerService {
       );
       if (diyanetTimes != null) {
         _log('[Diyanet] ${location.province}/${location.district} '
-            'Fajr ${_fmt(diyanetTimes.fajr)} '
-            'Sunrise ${_fmt(diyanetTimes.sunrise)} '
-            'Dhuhr ${_fmt(diyanetTimes.dhuhr)} '
-            'Asr ${_fmt(diyanetTimes.asr)} '
-            'Maghrib ${_fmt(diyanetTimes.maghrib)} '
-            'Isha ${_fmt(diyanetTimes.isha)}');
+            'Fajr ${formatPrayerTimeHourMinute(diyanetTimes.fajr)} '
+            'Sunrise ${formatPrayerTimeHourMinute(diyanetTimes.sunrise)} '
+            'Dhuhr ${formatPrayerTimeHourMinute(diyanetTimes.dhuhr)} '
+            'Asr ${formatPrayerTimeHourMinute(diyanetTimes.asr)} '
+            'Maghrib ${formatPrayerTimeHourMinute(diyanetTimes.maghrib)} '
+            'Isha ${formatPrayerTimeHourMinute(diyanetTimes.isha)}');
         return diyanetTimes;
       }
 
@@ -148,12 +142,12 @@ class PrayerService {
       );
       if (aladhanTurkey != null) {
         _log('[Aladhan:turkey] '
-            'Fajr ${_fmt(aladhanTurkey.fajr)} '
-            'Sunrise ${_fmt(aladhanTurkey.sunrise)} '
-            'Dhuhr ${_fmt(aladhanTurkey.dhuhr)} '
-            'Asr ${_fmt(aladhanTurkey.asr)} '
-            'Maghrib ${_fmt(aladhanTurkey.maghrib)} '
-            'Isha ${_fmt(aladhanTurkey.isha)}');
+            'Fajr ${formatPrayerTimeHourMinute(aladhanTurkey.fajr)} '
+            'Sunrise ${formatPrayerTimeHourMinute(aladhanTurkey.sunrise)} '
+            'Dhuhr ${formatPrayerTimeHourMinute(aladhanTurkey.dhuhr)} '
+            'Asr ${formatPrayerTimeHourMinute(aladhanTurkey.asr)} '
+            'Maghrib ${formatPrayerTimeHourMinute(aladhanTurkey.maghrib)} '
+            'Isha ${formatPrayerTimeHourMinute(aladhanTurkey.isha)}');
         return aladhanTurkey;
       }
 
@@ -167,12 +161,12 @@ class PrayerService {
       );
       if (aladhanShafii != null) {
         _log('[Aladhan:shafii] '
-            'Fajr ${_fmt(aladhanShafii.fajr)} '
-            'Sunrise ${_fmt(aladhanShafii.sunrise)} '
-            'Dhuhr ${_fmt(aladhanShafii.dhuhr)} '
-            'Asr ${_fmt(aladhanShafii.asr)} '
-            'Maghrib ${_fmt(aladhanShafii.maghrib)} '
-            'Isha ${_fmt(aladhanShafii.isha)}');
+            'Fajr ${formatPrayerTimeHourMinute(aladhanShafii.fajr)} '
+            'Sunrise ${formatPrayerTimeHourMinute(aladhanShafii.sunrise)} '
+            'Dhuhr ${formatPrayerTimeHourMinute(aladhanShafii.dhuhr)} '
+            'Asr ${formatPrayerTimeHourMinute(aladhanShafii.asr)} '
+            'Maghrib ${formatPrayerTimeHourMinute(aladhanShafii.maghrib)} '
+            'Isha ${formatPrayerTimeHourMinute(aladhanShafii.isha)}');
         return aladhanShafii;
       }
     }
@@ -239,22 +233,12 @@ class PrayerService {
         return null;
       }
 
-      DateTime? parseTime(String key) {
-        final raw = timings[key];
-        if (raw is! String) return null;
-        final match = RegExp(r'(\d{1,2}):(\d{2})').firstMatch(raw);
-        if (match == null) return null;
-        final hour = int.parse(match.group(1)!);
-        final minute = int.parse(match.group(2)!);
-        return DateTime(date.year, date.month, date.day, hour, minute);
-      }
-
-      final fajr = parseTime('Fajr');
-      final sunrise = parseTime('Sunrise');
-      final dhuhr = parseTime('Dhuhr');
-      final asr = parseTime('Asr');
-      final maghrib = parseTime('Maghrib');
-      final isha = parseTime('Isha');
+      final fajr = parsePrayerClockTime(raw: timings['Fajr'], baseDate: date);
+      final sunrise = parsePrayerClockTime(raw: timings['Sunrise'], baseDate: date);
+      final dhuhr = parsePrayerClockTime(raw: timings['Dhuhr'], baseDate: date);
+      final asr = parsePrayerClockTime(raw: timings['Asr'], baseDate: date);
+      final maghrib = parsePrayerClockTime(raw: timings['Maghrib'], baseDate: date);
+      final isha = parsePrayerClockTime(raw: timings['Isha'], baseDate: date);
       if ([fajr, sunrise, dhuhr, asr, maghrib, isha].contains(null)) {
         return null;
       }
@@ -289,8 +273,8 @@ class PrayerService {
         '${date.month.toString().padLeft(2, '0')}-'
         '${date.day.toString().padLeft(2, '0')}';
     final countryId = (location.countryId ?? '').trim();
-    final province = _normalizeName(location.province);
-    final district = _normalizeName(location.district);
+    final province = normalizePrayerLocationName(location.province);
+    final district = normalizePrayerLocationName(location.district);
     final lat = latitude.toStringAsFixed(4);
     final lon = longitude.toStringAsFixed(4);
     final offsets = [
@@ -500,34 +484,36 @@ class PrayerService {
       final dateValue = entry['date'] as String?;
       final baseDate = DateTime.tryParse(dateValue ?? '')?.toLocal() ?? date;
 
-      DateTime? parseTime(String key) {
-        final raw = times[key];
-        if (raw is! String) return null;
-        final match = RegExp(r'(\d{1,2}):(\d{2})').firstMatch(raw);
-        if (match == null) return null;
-        final hour = int.parse(match.group(1)!);
-        final minute = int.parse(match.group(2)!);
-        return DateTime(baseDate.year, baseDate.month, baseDate.day, hour, minute);
-      }
-
-      DateTime applyOffset(DateTime value, String key) {
-        final delta = config.minuteOffsets[key] ?? 0;
-        if (delta == 0) return value;
-        return value.add(Duration(minutes: delta));
-      }
-
-      final fajrRaw = parseTime('imsak');
-      final sunriseRaw = parseTime('gunes');
-      final dhuhrRaw = parseTime('ogle');
-      final asrRaw = parseTime('ikindi');
-      final maghribRaw = parseTime('aksam');
-      final ishaRaw = parseTime('yatsi');
-      final fajr = fajrRaw == null ? null : applyOffset(fajrRaw, 'imsak');
-      final sunrise = sunriseRaw == null ? null : applyOffset(sunriseRaw, 'gunes');
-      final dhuhr = dhuhrRaw == null ? null : applyOffset(dhuhrRaw, 'ogle');
-      final asr = asrRaw == null ? null : applyOffset(asrRaw, 'ikindi');
-      final maghrib = maghribRaw == null ? null : applyOffset(maghribRaw, 'aksam');
-      final isha = ishaRaw == null ? null : applyOffset(ishaRaw, 'yatsi');
+      final fajrRaw = parsePrayerClockTime(raw: times['imsak'], baseDate: baseDate);
+      final sunriseRaw = parsePrayerClockTime(raw: times['gunes'], baseDate: baseDate);
+      final dhuhrRaw = parsePrayerClockTime(raw: times['ogle'], baseDate: baseDate);
+      final asrRaw = parsePrayerClockTime(raw: times['ikindi'], baseDate: baseDate);
+      final maghribRaw = parsePrayerClockTime(raw: times['aksam'], baseDate: baseDate);
+      final ishaRaw = parsePrayerClockTime(raw: times['yatsi'], baseDate: baseDate);
+      final fajr = fajrRaw == null
+          ? null
+          : applyPrayerMinuteOffset(fajrRaw, config.minuteOffsets['imsak'] ?? 0);
+      final sunrise = sunriseRaw == null
+          ? null
+          : applyPrayerMinuteOffset(
+              sunriseRaw,
+              config.minuteOffsets['gunes'] ?? 0,
+            );
+      final dhuhr = dhuhrRaw == null
+          ? null
+          : applyPrayerMinuteOffset(dhuhrRaw, config.minuteOffsets['ogle'] ?? 0);
+      final asr = asrRaw == null
+          ? null
+          : applyPrayerMinuteOffset(asrRaw, config.minuteOffsets['ikindi'] ?? 0);
+      final maghrib = maghribRaw == null
+          ? null
+          : applyPrayerMinuteOffset(
+              maghribRaw,
+              config.minuteOffsets['aksam'] ?? 0,
+            );
+      final isha = ishaRaw == null
+          ? null
+          : applyPrayerMinuteOffset(ishaRaw, config.minuteOffsets['yatsi'] ?? 0);
       if ([fajr, sunrise, dhuhr, asr, maghrib, isha].contains(null)) {
         _log('[Diyanet] missing times for ${location.province}/${location.district}');
         return null;
@@ -552,13 +538,13 @@ class PrayerService {
     }
   }
 
-  Future<_DiyanetIds?> _resolveDiyanetIds({
+  Future<DiyanetIds?> _resolveDiyanetIds({
     required String? countryId,
     required String province,
     required String district,
   }) async {
-    final provinceKey = _normalizeName(province);
-    final districtKey = _normalizeName(district);
+    final provinceKey = normalizePrayerLocationName(province);
+    final districtKey = normalizePrayerLocationName(district);
     final config = ConfigRegistry.dataSources.diyanet;
     final resolvedCountryId =
         (countryId != null && countryId.trim().isNotEmpty)
@@ -568,7 +554,7 @@ class PrayerService {
     final cachedState = _stateIdCache[cachePrefix];
     final cachedDistrict = _districtIdCache['$cachePrefix|$districtKey'];
     if (cachedState != null && cachedDistrict != null) {
-      return _DiyanetIds(stateId: cachedState, districtId: cachedDistrict);
+      return DiyanetIds(stateId: cachedState, districtId: cachedDistrict);
     }
 
     final statesUri = Uri.parse('${config.baseUrl}/api/locations/states').replace(
@@ -588,23 +574,7 @@ class PrayerService {
       if (statesData is! List) {
         return null;
       }
-      String? stateId;
-      for (final entry in statesData) {
-        if (entry is! Map<String, dynamic>) continue;
-        final name = entry['name'] ?? entry['name_en'];
-        if (name is! String) continue;
-        if (_normalizeName(name) == provinceKey) {
-          final id = entry['_id'];
-          if (id is String) {
-            stateId = id;
-            break;
-          }
-          if (id is int) {
-            stateId = id.toString();
-            break;
-          }
-        }
-      }
+      final stateId = findDiyanetEntryIdByNormalizedName(statesData, provinceKey);
       if (stateId == null) {
         _log('[Diyanet] state not found for $province');
         return null;
@@ -625,23 +595,10 @@ class PrayerService {
       if (districtsData is! List) {
         return null;
       }
-      String? districtId;
-      for (final entry in districtsData) {
-        if (entry is! Map<String, dynamic>) continue;
-        final name = entry['name'] ?? entry['name_en'];
-        if (name is! String) continue;
-        if (_normalizeName(name) == districtKey) {
-          final id = entry['_id'];
-          if (id is String) {
-            districtId = id;
-            break;
-          }
-          if (id is int) {
-            districtId = id.toString();
-            break;
-          }
-        }
-      }
+      final districtId = findDiyanetEntryIdByNormalizedName(
+        districtsData,
+        districtKey,
+      );
       if (districtId == null) {
         _log('[Diyanet] district not found for $province/$district');
         return null;
@@ -649,54 +606,11 @@ class PrayerService {
 
       _stateIdCache[cachePrefix] = stateId;
       _districtIdCache['$cachePrefix|$districtKey'] = districtId;
-      return _DiyanetIds(stateId: stateId, districtId: districtId);
+      return DiyanetIds(stateId: stateId, districtId: districtId);
     } catch (_) {
       return null;
     }
   }
 
-  String _normalizeName(String input) {
-    final upper = input.trim().toUpperCase();
-    final buffer = StringBuffer();
-    for (final rune in upper.runes) {
-      switch (rune) {
-        case 0x00C7: // Ç
-          buffer.write('C');
-          break;
-        case 0x011E: // Ğ
-          buffer.write('G');
-          break;
-        case 0x0130: // İ
-          buffer.write('I');
-          break;
-        case 0x00D6: // Ö
-          buffer.write('O');
-          break;
-        case 0x015E: // Ş
-          buffer.write('S');
-          break;
-        case 0x00DC: // Ü
-          buffer.write('U');
-          break;
-        case 0x00C2: // Â
-          buffer.write('A');
-          break;
-        case 0x00CE: // Î
-          buffer.write('I');
-          break;
-        case 0x00DB: // Û
-          buffer.write('U');
-          break;
-        default:
-          buffer.write(String.fromCharCode(rune));
-      }
-    }
-    return buffer.toString().replaceAll(RegExp(r'[^A-Z0-9]'), '');
-  }
-
-  String _fmt(DateTime dt) {
-    final h = dt.hour.toString().padLeft(2, '0');
-    final m = dt.minute.toString().padLeft(2, '0');
-    return '$h:$m';
-  }
 }
+

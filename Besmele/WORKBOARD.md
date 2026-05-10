@@ -1,7 +1,7 @@
 ﻿# WORKBOARD.md
 
 ## Active
-- [ ] TASK-00 - Baseline safety and instruction cleanup (final baseline evidence pending: `flutter pub get` record)
+- [x] TASK-00 - Baseline safety and instruction cleanup (closed on 2026-05-10)
 
 ## Next
 - [ ] TASK-01 - Current architecture map

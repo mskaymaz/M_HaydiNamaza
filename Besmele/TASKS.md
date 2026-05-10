@@ -19,7 +19,7 @@ This is the canonical task file. Do not create another competing `Tasks.md`, `WO
 Goal: make the repo understandable before code changes.
 
 - [x] Create branch `upgrade/advanced-cleanup` (documented exception: obsolete on current `main` flow).
-- [ ] Confirm current app baseline with `flutter pub get`.
+- [x] Confirm current app baseline with `flutter pub get`.
 - [x] Run `flutter analyze` and save result summary in `Besmele/HANDOFF.md`.
 - [x] Archive old duplicated instruction files into `_archive_instruction_old/<timestamp>/`.
 - [x] Keep only root `AGENTS.md`, `CORE.md`, `STATE.md`, and `Besmele/` as active instruction system.
@@ -29,7 +29,7 @@ Goal: make the repo understandable before code changes.
 
 TASK-00 audit notes (2026-05-10):
 - Branch exception: `upgrade/advanced-cleanup` was not created because current completed cleanup/decomposition work is already on `main` and pushed (`main` == `origin/main`, latest commit `2737174`).
-- Baseline command exception: `flutter pub get` was not executed in this audit by scope rule; item remains open until explicitly run/recorded.
+- Baseline command confirmation: `flutter pub get` executed by user on 2026-05-10. Result: `Got dependencies!` with note `26 packages have newer versions incompatible with dependency constraints`.
 - Baseline command note: `flutter analyze` was not executed in this audit by scope rule; user-reported result is `No issues found!` and recorded in `Besmele/HANDOFF.md`.
 - Archive verification: old instruction material is present in `_archive_instruction_old_20260509_131932/` and `_archive_instruction_old_20260509_132105/`.
 - Duplicate folder verification: `BesmeleGenel`, `ContextKit`, `core`, `rules`, `flows`, `plans`, `sessions`, `oturumlar`, `hooks`, `optional` are absent at repo root.
@@ -453,4 +453,5 @@ Goal: prepare for real users.
 
 Acceptance:
 - A new developer or AI assistant can understand, build, and safely continue the project.
+
 

@@ -5,7 +5,7 @@
 
 ## Next
 - [x] TASK-01 - Current architecture map
-- [ ] TASK-02 - Target architecture skeleton
+- [x] TASK-02 - Target architecture skeleton
 - [ ] TASK-04 - Prayer times domain and data strategy (do not start before TASK-00 closure)
 
 ## Blocked

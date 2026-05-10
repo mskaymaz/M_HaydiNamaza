@@ -65,15 +65,15 @@ Acceptance:
 
 Goal: create structure without moving risky behavior yet.
 
-- [ ] Create or align `lib/app/` for app shell, config, theme, routing.
-- [ ] Create or align `lib/core/` for shared constants, storage, errors, logging, platform utilities, common widgets.
-- [ ] Create or align `lib/features/prayer_times/`.
-- [ ] Create or align `lib/features/qibla/`.
-- [ ] Create or align `lib/features/daily_content/`.
-- [ ] Create or align `lib/features/shared_settings/`.
-- [ ] Create or align `lib/features/location/`.
-- [ ] Create or align `lib/features/notifications/`.
-- [ ] Add barrel files only if they reduce import noise.
+- [x] Create or align `lib/app/` for app shell, config, theme, routing.
+- [x] Create or align `lib/core/` for shared constants, storage, errors, logging, platform utilities, common widgets.
+- [x] Create or align `lib/features/prayer_times/`.
+- [x] Create or align `lib/features/qibla/`.
+- [x] Create or align `lib/features/daily_content/`.
+- [x] Create or align `lib/features/shared_settings/`.
+- [x] Create or align `lib/features/location/`.
+- [x] Create or align `lib/features/notifications/`.
+- [x] Add barrel files only if they reduce import noise.
 
 Acceptance:
 - New folders exist.
@@ -453,6 +453,7 @@ Goal: prepare for real users.
 
 Acceptance:
 - A new developer or AI assistant can understand, build, and safely continue the project.
+
 
 
 

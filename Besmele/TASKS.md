@@ -300,6 +300,11 @@ Goal: make prayer-time logic trustworthy and maintainable.
 - Preserved PrayerTimes.fromTimings behavior and parameters.
 - Provider calls, fallback order, cache flow, orchestration, and app-level null/error behavior remained in PrayerService.
 - No behavior change intended.
+### TASK-04A closure audit (2026-05-11)
+- Checkpoint 1-8 extractions completed; PrayerService now primarily owns orchestration/fallback/cache decision flow.
+- Further micro-extractions in 04A are deferred to avoid over-fragmentation.
+- Remaining policy-level decomposition (fallback/cache/use-case layering) is deferred to a future dedicated architecture task.
+- TASK-04A is considered closed; next phase is TASK-04B official data-source strategy.
 ### 04B — Official data access strategy
 - [ ] Add `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`.
 - [ ] Record current status: waiting for CIMER/Diyanet answer.

@@ -276,6 +276,10 @@ Goal: make prayer-time logic trustworthy and maintainable.
 - Daily prayer-time cache read/write access was extracted from lib/app/prayer_service.dart into lib/app/prayer_daily_cache_repository.dart.
 - Preserved: cache key (prayer_daily_cache_v1), JSON field names, fingerprint comparison usage, and cache miss null semantics.
 - No fallback order/source flow (Diyanet/Aladhan) or PrayerTimes.fromTimings orchestration change intended.
+### TASK-04A checkpoint 3 (2026-05-11)
+- Diyanet location city/district ID resolver logic was extracted from lib/app/prayer_service.dart into lib/app/diyanet_location_id_resolver.dart.
+- Preserved: location-name normalization, ID list fetch endpoints/headers/timeouts, parsing flow, and static resolver cache behavior.
+- No prayer-time fetch flow, fallback order, cache/fingerprint, or PrayerTimes.fromTimings behavior change intended.
 ### 04B — Official data access strategy
 - [ ] Add `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`.
 - [ ] Record current status: waiting for CIMER/Diyanet answer.
@@ -461,6 +465,7 @@ Goal: prepare for real users.
 
 Acceptance:
 - A new developer or AI assistant can understand, build, and safely continue the project.
+
 
 
 

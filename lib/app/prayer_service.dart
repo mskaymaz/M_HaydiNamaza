@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 
 import 'calculation_advanced_settings_storage.dart';
+import 'diyanet_location_id_resolver.dart';
 import 'prayer_calculation_parameters_factory.dart';
 import 'prayer_daily_cache_repository.dart';
 import '../core/config/config_registry.dart';
@@ -26,9 +27,8 @@ class PrayerService {
   final PrayerEngine _engine;
   final CalculationAdvancedSettingsStorage _advancedSettingsStorage;
   final PrayerDailyCacheRepository _dailyCacheRepository;
+  final DiyanetLocationIdResolver _diyanetLocationIdResolver;
 
-  static final Map<String, String> _stateIdCache = {};
-  static final Map<String, String> _districtIdCache = {};
   static String? _memoryCacheFingerprint;
   static PrayerTimes? _memoryCacheTimes;
 
@@ -36,11 +36,14 @@ class PrayerService {
     PrayerEngine? engine,
     CalculationAdvancedSettingsStorage? advancedSettingsStorage,
     PrayerDailyCacheRepository? dailyCacheRepository,
+    DiyanetLocationIdResolver? diyanetLocationIdResolver,
   }) : _engine = engine ?? const PrayerEngine(),
        _advancedSettingsStorage =
            advancedSettingsStorage ?? CalculationAdvancedSettingsStorage(),
        _dailyCacheRepository =
-           dailyCacheRepository ?? PrayerDailyCacheRepository();
+           dailyCacheRepository ?? PrayerDailyCacheRepository(),
+       _diyanetLocationIdResolver =
+           diyanetLocationIdResolver ?? DiyanetLocationIdResolver();
 
   void _log(String message) {
     if (kDebugMode) {
@@ -297,10 +300,13 @@ class PrayerService {
     if (location.province.trim().isEmpty || location.district.trim().isEmpty) {
       return null;
     }
-    final ids = await _resolveDiyanetIds(
+    final ids = await _diyanetLocationIdResolver.resolve(
       countryId: location.countryId,
       province: location.province,
       district: location.district,
+      timeout: _diyanetTimeout,
+      headers: _diyanetHeaders,
+      onLog: _log,
     );
     if (ids == null) {
       _log('[Diyanet] id resolve failed for '
@@ -392,80 +398,6 @@ class PrayerService {
         maghrib: maghrib,
         isha: isha!,
       );
-    } catch (_) {
-      return null;
-    }
-  }
-
-  Future<DiyanetIds?> _resolveDiyanetIds({
-    required String? countryId,
-    required String province,
-    required String district,
-  }) async {
-    final provinceKey = normalizePrayerLocationName(province);
-    final districtKey = normalizePrayerLocationName(district);
-    final config = ConfigRegistry.dataSources.diyanet;
-    final resolvedCountryId =
-        (countryId != null && countryId.trim().isNotEmpty)
-            ? countryId.trim()
-            : config.countryId;
-    final cachePrefix = '$resolvedCountryId|$provinceKey';
-    final cachedState = _stateIdCache[cachePrefix];
-    final cachedDistrict = _districtIdCache['$cachePrefix|$districtKey'];
-    if (cachedState != null && cachedDistrict != null) {
-      return DiyanetIds(stateId: cachedState, districtId: cachedDistrict);
-    }
-
-    final statesUri = Uri.parse('${config.baseUrl}/api/locations/states').replace(
-      queryParameters: <String, String>{'countryId': resolvedCountryId},
-    );
-
-    try {
-      final statesResponse = await http
-          .get(statesUri, headers: _diyanetHeaders)
-          .timeout(_diyanetTimeout);
-      if (statesResponse.statusCode != 200) {
-        _log('[Diyanet] states status=${statesResponse.statusCode}');
-        return null;
-      }
-      final statesPayload = jsonDecode(statesResponse.body) as Map<String, dynamic>;
-      final statesData = statesPayload['data'];
-      if (statesData is! List) {
-        return null;
-      }
-      final stateId = findDiyanetEntryIdByNormalizedName(statesData, provinceKey);
-      if (stateId == null) {
-        _log('[Diyanet] state not found for $province');
-        return null;
-      }
-
-      final districtsUri = Uri.parse('${config.baseUrl}/api/locations/districts').replace(
-        queryParameters: <String, String>{'stateId': stateId},
-      );
-      final districtsResponse = await http
-          .get(districtsUri, headers: _diyanetHeaders)
-          .timeout(_diyanetTimeout);
-      if (districtsResponse.statusCode != 200) {
-        _log('[Diyanet] districts status=${districtsResponse.statusCode}');
-        return null;
-      }
-      final districtsPayload = jsonDecode(districtsResponse.body) as Map<String, dynamic>;
-      final districtsData = districtsPayload['data'];
-      if (districtsData is! List) {
-        return null;
-      }
-      final districtId = findDiyanetEntryIdByNormalizedName(
-        districtsData,
-        districtKey,
-      );
-      if (districtId == null) {
-        _log('[Diyanet] district not found for $province/$district');
-        return null;
-      }
-
-      _stateIdCache[cachePrefix] = stateId;
-      _districtIdCache['$cachePrefix|$districtKey'] = districtId;
-      return DiyanetIds(stateId: stateId, districtId: districtId);
     } catch (_) {
       return null;
     }

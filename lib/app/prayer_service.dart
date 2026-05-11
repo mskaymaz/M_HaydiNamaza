@@ -1,14 +1,11 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 
+import 'aladhan_prayer_times_client.dart';
 import 'calculation_advanced_settings_storage.dart';
 import 'diyanet_location_id_resolver.dart';
 import 'diyanet_prayer_times_client.dart';
 import 'prayer_calculation_parameters_factory.dart';
 import 'prayer_daily_cache_repository.dart';
-import '../core/config/config_registry.dart';
 import '../core/prayer_engine/calculation_parameters.dart';
 import '../core/prayer_engine/coordinates.dart';
 import '../core/prayer_engine/prayer_engine.dart';
@@ -30,6 +27,7 @@ class PrayerService {
   final PrayerDailyCacheRepository _dailyCacheRepository;
   final DiyanetLocationIdResolver _diyanetLocationIdResolver;
   final DiyanetPrayerTimesClient _diyanetPrayerTimesClient;
+  final AladhanPrayerTimesClient _aladhanPrayerTimesClient;
 
   static String? _memoryCacheFingerprint;
   static PrayerTimes? _memoryCacheTimes;
@@ -40,6 +38,7 @@ class PrayerService {
     PrayerDailyCacheRepository? dailyCacheRepository,
     DiyanetLocationIdResolver? diyanetLocationIdResolver,
     DiyanetPrayerTimesClient? diyanetPrayerTimesClient,
+    AladhanPrayerTimesClient? aladhanPrayerTimesClient,
   }) : _engine = engine ?? const PrayerEngine(),
        _advancedSettingsStorage =
            advancedSettingsStorage ?? CalculationAdvancedSettingsStorage(),
@@ -48,7 +47,9 @@ class PrayerService {
        _diyanetLocationIdResolver =
            diyanetLocationIdResolver ?? DiyanetLocationIdResolver(),
        _diyanetPrayerTimesClient =
-           diyanetPrayerTimesClient ?? DiyanetPrayerTimesClient();
+           diyanetPrayerTimesClient ?? DiyanetPrayerTimesClient(),
+       _aladhanPrayerTimesClient =
+           aladhanPrayerTimesClient ?? AladhanPrayerTimesClient();
 
   void _log(String message) {
     if (kDebugMode) {
@@ -198,73 +199,31 @@ class PrayerService {
     if (!latitude.isFinite || !longitude.isFinite) {
       return null;
     }
-    final config = ConfigRegistry.dataSources.aladhan;
-    final methodId = config.methodIds[methodCode];
-    if (methodId == null) {
+    final daily = await _aladhanPrayerTimesClient.fetchDaily(
+      date: date,
+      latitude: latitude,
+      longitude: longitude,
+      methodCode: methodCode,
+      school: school,
+      timeout: _aladhanTimeout,
+      headers: _diyanetHeaders,
+    );
+    if (daily == null) {
       return null;
     }
-    final datePath =
-        '${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year.toString().padLeft(4, '0')}';
-    final query = <String, String>{
-      'latitude': latitude.toString(),
-      'longitude': longitude.toString(),
-      'method': methodId.toString(),
-      'school': school.toString(),
-      'timezonestring': config.timeZone,
-    };
-    if (config.tune.trim().isNotEmpty) {
-      query['tune'] = config.tune;
-    }
-    if (config.shafaq.trim().isNotEmpty) {
-      query['shafaq'] = config.shafaq;
-    }
-    final uri =
-        Uri.parse('${config.baseUrl}/timings/$datePath').replace(queryParameters: query);
 
-    try {
-      final response =
-          await http.get(uri, headers: _diyanetHeaders).timeout(_aladhanTimeout);
-      if (response.statusCode != 200) {
-        return null;
-      }
-      final payload = jsonDecode(response.body);
-      if (payload is! Map<String, dynamic>) {
-        return null;
-      }
-      final data = payload['data'];
-      if (data is! Map<String, dynamic>) {
-        return null;
-      }
-      final timings = data['timings'];
-      if (timings is! Map<String, dynamic>) {
-        return null;
-      }
-
-      final fajr = parsePrayerClockTime(raw: timings['Fajr'], baseDate: date);
-      final sunrise = parsePrayerClockTime(raw: timings['Sunrise'], baseDate: date);
-      final dhuhr = parsePrayerClockTime(raw: timings['Dhuhr'], baseDate: date);
-      final asr = parsePrayerClockTime(raw: timings['Asr'], baseDate: date);
-      final maghrib = parsePrayerClockTime(raw: timings['Maghrib'], baseDate: date);
-      final isha = parsePrayerClockTime(raw: timings['Isha'], baseDate: date);
-      if ([fajr, sunrise, dhuhr, asr, maghrib, isha].contains(null)) {
-        return null;
-      }
-
-      return PrayerTimes.fromTimings(
-        coordinates: Coordinates(latitude, longitude),
-        date: date,
-        calculationParameters: fallbackParams,
-        fajr: fajr!,
-        sunrise: sunrise!,
-        dhuhr: dhuhr!,
-        asr: asr!,
-        sunset: maghrib!,
-        maghrib: maghrib,
-        isha: isha!,
-      );
-    } catch (_) {
-      return null;
-    }
+    return PrayerTimes.fromTimings(
+      coordinates: Coordinates(latitude, longitude),
+      date: date,
+      calculationParameters: fallbackParams,
+      fajr: daily.fajr,
+      sunrise: daily.sunrise,
+      dhuhr: daily.dhuhr,
+      asr: daily.asr,
+      sunset: daily.maghrib,
+      maghrib: daily.maghrib,
+      isha: daily.isha,
+    );
   }
 
   String _buildCacheFingerprint({

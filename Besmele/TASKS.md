@@ -284,6 +284,11 @@ Goal: make prayer-time logic trustworthy and maintainable.
 - Diyanet prayer-time fetch/parse logic was extracted from lib/app/prayer_service.dart into lib/app/diyanet_prayer_times_client.dart.
 - Preserved: prayer-times endpoint, headers, timeout, payload parsing, date fallback, minute-offset application, and null-return semantics.
 - Fallback orchestration and final PrayerTimes assembly remained in PrayerService; no Aladhan/cache/fingerprint behavior change intended.
+### TASK-04A checkpoint 5 (2026-05-11)
+- Aladhan prayer-time fetch/parse logic was extracted from lib/app/prayer_service.dart into lib/app/aladhan_prayer_times_client.dart.
+- Preserved: Aladhan API query construction, HTTP timeout/header behavior, JSON parsing/validation, invalid/missing response null semantics, and timing parse null semantics.
+- Provider selection, Diyanet -> Aladhan fallback order, cache/fingerprint flow, and PrayerTimes.fromTimings orchestration remained in PrayerService.
+- No behavior change intended.
 ### 04B — Official data access strategy
 - [ ] Add `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`.
 - [ ] Record current status: waiting for CIMER/Diyanet answer.

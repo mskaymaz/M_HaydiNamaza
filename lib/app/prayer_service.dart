@@ -4,6 +4,7 @@ import 'aladhan_prayer_times_client.dart';
 import 'calculation_advanced_settings_storage.dart';
 import 'diyanet_location_id_resolver.dart';
 import 'diyanet_prayer_times_client.dart';
+import 'prayer_cache_fingerprint_builder.dart';
 import 'prayer_calculation_parameters_factory.dart';
 import 'prayer_daily_cache_repository.dart';
 import '../core/prayer_engine/calculation_parameters.dart';
@@ -72,7 +73,7 @@ class PrayerService {
         methodCode: methodCode,
         advancedSettings: advancedSettings,
       );
-      final fingerprint = _buildCacheFingerprint(
+      final fingerprint = PrayerCacheFingerprintBuilder.build(
         location: location,
         methodCode: methodCode,
         latitude: latitude,
@@ -224,36 +225,6 @@ class PrayerService {
       maghrib: daily.maghrib,
       isha: daily.isha,
     );
-  }
-
-  String _buildCacheFingerprint({
-    required LocationData location,
-    required String methodCode,
-    required double latitude,
-    required double longitude,
-    required String timeZone,
-    required DateTime date,
-    required CalculationAdvancedSettings advancedSettings,
-  }) {
-    final dayKey = '${date.year.toString().padLeft(4, '0')}-'
-        '${date.month.toString().padLeft(2, '0')}-'
-        '${date.day.toString().padLeft(2, '0')}';
-    final countryId = (location.countryId ?? '').trim();
-    final province = normalizePrayerLocationName(location.province);
-    final district = normalizePrayerLocationName(location.district);
-    final lat = latitude.toStringAsFixed(4);
-    final lon = longitude.toStringAsFixed(4);
-    final offsets = [
-      advancedSettings.fajrOffsetMinutes,
-      advancedSettings.sunriseOffsetMinutes,
-      advancedSettings.dhuhrOffsetMinutes,
-      advancedSettings.asrOffsetMinutes,
-      advancedSettings.maghribOffsetMinutes,
-      advancedSettings.ishaOffsetMinutes,
-    ].join(',');
-    return '$dayKey|$methodCode|$timeZone|$countryId|$province|$district|$lat|$lon'
-        '|${advancedSettings.madhabCode}|${advancedSettings.highLatitudeRuleCode}'
-        '|${advancedSettings.shafaqCode}|${advancedSettings.roundingCode}|$offsets';
   }
 
   Future<PrayerTimes?> _tryDiyanet({

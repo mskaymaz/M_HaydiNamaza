@@ -289,6 +289,12 @@ Goal: make prayer-time logic trustworthy and maintainable.
 - Preserved: Aladhan API query construction, HTTP timeout/header behavior, JSON parsing/validation, invalid/missing response null semantics, and timing parse null semantics.
 - Provider selection, Diyanet -> Aladhan fallback order, cache/fingerprint flow, and PrayerTimes.fromTimings orchestration remained in PrayerService.
 - No behavior change intended.
+### TASK-04A checkpoint 7 (2026-05-11)
+- Cache fingerprint construction was extracted from lib/app/prayer_service.dart into lib/app/prayer_cache_fingerprint_builder.dart.
+- Preserved exact fingerprint content and format:
+  day|method|tz|country|province|district|lat|lon|madhab|highLatitude|shafaq|rounding|offsets
+- Cache key usage, cache read/write flow, provider selection, fallback order, PrayerTimes.fromTimings orchestration, and app-level null/error behavior remained in PrayerService.
+- No behavior change intended.
 ### 04B — Official data access strategy
 - [ ] Add `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`.
 - [ ] Record current status: waiting for CIMER/Diyanet answer.

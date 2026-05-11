@@ -7,6 +7,7 @@ import 'diyanet_prayer_times_client.dart';
 import 'prayer_cache_fingerprint_builder.dart';
 import 'prayer_calculation_parameters_factory.dart';
 import 'prayer_daily_cache_repository.dart';
+import 'prayer_times_mapper.dart';
 import '../core/prayer_engine/calculation_parameters.dart';
 import '../core/prayer_engine/coordinates.dart';
 import '../core/prayer_engine/prayer_engine.dart';
@@ -213,17 +214,12 @@ class PrayerService {
       return null;
     }
 
-    return PrayerTimes.fromTimings(
-      coordinates: Coordinates(latitude, longitude),
+    return PrayerTimesMapper.fromAladhanDaily(
+      daily: daily,
       date: date,
+      latitude: latitude,
+      longitude: longitude,
       calculationParameters: fallbackParams,
-      fajr: daily.fajr,
-      sunrise: daily.sunrise,
-      dhuhr: daily.dhuhr,
-      asr: daily.asr,
-      sunset: daily.maghrib,
-      maghrib: daily.maghrib,
-      isha: daily.isha,
     );
   }
 
@@ -264,19 +260,10 @@ class PrayerService {
         return null;
       }
 
-      final lat = double.tryParse(location.latitude) ?? 0;
-      final lon = double.tryParse(location.longitude) ?? 0;
-      return PrayerTimes.fromTimings(
-        coordinates: Coordinates(lat, lon),
-        date: daily.baseDate,
+      return PrayerTimesMapper.fromDiyanetDaily(
+        daily: daily,
+        location: location,
         calculationParameters: fallbackParams,
-        fajr: daily.fajr,
-        sunrise: daily.sunrise,
-        dhuhr: daily.dhuhr,
-        asr: daily.asr,
-        sunset: daily.maghrib,
-        maghrib: daily.maghrib,
-        isha: daily.isha,
       );
     } catch (_) {
       return null;

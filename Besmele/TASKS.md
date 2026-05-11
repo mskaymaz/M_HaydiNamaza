@@ -295,6 +295,11 @@ Goal: make prayer-time logic trustworthy and maintainable.
   day|method|tz|country|province|district|lat|lon|madhab|highLatitude|shafaq|rounding|offsets
 - Cache key usage, cache read/write flow, provider selection, fallback order, PrayerTimes.fromTimings orchestration, and app-level null/error behavior remained in PrayerService.
 - No behavior change intended.
+### TASK-04A checkpoint 8 (2026-05-11)
+- Provider timing/result to PrayerTimes mapping helpers were extracted from lib/app/prayer_service.dart into lib/app/prayer_times_mapper.dart.
+- Preserved PrayerTimes.fromTimings behavior and parameters.
+- Provider calls, fallback order, cache flow, orchestration, and app-level null/error behavior remained in PrayerService.
+- No behavior change intended.
 ### 04B — Official data access strategy
 - [ ] Add `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`.
 - [ ] Record current status: waiting for CIMER/Diyanet answer.

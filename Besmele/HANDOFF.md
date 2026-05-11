@@ -6,6 +6,7 @@ TASK-00 is completed on 2026-05-10 with documented exceptions.
 TASK-04A first implementation step is completed (parameter factory extraction only).
 TASK-04A checkpoint 2 is completed (daily cache repository extraction only).
 TASK-04A checkpoint 3 is completed (Diyanet location ID resolver extraction only).
+TASK-04A checkpoint 4 is completed (Diyanet prayer-time client extraction only).
 
 ## Next action
 Wait for explicit start instruction before TASK-01.
@@ -49,6 +50,15 @@ Wait for explicit start instruction before TASK-01.
 ## TASK-04A checkpoint 3 (2026-05-11)
 - Changed files:
   - `lib/app/diyanet_location_id_resolver.dart`
+  - `lib/app/prayer_service.dart`
+  - `Besmele/TASKS.md`
+  - `Besmele/HANDOFF.md`
+- Validation:
+  - `flutter analyze` was not run in this step by scope rule.
+
+## TASK-04A checkpoint 4 (2026-05-11)
+- Changed files:
+  - `lib/app/diyanet_prayer_times_client.dart`
   - `lib/app/prayer_service.dart`
   - `Besmele/TASKS.md`
   - `Besmele/HANDOFF.md`

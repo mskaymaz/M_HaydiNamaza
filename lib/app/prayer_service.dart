@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 import 'calculation_advanced_settings_storage.dart';
 import 'diyanet_location_id_resolver.dart';
+import 'diyanet_prayer_times_client.dart';
 import 'prayer_calculation_parameters_factory.dart';
 import 'prayer_daily_cache_repository.dart';
 import '../core/config/config_registry.dart';
@@ -28,6 +29,7 @@ class PrayerService {
   final CalculationAdvancedSettingsStorage _advancedSettingsStorage;
   final PrayerDailyCacheRepository _dailyCacheRepository;
   final DiyanetLocationIdResolver _diyanetLocationIdResolver;
+  final DiyanetPrayerTimesClient _diyanetPrayerTimesClient;
 
   static String? _memoryCacheFingerprint;
   static PrayerTimes? _memoryCacheTimes;
@@ -37,13 +39,16 @@ class PrayerService {
     CalculationAdvancedSettingsStorage? advancedSettingsStorage,
     PrayerDailyCacheRepository? dailyCacheRepository,
     DiyanetLocationIdResolver? diyanetLocationIdResolver,
+    DiyanetPrayerTimesClient? diyanetPrayerTimesClient,
   }) : _engine = engine ?? const PrayerEngine(),
        _advancedSettingsStorage =
            advancedSettingsStorage ?? CalculationAdvancedSettingsStorage(),
        _dailyCacheRepository =
            dailyCacheRepository ?? PrayerDailyCacheRepository(),
        _diyanetLocationIdResolver =
-           diyanetLocationIdResolver ?? DiyanetLocationIdResolver();
+           diyanetLocationIdResolver ?? DiyanetLocationIdResolver(),
+       _diyanetPrayerTimesClient =
+           diyanetPrayerTimesClient ?? DiyanetPrayerTimesClient();
 
   void _log(String message) {
     if (kDebugMode) {
@@ -315,72 +320,17 @@ class PrayerService {
     }
     _log('[Diyanet] ids state=${ids.stateId} district=${ids.districtId}');
 
-    final config = ConfigRegistry.dataSources.diyanet;
-    final uri = Uri.parse('${config.baseUrl}/api/prayer-times/${ids.districtId}/daily');
-
     try {
-      final response =
-          await http.get(uri, headers: _diyanetHeaders).timeout(_diyanetTimeout);
-      if (response.statusCode != 200) {
-        _log('[Diyanet] prayer-times status=${response.statusCode}');
-        return null;
-      }
-      final payload = jsonDecode(response.body) as Map<String, dynamic>;
-      final data = payload['data'];
-      Map<String, dynamic>? entry;
-      if (data is List && data.isNotEmpty) {
-        final first = data.first;
-        if (first is Map<String, dynamic>) {
-          entry = first;
-        }
-      } else if (data is Map<String, dynamic>) {
-        entry = data;
-      }
-      if (entry == null) {
-        _log('[Diyanet] empty payload');
-        return null;
-      }
-      final times = entry['times'] as Map<String, dynamic>?;
-      if (times == null) {
-        _log('[Diyanet] times missing');
-        return null;
-      }
-
-      final dateValue = entry['date'] as String?;
-      final baseDate = DateTime.tryParse(dateValue ?? '')?.toLocal() ?? date;
-
-      final fajrRaw = parsePrayerClockTime(raw: times['imsak'], baseDate: baseDate);
-      final sunriseRaw = parsePrayerClockTime(raw: times['gunes'], baseDate: baseDate);
-      final dhuhrRaw = parsePrayerClockTime(raw: times['ogle'], baseDate: baseDate);
-      final asrRaw = parsePrayerClockTime(raw: times['ikindi'], baseDate: baseDate);
-      final maghribRaw = parsePrayerClockTime(raw: times['aksam'], baseDate: baseDate);
-      final ishaRaw = parsePrayerClockTime(raw: times['yatsi'], baseDate: baseDate);
-      final fajr = fajrRaw == null
-          ? null
-          : applyPrayerMinuteOffset(fajrRaw, config.minuteOffsets['imsak'] ?? 0);
-      final sunrise = sunriseRaw == null
-          ? null
-          : applyPrayerMinuteOffset(
-              sunriseRaw,
-              config.minuteOffsets['gunes'] ?? 0,
-            );
-      final dhuhr = dhuhrRaw == null
-          ? null
-          : applyPrayerMinuteOffset(dhuhrRaw, config.minuteOffsets['ogle'] ?? 0);
-      final asr = asrRaw == null
-          ? null
-          : applyPrayerMinuteOffset(asrRaw, config.minuteOffsets['ikindi'] ?? 0);
-      final maghrib = maghribRaw == null
-          ? null
-          : applyPrayerMinuteOffset(
-              maghribRaw,
-              config.minuteOffsets['aksam'] ?? 0,
-            );
-      final isha = ishaRaw == null
-          ? null
-          : applyPrayerMinuteOffset(ishaRaw, config.minuteOffsets['yatsi'] ?? 0);
-      if ([fajr, sunrise, dhuhr, asr, maghrib, isha].contains(null)) {
-        _log('[Diyanet] missing times for ${location.province}/${location.district}');
+      final daily = await _diyanetPrayerTimesClient.fetchDaily(
+        districtId: ids.districtId,
+        province: location.province,
+        district: location.district,
+        date: date,
+        timeout: _diyanetTimeout,
+        headers: _diyanetHeaders,
+        onLog: _log,
+      );
+      if (daily == null) {
         return null;
       }
 
@@ -388,15 +338,15 @@ class PrayerService {
       final lon = double.tryParse(location.longitude) ?? 0;
       return PrayerTimes.fromTimings(
         coordinates: Coordinates(lat, lon),
-        date: baseDate,
+        date: daily.baseDate,
         calculationParameters: fallbackParams,
-        fajr: fajr!,
-        sunrise: sunrise!,
-        dhuhr: dhuhr!,
-        asr: asr!,
-        sunset: maghrib!,
-        maghrib: maghrib,
-        isha: isha!,
+        fajr: daily.fajr,
+        sunrise: daily.sunrise,
+        dhuhr: daily.dhuhr,
+        asr: daily.asr,
+        sunset: daily.maghrib,
+        maghrib: daily.maghrib,
+        isha: daily.isha,
       );
     } catch (_) {
       return null;

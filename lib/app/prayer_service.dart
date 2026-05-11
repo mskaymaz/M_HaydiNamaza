@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'calculation_advanced_settings_storage.dart';
 import 'prayer_calculation_parameters_factory.dart';
+import 'prayer_daily_cache_repository.dart';
 import '../core/config/config_registry.dart';
 import '../core/prayer_engine/calculation_parameters.dart';
 import '../core/prayer_engine/coordinates.dart';
@@ -18,7 +18,6 @@ import 'runtime_monitor.dart';
 class PrayerService {
   static const Duration _diyanetTimeout = Duration(seconds: 12);
   static const Duration _aladhanTimeout = Duration(seconds: 12);
-  static const String _dailyCacheKey = 'prayer_daily_cache_v1';
   static const Map<String, String> _diyanetHeaders = <String, String>{
     'Accept': 'application/json',
     'User-Agent': 'HaydiNamaza/1.0',
@@ -26,6 +25,7 @@ class PrayerService {
 
   final PrayerEngine _engine;
   final CalculationAdvancedSettingsStorage _advancedSettingsStorage;
+  final PrayerDailyCacheRepository _dailyCacheRepository;
 
   static final Map<String, String> _stateIdCache = {};
   static final Map<String, String> _districtIdCache = {};
@@ -35,9 +35,12 @@ class PrayerService {
   PrayerService({
     PrayerEngine? engine,
     CalculationAdvancedSettingsStorage? advancedSettingsStorage,
+    PrayerDailyCacheRepository? dailyCacheRepository,
   }) : _engine = engine ?? const PrayerEngine(),
        _advancedSettingsStorage =
-           advancedSettingsStorage ?? CalculationAdvancedSettingsStorage();
+           advancedSettingsStorage ?? CalculationAdvancedSettingsStorage(),
+       _dailyCacheRepository =
+           dailyCacheRepository ?? PrayerDailyCacheRepository();
 
   void _log(String message) {
     if (kDebugMode) {
@@ -73,7 +76,7 @@ class PrayerService {
         _log('[Cache] memory hit for today');
         return _memoryCacheTimes!;
       }
-      final cached = await _readDailyCache(
+      final cached = await _dailyCacheRepository.read(
         fingerprint: fingerprint,
         coordinates: Coordinates(latitude, longitude),
         date: now,
@@ -95,7 +98,7 @@ class PrayerService {
         date: now,
         params: params,
       );
-      await _writeDailyCache(fingerprint: fingerprint, times: fresh);
+      await _dailyCacheRepository.write(fingerprint: fingerprint, times: fresh);
       _memoryCacheFingerprint = fingerprint;
       _memoryCacheTimes = fresh;
       return fresh;
@@ -284,61 +287,6 @@ class PrayerService {
     return '$dayKey|$methodCode|$timeZone|$countryId|$province|$district|$lat|$lon'
         '|${advancedSettings.madhabCode}|${advancedSettings.highLatitudeRuleCode}'
         '|${advancedSettings.shafaqCode}|${advancedSettings.roundingCode}|$offsets';
-  }
-
-  Future<PrayerTimes?> _readDailyCache({
-    required String fingerprint,
-    required Coordinates coordinates,
-    required DateTime date,
-    required CalculationParameters calculationParameters,
-  }) async {
-    final prefs = await SharedPreferences.getInstance();
-    final raw = prefs.getString(_dailyCacheKey);
-    if (raw == null || raw.trim().isEmpty) return null;
-    try {
-      final payload = jsonDecode(raw);
-      if (payload is! Map<String, dynamic>) return null;
-      if (payload['fingerprint'] != fingerprint) return null;
-      final fajr = DateTime.tryParse((payload['fajr'] ?? '').toString());
-      final sunrise = DateTime.tryParse((payload['sunrise'] ?? '').toString());
-      final dhuhr = DateTime.tryParse((payload['dhuhr'] ?? '').toString());
-      final asr = DateTime.tryParse((payload['asr'] ?? '').toString());
-      final maghrib = DateTime.tryParse((payload['maghrib'] ?? '').toString());
-      final isha = DateTime.tryParse((payload['isha'] ?? '').toString());
-      if ([fajr, sunrise, dhuhr, asr, maghrib, isha].contains(null)) return null;
-      return PrayerTimes.fromTimings(
-        coordinates: coordinates,
-        date: date,
-        calculationParameters: calculationParameters,
-        fajr: fajr!,
-        sunrise: sunrise!,
-        dhuhr: dhuhr!,
-        asr: asr!,
-        sunset: maghrib!,
-        maghrib: maghrib,
-        isha: isha!,
-      );
-    } catch (_) {
-      return null;
-    }
-  }
-
-  Future<void> _writeDailyCache({
-    required String fingerprint,
-    required PrayerTimes times,
-  }) async {
-    final payload = <String, dynamic>{
-      'fingerprint': fingerprint,
-      'savedAt': DateTime.now().toIso8601String(),
-      'fajr': times.fajr.toIso8601String(),
-      'sunrise': times.sunrise.toIso8601String(),
-      'dhuhr': times.dhuhr.toIso8601String(),
-      'asr': times.asr.toIso8601String(),
-      'maghrib': times.maghrib.toIso8601String(),
-      'isha': times.isha.toIso8601String(),
-    };
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_dailyCacheKey, jsonEncode(payload));
   }
 
   Future<PrayerTimes?> _tryDiyanet({

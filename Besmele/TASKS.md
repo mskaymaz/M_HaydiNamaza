@@ -272,6 +272,10 @@ Goal: make prayer-time logic trustworthy and maintainable.
 - Parameter construction logic was extracted from lib/app/prayer_service.dart into lib/app/prayer_calculation_parameters_factory.dart.
 - Extracted scope: method-code -> CalculationMethod mapping and advanced settings application (madhab, high-latitude rule, shafaq, rounding, per-prayer offsets).
 - No fallback order, cache key/fingerprint, source access (Diyanet/Aladhan), or PrayerTimes.fromTimings behavior change intended.
+### TASK-04A checkpoint 2 (2026-05-11)
+- Daily prayer-time cache read/write access was extracted from lib/app/prayer_service.dart into lib/app/prayer_daily_cache_repository.dart.
+- Preserved: cache key (prayer_daily_cache_v1), JSON field names, fingerprint comparison usage, and cache miss null semantics.
+- No fallback order/source flow (Diyanet/Aladhan) or PrayerTimes.fromTimings orchestration change intended.
 ### 04B — Official data access strategy
 - [ ] Add `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`.
 - [ ] Record current status: waiting for CIMER/Diyanet answer.
@@ -457,6 +461,7 @@ Goal: prepare for real users.
 
 Acceptance:
 - A new developer or AI assistant can understand, build, and safely continue the project.
+
 
 
 

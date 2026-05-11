@@ -3,6 +3,7 @@
 ## Current status
 TASK-03 is closed and pushed on `main`.
 TASK-00 is completed on 2026-05-10 with documented exceptions.
+TASK-04A first implementation step is completed (parameter factory extraction only).
 
 ## Next action
 Wait for explicit start instruction before TASK-01.
@@ -24,4 +25,13 @@ Wait for explicit start instruction before TASK-01.
 - The app must stay working during refactors.
 - Large files must be split gradually.
 - Shared settings must be reusable across MSK Labs apps.
+
+## TASK-04A checkpoint (2026-05-11)
+- Changed files:
+  - `lib/app/prayer_calculation_parameters_factory.dart`
+  - `lib/app/prayer_service.dart`
+  - `Besmele/TASKS.md`
+  - `Besmele/HANDOFF.md`
+- Validation:
+  - `flutter analyze` was not run in this step by scope rule.
 

@@ -5,16 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'calculation_advanced_settings_storage.dart';
+import 'prayer_calculation_parameters_factory.dart';
 import '../core/config/config_registry.dart';
-import '../core/prayer_engine/calculation_method.dart';
 import '../core/prayer_engine/calculation_parameters.dart';
 import '../core/prayer_engine/coordinates.dart';
-import '../core/prayer_engine/high_latitude_rule.dart';
-import '../core/prayer_engine/madhab.dart';
 import '../core/prayer_engine/prayer_engine.dart';
 import '../core/prayer_engine/prayer_times.dart';
-import '../core/prayer_engine/rounding.dart';
-import '../core/prayer_engine/shafaq.dart';
 import 'location_storage.dart';
 import 'prayer_service_pure_helpers.dart';
 import 'runtime_monitor.dart';
@@ -60,9 +56,9 @@ class PrayerService {
       _log('[Calc] method=$methodCode location=${location.province}/${location.district}');
       final now = DateTime.now();
       final advancedSettings = await _advancedSettingsStorage.read();
-      final params = _applyAdvancedSettings(
-        _paramsFor(methodCode),
-        advancedSettings,
+      final params = PrayerCalculationParametersFactory.build(
+        methodCode: methodCode,
+        advancedSettings: advancedSettings,
       );
       final fingerprint = _buildCacheFingerprint(
         location: location,
@@ -290,58 +286,6 @@ class PrayerService {
         '|${advancedSettings.shafaqCode}|${advancedSettings.roundingCode}|$offsets';
   }
 
-  CalculationParameters _applyAdvancedSettings(
-    CalculationParameters params,
-    CalculationAdvancedSettings settings,
-  ) {
-    params.madhab = settings.madhabCode == 'hanafi' ? Madhab.hanafi : Madhab.shafi;
-    switch (settings.highLatitudeRuleCode) {
-      case 'seventh_of_the_night':
-        params.highLatitudeRule = HighLatitudeRule.seventhOfTheNight;
-        break;
-      case 'twilight_angle':
-        params.highLatitudeRule = HighLatitudeRule.twilightAngle;
-        break;
-      case 'middle_of_the_night':
-      default:
-        params.highLatitudeRule = HighLatitudeRule.middleOfTheNight;
-        break;
-    }
-    switch (settings.shafaqCode) {
-      case 'ahmer':
-        params.shafaq = Shafaq.ahmer;
-        break;
-      case 'abyad':
-        params.shafaq = Shafaq.abyad;
-        break;
-      case 'general':
-      default:
-        params.shafaq = Shafaq.general;
-        break;
-    }
-    switch (settings.roundingCode) {
-      case 'up':
-        params.rounding = Rounding.up;
-        break;
-      case 'none':
-        params.rounding = Rounding.none;
-        break;
-      case 'nearest':
-      default:
-        params.rounding = Rounding.nearest;
-        break;
-    }
-    params.adjustments = <String, int>{
-      'fajr': settings.fajrOffsetMinutes,
-      'sunrise': settings.sunriseOffsetMinutes,
-      'dhuhr': settings.dhuhrOffsetMinutes,
-      'asr': settings.asrOffsetMinutes,
-      'maghrib': settings.maghribOffsetMinutes,
-      'isha': settings.ishaOffsetMinutes,
-    };
-    return params;
-  }
-
   Future<PrayerTimes?> _readDailyCache({
     required String fingerprint,
     required Coordinates coordinates,
@@ -395,39 +339,6 @@ class PrayerService {
     };
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_dailyCacheKey, jsonEncode(payload));
-  }
-
-  CalculationParameters _paramsFor(String code) {
-    switch (code) {
-      case 'turkey':
-      case 'diyanet_tabanli':
-        return CalculationMethod.turkey();
-      case 'muslim_world_league':
-        return CalculationMethod.muslimWorldLeague();
-      case 'umm_al_qura':
-        return CalculationMethod.ummAlQura();
-      case 'dubai':
-        return CalculationMethod.dubai();
-      case 'kuwait':
-        return CalculationMethod.kuwait();
-      case 'qatar':
-        return CalculationMethod.qatar();
-      case 'singapore':
-        return CalculationMethod.singapore();
-      case 'tehran':
-        return CalculationMethod.tehran();
-      case 'moonsighting':
-        return CalculationMethod.moonsightingCommittee();
-      case 'north_america':
-        return CalculationMethod.northAmerica();
-      case 'egyptian':
-        return CalculationMethod.egyptian();
-      case 'karachi':
-        return CalculationMethod.karachi();
-      case 'other':
-      default:
-        return CalculationMethod.other();
-    }
   }
 
   Future<PrayerTimes?> _tryDiyanet({

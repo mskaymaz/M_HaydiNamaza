@@ -161,13 +161,32 @@ Label bazlı kısa açıklama örnekleri:
 ## 8. 10 şehir karşılaştırma test planı
 Release öncesi en az 10 şehirde karşılaştırma yapılmalıdır.
 
-Kapsam:
-- Farklı coğrafi dağılım (batı/doğu, kuzey/güney)
-- Büyükşehir + orta ölçekli şehir karışımı
-- Mümkünse farklı enlem etkisi görülen noktalar
+Şehir/ilçe örnek listesi:
+- İstanbul / Fatih
+- Ankara / Çankaya
+- İzmir / Konak
+- Konya / Selçuklu
+- Erzurum / Yakutiye
+- Trabzon / Ortahisar
+- Diyarbakır / Sur
+- Antalya / Muratpaşa
+- Van / İpekyolu
+- Edirne / Merkez
+
+Her şehir için karşılaştırılacak kaynaklar:
+- Resmi/izinli Diyanet veri cevabı geldiyse resmi kaynak
+- Mevcut Diyanet endpoint sonucu (geçici gözlem amaçlı)
+- Aladhan sonucu
+- Local calculated fallback sonucu
 
 Kontroller:
-- Aynı gün için her vakit kaleminde karşılaştırma (imsak, güneş, öğle, ikindi, akşam, yatsı)
+- Aynı gün için her vakit kaleminde karşılaştırma:
+  - imsak
+  - güneş
+  - öğle
+  - ikindi
+  - akşam
+  - yatsı
 - Kaynaklar arası dakika farkı raporu
 - Kabul eşiğini aşan sapmalarda kök neden notu
 
@@ -175,6 +194,11 @@ Kontroller:
 - Åehir bazlı fark tablosu
 - Kaynak güven notu
 - Release gate kararına girdi olacak özet değerlendirme
+
+Kabul notu:
+- Tolerans değerleri resmi kaynak stratejisi netleşmeden final kabul edilmeyecek.
+- Büyük farklar release blocker kabul edilecek.
+- Bu test planı şimdilik dokümantasyon taslağıdır.
 
 ## 9. Release gate / çıkış kriterleri
 Release için aşağıdakiler birlikte sağlanmalıdır:

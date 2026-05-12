@@ -10,10 +10,9 @@ abstract class DailyContentClock {
   }
 }
 
-class SystemDailyContentClock implements DailyContentClock {
-  const SystemDailyContentClock();
+class SystemDailyContentClock extends DailyContentClock {
+  SystemDailyContentClock();
 
   @override
   DateTime now() => DateTime.now();
 }
-

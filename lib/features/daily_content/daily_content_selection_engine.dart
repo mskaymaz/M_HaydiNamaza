@@ -1,6 +1,7 @@
 import 'daily_content_clock.dart';
 import 'daily_content_loader.dart';
 import 'daily_content_models.dart';
+import 'daily_content_parse_result.dart';
 import 'daily_content_selection_models.dart';
 import 'daily_content_state_codec.dart';
 import 'daily_content_state_repository.dart';
@@ -18,7 +19,7 @@ class DailyContentSelectionEngine {
     int recentWindow = 7,
   }) : _loader = loader ?? DailyContentLoader(),
        _stateRepository = stateRepository ?? DailyContentStateRepository(),
-       _clock = clock ?? const SystemDailyContentClock(),
+       _clock = clock ?? SystemDailyContentClock(),
        _recentWindow = recentWindow < 0 ? 0 : recentWindow;
 
   Future<DailyContentSelectionResult> selectToday() async {
@@ -260,7 +261,7 @@ class DailyContentSelectionEngine {
   List<String> _trimRecent(List<String> ids, int candidateCount) {
     final maxWindow = candidateCount <= 1
         ? 0
-        : _recentWindow.clamp(1, candidateCount - 1) as int;
+        : _recentWindow.clamp(1, candidateCount - 1);
     if (maxWindow <= 0) return const <String>[];
     if (ids.length <= maxWindow) return ids;
     return ids.sublist(ids.length - maxWindow);

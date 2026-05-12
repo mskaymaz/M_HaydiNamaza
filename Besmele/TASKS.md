@@ -322,6 +322,13 @@ Acceptance:
 - The app can represent source quality honestly.
 - Release is blocked until source strategy is approved.
 
+### TASK-04B closure audit (2026-05-12)
+- Prayer-time data-source strategy documentation was completed.
+- Covered: candidate source options, source quality label plan, UI transparency text plan, 10-city comparison test plan, and release gate criteria.
+- No final source/fallback contract decision will be made before the official CÝMER/Diyanet response is evaluated.
+- Finalization after the official response will be handled as a separate checkpoint.
+- TASK-04B is considered closed for the current documentation scope.
+
 ---
 
 ## TASK-05 â€” Daily Ayah and Hadith Panel System

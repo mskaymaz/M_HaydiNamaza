@@ -1,0 +1,156 @@
+﻿# PRAYER_TIMES_DATA_SOURCE_STRATEGY
+
+## 1. Amaç ve kapsam
+Bu dokümanın amacı, M_HaydiNamaza uygulamasında namaz vakti verisinin hangi kaynaklardan, hangi kurallarla ve hangi şeffaflık düzeyiyle kullanılacağını net bir çerçeveye oturtmaktır.
+
+Kapsam:
+- Veri kaynağı seçeneklerini karşılaştırmak
+- Geçici ve kalıcı mimariyi ayırmak
+- Kullanıcıya gösterilecek kaynak kalitesi yaklaşımını tanımlamak
+- Release öncesi zorunlu karar ve test kapılarını belirlemek
+
+Kapsam dışı:
+- Bu aşamada kod akışı/fallback sırası değiştirmek
+- Resmi yanıt gelmeden kesin kaynak kararı vermek
+
+## 2. Mevcut durum
+- 2026-05-12 itibarıyla CİMER/Diyanet cevabı bekleniyor.
+- Resmi/izinli veri stratejisi netleşmeden release yapılmayacak.
+- TASK-04A tamamlandı; mevcut servis yapısı orkestrasyon/fallback kararını taşıyor.
+- Mevcut durumda gizli/fragil endpoint kullanımının kalıcı mimari olmaması temel prensip.
+
+## 3. Zorunlu karar kriterleri
+Veri stratejisi aşağıdaki kriterler birlikte sağlanacak şekilde seçilmelidir:
+
+- Hukuki izin: Kaynağın kullanım hakkı, lisans ve dağıtım izni açık olmalı.
+- Veri doğruluğu: İl/ilçe bazında güvenilir ve doğrulanabilir sonuç üretmeli.
+- Sürdürülebilirlik: Kaynak erişimi uzun vadede kesintisiz ve bakım yapılabilir olmalı.
+- Offline uygunluk: Ağ yokken kullanıcıyı tamamen işlevsiz bırakmamalı.
+- Maliyet: API, depolama, güncelleme ve bakım maliyetleri yönetilebilir olmalı.
+- Kullanıcıya şeffaflık: Veri kaynağı ve kalite düzeyi kullanıcıya açıkça gösterilmeli.
+
+## 4. Aday veri kaynakları karşılaştırması
+Kesin karar için resmi yanıt beklendiğinden, aşağıdaki seçenekler ön değerlendirme seviyesindedir.
+
+### 4.1 Resmi Diyanet API veya lisanslı veri
+Artılar:
+- Kurumsal güven ve dini içerik tutarlılığı açısından güçlü aday.
+- Ürün güvenilirliği anlatısında en net seçenek.
+
+Riskler/Sorular:
+- API erişim modeli, kota ve lisans şartları net değil.
+- Ticari/halka açık uygulama kullanım koşulları teyit gerektiriyor.
+
+### 4.2 Yıllık/aylık şehir-ilçe offline veri paketi
+Artılar:
+- Offline dayanıklılığı yüksek.
+- Performans ve öngörülebilirlik iyi.
+
+Riskler/Sorular:
+- Paket güncelleme döngüsü ve dağıtım mekanizması netleşmeli.
+- Veri güncelliği ve bakım operasyonu maliyetli olabilir.
+
+### 4.3 İzinli/üretilmiş doğrulanmış cache
+Artılar:
+- Hızlı erişim ve ağ bağımlılığını azaltma avantajı.
+- Resmi kaynaktan türetilirse kullanıcı deneyimi dengelenebilir.
+
+Riskler/Sorular:
+- Türetim ve yeniden dağıtım izni açık olmalı.
+- Cache üretim doğrulama süreci resmi olarak tanımlanmalı.
+
+### 4.4 Üçüncü taraf API fallback
+Artılar:
+- Erişilebilirlik ve yedeklilik sağlar.
+- Geçiş döneminde operasyonel esneklik verebilir.
+
+Riskler/Sorular:
+- Metodoloji farkları nedeniyle resmi kaynakla sapma olabilir.
+- Uzun vadede bağımlılık/maliyet riski oluşabilir.
+
+### 4.5 Yaklaşık hesaplama fallback
+Artılar:
+- Tam veri yokken minimum hizmet sürekliliği sağlar.
+- Ağsız senaryoda son çare yaklaşımı olabilir.
+
+Riskler/Sorular:
+- Kullanıcıda â€œresmi vakitâ€ algısı oluşturulmamalı.
+- Bölgesel/doğruluk sapmaları net biçimde etiketlenmeli.
+
+## 5. Geçici mimari ve kalıcı mimari ayrımı
+Geçici mimari (CİMER/Diyanet yanıtı öncesi):
+- Mevcut fallback orkestrasyonu korunur.
+- Kaynak kalitesi etiketleme hazırlığı yapılır.
+- Release kararı bloklu kalır.
+
+Kalıcı mimari (resmi karar sonrası):
+- Birincil kaynak resmi/izinli stratejiye bağlanır.
+- Fallback sırası lisans ve doğruluk kurallarına göre kesinlenir.
+- Veri güncelleme/dağıtım akışı resmi stratejiyle standartlaştırılır.
+
+## 6. Source quality / veri kaynağı etiketi planı
+Uygulama içinde kullanıcıya gösterilecek etiketler, kaynak güven düzeyini sade şekilde iletmelidir.
+
+Önerilen etiket seviyeleri:
+- `Resmi / dogrulanmis kaynak`
+- `Dogrulanmis ikincil kaynak`
+- `Yaklasik hesaplama`
+
+Not:
+- Nihai etiket metinleri ve eşik kuralları resmi veri stratejisi netleşince kesinlenir.
+- Etiket görünürlüğü kullanıcıdan saklanmamalıdır.
+
+## 7. UI şeffaflık metni planı
+Amaç, kullanıcıya â€œhangi veriyi neden görüyorum?â€ sorusunun net cevabını vermektir.
+
+Plan:
+- Namaz vakti panelinde kısa kaynak etiketi gösterimi
+- Ayarlar içinde â€œVeri Kaynağı ve Güven Düzeyiâ€ açıklama alanı
+- Fallback durumunda sade bilgilendirme metni
+
+Taslak metin yaklaşımı:
+- Resmi kaynakta: â€œVakitler resmi/izinli kaynaktan sunulmaktadır.â€
+- İkincil kaynaktan: â€œVakitler doğrulanmış ikincil kaynaktan sunulmaktadır.â€
+- Yaklaşık hesapta: â€œBu vakitler yaklaşık hesaplama ile gösterilmektedir.â€
+
+## 8. 10 şehir karşılaştırma test planı
+Release öncesi en az 10 şehirde karşılaştırma yapılmalıdır.
+
+Kapsam:
+- Farklı coğrafi dağılım (batı/doğu, kuzey/güney)
+- Büyükşehir + orta ölçekli şehir karışımı
+- Mümkünse farklı enlem etkisi görülen noktalar
+
+Kontroller:
+- Aynı gün için her vakit kaleminde karşılaştırma (imsak, güneş, öğle, ikindi, akşam, yatsı)
+- Kaynaklar arası dakika farkı raporu
+- Kabul eşiğini aşan sapmalarda kök neden notu
+
+Çıktı:
+- Åehir bazlı fark tablosu
+- Kaynak güven notu
+- Release gate kararına girdi olacak özet değerlendirme
+
+## 9. Release gate / çıkış kriterleri
+Release için aşağıdakiler birlikte sağlanmalıdır:
+
+- Resmi/izinli veri stratejisi onayı tamamlanmış olmalı.
+- Birincil kaynak ve fallback politikası dokümante edilmiş olmalı.
+- 10 şehir karşılaştırma testi tamamlanmış olmalı.
+- Kaynak kalite etiketi ve şeffaflık metni kullanıcıya görünür olmalı.
+- Hukuki belirsizlik içeren kullanım yolu release kapsamı dışında bırakılmalı.
+
+## 10. Açık kararlar ve beklenen cevaplar
+Henüz kesinleşmeyen başlıklar:
+- Diyanet tarafından sağlanacak resmi erişim modeli nedir?
+- Lisans/yeniden dağıtım şartları nelerdir?
+- Offline paket kullanımına resmi olarak hangi sınırlar uygulanır?
+- Üçüncü taraf fallback hangi koşullarda devreye girebilir?
+- Yaklaşık hesaplama hangi kullanıcı senaryosunda gösterilebilir?
+
+Beklenen dış cevaplar:
+- CİMER/Diyanet resmi yanıtı
+- Gerekirse hukuki/lisans değerlendirme geri bildirimi
+
+Bu cevaplar alınmadan kalıcı veri kaynağı kararı kesinleştirilmeyecektir.
+

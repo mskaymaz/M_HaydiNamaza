@@ -201,13 +201,24 @@ Kabul notu:
 - Bu test planı şimdilik dokümantasyon taslağıdır.
 
 ## 9. Release gate / çıkış kriterleri
-Release için aşağıdakiler birlikte sağlanmalıdır:
+Production release öncesi aşağıdaki zorunlu şartlar birlikte sağlanmalıdır:
 
-- Resmi/izinli veri stratejisi onayı tamamlanmış olmalı.
-- Birincil kaynak ve fallback politikası dokümante edilmiş olmalı.
-- 10 şehir karşılaştırma testi tamamlanmış olmalı.
-- Kaynak kalite etiketi ve şeffaflık metni kullanıcıya görünür olmalı.
-- Hukuki belirsizlik içeren kullanım yolu release kapsamı dışında bırakılmalı.
+- CİMER/Diyanet cevabı değerlendirilmiş olmalı.
+- Birincil veri kaynağı stratejisi netleşmiş olmalı.
+- Source quality label planı uygulanabilir olmalı.
+- 10 şehir karşılaştırma planı tamamlanmış olmalı.
+- Kullanıcıya gösterilecek şeffaflık metinleri hazırlanmış olmalı.
+
+Release blocker durumları:
+- Resmi izin/lisans belirsizliği
+- Gizli/fragil endpoint'e kalıcı bağımlılık
+- Büyük vakit farkları
+- Kaynak etiketi gösterilememesi
+- Offline/fallback davranışının belirsiz kalması
+
+Release kararı:
+- Bu şartlar tamamlanmadan production release yapılmayacak.
+- Gerekirse internal/test build yapılabilir; gerçek kullanıcı release'i yapılmayacak.
 
 ## 10. Açık kararlar ve beklenen cevaplar
 Henüz kesinleşmeyen başlıklar:

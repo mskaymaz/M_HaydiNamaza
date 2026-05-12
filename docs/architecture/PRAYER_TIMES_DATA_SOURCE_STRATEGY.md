@@ -91,13 +91,20 @@ Kalıcı mimari (resmi karar sonrası):
 ## 6. Source quality / veri kaynağı etiketi planı
 Uygulama içinde kullanıcıya gösterilecek etiketler, kaynak güven düzeyini sade şekilde iletmelidir.
 
-Önerilen etiket seviyeleri:
-- `Resmi / dogrulanmis kaynak`
-- `Dogrulanmis ikincil kaynak`
-- `Yaklasik hesaplama`
+Olası source label değerleri ve kullanım çerçevesi:
 
-Not:
-- Nihai etiket metinleri ve eşik kuralları resmi veri stratejisi netleşince kesinlenir.
+| Label | Kullanıcıya kısa açıklama | Güven seviyesi | Release kabul durumu | Risk notu |
+|---|---|---|---|---|
+| `official_diyanet` | Resmi Diyanet kaynağından alınan veri. | Yüksek | Koşullu kabul (resmi izin/koşul teyidi sonrası) | Erişim ve lisans koşulları netleşmeden kalıcı karar verilmez. |
+| `licensed_offline_diyanet` | Diyanet lisanslı offline veri paketinden sunulan veri. | Yüksek | Koşullu kabul (lisans + güncelleme modeli doğrulanınca) | Paket güncelliği ve dağıtım operasyonu düzenli yönetilmelidir. |
+| `verified_cache` | İzinli kaynaktan üretilmiş ve doğrulanmış önbellek verisi. | Orta-Yüksek | Koşullu kabul (türetim/yeniden dağıtım izni açık ise) | Cache üretim hattı bozulursa eski veri riski doğar. |
+| `third_party_api` | Doğrulanmış üçüncü taraf servisinden alınan veri. | Orta | Sınırlı kabul (fallback amacıyla) | Metodoloji farkı nedeniyle resmi kaynakla dakika sapması oluşabilir. |
+| `calculated_fallback` | Yaklaşık hesaplama ile üretilen vakit verisi. | Düşük-Orta | Sadece acil fallback olarak kabul | Kullanıcı bunu resmi vakit sanmamalı; açık uyarı zorunludur. |
+| `unknown` | Veri kaynağı doğrulanamadı veya etiket belirlenemedi. | Düşük | Release için kabul edilmez | Kaynak belirsizliği güven ve doğruluk riski üretir. |
+
+Kesin karar notu:
+- Resmi/Diyanet cevabı gelmeden source label isimleri final API contract olarak kabul edilmeyecek.
+- Bu bölüm şu aşamada dokümantasyon taslağıdır.
 - Etiket görünürlüğü kullanıcıdan saklanmamalıdır.
 
 ## 7. UI şeffaflık metni planı
@@ -109,9 +116,10 @@ Plan:
 - Fallback durumunda sade bilgilendirme metni
 
 Taslak metin yaklaşımı:
-- Resmi kaynakta: â€œVakitler resmi/izinli kaynaktan sunulmaktadır.â€
-- İkincil kaynaktan: â€œVakitler doğrulanmış ikincil kaynaktan sunulmaktadır.â€
-- Yaklaşık hesapta: â€œBu vakitler yaklaşık hesaplama ile gösterilmektedir.â€
+- `Kaynak: Resmi/izinli veri`
+- `Kaynak: Doğrulanmış önbellek`
+- `Kaynak: Yaklaşık hesaplama`
+- `Bu vakitler yaklaşık olabilir.`
 
 ## 8. 10 şehir karşılaştırma test planı
 Release öncesi en az 10 şehirde karşılaştırma yapılmalıdır.

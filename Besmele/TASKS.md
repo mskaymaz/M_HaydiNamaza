@@ -335,6 +335,17 @@ Acceptance:
 
 Goal: prepare the architecture now; content collection happens later.
 
+### TASK-05 checkpoint tracking (guncel)
+- [x] Checkpoint 1: audit/scope
+- [x] Checkpoint 2: schema foundation (c7776a9)
+- [x] Checkpoint 3: model/loader plan
+- [x] Checkpoint 4: approved-only loader (64ab0e1)
+- [x] Checkpoint 5: selection/state plan
+- [x] Checkpoint 6: selection state implementation (e45c970)
+- [x] Checkpoint 7: service/orchestrator plan
+- [x] Checkpoint 8: daily content service (13a68bd)
+- [ ] Checkpoint 9: UI integration scope/audit (active)
+
 - [ ] Add panel below the prayer-times panel with matching width and calm visual style.
 - [ ] Create `assets/data/daily_content/draft/`, `approved/`, and `archive/`.
 - [ ] Define JSON schema for ayah records.

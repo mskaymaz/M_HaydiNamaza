@@ -19,9 +19,12 @@ import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
 import '../../core/prayer_engine/prayer.dart';
 import '../../core/prayer_engine/prayer_times.dart';
+import '../../features/daily_content/daily_content_selection_models.dart';
+import '../../features/daily_content/daily_content_service.dart';
 import '../settings/location_screen.dart';
 import '../settings/settings_screen.dart';
 import 'home_date_text_helpers.dart';
+import 'widgets/home_daily_content_panel.dart';
 import 'widgets/home_presentational_widgets.dart';
 import 'widgets/home_prayer_list.dart';
 import 'widgets/home_qibla_screen.dart';
@@ -57,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _reminderTriggerStorage = ReminderTriggerStorage();
   final _reminderAudioService = ReminderAudioService();
   final _prayerService = PrayerService();
+  final _dailyContentService = DailyContentService();
   final Map<Prayer, _PrayerRowSettings> _rowSettings = {};
   final Map<Prayer, TextEditingController> _reminderControllers = {};
   final Map<String, String> _triggerLog = {};
@@ -64,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _prayerListScrollController = ScrollController();
 
   late Future<_HomeData> _future;
+  late Future<DailyContentSelectionResult> _dailyContentFuture;
   Timer? _ticker;
   Timer? _voiceRepeatTimer;
   Timer? _visualCycleTimer;
@@ -96,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
     unawaited(_loadReminderSettings());
     unawaited(_loadReminderTriggerLog());
     _future = _loadData();
+    _dailyContentFuture = _dailyContentService.loadToday();
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       if (!mounted) return;
       final now = DateTime.now();
@@ -108,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (dayChanged) {
           _lastRefreshDay = DateTime(now.year, now.month, now.day);
           _future = _loadData();
+          _dailyContentFuture = _dailyContentService.loadToday();
         }
       });
     });
@@ -622,6 +629,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                           onAddCustomPrayer:
                                               _addCustomPrayerRow,
                                         ),
+                                      ),
+                                    if (_drawerProgress > 0.02)
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                          12,
+                                          0,
+                                          12,
+                                          8,
+                                        ),
+                                        child:
+                                            FutureBuilder<
+                                              DailyContentSelectionResult
+                                            >(
+                                              future: _dailyContentFuture,
+                                              builder: (context, snapshot) {
+                                                return HomeDailyContentPanel(
+                                                  result: snapshot.data,
+                                                  isLoading:
+                                                      snapshot.connectionState ==
+                                                      ConnectionState.waiting,
+                                                  hasError: snapshot.hasError,
+                                                  cizgiColor:
+                                                      palette.cizgiColor,
+                                                );
+                                              },
+                                            ),
                                       ),
                                     if (_drawerProgress > 0.02)
                                       buildHandleBand(

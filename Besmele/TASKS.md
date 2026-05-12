@@ -345,6 +345,7 @@ Goal: prepare the architecture now; content collection happens later.
 - [x] Checkpoint 7: service/orchestrator plan
 - [x] Checkpoint 8: daily content service (13a68bd)
 - [ ] Checkpoint 9: UI integration scope/audit (active)
+- [x] Checkpoint 10: daily ayah/hadith panel UI implementation
 
 - [ ] Add panel below the prayer-times panel with matching width and calm visual style.
 - [ ] Create `assets/data/daily_content/draft/`, `approved/`, and `archive/`.

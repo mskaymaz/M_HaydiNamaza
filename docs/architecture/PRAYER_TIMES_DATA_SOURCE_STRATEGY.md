@@ -108,18 +108,55 @@ Kesin karar notu:
 - Etiket görünürlüğü kullanıcıdan saklanmamalıdır.
 
 ## 7. UI şeffaflık metni planı
-Amaç, kullanıcıya â€œhangi veriyi neden görüyorum?â€ sorusunun net cevabını vermektir.
+Amaç, kullanıcıya "hangi veriyi neden görüyorum?" sorusunun net cevabını vermektir.
 
-Plan:
-- Namaz vakti panelinde kısa kaynak etiketi gösterimi
-- Ayarlar içinde â€œVeri Kaynağı ve Güven Düzeyiâ€ açıklama alanı
-- Fallback durumunda sade bilgilendirme metni
-
-Taslak metin yaklaşımı:
+### 7.1 Ana ekranda kısa kaynak metinleri
+Namaz vakti panelinde, vakit tablosuna yakın ve sade bir satırda gösterilir:
 - `Kaynak: Resmi/izinli veri`
 - `Kaynak: Doğrulanmış önbellek`
+- `Kaynak: Üçüncü taraf doğrulanmış veri`
 - `Kaynak: Yaklaşık hesaplama`
+- `Kaynak: Belirsiz`
+
+Ek kısa gösterim (opsiyonel):
+- `Güven: Yüksek`
+- `Güven: Orta`
+- `Güven: Düşük`
+
+### 7.2 Detay/yardım ekranı açıklama metinleri
+Ayarlar veya yardım altında "Veri Kaynağı ve Güven Düzeyi" alanında gösterilir:
+- `Bu uygulama, namaz vakitlerini seçili veri kaynağına göre sunar.`
+- `Kaynak etiketi, verinin hangi tür kaynaktan geldiğini gösterir.`
+- `Güven seviyesi, verinin doğrulanma düzeyini özetler.`
+- `Mümkün olduğunda resmi/izinli kaynaklar önceliklendirilir.`
+
+Label bazlı kısa açıklama örnekleri:
+- `Resmi/izinli veri: Yetkili veya lisanslı kaynaktan alınır.`
+- `Doğrulanmış önbellek: İzinli kaynaktan üretilmiş, sonradan doğrulanmış veridir.`
+- `Üçüncü taraf veri: Resmi olmayan ancak teknik olarak doğrulanan kaynaktır.`
+- `Yaklaşık hesaplama: Hesap yöntemine dayalı tahmini vakitlerdir.`
+
+### 7.3 Yaklaşık hesaplama/fallback uyarı metinleri
+`calculated_fallback` veya düşük güven durumunda görünür:
 - `Bu vakitler yaklaşık olabilir.`
+- `Konum ve yöntem farkı nedeniyle dakika düzeyinde sapma oluşabilir.`
+- `Mümkünse resmi/izinli kaynak doğrulaması önerilir.`
+
+`unknown` durumunda görünür:
+- `Kaynak doğrulanamadı. Gösterilen vakitleri dikkatle değerlendirin.`
+
+### 7.4 Resmi/izinli kaynak güven metinleri
+`official_diyanet` veya `licensed_offline_diyanet` durumunda:
+- `Vakitler resmi/izinli veri kaynağından sunulmaktadır.`
+- `Kaynak güven seviyesi: Yüksek.`
+- `Veri güncellemesi kaynak politikasına göre yapılır.`
+
+### 7.5 Ton kuralları
+- Korkutucu değil, açık ve dürüst bir dil kullanılır.
+- Belirsizlik varsa saklanmaz; kısa ve sade şekilde belirtilir.
+- Kullanıcıyı suçlayan veya panik oluşturan ifadeler kullanılmaz.
+- Teknik detaylar yardım ekranında tutulur, ana ekranda kısa metin kullanılır.
+- Kaynak kalitesi düşükse yönlendirici ama yumuşak uyarı verilir.
 
 ## 8. 10 şehir karşılaştırma test planı
 Release öncesi en az 10 şehirde karşılaştırma yapılmalıdır.

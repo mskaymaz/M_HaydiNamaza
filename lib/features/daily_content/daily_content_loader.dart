@@ -20,6 +20,10 @@ class DailyContentLoader {
     );
 
     return DailyContentLoadResult(
+      ayahSchemaVersion: ayahResult.schemaVersion,
+      hadithSchemaVersion: hadithResult.schemaVersion,
+      ayahContentVersion: ayahResult.contentVersion,
+      hadithContentVersion: hadithResult.contentVersion,
       ayahs: ayahResult.records,
       hadiths: hadithResult.records,
       skippedCount: ayahResult.skippedCount + hadithResult.skippedCount,
@@ -49,6 +53,9 @@ class DailyContentLoader {
     } catch (error) {
       warnings.add('$path: json okunamadi ($error)');
       return DailyContentFileParseResult(
+        schemaVersion: null,
+        contentVersion: null,
+        type: null,
         records: validRecords,
         skippedCount: skippedCount,
         warnings: warnings,
@@ -58,6 +65,9 @@ class DailyContentLoader {
     if (decoded is! Map) {
       warnings.add('$path: top-level json object olmali.');
       return DailyContentFileParseResult(
+        schemaVersion: null,
+        contentVersion: null,
+        type: null,
         records: validRecords,
         skippedCount: skippedCount,
         warnings: warnings,
@@ -80,8 +90,11 @@ class DailyContentLoader {
       warnings.add('$path: type zorunlu.');
     }
     if (records is! List) {
-      warnings.add('$path: records alanı dizi olmali.');
+      warnings.add('$path: records alani dizi olmali.');
       return DailyContentFileParseResult(
+        schemaVersion: schemaVersion,
+        contentVersion: contentVersion,
+        type: type,
         records: validRecords,
         skippedCount: skippedCount,
         warnings: warnings,
@@ -91,6 +104,9 @@ class DailyContentLoader {
     if (type != expectedType) {
       warnings.add('$path: type beklenen degerle uyusmuyor ($expectedType).');
       return DailyContentFileParseResult(
+        schemaVersion: schemaVersion,
+        contentVersion: contentVersion,
+        type: type,
         records: validRecords,
         skippedCount: records.length,
         warnings: warnings,
@@ -98,6 +114,9 @@ class DailyContentLoader {
     }
     if (schemaVersion == null || contentVersion == null) {
       return DailyContentFileParseResult(
+        schemaVersion: schemaVersion,
+        contentVersion: contentVersion,
+        type: type,
         records: validRecords,
         skippedCount: records.length,
         warnings: warnings,
@@ -125,6 +144,9 @@ class DailyContentLoader {
     }
 
     return DailyContentFileParseResult(
+      schemaVersion: schemaVersion,
+      contentVersion: contentVersion,
+      type: type,
       records: validRecords,
       skippedCount: skippedCount,
       warnings: warnings,

@@ -2,15 +2,15 @@
 
 last_update: 2026-05-13
 project: M_HaydiNamaza
-status: task_06_completed
+status: task_10_completed
 active_phase: advanced_architecture_upgrade
 active_task: TASK-07-not-started-release-gate-active
 blockers:
   - Final release remains blocked until explicit official prayer-time source/release decision is cleared.
 next_step:
-  - Keep TASK-07, TASK-10, TASK-11, and TASK-12 pending until explicit start instruction.
+  - Keep TASK-07, TASK-11, and TASK-12 pending until explicit start instruction.
   - Keep TASK-04A closed and TASK-04B documentation scope closed.
-  - Keep TASK-05 and TASK-06 records aligned with `Besmele/TASKS.md`.
+  - Keep TASK-05, TASK-06, and TASK-10 records aligned with `Besmele/TASKS.md`.
   - Continue work from `Besmele/TASKS.md`.
 
 ## Current known risks

@@ -7,6 +7,7 @@ import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
+import '../../app/runtime_monitor.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
 import 'location_data_parsers.dart';
@@ -203,7 +204,10 @@ class _LocationScreenState extends State<LocationScreen> {
       _setListLoadError(null);
       return items;
     } catch (error) {
-      debugPrint('Location list load failed: $error');
+      RuntimeMonitor.instance.reportNonFatalCode(
+        source: 'location_list_fetch',
+        code: 'network_or_parse_failed',
+      );
       _setListLoadError(_listLoadErrorMessage);
       return const <DiyanetItem>[];
     }
@@ -247,14 +251,30 @@ class _LocationScreenState extends State<LocationScreen> {
     });
     try {
       final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) throw Exception();
+      if (!serviceEnabled) {
+        if (!mounted) return;
+        setState(() {
+          _useCurrentLocation = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Konum servisi kapali. Elle konum secimi ile devam edebilirsiniz.')),
+        );
+        return;
+      }
       var permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
       }
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
-        throw Exception();
+        if (!mounted) return;
+        setState(() {
+          _useCurrentLocation = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Konum izni verilmedi. Elle konum secimi ile devam edebilirsiniz.')),
+        );
+        return;
       }
       final position = await Geolocator.getCurrentPosition();
       final placemarks = await placemarkFromCoordinates(
@@ -283,6 +303,10 @@ class _LocationScreenState extends State<LocationScreen> {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Koordinatlar alindi, il / ilce cozulemedi.')));
       }
     } catch (_) {
+      RuntimeMonitor.instance.reportNonFatalCode(
+        source: 'location_current_position',
+        code: 'current_location_failed',
+      );
       if (!mounted) return;
       setState(() {
         _useCurrentLocation = false;

@@ -7,10 +7,11 @@ TASK-04A is closed (checkpoints completed; orchestration-safe extraction scope f
 TASK-04B documentation scope is closed, including official Diyanet/AwqatSalah API source strategy notes.
 TASK-05 checkpoints 1-14 are synchronized with `Besmele/TASKS.md` for current scope.
 TASK-06 is completed with location-based qibla bearing + sensor fallback + bearing validation tests.
+TASK-10 is completed with storage fallback/recovery hardening and log-safe non-fatal reporting.
 Ayah/hadith data work is completed for current scope (approved sample set + draft pool workflow records).
 
 ## Next action
-Wait for explicit start instruction before TASK-07, TASK-10, TASK-11, and TASK-12.
+Wait for explicit start instruction before TASK-07, TASK-11, and TASK-12.
 
 ## Important blockers
 - Final release remains blocked until explicit official prayer-time source/release decision is cleared.
@@ -24,6 +25,24 @@ Wait for explicit start instruction before TASK-07, TASK-10, TASK-11, and TASK-1
   - `lib/features/qibla/qibla_bearing_calculator.dart`
   - `lib/presentation/home/widgets/home_qibla_screen.dart`
   - `test/features/qibla/qibla_bearing_calculator_test.dart`
+  - `Besmele/TASKS.md`
+  - `STATE.md`
+  - `Besmele/HANDOFF.md`
+- Validation:
+  - `flutter analyze` was not run in this step by scope rule.
+
+## TASK-10 closure update (2026-05-13)
+- Scope:
+  - Persistence/error/offline safety hardening for local storage decode/write failures and location permission recovery path.
+- Changed files:
+  - `lib/app/runtime_monitor.dart`
+  - `lib/app/prayer_daily_cache_repository.dart`
+  - `lib/app/reminder_trigger_storage.dart`
+  - `lib/app/prayer_row_settings_storage.dart`
+  - `lib/app/custom_prayer_storage.dart`
+  - `lib/features/daily_content/daily_content_state_repository.dart`
+  - `lib/features/daily_content/daily_content_service.dart`
+  - `lib/presentation/settings/location_screen.dart`
   - `Besmele/TASKS.md`
   - `STATE.md`
   - `Besmele/HANDOFF.md`

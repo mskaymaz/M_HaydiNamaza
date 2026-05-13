@@ -85,4 +85,13 @@ class RuntimeMonitor {
       fatal: true,
     );
   }
+
+  void reportNonFatalCode({required String source, required String code}) {
+    _errorReporter.report(
+      StateError(code),
+      StackTrace.current,
+      source: source,
+      fatal: false,
+    );
+  }
 }

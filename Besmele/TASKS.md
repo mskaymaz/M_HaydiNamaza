@@ -471,12 +471,12 @@ Acceptance:
 
 Goal: make the app dependable.
 
-- [ ] Review local storage strategy.
-- [ ] Add safe fallback for missing/corrupt JSON.
-- [ ] Add prayer-time cache recovery path.
-- [ ] Add daily content pick recovery path.
-- [ ] Add location permission state recovery.
-- [ ] Add log-safe error reporting without exposing private data.
+- [x] Review local storage strategy.
+- [x] Add safe fallback for missing/corrupt JSON.
+- [x] Add prayer-time cache recovery path.
+- [x] Add daily content pick recovery path.
+- [x] Add location permission state recovery.
+- [x] Add log-safe error reporting without exposing private data.
 
 Acceptance:
 - App does not crash on missing content, location denial, network failure, or cache corruption.

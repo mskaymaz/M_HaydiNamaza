@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/prayer_engine/prayer.dart';
+import 'runtime_monitor.dart';
 
 class CustomPrayerRecord {
   final String id;
@@ -89,23 +90,49 @@ class CustomPrayerStorage {
   static const String _key = 'custom_prayer_rows';
 
   Future<List<CustomPrayerRecord>> read() async {
-    final prefs = await SharedPreferences.getInstance();
-    final raw = prefs.getString(_key);
-    if (raw == null || raw.trim().isEmpty) return const [];
-    final decoded = jsonDecode(raw);
-    if (decoded is! List) return const [];
-    final result = <CustomPrayerRecord>[];
-    for (final entry in decoded) {
-      final record = CustomPrayerRecord.fromJson(entry);
-      if (record == null || record.id.isEmpty) continue;
-      result.add(record);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final raw = prefs.getString(_key);
+      if (raw == null || raw.trim().isEmpty) return const [];
+      final decoded = jsonDecode(raw);
+      if (decoded is! List) {
+        await _recoverCorruptState(prefs, 'invalid_payload_shape');
+        return const [];
+      }
+      final result = <CustomPrayerRecord>[];
+      for (final entry in decoded) {
+        final record = CustomPrayerRecord.fromJson(entry);
+        if (record == null || record.id.isEmpty) continue;
+        result.add(record);
+      }
+      return result;
+    } catch (_) {
+      final prefs = await SharedPreferences.getInstance();
+      await _recoverCorruptState(prefs, 'json_decode_failed');
+      return const [];
     }
-    return result;
   }
 
   Future<void> write(List<CustomPrayerRecord> rows) async {
-    final prefs = await SharedPreferences.getInstance();
-    final payload = rows.map((row) => row.toJson()).toList();
-    await prefs.setString(_key, jsonEncode(payload));
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final payload = rows.map((row) => row.toJson()).toList();
+      await prefs.setString(_key, jsonEncode(payload));
+    } catch (_) {
+      RuntimeMonitor.instance.reportNonFatalCode(
+        source: 'custom_prayer_storage_write',
+        code: 'state_write_failed',
+      );
+    }
+  }
+
+  Future<void> _recoverCorruptState(SharedPreferences prefs, String code) async {
+    try {
+      await prefs.remove(_key);
+    } catch (_) {}
+    RuntimeMonitor.instance.reportNonFatalCode(
+      source: 'custom_prayer_storage_read',
+      code: code,
+    );
   }
 }

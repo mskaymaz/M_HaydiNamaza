@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../core/prayer_engine/calculation_parameters.dart';
 import '../core/prayer_engine/coordinates.dart';
 import '../core/prayer_engine/prayer_times.dart';
+import 'runtime_monitor.dart';
 
 class PrayerDailyCacheRepository {
   static const String _dailyCacheKey = 'prayer_daily_cache_v1';
@@ -20,7 +21,13 @@ class PrayerDailyCacheRepository {
     if (raw == null || raw.trim().isEmpty) return null;
     try {
       final payload = jsonDecode(raw);
-      if (payload is! Map<String, dynamic>) return null;
+      if (payload is! Map<String, dynamic>) {
+        await _recoverCorruptCache(
+          prefs,
+          reasonCode: 'invalid_payload_shape',
+        );
+        return null;
+      }
       if (payload['fingerprint'] != fingerprint) return null;
       final fajr = DateTime.tryParse((payload['fajr'] ?? '').toString());
       final sunrise = DateTime.tryParse((payload['sunrise'] ?? '').toString());
@@ -28,7 +35,13 @@ class PrayerDailyCacheRepository {
       final asr = DateTime.tryParse((payload['asr'] ?? '').toString());
       final maghrib = DateTime.tryParse((payload['maghrib'] ?? '').toString());
       final isha = DateTime.tryParse((payload['isha'] ?? '').toString());
-      if ([fajr, sunrise, dhuhr, asr, maghrib, isha].contains(null)) return null;
+      if ([fajr, sunrise, dhuhr, asr, maghrib, isha].contains(null)) {
+        await _recoverCorruptCache(
+          prefs,
+          reasonCode: 'invalid_time_fields',
+        );
+        return null;
+      }
       return PrayerTimes.fromTimings(
         coordinates: coordinates,
         date: date,
@@ -42,6 +55,10 @@ class PrayerDailyCacheRepository {
         isha: isha!,
       );
     } catch (_) {
+      await _recoverCorruptCache(
+        prefs,
+        reasonCode: 'json_decode_failed',
+      );
       return null;
     }
   }
@@ -64,7 +81,26 @@ class PrayerDailyCacheRepository {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(_dailyCacheKey, jsonEncode(payload));
     } catch (_) {
+      RuntimeMonitor.instance.reportNonFatalCode(
+        source: 'prayer_daily_cache_write',
+        code: 'cache_write_failed',
+      );
       // Keep calculation flow intact even if cache write fails.
     }
+  }
+
+  Future<void> _recoverCorruptCache(
+    SharedPreferences prefs, {
+    required String reasonCode,
+  }) async {
+    try {
+      await prefs.remove(_dailyCacheKey);
+    } catch (_) {
+      // Ignore secondary remove failures.
+    }
+    RuntimeMonitor.instance.reportNonFatalCode(
+      source: 'prayer_daily_cache_read',
+      code: reasonCode,
+    );
   }
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/prayer_engine/prayer.dart';
+import 'runtime_monitor.dart';
 
 class PrayerRowSettingsRecord {
   final int reminderMinutes;
@@ -44,41 +45,65 @@ class PrayerRowSettingsStorage {
   static const String _key = 'prayer_row_settings';
 
   Future<Map<Prayer, PrayerRowSettingsRecord>> read() async {
-    final prefs = await SharedPreferences.getInstance();
-    final raw = prefs.getString(_key);
-    if (raw == null || raw.trim().isEmpty) {
-      return {};
-    }
-    final decoded = jsonDecode(raw);
-    if (decoded is! Map<String, dynamic>) {
-      return {};
-    }
-    final result = <Prayer, PrayerRowSettingsRecord>{};
-    for (final entry in decoded.entries) {
-      Prayer? prayer;
-      for (final value in Prayer.values) {
-        if (value.name == entry.key) {
-          prayer = value;
-          break;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final raw = prefs.getString(_key);
+      if (raw == null || raw.trim().isEmpty) {
+        return {};
+      }
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map<String, dynamic>) {
+        await _recoverCorruptState(prefs, 'invalid_payload_shape');
+        return {};
+      }
+      final result = <Prayer, PrayerRowSettingsRecord>{};
+      for (final entry in decoded.entries) {
+        Prayer? prayer;
+        for (final value in Prayer.values) {
+          if (value.name == entry.key) {
+            prayer = value;
+            break;
+          }
         }
+        final payload = entry.value;
+        if (prayer == null || payload is! Map) {
+          continue;
+        }
+        result[prayer] = PrayerRowSettingsRecord.fromJson(
+          Map<String, dynamic>.from(payload),
+        );
       }
-      final payload = entry.value;
-      if (prayer == null || payload is! Map) {
-        continue;
-      }
-      result[prayer] = PrayerRowSettingsRecord.fromJson(
-        Map<String, dynamic>.from(payload),
-      );
+      return result;
+    } catch (_) {
+      final prefs = await SharedPreferences.getInstance();
+      await _recoverCorruptState(prefs, 'json_decode_failed');
+      return {};
     }
-    return result;
   }
 
   Future<void> write(Map<Prayer, PrayerRowSettingsRecord> settings) async {
-    final prefs = await SharedPreferences.getInstance();
-    final payload = <String, dynamic>{};
-    for (final entry in settings.entries) {
-      payload[entry.key.name] = entry.value.toJson();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final payload = <String, dynamic>{};
+      for (final entry in settings.entries) {
+        payload[entry.key.name] = entry.value.toJson();
+      }
+      await prefs.setString(_key, jsonEncode(payload));
+    } catch (_) {
+      RuntimeMonitor.instance.reportNonFatalCode(
+        source: 'prayer_row_settings_storage_write',
+        code: 'state_write_failed',
+      );
     }
-    await prefs.setString(_key, jsonEncode(payload));
+  }
+
+  Future<void> _recoverCorruptState(SharedPreferences prefs, String code) async {
+    try {
+      await prefs.remove(_key);
+    } catch (_) {}
+    RuntimeMonitor.instance.reportNonFatalCode(
+      source: 'prayer_row_settings_storage_read',
+      code: code,
+    );
   }
 }

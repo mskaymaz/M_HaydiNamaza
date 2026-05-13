@@ -60,9 +60,9 @@ class DailyContentService {
         warnings: warnings,
         skippedCount: result.skippedCount,
       );
-    } catch (error) {
+    } catch (_) {
       final warnings = <String>[
-        'daily_content_service: gunluk icerik secimi basarisiz ($error).',
+        'daily_content_service: gunluk icerik secimi basarisiz, fallback state kullanildi.',
       ];
       final fallbackState = await _stateRepository.read(warnings: warnings);
       return DailyContentSelectionResult(

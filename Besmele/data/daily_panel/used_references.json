@@ -1,0 +1,23 @@
+{
+  "ayah": {
+    "planned_target_total": 400,
+    "seed_file": "tools/daily_content/ayah_seed_refs.json",
+    "selected_refs": [],
+    "used_ids": [],
+    "used_source_keys": [],
+    "skipped_refs": []
+  },
+  "hadith": {
+    "planned_target_total": 400,
+    "seed_file": null,
+    "selected_refs": [],
+    "used_ids": [],
+    "used_source_keys": [],
+    "skipped_refs": []
+  },
+  "meta": {
+    "last_updated": "2026-05-13",
+    "status": "draft-only-tracking",
+    "note": "Hadith tarafi bu adimda kapsam disi."
+  }
+}

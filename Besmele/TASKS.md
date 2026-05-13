@@ -328,6 +328,7 @@ Acceptance:
 - No final source/fallback contract decision will be made before the official CÝMER/Diyanet response is evaluated.
 - Finalization after the official response will be handled as a separate checkpoint.
 - TASK-04B is considered closed for the current documentation scope.
+- [x] TASK-04B source discovery update: official AwqatSalah API sources recorded (2026-05-13).
 
 ---
 

@@ -19,6 +19,35 @@ Kapsam dışı:
 - TASK-04A tamamlandı; mevcut servis yapısı orkestrasyon/fallback kararını taşıyor.
 - Mevcut durumda gizli/fragil endpoint kullanımının kalıcı mimari olmaması temel prensip.
 
+### 2.1 Resmi kaynak tespiti (2026-05-13)
+TASK-04B dokümantasyon kapanış güncellemesi kapsamında Diyanet'in resmi namaz vakti API kaynağı aşağıdaki bağlantılarla kayda alınmıştır:
+
+- Resmi API sayfası: `https://awqatsalah.diyanet.gov.tr/index.html`
+- OpenAPI/Scalar dokümantasyonu: `https://awqatsalah.diyanet.gov.tr/scalar/`
+- Resmi örnek GitHub deposu: `https://github.com/DinIsleriYuksekKurulu/AwqatSalah`
+
+Notlar:
+- API adı: `AwqatSalah / Diyanet Namaz Vakti API`.
+- Scalar/OpenAPI tarafında `Diyanet Namaz Vakti API - Version 1` ifadesi ve OpenAPI JSON indirme bilgisi bulunmaktadır.
+- API erişimi için başvuru/token süreci gerekebilir; repo içine gerçek token/credential yazılmayacaktır.
+- Bu güncelleme sadece kaynak stratejisi kaydıdır; uygulama entegrasyonu veya prayer-time kod akışında değişiklik yapılmaz.
+
+### 2.2 Resmi sayfada listelenen endpoint grupları (strateji referansı)
+Resmi sayfada görülen ana endpoint başlıkları:
+
+- `Auth/Login`
+- `Auth/RefreshToken`
+- `Place/Countries`
+- `Place/States`
+- `Place/Cities`
+- `CityDetail`
+- `Daily`
+- `Weekly`
+- `Monthly`
+- `Eid`
+- `Ramadan`
+- `DateRange`
+
 ## 3. Zorunlu karar kriterleri
 Veri stratejisi aşağıdaki kriterler birlikte sağlanacak şekilde seçilmelidir:
 

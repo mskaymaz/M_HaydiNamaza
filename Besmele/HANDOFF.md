@@ -65,3 +65,18 @@ Wait for explicit start instruction before TASK-01.
 - Validation:
   - `flutter analyze` was not run in this step by scope rule.
 
+## TASK-04B source strategy closure update (2026-05-13)
+- Scope:
+  - Documentation-only source strategy update for official Diyanet prayer-time API discovery.
+- Recorded official sources:
+  - `https://awqatsalah.diyanet.gov.tr/index.html`
+  - `https://awqatsalah.diyanet.gov.tr/scalar/`
+  - `https://github.com/DinIsleriYuksekKurulu/AwqatSalah`
+- Recorded notes:
+  - API adı: `AwqatSalah / Diyanet Namaz Vakti API`.
+  - OpenAPI sayfasında `Diyanet Namaz Vakti API - Version 1` ve OpenAPI JSON indirme bilgisi bulunur.
+  - Auth/token başvuru süreci gerekebilir; repo içine gerçek token/credential eklenmez.
+  - Resmi sayfada Auth/Login, RefreshToken, Place/Countries, Place/States, Place/Cities, CityDetail, Daily, Weekly, Monthly, Eid, Ramadan, DateRange endpointleri listelenir.
+- Validation:
+  - `flutter analyze` was not run in this step by scope rule.
+

@@ -1,7 +1,7 @@
 {
   "version": "v1-seed-structured",
   "target_total": 400,
-  "current_count": 100,
+  "current_count": 400,
   "topic_order": [
     "cihad",
     "islama_cagirma",
@@ -1320,6 +1320,3906 @@
         "ehl_i_kitap_tarihi_uyarilar"
       ],
       "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-60",
+      "surah_number": 2,
+      "ayah_number": 60,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:60",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-61",
+      "surah_number": 2,
+      "ayah_number": 61,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:61",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-62",
+      "surah_number": 2,
+      "ayah_number": 62,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:62",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-63",
+      "surah_number": 2,
+      "ayah_number": 63,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:63",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-64",
+      "surah_number": 2,
+      "ayah_number": 64,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:64",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-65",
+      "surah_number": 2,
+      "ayah_number": 65,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:65",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-66",
+      "surah_number": 2,
+      "ayah_number": 66,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:66",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-67",
+      "surah_number": 2,
+      "ayah_number": 67,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:67",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-68",
+      "surah_number": 2,
+      "ayah_number": 68,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:68",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-69",
+      "surah_number": 2,
+      "ayah_number": 69,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:69",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-70",
+      "surah_number": 2,
+      "ayah_number": 70,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:70",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-71",
+      "surah_number": 2,
+      "ayah_number": 71,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:71",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-72",
+      "surah_number": 2,
+      "ayah_number": 72,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:72",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-73",
+      "surah_number": 2,
+      "ayah_number": 73,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:73",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-74",
+      "surah_number": 2,
+      "ayah_number": 74,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:74",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-75",
+      "surah_number": 2,
+      "ayah_number": 75,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:75",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-76",
+      "surah_number": 2,
+      "ayah_number": 76,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:76",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-77",
+      "surah_number": 2,
+      "ayah_number": 77,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:77",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-78",
+      "surah_number": 2,
+      "ayah_number": 78,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:78",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-79",
+      "surah_number": 2,
+      "ayah_number": 79,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:79",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-80",
+      "surah_number": 2,
+      "ayah_number": 80,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:80",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-81",
+      "surah_number": 2,
+      "ayah_number": 81,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:81",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-82",
+      "surah_number": 2,
+      "ayah_number": 82,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:82",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-83",
+      "surah_number": 2,
+      "ayah_number": 83,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:83",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-84",
+      "surah_number": 2,
+      "ayah_number": 84,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:84",
+      "topics": [
+        "ehl_i_kitap_tarihi_uyarilar"
+      ],
+      "priority": 3,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-58",
+      "surah_number": 4,
+      "ayah_number": 58,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:58",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-59",
+      "surah_number": 4,
+      "ayah_number": 59,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:59",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-60",
+      "surah_number": 4,
+      "ayah_number": 60,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:60",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-61",
+      "surah_number": 4,
+      "ayah_number": 61,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:61",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-62",
+      "surah_number": 4,
+      "ayah_number": 62,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:62",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-63",
+      "surah_number": 4,
+      "ayah_number": 63,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:63",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-64",
+      "surah_number": 4,
+      "ayah_number": 64,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:64",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-65",
+      "surah_number": 4,
+      "ayah_number": 65,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:65",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-44",
+      "surah_number": 5,
+      "ayah_number": 44,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:44",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-45",
+      "surah_number": 5,
+      "ayah_number": 45,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:45",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-47",
+      "surah_number": 5,
+      "ayah_number": 47,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:47",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-48",
+      "surah_number": 5,
+      "ayah_number": 48,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:48",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-49",
+      "surah_number": 5,
+      "ayah_number": 49,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:49",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-50",
+      "surah_number": 5,
+      "ayah_number": 50,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:50",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-1",
+      "surah_number": 8,
+      "ayah_number": 1,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:1",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-41",
+      "surah_number": 8,
+      "ayah_number": 41,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:41",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-60",
+      "surah_number": 9,
+      "ayah_number": 60,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:60",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-22-41",
+      "surah_number": 22,
+      "ayah_number": 41,
+      "surah_name_tr": "Hac",
+      "surah_name_en": "Al-Hajj",
+      "source_ar": "diyanet_api_v1:22:41",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-55",
+      "surah_number": 24,
+      "ayah_number": 55,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:55",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-42-38",
+      "surah_number": 42,
+      "ayah_number": 38,
+      "surah_name_tr": "Sura",
+      "surah_name_en": "Ash-Shura",
+      "source_ar": "diyanet_api_v1:42:38",
+      "topics": [
+        "islam_devleti_yapisi"
+      ],
+      "priority": 4,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-177",
+      "surah_number": 2,
+      "ayah_number": 177,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:177",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-178",
+      "surah_number": 2,
+      "ayah_number": 178,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:178",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-179",
+      "surah_number": 2,
+      "ayah_number": 179,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:179",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-180",
+      "surah_number": 2,
+      "ayah_number": 180,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:180",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-181",
+      "surah_number": 2,
+      "ayah_number": 181,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:181",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-182",
+      "surah_number": 2,
+      "ayah_number": 182,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:182",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-188",
+      "surah_number": 2,
+      "ayah_number": 188,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:188",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-282",
+      "surah_number": 2,
+      "ayah_number": 282,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:282",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-159",
+      "surah_number": 3,
+      "ayah_number": 159,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:159",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-29",
+      "surah_number": 4,
+      "ayah_number": 29,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:29",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-30",
+      "surah_number": 4,
+      "ayah_number": 30,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:30",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-35",
+      "surah_number": 4,
+      "ayah_number": 35,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:35",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-85",
+      "surah_number": 4,
+      "ayah_number": 85,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:85",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-105",
+      "surah_number": 4,
+      "ayah_number": 105,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:105",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-106",
+      "surah_number": 4,
+      "ayah_number": 106,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:106",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-107",
+      "surah_number": 4,
+      "ayah_number": 107,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:107",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-108",
+      "surah_number": 4,
+      "ayah_number": 108,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:108",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-109",
+      "surah_number": 4,
+      "ayah_number": 109,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:109",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-135",
+      "surah_number": 4,
+      "ayah_number": 135,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:135",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-8",
+      "surah_number": 5,
+      "ayah_number": 8,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:8",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-42",
+      "surah_number": 5,
+      "ayah_number": 42,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:42",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-16-90",
+      "surah_number": 16,
+      "ayah_number": 90,
+      "surah_name_tr": "Nahl",
+      "surah_name_en": "An-Nahl",
+      "source_ar": "diyanet_api_v1:16:90",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-42-15",
+      "surah_number": 42,
+      "ayah_number": 15,
+      "surah_name_tr": "Sura",
+      "surah_name_en": "Ash-Shura",
+      "source_ar": "diyanet_api_v1:42:15",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-49-9",
+      "surah_number": 49,
+      "ayah_number": 9,
+      "surah_name_tr": "Hucurat",
+      "surah_name_en": "Al-Hujurat",
+      "source_ar": "diyanet_api_v1:49:9",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-49-10",
+      "surah_number": 49,
+      "ayah_number": 10,
+      "surah_name_tr": "Hucurat",
+      "surah_name_en": "Al-Hujurat",
+      "source_ar": "diyanet_api_v1:49:10",
+      "topics": [
+        "islami_devlet_yonetimi"
+      ],
+      "priority": 5,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-3",
+      "surah_number": 2,
+      "ayah_number": 3,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:3",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-4",
+      "surah_number": 2,
+      "ayah_number": 4,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:4",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-5",
+      "surah_number": 2,
+      "ayah_number": 5,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:5",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-110",
+      "surah_number": 2,
+      "ayah_number": 110,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:110",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-153",
+      "surah_number": 2,
+      "ayah_number": 153,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:153",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-195",
+      "surah_number": 2,
+      "ayah_number": 195,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:195",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-197",
+      "surah_number": 2,
+      "ayah_number": 197,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:197",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-208",
+      "surah_number": 2,
+      "ayah_number": 208,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:208",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-254",
+      "surah_number": 2,
+      "ayah_number": 254,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:254",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-102",
+      "surah_number": 3,
+      "ayah_number": 102,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:102",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-133",
+      "surah_number": 3,
+      "ayah_number": 133,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:133",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-134",
+      "surah_number": 3,
+      "ayah_number": 134,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:134",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-135",
+      "surah_number": 3,
+      "ayah_number": 135,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:135",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-136",
+      "surah_number": 3,
+      "ayah_number": 136,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:136",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-200",
+      "surah_number": 3,
+      "ayah_number": 200,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:200",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-36",
+      "surah_number": 4,
+      "ayah_number": 36,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:36",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-2",
+      "surah_number": 5,
+      "ayah_number": 2,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:2",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-35",
+      "surah_number": 5,
+      "ayah_number": 35,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:35",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-151",
+      "surah_number": 6,
+      "ayah_number": 151,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:151",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-152",
+      "surah_number": 6,
+      "ayah_number": 152,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:152",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-153",
+      "surah_number": 6,
+      "ayah_number": 153,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:153",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-17-23",
+      "surah_number": 17,
+      "ayah_number": 23,
+      "surah_name_tr": "Isra",
+      "surah_name_en": "Al-Isra",
+      "source_ar": "diyanet_api_v1:17:23",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-17-24",
+      "surah_number": 17,
+      "ayah_number": 24,
+      "surah_name_tr": "Isra",
+      "surah_name_en": "Al-Isra",
+      "source_ar": "diyanet_api_v1:17:24",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-17-27",
+      "surah_number": 17,
+      "ayah_number": 27,
+      "surah_name_tr": "Isra",
+      "surah_name_en": "Al-Isra",
+      "source_ar": "diyanet_api_v1:17:27",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-17-26",
+      "surah_number": 17,
+      "ayah_number": 26,
+      "surah_name_tr": "Isra",
+      "surah_name_en": "Al-Isra",
+      "source_ar": "diyanet_api_v1:17:26",
+      "topics": [
+        "prensipli_hayat_yasama"
+      ],
+      "priority": 6,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-194",
+      "surah_number": 2,
+      "ayah_number": 194,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:194",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-251",
+      "surah_number": 2,
+      "ayah_number": 251,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:251",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-57",
+      "surah_number": 3,
+      "ayah_number": 57,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:57",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-86",
+      "surah_number": 3,
+      "ayah_number": 86,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:86",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-22-39",
+      "surah_number": 22,
+      "ayah_number": 39,
+      "surah_name_tr": "Hac",
+      "surah_name_en": "Al-Hajj",
+      "source_ar": "diyanet_api_v1:22:39",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-141",
+      "surah_number": 4,
+      "ayah_number": 141,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:141",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-148",
+      "surah_number": 4,
+      "ayah_number": 148,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:148",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-33",
+      "surah_number": 5,
+      "ayah_number": 33,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:33",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-34",
+      "surah_number": 5,
+      "ayah_number": 34,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:34",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-39",
+      "surah_number": 8,
+      "ayah_number": 39,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:39",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-60",
+      "surah_number": 8,
+      "ayah_number": 60,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:60",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-61",
+      "surah_number": 8,
+      "ayah_number": 61,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:61",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-12",
+      "surah_number": 9,
+      "ayah_number": 12,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:12",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-13",
+      "surah_number": 9,
+      "ayah_number": 13,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:13",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-14",
+      "surah_number": 9,
+      "ayah_number": 14,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:14",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-36",
+      "surah_number": 9,
+      "ayah_number": 36,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:36",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-16-126",
+      "surah_number": 16,
+      "ayah_number": 126,
+      "surah_name_tr": "Nahl",
+      "surah_name_en": "An-Nahl",
+      "source_ar": "diyanet_api_v1:16:126",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-16-127",
+      "surah_number": 16,
+      "ayah_number": 127,
+      "surah_name_tr": "Nahl",
+      "surah_name_en": "An-Nahl",
+      "source_ar": "diyanet_api_v1:16:127",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-22-40",
+      "surah_number": 22,
+      "ayah_number": 40,
+      "surah_name_tr": "Hac",
+      "surah_name_en": "Al-Hajj",
+      "source_ar": "diyanet_api_v1:22:40",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-22-60",
+      "surah_number": 22,
+      "ayah_number": 60,
+      "surah_name_tr": "Hac",
+      "surah_name_en": "Al-Hajj",
+      "source_ar": "diyanet_api_v1:22:60",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-26-227",
+      "surah_number": 26,
+      "ayah_number": 227,
+      "surah_name_tr": "Suara",
+      "surah_name_en": "Ash-Shu'ara",
+      "source_ar": "diyanet_api_v1:26:227",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-28-5",
+      "surah_number": 28,
+      "ayah_number": 5,
+      "surah_name_tr": "Kasas",
+      "surah_name_en": "Al-Qasas",
+      "source_ar": "diyanet_api_v1:28:5",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-28-6",
+      "surah_number": 28,
+      "ayah_number": 6,
+      "surah_name_tr": "Kasas",
+      "surah_name_en": "Al-Qasas",
+      "source_ar": "diyanet_api_v1:28:6",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-42-39",
+      "surah_number": 42,
+      "ayah_number": 39,
+      "surah_name_tr": "Sura",
+      "surah_name_en": "Ash-Shura",
+      "source_ar": "diyanet_api_v1:42:39",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-42-40",
+      "surah_number": 42,
+      "ayah_number": 40,
+      "surah_name_tr": "Sura",
+      "surah_name_en": "Ash-Shura",
+      "source_ar": "diyanet_api_v1:42:40",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-42-41",
+      "surah_number": 42,
+      "ayah_number": 41,
+      "surah_name_tr": "Sura",
+      "surah_name_en": "Ash-Shura",
+      "source_ar": "diyanet_api_v1:42:41",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-42-42",
+      "surah_number": 42,
+      "ayah_number": 42,
+      "surah_name_tr": "Sura",
+      "surah_name_en": "Ash-Shura",
+      "source_ar": "diyanet_api_v1:42:42",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-42-43",
+      "surah_number": 42,
+      "ayah_number": 43,
+      "surah_name_tr": "Sura",
+      "surah_name_en": "Ash-Shura",
+      "source_ar": "diyanet_api_v1:42:43",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-60-8",
+      "surah_number": 60,
+      "ayah_number": 8,
+      "surah_name_tr": "Mumtehine",
+      "surah_name_en": "Al-Mumtahanah",
+      "source_ar": "diyanet_api_v1:60:8",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-60-9",
+      "surah_number": 60,
+      "ayah_number": 9,
+      "surah_name_tr": "Mumtehine",
+      "surah_name_en": "Al-Mumtahanah",
+      "source_ar": "diyanet_api_v1:60:9",
+      "topics": [
+        "zulme_ve_zalime_karsi_davranis"
+      ],
+      "priority": 7,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-114",
+      "surah_number": 2,
+      "ayah_number": 114,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:114",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-124",
+      "surah_number": 2,
+      "ayah_number": 124,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:124",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-145",
+      "surah_number": 2,
+      "ayah_number": 145,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:145",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-229",
+      "surah_number": 2,
+      "ayah_number": 229,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:229",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-231",
+      "surah_number": 2,
+      "ayah_number": 231,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:231",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-258",
+      "surah_number": 2,
+      "ayah_number": 258,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:258",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-270",
+      "surah_number": 2,
+      "ayah_number": 270,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:270",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-279",
+      "surah_number": 2,
+      "ayah_number": 279,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:279",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-117",
+      "surah_number": 3,
+      "ayah_number": 117,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:117",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-10",
+      "surah_number": 4,
+      "ayah_number": 10,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:10",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-40",
+      "surah_number": 4,
+      "ayah_number": 40,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:40",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-110",
+      "surah_number": 4,
+      "ayah_number": 110,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:110",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-112",
+      "surah_number": 4,
+      "ayah_number": 112,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:112",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-168",
+      "surah_number": 4,
+      "ayah_number": 168,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:168",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-21",
+      "surah_number": 6,
+      "ayah_number": 21,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:21",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-82",
+      "surah_number": 6,
+      "ayah_number": 82,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:82",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-93",
+      "surah_number": 6,
+      "ayah_number": 93,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:93",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-135",
+      "surah_number": 6,
+      "ayah_number": 135,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:135",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-7-23",
+      "surah_number": 7,
+      "ayah_number": 23,
+      "surah_name_tr": "Araf",
+      "surah_name_en": "Al-A'raf",
+      "source_ar": "diyanet_api_v1:7:23",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-7-41",
+      "surah_number": 7,
+      "ayah_number": 41,
+      "surah_name_tr": "Araf",
+      "surah_name_en": "Al-A'raf",
+      "source_ar": "diyanet_api_v1:7:41",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-7-44",
+      "surah_number": 7,
+      "ayah_number": 44,
+      "surah_name_tr": "Araf",
+      "surah_name_en": "Al-A'raf",
+      "source_ar": "diyanet_api_v1:7:44",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-7-148",
+      "surah_number": 7,
+      "ayah_number": 148,
+      "surah_name_tr": "Araf",
+      "surah_name_en": "Al-A'raf",
+      "source_ar": "diyanet_api_v1:7:148",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-7-162",
+      "surah_number": 7,
+      "ayah_number": 162,
+      "surah_name_tr": "Araf",
+      "surah_name_en": "Al-A'raf",
+      "source_ar": "diyanet_api_v1:7:162",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-10-13",
+      "surah_number": 10,
+      "ayah_number": 13,
+      "surah_name_tr": "Yunus",
+      "surah_name_en": "Yunus",
+      "source_ar": "diyanet_api_v1:10:13",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-10-44",
+      "surah_number": 10,
+      "ayah_number": 44,
+      "surah_name_tr": "Yunus",
+      "surah_name_en": "Yunus",
+      "source_ar": "diyanet_api_v1:10:44",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-10-52",
+      "surah_number": 10,
+      "ayah_number": 52,
+      "surah_name_tr": "Yunus",
+      "surah_name_en": "Yunus",
+      "source_ar": "diyanet_api_v1:10:52",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-11-18",
+      "surah_number": 11,
+      "ayah_number": 18,
+      "surah_name_tr": "Hud",
+      "surah_name_en": "Hud",
+      "source_ar": "diyanet_api_v1:11:18",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-11-101",
+      "surah_number": 11,
+      "ayah_number": 101,
+      "surah_name_tr": "Hud",
+      "surah_name_en": "Hud",
+      "source_ar": "diyanet_api_v1:11:101",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-14-42",
+      "surah_number": 14,
+      "ayah_number": 42,
+      "surah_name_tr": "Ibrahim",
+      "surah_name_en": "Ibrahim",
+      "source_ar": "diyanet_api_v1:14:42",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-31-13",
+      "surah_number": 31,
+      "ayah_number": 13,
+      "surah_name_tr": "Lokman",
+      "surah_name_en": "Luqman",
+      "source_ar": "diyanet_api_v1:31:13",
+      "topics": [
+        "zulum_nedir_zalim_kimdir"
+      ],
+      "priority": 8,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-263",
+      "surah_number": 2,
+      "ayah_number": 263,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:263",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-264",
+      "surah_number": 2,
+      "ayah_number": 264,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:264",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-267",
+      "surah_number": 2,
+      "ayah_number": 267,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:267",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-271",
+      "surah_number": 2,
+      "ayah_number": 271,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:271",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-273",
+      "surah_number": 2,
+      "ayah_number": 273,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:273",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-1",
+      "surah_number": 4,
+      "ayah_number": 1,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:1",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-2",
+      "surah_number": 4,
+      "ayah_number": 2,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:2",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-3",
+      "surah_number": 4,
+      "ayah_number": 3,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:3",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-6",
+      "surah_number": 4,
+      "ayah_number": 6,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:6",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-8",
+      "surah_number": 4,
+      "ayah_number": 8,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:8",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-9",
+      "surah_number": 4,
+      "ayah_number": 9,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:9",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-19",
+      "surah_number": 4,
+      "ayah_number": 19,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:19",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-32",
+      "surah_number": 4,
+      "ayah_number": 32,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:32",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-86",
+      "surah_number": 4,
+      "ayah_number": 86,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:86",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-114",
+      "surah_number": 4,
+      "ayah_number": 114,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:114",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-128",
+      "surah_number": 4,
+      "ayah_number": 128,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:128",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-129",
+      "surah_number": 4,
+      "ayah_number": 129,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:129",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-17-28",
+      "surah_number": 17,
+      "ayah_number": 28,
+      "surah_name_tr": "Isra",
+      "surah_name_en": "Al-Isra",
+      "source_ar": "diyanet_api_v1:17:28",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-17-29",
+      "surah_number": 17,
+      "ayah_number": 29,
+      "surah_name_tr": "Isra",
+      "surah_name_en": "Al-Isra",
+      "source_ar": "diyanet_api_v1:17:29",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-17-53",
+      "surah_number": 17,
+      "ayah_number": 53,
+      "surah_name_tr": "Isra",
+      "surah_name_en": "Al-Isra",
+      "source_ar": "diyanet_api_v1:17:53",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-27",
+      "surah_number": 24,
+      "ayah_number": 27,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:27",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-28",
+      "surah_number": 24,
+      "ayah_number": 28,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:28",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-31-14",
+      "surah_number": 31,
+      "ayah_number": 14,
+      "surah_name_tr": "Lokman",
+      "surah_name_en": "Luqman",
+      "source_ar": "diyanet_api_v1:31:14",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-31-15",
+      "surah_number": 31,
+      "ayah_number": 15,
+      "surah_name_tr": "Lokman",
+      "surah_name_en": "Luqman",
+      "source_ar": "diyanet_api_v1:31:15",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-49-11",
+      "surah_number": 49,
+      "ayah_number": 11,
+      "surah_name_tr": "Hucurat",
+      "surah_name_en": "Al-Hujurat",
+      "source_ar": "diyanet_api_v1:49:11",
+      "topics": [
+        "insani_iliskiler"
+      ],
+      "priority": 9,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-112",
+      "surah_number": 2,
+      "ayah_number": 112,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:112",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-131",
+      "surah_number": 2,
+      "ayah_number": 131,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:131",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-132",
+      "surah_number": 2,
+      "ayah_number": 132,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:132",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-136",
+      "surah_number": 2,
+      "ayah_number": 136,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:136",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-138",
+      "surah_number": 2,
+      "ayah_number": 138,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:138",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-139",
+      "surah_number": 2,
+      "ayah_number": 139,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:139",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-31",
+      "surah_number": 3,
+      "ayah_number": 31,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:31",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-32",
+      "surah_number": 3,
+      "ayah_number": 32,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:32",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-52",
+      "surah_number": 3,
+      "ayah_number": 52,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:52",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-83",
+      "surah_number": 3,
+      "ayah_number": 83,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:83",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-3",
+      "surah_number": 5,
+      "ayah_number": 3,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:3",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-54",
+      "surah_number": 5,
+      "ayah_number": 54,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:54",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-55",
+      "surah_number": 5,
+      "ayah_number": 55,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:55",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-56",
+      "surah_number": 5,
+      "ayah_number": 56,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:56",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-162",
+      "surah_number": 6,
+      "ayah_number": 162,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:162",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-163",
+      "surah_number": 6,
+      "ayah_number": 163,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:163",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-24",
+      "surah_number": 9,
+      "ayah_number": 24,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:24",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-111",
+      "surah_number": 9,
+      "ayah_number": 111,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:111",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-10-84",
+      "surah_number": 10,
+      "ayah_number": 84,
+      "surah_name_tr": "Yunus",
+      "surah_name_en": "Yunus",
+      "source_ar": "diyanet_api_v1:10:84",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-36",
+      "surah_number": 33,
+      "ayah_number": 36,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:36",
+      "topics": [
+        "islama_baglilik"
+      ],
+      "priority": 10,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-39-11",
+      "surah_number": 39,
+      "ayah_number": 11,
+      "surah_name_tr": "Zumer",
+      "surah_name_en": "Az-Zumar",
+      "source_ar": "diyanet_api_v1:39:11",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-39-12",
+      "surah_number": 39,
+      "ayah_number": 12,
+      "surah_name_tr": "Zumer",
+      "surah_name_en": "Az-Zumar",
+      "source_ar": "diyanet_api_v1:39:12",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-39-14",
+      "surah_number": 39,
+      "ayah_number": 14,
+      "surah_name_tr": "Zumer",
+      "surah_name_en": "Az-Zumar",
+      "source_ar": "diyanet_api_v1:39:14",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-41-30",
+      "surah_number": 41,
+      "ayah_number": 30,
+      "surah_name_tr": "Fussilet",
+      "surah_name_en": "Fussilat",
+      "source_ar": "diyanet_api_v1:41:30",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-42-13",
+      "surah_number": 42,
+      "ayah_number": 13,
+      "surah_name_tr": "Sura",
+      "surah_name_en": "Ash-Shura",
+      "source_ar": "diyanet_api_v1:42:13",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-143",
+      "surah_number": 2,
+      "ayah_number": 143,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:143",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-213",
+      "surah_number": 2,
+      "ayah_number": 213,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:213",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-103",
+      "surah_number": 3,
+      "ayah_number": 103,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:103",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-105",
+      "surah_number": 3,
+      "ayah_number": 105,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:105",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-6-159",
+      "surah_number": 6,
+      "ayah_number": 159,
+      "surah_name_tr": "Enam",
+      "surah_name_en": "Al-An'am",
+      "source_ar": "diyanet_api_v1:6:159",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-46",
+      "surah_number": 8,
+      "ayah_number": 46,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:46",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-72",
+      "surah_number": 8,
+      "ayah_number": 72,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:72",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-73",
+      "surah_number": 8,
+      "ayah_number": 73,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:73",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-71",
+      "surah_number": 9,
+      "ayah_number": 71,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:71",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-100",
+      "surah_number": 9,
+      "ayah_number": 100,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:100",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-21-92",
+      "surah_number": 21,
+      "ayah_number": 92,
+      "surah_name_tr": "Enbiya",
+      "surah_name_en": "Al-Anbiya",
+      "source_ar": "diyanet_api_v1:21:92",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-22-78",
+      "surah_number": 22,
+      "ayah_number": 78,
+      "surah_name_tr": "Hac",
+      "surah_name_en": "Al-Hajj",
+      "source_ar": "diyanet_api_v1:22:78",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-23-52",
+      "surah_number": 23,
+      "ayah_number": 52,
+      "surah_name_tr": "Muminun",
+      "surah_name_en": "Al-Mu'minun",
+      "source_ar": "diyanet_api_v1:23:52",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-6",
+      "surah_number": 33,
+      "ayah_number": 6,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:6",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-23",
+      "surah_number": 33,
+      "ayah_number": 23,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:23",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-35",
+      "surah_number": 33,
+      "ayah_number": 35,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:35",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-48-29",
+      "surah_number": 48,
+      "ayah_number": 29,
+      "surah_name_tr": "Fetih",
+      "surah_name_en": "Al-Fath",
+      "source_ar": "diyanet_api_v1:48:29",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-49-13",
+      "surah_number": 49,
+      "ayah_number": 13,
+      "surah_name_tr": "Hucurat",
+      "surah_name_en": "Al-Hujurat",
+      "source_ar": "diyanet_api_v1:49:13",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-59-9",
+      "surah_number": 59,
+      "ayah_number": 9,
+      "surah_name_tr": "Hasr",
+      "surah_name_en": "Al-Hashr",
+      "source_ar": "diyanet_api_v1:59:9",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-61-4",
+      "surah_number": 61,
+      "ayah_number": 4,
+      "surah_name_tr": "Saff",
+      "surah_name_en": "As-Saff",
+      "source_ar": "diyanet_api_v1:61:4",
+      "topics": [
+        "ummet_bilinci"
+      ],
+      "priority": 11,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-220",
+      "surah_number": 2,
+      "ayah_number": 220,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:220",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-224",
+      "surah_number": 2,
+      "ayah_number": 224,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:224",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-237",
+      "surah_number": 2,
+      "ayah_number": 237,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:237",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-25",
+      "surah_number": 4,
+      "ayah_number": 25,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:25",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-92",
+      "surah_number": 4,
+      "ayah_number": 92,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:92",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-93",
+      "surah_number": 4,
+      "ayah_number": 93,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:93",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-63",
+      "surah_number": 8,
+      "ayah_number": 63,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:63",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-11",
+      "surah_number": 9,
+      "ayah_number": 11,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:11",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-15-47",
+      "surah_number": 15,
+      "ayah_number": 47,
+      "surah_name_tr": "Hicr",
+      "surah_name_en": "Al-Hijr",
+      "source_ar": "diyanet_api_v1:15:47",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-22",
+      "surah_number": 24,
+      "ayah_number": 22,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:22",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-61",
+      "surah_number": 24,
+      "ayah_number": 61,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:61",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-5",
+      "surah_number": 33,
+      "ayah_number": 5,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:5",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-53",
+      "surah_number": 33,
+      "ayah_number": 53,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:53",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-56",
+      "surah_number": 33,
+      "ayah_number": 56,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:56",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-49-12",
+      "surah_number": 49,
+      "ayah_number": 12,
+      "surah_name_tr": "Hucurat",
+      "surah_name_en": "Al-Hujurat",
+      "source_ar": "diyanet_api_v1:49:12",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-59-10",
+      "surah_number": 59,
+      "ayah_number": 10,
+      "surah_name_tr": "Hasr",
+      "surah_name_en": "Al-Hashr",
+      "source_ar": "diyanet_api_v1:59:10",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-59-11",
+      "surah_number": 59,
+      "ayah_number": 11,
+      "surah_name_tr": "Hasr",
+      "surah_name_en": "Al-Hashr",
+      "source_ar": "diyanet_api_v1:59:11",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-59-12",
+      "surah_number": 59,
+      "ayah_number": 12,
+      "surah_name_tr": "Hasr",
+      "surah_name_en": "Al-Hashr",
+      "source_ar": "diyanet_api_v1:59:12",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-60-7",
+      "surah_number": 60,
+      "ayah_number": 7,
+      "surah_name_tr": "Mumtehine",
+      "surah_name_en": "Al-Mumtahanah",
+      "source_ar": "diyanet_api_v1:60:7",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-64-14",
+      "surah_number": 64,
+      "ayah_number": 14,
+      "surah_name_tr": "Tegabun",
+      "surah_name_en": "At-Taghabun",
+      "source_ar": "diyanet_api_v1:64:14",
+      "topics": [
+        "kardeslige_baglilik"
+      ],
+      "priority": 12,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-215",
+      "surah_number": 2,
+      "ayah_number": 215,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:215",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-58",
+      "surah_number": 24,
+      "ayah_number": 58,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:58",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-59",
+      "surah_number": 24,
+      "ayah_number": 59,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:59",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-60",
+      "surah_number": 24,
+      "ayah_number": 60,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:60",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-28-23",
+      "surah_number": 28,
+      "ayah_number": 23,
+      "surah_name_tr": "Kasas",
+      "surah_name_en": "Al-Qasas",
+      "source_ar": "diyanet_api_v1:28:23",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-28-24",
+      "surah_number": 28,
+      "ayah_number": 24,
+      "surah_name_tr": "Kasas",
+      "surah_name_en": "Al-Qasas",
+      "source_ar": "diyanet_api_v1:28:24",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-46-15",
+      "surah_number": 46,
+      "ayah_number": 15,
+      "surah_name_tr": "Ahkaf",
+      "surah_name_en": "Al-Ahqaf",
+      "source_ar": "diyanet_api_v1:46:15",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-46-16",
+      "surah_number": 46,
+      "ayah_number": 16,
+      "surah_name_tr": "Ahkaf",
+      "surah_name_en": "Al-Ahqaf",
+      "source_ar": "diyanet_api_v1:46:16",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-93-9",
+      "surah_number": 93,
+      "ayah_number": 9,
+      "surah_name_tr": "Duha",
+      "surah_name_en": "Ad-Duhaa",
+      "source_ar": "diyanet_api_v1:93:9",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-93-10",
+      "surah_number": 93,
+      "ayah_number": 10,
+      "surah_name_tr": "Duha",
+      "surah_name_en": "Ad-Duhaa",
+      "source_ar": "diyanet_api_v1:93:10",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-80",
+      "surah_number": 4,
+      "ayah_number": 80,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:80",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-115",
+      "surah_number": 4,
+      "ayah_number": 115,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:115",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-7-157",
+      "surah_number": 7,
+      "ayah_number": 157,
+      "surah_name_tr": "Araf",
+      "surah_name_en": "Al-A'raf",
+      "source_ar": "diyanet_api_v1:7:157",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-20",
+      "surah_number": 8,
+      "ayah_number": 20,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:20",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-24",
+      "surah_number": 8,
+      "ayah_number": 24,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:24",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-51",
+      "surah_number": 24,
+      "ayah_number": 51,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:51",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-52",
+      "surah_number": 24,
+      "ayah_number": 52,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:52",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-54",
+      "surah_number": 24,
+      "ayah_number": 54,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:54",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-24-56",
+      "surah_number": 24,
+      "ayah_number": 56,
+      "surah_name_tr": "Nur",
+      "surah_name_en": "An-Nur",
+      "source_ar": "diyanet_api_v1:24:56",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-21",
+      "surah_number": 33,
+      "ayah_number": 21,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:21",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-40",
+      "surah_number": 33,
+      "ayah_number": 40,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:40",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-45",
+      "surah_number": 33,
+      "ayah_number": 45,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:45",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-46",
+      "surah_number": 33,
+      "ayah_number": 46,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:46",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-47-33",
+      "surah_number": 47,
+      "ayah_number": 33,
+      "surah_name_tr": "Muhammed",
+      "surah_name_en": "Muhammad",
+      "source_ar": "diyanet_api_v1:47:33",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-59-7",
+      "surah_number": 59,
+      "ayah_number": 7,
+      "surah_name_tr": "Hasr",
+      "surah_name_en": "Al-Hashr",
+      "source_ar": "diyanet_api_v1:59:7",
+      "topics": [
+        "buyuklere_ve_kucuklere_davranis"
+      ],
+      "priority": 13,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-261",
+      "surah_number": 2,
+      "ayah_number": 261,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:261",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-2-262",
+      "surah_number": 2,
+      "ayah_number": 262,
+      "surah_name_tr": "Bakara",
+      "surah_name_en": "Al-Baqarah",
+      "source_ar": "diyanet_api_v1:2:262",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-92",
+      "surah_number": 3,
+      "ayah_number": 92,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:92",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-32",
+      "surah_number": 5,
+      "ayah_number": 32,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:32",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-28-77",
+      "surah_number": 28,
+      "ayah_number": 77,
+      "surah_name_tr": "Kasas",
+      "surah_name_en": "Al-Qasas",
+      "source_ar": "diyanet_api_v1:28:77",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-76-8",
+      "surah_number": 76,
+      "ayah_number": 8,
+      "surah_name_tr": "Insan",
+      "surah_name_en": "Al-Insan",
+      "source_ar": "diyanet_api_v1:76:8",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-76-9",
+      "surah_number": 76,
+      "ayah_number": 9,
+      "surah_name_tr": "Insan",
+      "surah_name_en": "Al-Insan",
+      "source_ar": "diyanet_api_v1:76:9",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-90-13",
+      "surah_number": 90,
+      "ayah_number": 13,
+      "surah_name_tr": "Beled",
+      "surah_name_en": "Al-Balad",
+      "source_ar": "diyanet_api_v1:90:13",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-90-14",
+      "surah_number": 90,
+      "ayah_number": 14,
+      "surah_name_tr": "Beled",
+      "surah_name_en": "Al-Balad",
+      "source_ar": "diyanet_api_v1:90:14",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-107-3",
+      "surah_number": 107,
+      "ayah_number": 3,
+      "surah_name_tr": "Maun",
+      "surah_name_en": "Al-Ma'un",
+      "source_ar": "diyanet_api_v1:107:3",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-7-199",
+      "surah_number": 7,
+      "ayah_number": 199,
+      "surah_name_tr": "Araf",
+      "surah_name_en": "Al-A'raf",
+      "source_ar": "diyanet_api_v1:7:199",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-119",
+      "surah_number": 9,
+      "ayah_number": 119,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:119",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-22-30",
+      "surah_number": 22,
+      "ayah_number": 30,
+      "surah_name_tr": "Hac",
+      "surah_name_en": "Al-Hajj",
+      "source_ar": "diyanet_api_v1:22:30",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-25-63",
+      "surah_number": 25,
+      "ayah_number": 63,
+      "surah_name_tr": "Furkan",
+      "surah_name_en": "Al-Furqan",
+      "source_ar": "diyanet_api_v1:25:63",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-31-17",
+      "surah_number": 31,
+      "ayah_number": 17,
+      "surah_name_tr": "Lokman",
+      "surah_name_en": "Luqman",
+      "source_ar": "diyanet_api_v1:31:17",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-33-70",
+      "surah_number": 33,
+      "ayah_number": 70,
+      "surah_name_tr": "Ahzab",
+      "surah_name_en": "Al-Ahzab",
+      "source_ar": "diyanet_api_v1:33:70",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-39-18",
+      "surah_number": 39,
+      "ayah_number": 18,
+      "surah_name_tr": "Zumer",
+      "surah_name_en": "Az-Zumar",
+      "source_ar": "diyanet_api_v1:39:18",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-41-33",
+      "surah_number": 41,
+      "ayah_number": 33,
+      "surah_name_tr": "Fussilet",
+      "surah_name_en": "Fussilat",
+      "source_ar": "diyanet_api_v1:41:33",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-103-1",
+      "surah_number": 103,
+      "ayah_number": 1,
+      "surah_name_tr": "Asr",
+      "surah_name_en": "Al-Asr",
+      "source_ar": "diyanet_api_v1:103:1",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-103-3",
+      "surah_number": 103,
+      "ayah_number": 3,
+      "surah_name_tr": "Asr",
+      "surah_name_en": "Al-Asr",
+      "source_ar": "diyanet_api_v1:103:3",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-23-1",
+      "surah_number": 23,
+      "ayah_number": 1,
+      "surah_name_tr": "Muminun",
+      "surah_name_en": "Al-Mu'minun",
+      "source_ar": "diyanet_api_v1:23:1",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-23-2",
+      "surah_number": 23,
+      "ayah_number": 2,
+      "surah_name_tr": "Muminun",
+      "surah_name_en": "Al-Mu'minun",
+      "source_ar": "diyanet_api_v1:23:2",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-23-3",
+      "surah_number": 23,
+      "ayah_number": 3,
+      "surah_name_tr": "Muminun",
+      "surah_name_en": "Al-Mu'minun",
+      "source_ar": "diyanet_api_v1:23:3",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-23-4",
+      "surah_number": 23,
+      "ayah_number": 4,
+      "surah_name_tr": "Muminun",
+      "surah_name_en": "Al-Mu'minun",
+      "source_ar": "diyanet_api_v1:23:4",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-23-5",
+      "surah_number": 23,
+      "ayah_number": 5,
+      "surah_name_tr": "Muminun",
+      "surah_name_en": "Al-Mu'minun",
+      "source_ar": "diyanet_api_v1:23:5",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-23-8",
+      "surah_number": 23,
+      "ayah_number": 8,
+      "surah_name_tr": "Muminun",
+      "surah_name_en": "Al-Mu'minun",
+      "source_ar": "diyanet_api_v1:23:8",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-23-9",
+      "surah_number": 23,
+      "ayah_number": 9,
+      "surah_name_tr": "Muminun",
+      "surah_name_en": "Al-Mu'minun",
+      "source_ar": "diyanet_api_v1:23:9",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-23-10",
+      "surah_number": 23,
+      "ayah_number": 10,
+      "surah_name_tr": "Muminun",
+      "surah_name_en": "Al-Mu'minun",
+      "source_ar": "diyanet_api_v1:23:10",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-31-18",
+      "surah_number": 31,
+      "ayah_number": 18,
+      "surah_name_tr": "Lokman",
+      "surah_name_en": "Luqman",
+      "source_ar": "diyanet_api_v1:31:18",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-31-19",
+      "surah_number": 31,
+      "ayah_number": 19,
+      "surah_name_tr": "Lokman",
+      "surah_name_en": "Luqman",
+      "source_ar": "diyanet_api_v1:31:19",
+      "topics": [
+        "peygamber_sozlerine_itibar"
+      ],
+      "priority": 14,
       "status": "draft"
     }
   ]

@@ -487,11 +487,11 @@ Acceptance:
 
 Goal: prevent regressions.
 
-- [ ] Add unit tests for qibla bearing calculation.
-- [ ] Add unit tests for daily content repeat-prevention.
+- [x] Add unit tests for qibla bearing calculation.
+- [x] Add unit tests for daily content repeat-prevention.
 - [ ] Add unit tests for update/catalog JSON parsing.
-- [ ] Add tests for prayer-time source labels.
-- [ ] Add widget smoke tests for main panels where practical.
+- [x] Add tests for prayer-time source labels.
+- [x] Add widget smoke tests for main panels where practical.
 - [ ] Run `flutter analyze`.
 
 Acceptance:

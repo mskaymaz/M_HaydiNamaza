@@ -1,0 +1,387 @@
+{
+  "threshold_tr_chars": 500,
+  "count": 10,
+  "source_file": "Besmele/data/daily_panel/ayahs_draft.json",
+  "records": [
+    {
+      "id": "ayah-2-282",
+      "surah_number": 2,
+      "ayah_number": 282,
+      "length_tr": 1022,
+      "record": {
+        "id": "ayah-2-282",
+        "type": "ayah",
+        "surah_name": "Bakara",
+        "surah_number": 2,
+        "ayah_number": 282,
+        "text": {
+          "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِذَا تَدَايَنتُم بِدَيْنٍ إِلَىٰٓ أَجَلٍۢ مُّسَمًّۭى فَٱكْتُبُوهُ ۚ وَلْيَكْتُب بَّيْنَكُمْ كَاتِبٌۢ بِٱلْعَدْلِ ۚ وَلَا يَأْبَ كَاتِبٌ أَن يَكْتُبَ كَمَا عَلَّمَهُ ٱللَّهُ ۚ فَلْيَكْتُبْ وَلْيُمْلِلِ ٱلَّذِى عَلَيْهِ ٱلْحَقُّ وَلْيَتَّقِ ٱللَّهَ رَبَّهُۥ وَلَا يَبْخَسْ مِنْهُ شَيْـًۭٔا ۚ فَإِن كَانَ ٱلَّذِى عَلَيْهِ ٱلْحَقُّ سَفِيهًا أَوْ ضَعِيفًا أَوْ لَا يَسْتَطِيعُ أَن يُمِلَّ هُوَ فَلْيُمْلِلْ وَلِيُّهُۥ بِٱلْعَدْلِ ۚ وَٱسْتَشْهِدُوا۟ شَهِيدَيْنِ مِن رِّجَالِكُمْ ۖ فَإِن لَّمْ يَكُونَا رَجُلَيْنِ فَرَجُلٌۭ وَٱمْرَأَتَانِ مِمَّن تَرْضَوْنَ مِنَ ٱلشُّهَدَآءِ أَن تَضِلَّ إِحْدَىٰهُمَا فَتُذَكِّرَ إِحْدَىٰهُمَا ٱلْأُخْرَىٰ ۚ وَلَا يَأْبَ ٱلشُّهَدَآءُ إِذَا مَا دُعُوا۟ ۚ وَلَا تَسْـَٔمُوٓا۟ أَن تَكْتُبُوهُ صَغِيرًا أَوْ كَبِيرًا إِلَىٰٓ أَجَلِهِۦ ۚ ذَٰلِكُمْ أَقْسَطُ عِندَ ٱللَّهِ وَأَقْوَمُ لِلشَّهَٰدَةِ وَأَدْنَىٰٓ أَلَّا تَرْتَابُوٓا۟ ۖ إِلَّآ أَن تَكُونَ تِجَٰرَةً حَاضِرَةًۭ تُدِيرُونَهَا بَيْنَكُمْ فَلَيْسَ عَلَيْكُمْ جُنَاحٌ أَلَّا تَكْتُبُوهَا ۗ وَأَشْهِدُوٓا۟ إِذَا تَبَايَعْتُمْ ۚ وَلَا يُضَآرَّ كَاتِبٌۭ وَلَا شَهِيدٌۭ ۚ وَإِن تَفْعَلُوا۟ فَإِنَّهُۥ فُسُوقٌۢ بِكُمْ ۗ وَٱتَّقُوا۟ ٱللَّهَ ۖ وَيُعَلِّمُكُمُ ٱللَّهُ ۗ وَٱللَّهُ بِكُلِّ شَىْءٍ عَلِيمٌۭ"
+        },
+        "translation": {
+          "tr": "Ey İnananlar! Birbirinize belirli bir süre için borçlandığınız zaman onu yazınız. İçinizden bir katip doğru olarak yazsın; katip onu Allah'ın kendisine öğrettiği gibi yazmaktan çekinmesin, yazsın. Borçlu olan da yazdırsın, Rabbi olan Allah'tan sakınsın, ondan bir şey eksiltmesin. Eğer borçlu, aptal veya aciz, ya da yazdıramıyacak durumda ise, velisi, doğru olarak yazdırsın. Erkeklerinizden iki şahid tutun; eğer iki erkek bulunmazsa, şahidlerden razı olacağınız bir erkek, biri unuttuğunda diğeri ona hatırlatacak iki kadın olabilir. Şahidler çağırıldıklarında çekinmesinler. Borç büyük veya küçük olsun, onu süresiyle beraber yazmaya üşenmeyin; bu, Allah katında en doğru, şahidlik için en sağlam ve şüphelenmenizden en uzak olandır. Ancak aranızdaki alışveriş peşin olursa, onu yazmamanızda size bir sorumluluk yoktur. Alışveriş yaptığınızda şahid tutun. Katibe de şahide de zarar verilmesin; eğer zarar verirseniz, o zaman doğru yoldan çıkmış olursunuz. Allah'tan sakının, Allah size öğretiyor; Allah her şeyi bilir.",
+          "en": "O YOU who have attained to faith! Whenever you give or take credit for a stated term, set it down in writing. And let a scribe write it down equitably between you; and no scribe shall refuse to write as God has taught him: thus shall he write. And let him who contracts the debt dictate; and let him be conscious of God, his Sustainer, and not weaken anything of his undertaking. And if he who contracts the debt is weak of mind or body, or, is not able to dictate himself, then let him who watches over his interests dictate equitably. And call upon two of your men to act as witnesses; and if two men are not available, then a man and two women from among such as are acceptable to you as witnesses, so that if one of them should make a mistake, the other could remind her. And the witnesses must not refuse [to give evidence] whenever they are called upon. And be not loath to write down every contractual provision, be it small or great, together with the time at which it falls due; this is more equitable in the sight of God, more reliable as evidence, and more likely to prevent you from having doubts [later]. If, however, [the transaction] concerns ready merchandise which you transfer directly unto one another, you will incur no sin if you do not write it down. And have witnesses whenever you trade with one another, but neither scribe nor witness must suffer harm; for if you do [them harm], behold, it will be sinful conduct on your part. And remain conscious of God, since it is God who teaches you [herewith] - and God has full knowledge of everything."
+        },
+        "source_ar": "diyanet_api_v1:2:282",
+        "source_tr": "tr.diyanet:2:282",
+        "source_en": "en.asad:2:282",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "islami_devlet_yonetimi"
+        ],
+        "priority": 5,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    },
+    {
+      "id": "ayah-24-61",
+      "surah_number": 24,
+      "ayah_number": 61,
+      "length_tr": 713,
+      "record": {
+        "id": "ayah-24-61",
+        "type": "ayah",
+        "surah_name": "Nur",
+        "surah_number": 24,
+        "ayah_number": 61,
+        "text": {
+          "ar": "لَّيْسَ عَلَى ٱلْأَعْمَىٰ حَرَجٌۭ وَلَا عَلَى ٱلْأَعْرَجِ حَرَجٌۭ وَلَا عَلَى ٱلْمَرِيضِ حَرَجٌۭ وَلَا عَلَىٰٓ أَنفُسِكُمْ أَن تَأْكُلُوا۟ مِنۢ بُيُوتِكُمْ أَوْ بُيُوتِ ءَابَآئِكُمْ أَوْ بُيُوتِ أُمَّهَٰتِكُمْ أَوْ بُيُوتِ إِخْوَٰنِكُمْ أَوْ بُيُوتِ أَخَوَٰتِكُمْ أَوْ بُيُوتِ أَعْمَٰمِكُمْ أَوْ بُيُوتِ عَمَّٰتِكُمْ أَوْ بُيُوتِ أَخْوَٰلِكُمْ أَوْ بُيُوتِ خَٰلَٰتِكُمْ أَوْ مَا مَلَكْتُم مَّفَاتِحَهُۥٓ أَوْ صَدِيقِكُمْ ۚ لَيْسَ عَلَيْكُمْ جُنَاحٌ أَن تَأْكُلُوا۟ جَمِيعًا أَوْ أَشْتَاتًۭا ۚ فَإِذَا دَخَلْتُم بُيُوتًۭا فَسَلِّمُوا۟ عَلَىٰٓ أَنفُسِكُمْ تَحِيَّةًۭ مِّنْ عِندِ ٱللَّهِ مُبَٰرَكَةًۭ طَيِّبَةًۭ ۚ كَذَٰلِكَ يُبَيِّنُ ٱللَّهُ لَكُمُ ٱلْءَايَٰتِ لَعَلَّكُمْ تَعْقِلُونَ"
+        },
+        "translation": {
+          "tr": "Kör için bir sorumluluk yoktur. Topal için bir sorumluluk yoktur. Hastaya da bir sorumluluk yoktur. Evlerinizde veya babalarınızın evlerinde veya annelerinizin evlerinde veya erkek kardeşlerinizin evlerinde veya kız kardeşlerinizin evlerinde veya amcalarınızın evlerinde veya halalarınızın evlerinde veya dayılarınızın evlerinde veya teyzelerinizin evlerinde veya kahyası olup anahtarları elinde olan evlerde, ya da dostlarınızın evlerinde izinsiz yemek yemenizde bir sorumluluk yoktur. Bir arada veya ayrı ayrı yemenizde de bir sorumluluk yoktur. Evlere girdiğiniz zaman, kendinize ehlinize Allah katından bereket, esenlik ve güzellik dileyerek selam verin. Allah size ayetleri, düşünesiniz diye böylece açıklar.",
+          "en": "[ALL OF YOU, O believers, are brethren: hence.] no blame attaches to the blind, nor does blame attach to the lame, nor does blame attach to the sick [for accepting charity from the hale], and neither to your­selves for eating [whatever is offered to you by others, whether it be food obtained] from your [chil­dren’s] houses, or your fathers’ houses, or your mothers’ houses, or your brothers’ houses, or your sisters’ houses, or your paternal uncles’ houses, or your paternal aunts’ houses, or your maternal uncles’ houses, or your maternal aunts’ houses, or [houses] the keys whereof are in your charge! or [the house] of any of your friends; nor will you incur any sin by eating in company or separately. But whenever you enter [any of these] houses, greet one another with a blessed, goodly greeting, as enjoined by God. In this way God makes clear unto you His mes­sages, so that you might [learn to] use your reason."
+        },
+        "source_ar": "diyanet_api_v1:24:61",
+        "source_tr": "tr.diyanet:24:61",
+        "source_en": "en.asad:24:61",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "kardeslige_baglilik"
+        ],
+        "priority": 12,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    },
+    {
+      "id": "ayah-5-3",
+      "surah_number": 5,
+      "ayah_number": 3,
+      "length_tr": 664,
+      "record": {
+        "id": "ayah-5-3",
+        "type": "ayah",
+        "surah_name": "Maide",
+        "surah_number": 5,
+        "ayah_number": 3,
+        "text": {
+          "ar": "حُرِّمَتْ عَلَيْكُمُ ٱلْمَيْتَةُ وَٱلدَّمُ وَلَحْمُ ٱلْخِنزِيرِ وَمَآ أُهِلَّ لِغَيْرِ ٱللَّهِ بِهِۦ وَٱلْمُنْخَنِقَةُ وَٱلْمَوْقُوذَةُ وَٱلْمُتَرَدِّيَةُ وَٱلنَّطِيحَةُ وَمَآ أَكَلَ ٱلسَّبُعُ إِلَّا مَا ذَكَّيْتُمْ وَمَا ذُبِحَ عَلَى ٱلنُّصُبِ وَأَن تَسْتَقْسِمُوا۟ بِٱلْأَزْلَٰمِ ۚ ذَٰلِكُمْ فِسْقٌ ۗ ٱلْيَوْمَ يَئِسَ ٱلَّذِينَ كَفَرُوا۟ مِن دِينِكُمْ فَلَا تَخْشَوْهُمْ وَٱخْشَوْنِ ۚ ٱلْيَوْمَ أَكْمَلْتُ لَكُمْ دِينَكُمْ وَأَتْمَمْتُ عَلَيْكُمْ نِعْمَتِى وَرَضِيتُ لَكُمُ ٱلْإِسْلَٰمَ دِينًۭا ۚ فَمَنِ ٱضْطُرَّ فِى مَخْمَصَةٍ غَيْرَ مُتَجَانِفٍۢ لِّإِثْمٍۢ ۙ فَإِنَّ ٱللَّهَ غَفُورٌۭ رَّحِيمٌۭ"
+        },
+        "translation": {
+          "tr": "Leş, kan, domuz eti, Allah'tan başkası adına kesilenler, -canları çıkmadan önce kesmemişseniz, boğulmuş, bir yerine vurularak öldürülmüş, düşüp yuvarlanmış, başka bir hayvan tarafından süsülmüş, yırtıcı hayvan tarafından yenmiş olanları- dikili taşlar üzerine boğazlananlar ile fal oklarıyla kısmet aramanız size haram kılındı; bunlar fasıklıktır. Bugün, inkar edenler sizi dininizden etmekten umutlarını kesmişlerdir, onlardan korkmayın, Benden korkun. Bugün, size dininizi bütünledim, üzerinize olan nimetimi tamamladım, din olarak sizin için İslam'ı beğendim. Açlıktan darda kalan, günaha kaymaksızın yiyebilir. Doğrusu Allah Bağışlayan'dır, merhametli olandır.",
+          "en": "FORBIDDEN to you is carrion, and blood, and the flesh of swine, and that over which any name other than God's has been invoked, and the animal that has been strangled, or beaten to death, or killed by a fall, or gored to death, or savaged by a beast of prey, save that which you [yourselves] may have slaughtered while it was still alive; and [forbidden to you is] all that has been slaughtered on idolatrous altars. And [you are forbidden] to seek to learn through divination what the future may hold in store for you: this is sinful conduct. Today, those who are bent on denying the truth have lost all hope of [your ever forsaking] your religion: do not, then, hold them in awe, but stand in awe of Me! Today have I perfected your religious law for you, and have bestowed upon you the full measure of My blessings, and willed that self-surrender unto Me shall be your religion. As for him, however, who is driven [to what is forbidden] by dire necessity and not by an inclination to sinning -behold, God is much-forgiving, a dispenser of grace."
+        },
+        "source_ar": "diyanet_api_v1:5:3",
+        "source_tr": "tr.diyanet:5:3",
+        "source_en": "en.asad:5:3",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "islama_baglilik"
+        ],
+        "priority": 10,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    },
+    {
+      "id": "ayah-7-157",
+      "surah_number": 7,
+      "ayah_number": 157,
+      "length_tr": 634,
+      "record": {
+        "id": "ayah-7-157",
+        "type": "ayah",
+        "surah_name": "Araf",
+        "surah_number": 7,
+        "ayah_number": 157,
+        "text": {
+          "ar": "ٱلَّذِينَ يَتَّبِعُونَ ٱلرَّسُولَ ٱلنَّبِىَّ ٱلْأُمِّىَّ ٱلَّذِى يَجِدُونَهُۥ مَكْتُوبًا عِندَهُمْ فِى ٱلتَّوْرَىٰةِ وَٱلْإِنجِيلِ يَأْمُرُهُم بِٱلْمَعْرُوفِ وَيَنْهَىٰهُمْ عَنِ ٱلْمُنكَرِ وَيُحِلُّ لَهُمُ ٱلطَّيِّبَٰتِ وَيُحَرِّمُ عَلَيْهِمُ ٱلْخَبَٰٓئِثَ وَيَضَعُ عَنْهُمْ إِصْرَهُمْ وَٱلْأَغْلَٰلَ ٱلَّتِى كَانَتْ عَلَيْهِمْ ۚ فَٱلَّذِينَ ءَامَنُوا۟ بِهِۦ وَعَزَّرُوهُ وَنَصَرُوهُ وَٱتَّبَعُوا۟ ٱلنُّورَ ٱلَّذِىٓ أُنزِلَ مَعَهُۥٓ ۙ أُو۟لَٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ"
+        },
+        "translation": {
+          "tr": "\"Bu dünyada ve ahirette bizim için güzel olanı yaz; biz Sana yöneldik\" dedi. Allah: \"Azabıma dilediğim kimseyi uğratırım, rahmetim herşeyi kaplamıştır; bunu Allah'a karşı gelmekten sakınanlara, zekat verenlere, ayetlerimize inanıp, yanlarındaki Tevrat ve İncil'de yazılı buldukları, okuyup yazması olmayan peygambere uyanlara yazacağız. O peygamber, onlara, uygun olanı emreder ve fenalıktan meneder, temiz şeyleri helal, murdar şeyleri haram kılar, onların ağır yüklerini indirir, zor tekliflerini hafifletir. Bu peygambere inanan, hürmet eden, yardım eden, onunla gönderilen nura uyanlar yok mu? İşte onlar saadete erenlerdir\" dedi.",
+          "en": "those who shall follow the [last] Apostle, the unlettered Prophet whom they shall find described in the Torah that is with them, and [later on] in the Gospel: [the Prophet] who will enjoin upon them the doing of what is right and forbid them the doing of what is wrong, and make lawful to them the good things of life and forbid them the bad things, and lift from them their burdens and the shackles that were upon them [aforetime]. Those, therefore, who shall believe in him, and honour him, and succour him, and follow the light that has been bestowed from on high through him-it is they that shall attain to a happy state.\""
+        },
+        "source_ar": "diyanet_api_v1:7:157",
+        "source_tr": "tr.diyanet:7:157",
+        "source_en": "en.asad:7:157",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "buyuklere_ve_kucuklere_davranis"
+        ],
+        "priority": 13,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    },
+    {
+      "id": "ayah-3-154",
+      "surah_number": 3,
+      "ayah_number": 154,
+      "length_tr": 622,
+      "record": {
+        "id": "ayah-3-154",
+        "type": "ayah",
+        "surah_name": "Al-i Imran",
+        "surah_number": 3,
+        "ayah_number": 154,
+        "text": {
+          "ar": "ثُمَّ أَنزَلَ عَلَيْكُم مِّنۢ بَعْدِ ٱلْغَمِّ أَمَنَةًۭ نُّعَاسًۭا يَغْشَىٰ طَآئِفَةًۭ مِّنكُمْ ۖ وَطَآئِفَةٌۭ قَدْ أَهَمَّتْهُمْ أَنفُسُهُمْ يَظُنُّونَ بِٱللَّهِ غَيْرَ ٱلْحَقِّ ظَنَّ ٱلْجَٰهِلِيَّةِ ۖ يَقُولُونَ هَل لَّنَا مِنَ ٱلْأَمْرِ مِن شَىْءٍۢ ۗ قُلْ إِنَّ ٱلْأَمْرَ كُلَّهُۥ لِلَّهِ ۗ يُخْفُونَ فِىٓ أَنفُسِهِم مَّا لَا يُبْدُونَ لَكَ ۖ يَقُولُونَ لَوْ كَانَ لَنَا مِنَ ٱلْأَمْرِ شَىْءٌۭ مَّا قُتِلْنَا هَٰهُنَا ۗ قُل لَّوْ كُنتُمْ فِى بُيُوتِكُمْ لَبَرَزَ ٱلَّذِينَ كُتِبَ عَلَيْهِمُ ٱلْقَتْلُ إِلَىٰ مَضَاجِعِهِمْ ۖ وَلِيَبْتَلِىَ ٱللَّهُ مَا فِى صُدُورِكُمْ وَلِيُمَحِّصَ مَا فِى قُلُوبِكُمْ ۗ وَٱللَّهُ عَلِيمٌۢ بِذَاتِ ٱلصُّدُورِ"
+        },
+        "translation": {
+          "tr": "Kederden sonra, bir takımınızı kendinden geçirecek şekilde size huzur ve emniyet indirdi; oysa bir takımınız da kendi derdlerine düşmüşlerdi. Haksız yere Allah hakkında, cahiliye devrinde olduğu gibi inanıyorlar. \"Bu işte bizim bir fikrimiz var mı?\" diyorlardı; De ki: \"Buyruğun hepsi Allah'ındır\". Sana açmadıklarını içlerinde gizliyorlar. \"Bu işte bizim fikrimiz alınsaydı, burada öldürülmezdik\" diyorlar. De ki: Evlerinizde olsaydınız, haklarında ölüm yazılı olan kimseler, yine de devrilecekleri yere varırlardı. Bu, Allah'ın içinizde olanı denemesi, kalblerinizde olanı arıtması içindir. Allah gönüllerde olanı bilir.",
+          "en": "Then, after this woe, He sent down upon you a sense of security, an inner calm which enfolded some of you, whereas the others, who cared mainly for themselves, entertained wrong thoughts about God - thoughts of pagan ignorance - saying, \"Did we, then, have any power of decision [in this matter]?\" Say: \"Verily, all power of decision does rest with God\" - [but as for them,] they are trying to conceal within themselves that [weakness of faith] which they would not reveal unto thee, [O Prophet, by] saying, \"If we had any power of decision, we would not have left so many dead behind.\" Say [unto them]: \"Even if you had remained in your homes, those [of you] whose death had been ordained would indeed have gone forth to the places where they were destined to lie down.\" And [all this befell you] so that God might put to a test all that you harbour in your bosoms, and render your innermost hearts pure of all dross: for God is aware of what is in the hearts [of men]."
+        },
+        "source_ar": "diyanet_api_v1:3:154",
+        "source_tr": "tr.diyanet:3:154",
+        "source_en": "en.asad:3:154",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "cihad"
+        ],
+        "priority": 1,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    },
+    {
+      "id": "ayah-48-29",
+      "surah_number": 48,
+      "ayah_number": 29,
+      "length_tr": 610,
+      "record": {
+        "id": "ayah-48-29",
+        "type": "ayah",
+        "surah_name": "Fetih",
+        "surah_number": 48,
+        "ayah_number": 29,
+        "text": {
+          "ar": "مُّحَمَّدٌۭ رَّسُولُ ٱللَّهِ ۚ وَٱلَّذِينَ مَعَهُۥٓ أَشِدَّآءُ عَلَى ٱلْكُفَّارِ رُحَمَآءُ بَيْنَهُمْ ۖ تَرَىٰهُمْ رُكَّعًۭا سُجَّدًۭا يَبْتَغُونَ فَضْلًۭا مِّنَ ٱللَّهِ وَرِضْوَٰنًۭا ۖ سِيمَاهُمْ فِى وُجُوهِهِم مِّنْ أَثَرِ ٱلسُّجُودِ ۚ ذَٰلِكَ مَثَلُهُمْ فِى ٱلتَّوْرَىٰةِ ۚ وَمَثَلُهُمْ فِى ٱلْإِنجِيلِ كَزَرْعٍ أَخْرَجَ شَطْـَٔهُۥ فَـَٔازَرَهُۥ فَٱسْتَغْلَظَ فَٱسْتَوَىٰ عَلَىٰ سُوقِهِۦ يُعْجِبُ ٱلزُّرَّاعَ لِيَغِيظَ بِهِمُ ٱلْكُفَّارَ ۗ وَعَدَ ٱللَّهُ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّٰلِحَٰتِ مِنْهُم مَّغْفِرَةًۭ وَأَجْرًا عَظِيمًۢا"
+        },
+        "translation": {
+          "tr": "Muhammed Allah'ın elçisidir. Onun beraberinde bulunanlar, inkarcılara karşı sert, birbirlerine merhametlidirler. Onları rükua varırken, secde ederken, Allah'tan lütuf ve hoşnudluk dilerken görürsün. Onlar, yüzlerindeki secde izi ile tanınırlar. İşte bu, onların Tevrat'ta anlatılan vasıflarıdır. İncil'de de şöyle vasıflandırılmışlardı: Filizini çıkarmış, onu kuvvetlendirmiş, kalınlaşmış, gövdesi üzerine dikilmiş, ekincilerin hoşuna giden ekin gibidirler. Allah böylece bunları çoğaltıp kuvvetlendirmekle inkarcıları öfkelendirir. Allah, inanıp yararlı işler işleyenlere, bağışlama ve büyük ecir vadetmiştir.",
+          "en": "MUHAMMAD is God’s Apostle; and those who are [truly] with him are firm and unyielding towards all deniers of the truth, [yet] full of mercy towards one another. Thou canst see them bowing down, pros­trating themselves [in prayer], seeking favour with God and [His] goodly acceptance: their marks are on their faces, traced by prostration. This is their parable in the Torah as well as their parable in the Gospel: [they are] like a seed that brings forth its shoot, and then He strengthens it, so that it grows stout, and [in the end] stands firm upon its stem, delighting the sowers. [Thus will God cause the believers to grow in strength,] so that through them He might confound the deniers of the truth. [But] unto such of them as may [yet] attain to faith and do righteous deeds, God has promised forgiveness and a reward supreme."
+        },
+        "source_ar": "diyanet_api_v1:48:29",
+        "source_tr": "tr.diyanet:48:29",
+        "source_en": "en.asad:48:29",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "ummet_bilinci"
+        ],
+        "priority": 11,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    },
+    {
+      "id": "ayah-33-53",
+      "surah_number": 33,
+      "ayah_number": 53,
+      "length_tr": 581,
+      "record": {
+        "id": "ayah-33-53",
+        "type": "ayah",
+        "surah_name": "Ahzab",
+        "surah_number": 33,
+        "ayah_number": 53,
+        "text": {
+          "ar": "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ لَا تَدْخُلُوا۟ بُيُوتَ ٱلنَّبِىِّ إِلَّآ أَن يُؤْذَنَ لَكُمْ إِلَىٰ طَعَامٍ غَيْرَ نَٰظِرِينَ إِنَىٰهُ وَلَٰكِنْ إِذَا دُعِيتُمْ فَٱدْخُلُوا۟ فَإِذَا طَعِمْتُمْ فَٱنتَشِرُوا۟ وَلَا مُسْتَـْٔنِسِينَ لِحَدِيثٍ ۚ إِنَّ ذَٰلِكُمْ كَانَ يُؤْذِى ٱلنَّبِىَّ فَيَسْتَحْىِۦ مِنكُمْ ۖ وَٱللَّهُ لَا يَسْتَحْىِۦ مِنَ ٱلْحَقِّ ۚ وَإِذَا سَأَلْتُمُوهُنَّ مَتَٰعًۭا فَسْـَٔلُوهُنَّ مِن وَرَآءِ حِجَابٍۢ ۚ ذَٰلِكُمْ أَطْهَرُ لِقُلُوبِكُمْ وَقُلُوبِهِنَّ ۚ وَمَا كَانَ لَكُمْ أَن تُؤْذُوا۟ رَسُولَ ٱللَّهِ وَلَآ أَن تَنكِحُوٓا۟ أَزْوَٰجَهُۥ مِنۢ بَعْدِهِۦٓ أَبَدًا ۚ إِنَّ ذَٰلِكُمْ كَانَ عِندَ ٱللَّهِ عَظِيمًا"
+        },
+        "translation": {
+          "tr": "Ey inananlar! Peygamber'in evlerine, yemeğe çağırılmaksızın vakitli vakitsiz girmeyin; fakat davet edilseniz girin ve yemeği yiyince, dağılın. Sohbet etmek için de girip oturmayın. Bu haliniz Peygamber'i üzüyor, o da size bir şey söylemeye çekiniyordu. Allah gerçeği söylemekten çekinmez. Peygamber'in eşlerinden bir şey isteyeceğinizde onu perde arkasından isteyin. Bu sayede sizin gönülleriniz de, onların gönülleri de daha temiz kalır. Bundan sonra ne Allah'ın Peygamber'ini üzmeniz ve ne de O'nuneşlerini nikahlamanız asla caiz değildir. Doğrusu bu, Allah katında büyük şeydir.",
+          "en": "O YOU who have attained to faith! Do not enter the Prophet’s dwellings unless you are given leave; [and when invited] to a meal, do not come [so early as] to wait for it to be readied: but whenever you are invited, enter [at the proper time]; and when you have partaken of the meal, disperse without lingering for the sake of mere talk: that, behold, might give offence to the Prophet, and yet he might feel shy of [asking] you [to leave]: but God is not shy of [teaching you] what is right. And [as for the Prophet’s wives,] whenever you ask them for anything that you need, ask them from behind a screen: this will but deepen the purity of your hearts and theirs. Moreover, it does not behove you to give offence to God’s Apostle - just as it would not behove you ever to marry his widows after he has passed away: that, verily, would be an enormity in the sight of God."
+        },
+        "source_ar": "diyanet_api_v1:33:53",
+        "source_tr": "tr.diyanet:33:53",
+        "source_en": "en.asad:33:53",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "kardeslige_baglilik"
+        ],
+        "priority": 12,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    },
+    {
+      "id": "ayah-4-25",
+      "surah_number": 4,
+      "ayah_number": 25,
+      "length_tr": 580,
+      "record": {
+        "id": "ayah-4-25",
+        "type": "ayah",
+        "surah_name": "Nisa",
+        "surah_number": 4,
+        "ayah_number": 25,
+        "text": {
+          "ar": "وَمَن لَّمْ يَسْتَطِعْ مِنكُمْ طَوْلًا أَن يَنكِحَ ٱلْمُحْصَنَٰتِ ٱلْمُؤْمِنَٰتِ فَمِن مَّا مَلَكَتْ أَيْمَٰنُكُم مِّن فَتَيَٰتِكُمُ ٱلْمُؤْمِنَٰتِ ۚ وَٱللَّهُ أَعْلَمُ بِإِيمَٰنِكُم ۚ بَعْضُكُم مِّنۢ بَعْضٍۢ ۚ فَٱنكِحُوهُنَّ بِإِذْنِ أَهْلِهِنَّ وَءَاتُوهُنَّ أُجُورَهُنَّ بِٱلْمَعْرُوفِ مُحْصَنَٰتٍ غَيْرَ مُسَٰفِحَٰتٍۢ وَلَا مُتَّخِذَٰتِ أَخْدَانٍۢ ۚ فَإِذَآ أُحْصِنَّ فَإِنْ أَتَيْنَ بِفَٰحِشَةٍۢ فَعَلَيْهِنَّ نِصْفُ مَا عَلَى ٱلْمُحْصَنَٰتِ مِنَ ٱلْعَذَابِ ۚ ذَٰلِكَ لِمَنْ خَشِىَ ٱلْعَنَتَ مِنكُمْ ۚ وَأَن تَصْبِرُوا۟ خَيْرٌۭ لَّكُمْ ۗ وَٱللَّهُ غَفُورٌۭ رَّحِيمٌۭ"
+        },
+        "translation": {
+          "tr": "Sizden, hür mümin kadınlarla evlenmeye güç yetiremiyen kimse, ellerinizdeki mümin cariyelerinizden alsın. Allah sizin imanınızı çok iyi bilir. Birbirinizdensiniz, aynı soydansınız. Onlarla, zinadan kaçınmaları, iffetli olmaları ve gizli dost tutmamış olmaları halinde, velilerinin izniyle evlenin ve örfe uygun bir şekilde mehirlerini verin. Evlendiklerinde zina edecek olurlarsa, onlara, hür kadınlara edilen azabın yarısı edilir. Cariye ile evlenmedeki bu izin içinizden, günaha girme korkusu olanlaradır. Sabretmeniz sizin için daha hayırlıdır. Allah bağışlar ve merhamet eder.",
+          "en": "And as for those of you who, owing to cir­cumstances, are not in a position to marry free believing women, [let them marry] believing maidens from among those whom you rightfully possess. And God knows all about your faith; each one of you is an issue of the other. Marry them, then, with their people's leave, and give them their dowers in an equitable manner - they being women who give themselves in honest wedlock, not in fornication, nor as secret love-companions. And when they are married, and thereafter become guilty of immoral conduct, they shall be liable to half the penalty to which free married women are liable. This [permission to marry slave-girls applies] to those of you who fear lest they stumble into evil. But it is for your own good to persevere in patience [and to abstain from such marriages]: and God is much-forgiving, a dispenser of grace."
+        },
+        "source_ar": "diyanet_api_v1:4:25",
+        "source_tr": "tr.diyanet:4:25",
+        "source_en": "en.asad:4:25",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "kardeslige_baglilik"
+        ],
+        "priority": 12,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    },
+    {
+      "id": "ayah-4-92",
+      "surah_number": 4,
+      "ayah_number": 92,
+      "length_tr": 507,
+      "record": {
+        "id": "ayah-4-92",
+        "type": "ayah",
+        "surah_name": "Nisa",
+        "surah_number": 4,
+        "ayah_number": 92,
+        "text": {
+          "ar": "وَمَا كَانَ لِمُؤْمِنٍ أَن يَقْتُلَ مُؤْمِنًا إِلَّا خَطَـًۭٔا ۚ وَمَن قَتَلَ مُؤْمِنًا خَطَـًۭٔا فَتَحْرِيرُ رَقَبَةٍۢ مُّؤْمِنَةٍۢ وَدِيَةٌۭ مُّسَلَّمَةٌ إِلَىٰٓ أَهْلِهِۦٓ إِلَّآ أَن يَصَّدَّقُوا۟ ۚ فَإِن كَانَ مِن قَوْمٍ عَدُوٍّۢ لَّكُمْ وَهُوَ مُؤْمِنٌۭ فَتَحْرِيرُ رَقَبَةٍۢ مُّؤْمِنَةٍۢ ۖ وَإِن كَانَ مِن قَوْمٍۭ بَيْنَكُمْ وَبَيْنَهُم مِّيثَٰقٌۭ فَدِيَةٌۭ مُّسَلَّمَةٌ إِلَىٰٓ أَهْلِهِۦ وَتَحْرِيرُ رَقَبَةٍۢ مُّؤْمِنَةٍۢ ۖ فَمَن لَّمْ يَجِدْ فَصِيَامُ شَهْرَيْنِ مُتَتَابِعَيْنِ تَوْبَةًۭ مِّنَ ٱللَّهِ ۗ وَكَانَ ٱللَّهُ عَلِيمًا حَكِيمًۭا"
+        },
+        "translation": {
+          "tr": "Bir müminin diğer mümini yanlışlık dışında öldürmesi asla caiz değildir. Bir mümini yanlışlıkla öldürenin, bir mümin köleyi azad etmesi ve öldürülenin ailesi bağışlamadıkça, ona diyet ödemesi gerekir. Eğer o mümin, size düşman bir topluluktan ise mümin bir köleyi azad etmek gerekir. Şayet aranızda anlaşma olan bir millettense, ailesine diyet ödemek ve mümin bir köleyi azat etmek gerekir. Bulamayana, Allah tarafından tevbesinin kabulü için, ard arda iki ay oruç tutmak gerekir. Allah bilendir. Hakim'dir.",
+          "en": "AND IT IS not conceivable that a believer should slay another believer, unless it be by mistake. And upon him who has slain a believer by mistake there is the duty of freeing a believing soul from bondage and paying an indemnity to the victim's relations, unless they forgo it by way of charity. Now if the slain, while himself a believer, belonged to a people who are at war with you, [the penance shall be confined to] the freeing of a believing soul from bondage; whereas, if he belonged to a people to whom you are bound by a covenant, [it shall consist of] an indemnity to be paid to his relations in ad­dition to the freeing of a believing soul from bon­dage. And he who does not have the wherewithal shall fast [instead] for two consecutive months. (This is) the atonement ordained by God: and God is indeed all-knowing, wise."
+        },
+        "source_ar": "diyanet_api_v1:4:92",
+        "source_tr": "tr.diyanet:4:92",
+        "source_en": "en.asad:4:92",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "kardeslige_baglilik"
+        ],
+        "priority": 12,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    },
+    {
+      "id": "ayah-2-217",
+      "surah_number": 2,
+      "ayah_number": 217,
+      "length_tr": 503,
+      "record": {
+        "id": "ayah-2-217",
+        "type": "ayah",
+        "surah_name": "Bakara",
+        "surah_number": 2,
+        "ayah_number": 217,
+        "text": {
+          "ar": "يَسْـَٔلُونَكَ عَنِ ٱلشَّهْرِ ٱلْحَرَامِ قِتَالٍۢ فِيهِ ۖ قُلْ قِتَالٌۭ فِيهِ كَبِيرٌۭ ۖ وَصَدٌّ عَن سَبِيلِ ٱللَّهِ وَكُفْرٌۢ بِهِۦ وَٱلْمَسْجِدِ ٱلْحَرَامِ وَإِخْرَاجُ أَهْلِهِۦ مِنْهُ أَكْبَرُ عِندَ ٱللَّهِ ۚ وَٱلْفِتْنَةُ أَكْبَرُ مِنَ ٱلْقَتْلِ ۗ وَلَا يَزَالُونَ يُقَٰتِلُونَكُمْ حَتَّىٰ يَرُدُّوكُمْ عَن دِينِكُمْ إِنِ ٱسْتَطَٰعُوا۟ ۚ وَمَن يَرْتَدِدْ مِنكُمْ عَن دِينِهِۦ فَيَمُتْ وَهُوَ كَافِرٌۭ فَأُو۟لَٰٓئِكَ حَبِطَتْ أَعْمَٰلُهُمْ فِى ٱلدُّنْيَا وَٱلْءَاخِرَةِ ۖ وَأُو۟لَٰٓئِكَ أَصْحَٰبُ ٱلنَّارِ ۖ هُمْ فِيهَا خَٰلِدُونَ"
+        },
+        "translation": {
+          "tr": "Sana hürmet edilen ayı, o aydaki savaşı sorarlar. De ki: \"O ayda savaşmak büyük suçtur. Allah yolundan alıkoymak, O'nu inkar etmek, Mescidi Haram'a engel olmak ve halkını oradan çıkarmak Allah katında daha büyük suçtur. Fitne çıkarmak ise öldürmekten daha büyüktür\". Güçleri yeterse, dininizden döndürünceye kadar sizinle savaşa devam ederler. İçinizden dininden dönüp kafir olarak ölen olursa, bunların işleri dünya ve ahirette boşa gitmiş olur. İşte cehennemlikler onlardır, onlar orada temellidirler.",
+          "en": "They will ask thee about fighting in the sacred month. Say: \"Fighting in it is an awesome thing (grave transgression); but turning men away from the path of God and denying Him, and [turning them away from] the Inviolable House of Worship and expelling its people there from - [all this] is yet more awesome (greater transgression) in the sight of God, since oppression is more awesome (greater transgression) than killing.\" [Your enemies] will not cease to fight against you till they have turned you away from your faith, if they can. But if any of you should turn away from his faith and die as a denier of the truth - these it is whose works will go for nought in this world and in the life to come; and these it is who are destined for the fire, therein to abide."
+        },
+        "source_ar": "diyanet_api_v1:2:217",
+        "source_tr": "tr.diyanet:2:217",
+        "source_en": "en.asad:2:217",
+        "meal_source": {
+          "tr": "Diyanet Isleri Baskanligi (tr.diyanet)",
+          "en": "Muhammad Asad (en.asad)"
+        },
+        "source_note": "requires human verification",
+        "topics": [
+          "cihad"
+        ],
+        "priority": 1,
+        "status": "draft",
+        "approval": {
+          "approved_by": null,
+          "approved_at": null,
+          "review_note": "requires human verification"
+        }
+      }
+    }
+  ]
+}

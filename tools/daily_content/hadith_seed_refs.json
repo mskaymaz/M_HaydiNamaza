@@ -1,7 +1,7 @@
 {
   "version": "v1-seed-structured",
   "target_total": 400,
-  "current_count": 400,
+  "current_count": 397,
   "collection_order": [
     "riyadussalihin"
   ],
@@ -287,20 +287,6 @@
       "status": "draft"
     },
     {
-      "id": "hadith-riyadussalihin-21",
-      "collection_slug": "riyadussalihin",
-      "collection_name_tr": "Riyazu's-Salihin",
-      "collection_name_en": "Riyad as-Salihin",
-      "reference": "Riyad as-Salihin 21",
-      "hadith_number": 21,
-      "source_url": "https://sunnah.com/riyadussalihin:21",
-      "topics": [
-        "hadis_draft_pool"
-      ],
-      "priority": 1,
-      "status": "draft"
-    },
-    {
       "id": "hadith-riyadussalihin-22",
       "collection_slug": "riyadussalihin",
       "collection_name_tr": "Riyazu's-Salihin",
@@ -406,20 +392,6 @@
       "reference": "Riyad as-Salihin 29",
       "hadith_number": 29,
       "source_url": "https://sunnah.com/riyadussalihin:29",
-      "topics": [
-        "hadis_draft_pool"
-      ],
-      "priority": 1,
-      "status": "draft"
-    },
-    {
-      "id": "hadith-riyadussalihin-30",
-      "collection_slug": "riyadussalihin",
-      "collection_name_tr": "Riyazu's-Salihin",
-      "collection_name_en": "Riyad as-Salihin",
-      "reference": "Riyad as-Salihin 30",
-      "hadith_number": 30,
-      "source_url": "https://sunnah.com/riyadussalihin:30",
       "topics": [
         "hadis_draft_pool"
       ],
@@ -2086,20 +2058,6 @@
       "reference": "Riyad as-Salihin 149",
       "hadith_number": 149,
       "source_url": "https://sunnah.com/riyadussalihin:149",
-      "topics": [
-        "hadis_draft_pool"
-      ],
-      "priority": 2,
-      "status": "draft"
-    },
-    {
-      "id": "hadith-riyadussalihin-150",
-      "collection_slug": "riyadussalihin",
-      "collection_name_tr": "Riyazu's-Salihin",
-      "collection_name_en": "Riyad as-Salihin",
-      "reference": "Riyad as-Salihin 150",
-      "hadith_number": 150,
-      "source_url": "https://sunnah.com/riyadussalihin:150",
       "topics": [
         "hadis_draft_pool"
       ],

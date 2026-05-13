@@ -381,23 +381,23 @@ Acceptance:
 Goal: improve qibla reliability without false accuracy claims.
 
 ### 06A — Location-based mode
-- [ ] Store Kaaba coordinates as constants.
-- [ ] Implement initial bearing / great-circle direction from user coordinates to Kaaba.
-- [ ] Use location permission when available.
-- [ ] Show mode label: `Konuma gore hesaplandi`.
+- [x] Store Kaaba coordinates as constants.
+- [x] Implement initial bearing / great-circle direction from user coordinates to Kaaba.
+- [x] Use location permission when available.
+- [x] Show mode label: `Konuma gore hesaplandi`.
 
 ### 06B — Sensor fallback mode
-- [ ] Keep sensor-only compass fallback when location is disabled.
-- [ ] Show mode label: `Yaklasik / sensor tabanli`.
-- [ ] Add gentle guidance:
+- [x] Keep sensor-only compass fallback when location is disabled.
+- [x] Show mode label: `Yaklasik / sensor tabanli`.
+- [x] Add gentle guidance:
   - `Daha dogru kible yonu icin konum iznini acabilirsiniz.`
-- [ ] Add sensor calibration guidance.
-- [ ] Add accuracy warning when compass data is unstable.
+- [x] Add sensor calibration guidance.
+- [x] Add accuracy warning when compass data is unstable.
 
 ### 06C — Validation
-- [ ] Add expected qibla bearing test values for multiple cities.
-- [ ] Compare calculated bearing against known references.
-- [ ] Do not claim 100% accuracy.
+- [x] Add expected qibla bearing test values for multiple cities.
+- [x] Compare calculated bearing against known references.
+- [x] Do not claim 100% accuracy.
 
 Acceptance:
 - Location mode and fallback mode are visibly distinct.

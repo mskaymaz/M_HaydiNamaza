@@ -6,14 +6,29 @@ TASK-00 is completed on 2026-05-10 with documented exceptions.
 TASK-04A is closed (checkpoints completed; orchestration-safe extraction scope finalized).
 TASK-04B documentation scope is closed, including official Diyanet/AwqatSalah API source strategy notes.
 TASK-05 checkpoints 1-14 are synchronized with `Besmele/TASKS.md` for current scope.
+TASK-06 is completed with location-based qibla bearing + sensor fallback + bearing validation tests.
 Ayah/hadith data work is completed for current scope (approved sample set + draft pool workflow records).
 
 ## Next action
-Wait for explicit start instruction before TASK-06, TASK-10, TASK-11, and TASK-12.
+Wait for explicit start instruction before TASK-07, TASK-10, TASK-11, and TASK-12.
 
 ## Important blockers
 - Final release remains blocked until explicit official prayer-time source/release decision is cleared.
 - Future curated 400 + 400 approved ayah/hadith dataset is still pending as a later content phase.
+
+## TASK-06 closure update (2026-05-13)
+- Scope:
+  - Qibla direction engine upgrade with location-based mode, sensor fallback mode, user guidance, and bearing validation tests.
+- Changed files:
+  - `lib/features/qibla/qibla_constants.dart`
+  - `lib/features/qibla/qibla_bearing_calculator.dart`
+  - `lib/presentation/home/widgets/home_qibla_screen.dart`
+  - `test/features/qibla/qibla_bearing_calculator_test.dart`
+  - `Besmele/TASKS.md`
+  - `STATE.md`
+  - `Besmele/HANDOFF.md`
+- Validation:
+  - `flutter analyze` was not run in this step by scope rule.
 
 ## TASK-00 audit notes (2026-05-10)
 - Branch `upgrade/advanced-cleanup` is treated as obsolete for now because cleanup work already landed on `main` and `origin/main` is aligned.

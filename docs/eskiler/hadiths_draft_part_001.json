@@ -1,0 +1,2730 @@
+{
+  "version": "hadiths_draft.v1",
+  "part": 1,
+  "count": 100,
+  "character_rule": {
+    "text_tr_max_chars": 400,
+    "result": "PASS"
+  },
+  "distribution": {
+    "cihad": 12,
+    "İslam’a çağırma": 9,
+    "Ehl-i Kitap ile ilgili tarihî uyarılar, peygamberlere karşı tavırlar, ahdi bozma, dini tahrif ve güvenilirlik imtihanı": 8,
+    "İslam Devleti yapısı": 8,
+    "İslami devlet yönetimi": 7,
+    "prensipli hayat yaşama": 7,
+    "Zulme ve zalime karşı davranış": 6,
+    "Zulüm nedir, zalim kimdir": 6,
+    "insani ilişkiler": 5,
+    "İslam’a bağlılık": 5,
+    "ümmet bilinci": 5,
+    "kardeşliğe bağlılık": 4,
+    "büyüklere ve küçüklere davranış": 4,
+    "peygamberlerin sözlerine itibar edilmesi": 4,
+    "insanlığa faydalı olma": 4,
+    "doğruluğa çağırma": 3,
+    "ahlaklı olma": 3
+  },
+  "items": [
+    {
+      "id": "hadith-001",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2783",
+      "hadith_number": "2783",
+      "narrator": "Aisha",
+      "grade": "sahih",
+      "text_ar": "أفضل الجهاد حج مبرور",
+      "text_tr": "Kadınlar için en faziletli cihad, kabul edilmiş hacdır.",
+      "text_en": "For women, the best jihad is an accepted Hajj.",
+      "text_tr_char_count": 55,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2783",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2783"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-002",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "riyad_as_salihin",
+      "collection_name_tr": "Riyazü's-Salihin",
+      "collection_name_en": "Riyad as-Salihin",
+      "reference": "Riyad as-Salihin 1287",
+      "hadith_number": "1287",
+      "narrator": "Abu Dharr",
+      "grade": "sahih",
+      "text_ar": "الإيمان بالله والجهاد في سبيل الله",
+      "text_tr": "En faziletli amellerden biri Allah’a iman ve O’nun yolunda cihaddır.",
+      "text_en": "Faith in Allah and striving in His path are among the best deeds.",
+      "text_tr_char_count": 68,
+      "sources": {
+        "arabic": "https://sunnah.com/riyadussalihin:1287",
+        "turkish": null,
+        "english": "https://sunnah.com/riyadussalihin:1287"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-003",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "riyad_as_salihin",
+      "collection_name_tr": "Riyazü's-Salihin",
+      "collection_name_en": "Riyad as-Salihin",
+      "reference": "Riyad as-Salihin 194",
+      "hadith_number": "194",
+      "narrator": "Abu Sa'id al-Khudri",
+      "grade": "hasan",
+      "text_ar": "أفضل الجهاد كلمة عدل عند سلطان جائر",
+      "text_tr": "Zalim yönetici karşısında adil sözü söylemek en faziletli cihadlardandır.",
+      "text_en": "Speaking a just word before a tyrant ruler is among the best forms of jihad.",
+      "text_tr_char_count": 73,
+      "sources": {
+        "arabic": "https://sunnah.com/riyadussalihin:194",
+        "turkish": null,
+        "english": "https://sunnah.com/riyadussalihin:194"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-004",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "riyad_as_salihin",
+      "collection_name_tr": "Riyazü's-Salihin",
+      "collection_name_en": "Riyad as-Salihin",
+      "reference": "Riyad as-Salihin 1349",
+      "hadith_number": "1349",
+      "narrator": "Anas ibn Malik",
+      "grade": "sahih",
+      "text_ar": "جاهدوا المشركين بأموالكم وأنفسكم وألسنتكم",
+      "text_tr": "Cihad; mal, can ve dil ile hak uğrunda gayret etmeyi de kapsar.",
+      "text_en": "Jihad includes striving with wealth, lives, and words for the truth.",
+      "text_tr_char_count": 63,
+      "sources": {
+        "arabic": "https://sunnah.com/riyadussalihin:1349",
+        "turkish": null,
+        "english": "https://sunnah.com/riyadussalihin:1349"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-005",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 7534",
+      "hadith_number": "7534",
+      "narrator": "Ibn Mas'ud",
+      "grade": "sahih",
+      "text_ar": "الصلاة لوقتها وبر الوالدين ثم الجهاد",
+      "text_tr": "Vaktinde namaz, anne babaya iyilik ve Allah yolunda cihad faziletli amellerdendir.",
+      "text_en": "Prayer on time, kindness to parents, then striving in Allah's path are virtuous deeds.",
+      "text_tr_char_count": 82,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:7534",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:7534"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-006",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1904",
+      "hadith_number": "1904",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "من مات ولم يغز ولم يحدث نفسه بالغزو",
+      "text_tr": "Mümin, gerektiğinde Allah yolunda sorumluluk alma bilincini diri tutar.",
+      "text_en": "A believer keeps alive the sense of responsibility to strive in Allah's cause when needed.",
+      "text_tr_char_count": 71,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1904",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1904"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-007",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1911",
+      "hadith_number": "1911",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "من قتل في سبيل الله فهو شهيد",
+      "text_tr": "Allah yolunda can veren kimse şehitlik şerefine erer.",
+      "text_en": "One who is killed in Allah's path attains the honor of martyrdom.",
+      "text_tr_char_count": 53,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1911",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1911"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-008",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2810",
+      "hadith_number": "2810",
+      "narrator": "Sahl ibn Sa'd",
+      "grade": "sahih",
+      "text_ar": "رباط يوم في سبيل الله خير من الدنيا",
+      "text_tr": "Allah yolunda bir gün nöbet tutmak, dünya nimetlerinden daha değerlidir.",
+      "text_en": "A day of guarding in Allah's path is better than worldly gain.",
+      "text_tr_char_count": 72,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2810",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2810"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-009",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "abudawud",
+      "collection_name_tr": "Sünen-i Ebû Dâvûd",
+      "collection_name_en": "Sunan Abi Dawud",
+      "reference": "Sunan Abi Dawud 2504",
+      "hadith_number": "2504",
+      "narrator": "Anas ibn Malik",
+      "grade": "sahih",
+      "text_ar": "جاهدوا بأموالكم وأنفسكم وألسنتكم",
+      "text_tr": "Hak uğrunda mücadele bazen sözle, bazen emekle, bazen fedakârlıkla olur.",
+      "text_en": "Striving for truth may be by words, effort, and sacrifice.",
+      "text_tr_char_count": 72,
+      "sources": {
+        "arabic": "https://sunnah.com/abudawud:2504",
+        "turkish": null,
+        "english": "https://sunnah.com/abudawud:2504"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-010",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 1655",
+      "hadith_number": "1655",
+      "narrator": "Fadalah ibn Ubayd",
+      "grade": "hasan",
+      "text_ar": "المجاهد من جاهد نفسه في الله",
+      "text_tr": "Gerçek mücahid, Allah için nefsine karşı mücadele edendir.",
+      "text_en": "The true striver is the one who strives against his own self for Allah.",
+      "text_tr_char_count": 58,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:1655",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:1655"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-011",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "nasai",
+      "collection_name_tr": "Sünen-i Nesâî",
+      "collection_name_en": "Sunan an-Nasa'i",
+      "reference": "Sunan an-Nasa'i 3130",
+      "hadith_number": "3130",
+      "narrator": "Abu Dharr",
+      "grade": "sahih",
+      "text_ar": "إيمان بالله وجهاد في سبيله",
+      "text_tr": "Allah’a iman ve O’nun yolunda gayret, amellerin üstünlerindendir.",
+      "text_en": "Faith in Allah and striving in His path are among the highest deeds.",
+      "text_tr_char_count": 65,
+      "sources": {
+        "arabic": "https://sunnah.com/nasai:3130",
+        "turkish": null,
+        "english": "https://sunnah.com/nasai:3130"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-012",
+      "topic": "cihad",
+      "priority": 1,
+      "collection_slug": "riyad_as_salihin",
+      "collection_name_tr": "Riyazü's-Salihin",
+      "collection_name_en": "Riyad as-Salihin",
+      "reference": "Riyad as-Salihin 1348",
+      "hadith_number": "1348",
+      "narrator": "Abu Umamah",
+      "grade": "sahih",
+      "text_ar": "أو يجهز غازيا أو يخلفه في أهله بخير",
+      "text_tr": "Cihada destek; bazen hazırlamak, bazen geride kalana iyilik etmektir.",
+      "text_en": "Supporting jihad may be by equipping someone or caring for those left behind.",
+      "text_tr_char_count": 69,
+      "sources": {
+        "arabic": "https://sunnah.com/riyadussalihin:1348",
+        "turkish": null,
+        "english": "https://sunnah.com/riyadussalihin:1348"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-013",
+      "topic": "İslam’a çağırma",
+      "priority": 2,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 3461",
+      "hadith_number": "3461",
+      "narrator": "Abdullah ibn Amr",
+      "grade": "sahih",
+      "text_ar": "بلغوا عني ولو آية",
+      "text_tr": "Resûlullah’tan bir âyet bile olsa ulaştırmak, hayra çağrının kapısıdır.",
+      "text_en": "Convey from the Messenger, even if it is one verse.",
+      "text_tr_char_count": 71,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:3461",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:3461"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-014",
+      "topic": "İslam’a çağırma",
+      "priority": 2,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2674",
+      "hadith_number": "2674",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "من دعا إلى هدى",
+      "text_tr": "Hidayete çağıran, ona uyanların sevabından eksilmeden pay alır.",
+      "text_en": "Whoever calls to guidance shares in the reward of those who follow it.",
+      "text_tr_char_count": 63,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2674",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2674"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-015",
+      "topic": "İslam’a çağırma",
+      "priority": 2,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2942",
+      "hadith_number": "2942",
+      "narrator": "Sahl ibn Sa'd",
+      "grade": "sahih",
+      "text_ar": "لأن يهدي الله بك رجلا واحدا",
+      "text_tr": "Bir kişinin hidayetine vesile olmak, büyük nimetlerden daha hayırlıdır.",
+      "text_en": "For one person to be guided through you is better than great worldly treasures.",
+      "text_tr_char_count": 71,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2942",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2942"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-016",
+      "topic": "İslam’a çağırma",
+      "priority": 2,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2406",
+      "hadith_number": "2406",
+      "narrator": "Sahl ibn Sa'd",
+      "grade": "sahih",
+      "text_ar": "فوالله لأن يهدي الله بك رجلا",
+      "text_tr": "Hakka davette ölçü zorlamak değil, hidayete vesile olmaktır.",
+      "text_en": "Calling to truth aims to be a means of guidance, not coercion.",
+      "text_tr_char_count": 60,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2406",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2406"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-017",
+      "topic": "İslam’a çağırma",
+      "priority": 2,
+      "collection_slug": "abudawud",
+      "collection_name_tr": "Sünen-i Ebû Dâvûd",
+      "collection_name_en": "Sunan Abi Dawud",
+      "reference": "Sunan Abi Dawud 3660",
+      "hadith_number": "3660",
+      "narrator": "Abu Hurairah",
+      "grade": "hasan",
+      "text_ar": "من سئل عن علم فكتمه",
+      "text_tr": "İlmi gizlemek değil, ehline ve yerinde öğretmek gerekir.",
+      "text_en": "Knowledge should not be concealed; it should be taught properly.",
+      "text_tr_char_count": 56,
+      "sources": {
+        "arabic": "https://sunnah.com/abudawud:3660",
+        "turkish": null,
+        "english": "https://sunnah.com/abudawud:3660"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-018",
+      "topic": "İslam’a çağırma",
+      "priority": 2,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 2670",
+      "hadith_number": "2670",
+      "narrator": "Abu Hurairah",
+      "grade": "hasan",
+      "text_ar": "الدال على الخير كفاعله",
+      "text_tr": "Hayra vesile olan, o hayrı yapan gibi ecir kazanır.",
+      "text_en": "The one who points to good is like the one who does it.",
+      "text_tr_char_count": 51,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:2670",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:2670"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-019",
+      "topic": "İslam’a çağırma",
+      "priority": 2,
+      "collection_slug": "ibnmajah",
+      "collection_name_tr": "Sünen-i İbn Mâce",
+      "collection_name_en": "Sunan Ibn Majah",
+      "reference": "Sunan Ibn Majah 206",
+      "hadith_number": "206",
+      "narrator": "Anas ibn Malik",
+      "grade": "hasan",
+      "text_ar": "طلب العلم فريضة",
+      "text_tr": "İlim aramak, dini doğru anlatmanın temelidir.",
+      "text_en": "Seeking knowledge is the foundation of conveying religion correctly.",
+      "text_tr_char_count": 45,
+      "sources": {
+        "arabic": "https://sunnah.com/ibnmajah:206",
+        "turkish": null,
+        "english": "https://sunnah.com/ibnmajah:206"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-020",
+      "topic": "İslam’a çağırma",
+      "priority": 2,
+      "collection_slug": "riyad_as_salihin",
+      "collection_name_tr": "Riyazü's-Salihin",
+      "collection_name_en": "Riyad as-Salihin",
+      "reference": "Riyad as-Salihin 1376",
+      "hadith_number": "1376",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "ومن سلك طريقا يلتمس فيه علما",
+      "text_tr": "İlim yoluna giren kimseye Allah cennet yolunu kolaylaştırır.",
+      "text_en": "Allah eases the path to Paradise for one who seeks knowledge.",
+      "text_tr_char_count": 60,
+      "sources": {
+        "arabic": "https://sunnah.com/riyadussalihin:1376",
+        "turkish": null,
+        "english": "https://sunnah.com/riyadussalihin:1376"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-021",
+      "topic": "İslam’a çağırma",
+      "priority": 2,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2699",
+      "hadith_number": "2699",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "من سن في الإسلام سنة حسنة",
+      "text_tr": "Güzel bir yol açan, ardından gelen hayırlardan pay alır.",
+      "text_en": "Whoever begins a good practice shares in the good that follows.",
+      "text_tr_char_count": 56,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2699",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2699"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-022",
+      "topic": "Ehl-i Kitap ile ilgili tarihî uyarılar, peygamberlere karşı tavırlar, ahdi bozma, dini tahrif ve güvenilirlik imtihanı",
+      "priority": 3,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 3456",
+      "hadith_number": "3456",
+      "narrator": "Abu Sa'id al-Khudri",
+      "grade": "sahih",
+      "text_ar": "لتتبعن سنن من كان قبلكم",
+      "text_tr": "Öncekilerin hatalarını körü körüne izlemekten sakınmak gerekir.",
+      "text_en": "Beware of blindly following the errors of earlier peoples.",
+      "text_tr_char_count": 63,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:3456",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:3456"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-023",
+      "topic": "Ehl-i Kitap ile ilgili tarihî uyarılar, peygamberlere karşı tavırlar, ahdi bozma, dini tahrif ve güvenilirlik imtihanı",
+      "priority": 3,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 3461",
+      "hadith_number": "3461",
+      "narrator": "Abdullah ibn Amr",
+      "grade": "sahih",
+      "text_ar": "حدثوا عن بني إسرائيل ولا حرج",
+      "text_tr": "Geçmiş ümmetlerden ibret alınır; dinin ölçüsü vahiy ve sahih sünnettir.",
+      "text_en": "Lessons may be taken from earlier communities, while revelation and sound Sunnah remain the measure.",
+      "text_tr_char_count": 71,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:3461",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:3461"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-024",
+      "topic": "Ehl-i Kitap ile ilgili tarihî uyarılar, peygamberlere karşı tavırlar, ahdi bozma, dini tahrif ve güvenilirlik imtihanı",
+      "priority": 3,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 4485",
+      "hadith_number": "4485",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "لا تصدقوا أهل الكتاب ولا تكذبوهم",
+      "text_tr": "Ehl-i Kitap haberlerinde acele tasdik ve inkârdan kaçınılır; ölçü vahiydir.",
+      "text_en": "Reports from the People of the Book are not hastily affirmed or denied; revelation is the criterion.",
+      "text_tr_char_count": 75,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:4485",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:4485"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-025",
+      "topic": "Ehl-i Kitap ile ilgili tarihî uyarılar, peygamberlere karşı tavırlar, ahdi bozma, dini tahrif ve güvenilirlik imtihanı",
+      "priority": 3,
+      "collection_slug": "abudawud",
+      "collection_name_tr": "Sünen-i Ebû Dâvûd",
+      "collection_name_en": "Sunan Abi Dawud",
+      "reference": "Sunan Abi Dawud 3644",
+      "hadith_number": "3644",
+      "narrator": "Zayd ibn Thabit",
+      "grade": "hasan",
+      "text_ar": "أمرني أن أتعلم له كلمات من كتاب يهود",
+      "text_tr": "Müslüman, güvenlik ve doğruluk için gerekli dili ve bilgiyi öğrenir.",
+      "text_en": "A Muslim may learn needed language and knowledge for trust and clarity.",
+      "text_tr_char_count": 68,
+      "sources": {
+        "arabic": "https://sunnah.com/abudawud:3644",
+        "turkish": null,
+        "english": "https://sunnah.com/abudawud:3644"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-026",
+      "topic": "Ehl-i Kitap ile ilgili tarihî uyarılar, peygamberlere karşı tavırlar, ahdi bozma, dini tahrif ve güvenilirlik imtihanı",
+      "priority": 3,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2669",
+      "hadith_number": "2669",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "كتب الله مقادير الخلائق",
+      "text_tr": "Tarihî imtihanlar kader, sorumluluk ve vahye bağlılık bilinciyle okunur.",
+      "text_en": "Historical trials are read with awareness of decree, responsibility, and revelation.",
+      "text_tr_char_count": 72,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2669",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2669"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-027",
+      "topic": "Ehl-i Kitap ile ilgili tarihî uyarılar, peygamberlere karşı tavırlar, ahdi bozma, dini tahrif ve güvenilirlik imtihanı",
+      "priority": 3,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 3445",
+      "hadith_number": "3445",
+      "narrator": "Ubadah ibn as-Samit",
+      "grade": "sahih",
+      "text_ar": "عبده ورسوله وكلمته ألقاها إلى مريم",
+      "text_tr": "İsa (as) Allah’ın kulu ve resûlüdür; inançta aşırılıktan sakınılır.",
+      "text_en": "Jesus is Allah's servant and messenger; excess in belief is avoided.",
+      "text_tr_char_count": 67,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:3445",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:3445"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-028",
+      "topic": "Ehl-i Kitap ile ilgili tarihî uyarılar, peygamberlere karşı tavırlar, ahdi bozma, dini tahrif ve güvenilirlik imtihanı",
+      "priority": 3,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 3446",
+      "hadith_number": "3446",
+      "narrator": "Umar ibn al-Khattab",
+      "grade": "sahih",
+      "text_ar": "لا تطروني كما أطرت النصارى ابن مريم",
+      "text_tr": "Peygamber sevgisi ölçülüdür; onu ilahlaştırmak yasaktır.",
+      "text_en": "Love for the Prophet is measured; deifying him is forbidden.",
+      "text_tr_char_count": 56,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:3446",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:3446"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-029",
+      "topic": "Ehl-i Kitap ile ilgili tarihî uyarılar, peygamberlere karşı tavırlar, ahdi bozma, dini tahrif ve güvenilirlik imtihanı",
+      "priority": 3,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 153",
+      "hadith_number": "153",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "والذي نفس محمد بيده لا يسمع بي أحد",
+      "text_tr": "Hz. Muhammed’in risaletine iman, son vahyin gereğidir.",
+      "text_en": "Belief in Muhammad's message is required by the final revelation.",
+      "text_tr_char_count": 54,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:153",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:153"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-030",
+      "topic": "İslam Devleti yapısı",
+      "priority": 4,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 893",
+      "hadith_number": "893",
+      "narrator": "Ibn Umar",
+      "grade": "sahih",
+      "text_ar": "كلكم راع وكلكم مسؤول",
+      "text_tr": "Herkes sorumluluk sahibidir; yönetim emanet ve hesaptır.",
+      "text_en": "Everyone is a shepherd and accountable; governance is a trust.",
+      "text_tr_char_count": 56,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:893",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:893"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-031",
+      "topic": "İslam Devleti yapısı",
+      "priority": 4,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1829",
+      "hadith_number": "1829",
+      "narrator": "Ibn Umar",
+      "grade": "sahih",
+      "text_ar": "من خلع يدا من طاعة",
+      "text_tr": "Toplumsal düzen, meşru otorite ve sorumluluk bilinciyle korunur.",
+      "text_en": "Social order is preserved through lawful authority and responsibility.",
+      "text_tr_char_count": 64,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1829",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1829"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-032",
+      "topic": "İslam Devleti yapısı",
+      "priority": 4,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1848",
+      "hadith_number": "1848",
+      "narrator": "Auf ibn Malik",
+      "grade": "sahih",
+      "text_ar": "خيار أئمتكم الذين تحبونهم",
+      "text_tr": "En hayırlı yöneticiler, halkıyla hayır ve dua bağı kuranlardır.",
+      "text_en": "The best leaders are those joined to their people by goodness and prayer.",
+      "text_tr_char_count": 63,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1848",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1848"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-033",
+      "topic": "İslam Devleti yapısı",
+      "priority": 4,
+      "collection_slug": "abudawud",
+      "collection_name_tr": "Sünen-i Ebû Dâvûd",
+      "collection_name_en": "Sunan Abi Dawud",
+      "reference": "Sunan Abi Dawud 2928",
+      "hadith_number": "2928",
+      "narrator": "Abu Hurairah",
+      "grade": "hasan",
+      "text_ar": "الإمام ضامن",
+      "text_tr": "İmam ve yönetici, toplumun düzeninden sorumludur.",
+      "text_en": "The imam and leader bear responsibility for communal order.",
+      "text_tr_char_count": 49,
+      "sources": {
+        "arabic": "https://sunnah.com/abudawud:2928",
+        "turkish": null,
+        "english": "https://sunnah.com/abudawud:2928"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-034",
+      "topic": "İslam Devleti yapısı",
+      "priority": 4,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2957",
+      "hadith_number": "2957",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "إنما الإمام جنة",
+      "text_tr": "Meşru yönetim, toplum için koruyucu bir sorumluluk taşır.",
+      "text_en": "Lawful leadership carries a protective responsibility for society.",
+      "text_tr_char_count": 57,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2957",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2957"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-035",
+      "topic": "İslam Devleti yapısı",
+      "priority": 4,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1827",
+      "hadith_number": "1827",
+      "narrator": "Abu Dharr",
+      "grade": "sahih",
+      "text_ar": "إنها أمانة",
+      "text_tr": "Yönetim bir emanettir; ehliyetsiz elde pişmanlık sebebi olur.",
+      "text_en": "Authority is a trust; in unqualified hands it becomes regret.",
+      "text_tr_char_count": 61,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1827",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1827"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-036",
+      "topic": "İslam Devleti yapısı",
+      "priority": 4,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 7144",
+      "hadith_number": "7144",
+      "narrator": "Anas ibn Malik",
+      "grade": "sahih",
+      "text_ar": "اسمعوا وأطيعوا",
+      "text_tr": "Meşru emirlerde düzeni korumak, toplumun istikrarına hizmet eder.",
+      "text_en": "Obedience in lawful matters serves social stability.",
+      "text_tr_char_count": 65,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:7144",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:7144"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-037",
+      "topic": "İslam Devleti yapısı",
+      "priority": 4,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1855",
+      "hadith_number": "1855",
+      "narrator": "Ibn Abbas",
+      "grade": "sahih",
+      "text_ar": "من رأى من أميره شيئا يكرهه فليصبر",
+      "text_tr": "Yönetimde sabır, fitneden kaçınma ve meşru ıslah birlikte düşünülür.",
+      "text_en": "Patience, avoidance of disorder, and lawful reform belong together in governance.",
+      "text_tr_char_count": 68,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1855",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1855"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-038",
+      "topic": "İslami devlet yönetimi",
+      "priority": 5,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 7150",
+      "hadith_number": "7150",
+      "narrator": "Ma'qil ibn Yasar",
+      "grade": "sahih",
+      "text_ar": "ما من عبد يسترعيه الله رعية",
+      "text_tr": "Halkına hıyanet eden yönetici, ağır bir vebal taşır.",
+      "text_en": "A leader who betrays his people carries a grave burden.",
+      "text_tr_char_count": 52,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:7150",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:7150"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-039",
+      "topic": "İslami devlet yönetimi",
+      "priority": 5,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1828",
+      "hadith_number": "1828",
+      "narrator": "Aisha",
+      "grade": "sahih",
+      "text_ar": "اللهم من ولي من أمر أمتي شيئا فشق عليهم",
+      "text_tr": "Ümmete zorluk çıkaran yöneticiye zorluk; merhamet edene merhamet dilenir.",
+      "text_en": "Hardship is invoked on harsh rulers, and mercy on merciful ones.",
+      "text_tr_char_count": 73,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1828",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1828"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-040",
+      "topic": "İslami devlet yönetimi",
+      "priority": 5,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1827",
+      "hadith_number": "1827",
+      "narrator": "Abu Dharr",
+      "grade": "sahih",
+      "text_ar": "إنك ضعيف وإنها أمانة",
+      "text_tr": "Görev ehline verilmelidir; makam arzu değil emanet bilincidir.",
+      "text_en": "Office belongs to the qualified; leadership is trust, not desire.",
+      "text_tr_char_count": 62,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1827",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1827"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-041",
+      "topic": "İslami devlet yönetimi",
+      "priority": 5,
+      "collection_slug": "nasai",
+      "collection_name_tr": "Sünen-i Nesâî",
+      "collection_name_en": "Sunan an-Nasa'i",
+      "reference": "Sunan an-Nasa'i 5387",
+      "hadith_number": "5387",
+      "narrator": "Abdullah ibn Amr",
+      "grade": "sahih",
+      "text_ar": "المقسطون عند الله على منابر من نور",
+      "text_tr": "Adil yöneticiler Allah katında büyük ikrama erişir.",
+      "text_en": "Just rulers receive great honor with Allah.",
+      "text_tr_char_count": 51,
+      "sources": {
+        "arabic": "https://sunnah.com/nasai:5387",
+        "turkish": null,
+        "english": "https://sunnah.com/nasai:5387"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-042",
+      "topic": "İslami devlet yönetimi",
+      "priority": 5,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 7138",
+      "hadith_number": "7138",
+      "narrator": "Abu Bakrah",
+      "grade": "sahih",
+      "text_ar": "لن يفلح قوم ولوا أمرهم امرأة",
+      "text_tr": "Yönetim rivayetleri, bağlam ve fıkhî yorumla dikkatli ele alınmalıdır.",
+      "text_en": "Governance narrations must be handled carefully with context and fiqh review.",
+      "text_tr_char_count": 70,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:7138",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:7138"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-043",
+      "topic": "İslami devlet yönetimi",
+      "priority": 5,
+      "collection_slug": "abudawud",
+      "collection_name_tr": "Sünen-i Ebû Dâvûd",
+      "collection_name_en": "Sunan Abi Dawud",
+      "reference": "Sunan Abi Dawud 3580",
+      "hadith_number": "3580",
+      "narrator": "Buraydah",
+      "grade": "hasan",
+      "text_ar": "القضاة ثلاثة",
+      "text_tr": "Yargı makamı ağır sorumluluktur; adalet ve ilim şarttır.",
+      "text_en": "Judgment is a grave duty requiring knowledge and justice.",
+      "text_tr_char_count": 56,
+      "sources": {
+        "arabic": "https://sunnah.com/abudawud:3580",
+        "turkish": null,
+        "english": "https://sunnah.com/abudawud:3580"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-044",
+      "topic": "İslami devlet yönetimi",
+      "priority": 5,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 1329",
+      "hadith_number": "1329",
+      "narrator": "Abu Hurairah",
+      "grade": "hasan",
+      "text_ar": "أد الأمانة إلى من ائتمنك",
+      "text_tr": "Emanet, yönetimde ve halk ilişkilerinde temel ilkedir.",
+      "text_en": "Trustworthiness is foundational in governance and public dealings.",
+      "text_tr_char_count": 54,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:1329",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:1329"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-045",
+      "topic": "prensipli hayat yaşama",
+      "priority": 6,
+      "collection_slug": "riyad_as_salihin",
+      "collection_name_tr": "Riyazü's-Salihin",
+      "collection_name_en": "Riyad as-Salihin",
+      "reference": "Riyad as-Salihin 1",
+      "hadith_number": "1",
+      "narrator": "Umar ibn al-Khattab",
+      "grade": "sahih",
+      "text_ar": "إنما الأعمال بالنيات",
+      "text_tr": "Ameller niyetlere göredir; mümin işine temiz niyetle başlar.",
+      "text_en": "Actions are by intentions; a believer begins with a sincere aim.",
+      "text_tr_char_count": 60,
+      "sources": {
+        "arabic": "https://sunnah.com/riyadussalihin:1",
+        "turkish": null,
+        "english": "https://sunnah.com/riyadussalihin:1"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-046",
+      "topic": "prensipli hayat yaşama",
+      "priority": 6,
+      "collection_slug": "nawawi40",
+      "collection_name_tr": "Nevevî'nin Kırk Hadisi",
+      "collection_name_en": "An-Nawawi's 40 Hadith",
+      "reference": "An-Nawawi 40 Hadith 6",
+      "hadith_number": "6",
+      "narrator": "Nu'man ibn Bashir",
+      "grade": "sahih",
+      "text_ar": "الحلال بين والحرام بين",
+      "text_tr": "Helal bellidir, haram bellidir; şüphelilerden sakınmak kalbi korur.",
+      "text_en": "The lawful and unlawful are clear; avoiding doubts protects the heart.",
+      "text_tr_char_count": 67,
+      "sources": {
+        "arabic": "https://sunnah.com/nawawi40:6",
+        "turkish": null,
+        "english": "https://sunnah.com/nawawi40:6"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-047",
+      "topic": "prensipli hayat yaşama",
+      "priority": 6,
+      "collection_slug": "riyad_as_salihin",
+      "collection_name_tr": "Riyazü's-Salihin",
+      "collection_name_en": "Riyad as-Salihin",
+      "reference": "Riyad as-Salihin 100",
+      "hadith_number": "100",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "احرص على ما ينفعك واستعن بالله",
+      "text_tr": "Faydalı olana sarıl, Allah’tan yardım iste ve yılgınlığa düşme.",
+      "text_en": "Hold to what benefits you, seek Allah's help, and do not give up.",
+      "text_tr_char_count": 63,
+      "sources": {
+        "arabic": "https://sunnah.com/riyadussalihin:100",
+        "turkish": null,
+        "english": "https://sunnah.com/riyadussalihin:100"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-048",
+      "topic": "prensipli hayat yaşama",
+      "priority": 6,
+      "collection_slug": "nawawi40",
+      "collection_name_tr": "Nevevî'nin Kırk Hadisi",
+      "collection_name_en": "An-Nawawi's 40 Hadith",
+      "reference": "An-Nawawi 40 Hadith 11",
+      "hadith_number": "11",
+      "narrator": "Hasan ibn Ali",
+      "grade": "hasan",
+      "text_ar": "دع ما يريبك إلى ما لا يريبك",
+      "text_tr": "Şüpheli olanı bırak, gönlü rahatlatan doğru olana yönel.",
+      "text_en": "Leave what troubles you for what brings certainty and peace.",
+      "text_tr_char_count": 56,
+      "sources": {
+        "arabic": "https://sunnah.com/nawawi40:11",
+        "turkish": null,
+        "english": "https://sunnah.com/nawawi40:11"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-049",
+      "topic": "prensipli hayat yaşama",
+      "priority": 6,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 1987",
+      "hadith_number": "1987",
+      "narrator": "Abu Dharr",
+      "grade": "hasan",
+      "text_ar": "اتق الله حيثما كنت",
+      "text_tr": "Nerede olursan ol Allah’a karşı sorumluluk bilinciyle yaşa.",
+      "text_en": "Be mindful of Allah wherever you are.",
+      "text_tr_char_count": 59,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:1987",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:1987"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-050",
+      "topic": "prensipli hayat yaşama",
+      "priority": 6,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 55",
+      "hadith_number": "55",
+      "narrator": "Tamim ad-Dari",
+      "grade": "sahih",
+      "text_ar": "الدين النصيحة",
+      "text_tr": "Din samimiyettir; Allah’a, kitabına, resûlüne ve ümmete sadakattir.",
+      "text_en": "Religion is sincere counsel: to Allah, His Book, His Messenger, and the community.",
+      "text_tr_char_count": 67,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:55",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:55"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-051",
+      "topic": "prensipli hayat yaşama",
+      "priority": 6,
+      "collection_slug": "nawawi40",
+      "collection_name_tr": "Nevevî'nin Kırk Hadisi",
+      "collection_name_en": "An-Nawawi's 40 Hadith",
+      "reference": "An-Nawawi 40 Hadith 12",
+      "hadith_number": "12",
+      "narrator": "Abu Hurairah",
+      "grade": "hasan",
+      "text_ar": "من حسن إسلام المرء تركه ما لا يعنيه",
+      "text_tr": "Kişinin iyi Müslümanlığı, kendisini ilgilendirmeyeni terk etmesindendir.",
+      "text_en": "A sign of good Islam is leaving what does not concern one.",
+      "text_tr_char_count": 72,
+      "sources": {
+        "arabic": "https://sunnah.com/nawawi40:12",
+        "turkish": null,
+        "english": "https://sunnah.com/nawawi40:12"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-052",
+      "topic": "Zulme ve zalime karşı davranış",
+      "priority": 7,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 49",
+      "hadith_number": "49",
+      "narrator": "Abu Sa'id al-Khudri",
+      "grade": "sahih",
+      "text_ar": "من رأى منكم منكرا فليغيره",
+      "text_tr": "Münkeri gören gücü yettiğince eliyle, diliyle veya kalbiyle tavır alır.",
+      "text_en": "Whoever sees wrong should oppose it by hand, tongue, or heart as able.",
+      "text_tr_char_count": 71,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:49",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:49"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-053",
+      "topic": "Zulme ve zalime karşı davranış",
+      "priority": 7,
+      "collection_slug": "riyad_as_salihin",
+      "collection_name_tr": "Riyazü's-Salihin",
+      "collection_name_en": "Riyad as-Salihin",
+      "reference": "Riyad as-Salihin 194",
+      "hadith_number": "194",
+      "narrator": "Abu Sa'id al-Khudri",
+      "grade": "hasan",
+      "text_ar": "كلمة عدل عند سلطان جائر",
+      "text_tr": "Zalime karşı adil söz, imanın cesaret isteyen duruşudur.",
+      "text_en": "A just word before a tyrant is a courageous stance of faith.",
+      "text_tr_char_count": 56,
+      "sources": {
+        "arabic": "https://sunnah.com/riyadussalihin:194",
+        "turkish": null,
+        "english": "https://sunnah.com/riyadussalihin:194"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-054",
+      "topic": "Zulme ve zalime karşı davranış",
+      "priority": 7,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2444",
+      "hadith_number": "2444",
+      "narrator": "Anas ibn Malik",
+      "grade": "sahih",
+      "text_ar": "انصر أخاك ظالما أو مظلوما",
+      "text_tr": "Zalim kardeşe yardım, onu zulmünden alıkoymaktır.",
+      "text_en": "Helping an oppressor means stopping him from oppression.",
+      "text_tr_char_count": 49,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2444",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2444"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-055",
+      "topic": "Zulme ve zalime karşı davranış",
+      "priority": 7,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2584",
+      "hadith_number": "2584",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "لا تحاسدوا ولا تباغضوا",
+      "text_tr": "Müminler zulme, kin ve haksızlığa değil kardeşliğe yönelir.",
+      "text_en": "Believers turn away from hatred and injustice toward brotherhood.",
+      "text_tr_char_count": 59,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2584",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2584"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-056",
+      "topic": "Zulme ve zalime karşı davranış",
+      "priority": 7,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2449",
+      "hadith_number": "2449",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "من كانت له مظلمة لأخيه",
+      "text_tr": "Kıyametten önce kul hakkı için helalleşmek gerekir.",
+      "text_en": "One should settle wrongs against others before the Day of Judgment.",
+      "text_tr_char_count": 51,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2449",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2449"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-057",
+      "topic": "Zulme ve zalime karşı davranış",
+      "priority": 7,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2578",
+      "hadith_number": "2578",
+      "narrator": "Abu Dharr",
+      "grade": "sahih",
+      "text_ar": "يا عبادي إني حرمت الظلم على نفسي",
+      "text_tr": "Allah zulmü haram kılmıştır; kullar da birbirine zulmetmemelidir.",
+      "text_en": "Allah has forbidden oppression; people must not oppress one another.",
+      "text_tr_char_count": 65,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2578",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2578"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-058",
+      "topic": "Zulüm nedir, zalim kimdir",
+      "priority": 8,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2578",
+      "hadith_number": "2578",
+      "narrator": "Abu Dharr",
+      "grade": "sahih",
+      "text_ar": "فلا تظالموا",
+      "text_tr": "Zulüm, Allah’ın haram kıldığı haksızlıktır; mümine yakışmaz.",
+      "text_en": "Oppression is forbidden injustice; it does not befit a believer.",
+      "text_tr_char_count": 60,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2578",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2578"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-059",
+      "topic": "Zulüm nedir, zalim kimdir",
+      "priority": 8,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2447",
+      "hadith_number": "2447",
+      "narrator": "Ibn Umar",
+      "grade": "sahih",
+      "text_ar": "الظلم ظلمات يوم القيامة",
+      "text_tr": "Zulüm, kıyamet gününde karanlıklara dönüşür.",
+      "text_en": "Oppression becomes layers of darkness on the Day of Resurrection.",
+      "text_tr_char_count": 44,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2447",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2447"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-060",
+      "topic": "Zulüm nedir, zalim kimdir",
+      "priority": 8,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2581",
+      "hadith_number": "2581",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "أتدرون ما المفلس",
+      "text_tr": "Asıl iflas, kul hakkıyla Allah’ın huzuruna çıkmaktır.",
+      "text_en": "True bankruptcy is meeting Allah burdened with others' rights.",
+      "text_tr_char_count": 53,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2581",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2581"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-061",
+      "topic": "Zulüm nedir, zalim kimdir",
+      "priority": 8,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2453",
+      "hadith_number": "2453",
+      "narrator": "Abu Bakrah",
+      "grade": "sahih",
+      "text_ar": "فإن دماءكم وأموالكم وأعراضكم عليكم حرام",
+      "text_tr": "Can, mal ve onur dokunulmazdır; bunlara saldırmak zulümdür.",
+      "text_en": "Life, property, and honor are sacred; violating them is oppression.",
+      "text_tr_char_count": 59,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2453",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2453"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-062",
+      "topic": "Zulüm nedir, zalim kimdir",
+      "priority": 8,
+      "collection_slug": "abudawud",
+      "collection_name_tr": "Sünen-i Ebû Dâvûd",
+      "collection_name_en": "Sunan Abi Dawud",
+      "reference": "Sunan Abi Dawud 4882",
+      "hadith_number": "4882",
+      "narrator": "Aisha",
+      "grade": "hasan",
+      "text_ar": "إن من أربى الربا الاستطالة في عرض المسلم",
+      "text_tr": "Müslümanın onuruna saldırmak ağır bir haksızlıktır.",
+      "text_en": "Attacking a Muslim's honor is a grave injustice.",
+      "text_tr_char_count": 51,
+      "sources": {
+        "arabic": "https://sunnah.com/abudawud:4882",
+        "turkish": null,
+        "english": "https://sunnah.com/abudawud:4882"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-063",
+      "topic": "Zulüm nedir, zalim kimdir",
+      "priority": 8,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 2032",
+      "hadith_number": "2032",
+      "narrator": "Abu Hurairah",
+      "grade": "hasan",
+      "text_ar": "المسلم من سلم المسلمون من لسانه ويده",
+      "text_tr": "Zalim, dili veya eliyle insanlara zarar verendir.",
+      "text_en": "An oppressor harms people by tongue or hand.",
+      "text_tr_char_count": 49,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:2032",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:2032"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-064",
+      "topic": "insani ilişkiler",
+      "priority": 9,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 6018",
+      "hadith_number": "6018",
+      "narrator": "Anas ibn Malik",
+      "grade": "sahih",
+      "text_ar": "لا يؤمن أحدكم حتى يحب لأخيه",
+      "text_tr": "Kendin için sevdiğini kardeşin için de sevmedikçe iman kemale ermez.",
+      "text_en": "Faith is incomplete until one loves for his brother what he loves for himself.",
+      "text_tr_char_count": 68,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:6018",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:6018"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-065",
+      "topic": "insani ilişkiler",
+      "priority": 9,
+      "collection_slug": "riyad_as_salihin",
+      "collection_name_tr": "Riyazü's-Salihin",
+      "collection_name_en": "Riyad as-Salihin",
+      "reference": "Riyad as-Salihin 1511",
+      "hadith_number": "1511",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "فليقل خيرا أو ليصمت",
+      "text_tr": "Allah’a ve ahirete iman eden ya hayır söyler ya susar.",
+      "text_en": "Whoever believes in Allah and the Last Day should speak good or remain silent.",
+      "text_tr_char_count": 54,
+      "sources": {
+        "arabic": "https://sunnah.com/riyadussalihin:1511",
+        "turkish": null,
+        "english": "https://sunnah.com/riyadussalihin:1511"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-066",
+      "topic": "insani ilişkiler",
+      "priority": 9,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2564",
+      "hadith_number": "2564",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "لا يدخل الجنة من لا يأمن جاره بوائقه",
+      "text_tr": "Komşusu zararından emin olmayan kimse iyi komşuluk yapmış olmaz.",
+      "text_en": "One whose neighbor is unsafe from his harm has failed in neighborly duty.",
+      "text_tr_char_count": 64,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2564",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2564"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-067",
+      "topic": "insani ilişkiler",
+      "priority": 9,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 1924",
+      "hadith_number": "1924",
+      "narrator": "Abdullah ibn Amr",
+      "grade": "hasan",
+      "text_ar": "الراحمون يرحمهم الرحمن",
+      "text_tr": "Merhamet edenlere Rahman merhamet eder.",
+      "text_en": "The Most Merciful shows mercy to those who are merciful.",
+      "text_tr_char_count": 39,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:1924",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:1924"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-068",
+      "topic": "insani ilişkiler",
+      "priority": 9,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 6136",
+      "hadith_number": "6136",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "تبسمك في وجه أخيك صدقة",
+      "text_tr": "Kardeşinin yüzüne tebessüm etmek bile sadakadır.",
+      "text_en": "Smiling at your brother is charity.",
+      "text_tr_char_count": 48,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:6136",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:6136"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-069",
+      "topic": "İslam’a bağlılık",
+      "priority": 10,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 38",
+      "hadith_number": "38",
+      "narrator": "Sufyan ibn Abdullah",
+      "grade": "sahih",
+      "text_ar": "قل آمنت بالله ثم استقم",
+      "text_tr": "Allah’a iman ettim de, sonra dosdoğru ol.",
+      "text_en": "Say, 'I believe in Allah,' then remain upright.",
+      "text_tr_char_count": 41,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:38",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:38"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-070",
+      "topic": "İslam’a bağlılık",
+      "priority": 10,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 8",
+      "hadith_number": "8",
+      "narrator": "Ibn Umar",
+      "grade": "sahih",
+      "text_ar": "بني الإسلام على خمس",
+      "text_tr": "İslam beş temel üzerine kurulmuştur.",
+      "text_en": "Islam is built upon five foundations.",
+      "text_tr_char_count": 36,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:8",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:8"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-071",
+      "topic": "İslam’a bağlılık",
+      "priority": 10,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 8",
+      "hadith_number": "8",
+      "narrator": "Umar ibn al-Khattab",
+      "grade": "sahih",
+      "text_ar": "الإسلام أن تشهد أن لا إله إلا الله",
+      "text_tr": "İslam, tevhid şahitliği ve kulluk esasları üzerine yaşanır.",
+      "text_en": "Islam is lived upon testimony of tawhid and acts of worship.",
+      "text_tr_char_count": 59,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:8",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:8"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-072",
+      "topic": "İslam’a bağlılık",
+      "priority": 10,
+      "collection_slug": "nawawi40",
+      "collection_name_tr": "Nevevî'nin Kırk Hadisi",
+      "collection_name_en": "An-Nawawi's 40 Hadith",
+      "reference": "An-Nawawi 40 Hadith 7",
+      "hadith_number": "7",
+      "narrator": "Tamim ad-Dari",
+      "grade": "sahih",
+      "text_ar": "الدين النصيحة",
+      "text_tr": "Dine bağlılık samimiyet, sadakat ve hayır öğüdüyle görünür.",
+      "text_en": "Loyalty to religion appears through sincerity, faithfulness, and counsel.",
+      "text_tr_char_count": 59,
+      "sources": {
+        "arabic": "https://sunnah.com/nawawi40:7",
+        "turkish": null,
+        "english": "https://sunnah.com/nawawi40:7"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-073",
+      "topic": "İslam’a bağlılık",
+      "priority": 10,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 16",
+      "hadith_number": "16",
+      "narrator": "Anas ibn Malik",
+      "grade": "sahih",
+      "text_ar": "حتى أكون أحب إليه",
+      "text_tr": "Resûlullah sevgisi, iman bağlılığının merkezindedir.",
+      "text_en": "Love for the Messenger is central to faithful commitment.",
+      "text_tr_char_count": 52,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:16",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:16"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-074",
+      "topic": "ümmet bilinci",
+      "priority": 11,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2586",
+      "hadith_number": "2586",
+      "narrator": "Nu'man ibn Bashir",
+      "grade": "sahih",
+      "text_ar": "مثل المؤمنين في توادهم",
+      "text_tr": "Müminler sevgide, merhamette ve dayanışmada bir beden gibidir.",
+      "text_en": "Believers are like one body in love, mercy, and mutual support.",
+      "text_tr_char_count": 62,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2586",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2586"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-075",
+      "topic": "ümmet bilinci",
+      "priority": 11,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 6011",
+      "hadith_number": "6011",
+      "narrator": "Nu'man ibn Bashir",
+      "grade": "sahih",
+      "text_ar": "تداعى له سائر الجسد",
+      "text_tr": "Bir müminin acısı, ümmetin ortak hassasiyetidir.",
+      "text_en": "The pain of one believer concerns the whole community.",
+      "text_tr_char_count": 48,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:6011",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:6011"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-076",
+      "topic": "ümmet bilinci",
+      "priority": 11,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2446",
+      "hadith_number": "2446",
+      "narrator": "Abdullah ibn Umar",
+      "grade": "sahih",
+      "text_ar": "المسلم أخو المسلم",
+      "text_tr": "Müslüman Müslümanın kardeşidir; onu terk etmez ve zulme bırakmaz.",
+      "text_en": "A Muslim is the brother of a Muslim; he neither abandons nor wrongs him.",
+      "text_tr_char_count": 65,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2446",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2446"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-077",
+      "topic": "ümmet bilinci",
+      "priority": 11,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2699",
+      "hadith_number": "2699",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "من نفس عن مؤمن كربة",
+      "text_tr": "Bir müminin sıkıntısını giderenin sıkıntısını Allah giderir.",
+      "text_en": "Allah relieves the distress of one who relieves a believer's distress.",
+      "text_tr_char_count": 60,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2699",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2699"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-078",
+      "topic": "ümmet bilinci",
+      "priority": 11,
+      "collection_slug": "abudawud",
+      "collection_name_tr": "Sünen-i Ebû Dâvûd",
+      "collection_name_en": "Sunan Abi Dawud",
+      "reference": "Sunan Abi Dawud 4944",
+      "hadith_number": "4944",
+      "narrator": "Abu Musa",
+      "grade": "sahih",
+      "text_ar": "المؤمن للمؤمن كالبنيان",
+      "text_tr": "Müminler birbirini tutan bina taşları gibidir.",
+      "text_en": "Believers are like a building, each part supporting the other.",
+      "text_tr_char_count": 46,
+      "sources": {
+        "arabic": "https://sunnah.com/abudawud:4944",
+        "turkish": null,
+        "english": "https://sunnah.com/abudawud:4944"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-079",
+      "topic": "kardeşliğe bağlılık",
+      "priority": 12,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2442",
+      "hadith_number": "2442",
+      "narrator": "Abdullah ibn Umar",
+      "grade": "sahih",
+      "text_ar": "المسلم أخو المسلم",
+      "text_tr": "Müslüman kardeşini haksızlığa teslim etmez.",
+      "text_en": "A Muslim does not hand his brother over to injustice.",
+      "text_tr_char_count": 43,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2442",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2442"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-080",
+      "topic": "kardeşliğe bağlılık",
+      "priority": 12,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2563",
+      "hadith_number": "2563",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "لا تحاسدوا ولا تباغضوا",
+      "text_tr": "Kıskançlık, kin ve sırt çevirme kardeşliği bozar.",
+      "text_en": "Envy, hatred, and turning away damage brotherhood.",
+      "text_tr_char_count": 49,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2563",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2563"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-081",
+      "topic": "kardeşliğe bağlılık",
+      "priority": 12,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2564",
+      "hadith_number": "2564",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "كونوا عباد الله إخوانا",
+      "text_tr": "Allah’ın kulları olarak kardeş olun.",
+      "text_en": "Be brothers as servants of Allah.",
+      "text_tr_char_count": 36,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2564",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2564"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-082",
+      "topic": "kardeşliğe bağlılık",
+      "priority": 12,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 2510",
+      "hadith_number": "2510",
+      "narrator": "Abu Hurairah",
+      "grade": "hasan",
+      "text_ar": "المؤمن مرآة المؤمن",
+      "text_tr": "Mümin, müminin aynasıdır; onu iyilikle düzeltir.",
+      "text_en": "A believer is the mirror of a believer and corrects him with goodness.",
+      "text_tr_char_count": 48,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:2510",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:2510"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-083",
+      "topic": "büyüklere ve küçüklere davranış",
+      "priority": 13,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 1919",
+      "hadith_number": "1919",
+      "narrator": "Abdullah ibn Amr",
+      "grade": "hasan",
+      "text_ar": "ليس منا من لم يرحم صغيرنا ويعرف شرف كبيرنا",
+      "text_tr": "Küçüğe merhamet, büyüğe saygı Müslüman ahlakındandır.",
+      "text_en": "Mercy to the young and respect for elders are part of Muslim character.",
+      "text_tr_char_count": 53,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:1919",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:1919"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-084",
+      "topic": "büyüklere ve küçüklere davranış",
+      "priority": 13,
+      "collection_slug": "abudawud",
+      "collection_name_tr": "Sünen-i Ebû Dâvûd",
+      "collection_name_en": "Sunan Abi Dawud",
+      "reference": "Sunan Abi Dawud 4943",
+      "hadith_number": "4943",
+      "narrator": "Abdullah ibn Amr",
+      "grade": "hasan",
+      "text_ar": "ويرحم صغيرنا ويعرف حق كبيرنا",
+      "text_tr": "Küçüğün hakkı merhamet, büyüğün hakkı hürmettir.",
+      "text_en": "The young deserve mercy and elders deserve honor.",
+      "text_tr_char_count": 48,
+      "sources": {
+        "arabic": "https://sunnah.com/abudawud:4943",
+        "turkish": null,
+        "english": "https://sunnah.com/abudawud:4943"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-085",
+      "topic": "büyüklere ve küçüklere davranış",
+      "priority": 13,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 246",
+      "hadith_number": "246",
+      "narrator": "Anas ibn Malik",
+      "grade": "sahih",
+      "text_ar": "ما رأيت أحدا كان أرحم بالعيال",
+      "text_tr": "Resûlullah çocuklara karşı en merhametli örnekti.",
+      "text_en": "The Messenger was the finest example of mercy toward children.",
+      "text_tr_char_count": 49,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:246",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:246"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-086",
+      "topic": "büyüklere ve küçüklere davranış",
+      "priority": 13,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 6005",
+      "hadith_number": "6005",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "من لا يرحم لا يرحم",
+      "text_tr": "Merhamet etmeyene merhamet edilmez.",
+      "text_en": "Whoever does not show mercy will not be shown mercy.",
+      "text_tr_char_count": 35,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:6005",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:6005"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-087",
+      "topic": "peygamberlerin sözlerine itibar edilmesi",
+      "priority": 14,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 7280",
+      "hadith_number": "7280",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "كل أمتي يدخلون الجنة إلا من أبى",
+      "text_tr": "Resûle itaat cennet yoludur; yüz çevirmek kendine zarardır.",
+      "text_en": "Obeying the Messenger is the path to Paradise; turning away harms oneself.",
+      "text_tr_char_count": 59,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:7280",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:7280"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-088",
+      "topic": "peygamberlerin sözlerine itibar edilmesi",
+      "priority": 14,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 2697",
+      "hadith_number": "2697",
+      "narrator": "Aisha",
+      "grade": "sahih",
+      "text_ar": "من أحدث في أمرنا هذا ما ليس منه",
+      "text_tr": "Dinde sonradan uydurulan şeyler reddedilir.",
+      "text_en": "Newly invented matters in religion are rejected.",
+      "text_tr_char_count": 43,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:2697",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:2697"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-089",
+      "topic": "peygamberlerin sözlerine itibar edilmesi",
+      "priority": 14,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1718",
+      "hadith_number": "1718",
+      "narrator": "Aisha",
+      "grade": "sahih",
+      "text_ar": "من عمل عملا ليس عليه أمرنا",
+      "text_tr": "Resûlullah’ın yoluna uymayan ibadet ve amel kabul ölçüsünü kaybeder.",
+      "text_en": "An act not in accordance with the Messenger's way lacks acceptance.",
+      "text_tr_char_count": 68,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1718",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1718"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-090",
+      "topic": "peygamberlerin sözlerine itibar edilmesi",
+      "priority": 14,
+      "collection_slug": "abudawud",
+      "collection_name_tr": "Sünen-i Ebû Dâvûd",
+      "collection_name_en": "Sunan Abi Dawud",
+      "reference": "Sunan Abi Dawud 4607",
+      "hadith_number": "4607",
+      "narrator": "Irbad ibn Sariyah",
+      "grade": "sahih",
+      "text_ar": "عليكم بسنتي",
+      "text_tr": "Sünnete sarılmak, fitneler karşısında korunma yoludur.",
+      "text_en": "Holding to the Sunnah is protection amid trials.",
+      "text_tr_char_count": 54,
+      "sources": {
+        "arabic": "https://sunnah.com/abudawud:4607",
+        "turkish": null,
+        "english": "https://sunnah.com/abudawud:4607"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-091",
+      "topic": "insanlığa faydalı olma",
+      "priority": 15,
+      "collection_slug": "tabarani",
+      "collection_name_tr": "Taberânî",
+      "collection_name_en": "Al-Tabarani",
+      "reference": "Al-Mu'jam al-Awsat 5787",
+      "hadith_number": "5787",
+      "narrator": "Jabir ibn Abdullah",
+      "grade": "hasan_li_ghayrihi",
+      "text_ar": "خير الناس أنفعهم للناس",
+      "text_tr": "İnsanların hayırlısı, insanlara en faydalı olandır.",
+      "text_en": "The best of people are those most beneficial to people.",
+      "text_tr_char_count": 51,
+      "sources": {
+        "arabic": "https://dorar.net/hadith/search?q=%D8%AE%D9%8A%D8%B1+%D8%A7%D9%84%D9%86%D8%A7%D8%B3+%D8%A3%D9%86%D9%81%D8%B9%D9%87%D9%85",
+        "turkish": null,
+        "english": "https://dorar.net/hadith/search?q=%D8%AE%D9%8A%D8%B1+%D8%A7%D9%84%D9%86%D8%A7%D8%B3+%D8%A3%D9%86%D9%81%D8%B9%D9%87%D9%85"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-092",
+      "topic": "insanlığa faydalı olma",
+      "priority": 15,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2699",
+      "hadith_number": "2699",
+      "narrator": "Abu Hurairah",
+      "grade": "sahih",
+      "text_ar": "من يسر على معسر",
+      "text_tr": "Darda kalana kolaylık sağlayana Allah kolaylık verir.",
+      "text_en": "Allah makes things easy for one who eases hardship for another.",
+      "text_tr_char_count": 53,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2699",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2699"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-093",
+      "topic": "insanlığa faydalı olma",
+      "priority": 15,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 6021",
+      "hadith_number": "6021",
+      "narrator": "Abu Musa",
+      "grade": "sahih",
+      "text_ar": "على كل مسلم صدقة",
+      "text_tr": "Her Müslüman için iyilik ve fayda üretmek sadakadır.",
+      "text_en": "Every Muslim can give charity through good and benefit.",
+      "text_tr_char_count": 52,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:6021",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:6021"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-094",
+      "topic": "insanlığa faydalı olma",
+      "priority": 15,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 1009",
+      "hadith_number": "1009",
+      "narrator": "Abu Dharr",
+      "grade": "sahih",
+      "text_ar": "إماطة الأذى عن الطريق صدقة",
+      "text_tr": "Yoldan eziyet veren şeyi kaldırmak sadakadır.",
+      "text_en": "Removing harm from the road is charity.",
+      "text_tr_char_count": 45,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:1009",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:1009"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-095",
+      "topic": "doğruluğa çağırma",
+      "priority": 16,
+      "collection_slug": "muslim",
+      "collection_name_tr": "Sahih-i Müslim",
+      "collection_name_en": "Sahih Muslim",
+      "reference": "Sahih Muslim 2607",
+      "hadith_number": "2607",
+      "narrator": "Ibn Mas'ud",
+      "grade": "sahih",
+      "text_ar": "عليكم بالصدق",
+      "text_tr": "Doğruluktan ayrılmayın; doğruluk kişiyi iyiliğe götürür.",
+      "text_en": "Hold fast to truthfulness; truthfulness leads to righteousness.",
+      "text_tr_char_count": 56,
+      "sources": {
+        "arabic": "https://sunnah.com/muslim:2607",
+        "turkish": null,
+        "english": "https://sunnah.com/muslim:2607"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-096",
+      "topic": "doğruluğa çağırma",
+      "priority": 16,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 1971",
+      "hadith_number": "1971",
+      "narrator": "Hasan ibn Ali",
+      "grade": "hasan",
+      "text_ar": "فإن الصدق طمأنينة",
+      "text_tr": "Doğruluk huzur, yalan ise şüphe doğurur.",
+      "text_en": "Truthfulness brings calm, while falsehood brings doubt.",
+      "text_tr_char_count": 40,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:1971",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:1971"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-097",
+      "topic": "doğruluğa çağırma",
+      "priority": 16,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 6094",
+      "hadith_number": "6094",
+      "narrator": "Ibn Mas'ud",
+      "grade": "sahih",
+      "text_ar": "إن الصدق يهدي إلى البر",
+      "text_tr": "Doğruluk iyiliğe, iyilik cennete götürür.",
+      "text_en": "Truthfulness leads to righteousness, and righteousness leads to Paradise.",
+      "text_tr_char_count": 41,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:6094",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:6094"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-098",
+      "topic": "ahlaklı olma",
+      "priority": 17,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 1162",
+      "hadith_number": "1162",
+      "narrator": "Abu Hurairah",
+      "grade": "hasan",
+      "text_ar": "أكمل المؤمنين إيمانا أحسنهم خلقا",
+      "text_tr": "İmanı en olgun olanlar, ahlakı en güzel olanlardır.",
+      "text_en": "The most complete believers in faith are those best in character.",
+      "text_tr_char_count": 51,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:1162",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:1162"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-099",
+      "topic": "ahlaklı olma",
+      "priority": 17,
+      "collection_slug": "tirmidhi",
+      "collection_name_tr": "Câmiu't-Tirmizî",
+      "collection_name_en": "Jami' at-Tirmidhi",
+      "reference": "Jami' at-Tirmidhi 2003",
+      "hadith_number": "2003",
+      "narrator": "Abu Darda",
+      "grade": "hasan",
+      "text_ar": "ما من شيء أثقل في الميزان من حسن الخلق",
+      "text_tr": "Kıyamet terazisinde güzel ahlaktan daha ağır şeylerden azı vardır.",
+      "text_en": "Few things weigh heavier on the scale than good character.",
+      "text_tr_char_count": 66,
+      "sources": {
+        "arabic": "https://sunnah.com/tirmidhi:2003",
+        "turkish": null,
+        "english": "https://sunnah.com/tirmidhi:2003"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    },
+    {
+      "id": "hadith-100",
+      "topic": "ahlaklı olma",
+      "priority": 17,
+      "collection_slug": "bukhari",
+      "collection_name_tr": "Sahih-i Buhârî",
+      "collection_name_en": "Sahih al-Bukhari",
+      "reference": "Sahih al-Bukhari 3559",
+      "hadith_number": "3559",
+      "narrator": "Anas ibn Malik",
+      "grade": "sahih",
+      "text_ar": "كان أحسن الناس خلقا",
+      "text_tr": "Resûlullah insanların ahlakça en güzeliydi.",
+      "text_en": "The Messenger was the best of people in character.",
+      "text_tr_char_count": 43,
+      "sources": {
+        "arabic": "https://sunnah.com/bukhari:3559",
+        "turkish": null,
+        "english": "https://sunnah.com/bukhari:3559"
+      },
+      "status": "draft",
+      "approval": {
+        "reviewed": false,
+        "reviewer": null,
+        "notes": "Short UI meaning text. Verify Arabic wording, exact grading, and Turkish rendering before publication."
+      }
+    }
+  ]
+}

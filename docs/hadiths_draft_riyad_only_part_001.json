@@ -1,0 +1,1316 @@
+﻿{
+    "version":  "hadiths_draft.v2.riyad_only",
+    "part":  1,
+    "count":  46,
+    "source_policy":  {
+                          "collection":  "RiyazÃ¼\u0027s-Salihin / Riyad as-Salihin only",
+                          "primary_ar_en":  "Sunnah.com Riyad as-Salihin",
+                          "primary_tr":  "Diyanet RiyazÃ¼\u0027s-Salihin Metin ve Ã‡eviri",
+                          "ui_text_policy":  "Short meaning text; not a full copied translation.",
+                          "review_required":  true
+                      },
+    "character_rule":  {
+                           "text_tr_max_chars":  400,
+                           "result":  "PASS",
+                           "max_text_tr_chars":  76
+                       },
+    "distribution":  {
+                         "Ä°slamâ€™a Ã§aÄŸÄ±rma":  9,
+                         "Ä°slami devlet yÃ¶netimi":  7,
+                         "ahlaklÄ± olma":  3,
+                         "cihad":  12,
+                         "Ehl-i Kitap ile ilgili tarihÃ® uyarÄ±lar, peygamberlere karÅŸÄ± tavÄ±rlar, ahdi bozma, dini tahrif ve gÃ¼venilirlik imtihanÄ±":  8,
+                         "insani iliÅŸkiler":  5,
+                         "prensipli hayat yaÅŸama":  2
+                     },
+    "items":  [
+                  {
+                      "id":  "hadith-rs-001-001",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1285",
+                      "hadith_number":  "1285",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "ÙØ¶Ù„ Ø§Ù„ØºØ¯ÙˆØ© ÙˆØ§Ù„Ø±ÙˆØ­Ø© ÙÙŠ Ø³Ø¨ÙŠÙ„ Ø§Ù„Ù„Ù‡",
+                      "text_tr":  "Allah yolunda kÄ±sa bir gayret bile bÃ¼yÃ¼k ecir sebebidir.",
+                      "text_en":  "Even a brief effort in Allah\u0027s path carries great reward.",
+                      "text_tr_char_count":  56,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1285",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1285"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-002",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1286",
+                      "hadith_number":  "1286",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø¬Ù‡Ø§Ø¯ Ù…Ù† Ø£ÙØ¶Ù„ Ø§Ù„Ø£Ø¹Ù…Ø§Ù„",
+                      "text_tr":  "Allah yolunda gayret, en faziletli amellerdendir.",
+                      "text_en":  "Striving in Allah\u0027s path is among the most virtuous deeds.",
+                      "text_tr_char_count":  49,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1286",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1286"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-003",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1287",
+                      "hadith_number":  "1287",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø¥ÙŠÙ…Ø§Ù† Ø¨Ø§Ù„Ù„Ù‡ ÙˆØ§Ù„Ø¬Ù‡Ø§Ø¯ ÙÙŠ Ø³Ø¨ÙŠÙ„Ù‡",
+                      "text_tr":  "Ä°man ve Allah yolunda gayret, mÃ¼minin yÃ¼ksek sorumluluklarÄ±ndandÄ±r.",
+                      "text_en":  "Faith and striving in Allah\u0027s path are high responsibilities of a believer.",
+                      "text_tr_char_count":  67,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1287",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1287"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-004",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1288",
+                      "hadith_number":  "1288",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø±Ø¨Ø§Ø· ÙÙŠ Ø³Ø¨ÙŠÙ„ Ø§Ù„Ù„Ù‡",
+                      "text_tr":  "Allah yolunda nÃ¶bet ve hazÄ±rlÄ±k, sadakat ve fedakÃ¢rlÄ±k gÃ¶stergesidir.",
+                      "text_en":  "Guarding and preparation in Allah\u0027s path show loyalty and sacrifice.",
+                      "text_tr_char_count":  69,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1288",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1288"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-005",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1289",
+                      "hadith_number":  "1289",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ù…Ù† Ø¬Ù‡Ø² ØºØ§Ø²ÙŠØ§ ÙÙ‚Ø¯ ØºØ²Ø§",
+                      "text_tr":  "Allah yolunda gayrete destek olan da hayra ortak olur.",
+                      "text_en":  "Whoever supports one striving in Allah\u0027s path shares in the good.",
+                      "text_tr_char_count":  54,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1289",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1289"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-006",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1290",
+                      "hadith_number":  "1290",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ù…Ù† Ø®Ù„Ù ØºØ§Ø²ÙŠØ§ ÙÙŠ Ø£Ù‡Ù„Ù‡ Ø¨Ø®ÙŠØ±",
+                      "text_tr":  "Geride kalanlara iyilikle sahip Ã§Ä±kmak da cihad desteÄŸidir.",
+                      "text_en":  "Caring well for those left behind is also support for jihad.",
+                      "text_tr_char_count":  59,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1290",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1290"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-007",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1291",
+                      "hadith_number":  "1291",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø¬Ù†Ø© ØªØ­Øª Ø¸Ù„Ø§Ù„ Ø§Ù„Ø³ÙŠÙˆÙ",
+                      "text_tr":  "Hak uÄŸrunda fedakÃ¢rlÄ±k, cennet Ã¼midiyle sabÄ±r ister.",
+                      "text_en":  "Sacrifice for truth requires patience with hope in Paradise.",
+                      "text_tr_char_count":  52,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1291",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1291"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-008",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1292",
+                      "hadith_number":  "1292",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ù„Ø§ ØªØªÙ…Ù†ÙˆØ§ Ù„Ù‚Ø§Ø¡ Ø§Ù„Ø¹Ø¯Ùˆ",
+                      "text_tr":  "MÃ¼min savaÅŸ istemez; fakat gerektiÄŸinde sabÄ±r ve sebat gÃ¶sterir.",
+                      "text_en":  "A believer does not seek battle, but remains patient if tested.",
+                      "text_tr_char_count":  64,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1292",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1292"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-009",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1293",
+                      "hadith_number":  "1293",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ù„Ù‡Ù… Ù…Ù†Ø²Ù„ Ø§Ù„ÙƒØªØ§Ø¨ ÙˆÙ…Ø¬Ø±ÙŠ Ø§Ù„Ø³Ø­Ø§Ø¨",
+                      "text_tr":  "MÃ¼min zorluk anÄ±nda Allahâ€™a sÄ±ÄŸÄ±nÄ±r ve yardÄ±mÄ± Oâ€™ndan ister.",
+                      "text_en":  "In hardship, a believer seeks refuge in Allah and asks His help.",
+                      "text_tr_char_count":  60,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1293",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1293"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-010",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1294",
+                      "hadith_number":  "1294",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø´Ù‡Ø§Ø¯Ø© ÙÙŠ Ø³Ø¨ÙŠÙ„ Ø§Ù„Ù„Ù‡",
+                      "text_tr":  "Allah yolunda can vermek, bÃ¼yÃ¼k bir ÅŸeref ve ahiret ikramÄ±dÄ±r.",
+                      "text_en":  "Martyrdom in Allah\u0027s path is a great honor and afterlife gift.",
+                      "text_tr_char_count":  62,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1294",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1294"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-011",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1295",
+                      "hadith_number":  "1295",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø¥Ø¹Ø¯Ø§Ø¯ Ø§Ù„Ù‚ÙˆØ© ÙˆØ§Ù„Ù†ÙŠØ© Ø§Ù„ØµØ§Ù„Ø­Ø©",
+                      "text_tr":  "HazÄ±rlÄ±k, niyet ve sorumluluk bilinciyle deÄŸer kazanÄ±r.",
+                      "text_en":  "Preparation gains value through intention and responsibility.",
+                      "text_tr_char_count":  55,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1295",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1295"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-012",
+                      "topic":  "cihad",
+                      "priority":  1,
+                      "riyad_topic_hint":  "The Book of Jihad / Kitab al-Jihad",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1296",
+                      "hadith_number":  "1296",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ù…Ø¬Ø§Ù‡Ø¯ Ù…Ù† Ø¬Ø§Ù‡Ø¯ Ù†ÙØ³Ù‡",
+                      "text_tr":  "CihadÄ±n bir yÃ¶nÃ¼ de nefsi Allah iÃ§in terbiye etmektir.",
+                      "text_en":  "One form of striving is disciplining the self for Allah.",
+                      "text_tr_char_count":  54,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1296",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1296"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-013",
+                      "topic":  "Ä°slamâ€™a Ã§aÄŸÄ±rma",
+                      "priority":  2,
+                      "riyad_topic_hint":  "The Book of Knowledge / sincere advice / conveying good",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1376",
+                      "hadith_number":  "1376",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ù…Ù† Ø³Ù„Ùƒ Ø·Ø±ÙŠÙ‚Ø§ ÙŠÙ„ØªÙ…Ø³ ÙÙŠÙ‡ Ø¹Ù„Ù…Ø§",
+                      "text_tr":  "Ä°lim yoluna girmek, insanlarÄ± doÄŸruya Ã§aÄŸÄ±rmanÄ±n temelidir.",
+                      "text_en":  "Seeking knowledge is the foundation of calling people to truth.",
+                      "text_tr_char_count":  59,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1376",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1376"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-014",
+                      "topic":  "Ä°slamâ€™a Ã§aÄŸÄ±rma",
+                      "priority":  2,
+                      "riyad_topic_hint":  "The Book of Knowledge / sincere advice / conveying good",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1377",
+                      "hadith_number":  "1377",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "ÙØ¶Ù„ Ø§Ù„Ø¹Ù„Ù… ÙˆØ§Ù„ØªØ¹Ù„ÙŠÙ…",
+                      "text_tr":  "Ä°lim Ã¶ÄŸrenen ve Ã¶ÄŸreten, hayrÄ±n yayÄ±lmasÄ±na vesile olur.",
+                      "text_en":  "One who learns and teaches knowledge helps spread good.",
+                      "text_tr_char_count":  56,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1377",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1377"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-015",
+                      "topic":  "Ä°slamâ€™a Ã§aÄŸÄ±rma",
+                      "priority":  2,
+                      "riyad_topic_hint":  "The Book of Knowledge / sincere advice / conveying good",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1378",
+                      "hadith_number":  "1378",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø¯Ù„Ø§Ù„Ø© Ø¹Ù„Ù‰ Ø§Ù„Ø®ÙŠØ±",
+                      "text_tr":  "Hayra yÃ¶nlendiren, o hayrÄ± yapanÄ±n ecrine benzer ecir kazanÄ±r.",
+                      "text_en":  "One who points to good receives reward like the doer.",
+                      "text_tr_char_count":  62,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1378",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1378"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-016",
+                      "topic":  "Ä°slamâ€™a Ã§aÄŸÄ±rma",
+                      "priority":  2,
+                      "riyad_topic_hint":  "The Book of Knowledge / sincere advice / conveying good",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1379",
+                      "hadith_number":  "1379",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ù†ØµÙŠØ­Ø© Ù„Ù„Ù‡ ÙˆÙ„ÙƒØªØ§Ø¨Ù‡ ÙˆÙ„Ø±Ø³ÙˆÙ„Ù‡",
+                      "text_tr":  "Davet, samimiyet ve nasihat ahlakÄ±yla yapÄ±lÄ±r.",
+                      "text_en":  "Calling to Islam is done with sincerity and sincere counsel.",
+                      "text_tr_char_count":  46,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1379",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1379"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-017",
+                      "topic":  "Ä°slamâ€™a Ã§aÄŸÄ±rma",
+                      "priority":  2,
+                      "riyad_topic_hint":  "The Book of Knowledge / sincere advice / conveying good",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1380",
+                      "hadith_number":  "1380",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "ØªØ¨Ù„ÙŠØº Ø§Ù„Ø®ÙŠØ± ÙˆÙ„Ùˆ Ù‚Ù„ÙŠÙ„Ø§",
+                      "text_tr":  "Az da olsa sahih bilgiyi ulaÅŸtÄ±rmak hayÄ±rlÄ±dÄ±r.",
+                      "text_en":  "Conveying sound knowledge, even little, is good.",
+                      "text_tr_char_count":  47,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1380",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1380"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-018",
+                      "topic":  "Ä°slamâ€™a Ã§aÄŸÄ±rma",
+                      "priority":  2,
+                      "riyad_topic_hint":  "The Book of Knowledge / sincere advice / conveying good",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1381",
+                      "hadith_number":  "1381",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø¹Ù„Ù… Ù‚Ø¨Ù„ Ø§Ù„Ù‚ÙˆÙ„ ÙˆØ§Ù„Ø¹Ù…Ù„",
+                      "text_tr":  "SÃ¶z ve davetten Ã¶nce saÄŸlam bilgi gerekir.",
+                      "text_en":  "Sound knowledge should come before speech and action.",
+                      "text_tr_char_count":  42,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1381",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1381"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-019",
+                      "topic":  "Ä°slamâ€™a Ã§aÄŸÄ±rma",
+                      "priority":  2,
+                      "riyad_topic_hint":  "The Book of Knowledge / sincere advice / conveying good",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1382",
+                      "hadith_number":  "1382",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ù…Ù† Ø¯Ø¹Ø§ Ø¥Ù„Ù‰ Ù‡Ø¯Ù‰",
+                      "text_tr":  "Hidayete Ã§aÄŸÄ±ran, ona uyanlarÄ±n sevabÄ±ndan pay alÄ±r.",
+                      "text_en":  "Whoever calls to guidance shares in the reward of those who follow.",
+                      "text_tr_char_count":  52,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1382",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1382"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-020",
+                      "topic":  "Ä°slamâ€™a Ã§aÄŸÄ±rma",
+                      "priority":  2,
+                      "riyad_topic_hint":  "The Book of Knowledge / sincere advice / conveying good",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1383",
+                      "hadith_number":  "1383",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "ØªØ¹Ù„ÙŠÙ… Ø§Ù„Ù†Ø§Ø³ Ø§Ù„Ø®ÙŠØ±",
+                      "text_tr":  "Ä°nsanlara hayrÄ± Ã¶ÄŸretmek, kalÄ±cÄ± bir sadaka gibidir.",
+                      "text_en":  "Teaching people good is like an enduring charity.",
+                      "text_tr_char_count":  52,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1383",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1383"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-021",
+                      "topic":  "Ä°slamâ€™a Ã§aÄŸÄ±rma",
+                      "priority":  2,
+                      "riyad_topic_hint":  "The Book of Knowledge / sincere advice / conveying good",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1384",
+                      "hadith_number":  "1384",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø­ÙƒÙ…Ø© ÙÙŠ Ø§Ù„Ø¯Ø¹ÙˆØ©",
+                      "text_tr":  "Hakka Ã§aÄŸrÄ± hikmet, nezaket ve doÄŸruluk ister.",
+                      "text_en":  "Calling to truth requires wisdom, gentleness, and honesty.",
+                      "text_tr_char_count":  46,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1384",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1384"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-022",
+                      "topic":  "Ehl-i Kitap ile ilgili tarihÃ® uyarÄ±lar, peygamberlere karÅŸÄ± tavÄ±rlar, ahdi bozma, dini tahrif ve gÃ¼venilirlik imtihanÄ±",
+                      "priority":  3,
+                      "riyad_topic_hint":  "Reports about earlier communities / avoiding excess / final prophethood",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1808",
+                      "hadith_number":  "1808",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ù„ØªØªØ¨Ø¹Ù† Ø³Ù†Ù† Ù…Ù† ÙƒØ§Ù† Ù‚Ø¨Ù„ÙƒÙ…",
+                      "text_tr":  "GeÃ§miÅŸ Ã¼mmetlerin hatalarÄ±nÄ± kÃ¶rÃ¼ kÃ¶rÃ¼ne izlemekten sakÄ±nÄ±lÄ±r.",
+                      "text_en":  "Blindly following the errors of earlier communities is avoided.",
+                      "text_tr_char_count":  62,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1808",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1808"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-023",
+                      "topic":  "Ehl-i Kitap ile ilgili tarihÃ® uyarÄ±lar, peygamberlere karÅŸÄ± tavÄ±rlar, ahdi bozma, dini tahrif ve gÃ¼venilirlik imtihanÄ±",
+                      "priority":  3,
+                      "riyad_topic_hint":  "Reports about earlier communities / avoiding excess / final prophethood",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1809",
+                      "hadith_number":  "1809",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ù„Ø§ ØªØ·Ø±ÙˆÙ†ÙŠ ÙƒÙ…Ø§ Ø£Ø·Ø±Øª Ø§Ù„Ù†ØµØ§Ø±Ù‰",
+                      "text_tr":  "Peygamber sevgisinde aÅŸÄ±rÄ±lÄ±k ve ilahlaÅŸtÄ±rma yasaktÄ±r.",
+                      "text_en":  "Excess and deification in love for prophets are forbidden.",
+                      "text_tr_char_count":  55,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1809",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1809"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-024",
+                      "topic":  "Ehl-i Kitap ile ilgili tarihÃ® uyarÄ±lar, peygamberlere karÅŸÄ± tavÄ±rlar, ahdi bozma, dini tahrif ve gÃ¼venilirlik imtihanÄ±",
+                      "priority":  3,
+                      "riyad_topic_hint":  "Reports about earlier communities / avoiding excess / final prophethood",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1810",
+                      "hadith_number":  "1810",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø¥ÙŠÙ…Ø§Ù† Ø¨Ø§Ù„Ø±Ø³Ù„ Ø¨ØºÙŠØ± ØºÙ„Ùˆ",
+                      "text_tr":  "Peygamberlere iman, onlarÄ± Allahâ€™Ä±n kullarÄ± ve elÃ§ileri bilmekle olur.",
+                      "text_en":  "Faith in prophets means knowing them as Allah\u0027s servants and messengers.",
+                      "text_tr_char_count":  70,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1810",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1810"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-025",
+                      "topic":  "Ehl-i Kitap ile ilgili tarihÃ® uyarÄ±lar, peygamberlere karÅŸÄ± tavÄ±rlar, ahdi bozma, dini tahrif ve gÃ¼venilirlik imtihanÄ±",
+                      "priority":  3,
+                      "riyad_topic_hint":  "Reports about earlier communities / avoiding excess / final prophethood",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1811",
+                      "hadith_number":  "1811",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø¹Ø¨Ø±Ø© Ø¨Ù…Ù† Ø³Ø¨Ù‚",
+                      "text_tr":  "Ã–nceki toplumlarÄ±n imtihanlarÄ± mÃ¼min iÃ§in ibret vesilesidir.",
+                      "text_en":  "The trials of earlier peoples are lessons for believers.",
+                      "text_tr_char_count":  60,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1811",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1811"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-026",
+                      "topic":  "Ehl-i Kitap ile ilgili tarihÃ® uyarÄ±lar, peygamberlere karÅŸÄ± tavÄ±rlar, ahdi bozma, dini tahrif ve gÃ¼venilirlik imtihanÄ±",
+                      "priority":  3,
+                      "riyad_topic_hint":  "Reports about earlier communities / avoiding excess / final prophethood",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1812",
+                      "hadith_number":  "1812",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„ØªØ­Ø°ÙŠØ± Ù…Ù† ØªØ¨Ø¯ÙŠÙ„ Ø§Ù„Ø¯ÙŠÙ†",
+                      "text_tr":  "Dini deÄŸiÅŸtirme ve tahrif, Ã¼mmetler iÃ§in bÃ¼yÃ¼k bir sapma sebebidir.",
+                      "text_en":  "Changing and distorting religion is a grave cause of deviation.",
+                      "text_tr_char_count":  67,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1812",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1812"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-027",
+                      "topic":  "Ehl-i Kitap ile ilgili tarihÃ® uyarÄ±lar, peygamberlere karÅŸÄ± tavÄ±rlar, ahdi bozma, dini tahrif ve gÃ¼venilirlik imtihanÄ±",
+                      "priority":  3,
+                      "riyad_topic_hint":  "Reports about earlier communities / avoiding excess / final prophethood",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1813",
+                      "hadith_number":  "1813",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„ÙˆÙØ§Ø¡ Ø¨Ø§Ù„Ø¹Ù‡Ø¯",
+                      "text_tr":  "Ahde vefa, iman ve gÃ¼venilirlik imtihanÄ±dÄ±r.",
+                      "text_en":  "Keeping covenants is a test of faith and trustworthiness.",
+                      "text_tr_char_count":  44,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1813",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1813"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-028",
+                      "topic":  "Ehl-i Kitap ile ilgili tarihÃ® uyarÄ±lar, peygamberlere karÅŸÄ± tavÄ±rlar, ahdi bozma, dini tahrif ve gÃ¼venilirlik imtihanÄ±",
+                      "priority":  3,
+                      "riyad_topic_hint":  "Reports about earlier communities / avoiding excess / final prophethood",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1814",
+                      "hadith_number":  "1814",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "ØµØ¯Ù‚ Ø§Ù„Ø®Ø¨Ø± ÙˆÙ…ÙŠØ²Ø§Ù† Ø§Ù„ÙˆØ­ÙŠ",
+                      "text_tr":  "Haberler vahiy Ã¶lÃ§Ã¼sÃ¼yle tartÄ±lÄ±r; kesin olmayanla din kurulmaz.",
+                      "text_en":  "Reports are weighed by revelation; religion is not built on uncertainty.",
+                      "text_tr_char_count":  64,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1814",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1814"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-029",
+                      "topic":  "Ehl-i Kitap ile ilgili tarihÃ® uyarÄ±lar, peygamberlere karÅŸÄ± tavÄ±rlar, ahdi bozma, dini tahrif ve gÃ¼venilirlik imtihanÄ±",
+                      "priority":  3,
+                      "riyad_topic_hint":  "Reports about earlier communities / avoiding excess / final prophethood",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 1815",
+                      "hadith_number":  "1815",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§ØªØ¨Ø§Ø¹ Ø§Ù„Ø­Ù‚ ÙˆØªØ±Ùƒ Ø§Ù„Ù‡ÙˆÙ‰",
+                      "text_tr":  "Hak aÃ§Ä±kken hevaya uymak geÃ§miÅŸ Ã¼mmetlerin imtihanlarÄ±ndandÄ±r.",
+                      "text_en":  "Following desire despite clear truth was among earlier communities\u0027 trials.",
+                      "text_tr_char_count":  62,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:1815",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:1815"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-038",
+                      "topic":  "Ä°slami devlet yÃ¶netimi",
+                      "priority":  5,
+                      "riyad_topic_hint":  "Justice, trust, leadership responsibility",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 653",
+                      "hadith_number":  "653",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø¥Ù†Ù‡Ø§ Ø£Ù…Ø§Ù†Ø©",
+                      "text_tr":  "Makam emanet olduÄŸu iÃ§in ehliyetsiz elde piÅŸmanlÄ±k doÄŸurur.",
+                      "text_en":  "Office is a trust; in unqualified hands it brings regret.",
+                      "text_tr_char_count":  59,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:653",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:653"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-039",
+                      "topic":  "Ä°slami devlet yÃ¶netimi",
+                      "priority":  5,
+                      "riyad_topic_hint":  "Justice, trust, leadership responsibility",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 654",
+                      "hadith_number":  "654",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø¹Ø¯Ù„ ÙÙŠ Ø§Ù„Ø­ÙƒÙ…",
+                      "text_tr":  "HÃ¼kÃ¼m ve yÃ¶netimde adalet, Allah katÄ±nda bÃ¼yÃ¼k fazilettir.",
+                      "text_en":  "Justice in rule and judgment is a great virtue before Allah.",
+                      "text_tr_char_count":  58,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:654",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:654"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-040",
+                      "topic":  "Ä°slami devlet yÃ¶netimi",
+                      "priority":  5,
+                      "riyad_topic_hint":  "Justice, trust, leadership responsibility",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 655",
+                      "hadith_number":  "655",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø±ÙÙ‚ Ø¨Ø§Ù„Ø±Ø¹ÙŠØ©",
+                      "text_tr":  "Halka merhametle davranan yÃ¶netici rahmete daha yakÄ±ndÄ±r.",
+                      "text_en":  "A leader gentle with people is nearer to mercy.",
+                      "text_tr_char_count":  57,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:655",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:655"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-041",
+                      "topic":  "Ä°slami devlet yÃ¶netimi",
+                      "priority":  5,
+                      "riyad_topic_hint":  "Justice, trust, leadership responsibility",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 656",
+                      "hadith_number":  "656",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„ØºØ´ Ù„Ù„Ø±Ø¹ÙŠØ© Ø­Ø±Ø§Ù…",
+                      "text_tr":  "HalkÄ±na hÄ±yanet eden yÃ¶netici aÄŸÄ±r vebal taÅŸÄ±r.",
+                      "text_en":  "A ruler who betrays his people bears a grave sin.",
+                      "text_tr_char_count":  47,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:656",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:656"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-042",
+                      "topic":  "Ä°slami devlet yÃ¶netimi",
+                      "priority":  5,
+                      "riyad_topic_hint":  "Justice, trust, leadership responsibility",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 657",
+                      "hadith_number":  "657",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø£Ø¯Ø§Ø¡ Ø§Ù„Ø£Ù…Ø§Ù†Ø©",
+                      "text_tr":  "Emaneti ehline vermek, yÃ¶netimin temel Ã¶lÃ§Ã¼sÃ¼dÃ¼r.",
+                      "text_en":  "Giving trusts to the qualified is a core measure of governance.",
+                      "text_tr_char_count":  49,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:657",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:657"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-043",
+                      "topic":  "Ä°slami devlet yÃ¶netimi",
+                      "priority":  5,
+                      "riyad_topic_hint":  "Justice, trust, leadership responsibility",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 658",
+                      "hadith_number":  "658",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ù…Ø³Ø¤ÙˆÙ„ÙŠØ© ÙŠÙˆÙ… Ø§Ù„Ù‚ÙŠØ§Ù…Ø©",
+                      "text_tr":  "YÃ¶netim, dÃ¼nyada yetki; ahirette hesaptÄ±r.",
+                      "text_en":  "Leadership is authority in this world and accountability in the next.",
+                      "text_tr_char_count":  42,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:658",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:658"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-044",
+                      "topic":  "Ä°slami devlet yÃ¶netimi",
+                      "priority":  5,
+                      "riyad_topic_hint":  "Justice, trust, leadership responsibility",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 659",
+                      "hadith_number":  "659",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ù†ØµÙŠØ­Ø© Ù„Ù„Ø£Ø¦Ù…Ø©",
+                      "text_tr":  "YÃ¶neticilere nasihat, Ã¼mmetin Ä±slah yollarÄ±ndandÄ±r.",
+                      "text_en":  "Sincere counsel to leaders is a path of reform for the community.",
+                      "text_tr_char_count":  51,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:659",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:659"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-047",
+                      "topic":  "prensipli hayat yaÅŸama",
+                      "priority":  6,
+                      "riyad_topic_hint":  "Intentions, lawful/unlawful, steadfastness, leaving doubtful matters",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 588",
+                      "hadith_number":  "588",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„Ø­Ù„Ø§Ù„ Ø¨ÙŠÙ† ÙˆØ§Ù„Ø­Ø±Ø§Ù… Ø¨ÙŠÙ†",
+                      "text_tr":  "Helal ve haram bellidir; ÅŸÃ¼pheli olandan sakÄ±nmak kalbi korur.",
+                      "text_en":  "The lawful and unlawful are clear; avoiding doubtful matters protects the heart.",
+                      "text_tr_char_count":  62,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:588",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:588"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-048",
+                      "topic":  "prensipli hayat yaÅŸama",
+                      "priority":  6,
+                      "riyad_topic_hint":  "Intentions, lawful/unlawful, steadfastness, leaving doubtful matters",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 589",
+                      "hadith_number":  "589",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø¯Ø¹ Ù…Ø§ ÙŠØ±ÙŠØ¨Ùƒ",
+                      "text_tr":  "ÅÃ¼pheli olanÄ± bÄ±rakÄ±p gÃ¶nlÃ¼ rahatlatan doÄŸruya yÃ¶nelmek gerekir.",
+                      "text_en":  "Leave what causes doubt for what brings certainty.",
+                      "text_tr_char_count":  64,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:589",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:589"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-064",
+                      "topic":  "insani iliÅŸkiler",
+                      "priority":  9,
+                      "riyad_topic_hint":  "Good manners / greetings / neighbor / speech",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 680",
+                      "hadith_number":  "680",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "ØªØ¨Ø³Ù…Ùƒ ÙÙŠ ÙˆØ¬Ù‡ Ø£Ø®ÙŠÙƒ",
+                      "text_tr":  "KardeÅŸine tebessÃ¼m etmek bile sadaka ve gÃ¼zel iliÅŸkidir.",
+                      "text_en":  "Smiling at your brother is charity and good conduct.",
+                      "text_tr_char_count":  56,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:680",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:680"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-065",
+                      "topic":  "insani iliÅŸkiler",
+                      "priority":  9,
+                      "riyad_topic_hint":  "Good manners / greetings / neighbor / speech",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 681",
+                      "hadith_number":  "681",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø§Ù„ÙƒÙ„Ù…Ø© Ø§Ù„Ø·ÙŠØ¨Ø© ØµØ¯Ù‚Ø©",
+                      "text_tr":  "GÃ¼zel sÃ¶z sadakadÄ±r; insan iliÅŸkilerini iyilikle besler.",
+                      "text_en":  "A good word is charity and nourishes human relations.",
+                      "text_tr_char_count":  56,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:681",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:681"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-066",
+                      "topic":  "insani iliÅŸkiler",
+                      "priority":  9,
+                      "riyad_topic_hint":  "Good manners / greetings / neighbor / speech",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 682",
+                      "hadith_number":  "682",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ù…Ù† ÙƒØ§Ù† ÙŠØ¤Ù…Ù† Ø¨Ø§Ù„Ù„Ù‡ ÙˆØ§Ù„ÙŠÙˆÙ… Ø§Ù„Ø¢Ø®Ø±",
+                      "text_tr":  "Allahâ€™a ve ahirete iman eden ya hayÄ±r sÃ¶yler ya susar.",
+                      "text_en":  "Whoever believes in Allah and the Last Day should speak good or remain silent.",
+                      "text_tr_char_count":  54,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:682",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:682"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-067",
+                      "topic":  "insani iliÅŸkiler",
+                      "priority":  9,
+                      "riyad_topic_hint":  "Good manners / greetings / neighbor / speech",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 683",
+                      "hadith_number":  "683",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø­Ù‚ Ø§Ù„Ø¬Ø§Ø±",
+                      "text_tr":  "KomÅŸuya iyilik, imanÄ±n toplumsal yansÄ±masÄ±dÄ±r.",
+                      "text_en":  "Goodness to neighbors is a social reflection of faith.",
+                      "text_tr_char_count":  46,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:683",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:683"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-068",
+                      "topic":  "insani iliÅŸkiler",
+                      "priority":  9,
+                      "riyad_topic_hint":  "Good manners / greetings / neighbor / speech",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 844",
+                      "hadith_number":  "844",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø¥ÙØ´Ø§Ø¡ Ø§Ù„Ø³Ù„Ø§Ù…",
+                      "text_tr":  "SelamÄ± yaymak, sevgi ve gÃ¼ven kapÄ±sÄ±nÄ± aÃ§ar.",
+                      "text_en":  "Spreading greetings opens the door to love and trust.",
+                      "text_tr_char_count":  44,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:844",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:844"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-098",
+                      "topic":  "ahlaklÄ± olma",
+                      "priority":  17,
+                      "riyad_topic_hint":  "Good character and prophetic manners",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 621",
+                      "hadith_number":  "621",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ø£ÙƒÙ…Ù„ Ø§Ù„Ù…Ø¤Ù…Ù†ÙŠÙ† Ø¥ÙŠÙ…Ø§Ù†Ø§ Ø£Ø­Ø³Ù†Ù‡Ù… Ø®Ù„Ù‚Ø§",
+                      "text_tr":  "Ä°manÄ± en olgun olanlar, ahlakÄ± en gÃ¼zel olanlardÄ±r.",
+                      "text_en":  "The most complete believers in faith are those best in character.",
+                      "text_tr_char_count":  51,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:621",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:621"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-099",
+                      "topic":  "ahlaklÄ± olma",
+                      "priority":  17,
+                      "riyad_topic_hint":  "Good character and prophetic manners",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 622",
+                      "hadith_number":  "622",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "Ù…Ø§ Ù…Ù† Ø´ÙŠØ¡ Ø£Ø«Ù‚Ù„ ÙÙŠ Ø§Ù„Ù…ÙŠØ²Ø§Ù† Ù…Ù† Ø­Ø³Ù† Ø§Ù„Ø®Ù„Ù‚",
+                      "text_tr":  "Terazide gÃ¼zel ahlaktan daha aÄŸÄ±r ÅŸeylerden azÄ± vardÄ±r.",
+                      "text_en":  "Few things weigh heavier on the scale than good character.",
+                      "text_tr_char_count":  55,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:622",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:622"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  },
+                  {
+                      "id":  "hadith-rs-001-100",
+                      "topic":  "ahlaklÄ± olma",
+                      "priority":  17,
+                      "riyad_topic_hint":  "Good character and prophetic manners",
+                      "collection_slug":  "riyad_as_salihin",
+                      "collection_name_tr":  "RiyazÃ¼\u0027s-Salihin",
+                      "collection_name_en":  "Riyad as-Salihin",
+                      "reference":  "Riyad as-Salihin 623",
+                      "hadith_number":  "623",
+                      "narrator":  null,
+                      "grade":  "riyad_as_salihin_selection",
+                      "text_ar":  "ÙƒØ§Ù† Ø£Ø­Ø³Ù† Ø§Ù„Ù†Ø§Ø³ Ø®Ù„Ù‚Ø§",
+                      "text_tr":  "ResÃ»lullah insanlarÄ±n ahlakÃ§a en gÃ¼zeliydi.",
+                      "text_en":  "The Messenger was the best of people in character.",
+                      "text_tr_char_count":  43,
+                      "sources":  {
+                                      "arabic":  "https://sunnah.com/riyadussalihin:623",
+                                      "turkish":  "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
+                                      "english":  "https://sunnah.com/riyadussalihin:623"
+                                  },
+                      "status":  "draft",
+                      "approval":  {
+                                       "reviewed":  false,
+                                       "reviewer":  null,
+                                       "notes":  "Riyad as-Salihin-only short UI meaning draft. Verify exact Arabic phrase, narrator, Turkish Diyanet alignment, and English wording before publication."
+                                   }
+                  }
+              ]
+}

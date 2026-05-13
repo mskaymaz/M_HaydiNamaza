@@ -1,7 +1,7 @@
 {
   "version": "v1-seed-structured",
   "target_total": 400,
-  "current_count": 400,
+  "current_count": 424,
   "topic_order": [
     "cihad",
     "islama_cagirma",
@@ -5220,6 +5220,318 @@
         "peygamber_sozlerine_itibar"
       ],
       "priority": 14,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-9-41",
+      "surah_number": 9,
+      "ayah_number": 41,
+      "surah_name_tr": "Tevbe",
+      "surah_name_en": "At-Tawbah",
+      "source_ar": "diyanet_api_v1:9:41",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-29-69",
+      "surah_number": 29,
+      "ayah_number": 69,
+      "surah_name_tr": "Ankebut",
+      "surah_name_en": "Al-Ankabut",
+      "source_ar": "diyanet_api_v1:29:69",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-61-11",
+      "surah_number": 61,
+      "ayah_number": 11,
+      "surah_name_tr": "Saff",
+      "surah_name_en": "As-Saff",
+      "source_ar": "diyanet_api_v1:61:11",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-67",
+      "surah_number": 5,
+      "ayah_number": 67,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:67",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-78",
+      "surah_number": 3,
+      "ayah_number": 78,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:78",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-4-46",
+      "surah_number": 4,
+      "ayah_number": 46,
+      "surah_name_tr": "Nisa",
+      "surah_name_en": "An-Nisa",
+      "source_ar": "diyanet_api_v1:4:46",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-5-13",
+      "surah_number": 5,
+      "ayah_number": 13,
+      "surah_name_tr": "Maide",
+      "surah_name_en": "Al-Ma'idah",
+      "source_ar": "diyanet_api_v1:5:13",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-8-27",
+      "surah_number": 8,
+      "ayah_number": 27,
+      "surah_name_tr": "Enfal",
+      "surah_name_en": "Al-Anfal",
+      "source_ar": "diyanet_api_v1:8:27",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-38-26",
+      "surah_number": 38,
+      "ayah_number": 26,
+      "surah_name_tr": "Sad",
+      "surah_name_en": "Sad",
+      "source_ar": "diyanet_api_v1:38:26",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-7-29",
+      "surah_number": 7,
+      "ayah_number": 29,
+      "surah_name_tr": "Araf",
+      "surah_name_en": "Al-A'raf",
+      "source_ar": "diyanet_api_v1:7:29",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-11-112",
+      "surah_number": 11,
+      "ayah_number": 112,
+      "surah_name_tr": "Hud",
+      "surah_name_en": "Hud",
+      "source_ar": "diyanet_api_v1:11:112",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-70-32",
+      "surah_number": 70,
+      "ayah_number": 32,
+      "surah_name_tr": "Mearic",
+      "surah_name_en": "Al-Maarij",
+      "source_ar": "diyanet_api_v1:70:32",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-18-57",
+      "surah_number": 18,
+      "ayah_number": 57,
+      "surah_name_tr": "Kehf",
+      "surah_name_en": "Al-Kahf",
+      "source_ar": "diyanet_api_v1:18:57",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-39-32",
+      "surah_number": 39,
+      "ayah_number": 32,
+      "surah_name_tr": "Zumer",
+      "surah_name_en": "Az-Zumar",
+      "source_ar": "diyanet_api_v1:39:32",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-58-11",
+      "surah_number": 58,
+      "ayah_number": 11,
+      "surah_name_tr": "Mucadele",
+      "surah_name_en": "Al-Mujadila",
+      "source_ar": "diyanet_api_v1:58:11",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-64-12",
+      "surah_number": 64,
+      "ayah_number": 12,
+      "surah_name_tr": "Tegabun",
+      "surah_name_en": "At-Taghabun",
+      "source_ar": "diyanet_api_v1:64:12",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-90-12",
+      "surah_number": 90,
+      "ayah_number": 12,
+      "surah_name_tr": "Beled",
+      "surah_name_en": "Al-Balad",
+      "source_ar": "diyanet_api_v1:90:12",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-90-15",
+      "surah_number": 90,
+      "ayah_number": 15,
+      "surah_name_tr": "Beled",
+      "surah_name_en": "Al-Balad",
+      "source_ar": "diyanet_api_v1:90:15",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-90-16",
+      "surah_number": 90,
+      "ayah_number": 16,
+      "surah_name_tr": "Beled",
+      "surah_name_en": "Al-Balad",
+      "source_ar": "diyanet_api_v1:90:16",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-90-17",
+      "surah_number": 90,
+      "ayah_number": 17,
+      "surah_name_tr": "Beled",
+      "surah_name_en": "Al-Balad",
+      "source_ar": "diyanet_api_v1:90:17",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-3-17",
+      "surah_number": 3,
+      "ayah_number": 17,
+      "surah_name_tr": "Al-i Imran",
+      "surah_name_en": "Ali Imran",
+      "source_ar": "diyanet_api_v1:3:17",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-39-33",
+      "surah_number": 39,
+      "ayah_number": 33,
+      "surah_name_tr": "Zumer",
+      "surah_name_en": "Az-Zumar",
+      "source_ar": "diyanet_api_v1:39:33",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-49-15",
+      "surah_number": 49,
+      "ayah_number": 15,
+      "surah_name_tr": "Hucurat",
+      "surah_name_en": "Al-Hujurat",
+      "source_ar": "diyanet_api_v1:49:15",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
+      "status": "draft"
+    },
+    {
+      "id": "ayah-68-4",
+      "surah_number": 68,
+      "ayah_number": 4,
+      "surah_name_tr": "Kalem",
+      "surah_name_en": "Al-Qalam",
+      "source_ar": "diyanet_api_v1:68:4",
+      "topics": [
+        "cihad"
+      ],
+      "priority": 1,
       "status": "draft"
     }
   ]

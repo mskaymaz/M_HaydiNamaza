@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-TASK-05 Daily Ayah Dataset Generator (scaffold)
+TASK-05 Daily Ayah Dataset Generator (seed validation focused scaffold)
 
 - Produces draft-only ayah records.
+- Validates seed references strictly (required fields + duplicate checks).
 - Supports dry-run and reference-only mode when API credentials are missing.
 - Does not touch app integration or prayer-time logic.
 """
@@ -31,14 +32,22 @@ DEFAULT_SEED_FILE = REPO_ROOT / "tools" / "daily_content" / "ayah_seed_refs.json
 DEFAULT_OUTPUT_FILE = REPO_ROOT / "Besmele" / "data" / "daily_panel" / "ayahs_draft.json"
 DEFAULT_REF_FILE = REPO_ROOT / "Besmele" / "data" / "daily_panel" / "used_references.json"
 
-REF_PATTERN = re.compile(r"^(\d+):(\d+)$")
+ID_PATTERN = re.compile(r"^ayah-(\d+)-(\d+)$")
+SOURCE_AR_PATTERN = re.compile(r"^diyanet_api_v1:(\d+):(\d+)$")
 TAG_RE = re.compile(r"<[^>]+>")
 
 
 @dataclass(frozen=True)
-class AyahRef:
+class AyahSeedRef:
+    id: str
     surah_number: int
     ayah_number: int
+    surah_name_tr: str
+    surah_name_en: str
+    source_ar: str
+    topics: list[str]
+    priority: int
+    status: str
 
     @property
     def verse_key(self) -> str:
@@ -67,16 +76,115 @@ def normalize_text(value: Any) -> str:
     return " ".join(text.split())
 
 
-def parse_seed_refs(seed_file: Path) -> list[AyahRef]:
+def _required_str(raw: dict[str, Any], key: str) -> str:
+    if key not in raw:
+        raise ValueError(f"Missing required seed field: {key}")
+    value = normalize_text(raw.get(key))
+    if not value:
+        raise ValueError(f"Empty required seed field: {key}")
+    return value
+
+
+def _required_positive_int(raw: dict[str, Any], key: str) -> int:
+    if key not in raw:
+        raise ValueError(f"Missing required seed field: {key}")
+    value = raw.get(key)
+    if not isinstance(value, int) or value <= 0:
+        raise ValueError(f"Invalid positive integer for seed field: {key}")
+    return value
+
+
+def _required_topics(raw: dict[str, Any]) -> list[str]:
+    if "topics" not in raw:
+        raise ValueError("Missing required seed field: topics")
+    value = raw.get("topics")
+    if not isinstance(value, list):
+        raise ValueError("Invalid seed field type: topics must be a list")
+    normalized = [normalize_text(item) for item in value if normalize_text(item)]
+    return normalized
+
+
+def parse_seed_refs(seed_file: Path) -> list[AyahSeedRef]:
     seed_data = load_json(seed_file, {})
-    refs = seed_data.get("references", [])
-    parsed: list[AyahRef] = []
-    for raw in refs:
-        raw_s = str(raw).strip()
-        match = REF_PATTERN.match(raw_s)
-        if not match:
-            raise ValueError(f"Invalid ayah ref in seed file: {raw_s}")
-        parsed.append(AyahRef(int(match.group(1)), int(match.group(2))))
+    if not isinstance(seed_data, dict):
+        raise ValueError("Seed file root must be an object")
+
+    refs = seed_data.get("references")
+    if not isinstance(refs, list):
+        raise ValueError("Seed file `references` must be a list")
+
+    parsed: list[AyahSeedRef] = []
+
+    seen_ids: set[str] = set()
+    seen_surah_ayah: set[tuple[int, int]] = set()
+    seen_source_ar: set[str] = set()
+
+    for index, raw in enumerate(refs):
+        if not isinstance(raw, dict):
+            raise ValueError(f"Seed reference at index {index} must be an object")
+
+        item_id = _required_str(raw, "id")
+        surah_number = _required_positive_int(raw, "surah_number")
+        ayah_number = _required_positive_int(raw, "ayah_number")
+        surah_name_tr = _required_str(raw, "surah_name_tr")
+        surah_name_en = _required_str(raw, "surah_name_en")
+        source_ar = _required_str(raw, "source_ar")
+        topics = _required_topics(raw)
+        priority = _required_positive_int(raw, "priority")
+        status = _required_str(raw, "status")
+
+        if status != "draft":
+            raise ValueError(f"Seed reference `{item_id}` has invalid status `{status}` (must be `draft`)")
+
+        id_match = ID_PATTERN.match(item_id)
+        if not id_match:
+            raise ValueError(f"Seed reference has invalid id format: {item_id}")
+        id_surah = int(id_match.group(1))
+        id_ayah = int(id_match.group(2))
+        if (id_surah, id_ayah) != (surah_number, ayah_number):
+            raise ValueError(
+                f"Seed id and surah/ayah mismatch for `{item_id}`: "
+                f"id={id_surah}:{id_ayah}, fields={surah_number}:{ayah_number}"
+            )
+
+        source_match = SOURCE_AR_PATTERN.match(source_ar)
+        if not source_match:
+            raise ValueError(f"Seed reference has invalid source_ar format: {source_ar}")
+        source_surah = int(source_match.group(1))
+        source_ayah = int(source_match.group(2))
+        if (source_surah, source_ayah) != (surah_number, ayah_number):
+            raise ValueError(
+                f"Seed source_ar and surah/ayah mismatch for `{item_id}`: "
+                f"source_ar={source_surah}:{source_ayah}, fields={surah_number}:{ayah_number}"
+            )
+
+        if item_id in seen_ids:
+            raise ValueError(f"Duplicate seed id: {item_id}")
+        seen_ids.add(item_id)
+
+        surah_ayah = (surah_number, ayah_number)
+        if surah_ayah in seen_surah_ayah:
+            raise ValueError(f"Duplicate seed surah+ayah: {surah_number}:{ayah_number}")
+        seen_surah_ayah.add(surah_ayah)
+
+        if source_ar in seen_source_ar:
+            raise ValueError(f"Duplicate seed source_ar: {source_ar}")
+        seen_source_ar.add(source_ar)
+
+        parsed.append(
+            AyahSeedRef(
+                id=item_id,
+                surah_number=surah_number,
+                ayah_number=ayah_number,
+                surah_name_tr=surah_name_tr,
+                surah_name_en=surah_name_en,
+                source_ar=source_ar,
+                topics=topics,
+                priority=priority,
+                status=status,
+            )
+        )
+
     return parsed
 
 
@@ -87,23 +195,8 @@ def http_get_json(url: str, headers: dict[str, str], timeout_sec: int = 30) -> A
     return json.loads(body)
 
 
-def fetch_diyanet_surah_name(dib_base_url: str, dib_token: str, surah_number: int) -> str:
-    url = f"{dib_base_url.rstrip('/')}/api/v1/chapters"
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {dib_token}",
-    }
-    data = http_get_json(url, headers=headers)
-    chapters = data.get("data", [])
-    for row in chapters:
-        sid = row.get("SureId") or row.get("sure_id") or row.get("id")
-        if str(sid) == str(surah_number):
-            return normalize_text(row.get("SureNameTurkish") or row.get("name_tr"))
-    return ""
-
-
 def fetch_diyanet_ayah(
-    dib_base_url: str, dib_token: str, ayah_ref: AyahRef
+    dib_base_url: str, dib_token: str, ayah_ref: AyahSeedRef
 ) -> tuple[str, str]:
     url = f"{dib_base_url.rstrip('/')}/api/v1/chapters/{ayah_ref.surah_number}"
     headers = {
@@ -140,7 +233,7 @@ def fetch_qf_english_ayah(
     qf_base_url: str,
     qf_token: str,
     qf_client_id: str,
-    ayah_ref: AyahRef,
+    ayah_ref: AyahSeedRef,
     resource_id: int = 131,
 ) -> str:
     query = urlencode(
@@ -177,16 +270,15 @@ def record_fingerprints(record: dict[str, Any]) -> dict[str, str]:
 
 
 def build_draft_record(
-    ayah_ref: AyahRef,
-    surah_name_tr: str,
+    ayah_ref: AyahSeedRef,
     text_ar: str,
     tr_translation: str,
     en_translation: str,
 ) -> dict[str, Any]:
     return {
-        "id": f"ayah-{ayah_ref.surah_number}-{ayah_ref.ayah_number}",
+        "id": ayah_ref.id,
         "type": "ayah",
-        "surah_name": surah_name_tr or f"Sure {ayah_ref.surah_number}",
+        "surah_name": ayah_ref.surah_name_tr,
         "surah_number": ayah_ref.surah_number,
         "ayah_number": ayah_ref.ayah_number,
         "text": {
@@ -196,7 +288,7 @@ def build_draft_record(
             "tr": tr_translation,
             "en": en_translation,
         },
-        "source_ar": f"diyanet_api_v1:{ayah_ref.verse_key}",
+        "source_ar": ayah_ref.source_ar,
         "source_tr": f"diyanet_api_v1:{ayah_ref.verse_key}",
         "source_en": f"quran_foundation_resource_131:{ayah_ref.verse_key}",
         "meal_source": {
@@ -204,7 +296,8 @@ def build_draft_record(
             "en": "Dr. Mustafa Khattab (resource_id=131)",
         },
         "source_note": "requires human verification",
-        "topics": [],
+        "topics": ayah_ref.topics,
+        "priority": ayah_ref.priority,
         "status": "draft",
         "approval": {
             "approved_by": None,
@@ -283,21 +376,15 @@ def main() -> int:
 
     generated: list[dict[str, Any]] = []
     skipped: list[dict[str, str]] = []
-    surah_name_cache: dict[int, str] = {}
 
     for ayah_ref in refs:
         if reference_only:
             skipped.append(
-                {"ref": ayah_ref.verse_key, "reason": "missing_api_credentials_reference_only"}
+                {"id": ayah_ref.id, "ref": ayah_ref.verse_key, "reason": "missing_api_credentials_reference_only"}
             )
             continue
 
         try:
-            if ayah_ref.surah_number not in surah_name_cache:
-                surah_name_cache[ayah_ref.surah_number] = fetch_diyanet_surah_name(
-                    args.dib_base_url, args.dib_token, ayah_ref.surah_number
-                )
-
             text_ar, tr_translation = fetch_diyanet_ayah(
                 args.dib_base_url, args.dib_token, ayah_ref
             )
@@ -305,16 +392,15 @@ def main() -> int:
                 args.qf_base_url, args.qf_token, args.qf_client_id, ayah_ref
             )
         except (HTTPError, URLError, TimeoutError, ValueError, json.JSONDecodeError) as exc:
-            skipped.append({"ref": ayah_ref.verse_key, "reason": f"fetch_error:{type(exc).__name__}"})
+            skipped.append({"id": ayah_ref.id, "ref": ayah_ref.verse_key, "reason": f"fetch_error:{type(exc).__name__}"})
             continue
 
         if not (text_ar and tr_translation and en_translation):
-            skipped.append({"ref": ayah_ref.verse_key, "reason": "missing_required_text"})
+            skipped.append({"id": ayah_ref.id, "ref": ayah_ref.verse_key, "reason": "missing_required_text"})
             continue
 
         record = build_draft_record(
             ayah_ref=ayah_ref,
-            surah_name_tr=surah_name_cache.get(ayah_ref.surah_number, ""),
             text_ar=text_ar,
             tr_translation=tr_translation,
             en_translation=en_translation,
@@ -322,7 +408,7 @@ def main() -> int:
         fp = record_fingerprints(record)
         is_dup, dup_field = has_duplicate(fp, seen)
         if is_dup:
-            skipped.append({"ref": ayah_ref.verse_key, "reason": f"duplicate:{dup_field}"})
+            skipped.append({"id": ayah_ref.id, "ref": ayah_ref.verse_key, "reason": f"duplicate:{dup_field}"})
             continue
 
         generated.append(record)
@@ -339,6 +425,7 @@ def main() -> int:
 
     refs_data["ayah"]["seed_file"] = str(seed_file.relative_to(REPO_ROOT))
     refs_data["ayah"]["selected_refs"] = [r.verse_key for r in refs]
+    refs_data["ayah"]["selected_ids"] = [r.id for r in refs]
     refs_data["ayah"]["used_ids"] = [item.get("id") for item in updated_drafts if item.get("id")]
     refs_data["ayah"]["used_source_keys"] = [
         item.get("source_ar") for item in updated_drafts if item.get("source_ar")
@@ -349,6 +436,7 @@ def main() -> int:
     refs_data["meta"]["mode"] = "reference_only" if reference_only else "api_fetch"
 
     print("=== TASK-05 Ayah Dataset Generator ===")
+    print("seed validation: PASS")
     print(f"seed refs: {len(refs)}")
     print(f"existing drafts: {len(existing_drafts)}")
     print(f"generated drafts: {len(generated)}")

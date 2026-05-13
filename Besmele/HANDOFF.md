@@ -8,14 +8,29 @@ TASK-04B documentation scope is closed, including official Diyanet/AwqatSalah AP
 TASK-05 checkpoints 1-14 are synchronized with `Besmele/TASKS.md` for current scope.
 TASK-06 is completed with location-based qibla bearing + sensor fallback + bearing validation tests.
 TASK-10 is completed with storage fallback/recovery hardening and log-safe non-fatal reporting.
+TASK-11 is completed and pushed in current flow.
+TASK-12 release-readiness documentation/checklist outputs are completed.
 Ayah/hadith data work is completed for current scope (approved sample set + draft pool workflow records).
 
 ## Next action
-Wait for explicit start instruction before TASK-07, TASK-11, and TASK-12.
+Wait for explicit start instruction before TASK-07.
 
 ## Important blockers
 - Final release remains blocked until explicit official prayer-time source/release decision is cleared.
 - Future curated 400 + 400 approved ayah/hadith dataset is still pending as a later content phase.
+
+## TASK-12 closure update (2026-05-13)
+- Scope:
+  - Release readiness documentation/checklist outputs (README rewrite, privacy note, data-source transparency note, release checklist, build instructions, and repository safety verification).
+- Changed files:
+  - `README.md`
+  - `Besmele/TASKS.md`
+  - `STATE.md`
+  - `Besmele/HANDOFF.md`
+- Validation:
+  - `flutter analyze` was not run in this step by scope rule.
+- Release gate:
+  - Final release blocker remains active until official prayer-time source/release decision is explicitly cleared.
 
 ## TASK-06 closure update (2026-05-13)
 - Scope:

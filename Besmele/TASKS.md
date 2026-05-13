@@ -504,13 +504,13 @@ Acceptance:
 
 Goal: prepare for real users.
 
-- [ ] Rewrite root `README.md` as real project README.
-- [ ] Add privacy note.
-- [ ] Add data-source transparency note.
-- [ ] Add release checklist.
-- [ ] Add build instructions.
-- [ ] Verify no secrets or local artifacts are committed.
-- [ ] Do not release until prayer-time data-source strategy is resolved.
+- [x] Rewrite root `README.md` as real project README.
+- [x] Add privacy note.
+- [x] Add data-source transparency note.
+- [x] Add release checklist.
+- [x] Add build instructions.
+- [x] Verify no secrets or local artifacts are committed.
+- [x] Do not release until prayer-time data-source strategy is resolved.
 
 Acceptance:
 - A new developer or AI assistant can understand, build, and safely continue the project.

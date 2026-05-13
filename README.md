@@ -1,16 +1,55 @@
-# mhaydinamaza
+# M_HaydiNamaza
 
-A new Flutter project.
+M_HaydiNamaza is a Flutter prayer-time application focused on reliability, clarity, and offline-safe behavior.
 
-## Getting Started
+## Current Status
+- Active branch target: `main`
+- TASK-06 completed (qibla direction upgrade)
+- TASK-10 completed (persistence/error/offline safeguards)
+- TASK-11 completed for current scope in task tracking flow
+- Final production release is blocked until the official prayer-time source/release decision is explicitly cleared
 
-This project is a starting point for a Flutter application.
+## Core Features
+- Daily prayer times with fallback strategy
+- Qibla direction (location-based + sensor fallback)
+- Daily approved ayah/hadith panel with repeat-prevention logic
+- Location/favorites/settings persistence via local storage
 
-A few resources to get you started if this is your first Flutter project:
+## Build Instructions
+1. Install Flutter SDK compatible with project constraints.
+2. Get dependencies:
+   - `flutter pub get`
+3. Run app:
+   - `flutter run`
+4. Build Android release:
+   - `flutter build apk --release`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Privacy Note
+- The app stores user settings and local preferences on-device (location selection, reminders, UI settings, daily content state).
+- The app does not require account creation for core usage.
+- No private credentials or service-account files should be committed to this repository.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Data-Source Transparency Note
+- Prayer-time source strategy is documented in:
+  - `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`
+- Source quality and release gating rules are defined there.
+- Production release remains blocked until official source/release decision is cleared.
+
+## Release Checklist
+- [x] Root README is project-specific and actionable.
+- [x] Privacy note exists.
+- [x] Data-source transparency note exists.
+- [x] Build instructions exist.
+- [x] Repository checked for committed secrets/local artifacts in tracked files.
+- [x] Release blocker is explicitly preserved until official prayer-time source/release decision is cleared.
+
+## Repository Safety Notes
+- Do not commit:
+  - secrets or credentials
+  - service-account files
+  - local build artifacts
+  - generated private archives
+- Keep architecture/task tracking in:
+  - `Besmele/TASKS.md`
+  - `STATE.md`
+  - `Besmele/HANDOFF.md`

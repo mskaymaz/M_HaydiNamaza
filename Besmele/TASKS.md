@@ -345,26 +345,26 @@ Goal: prepare the architecture now; content collection happens later.
 - [x] Checkpoint 6: selection state implementation (e45c970)
 - [x] Checkpoint 7: service/orchestrator plan
 - [x] Checkpoint 8: daily content service (13a68bd)
-- [ ] Checkpoint 9: UI integration scope/audit (active)
+- [x] Checkpoint 9: UI integration scope/audit (closed, 2026-05-13)
 - [x] Checkpoint 10: daily ayah/hadith panel UI implementation
 - [x] Checkpoint 11: daily content panel UI behavior audit (2026-05-12)
 - [x] Checkpoint 12: final manual UI smoke scope (2026-05-13)
 - [x] Checkpoint 13: final technical closure audit (2026-05-13)
 - [x] Checkpoint 14: dataset generator scaffold (2026-05-13)
 
-- [ ] Add panel below the prayer-times panel with matching width and calm visual style.
-- [ ] Create `assets/data/daily_content/draft/`, `approved/`, and `archive/`.
-- [ ] Define JSON schema for ayah records.
-- [ ] Define JSON schema for hadith records.
-- [ ] Add required metadata fields:
+- [x] Add panel below the prayer-times panel with matching width and calm visual style.
+- [x] Create `assets/data/daily_content/draft/`, `approved/`, and `archive/`.
+- [x] Define JSON schema for ayah records.
+- [x] Define JSON schema for hadith records.
+- [x] Add required metadata fields:
   - Ayah: `id`, `type`, `surah_name`, `surah_number`, `ayah_number`, `text`, `translation`, `meal_source`, `source_note`, `topics`, `status`.
   - Hadith: `id`, `type`, `collection`, `book`, `hadith_number`, `narrator`, `text`, `translation`, `grade`, `source_note`, `topics`, `status`.
-- [ ] App must display only `status: approved` records.
-- [ ] Add daily random selection logic.
-- [ ] Prevent repeats until the approved list cycle is complete.
-- [ ] Persist `shown_ids`, `cycle_id`, `content_version`, and `daily_pick` locally.
-- [ ] Existing ayah/hadith files must not be treated as final production data.
-- [ ] Add placeholder approved sample records only for testing if needed.
+- [x] App must display only `status: approved` records.
+- [x] Add daily random selection logic.
+- [x] Prevent repeats until the approved list cycle is complete.
+- [x] Persist `shown_ids`, `cycle_id`, `content_version`, and `daily_pick` locally.
+- [x] Existing ayah/hadith files must not be treated as final production data.
+- [x] Add placeholder approved sample records only for testing if needed.
 
 Future content goal:
 - [ ] Rebuild content from zero with 400 approved ayahs + 400 approved hadiths.

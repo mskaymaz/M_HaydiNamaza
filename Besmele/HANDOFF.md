@@ -3,17 +3,17 @@
 ## Current status
 TASK-03 is closed and pushed on `main`.
 TASK-00 is completed on 2026-05-10 with documented exceptions.
-TASK-04A first implementation step is completed (parameter factory extraction only).
-TASK-04A checkpoint 2 is completed (daily cache repository extraction only).
-TASK-04A checkpoint 3 is completed (Diyanet location ID resolver extraction only).
-TASK-04A checkpoint 4 is completed (Diyanet prayer-time client extraction only).
+TASK-04A is closed (checkpoints completed; orchestration-safe extraction scope finalized).
+TASK-04B documentation scope is closed, including official Diyanet/AwqatSalah API source strategy notes.
+TASK-05 checkpoints 1-14 are synchronized with `Besmele/TASKS.md` for current scope.
+Ayah/hadith data work is completed for current scope (approved sample set + draft pool workflow records).
 
 ## Next action
-Wait for explicit start instruction before TASK-01.
+Wait for explicit start instruction before TASK-06, TASK-10, TASK-11, and TASK-12.
 
 ## Important blockers
-- Official Diyanet prayer-time data access is not resolved yet.
-- Existing ayah/hadith content will be replaced later with a new approved dataset.
+- Final release remains blocked until explicit official prayer-time source/release decision is cleared.
+- Future curated 400 + 400 approved ayah/hadith dataset is still pending as a later content phase.
 
 ## TASK-00 audit notes (2026-05-10)
 - Branch `upgrade/advanced-cleanup` is treated as obsolete for now because cleanup work already landed on `main` and `origin/main` is aligned.

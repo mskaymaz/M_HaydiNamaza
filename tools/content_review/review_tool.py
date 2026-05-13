@@ -1,27 +1,40 @@
 #!/usr/bin/env python3
-"""Local-only review tool for ayah/hadith draft content.
-
-This script serves a minimal browser UI to review records one by one and mark:
-- approved
-- rejected
-- pending
-
-It never modifies source input files. Review progress is stored in a separate
-state file, and exports are written under output/ with timestamped folders.
-"""
+"""Local-only desktop review tool for ayah/hadith draft content (PySide6)."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import os
+import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from http import HTTPStatus
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
-from urllib.parse import parse_qs, urlparse
+
+try:
+    from PySide6.QtCore import Qt
+    from PySide6.QtGui import QFont, QTextOption
+    from PySide6.QtWidgets import (
+        QApplication,
+        QCheckBox,
+        QFormLayout,
+        QGridLayout,
+        QGroupBox,
+        QHBoxLayout,
+        QLabel,
+        QMainWindow,
+        QMessageBox,
+        QPushButton,
+        QSplitter,
+        QTextEdit,
+        QVBoxLayout,
+        QWidget,
+    )
+except ImportError:
+    print("PySide6 not found.")
+    print("Install command: py -m pip install PySide6")
+    raise SystemExit(1)
 
 
 VALID_STATUSES = {"approved", "rejected", "pending"}
@@ -100,7 +113,6 @@ class ReviewStore:
         state.setdefault("cursor", 0)
         state.setdefault("input_files", {})
         state.setdefault("decisions", {})
-
         state["cursor"] = max(0, min(int(state["cursor"]), len(self.records) - 1))
         return state
 
@@ -135,7 +147,9 @@ class ReviewStore:
         cursor = int(self.state["cursor"])
         rec = self.records[cursor]
         decisions = self.state.get("decisions", {})
-        current_decision = decisions.get(rec["_record_key"], {"status": "pending", "note": ""})
+        current_decision = decisions.get(
+            rec["_record_key"], {"status": "pending", "note": ""}
+        )
         return {
             "cursor": cursor,
             "total": len(self.records),
@@ -189,7 +203,11 @@ class ReviewStore:
         target.mkdir(parents=False, exist_ok=False)
 
         decisions = self.state.get("decisions", {})
-        buckets: dict[str, list[dict[str, Any]]] = {"approved": [], "rejected": [], "pending": []}
+        buckets: dict[str, list[dict[str, Any]]] = {
+            "approved": [],
+            "rejected": [],
+            "pending": [],
+        }
 
         for rec in self.records:
             key = rec["_record_key"]
@@ -231,220 +249,263 @@ class ReviewStore:
         }
 
 
-def html_page() -> str:
-    return """<!doctype html>
-<html lang="tr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Daily Content Review Tool</title>
-  <style>
-    :root { color-scheme: light; }
-    body { font-family: Segoe UI, sans-serif; margin: 0; background: #f6f7fb; color: #1d2433; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 20px; }
-    .card { background: #fff; border: 1px solid #dde3ef; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
-    .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-    .muted { color: #5b6475; font-size: 13px; }
-    button { border: 1px solid #c9d2e7; background: #fdfefe; border-radius: 8px; padding: 9px 12px; cursor: pointer; }
-    button:hover { background: #f3f7ff; }
-    .approve { border-color: #6dbd7f; background: #eaf8ef; }
-    .reject { border-color: #e59a9a; background: #fff1f1; }
-    .pending { border-color: #d4b16a; background: #fff9ee; }
-    textarea { width: 100%; min-height: 68px; padding: 8px; border: 1px solid #ced6e7; border-radius: 8px; }
-    pre { white-space: pre-wrap; background: #f8f9fd; border: 1px solid #e4e9f5; padding: 10px; border-radius: 8px; }
-    h1 { margin: 0 0 8px; font-size: 22px; }
-    h2 { margin: 0 0 8px; font-size: 18px; }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <h1>Günlük İçerik İnceleme Aracı</h1>
-    <div class="muted">Bu araç yalnızca yerel çalışır. Kaynak JSON dosyalarını değiştirmez.</div>
-
-    <div class="card">
-      <div id="summary" class="row"></div>
-      <div class="row" style="margin-top: 8px;">
-        <button onclick="nav('first')">İlk</button>
-        <button onclick="nav('prev')">Önceki</button>
-        <button onclick="nav('next')">Sonraki</button>
-        <button onclick="nav('last')">Son</button>
-        <button onclick="runExport()">Çıktı Üret</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div id="meta" class="muted"></div>
-      <h2 id="title"></h2>
-      <div id="fields"></div>
-    </div>
-
-    <div class="card">
-      <div class="row">
-        <button class="approve" onclick="mark('approved')">approved</button>
-        <button class="reject" onclick="mark('rejected')">rejected</button>
-        <button class="pending" onclick="mark('pending')">pending</button>
-        <label><input type="checkbox" id="autoNext" checked /> İşaretleyince sonraki kayda geç</label>
-      </div>
-      <div style="margin-top: 10px;">
-        <label for="note">İnceleme notu</label>
-        <textarea id="note" placeholder="Opsiyonel not"></textarea>
-      </div>
-      <div id="currentDecision" class="muted" style="margin-top: 8px;"></div>
-    </div>
-  </div>
-
-  <script>
-    async function getJSON(url, opts) {
-      const res = await fetch(url, opts);
-      if (!res.ok) {
-        throw new Error(await res.text());
-      }
-      return await res.json();
+def _extract_record_view(rec: dict[str, Any]) -> dict[str, str]:
+    dataset = str(rec.get("_dataset", ""))
+    view: dict[str, str] = {
+        "record_type": "Ayet" if dataset == "ayah" else "Hadis",
+        "id": str(rec.get("id", "-")),
+        "technical": "-",
+        "source": str(rec.get("source_note", "-")),
+        "tr_text": "-",
+        "ar_text": "-",
+        "en_text": "-",
     }
 
-    function renderObj(title, value) {
-      if (value === null || value === undefined) return '';
-      if (typeof value === 'object') {
-        return `<h3>${title}</h3><pre>${JSON.stringify(value, null, 2)}</pre>`;
-      }
-      return `<p><strong>${title}:</strong> ${String(value)}</p>`;
-    }
-
-    function render(data) {
-      const s = data.summary;
-      document.getElementById('summary').innerHTML =
-        `<strong>Toplam: ${data.total}</strong>` +
-        ` <span>approved: ${s.approved}</span>` +
-        ` <span>rejected: ${s.rejected}</span>` +
-        ` <span>pending: ${s.pending}</span>`;
-
-      const r = data.record;
-      const idx = data.cursor + 1;
-      document.getElementById('meta').textContent = `Kayıt ${idx}/${data.total} | ${r._dataset}`;
-      document.getElementById('title').textContent = `${r.id}`;
-
-      const fields = [];
-      for (const [k, v] of Object.entries(r)) {
-        if (k.startsWith('_')) continue;
-        fields.push(renderObj(k, v));
-      }
-      document.getElementById('fields').innerHTML = fields.join('');
-
-      const decision = data.decision || {status: 'pending', note: ''};
-      document.getElementById('currentDecision').textContent =
-        `Mevcut durum: ${decision.status}${decision.updated_at ? ' | güncelleme: ' + decision.updated_at : ''}`;
-      document.getElementById('note').value = decision.note || '';
-    }
-
-    async function refresh() {
-      const data = await getJSON('/api/current');
-      render(data);
-    }
-
-    async function nav(direction) {
-      const data = await getJSON('/api/nav', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({direction})
-      });
-      render(data);
-    }
-
-    async function mark(status) {
-      const note = document.getElementById('note').value || '';
-      const move_next = document.getElementById('autoNext').checked;
-      const data = await getJSON('/api/mark', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({status, note, move_next})
-      });
-      render(data);
-    }
-
-    async function runExport() {
-      const data = await getJSON('/api/export', { method: 'POST' });
-      alert('Çıktılar üretildi:\\n' + data.directory);
-      await refresh();
-    }
-
-    refresh().catch(err => {
-      alert('Hata: ' + err.message);
-    });
-  </script>
-</body>
-</html>
-"""
+    if dataset == "ayah":
+        surah_name = str(rec.get("surah_name", "-"))
+        surah_number = str(rec.get("surah_number", "-"))
+        ayah_number = str(rec.get("ayah_number", "-"))
+        view["technical"] = (
+            f"Sure: {surah_name} ({surah_number}) | Ayet No: {ayah_number}"
+        )
+        translation = rec.get("translation", {}) if isinstance(rec.get("translation"), dict) else {}
+        text_obj = rec.get("text", {}) if isinstance(rec.get("text"), dict) else {}
+        view["tr_text"] = str(translation.get("tr", "-"))
+        view["ar_text"] = str(text_obj.get("ar", "-"))
+        view["en_text"] = str(translation.get("en", "-"))
+    else:
+        collection = str(rec.get("collection_name_tr", rec.get("collection_slug", "-")))
+        hadith_number = str(rec.get("hadith_number", "-"))
+        reference = str(rec.get("reference", "-"))
+        narrator = str(rec.get("narrator", "-"))
+        view["technical"] = (
+            f"Koleksiyon: {collection} | Hadis No: {hadith_number} | Referans: {reference} | Ravi: {narrator}"
+        )
+        view["tr_text"] = str(rec.get("text_tr", "-"))
+        view["ar_text"] = str(rec.get("text_ar", "-"))
+        view["en_text"] = str(rec.get("text_en", "-"))
+    return view
 
 
-class ReviewHandler(BaseHTTPRequestHandler):
-    store: ReviewStore
+def _english_caps_warning(text: str) -> str:
+    letters = [c for c in text if c.isalpha() and c.isascii()]
+    if len(letters) < 40:
+        return ""
+    upper = sum(1 for c in letters if c.isupper())
+    ratio = upper / len(letters) if letters else 0.0
+    if ratio >= 0.40:
+        return "Ingilizce metinde gereksiz BUYUK HARF yogunlugu olabilir. Kontrol ediniz."
+    return ""
 
-    def do_GET(self) -> None:  # noqa: N802
-        parsed = urlparse(self.path)
-        if parsed.path == "/":
-            return self._write_html(html_page())
-        if parsed.path == "/api/current":
-            return self._write_json(self.store.current_payload())
-        return self._not_found()
 
-    def do_POST(self) -> None:  # noqa: N802
-        parsed = urlparse(self.path)
-        if parsed.path == "/api/nav":
-            data = self._read_json_body()
-            direction = str(data.get("direction", "next"))
-            payload = self.store.move_cursor(direction)
-            return self._write_json(payload)
-        if parsed.path == "/api/mark":
-            data = self._read_json_body()
-            status = str(data.get("status", "pending"))
-            note = str(data.get("note", ""))
-            move_next = bool(data.get("move_next", False))
-            payload = self.store.set_decision(status=status, note=note, move_next=move_next)
-            return self._write_json(payload)
-        if parsed.path == "/api/export":
-            export_paths = self.store.export()
-            return self._write_json(export_paths)
-        return self._not_found()
+class ReviewWindow(QMainWindow):
+    def __init__(self, store: ReviewStore) -> None:
+        super().__init__()
+        self.store = store
+        self.setWindowTitle("Daily Content Review - PySide6")
+        self.resize(1080, 700)
+        self.setMinimumSize(900, 600)
+        self._build_ui()
+        self.refresh()
 
-    def _read_json_body(self) -> dict[str, Any]:
-        length = int(self.headers.get("Content-Length", "0"))
-        raw = self.rfile.read(length) if length else b"{}"
-        if not raw:
-            return {}
-        return json.loads(raw.decode("utf-8"))
+    def _build_ui(self) -> None:
+        central = QWidget()
+        root_layout = QVBoxLayout(central)
+        self.setCentralWidget(central)
 
-    def _write_json(self, data: Any, status: int = HTTPStatus.OK) -> None:
-        body = json.dumps(data, ensure_ascii=False).encode("utf-8")
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
+        top_box = QGroupBox("Ozet ve Gezinme")
+        top_layout = QGridLayout(top_box)
+        self.summary_label = QLabel("-")
+        self.position_label = QLabel("-")
+        top_layout.addWidget(self.summary_label, 0, 0, 1, 3)
+        top_layout.addWidget(self.position_label, 1, 0, 1, 3)
 
-    def _write_html(self, html: str) -> None:
-        body = html.encode("utf-8")
-        self.send_response(HTTPStatus.OK)
-        self.send_header("Content-Type", "text/html; charset=utf-8")
-        self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
+        self.btn_first = QPushButton("Ilk")
+        self.btn_prev = QPushButton("Onceki")
+        self.btn_next = QPushButton("Sonraki")
+        self.btn_last = QPushButton("Son")
+        self.btn_export = QPushButton("Cikti Uret")
+        self.btn_first.clicked.connect(lambda: self._navigate("first"))
+        self.btn_prev.clicked.connect(lambda: self._navigate("prev"))
+        self.btn_next.clicked.connect(lambda: self._navigate("next"))
+        self.btn_last.clicked.connect(lambda: self._navigate("last"))
+        self.btn_export.clicked.connect(self._export)
+        top_layout.addWidget(self.btn_first, 2, 0)
+        top_layout.addWidget(self.btn_prev, 2, 1)
+        top_layout.addWidget(self.btn_next, 2, 2)
+        top_layout.addWidget(self.btn_last, 3, 0)
+        top_layout.addWidget(self.btn_export, 3, 1, 1, 2)
+        root_layout.addWidget(top_box)
 
-    def _not_found(self) -> None:
-        self._write_json({"error": "not found"}, status=HTTPStatus.NOT_FOUND)
+        splitter = QSplitter(Qt.Orientation.Horizontal)
 
-    def log_message(self, format: str, *args: Any) -> None:
-        # Keep console output minimal.
-        return
+        left_panel = QWidget()
+        left_layout = QVBoxLayout(left_panel)
+        self.record_title = QLabel("-")
+        title_font = QFont()
+        title_font.setPointSize(12)
+        title_font.setBold(True)
+        self.record_title.setFont(title_font)
+        self.record_meta = QLabel("-")
+        left_layout.addWidget(self.record_title)
+        left_layout.addWidget(self.record_meta)
+
+        info_box = QGroupBox("Teknik Bilgi")
+        info_form = QFormLayout(info_box)
+        self.info_type = QLabel("-")
+        self.info_id = QLabel("-")
+        self.info_technical = QLabel("-")
+        self.info_source = QLabel("-")
+        self.info_technical.setWordWrap(True)
+        self.info_source.setWordWrap(True)
+        info_form.addRow("Tur:", self.info_type)
+        info_form.addRow("Kayit ID:", self.info_id)
+        info_form.addRow("Bilgi:", self.info_technical)
+        info_form.addRow("Kaynak Notu:", self.info_source)
+        left_layout.addWidget(info_box)
+
+        lang_splitter = QSplitter(Qt.Orientation.Vertical)
+        tr_box = QGroupBox("Turkce Metin")
+        tr_layout = QVBoxLayout(tr_box)
+        self.tr_text = QTextEdit()
+        self.tr_text.setReadOnly(True)
+        self._configure_flow_text(self.tr_text)
+        tr_layout.addWidget(self.tr_text)
+
+        ar_box = QGroupBox("Arapca Metin")
+        ar_layout = QVBoxLayout(ar_box)
+        self.ar_text = QTextEdit()
+        self.ar_text.setReadOnly(True)
+        self._configure_flow_text(self.ar_text)
+        ar_layout.addWidget(self.ar_text)
+
+        en_box = QGroupBox("Ingilizce Metin")
+        en_layout = QVBoxLayout(en_box)
+        self.en_text = QTextEdit()
+        self.en_text.setReadOnly(True)
+        self._configure_flow_text(self.en_text)
+        self.en_warning = QLabel("")
+        self.en_warning.setStyleSheet("color:#b23b3b;")
+        self.en_warning.setWordWrap(True)
+        en_layout.addWidget(self.en_text)
+        en_layout.addWidget(self.en_warning)
+
+        lang_splitter.addWidget(tr_box)
+        lang_splitter.addWidget(ar_box)
+        lang_splitter.addWidget(en_box)
+        lang_splitter.setStretchFactor(0, 3)
+        lang_splitter.setStretchFactor(1, 3)
+        lang_splitter.setStretchFactor(2, 3)
+        left_layout.addWidget(lang_splitter, 1)
+
+        right_panel = QWidget()
+        right_layout = QVBoxLayout(right_panel)
+
+        decision_box = QGroupBox("Inceleme")
+        decision_layout = QVBoxLayout(decision_box)
+        btn_line = QHBoxLayout()
+        self.btn_approved = QPushButton("approved")
+        self.btn_rejected = QPushButton("rejected")
+        self.btn_pending = QPushButton("pending")
+        self.btn_approved.setStyleSheet("background:#eaf8ef;border:1px solid #6dbd7f;")
+        self.btn_rejected.setStyleSheet("background:#fff1f1;border:1px solid #e59a9a;")
+        self.btn_pending.setStyleSheet("background:#fff9ee;border:1px solid #d4b16a;")
+        self.btn_approved.clicked.connect(lambda: self._mark("approved"))
+        self.btn_rejected.clicked.connect(lambda: self._mark("rejected"))
+        self.btn_pending.clicked.connect(lambda: self._mark("pending"))
+        btn_line.addWidget(self.btn_approved)
+        btn_line.addWidget(self.btn_rejected)
+        btn_line.addWidget(self.btn_pending)
+        decision_layout.addLayout(btn_line)
+
+        self.auto_next = QCheckBox("Isaretleyince sonraki kayda gec")
+        self.auto_next.setChecked(True)
+        decision_layout.addWidget(self.auto_next)
+
+        decision_layout.addWidget(QLabel("Inceleme notu"))
+        self.note_edit = QTextEdit()
+        self.note_edit.setPlaceholderText("Opsiyonel not")
+        self.note_edit.setFixedHeight(120)
+        decision_layout.addWidget(self.note_edit)
+
+        self.current_decision_label = QLabel("-")
+        decision_layout.addWidget(self.current_decision_label)
+
+        right_layout.addWidget(decision_box)
+        right_layout.addStretch(1)
+
+        splitter.addWidget(left_panel)
+        splitter.addWidget(right_panel)
+        splitter.setStretchFactor(0, 3)
+        splitter.setStretchFactor(1, 2)
+        root_layout.addWidget(splitter, 1)
+
+    @staticmethod
+    def _configure_flow_text(widget: QTextEdit) -> None:
+        widget.setLineWrapMode(QTextEdit.LineWrapMode.WidgetWidth)
+        widget.setWordWrapMode(QTextOption.WrapMode.WrapAtWordBoundaryOrAnywhere)
+        widget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+
+    def refresh(self) -> None:
+        payload = self.store.current_payload()
+        summary = payload["summary"]
+        rec = payload["record"]
+        cursor = payload["cursor"]
+        total = payload["total"]
+        decision = payload["decision"]
+
+        self.summary_label.setText(
+            "Toplam: "
+            f"{total} | approved: {summary['approved']} | rejected: {summary['rejected']} | pending: {summary['pending']}"
+        )
+        self.position_label.setText(f"Kayit {cursor + 1}/{total}")
+        view = _extract_record_view(rec)
+        self.record_title.setText(view["id"])
+        self.record_meta.setText(f"Dataset: {rec.get('_dataset', '-')}")
+        self.info_type.setText(view["record_type"])
+        self.info_id.setText(view["id"])
+        self.info_technical.setText(view["technical"])
+        self.info_source.setText(view["source"])
+        self.tr_text.setPlainText(view["tr_text"])
+        self.ar_text.setPlainText(view["ar_text"])
+        self.en_text.setPlainText(view["en_text"])
+        self.en_warning.setText(_english_caps_warning(view["en_text"]))
+
+        self.note_edit.setPlainText(decision.get("note", "") or "")
+        status = decision.get("status", "pending")
+        updated_at = decision.get("updated_at", "-")
+        self.current_decision_label.setText(
+            f"Mevcut durum: {status} | guncelleme: {updated_at}"
+        )
+
+    def _navigate(self, direction: str) -> None:
+        self.store.move_cursor(direction)
+        self.refresh()
+
+    def _mark(self, status: str) -> None:
+        note = self.note_edit.toPlainText().strip()
+        move_next = self.auto_next.isChecked()
+        self.store.set_decision(status=status, note=note, move_next=move_next)
+        self.refresh()
+
+    def _export(self) -> None:
+        out = self.store.export()
+        self.refresh()
+        QMessageBox.information(
+            self,
+            "Export tamam",
+            "Ciktilar yazildi:\n"
+            f"{out['directory']}\n\n"
+            f"approved: {out['approved']}\n"
+            f"rejected: {out['rejected']}\n"
+            f"pending: {out['pending']}",
+        )
 
 
 def parse_args() -> argparse.Namespace:
     root = Path(__file__).resolve().parent
     repo_root = root.parent.parent
-    parser = argparse.ArgumentParser(
-        description="Local daily ayah/hadith review tool.",
-    )
-    parser.add_argument("--host", default="127.0.0.1", help="Host to bind.")
-    parser.add_argument("--port", type=int, default=8765, help="Port to bind.")
+    parser = argparse.ArgumentParser(description="Local daily ayah/hadith review desktop tool.")
     parser.add_argument(
         "--ayah",
         default=str(repo_root / "Besmele" / "data" / "daily_panel" / "ayahs_draft.json"),
@@ -481,20 +542,10 @@ def main() -> None:
         state_path=state_path,
     )
 
-    handler_cls = type("BoundReviewHandler", (ReviewHandler,), {"store": store})
-    server = ThreadingHTTPServer((args.host, args.port), handler_cls)
-    url = f"http://{args.host}:{args.port}/"
-    print(f"Review tool started: {url}")
-    print(f"Input ayah file : {ayah_path}")
-    print(f"Input hadith file: {hadith_path}")
-    print(f"State file      : {state_path}")
-    print("Press Ctrl+C to stop.")
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        pass
-    finally:
-        server.server_close()
+    app = QApplication(sys.argv)
+    window = ReviewWindow(store)
+    window.show()
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":

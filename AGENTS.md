@@ -32,3 +32,7 @@ This file is the only bootstrap file for AI coding assistants.
 - Always list validation command results or say clearly that validation was not run.
 - Update `STATE.md` and `Besmele/HANDOFF.md` only when the task changes project status.
 
+## Validation preference (user workflow)
+- For `flutter analyze` and similar validation commands, ask the user to run the command and share the terminal output.
+- Prefer user-provided validation output in this repo unless the user explicitly asks the assistant to run validations directly.
+

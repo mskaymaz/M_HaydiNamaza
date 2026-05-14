@@ -50,7 +50,6 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
 class _HomeScreenState extends State<HomeScreen> {
   final _locationStorage = LocationStorage();
   final _methodStorage = CalculationMethodStorage();
@@ -76,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime _now = DateTime.now();
   DateTime _lastRefreshDay = DateTime.now();
   double _drawerProgress = 0;
+  double _infoPanelDragDy = 0;
   bool _showHijriDate = false;
   bool _reminderCheckInProgress = false;
   int _customPrayerSeed = 0;
@@ -512,6 +512,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           });
                         }
 
+                        const infoPanelGap = 3.0;
+                        final closedHandleBottom =
+                            drawerLayout.topPanelHeight -
+                            1 +
+                            drawerLayout.handleAreaHeight;
+                        final drawerBottom =
+                            drawerLayout.drawerTop + drawerLayout.drawerHeight;
+                        final infoPanelTop =
+                            math.max(drawerBottom, closedHandleBottom) +
+                            infoPanelGap;
+
                         Widget buildHandleBand({
                           required bool pointUp,
                           Border? border,
@@ -693,33 +704,32 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             Positioned(
-                              top: drawerLayout.drawerTop +
-                                  drawerLayout.drawerHeight +
-                                  8,
+                              top: infoPanelTop,
                               left: 0,
                               right: 0,
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                  12,
-                                  0,
-                                  12,
-                                  8,
-                                ),
-                                child: FutureBuilder<
-                                  DailyContentSelectionResult
-                                >(
-                                  future: _dailyContentFuture,
-                                  builder: (context, snapshot) {
-                                    return HomeDailyContentPanel(
-                                      result: snapshot.data,
-                                      isLoading:
-                                          snapshot.connectionState ==
-                                          ConnectionState.waiting,
-                                      hasError: snapshot.hasError,
-                                      cizgiColor: palette.cizgiColor,
-                                      panelColor: palette.zeminColor,
-                                    );
-                                  },
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                                child: GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onVerticalDragStart: _onInfoPanelDragStart,
+                                  onVerticalDragUpdate: _onInfoPanelDragUpdate,
+                                  onVerticalDragEnd: _onInfoPanelDragEnd,
+                                  child: FutureBuilder<
+                                    DailyContentSelectionResult
+                                  >(
+                                    future: _dailyContentFuture,
+                                    builder: (context, snapshot) {
+                                      return HomeDailyContentPanel(
+                                        result: snapshot.data,
+                                        isLoading:
+                                            snapshot.connectionState ==
+                                            ConnectionState.waiting,
+                                        hasError: snapshot.hasError,
+                                        cizgiColor: palette.cizgiColor,
+                                        panelColor: palette.zeminColor,
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
@@ -1193,6 +1203,34 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _onInfoPanelDragStart(DragStartDetails details) {
+    _infoPanelDragDy = 0;
+  }
+
+  void _onInfoPanelDragUpdate(DragUpdateDetails details) {
+    _infoPanelDragDy += details.primaryDelta ?? details.delta.dy;
+  }
+
+  void _onInfoPanelDragEnd(DragEndDetails details) {
+    final velocity = details.primaryVelocity ?? 0;
+    final draggedDistance = _infoPanelDragDy;
+    _infoPanelDragDy = 0;
+
+    const velocityThreshold = 220.0;
+    const distanceThreshold = 24.0;
+
+    setState(() {
+      if (velocity > velocityThreshold || draggedDistance > distanceThreshold) {
+        _drawerProgress = 1;
+      } else if (velocity < -velocityThreshold ||
+          draggedDistance < -distanceThreshold) {
+        _drawerProgress = 0;
+      } else {
+        _drawerProgress = _drawerProgress >= 0.35 ? 1 : 0;
+      }
+    });
+  }
+
   void _addCustomPrayerRow() {
     final label = 'Nafile ${_nextAvailableNafileIndex()}';
     final row = _CustomPrayerDraft(
@@ -1429,4 +1467,5 @@ class _HomeScreenState extends State<HomeScreen> {
     return ordered;
   }
 }
+
 

@@ -393,6 +393,32 @@ Acceptance:
 - No unapproved content appears.
 - Repeat-prevention logic is testable.
 
+### TASK-05C - Priority / Weighted Daily Content Display
+
+Goal: allow selected ayah/hadith items to appear more frequently without breaking trust and variety.
+
+- [ ] Define weighted selection contract (editorial boost metadata).
+- [ ] Keep default behavior backward-compatible when no weight is provided.
+- [ ] Add optional per-item fields for publish-time selection metadata:
+  - `priority_weight` (default: `1`)
+  - `min_gap_days` (default: `0`)
+  - `max_shows_per_30d` (optional safety cap)
+- [ ] Add schema/documentation update under AllApp daily_content contracts.
+- [ ] Add deterministic weighted order generation for publish pipeline.
+- [ ] Prevent immediate repeats and enforce `min_gap_days`.
+- [ ] Keep `status: approved` gate unchanged.
+- [ ] Add tests:
+  - weighted frequency distribution sanity,
+  - min-gap enforcement,
+  - fallback to unweighted mode.
+- [ ] Add operator note: priority usage must remain transparent and auditable.
+
+Acceptance:
+- Priority-tagged items appear more often by design.
+- Non-priority items continue to appear regularly (no starvation).
+- Selection remains deterministic per content version/seed.
+- No unapproved content or unsafe repetition behavior.
+
 ---
 
 ## TASK-06 — Qibla Direction Engine Upgrade
@@ -435,6 +461,17 @@ Required sections:
 - [ ] Diger Uygulamalarimiz
 - [ ] Destek Olabilirsiniz
 - [ ] Biz Kimiz
+
+### TASK-07A - Settings Sections Final Review Pass
+
+Goal: review all shared settings structures one-by-one and finalize TASK-07.
+
+- [ ] Review and polish: Bize Ulasin
+- [ ] Review and polish: Uygulama Bilgileri ve Guncelleme
+- [ ] Review and polish: Diger Uygulamalarimiz
+- [ ] Review and polish: Destek Olabilirsiniz
+- [ ] Review and polish: Biz Kimiz
+- [ ] Run final integrated settings smoke pass and close TASK-07.
 
 Implementation rules:
 - [x] Do not blindly copy M_RekatSay files.

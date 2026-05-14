@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../../features/daily_content/daily_content_models.dart';
 import '../../../features/daily_content/daily_content_selection_models.dart';
@@ -24,6 +24,17 @@ class HomeDailyContentPanel extends StatefulWidget {
 }
 
 class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
+  static const String _headingAyah = 'G\u00FCn\u00FCn Ayeti';
+  static const String _headingHadith = 'G\u00FCn\u00FCn Hadisi';
+  static const String _labelArabic = '\u0639\u0631\u0628\u064A';
+  static const String _noteLoading = 'G\u00FCnl\u00FCk i\u00E7erik y\u00FCkleniyor...';
+  static const String _noteError =
+      'G\u00FCnl\u00FCk i\u00E7erik \u015Fu an g\u00F6sterilemiyor.';
+  static const String _noteAyahMissing =
+      'Bug\u00FCn i\u00E7in ayet i\u00E7eri\u011Fi hen\u00FCz haz\u0131r de\u011Fil.';
+  static const String _noteHadithMissing =
+      'Bug\u00FCn i\u00E7in hadis i\u00E7eri\u011Fi hen\u00FCz haz\u0131r de\u011Fil.';
+
   late final PageController _pageController;
   bool _showTurkish = true;
   bool _showEnglish = true;
@@ -70,7 +81,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     final ayah = widget.result?.ayah;
     final hadith = widget.result?.hadith;
     final frameColor =
-        Color.lerp(widget.panelColor, Colors.white, 0.42) ?? widget.panelColor;
+        Color.lerp(widget.panelColor, Colors.white, 0.52) ?? widget.panelColor;
     final contentColor = widget.panelColor;
 
     return Container(
@@ -85,7 +96,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 240,
+            height: 270,
             child: PageView.builder(
               controller: _pageController,
               itemBuilder: (context, index) {
@@ -93,13 +104,13 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                 if (showAyah) {
                   return _buildPage(
                     context: context,
-                    heading: 'Günün Ayeti',
+                    heading: _headingAyah,
                     child: _buildAyahTab(context, ayah, contentColor),
                   );
                 }
                 return _buildPage(
                   context: context,
-                  heading: 'Günün Hadisi',
+                  heading: _headingHadith,
                   child: _buildHadithTab(context, hadith, contentColor),
                 );
               },
@@ -144,7 +155,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
             ),
             const SizedBox(width: 8),
             _buildLanguageToggle(
-              label: 'عربي',
+              label: _labelArabic,
               selected: _showArabic,
               onTap: () => _toggleLanguage('ar'),
               fontSize: 13,
@@ -233,21 +244,21 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     if (widget.isLoading) {
       return _buildNote(
         context: context,
-        text: 'Günlük içerik yükleniyor...',
+        text: _noteLoading,
         contentColor: contentColor,
       );
     }
     if (widget.hasError) {
       return _buildNote(
         context: context,
-        text: 'Günlük içerik şu an gösterilemiyor.',
+        text: _noteError,
         contentColor: contentColor,
       );
     }
     if (ayah == null) {
       return _buildNote(
         context: context,
-        text: 'Bugün için ayet içeriği henüz hazır değil.',
+        text: _noteAyahMissing,
         contentColor: contentColor,
       );
     }
@@ -274,21 +285,21 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     if (widget.isLoading) {
       return _buildNote(
         context: context,
-        text: 'Günlük içerik yükleniyor...',
+        text: _noteLoading,
         contentColor: contentColor,
       );
     }
     if (widget.hasError) {
       return _buildNote(
         context: context,
-        text: 'Günlük içerik şu an gösterilemiyor.',
+        text: _noteError,
         contentColor: contentColor,
       );
     }
     if (hadith == null) {
       return _buildNote(
         context: context,
-        text: 'Bugün için hadis içeriği henüz hazır değil.',
+        text: _noteHadithMissing,
         contentColor: contentColor,
       );
     }
@@ -463,3 +474,4 @@ class _DailyContentSection extends StatelessWidget {
     return arabicRegex.hasMatch(value);
   }
 }
+

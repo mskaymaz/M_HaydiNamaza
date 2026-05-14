@@ -14,7 +14,7 @@ class DailyContentService {
     DailyContentClock? clock,
     int recentWindow = 7,
   }) : this._(
-         loader: loader ?? DailyContentLoader(),
+         loader: loader ?? DailyContentLoader(enableRemote: true),
          stateRepository: stateRepository ?? DailyContentStateRepository(),
          clock: clock ?? SystemDailyContentClock(),
          recentWindow: recentWindow,

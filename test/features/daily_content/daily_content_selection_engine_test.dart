@@ -172,7 +172,9 @@ class _FakeLoader extends DailyContentLoader {
   _FakeLoader(this._result);
 
   @override
-  Future<DailyContentLoadResult> loadApprovedSampleContent() async {
+  Future<DailyContentLoadResult> loadApprovedSampleContent({
+    DateTime? referenceDate,
+  }) async {
     return _result;
   }
 }

@@ -5,9 +5,75 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'daily_content_models.dart';
 import 'daily_content_parse_result.dart';
 import 'daily_content_paths.dart';
+import 'daily_content_remote_client.dart';
 
 class DailyContentLoader {
-  Future<DailyContentLoadResult> loadApprovedSampleContent() async {
+  final DailyContentRemoteClient? _remoteClient;
+
+  DailyContentLoader({
+    DailyContentRemoteClient? remoteClient,
+    bool enableRemote = false,
+  }) : _remoteClient = enableRemote
+           ? (remoteClient ?? DailyContentRemoteClient())
+           : null;
+
+  Future<DailyContentLoadResult> loadApprovedSampleContent({
+    DateTime? referenceDate,
+  }) async {
+    final remoteWarnings = <String>[];
+    if (_remoteClient != null) {
+      final bundle = await _remoteClient!.fetchMonthlyBundle(
+        date: referenceDate ?? DateTime.now(),
+        warnings: remoteWarnings,
+      );
+      if (bundle != null) {
+        final ayahResult = _loadApprovedPayload<DailyAyahRecord>(
+          payload: bundle.ayahPayload,
+          sourceLabel: 'remote:publish/ayahs.v1.approved.json',
+          expectedType: 'ayah',
+          recordParser: _parseAyahRecord,
+        );
+        final hadithResult = _loadApprovedPayload<DailyHadithRecord>(
+          payload: bundle.hadithPayload,
+          sourceLabel: 'remote:publish/hadiths.v1.approved.json',
+          expectedType: 'hadith',
+          recordParser: _parseHadithRecord,
+        );
+
+        final filteredAyahs = _filterAyahsForMonth(
+          records: ayahResult.records,
+          allowedIds: bundle.ayahIds,
+          monthKey: bundle.monthKey,
+          warnings: remoteWarnings,
+        );
+        final filteredHadiths = _filterHadithsForMonth(
+          records: hadithResult.records,
+          allowedIds: bundle.hadithIds,
+          monthKey: bundle.monthKey,
+          warnings: remoteWarnings,
+        );
+
+        return DailyContentLoadResult(
+          ayahSchemaVersion: ayahResult.schemaVersion,
+          hadithSchemaVersion: hadithResult.schemaVersion,
+          ayahContentVersion: ayahResult.contentVersion,
+          hadithContentVersion: hadithResult.contentVersion,
+          ayahs: filteredAyahs,
+          hadiths: filteredHadiths,
+          skippedCount:
+              ayahResult.skippedCount +
+              hadithResult.skippedCount +
+              (ayahResult.records.length - filteredAyahs.length) +
+              (hadithResult.records.length - filteredHadiths.length),
+          warnings: [
+            ...remoteWarnings,
+            ...ayahResult.warnings,
+            ...hadithResult.warnings,
+          ],
+        );
+      }
+    }
+
     final ayahResult = await _loadApprovedFile<DailyAyahRecord>(
       path: DailyContentPaths.approvedAyahsSample,
       expectedType: 'ayah',
@@ -27,7 +93,101 @@ class DailyContentLoader {
       ayahs: ayahResult.records,
       hadiths: hadithResult.records,
       skippedCount: ayahResult.skippedCount + hadithResult.skippedCount,
-      warnings: [...ayahResult.warnings, ...hadithResult.warnings],
+      warnings: [...remoteWarnings, ...ayahResult.warnings, ...hadithResult.warnings],
+    );
+  }
+
+  DailyContentFileParseResult<T> _loadApprovedPayload<T>({
+    required Map<String, dynamic> payload,
+    required String sourceLabel,
+    required String expectedType,
+    required T? Function(
+      Map<String, dynamic> json,
+      String path,
+      int index,
+      List<String> warnings,
+    )
+    recordParser,
+  }) {
+    final warnings = <String>[];
+    final validRecords = <T>[];
+    var skippedCount = 0;
+
+    final schemaVersion = _readRequiredString(payload, 'schema_version');
+    final contentVersion = _readRequiredString(payload, 'content_version');
+    final type = _readRequiredString(payload, 'type');
+    final records = payload['records'];
+
+    if (schemaVersion == null) {
+      warnings.add('$sourceLabel: schema_version zorunlu.');
+    }
+    if (contentVersion == null) {
+      warnings.add('$sourceLabel: content_version zorunlu.');
+    }
+    if (type == null) {
+      warnings.add('$sourceLabel: type zorunlu.');
+    }
+    if (records is! List) {
+      warnings.add('$sourceLabel: records alani dizi olmali.');
+      return DailyContentFileParseResult(
+        schemaVersion: schemaVersion,
+        contentVersion: contentVersion,
+        type: type,
+        records: validRecords,
+        skippedCount: skippedCount,
+        warnings: warnings,
+      );
+    }
+
+    if (type != expectedType) {
+      warnings.add('$sourceLabel: type beklenen degerle uyusmuyor ($expectedType).');
+      return DailyContentFileParseResult(
+        schemaVersion: schemaVersion,
+        contentVersion: contentVersion,
+        type: type,
+        records: validRecords,
+        skippedCount: records.length,
+        warnings: warnings,
+      );
+    }
+    if (schemaVersion == null || contentVersion == null) {
+      return DailyContentFileParseResult(
+        schemaVersion: schemaVersion,
+        contentVersion: contentVersion,
+        type: type,
+        records: validRecords,
+        skippedCount: records.length,
+        warnings: warnings,
+      );
+    }
+
+    for (var i = 0; i < records.length; i++) {
+      final entry = records[i];
+      if (entry is! Map) {
+        skippedCount++;
+        warnings.add('$sourceLabel[$i]: record object olmali.');
+        continue;
+      }
+      final parsed = recordParser(
+        Map<String, dynamic>.from(entry),
+        sourceLabel,
+        i,
+        warnings,
+      );
+      if (parsed == null) {
+        skippedCount++;
+        continue;
+      }
+      validRecords.add(parsed);
+    }
+
+    return DailyContentFileParseResult(
+      schemaVersion: schemaVersion,
+      contentVersion: contentVersion,
+      type: type,
+      records: validRecords,
+      skippedCount: skippedCount,
+      warnings: warnings,
     );
   }
 
@@ -299,6 +459,50 @@ class DailyContentLoader {
       approvedAt: approvedAt,
       reviewNote: reviewNote,
     );
+  }
+
+  List<DailyAyahRecord> _filterAyahsForMonth({
+    required List<DailyAyahRecord> records,
+    required Set<String> allowedIds,
+    required String monthKey,
+    required List<String> warnings,
+  }) {
+    if (allowedIds.isEmpty) return records;
+    final filtered = records.where((record) => allowedIds.contains(record.id)).toList();
+    if (filtered.isEmpty) {
+      warnings.add('daily_content_remote: ayah monthly listesi bos kaldi ($monthKey).');
+      return records;
+    }
+    if (filtered.length != allowedIds.length) {
+      warnings.add(
+        'daily_content_remote: ayah monthly id uyumsuzlugu var '
+        '(beklenen=${allowedIds.length}, bulunan=${filtered.length}).',
+      );
+    }
+    return filtered;
+  }
+
+  List<DailyHadithRecord> _filterHadithsForMonth({
+    required List<DailyHadithRecord> records,
+    required Set<String> allowedIds,
+    required String monthKey,
+    required List<String> warnings,
+  }) {
+    if (allowedIds.isEmpty) return records;
+    final filtered = records.where((record) => allowedIds.contains(record.id)).toList();
+    if (filtered.isEmpty) {
+      warnings.add(
+        'daily_content_remote: hadith monthly listesi bos kaldi ($monthKey).',
+      );
+      return records;
+    }
+    if (filtered.length != allowedIds.length) {
+      warnings.add(
+        'daily_content_remote: hadith monthly id uyumsuzlugu var '
+        '(beklenen=${allowedIds.length}, bulunan=${filtered.length}).',
+      );
+    }
+    return filtered;
   }
 
   String? _readOptionalString(Map<String, dynamic> json, String key) {

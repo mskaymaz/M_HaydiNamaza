@@ -382,8 +382,8 @@ Goal: publish approved ayah/hadith content from a public repo while keeping priv
 - [x] Apply topic-based quota balancing in monthly generation (avoid same-topic streaks).
 - [x] Add cooldown window across recent months to reduce repeated ids.
 - [x] Add deterministic month seed for reproducible generation.
-- [ ] App remote fetch must read from GitHub public URL first, then fallback to local assets.
-- [ ] Add timeout and parse-failure fallback rules for remote fetch.
+- [x] App remote fetch must read from GitHub public URL first, then fallback to local assets.
+- [x] Add timeout and parse-failure fallback rules for remote fetch.
 - [ ] Document generation + publish runbook in repo docs.
 
 Acceptance:

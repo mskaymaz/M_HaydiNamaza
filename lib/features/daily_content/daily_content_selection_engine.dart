@@ -24,7 +24,8 @@ class DailyContentSelectionEngine {
 
   Future<DailyContentSelectionResult> selectToday() async {
     final warnings = <String>[];
-    final loadResult = await _loader.loadApprovedSampleContent();
+    final now = _clock.now();
+    final loadResult = await _loader.loadApprovedSampleContent(referenceDate: now);
     warnings.addAll(loadResult.warnings);
 
     final currentState = await _stateRepository.read(warnings: warnings);
@@ -74,7 +75,7 @@ class DailyContentSelectionEngine {
       seenHadithIds: hadithOutcome.seenIds,
       ayahCycleId: ayahOutcome.cycleId,
       hadithCycleId: hadithOutcome.cycleId,
-      updatedAt: _clock.now().toIso8601String(),
+      updatedAt: now.toIso8601String(),
     );
     await _stateRepository.write(nextState);
 

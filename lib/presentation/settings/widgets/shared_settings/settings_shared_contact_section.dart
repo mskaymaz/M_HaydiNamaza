@@ -446,4 +446,3 @@ class _RecentMessageCard extends StatelessWidget {
     );
   }
 }
-

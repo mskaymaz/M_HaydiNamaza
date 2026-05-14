@@ -9,7 +9,10 @@ import 'shared_settings_section_styles.dart';
 class SettingsSharedOtherAppsSection extends StatelessWidget {
   final SharedSettingsRemoteClient remoteClient;
 
-  const SettingsSharedOtherAppsSection({super.key, required this.remoteClient});
+  const SettingsSharedOtherAppsSection({
+    super.key,
+    required this.remoteClient,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,8 @@ class SettingsSharedOtherAppsSection extends StatelessWidget {
                   height: 320,
                   child: ListView.separated(
                     itemCount: items.length,
-                    separatorBuilder: (context, index) => const Divider(height: 1),
+                    separatorBuilder: (context, index) =>
+                        const Divider(height: 1),
                     itemBuilder: (context, index) {
                       final item = items[index];
                       return ListTile(
@@ -129,4 +133,3 @@ class SettingsSharedOtherAppsSection extends StatelessWidget {
     messenger?.showSnackBar(SnackBar(content: Text(message)));
   }
 }
-

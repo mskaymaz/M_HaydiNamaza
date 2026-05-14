@@ -28,7 +28,8 @@ class SettingsSharedAboutSection extends StatelessWidget {
                       width: double.infinity,
                       fit: BoxFit.fitWidth,
                       alignment: Alignment.topCenter,
-                      errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
+                      errorBuilder: (context, error, stackTrace) =>
+                          const SizedBox.shrink(),
                     ),
                     Positioned.fill(
                       child: Align(
@@ -37,11 +38,9 @@ class SettingsSharedAboutSection extends StatelessWidget {
                           widthFactor: 0.90,
                           heightFactor: 0.05,
                           child: Material(
-                            color: Colors.yellow.withValues(alpha: 0.20),
-                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.transparent,
                             child: InkWell(
                               onTap: () => _openBlog(context),
-                              borderRadius: BorderRadius.circular(10),
                               splashColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                             ),
@@ -100,4 +99,3 @@ class SettingsSharedAboutSection extends StatelessWidget {
     messenger?.showSnackBar(SnackBar(content: Text(message)));
   }
 }
-

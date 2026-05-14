@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../features/shared_settings/shared_settings_app_config.dart';
 import '../../../../features/shared_settings/shared_settings_support_bridge.dart';
@@ -38,6 +37,7 @@ class _SettingsSharedSupportSectionState
   @override
   Widget build(BuildContext context) {
     final support = kSharedSettingsAppConfig.support;
+    final textColor = const Color(0xFF161616);
     return SharedSettingsSectionCard(
       key: ValueKey<String>('support_$_openRevision'),
       title: support.title,
@@ -50,31 +50,61 @@ class _SettingsSharedSupportSectionState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              support.body,
+            RichText(
               textAlign: TextAlign.center,
-              style: const TextStyle(height: 1.6, fontWeight: FontWeight.w500),
+              text: TextSpan(
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 21,
+                  height: 1.45,
+                  fontWeight: FontWeight.w400,
+                ),
+                children: const [
+                  TextSpan(text: 'Öncelikle '),
+                  TextSpan(text: 'Direniş', style: TextStyle(fontWeight: FontWeight.w700)),
+                  TextSpan(text: ' için,\n'),
+                  TextSpan(text: 'tüm '),
+                  TextSpan(
+                    text: 'Dünya Müslümanları',
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  TextSpan(text: ' için\n'),
+                  TextSpan(text: 've '),
+                  TextSpan(text: 'bizim', style: TextStyle(fontWeight: FontWeight.w700)),
+                  TextSpan(text: ' için '),
+                  TextSpan(text: 'dua edin.', style: TextStyle(fontWeight: FontWeight.w700)),
+                ],
+              ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 18),
+            Text(
+              'Allah (cc) hepimizden razı olsun.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: textColor,
+                fontSize: 38 / 2,
+                height: 1.3,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 20),
             FractionallySizedBox(
-              widthFactor: 0.6,
+              widthFactor: 0.72,
               child: FilledButton.icon(
                 onPressed: _onPrayerSupport,
-                icon: const Icon(Icons.volunteer_activism_rounded),
+                style: FilledButton.styleFrom(
+                  backgroundColor: const Color(0xFF117A66),
+                  foregroundColor: Colors.white,
+                  shape: const StadiumBorder(),
+                  textStyle: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                icon: const Icon(Icons.volunteer_activism_rounded, size: 22),
                 label: const Text('Dua Ediyorum'),
               ),
             ),
-            if (support.actionUrl.trim().isNotEmpty) ...[
-              const SizedBox(height: 10),
-              FractionallySizedBox(
-                widthFactor: 0.6,
-                child: OutlinedButton.icon(
-                  onPressed: () => _openSupportUrl(),
-                  icon: const Icon(Icons.open_in_new_rounded),
-                  label: Text(support.actionLabel),
-                ),
-              ),
-            ],
           ],
         ),
       ),
@@ -113,18 +143,6 @@ class _SettingsSharedSupportSectionState
     _controller.collapse();
   }
 
-  Future<void> _openSupportUrl() async {
-    final uri = Uri.tryParse(kSharedSettingsAppConfig.support.actionUrl.trim());
-    if (uri == null) {
-      _showSnack('Destek baglantisi acilamadi.');
-      return;
-    }
-    final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
-    if (!ok) {
-      _showSnack('Destek baglantisi acilamadi.');
-    }
-  }
-
   void _showSnack(
     String message, {
     Duration duration = const Duration(seconds: 3),
@@ -149,3 +167,4 @@ class _SettingsSharedSupportSectionState
     );
   }
 }
+

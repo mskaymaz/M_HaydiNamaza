@@ -6,7 +6,11 @@ const Color sharedSettingsUpdateHeader = Color(0xFFE6D5F0);
 const Color sharedSettingsOtherAppsHeader = Color(0xFFF2D9E8);
 const Color sharedSettingsSupportHeader = Color(0xFFD6E5F5);
 const Color sharedSettingsAboutHeader = Color(0xFFE8E6CF);
-
+const Color sharedSettingsReminderOptionsHeader = Color(0xFFE9D8C5);
+const Color sharedSettingsVibrationHeader = Color(0xFFDCE8F8);
+const Color sharedSettingsVoiceHeader = Color(0xFFE5DBF7);
+const Color sharedSettingsVisualHeader = Color(0xFFF6DEEA);
+const Color sharedSettingsMergedColorsHeader = Color(0xFFD8EAD8);
 const double sharedSettingsHeaderRowHeight = 35;
 
 class SharedSettingsSectionCard extends StatelessWidget {

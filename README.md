@@ -4,10 +4,12 @@ M_HaydiNamaza is a Flutter prayer-time application focused on reliability, clari
 
 ## Current Status
 - Active branch target: `main`
+- TASK-05 content scope completed (`approved` counts: ayah=424, hadith=550)
+- TASK-05B publish runbook documented (`docs/architecture/DAILY_CONTENT_PUBLISH_RUNBOOK.md`)
 - TASK-06 completed (qibla direction upgrade)
 - TASK-10 completed (persistence/error/offline safeguards)
 - TASK-11 completed for current scope in task tracking flow
-- Final production release is blocked until the official prayer-time source/release decision is explicitly cleared
+- Final production release is blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared
 
 ## Core Features
 - Daily prayer times with fallback strategy
@@ -33,7 +35,7 @@ M_HaydiNamaza is a Flutter prayer-time application focused on reliability, clari
 - Prayer-time source strategy is documented in:
   - `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`
 - Source quality and release gating rules are defined there.
-- Production release remains blocked until official source/release decision is cleared.
+- Production release remains blocked until official access/release decision is cleared.
 
 ## Release Checklist
 - [x] Root README is project-specific and actionable.

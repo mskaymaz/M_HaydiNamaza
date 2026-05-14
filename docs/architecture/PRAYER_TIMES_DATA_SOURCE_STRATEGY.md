@@ -19,6 +19,10 @@ Kapsam dışı:
 - TASK-04A tamamlandı; mevcut servis yapısı orkestrasyon/fallback kararını taşıyor.
 - Mevcut durumda gizli/fragil endpoint kullanımının kalıcı mimari olmaması temel prensip.
 
+### 2.3 Durum güncellemesi (2026-05-14)
+- Diyanet `AwqatSalah` resmi API kaynağı artık strateji referansı olarak kullanılabilir durumdadır.
+- Release gate halen aktiftir; production kararı için auth/token erişim modeli ve kullanım/release koşulları açık şekilde netleşmelidir.
+
 ### 2.1 Resmi kaynak tespiti (2026-05-13)
 TASK-04B dokümantasyon kapanış güncellemesi kapsamında Diyanet'in resmi namaz vakti API kaynağı aşağıdaki bağlantılarla kayda alınmıştır:
 
@@ -232,7 +236,7 @@ Kabul notu:
 ## 9. Release gate / çıkış kriterleri
 Production release öncesi aşağıdaki zorunlu şartlar birlikte sağlanmalıdır:
 
-- CİMER/Diyanet cevabı değerlendirilmiş olmalı.
+- Resmi Diyanet/AwqatSalah erişim modeli (auth/token) ve kullanım/release koşulları değerlendirilmiş olmalı.
 - Birincil veri kaynağı stratejisi netleşmiş olmalı.
 - Source quality label planı uygulanabilir olmalı.
 - 10 şehir karşılaştırma planı tamamlanmış olmalı.
@@ -258,7 +262,7 @@ Henüz kesinleşmeyen başlıklar:
 - Yaklaşık hesaplama hangi kullanıcı senaryosunda gösterilebilir?
 
 Beklenen dış cevaplar:
-- CİMER/Diyanet resmi yanıtı
+- Diyanet/AwqatSalah resmi erişim ve kullanım/release koşulları netleştirmesi
 - Gerekirse hukuki/lisans değerlendirme geri bildirimi
 
 Bu cevaplar alınmadan kalıcı veri kaynağı kararı kesinleştirilmeyecektir.

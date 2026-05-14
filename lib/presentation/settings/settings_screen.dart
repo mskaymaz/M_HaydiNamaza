@@ -15,6 +15,7 @@ import 'calculation_method_screen.dart';
 import 'location_screen.dart';
 import 'widgets/settings_color_picker_widgets.dart';
 import 'widgets/settings_color_sections_group.dart';
+import 'widgets/settings_shared_modules_group.dart';
 import 'settings_audio_mode_texts.dart';
 import 'settings_color_formatters.dart';
 import 'settings_favorite_matcher.dart';
@@ -366,6 +367,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               if (!context.mounted) return;
               setState(() {});
             },
+          ),
+          SettingsSharedModulesGroup(
+            outerPadding: ui.screenPadding.copyWith(top: 0),
+            panelStyle: ui.panel,
           ),
         ],
       ),

@@ -631,32 +631,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                       ),
                                     if (_drawerProgress > 0.02)
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                          12,
-                                          0,
-                                          12,
-                                          8,
-                                        ),
-                                        child:
-                                            FutureBuilder<
-                                              DailyContentSelectionResult
-                                            >(
-                                              future: _dailyContentFuture,
-                                              builder: (context, snapshot) {
-                                                return HomeDailyContentPanel(
-                                                  result: snapshot.data,
-                                                  isLoading:
-                                                      snapshot.connectionState ==
-                                                      ConnectionState.waiting,
-                                                  hasError: snapshot.hasError,
-                                                  cizgiColor:
-                                                      palette.cizgiColor,
-                                                );
-                                              },
-                                            ),
-                                      ),
-                                    if (_drawerProgress > 0.02)
                                       buildHandleBand(
                                         pointUp: true,
                                         border: Border(
@@ -715,6 +689,37 @@ class _HomeScreenState extends State<HomeScreen> {
                                   settingsIconOpacity: ui.settingsIconOpacity,
                                   typography: ui.typography,
                                   cizgiColor: palette.cizgiColor,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: drawerLayout.drawerTop +
+                                  drawerLayout.drawerHeight +
+                                  8,
+                              left: 0,
+                              right: 0,
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                  12,
+                                  0,
+                                  12,
+                                  8,
+                                ),
+                                child: FutureBuilder<
+                                  DailyContentSelectionResult
+                                >(
+                                  future: _dailyContentFuture,
+                                  builder: (context, snapshot) {
+                                    return HomeDailyContentPanel(
+                                      result: snapshot.data,
+                                      isLoading:
+                                          snapshot.connectionState ==
+                                          ConnectionState.waiting,
+                                      hasError: snapshot.hasError,
+                                      cizgiColor: palette.cizgiColor,
+                                      panelColor: palette.zeminColor,
+                                    );
+                                  },
                                 ),
                               ),
                             ),

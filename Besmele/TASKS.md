@@ -367,7 +367,8 @@ Goal: prepare the architecture now; content collection happens later.
 - [x] Add placeholder approved sample records only for testing if needed.
 
 Future content goal:
-- [ ] Rebuild content from zero with 400 approved ayahs + 400 approved hadiths.
+- [x] Rebuild content from zero with 400 approved ayahs + 400 approved hadiths.
+  - Closure check (2026-05-14): approved payload counts verified as `ayah=424`, `hadith=550`.
 
 ### TASK-05B - Public Content Distribution (AllApp)
 
@@ -376,6 +377,7 @@ Goal: publish approved ayah/hadith content from a public repo while keeping priv
 - [x] Define public data contract under AllApp/data/daily_content/v1/.
 - [x] Add manifest.json contract (schema_version, content_version, generated_at, file list, checksums).
 - [ ] Keep private repo as canonical source; generate and sync publish artifacts to public repo.
+  - Blocker check (2026-05-14): public target repo/branch is not defined in current git remotes.
 - [x] Keep archive snapshots in private repo (Besmele/data/daily_panel/archive/...) as baseline history.
 - [x] Add monthly packs (monthly/YYYY-MM.json) for ayah/hadith id pools.
 - [x] Monthly pack generation must be random (no sequential fill).
@@ -384,7 +386,7 @@ Goal: publish approved ayah/hadith content from a public repo while keeping priv
 - [x] Add deterministic month seed for reproducible generation.
 - [x] App remote fetch must read from GitHub public URL first, then fallback to local assets.
 - [x] Add timeout and parse-failure fallback rules for remote fetch.
-- [ ] Document generation + publish runbook in repo docs.
+- [x] Document generation + publish runbook in repo docs.
 
 Acceptance:
 - Panel works with sample approved content.
@@ -428,24 +430,25 @@ Acceptance:
 Goal: bring the reusable settings model from M_RekatSay into M_HaydiNamaza cleanly.
 
 Required sections:
-- [ ] Bize Ulasin
-- [ ] Uygulama Bilgileri ve Guncelleme
-- [ ] Diger Uygulamalarimiz
-- [ ] Destek Olabilirsiniz
-- [ ] Biz Kimiz
+- [x] Bize Ulasin
+- [x] Uygulama Bilgileri ve Guncelleme
+- [x] Diger Uygulamalarimiz
+- [x] Destek Olabilirsiniz
+- [x] Biz Kimiz
 
 Implementation rules:
-- [ ] Do not blindly copy M_RekatSay files.
-- [ ] Extract reusable contracts and UI patterns.
-- [ ] App-specific values must come from config.
-- [ ] Contact messages must support current backend strategy.
-- [ ] Update check must support public APK / release manifest strategy.
-- [ ] Other apps catalog must support remote JSON and local fallback.
-- [ ] Support section must match MSK Labs philosophy.
-- [ ] About section must support app-specific image/text/link.
+- [x] Do not blindly copy M_RekatSay files.
+- [x] Extract reusable contracts and UI patterns.
+- [x] App-specific values must come from config.
+- [x] Contact messages must support current backend strategy.
+- [x] Update check must support public APK / release manifest strategy.
+- [x] Other apps catalog must support remote JSON and local fallback.
+- [x] Support section must match MSK Labs philosophy.
+- [x] About section must support app-specific image/text/link.
 
 Acceptance:
 - Settings page is modular.
+- TASK-07 closure note (2026-05-14): shared settings template extracted to AllApp and integrated into M_HaydiNamaza with config-driven values.
 - The same structure can be reused in other MSK Labs apps.
 - No M_RekatSay-specific naming leaks into M_HaydiNamaza.
 
@@ -455,11 +458,11 @@ Acceptance:
 
 Goal: turn shared settings and content contracts into reusable templates.
 
-- [ ] Add shared settings template under AllApp.
-- [ ] Add JSON schemas for app catalog, update manifest, support, about, and contact metadata.
-- [ ] Add Flutter reference implementation or copy guide.
-- [ ] Add README explaining how each app adapts the template.
-- [ ] Keep AllApp as template/contracts repository, not a hidden runtime dependency.
+- [x] Add shared settings template under AllApp.
+- [x] Add JSON schemas for app catalog, update manifest, support, about, and contact metadata.
+- [x] Add Flutter reference implementation or copy guide.
+- [x] Add README explaining how each app adapts the template.
+- [x] Keep AllApp as template/contracts repository, not a hidden runtime dependency.
 
 Acceptance:
 - Future MSK Labs apps can reuse the same settings pattern.
@@ -506,7 +509,7 @@ Goal: prevent regressions.
 
 - [x] Add unit tests for qibla bearing calculation.
 - [x] Add unit tests for daily content repeat-prevention.
-- [ ] Add unit tests for update/catalog JSON parsing.
+- [x] Add unit tests for update/catalog JSON parsing.
 - [x] Add tests for prayer-time source labels.
 - [x] Add widget smoke tests for main panels where practical.
 - [x] Run `flutter analyze`.
@@ -531,6 +534,14 @@ Goal: prepare for real users.
 
 Acceptance:
 - A new developer or AI assistant can understand, build, and safely continue the project.
+
+### Final stabilization checklist (2026-05-14)
+- [x] TASK-05 content closure verified (`approved`: ayah=424, hadith=550).
+- [x] TASK-05B generation + publish runbook documented in repo docs.
+- [x] Official Diyanet/AwqatSalah API references recorded in strategy docs.
+- [ ] Production release decision cleared (official auth/token + usage/release conditions).
+- [ ] Public content sync target repo URL/branch configured (TASK-05B blocker).
+- [ ] Local stabilization validation commands executed and logged.
 
 
 

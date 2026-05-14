@@ -6,6 +6,10 @@ TASK-00 is completed on 2026-05-10 with documented exceptions.
 TASK-04A is closed (checkpoints completed; orchestration-safe extraction scope finalized).
 TASK-04B documentation scope is closed, including official Diyanet/AwqatSalah API source strategy notes.
 TASK-05 checkpoints 1-14 are synchronized with `Besmele/TASKS.md` for current scope.
+TASK-05 content target closure is recorded (`approved` counts: ayah=424, hadith=550).
+TASK-05B publish runbook documentation is completed.
+TASK-07 shared settings modules are completed with config-driven integration.
+TASK-08 AllApp shared settings template/contracts are completed for current scope.
 TASK-06 is completed with location-based qibla bearing + sensor fallback + bearing validation tests.
 TASK-10 is completed with storage fallback/recovery hardening and log-safe non-fatal reporting.
 TASK-11 is completed and pushed in current flow.
@@ -13,11 +17,55 @@ TASK-12 release-readiness documentation/checklist outputs are completed.
 Ayah/hadith data work is completed for current scope (approved sample set + draft pool workflow records).
 
 ## Next action
-Wait for explicit start instruction before TASK-07.
+Wait for explicit start instruction before TASK-09 or release-gate closure actions.
 
 ## Important blockers
-- Final release remains blocked until explicit official prayer-time source/release decision is cleared.
-- Future curated 400 + 400 approved ayah/hadith dataset is still pending as a later content phase.
+- Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.
+- TASK-05B public sync remains blocked because public target repo URL/branch is not configured yet.
+
+## Final stabilization checkpoint (2026-05-14)
+- Scope:
+  - Documentation-only closure sync for TASK-05/TASK-05B completion records and current release blockers.
+- Changed files:
+  - `README.md`
+  - `Besmele/TASKS.md`
+  - `docs/architecture/DAILY_CONTENT_PUBLISH_RUNBOOK.md`
+  - `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`
+  - `STATE.md`
+  - `Besmele/HANDOFF.md`
+  - `Besmele/WORKBOARD.md`
+- Validation:
+  - `flutter analyze` was not run in this step by scope rule.
+
+## TASK-07 and TASK-08 closure update (2026-05-14)
+- Scope:
+  - Reusable shared-settings template extraction from M_RekatSay to AllApp and integration into M_HaydiNamaza settings page.
+- Changed files:
+  - `AllApp/templates/shared_settings/v1/README.md`
+  - `AllApp/templates/shared_settings/v1/schemas/app_settings.schema.json`
+  - `AllApp/templates/shared_settings/v1/schemas/app_catalog.schema.json`
+  - `AllApp/templates/shared_settings/v1/schemas/update_manifest.schema.json`
+  - `AllApp/templates/shared_settings/v1/schemas/support_contact.schema.json`
+  - `AllApp/templates/shared_settings/v1/schemas/about.schema.json`
+  - `AllApp/templates/shared_settings/v1/examples/shared_settings.app.sample.json`
+  - `AllApp/templates/shared_settings/v1/examples/app_catalog.sample.json`
+  - `AllApp/templates/shared_settings/v1/examples/update_manifest.sample.json`
+  - `lib/features/shared_settings/shared_settings_models.dart`
+  - `lib/features/shared_settings/shared_settings_parser.dart`
+  - `lib/features/shared_settings/shared_settings_remote_client.dart`
+  - `lib/features/shared_settings/shared_settings_app_config.dart`
+  - `lib/presentation/settings/widgets/settings_shared_modules_group.dart`
+  - `lib/presentation/settings/settings_screen.dart`
+  - `assets/data/shared_settings/app_catalog.local.json`
+  - `assets/data/shared_settings/update_manifest.local.json`
+  - `test/features/shared_settings/shared_settings_parser_test.dart`
+  - `pubspec.yaml`
+  - `Besmele/TASKS.md`
+  - `STATE.md`
+  - `Besmele/HANDOFF.md`
+  - `Besmele/WORKBOARD.md`
+- Validation:
+  - `flutter analyze` was not run in this step by scope rule.
 
 ## TASK-12 closure update (2026-05-13)
 - Scope:

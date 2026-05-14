@@ -263,10 +263,10 @@ Acceptance:
 Goal: make prayer-time logic trustworthy and maintainable.
 
 ### 04A — Domain extraction
-- [ ] Extract prayer-time entities and value objects.
-- [ ] Extract calculation/use-case layer from UI.
-- [ ] Extract storage/cache access.
-- [ ] Add explicit data-source labels.
+- [x] Extract prayer-time entities and value objects.
+- [x] Extract calculation/use-case layer from UI.
+- [x] Extract storage/cache access.
+- [x] Add explicit data-source labels.
 
 ### TASK-04A checkpoint (2026-05-11)
 - Parameter construction logic was extracted from lib/app/prayer_service.dart into lib/app/prayer_calculation_parameters_factory.dart.
@@ -306,17 +306,17 @@ Goal: make prayer-time logic trustworthy and maintainable.
 - Remaining policy-level decomposition (fallback/cache/use-case layering) is deferred to a future dedicated architecture task.
 - TASK-04A is considered closed; next phase is TASK-04B official data-source strategy.
 ### 04B — Official data access strategy
-- [ ] Add `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`.
-- [ ] Record current status: waiting for CIMER/Diyanet answer.
-- [ ] Do not depend on hidden Diyanet endpoints as permanent architecture.
-- [ ] Compare options:
+- [x] Add `docs/architecture/PRAYER_TIMES_DATA_SOURCE_STRATEGY.md`.
+- [x] Record current status: waiting for CIMER/Diyanet answer.
+- [x] Do not depend on hidden Diyanet endpoints as permanent architecture.
+- [x] Compare options:
   - official Diyanet API or licensed data file,
   - yearly/monthly city-district offline data package,
   - verified cache generated from permitted source,
   - third-party API fallback,
   - approximate calculation fallback.
-- [ ] Add source transparency text in UI plan.
-- [ ] Add 10-city comparison test plan before release.
+- [x] Add source transparency text in UI plan.
+- [x] Add 10-city comparison test plan before release.
 
 Acceptance:
 - The app can represent source quality honestly.
@@ -368,6 +368,23 @@ Goal: prepare the architecture now; content collection happens later.
 
 Future content goal:
 - [ ] Rebuild content from zero with 400 approved ayahs + 400 approved hadiths.
+
+### TASK-05B - Public Content Distribution (AllApp)
+
+Goal: publish approved ayah/hadith content from a public repo while keeping private repo as canonical source.
+
+- [ ] Define public data contract under AllApp/data/daily_content/v1/.
+- [ ] Add manifest.json contract (schema_version, content_version, generated_at, file list, checksums).
+- [ ] Keep private repo as canonical source; generate and sync publish artifacts to public repo.
+- [ ] Keep archive snapshots in private repo (Besmele/data/daily_panel/archive/...) as baseline history.
+- [ ] Add monthly packs (monthly/YYYY-MM.json) for ayah/hadith id pools.
+- [ ] Monthly pack generation must be random (no sequential fill).
+- [ ] Apply topic-based quota balancing in monthly generation (avoid same-topic streaks).
+- [ ] Add cooldown window across recent months to reduce repeated ids.
+- [ ] Add deterministic month seed for reproducible generation.
+- [ ] App remote fetch must read from GitHub public URL first, then fallback to local assets.
+- [ ] Add timeout and parse-failure fallback rules for remote fetch.
+- [ ] Document generation + publish runbook in repo docs.
 
 Acceptance:
 - Panel works with sample approved content.
@@ -492,7 +509,7 @@ Goal: prevent regressions.
 - [ ] Add unit tests for update/catalog JSON parsing.
 - [x] Add tests for prayer-time source labels.
 - [x] Add widget smoke tests for main panels where practical.
-- [ ] Run `flutter analyze`.
+- [x] Run `flutter analyze`.
 
 Acceptance:
 - Core logic is testable outside widgets.

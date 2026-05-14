@@ -10,19 +10,22 @@ void main() {
   ) async {
     await tester.pumpWidget(
       const MaterialApp(
+        locale: Locale('tr'),
         home: Scaffold(
           body: HomeDailyContentPanel(
             result: null,
             isLoading: true,
             hasError: false,
             cizgiColor: Colors.white,
+            panelColor: Colors.black,
           ),
         ),
       ),
     );
 
-    expect(find.text('Gunluk Ayet ve Hadis'), findsOneWidget);
-    expect(find.text('Gunluk icerik yukleniyor...'), findsOneWidget);
+    expect(find.byType(HomeDailyContentPanel), findsOneWidget);
+    expect(find.text('TR'), findsOneWidget);
+    expect(find.text('EN'), findsOneWidget);
   });
 
   testWidgets('HomeDailyContentPanel renders ayah and hadith content', (
@@ -54,8 +57,12 @@ void main() {
         surahName: 'Fatiha',
         surahNumber: 1,
         ayahNumber: 1,
-        text: 'Bismillah',
-        translation: 'Rahman ve Rahim',
+        textAr: 'Bismillah',
+        textTr: 'Rahman ve Rahim',
+        textEn: 'In the name of Allah',
+        sourceAr: 'test',
+        sourceTr: 'test',
+        sourceEn: 'test',
         mealSource: 'test',
         sourceNote: 'test',
         topics: <String>['baslangic'],
@@ -69,8 +76,12 @@ void main() {
         book: 'Iman',
         hadithNumber: '1',
         narrator: 'Omer',
-        text: 'Ameller niyetlere goredir',
-        translation: 'Ameller niyetlere gore deger kazanir',
+        textAr: 'Ameller niyetlere goredir',
+        textTr: 'Ameller niyetlere gore deger kazanir',
+        textEn: 'Actions are by intentions',
+        sourceAr: 'test',
+        sourceTr: 'test',
+        sourceEn: 'test',
         grade: 'sahih',
         sourceNote: 'test',
         topics: <String>['niyet'],
@@ -84,20 +95,26 @@ void main() {
 
     await tester.pumpWidget(
       const MaterialApp(
+        locale: Locale('tr'),
         home: Scaffold(
           body: HomeDailyContentPanel(
             result: result,
             isLoading: false,
             hasError: false,
             cizgiColor: Colors.white,
+            panelColor: Colors.black,
           ),
         ),
       ),
     );
 
-    expect(find.text('Ayet'), findsOneWidget);
-    expect(find.text('Hadis'), findsOneWidget);
-    expect(find.text('Bismillah'), findsOneWidget);
-    expect(find.text('Ameller niyetlere goredir'), findsOneWidget);
+    expect(find.text('Rahman ve Rahim'), findsOneWidget);
+    expect(find.text('Fatiha 1'), findsOneWidget);
+
+    await tester.drag(find.byType(PageView), const Offset(-500, 0));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Ameller niyetlere gore deger kazanir'), findsOneWidget);
+    expect(find.text('Buhari 1'), findsOneWidget);
   });
 }

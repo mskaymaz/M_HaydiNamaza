@@ -147,6 +147,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
               label: 'عربي',
               selected: _showArabic,
               onTap: () => _toggleLanguage('ar'),
+              fontSize: 13,
             ),
           ],
         ),
@@ -160,6 +161,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     required String label,
     required bool selected,
     required VoidCallback onTap,
+    double fontSize = 11,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -189,7 +191,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
         child: Text(
           label,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-            fontSize: label == 'عرب' ? 12 : 11,
+            fontSize: fontSize,
             color: selected ? Colors.white : const Color(0xFF111111),
             fontWeight: FontWeight.w700,
           ),

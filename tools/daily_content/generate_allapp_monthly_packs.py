@@ -34,6 +34,7 @@ HADITH_GENERIC_TOPICS = {"hadis_draft_pool"}
 class ContentRecord:
     record_id: str
     topic: str
+    is_long: bool
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -84,10 +85,21 @@ def normalize_records(records: list[dict[str, Any]], is_hadith: bool) -> list[Co
             continue
         raw_topics = record.get("topics", [])
         topics = raw_topics if isinstance(raw_topics, list) else []
+        tr_text = ""
+        if is_hadith:
+            # Hadith dataset Turkish main body is in `text`.
+            raw_text = record.get("text", "")
+            tr_text = raw_text if isinstance(raw_text, str) else ""
+        else:
+            # Ayah dataset Turkish content is in `translation`.
+            raw_text = record.get("translation", "")
+            tr_text = raw_text if isinstance(raw_text, str) else ""
+
         normalized.append(
             ContentRecord(
                 record_id=record_id.strip(),
                 topic=pick_topic(topics, is_hadith),
+                is_long=len(tr_text.strip()) > 300,
             )
         )
     return normalized
@@ -116,6 +128,10 @@ def select_monthly_ids(
 
     preferred = [r for r in shuffled if r.record_id not in cooldown_ids]
     fallback = [r for r in shuffled if r.record_id in cooldown_ids]
+    preferred_short = [r for r in preferred if not r.is_long]
+    preferred_long = [r for r in preferred if r.is_long]
+    fallback_short = [r for r in fallback if not r.is_long]
+    fallback_long = [r for r in fallback if r.is_long]
 
     chosen: list[str] = []
     chosen_set: set[str] = set()
@@ -133,19 +149,48 @@ def select_monthly_ids(
             chosen_set.add(rec.record_id)
             topic_counts[rec.topic] += 1
 
-    # 1) first pass: non-cooldown + topic cap
-    try_pick(preferred, enforce_cap=True)
-    # 2) second pass: non-cooldown without cap (if count not enough)
+    # 1) non-cooldown short + topic cap
+    try_pick(preferred_short, enforce_cap=True)
+    # 2) non-cooldown short without cap
     if len(chosen) < target_count:
-        try_pick(preferred, enforce_cap=False)
-    # 3) third pass: cooldown + cap
+        try_pick(preferred_short, enforce_cap=False)
+    # 3) cooldown short + cap
     if len(chosen) < target_count:
-        try_pick(fallback, enforce_cap=True)
-    # 4) final fill: cooldown without cap
+        try_pick(fallback_short, enforce_cap=True)
+    # 4) cooldown short without cap
     if len(chosen) < target_count:
-        try_pick(fallback, enforce_cap=False)
+        try_pick(fallback_short, enforce_cap=False)
+    # 5) non-cooldown long + cap
+    if len(chosen) < target_count:
+        try_pick(preferred_long, enforce_cap=True)
+    # 6) non-cooldown long without cap
+    if len(chosen) < target_count:
+        try_pick(preferred_long, enforce_cap=False)
+    # 7) cooldown long + cap
+    if len(chosen) < target_count:
+        try_pick(fallback_long, enforce_cap=True)
+    # 8) cooldown long without cap
+    if len(chosen) < target_count:
+        try_pick(fallback_long, enforce_cap=False)
 
     return chosen[:target_count]
+
+
+def select_ids_from_pool(
+    records: list[ContentRecord],
+    target_count: int,
+    seed: int,
+    cooldown_ids: set[str],
+) -> list[str]:
+    """Topic-balanced selection from a single pool (all short or all long)."""
+    if target_count <= 0:
+        return []
+    return select_monthly_ids(
+        records=records,
+        target_count=target_count,
+        seed=seed,
+        cooldown_ids=cooldown_ids,
+    )
 
 
 def copy_publish_sources(hadith_payload: dict[str, Any], ayah_payload: dict[str, Any]) -> None:
@@ -174,12 +219,18 @@ def main() -> None:
         [r for r in ayah_records if isinstance(r, dict)],
         is_hadith=False,
     )
+    hadith_short_pool = [r for r in hadith_pool if not r.is_long]
+    hadith_long_pool = [r for r in hadith_pool if r.is_long]
+    ayah_short_pool = [r for r in ayah_pool if not r.is_long]
+    ayah_long_pool = [r for r in ayah_pool if r.is_long]
 
     copy_publish_sources(hadith_payload, ayah_payload)
 
     months = month_sequence(START_MONTH, MONTH_COUNT)
     used_recent_hadith: deque[set[str]] = deque(maxlen=COOLDOWN_MONTHS)
     used_recent_ayah: deque[set[str]] = deque(maxlen=COOLDOWN_MONTHS)
+    used_hadith_ids: set[str] = set()
+    used_ayah_ids: set[str] = set()
 
     monthly_files: list[dict[str, Any]] = []
     for month in months:
@@ -187,18 +238,46 @@ def main() -> None:
         hadith_cooldown = set().union(*used_recent_hadith) if used_recent_hadith else set()
         ayah_cooldown = set().union(*used_recent_ayah) if used_recent_ayah else set()
 
-        hadith_ids = select_monthly_ids(
-            records=hadith_pool,
-            target_count=COUNT_PER_TYPE,
+        available_hadith_short = [r for r in hadith_short_pool if r.record_id not in used_hadith_ids]
+        available_hadith_long = [r for r in hadith_long_pool if r.record_id not in used_hadith_ids]
+        hadith_short_target = min(COUNT_PER_TYPE, len(available_hadith_short))
+        hadith_long_target = COUNT_PER_TYPE - hadith_short_target
+
+        hadith_short_ids = select_ids_from_pool(
+            records=available_hadith_short,
+            target_count=hadith_short_target,
             seed=month_seed + 17,
             cooldown_ids=hadith_cooldown,
         )
-        ayah_ids = select_monthly_ids(
-            records=ayah_pool,
-            target_count=COUNT_PER_TYPE,
+        hadith_long_ids = select_ids_from_pool(
+            records=available_hadith_long,
+            target_count=hadith_long_target,
+            seed=month_seed + 19,
+            cooldown_ids=hadith_cooldown,
+        )
+        hadith_ids = hadith_short_ids + hadith_long_ids
+
+        available_ayah_short = [r for r in ayah_short_pool if r.record_id not in used_ayah_ids]
+        available_ayah_long = [r for r in ayah_long_pool if r.record_id not in used_ayah_ids]
+        ayah_short_target = min(COUNT_PER_TYPE, len(available_ayah_short))
+        ayah_long_target = COUNT_PER_TYPE - ayah_short_target
+
+        ayah_short_ids = select_ids_from_pool(
+            records=available_ayah_short,
+            target_count=ayah_short_target,
             seed=month_seed + 31,
             cooldown_ids=ayah_cooldown,
         )
+        ayah_long_ids = select_ids_from_pool(
+            records=available_ayah_long,
+            target_count=ayah_long_target,
+            seed=month_seed + 37,
+            cooldown_ids=ayah_cooldown,
+        )
+        ayah_ids = ayah_short_ids + ayah_long_ids
+
+        used_hadith_ids.update(hadith_ids)
+        used_ayah_ids.update(ayah_ids)
 
         used_recent_hadith.append(set(hadith_ids))
         used_recent_ayah.append(set(ayah_ids))
@@ -212,6 +291,7 @@ def main() -> None:
                 "count_per_type": COUNT_PER_TYPE,
                 "selection_mode": "random_topic_balanced",
                 "cooldown_months": COOLDOWN_MONTHS,
+                "long_text_policy": "short_first_global_then_long_if_required",
             },
             "ayah_ids": ayah_ids,
             "hadith_ids": hadith_ids,

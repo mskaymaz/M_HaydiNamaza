@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "content_version": "2026-05-14",
-  "generated_at_utc": "2026-05-14T08:06:45.482263+00:00",
+  "generated_at_utc": "2026-05-14T08:17:49.106726+00:00",
   "root": "data/daily_content/v1",
   "publish_files": {
     "ayahs": {
@@ -17,84 +17,84 @@
     {
       "month": "2026-05",
       "path": "monthly/2026-05.json",
-      "sha256": "965d76500dbe009211f46cdee6ffed47841cef0757242e54aeb003406f5f9a79",
+      "sha256": "e01720de5ac5fa35c121e997344eeb84dc7d2e8cd7954d2f3d28706163a91cff",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2026-06",
       "path": "monthly/2026-06.json",
-      "sha256": "989d4d0d1c7968d3e40173c40baa303ef71c7b429ffc2d99293432df35c98673",
+      "sha256": "a3a7b651f613be791d9d32c367f08c2e4063ba6af1a245ce690e54ee979959b6",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2026-07",
       "path": "monthly/2026-07.json",
-      "sha256": "bb32293b73eddc492e0d47935a8c5859bdb2066a5e9ffd7374d0afc931010260",
+      "sha256": "879c27afc02460655248897d261e1a19bc407f5b6ef64630c554cbe1c0422d1e",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2026-08",
       "path": "monthly/2026-08.json",
-      "sha256": "05d5e4db9c37290c89da0757027c3edd723f06897c1ad85eff9e39d1ba7f94b3",
+      "sha256": "c101237e87eed0a045d5c8c98824cda74d648ddb50e237ef7e7a2a6918bec9a2",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2026-09",
       "path": "monthly/2026-09.json",
-      "sha256": "73e61081168475ae4f29a3f21ebeae0024c2ae6329e5c1296df2ebcd7ce2493a",
+      "sha256": "bc7b4e2d36c23e39516c6e54e77ed193047b5988df04cad7b2a84ce4ad7ad925",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2026-10",
       "path": "monthly/2026-10.json",
-      "sha256": "6a22b2bc0c52d29404b9d635f31ee9944c44de2857d6d2df9e68173dd51d0d87",
+      "sha256": "50508918896c8b728a4e80d93efdcbdd0ad192eff7e27729042c3c541ceadc7b",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2026-11",
       "path": "monthly/2026-11.json",
-      "sha256": "f2de822f777978882d49256720d6abb55a77eed86a48e39a4715e88f992ef040",
+      "sha256": "b77032e31237a295c1eee67470df36f7a90bfe4782851117e5fc24c24dd1eb7b",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2026-12",
       "path": "monthly/2026-12.json",
-      "sha256": "56207e2e91a9826687596bcbfdcd31a39a7cfc90593c7f698ce0316b96ee7b05",
+      "sha256": "a6a562ca91ffdd65d2fed4d9a909d4a25adf78e9d7a2ade05da15828ce51c33e",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2027-01",
       "path": "monthly/2027-01.json",
-      "sha256": "f4b002f07a8526adbf92d338c5646a77927f34d18ed3c167bb27591aba525880",
+      "sha256": "6473396d123cf82e837ffbdaf9e7310a8f9d4e026dc2b83c51e1a087ab95ed92",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2027-02",
       "path": "monthly/2027-02.json",
-      "sha256": "a622a1ab97b7bfe7cba27d534c1cb42412caea97511ce1005e50458f4a604e15",
+      "sha256": "9200113891c8be9eb0c64436cc218c3fc5890f14167de045eff62be46a3013e0",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2027-03",
       "path": "monthly/2027-03.json",
-      "sha256": "b063308257128d83a4a82c1e3da4227c814fae2544d6a57e9a1f129a4e7bf0ee",
+      "sha256": "1dabf6ee1ed0634d9ddf8c51aa8539c66e4a2ad2b580df4d85de8bd6a93f0499",
       "ayah_count": 30,
       "hadith_count": 30
     },
     {
       "month": "2027-04",
       "path": "monthly/2027-04.json",
-      "sha256": "182f3d81de38ad7d8097e093f58f5056d87bfb30a222d40bb6b1b43ad1bebd04",
+      "sha256": "b6dbf3af5dc16dedbb0d172ff5799a3625f7d497e70d5c79e0b74c0c50cfb70c",
       "ayah_count": 30,
       "hadith_count": 30
     }

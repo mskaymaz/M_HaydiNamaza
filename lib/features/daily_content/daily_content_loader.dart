@@ -21,8 +21,9 @@ class DailyContentLoader {
     DateTime? referenceDate,
   }) async {
     final remoteWarnings = <String>[];
-    if (_remoteClient != null) {
-      final bundle = await _remoteClient!.fetchMonthlyBundle(
+    final remoteClient = _remoteClient;
+    if (remoteClient != null) {
+      final bundle = await remoteClient.fetchBundle(
         date: referenceDate ?? DateTime.now(),
         warnings: remoteWarnings,
       );
@@ -39,32 +40,25 @@ class DailyContentLoader {
           expectedType: 'hadith',
           recordParser: _parseHadithRecord,
         );
-
-        final filteredAyahs = _filterAyahsForMonth(
+        final orderedAyahs = _orderAyahs(
           records: ayahResult.records,
-          allowedIds: bundle.ayahIds,
-          monthKey: bundle.monthKey,
-          warnings: remoteWarnings,
+          orderedIds: bundle.ayahOrderIds,
         );
-        final filteredHadiths = _filterHadithsForMonth(
+        final orderedHadiths = _orderHadiths(
           records: hadithResult.records,
-          allowedIds: bundle.hadithIds,
-          monthKey: bundle.monthKey,
-          warnings: remoteWarnings,
+          orderedIds: bundle.hadithOrderIds,
         );
-
         return DailyContentLoadResult(
           ayahSchemaVersion: ayahResult.schemaVersion,
           hadithSchemaVersion: hadithResult.schemaVersion,
           ayahContentVersion: ayahResult.contentVersion,
           hadithContentVersion: hadithResult.contentVersion,
-          ayahs: filteredAyahs,
-          hadiths: filteredHadiths,
-          skippedCount:
-              ayahResult.skippedCount +
-              hadithResult.skippedCount +
-              (ayahResult.records.length - filteredAyahs.length) +
-              (hadithResult.records.length - filteredHadiths.length),
+          ayahs: orderedAyahs,
+          hadiths: orderedHadiths,
+          ayahOrderIds: _extractAyahIds(orderedAyahs),
+          hadithOrderIds: _extractHadithIds(orderedHadiths),
+          sequenceStartDate: bundle.sequenceStartDate,
+          skippedCount: ayahResult.skippedCount + hadithResult.skippedCount,
           warnings: [
             ...remoteWarnings,
             ...ayahResult.warnings,
@@ -85,15 +79,38 @@ class DailyContentLoader {
       recordParser: _parseHadithRecord,
     );
 
+    final localAyahIds = _extractAyahIds(ayahResult.records);
+    final localHadithIds = _extractHadithIds(hadithResult.records);
+    final sequenceAsset = await _loadLocalSequence(
+      warnings: remoteWarnings,
+      fallbackAyahIds: localAyahIds,
+      fallbackHadithIds: localHadithIds,
+    );
+    final orderedAyahs = _orderAyahs(
+      records: ayahResult.records,
+      orderedIds: sequenceAsset.ayahOrderIds,
+    );
+    final orderedHadiths = _orderHadiths(
+      records: hadithResult.records,
+      orderedIds: sequenceAsset.hadithOrderIds,
+    );
+
     return DailyContentLoadResult(
       ayahSchemaVersion: ayahResult.schemaVersion,
       hadithSchemaVersion: hadithResult.schemaVersion,
       ayahContentVersion: ayahResult.contentVersion,
       hadithContentVersion: hadithResult.contentVersion,
-      ayahs: ayahResult.records,
-      hadiths: hadithResult.records,
+      ayahs: orderedAyahs,
+      hadiths: orderedHadiths,
+      ayahOrderIds: _extractAyahIds(orderedAyahs),
+      hadithOrderIds: _extractHadithIds(orderedHadiths),
+      sequenceStartDate: sequenceAsset.startDate,
       skippedCount: ayahResult.skippedCount + hadithResult.skippedCount,
-      warnings: [...remoteWarnings, ...ayahResult.warnings, ...hadithResult.warnings],
+      warnings: [
+        ...remoteWarnings,
+        ...ayahResult.warnings,
+        ...hadithResult.warnings,
+      ],
     );
   }
 
@@ -140,7 +157,9 @@ class DailyContentLoader {
     }
 
     if (type != expectedType) {
-      warnings.add('$sourceLabel: type beklenen degerle uyusmuyor ($expectedType).');
+      warnings.add(
+        '$sourceLabel: type beklenen degerle uyusmuyor ($expectedType).',
+      );
       return DailyContentFileParseResult(
         schemaVersion: schemaVersion,
         contentVersion: contentVersion,
@@ -324,10 +343,14 @@ class DailyContentLoader {
     final surahName = _readRequiredString(json, 'surah_name');
     final surahNumber = _readRequiredInt(json, 'surah_number');
     final ayahNumber = _readRequiredInt(json, 'ayah_number');
-    final text = _readRequiredString(json, 'text');
-    final translation = _readRequiredString(json, 'translation');
-    final mealSource = _readRequiredString(json, 'meal_source');
-    final sourceNote = _readRequiredString(json, 'source_note');
+    final textAr = _readRequiredString(json, 'text_ar') ?? _readRequiredString(json, 'text');
+    final textTr = _readRequiredString(json, 'text_tr') ?? _readRequiredString(json, 'translation');
+    final textEn = _readRequiredString(json, 'text_en');
+    final sourceAr = _readRequiredString(json, 'source_ar');
+    final sourceTr = _readRequiredString(json, 'source_tr');
+    final sourceEn = _readRequiredString(json, 'source_en');
+    final mealSource = _readRequiredString(json, 'meal_source') ?? 'source_based';
+    final sourceNote = _readRequiredString(json, 'source_note') ?? '';
     final topics = _readRequiredStringList(json, 'topics');
     final status = _readOptionalString(json, 'status') ?? 'approved';
     final approval = _parseApprovalOrDefault(json);
@@ -337,10 +360,12 @@ class DailyContentLoader {
         surahName == null ||
         surahNumber == null ||
         ayahNumber == null ||
-        text == null ||
-        translation == null ||
-        mealSource == null ||
-        sourceNote == null ||
+        textAr == null ||
+        textTr == null ||
+        textEn == null ||
+        sourceAr == null ||
+        sourceTr == null ||
+        sourceEn == null ||
         topics == null) {
       warnings.add('$path[$index]: ayah kaydi zorunlu alanlari eksik.');
       return null;
@@ -361,8 +386,12 @@ class DailyContentLoader {
       surahName: surahName,
       surahNumber: surahNumber,
       ayahNumber: ayahNumber,
-      text: text,
-      translation: translation,
+      textAr: textAr,
+      textTr: textTr,
+      textEn: textEn,
+      sourceAr: sourceAr,
+      sourceTr: sourceTr,
+      sourceEn: sourceEn,
       mealSource: mealSource,
       sourceNote: sourceNote,
       topics: topics,
@@ -383,10 +412,14 @@ class DailyContentLoader {
     final book = _readRequiredString(json, 'book');
     final hadithNumber = _readRequiredString(json, 'hadith_number');
     final narrator = _readRequiredString(json, 'narrator');
-    final text = _readRequiredString(json, 'text');
-    final translation = _readRequiredString(json, 'translation');
+    final textAr = _readRequiredString(json, 'text_ar') ?? _readRequiredString(json, 'text');
+    final textTr = _readRequiredString(json, 'text_tr') ?? _readRequiredString(json, 'text');
+    final textEn = _readRequiredString(json, 'text_en') ?? _readRequiredString(json, 'translation');
+    final sourceAr = _readRequiredString(json, 'source_ar');
+    final sourceTr = _readRequiredString(json, 'source_tr');
+    final sourceEn = _readRequiredString(json, 'source_en');
     final grade = _readRequiredString(json, 'grade');
-    final sourceNote = _readRequiredString(json, 'source_note');
+    final sourceNote = _readRequiredString(json, 'source_note') ?? '';
     final topics = _readRequiredStringList(json, 'topics');
     final status = _readOptionalString(json, 'status') ?? 'approved';
     final approval = _parseApprovalOrDefault(json);
@@ -397,10 +430,13 @@ class DailyContentLoader {
         book == null ||
         hadithNumber == null ||
         narrator == null ||
-        text == null ||
-        translation == null ||
+        textAr == null ||
+        textTr == null ||
+        textEn == null ||
+        sourceAr == null ||
+        sourceTr == null ||
+        sourceEn == null ||
         grade == null ||
-        sourceNote == null ||
         topics == null) {
       warnings.add('$path[$index]: hadith kaydi zorunlu alanlari eksik.');
       return null;
@@ -422,8 +458,12 @@ class DailyContentLoader {
       book: book,
       hadithNumber: hadithNumber,
       narrator: narrator,
-      text: text,
-      translation: translation,
+      textAr: textAr,
+      textTr: textTr,
+      textEn: textEn,
+      sourceAr: sourceAr,
+      sourceTr: sourceTr,
+      sourceEn: sourceEn,
       grade: grade,
       sourceNote: sourceNote,
       topics: topics,
@@ -461,48 +501,105 @@ class DailyContentLoader {
     );
   }
 
-  List<DailyAyahRecord> _filterAyahsForMonth({
+  List<DailyAyahRecord> _orderAyahs({
     required List<DailyAyahRecord> records,
-    required Set<String> allowedIds,
-    required String monthKey,
-    required List<String> warnings,
+    required List<String> orderedIds,
   }) {
-    if (allowedIds.isEmpty) return records;
-    final filtered = records.where((record) => allowedIds.contains(record.id)).toList();
-    if (filtered.isEmpty) {
-      warnings.add('daily_content_remote: ayah monthly listesi bos kaldi ($monthKey).');
-      return records;
+    if (records.isEmpty) return const [];
+    if (orderedIds.isEmpty) return records;
+    final map = <String, DailyAyahRecord>{for (final r in records) r.id: r};
+    final ordered = <DailyAyahRecord>[];
+    final seen = <String>{};
+    for (final id in orderedIds) {
+      final row = map[id];
+      if (row == null) continue;
+      ordered.add(row);
+      seen.add(id);
     }
-    if (filtered.length != allowedIds.length) {
-      warnings.add(
-        'daily_content_remote: ayah monthly id uyumsuzlugu var '
-        '(beklenen=${allowedIds.length}, bulunan=${filtered.length}).',
-      );
+    for (final row in records) {
+      if (seen.contains(row.id)) continue;
+      ordered.add(row);
     }
-    return filtered;
+    return ordered;
   }
 
-  List<DailyHadithRecord> _filterHadithsForMonth({
+  List<DailyHadithRecord> _orderHadiths({
     required List<DailyHadithRecord> records,
-    required Set<String> allowedIds,
-    required String monthKey,
-    required List<String> warnings,
+    required List<String> orderedIds,
   }) {
-    if (allowedIds.isEmpty) return records;
-    final filtered = records.where((record) => allowedIds.contains(record.id)).toList();
-    if (filtered.isEmpty) {
-      warnings.add(
-        'daily_content_remote: hadith monthly listesi bos kaldi ($monthKey).',
-      );
-      return records;
+    if (records.isEmpty) return const [];
+    if (orderedIds.isEmpty) return records;
+    final map = <String, DailyHadithRecord>{for (final r in records) r.id: r};
+    final ordered = <DailyHadithRecord>[];
+    final seen = <String>{};
+    for (final id in orderedIds) {
+      final row = map[id];
+      if (row == null) continue;
+      ordered.add(row);
+      seen.add(id);
     }
-    if (filtered.length != allowedIds.length) {
-      warnings.add(
-        'daily_content_remote: hadith monthly id uyumsuzlugu var '
-        '(beklenen=${allowedIds.length}, bulunan=${filtered.length}).',
+    for (final row in records) {
+      if (seen.contains(row.id)) continue;
+      ordered.add(row);
+    }
+    return ordered;
+  }
+
+  List<String> _extractAyahIds(List<DailyAyahRecord> records) {
+    final ids = <String>[];
+    for (final row in records) {
+      final id = row.id.trim();
+      if (id.isEmpty || ids.contains(id)) continue;
+      ids.add(id);
+    }
+    return ids;
+  }
+
+  List<String> _extractHadithIds(List<DailyHadithRecord> records) {
+    final ids = <String>[];
+    for (final row in records) {
+      final id = row.id.trim();
+      if (id.isEmpty || ids.contains(id)) continue;
+      ids.add(id);
+    }
+    return ids;
+  }
+
+  Future<_LocalSequenceAsset> _loadLocalSequence({
+    required List<String> warnings,
+    required List<String> fallbackAyahIds,
+    required List<String> fallbackHadithIds,
+  }) async {
+    try {
+      final raw = await rootBundle.loadString(DailyContentPaths.approvedSequence);
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map) {
+        warnings.add('local sequence: json object degil, fallback kullanildi.');
+        return _LocalSequenceAsset(
+          startDate: DailyContentPaths.defaultSequenceStartDate,
+          ayahOrderIds: fallbackAyahIds,
+          hadithOrderIds: fallbackHadithIds,
+        );
+      }
+      final map = Map<String, dynamic>.from(decoded);
+      final startDate =
+          _readRequiredString(map, 'start_date') ??
+          DailyContentPaths.defaultSequenceStartDate;
+      final ayahOrderIds = _readRequiredStringList(map, 'ayah_order_ids') ?? fallbackAyahIds;
+      final hadithOrderIds =
+          _readRequiredStringList(map, 'hadith_order_ids') ?? fallbackHadithIds;
+      return _LocalSequenceAsset(
+        startDate: startDate,
+        ayahOrderIds: ayahOrderIds,
+        hadithOrderIds: hadithOrderIds,
+      );
+    } catch (_) {
+      return _LocalSequenceAsset(
+        startDate: DailyContentPaths.defaultSequenceStartDate,
+        ayahOrderIds: fallbackAyahIds,
+        hadithOrderIds: fallbackHadithIds,
       );
     }
-    return filtered;
   }
 
   String? _readOptionalString(Map<String, dynamic> json, String key) {
@@ -537,8 +634,22 @@ class DailyContentLoader {
       if (entry is! String) return null;
       final trimmed = entry.trim();
       if (trimmed.isEmpty) return null;
-      list.add(trimmed);
+      if (!list.contains(trimmed)) {
+        list.add(trimmed);
+      }
     }
     return list;
   }
+}
+
+class _LocalSequenceAsset {
+  final String startDate;
+  final List<String> ayahOrderIds;
+  final List<String> hadithOrderIds;
+
+  const _LocalSequenceAsset({
+    required this.startDate,
+    required this.ayahOrderIds,
+    required this.hadithOrderIds,
+  });
 }

@@ -541,7 +541,7 @@ Acceptance:
 - [x] Official Diyanet/AwqatSalah API references recorded in strategy docs.
 - [ ] Production release decision cleared (official auth/token + usage/release conditions).
 - [ ] Public content sync target repo URL/branch configured (TASK-05B blocker).
-- [ ] Local stabilization validation commands executed and logged.
+- [x] Local stabilization validation commands executed and logged.
 
 
 

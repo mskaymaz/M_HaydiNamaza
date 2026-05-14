@@ -16,8 +16,12 @@ class DailyAyahRecord {
   final String surahName;
   final int surahNumber;
   final int ayahNumber;
-  final String text;
-  final String translation;
+  final String textAr;
+  final String textTr;
+  final String textEn;
+  final String sourceAr;
+  final String sourceTr;
+  final String sourceEn;
   final String mealSource;
   final String sourceNote;
   final List<String> topics;
@@ -30,8 +34,12 @@ class DailyAyahRecord {
     required this.surahName,
     required this.surahNumber,
     required this.ayahNumber,
-    required this.text,
-    required this.translation,
+    required this.textAr,
+    required this.textTr,
+    required this.textEn,
+    required this.sourceAr,
+    required this.sourceTr,
+    required this.sourceEn,
     required this.mealSource,
     required this.sourceNote,
     required this.topics,
@@ -47,8 +55,12 @@ class DailyHadithRecord {
   final String book;
   final String hadithNumber;
   final String narrator;
-  final String text;
-  final String translation;
+  final String textAr;
+  final String textTr;
+  final String textEn;
+  final String sourceAr;
+  final String sourceTr;
+  final String sourceEn;
   final String grade;
   final String sourceNote;
   final List<String> topics;
@@ -62,8 +74,12 @@ class DailyHadithRecord {
     required this.book,
     required this.hadithNumber,
     required this.narrator,
-    required this.text,
-    required this.translation,
+    required this.textAr,
+    required this.textTr,
+    required this.textEn,
+    required this.sourceAr,
+    required this.sourceTr,
+    required this.sourceEn,
     required this.grade,
     required this.sourceNote,
     required this.topics,

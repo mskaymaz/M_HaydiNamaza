@@ -7,16 +7,16 @@ import 'daily_content_paths.dart';
 class DailyContentRemoteBundle {
   final Map<String, dynamic> ayahPayload;
   final Map<String, dynamic> hadithPayload;
-  final Set<String> ayahIds;
-  final Set<String> hadithIds;
-  final String monthKey;
+  final List<String> ayahOrderIds;
+  final List<String> hadithOrderIds;
+  final String sequenceStartDate;
 
   const DailyContentRemoteBundle({
     required this.ayahPayload,
     required this.hadithPayload,
-    required this.ayahIds,
-    required this.hadithIds,
-    required this.monthKey,
+    required this.ayahOrderIds,
+    required this.hadithOrderIds,
+    required this.sequenceStartDate,
   });
 }
 
@@ -24,13 +24,11 @@ class DailyContentRemoteClient {
   final String _baseUrl;
   final http.Client _httpClient;
 
-  DailyContentRemoteClient({
-    String? baseUrl,
-    http.Client? httpClient,
-  }) : _baseUrl = (baseUrl ?? DailyContentPaths.remoteBaseUrl).trim(),
-       _httpClient = httpClient ?? http.Client();
+  DailyContentRemoteClient({String? baseUrl, http.Client? httpClient})
+    : _baseUrl = (baseUrl ?? DailyContentPaths.remoteBaseUrl).trim(),
+      _httpClient = httpClient ?? http.Client();
 
-  Future<DailyContentRemoteBundle?> fetchMonthlyBundle({
+  Future<DailyContentRemoteBundle?> fetchBundle({
     required DateTime date,
     required List<String> warnings,
   }) async {
@@ -45,29 +43,6 @@ class DailyContentRemoteClient {
       warnings: warnings,
     );
     if (manifest == null) return null;
-
-    final monthKey = _monthKey(date);
-    final monthlyPath = _readMonthlyPath(manifest, monthKey);
-    if (monthlyPath == null) {
-      warnings.add('daily_content_remote: monthly path bulunamadi ($monthKey).');
-      return null;
-    }
-
-    final monthly = await _getJsonObject(
-      uri: _resolveUri(monthlyPath),
-      label: monthlyPath,
-      warnings: warnings,
-    );
-    if (monthly == null) return null;
-
-    final ayahIds = _readIdSet(monthly['ayah_ids']);
-    final hadithIds = _readIdSet(monthly['hadith_ids']);
-    if (ayahIds.isEmpty || hadithIds.isEmpty) {
-      warnings.add(
-        'daily_content_remote: aylik id listesi bos ($monthKey), local fallback.',
-      );
-      return null;
-    }
 
     final ayahPath = _readPublishPath(manifest, type: 'ayahs');
     final hadithPath = _readPublishPath(manifest, type: 'hadiths');
@@ -90,13 +65,112 @@ class DailyContentRemoteClient {
       return null;
     }
 
+    final startDate =
+        _readScheduleStartDate(manifest) ??
+        DailyContentPaths.defaultSequenceStartDate;
+    final sequencePaths = _readSequencePaths(manifest);
+
+    final ayahOrderIds = await _loadOrderIds(
+      path: sequencePaths.$1,
+      payloadType: 'ayah',
+      fallbackPayload: ayahPayload,
+      warnings: warnings,
+    );
+    final hadithOrderIds = await _loadOrderIds(
+      path: sequencePaths.$2,
+      payloadType: 'hadith',
+      fallbackPayload: hadithPayload,
+      warnings: warnings,
+    );
+
     return DailyContentRemoteBundle(
       ayahPayload: ayahPayload,
       hadithPayload: hadithPayload,
-      ayahIds: ayahIds,
-      hadithIds: hadithIds,
-      monthKey: monthKey,
+      ayahOrderIds: ayahOrderIds,
+      hadithOrderIds: hadithOrderIds,
+      sequenceStartDate: startDate,
     );
+  }
+
+  Future<List<String>> _loadOrderIds({
+    required String? path,
+    required String payloadType,
+    required Map<String, dynamic> fallbackPayload,
+    required List<String> warnings,
+  }) async {
+    final fallback = _extractIdsFromPayload(fallbackPayload);
+    if (path == null || path.trim().isEmpty) return fallback;
+    final obj = await _getJsonObject(
+      uri: _resolveUri(path),
+      label: path,
+      warnings: warnings,
+    );
+    if (obj == null) return fallback;
+    final ids = _extractIds(obj['ids']);
+    if (ids.isEmpty) {
+      warnings.add(
+        'daily_content_remote: $payloadType sirasi bos, payload sirasi kullanildi.',
+      );
+      return fallback;
+    }
+    return ids;
+  }
+
+  List<String> _extractIdsFromPayload(Map<String, dynamic> payload) {
+    final records = payload['records'];
+    if (records is! List) return const <String>[];
+    final ids = <String>[];
+    for (final row in records) {
+      if (row is! Map) continue;
+      final map = Map<String, dynamic>.from(row);
+      final id = map['id'];
+      if (id is! String) continue;
+      final trimmed = id.trim();
+      if (trimmed.isEmpty || ids.contains(trimmed)) continue;
+      ids.add(trimmed);
+    }
+    return ids;
+  }
+
+  List<String> _extractIds(Object? value) {
+    if (value is! List) return const <String>[];
+    final ids = <String>[];
+    for (final row in value) {
+      if (row is! String) continue;
+      final trimmed = row.trim();
+      if (trimmed.isEmpty || ids.contains(trimmed)) continue;
+      ids.add(trimmed);
+    }
+    return ids;
+  }
+
+  String? _readScheduleStartDate(Map<String, dynamic> manifest) {
+    final raw = manifest['schedule'];
+    if (raw is! Map) return null;
+    final map = Map<String, dynamic>.from(raw);
+    final value = map['start_date'];
+    if (value is! String) return null;
+    final trimmed = value.trim();
+    if (trimmed.isEmpty) return null;
+    return trimmed;
+  }
+
+  (String?, String?) _readSequencePaths(Map<String, dynamic> manifest) {
+    final raw = manifest['sequence_files'];
+    if (raw is! Map) return (null, null);
+    final map = Map<String, dynamic>.from(raw);
+
+    String? readPath(String key) {
+      final row = map[key];
+      if (row is! Map) return null;
+      final item = Map<String, dynamic>.from(row);
+      final path = item['path'];
+      if (path is! String) return null;
+      final trimmed = path.trim();
+      return trimmed.isEmpty ? null : trimmed;
+    }
+
+    return (readPath('ayah_ids'), readPath('hadith_ids'));
   }
 
   Future<Map<String, dynamic>?> _getJsonObject({
@@ -128,31 +202,11 @@ class DailyContentRemoteClient {
     if (path.startsWith('http://') || path.startsWith('https://')) {
       return Uri.parse(path);
     }
-    final left = _baseUrl.endsWith('/') ? _baseUrl.substring(0, _baseUrl.length - 1) : _baseUrl;
+    final left = _baseUrl.endsWith('/')
+        ? _baseUrl.substring(0, _baseUrl.length - 1)
+        : _baseUrl;
     final right = path.startsWith('/') ? path.substring(1) : path;
     return Uri.parse('$left/$right');
-  }
-
-  String _monthKey(DateTime date) {
-    final month = date.month.toString().padLeft(2, '0');
-    return '${date.year}-$month';
-  }
-
-  String? _readMonthlyPath(Map<String, dynamic> manifest, String monthKey) {
-    final rows = manifest['monthly'];
-    if (rows is! List) return null;
-    for (final row in rows) {
-      if (row is! Map) continue;
-      final map = Map<String, dynamic>.from(row);
-      final month = map['month'];
-      if (month is! String || month.trim() != monthKey) continue;
-      final path = map['path'];
-      if (path is String && path.trim().isNotEmpty) {
-        return path.trim();
-      }
-      return null;
-    }
-    return null;
   }
 
   String? _readPublishPath(Map<String, dynamic> manifest, {required String type}) {
@@ -165,17 +219,5 @@ class DailyContentRemoteClient {
     final path = typeMap['path'];
     if (path is! String || path.trim().isEmpty) return null;
     return path.trim();
-  }
-
-  Set<String> _readIdSet(Object? value) {
-    if (value is! List) return const <String>{};
-    final set = <String>{};
-    for (final entry in value) {
-      if (entry is! String) continue;
-      final trimmed = entry.trim();
-      if (trimmed.isEmpty) continue;
-      set.add(trimmed);
-    }
-    return set;
   }
 }

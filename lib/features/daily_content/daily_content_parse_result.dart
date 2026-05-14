@@ -25,6 +25,9 @@ class DailyContentLoadResult {
   final String? hadithContentVersion;
   final List<DailyAyahRecord> ayahs;
   final List<DailyHadithRecord> hadiths;
+  final List<String> ayahOrderIds;
+  final List<String> hadithOrderIds;
+  final String sequenceStartDate;
   final int skippedCount;
   final List<String> warnings;
 
@@ -35,6 +38,9 @@ class DailyContentLoadResult {
     required this.hadithContentVersion,
     required this.ayahs,
     required this.hadiths,
+    required this.ayahOrderIds,
+    required this.hadithOrderIds,
+    required this.sequenceStartDate,
     required this.skippedCount,
     required this.warnings,
   });

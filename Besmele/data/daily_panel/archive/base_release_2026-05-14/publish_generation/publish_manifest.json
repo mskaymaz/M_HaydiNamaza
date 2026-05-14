@@ -1,36 +1,37 @@
 {
-  "generated_at_utc": "2026-05-14T07:45:50.572452+00:00",
+  "generated_at_utc": "2026-05-14T13:50:10.636833+00:00",
   "source_inputs": [
+    "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\legacy_files\\hadiths_draft.json",
     "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\legacy_files\\hadiths_draft_DiyanetUnified_v2.json",
-    "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\legacy_files\\ayahs_draft_Edit.json"
+    "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\legacy_files\\ayahs_draft_Edit.json",
+    "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\legacy_files\\ayahs_draft.json"
   ],
   "publish_outputs": [
     "Besmele\\data\\daily_panel\\publish\\hadiths.v1.approved.json",
     "Besmele\\data\\daily_panel\\publish\\ayahs.v1.approved.json",
+    "Besmele\\data\\daily_panel\\publish\\sequence.v1.json",
     "assets\\data\\daily_content\\approved\\hadiths.v1.approved.json",
-    "assets\\data\\daily_content\\approved\\ayahs.v1.approved.json"
-  ],
-  "removed_record_fields": [
-    "status",
-    "approval",
-    "approval.approved_by",
-    "approval.approved_at",
-    "approval.review_note"
+    "assets\\data\\daily_content\\approved\\ayahs.v1.approved.json",
+    "assets\\data\\daily_content\\approved\\sequence.v1.json"
   ],
   "stats": {
-    "hadith_record_count": 550,
+    "hadith_record_count": 109,
     "ayah_record_count": 424,
-    "hadith_mojibake_markers_before": 0,
-    "hadith_mojibake_markers_after": 0,
-    "ayah_mojibake_markers_before": 0,
-    "ayah_mojibake_markers_after": 0,
-    "ayah_arabic_text_count": 424
+    "hadith_tr_max_chars": 300,
+    "hadith_arabic_text_count": 109,
+    "ayah_arabic_text_count": 424,
+    "sequence_start_date": "2026-05-15"
   },
   "archive_files": [
     {
+      "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\archive__base_release_2026-05-14__legacy_files__hadiths_draft.json",
+      "sha256": "f5d99a76d3910af3dc4db833dda09ade7ad47f54d0e2e5112bd84abe4265ae81",
+      "size_bytes": 398948
+    },
+    {
       "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\archive__base_release_2026-05-14__legacy_files__hadiths_draft_DiyanetUnified_v2.json",
-      "sha256": "33cbe8f8608e8868956c7b76225dbcb1cff3b042fa61516b0bacc00efcd11ee8",
-      "size_bytes": 918261
+      "sha256": "a4376ad99e55add8d03e960d46b7ef14b0f5444b6ccb8867d0ed4800c8932d5d",
+      "size_bytes": 151259
     },
     {
       "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\archive__base_release_2026-05-14__legacy_files__ayahs_draft_Edit.json",
@@ -38,24 +39,39 @@
       "size_bytes": 698441
     },
     {
+      "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\archive__base_release_2026-05-14__legacy_files__ayahs_draft.json",
+      "sha256": "4f40eb2b5c7fed341f903cbf506f305952d92c7a18440567f5f1bed9b4c00a59",
+      "size_bytes": 683487
+    },
+    {
       "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\data__daily_panel__publish__hadiths.v1.approved.json",
-      "sha256": "88e572165e762232f86997ed71c381bc730986b9f4f633766d1dcefcc6772f0c",
-      "size_bytes": 894037
+      "sha256": "a4376ad99e55add8d03e960d46b7ef14b0f5444b6ccb8867d0ed4800c8932d5d",
+      "size_bytes": 151259
     },
     {
       "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\data__daily_panel__publish__ayahs.v1.approved.json",
-      "sha256": "85924c394b034a57b0fa181a968d1c95fad7228a087d64787b97dbfafc3a20b4",
-      "size_bytes": 397151
+      "sha256": "1707c102a01b1e25514fa0a10f80fef8f90da7ccd1aa37f11bad58e3b95fe258",
+      "size_bytes": 583148
+    },
+    {
+      "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\data__daily_panel__publish__sequence.v1.json",
+      "sha256": "46b5a69886dd08a693f7d52d795404591ac138a317247aee701c2b16c75470da",
+      "size_bytes": 11199
     },
     {
       "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\data__daily_content__approved__hadiths.v1.approved.json",
-      "sha256": "88e572165e762232f86997ed71c381bc730986b9f4f633766d1dcefcc6772f0c",
-      "size_bytes": 894037
+      "sha256": "a4376ad99e55add8d03e960d46b7ef14b0f5444b6ccb8867d0ed4800c8932d5d",
+      "size_bytes": 151259
     },
     {
       "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\data__daily_content__approved__ayahs.v1.approved.json",
-      "sha256": "85924c394b034a57b0fa181a968d1c95fad7228a087d64787b97dbfafc3a20b4",
-      "size_bytes": 397151
+      "sha256": "1707c102a01b1e25514fa0a10f80fef8f90da7ccd1aa37f11bad58e3b95fe258",
+      "size_bytes": 583148
+    },
+    {
+      "path": "Besmele\\data\\daily_panel\\archive\\base_release_2026-05-14\\publish_generation\\data__daily_content__approved__sequence.v1.json",
+      "sha256": "46b5a69886dd08a693f7d52d795404591ac138a317247aee701c2b16c75470da",
+      "size_bytes": 11199
     }
   ]
 }

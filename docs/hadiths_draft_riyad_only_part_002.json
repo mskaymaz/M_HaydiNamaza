@@ -10,7 +10,7 @@
                           "review_required":  true
                       },
     "character_rule":  {
-                           "text_tr_max_chars":  400,
+                           "text_tr_max_chars": 300,
                            "result":  "PASS",
                            "max_text_tr_chars":  78
                        },
@@ -1454,3 +1454,4 @@
                   }
               ]
 }
+

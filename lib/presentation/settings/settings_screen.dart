@@ -1,5 +1,5 @@
-﻿import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
+﻿import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../app/calculation_method_storage.dart';
@@ -10,22 +10,24 @@ import '../../app/reminder_audio_service.dart';
 import '../../app/reminder_text_settings_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
-import '../reminders/flashing_reminder_card.dart';
+import '../../features/shared_settings/shared_settings_remote_client.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
-import 'widgets/settings_color_picker_widgets.dart';
-import 'widgets/settings_color_sections_group.dart';
-import 'widgets/settings_shared_modules_group.dart';
 import 'settings_audio_mode_texts.dart';
 import 'settings_color_formatters.dart';
 import 'settings_favorite_matcher.dart';
 import 'settings_reminder_runtime_helpers.dart';
 import 'settings_reminder_snapshot.dart';
-import 'settings_text_formatters.dart';
 import 'settings_ui_mappers.dart';
 import 'settings_voice_key.dart';
-import 'widgets/settings_reminder_sections_group.dart';
+import 'widgets/settings_color_picker_widgets.dart';
 import 'widgets/settings_top_settings_section.dart';
+import 'widgets/shared_settings/settings_legacy_accordion_group.dart';
+import 'widgets/shared_settings/settings_shared_about_section.dart';
+import 'widgets/shared_settings/settings_shared_contact_section.dart';
+import 'widgets/shared_settings/settings_shared_other_apps_section.dart';
+import 'widgets/shared_settings/settings_shared_support_section.dart';
+import 'widgets/shared_settings/settings_shared_update_section.dart';
 
 class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -61,6 +63,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       TextEditingController();
   final TextEditingController _visualReopenController = TextEditingController();
   final List<_VoiceOption> _voiceOptions = [];
+
   LocationData? _location;
   List<LocationFavorite> _favorites = [];
   LocationFavorite? _selectedFavorite;
@@ -125,8 +128,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _voiceReminderController.text = settings.voiceText;
     _visualReminderController.text = settings.visualText;
     _voiceRepeatController.text = settings.voiceRepeatSeconds.toString();
-    _vibrationDurationController.text = settings.vibrationDurationSeconds
-        .toString();
+    _vibrationDurationController.text =
+        settings.vibrationDurationSeconds.toString();
     _vibrationPauseController.text = settings.vibrationPauseSeconds.toString();
     _visualDisplayController.text = settings.visualDisplaySeconds.toString();
     _visualReopenController.text = settings.visualReopenSeconds.toString();
@@ -220,7 +223,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onOpenCalculationMethod: () async {
               final changed = await Navigator.of(context).push<bool>(
                 MaterialPageRoute(
-                  builder: (_) => CalculationMethodScreen(initialCode: _methodCode),
+                  builder: (_) =>
+                      CalculationMethodScreen(initialCode: _methodCode),
                 ),
               );
               if (changed == true) {
@@ -228,8 +232,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               }
             },
           ),
-          SettingsReminderSectionsGroup(
-            screenPadding: ui.screenPadding,
+          SettingsLegacyAccordionGroup(
+            outerPadding: ui.screenPadding.copyWith(top: 0),
             panelStyle: ui.panel,
             showVoiceIcon: _showVoiceIcon,
             showVisualIcon: _showVisualIcon,
@@ -239,33 +243,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
             vibrationDurationController: _vibrationDurationController,
             vibrationPauseController: _vibrationPauseController,
             onVoiceToggleChanged: (value) {
-              setState(() {
-                _showVoiceIcon = value;
-              });
+              setState(() => _showVoiceIcon = value);
               _persistReminderTexts();
             },
             onVisualToggleChanged: (value) {
-              setState(() {
-                _showVisualIcon = value;
-              });
+              setState(() => _showVisualIcon = value);
               _persistReminderTexts();
             },
             onAzanToggleChanged: (value) {
-              setState(() {
-                _showAzanIcon = value;
-              });
+              setState(() => _showAzanIcon = value);
               _persistReminderTexts();
             },
             onVibrationToggleChanged: (value) {
-              setState(() {
-                _showVibrationIcon = value;
-              });
+              setState(() => _showVibrationIcon = value);
               _persistReminderTexts();
             },
             onSortChanged: (value) {
-              setState(() {
-                _sortCustomPrayersByTime = value ?? true;
-              });
+              setState(() => _sortCustomPrayersByTime = value ?? true);
               _persistReminderTexts();
             },
             onVibrationDurationChanged: (_) => _persistReminderTexts(),
@@ -273,16 +267,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
             selectedAudioMode: _selectedAudioMode,
             onAudioModeChanged: (value) {
               if (value == null) return;
-              setState(() {
-                _selectedAudioMode = value;
-              });
+              setState(() => _selectedAudioMode = value);
               _persistReminderTexts();
             },
             selectedVoiceKey: _selectedVoiceKey,
             voiceItems: [
               const DropdownMenuItem<String?>(
                 value: null,
-                child: Text('Sistem Varsayılanı'),
+                child: Text('Sistem Varsayilani'),
               ),
               ..._voiceOptions.map(
                 (voice) => DropdownMenuItem<String?>(
@@ -292,9 +284,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ],
             onVoiceChanged: (value) {
-              setState(() {
-                _selectedVoiceKey = value;
-              });
+              setState(() => _selectedVoiceKey = value);
               _persistReminderTexts();
             },
             onPickAudio: () => _pickReminderAudio(context),
@@ -303,7 +293,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               selectedAudioLabel: _selectedAudioLabel,
               selectedAudioMode: _selectedAudioMode,
             ),
-            onVoiceTest: () => _playVoiceReminderTest(context, l10n),
             voiceReminderController: _voiceReminderController,
             voiceRepeatController: _voiceRepeatController,
             onVoiceTextChanged: (_) => _persistReminderTexts(),
@@ -314,11 +303,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onVisualTextChanged: (_) => _persistReminderTexts(),
             onVisualDisplayChanged: (_) => _persistReminderTexts(),
             onVisualReopenChanged: (_) => _persistReminderTexts(),
-            onShowPreview: () => _showVisualReminderPreview(context, l10n),
-          ),
-          SettingsColorSectionsGroup(
-            outerPadding: ui.screenPadding.copyWith(top: 0),
-            panelStyle: ui.panel,
             panelColor: palette.zeminColor,
             textColor: palette.cizgiColor,
             backgroundColor: palette.backgroundZeminColor,
@@ -331,7 +315,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onEditTextColor: () => _editColor(
               context: context,
-              title: 'Yazı Rengi',
+              title: 'Yazi Rengi',
               initialColor: palette.cizgiColor,
               onApply: widget.uiPaletteController.setCizgiColor,
             ),
@@ -343,7 +327,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onEditBackgroundLineColor: () => _editColor(
               context: context,
-              title: 'Arka Plan Çizgi Rengi',
+              title: 'Arka Plan Cizgi Rengi',
               initialColor: palette.backgroundCizgiColor,
               onApply: widget.uiPaletteController.setBackgroundCizgiColor,
             ),
@@ -368,9 +352,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
               setState(() {});
             },
           ),
-          SettingsSharedModulesGroup(
-            outerPadding: ui.screenPadding.copyWith(top: 0),
-            panelStyle: ui.panel,
+          Padding(
+            padding: ui.screenPadding.copyWith(top: 0),
+            child: Column(
+              children: const [
+                SettingsSharedContactSection(),
+                SizedBox(height: 10),
+                SettingsSharedUpdateSection(),
+                SizedBox(height: 10),
+                SettingsSharedOtherAppsSection(
+                  remoteClient: SharedSettingsRemoteClient(),
+                ),
+                SizedBox(height: 10),
+                SettingsSharedSupportSection(),
+                SizedBox(height: 10),
+                SettingsSharedAboutSection(),
+              ],
+            ),
           ),
         ],
       ),
@@ -379,34 +377,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _persistReminderTexts() async {
     await _reminderTextStorage.write(_currentReminderSettingsSnapshot());
-  }
-
-  Future<void> _playVoiceReminderTest(
-    BuildContext context,
-    AppLocalizations l10n,
-  ) async {
-    final settings = _currentReminderSettingsSnapshot();
-    if (settings.audioMode != ReminderAudioMode.textToSpeech &&
-        (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Test için önce bir ses dosyası seçin.'),
-        ),
-      );
-      return;
-    }
-    try {
-      await _reminderAudioService.playReminder(
-        settings: settings,
-        selectedLocale: widget.localeController.value,
-        prayerLabel: l10n.prayerDhuhr,
-      );
-    } catch (_) {
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sesli test başlatılamadı.')),
-      );
-    }
   }
 
   ReminderTextSettings _currentReminderSettingsSnapshot() {
@@ -433,42 +403,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       selectedVoiceLocale: selectedVoice?.locale,
       selectedAudioPath: _selectedAudioPath,
       selectedAudioLabel: _selectedAudioLabel,
-    );
-  }
-
-  Future<void> _showVisualReminderPreview(
-    BuildContext context,
-    AppLocalizations l10n,
-  ) async {
-    final effectiveText = effectiveVisualReminderText(
-      visualText: _visualReminderController.text,
-      voiceText: _voiceReminderController.text,
-    ).trim();
-    if (effectiveText.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Görsel önizleme için önce metin girin.'),
-        ),
-      );
-      return;
-    }
-    await showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-          content: FlashingReminderCard(
-            prayerLabel: '${toTurkishUpper(l10n.prayerDhuhr)} VAKTİ',
-            message: effectiveText,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Kapat'),
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -590,7 +524,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('İptal'),
+                  child: const Text('Iptal'),
                 ),
                 FilledButton(
                   onPressed: () async {
@@ -610,7 +544,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       },
     );
   }
-
 }
 
 class _VoiceOption {
@@ -622,5 +555,3 @@ class _VoiceOption {
   String get key => '$locale|$name';
   String get label => '$name ($locale)';
 }
-
-

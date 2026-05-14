@@ -114,7 +114,7 @@ Status: Closed after safe decomposition checkpoints and documented exception han
   - No behavior change intended.
   - Deeper HomeController/ViewModel/ReminderEngine extraction is deferred to a future dedicated architecture task, not TASK-03.
 
-### TASK-03A — settings_screen.dart UI decomposition
+### TASK-03A ï¿½ settings_screen.dart UI decomposition
 
 - [x] Extract settings section panel/header helpers.
 - [x] Extract reminder field/toggle helpers.
@@ -129,7 +129,7 @@ Status: Closed after safe decomposition checkpoints and documented exception han
 - [x] Audit settings orchestration/load-save/service separation.
 - [x] Continuation checkpoint: extracted internal color dialog UI widgets (`ColorSpectrum`, `HueStrip`) and moved `FlashingReminderPreview` into settings widgets files; orchestration stayed in `settings_screen.dart`.
 
-### TASK-03B — location_screen.dart safe UI/helper extraction checkpoint
+### TASK-03B ï¿½ location_screen.dart safe UI/helper extraction checkpoint
 
 - [x] Extract location name formatting helpers.
 - [x] Extract location add-favorite button.
@@ -141,7 +141,7 @@ Status: Closed after safe decomposition checkpoints and documented exception han
 - Continuation checkpoint: tiny safe line compaction only (no behavior change, no orchestration move).
 - location_screen.dart reduced below 600 in this pass (~596 lines).
 
-### TASK-03C — home_screen.dart first presentational extraction checkpoint
+### TASK-03C ï¿½ home_screen.dart first presentational extraction checkpoint
 
 Status: Final audit completed with documented exceptions; safe decomposition checkpoint closed without behavior change.
 
@@ -325,7 +325,7 @@ Acceptance:
 ### TASK-04B closure audit (2026-05-12)
 - Prayer-time data-source strategy documentation was completed.
 - Covered: candidate source options, source quality label plan, UI transparency text plan, 10-city comparison test plan, and release gate criteria.
-- No final source/fallback contract decision will be made before the official CÝMER/Diyanet response is evaluated.
+- No final source/fallback contract decision will be made before the official Cï¿½MER/Diyanet response is evaluated.
 - Finalization after the official response will be handled as a separate checkpoint.
 - TASK-04B is considered closed for the current documentation scope.
 - [x] TASK-04B source discovery update: official AwqatSalah API sources recorded (2026-05-13).
@@ -430,11 +430,11 @@ Acceptance:
 Goal: bring the reusable settings model from M_RekatSay into M_HaydiNamaza cleanly.
 
 Required sections:
-- [x] Bize Ulasin
-- [x] Uygulama Bilgileri ve Guncelleme
-- [x] Diger Uygulamalarimiz
-- [x] Destek Olabilirsiniz
-- [x] Biz Kimiz
+- [ ] Bize Ulasin
+- [ ] Uygulama Bilgileri ve Guncelleme
+- [ ] Diger Uygulamalarimiz
+- [ ] Destek Olabilirsiniz
+- [ ] Biz Kimiz
 
 Implementation rules:
 - [x] Do not blindly copy M_RekatSay files.

@@ -466,6 +466,12 @@ Required sections:
 
 Goal: review all shared settings structures one-by-one and finalize TASK-07.
 
+- [ ] Review and polish: Hesaplama Yontemi
+- [ ] Review and polish: Hatirlatma Secenekleri (accordion)
+- [ ] Review and polish: Titresimle Uyari Ayarlari (accordion)
+- [ ] Review and polish: Sesli Hatirlatma (accordion)
+- [ ] Review and polish: Gorsel Hatirlatma (accordion)
+- [ ] Review and polish: Arayuz ve Arkaplan Renkleri (accordion)
 - [ ] Review and polish: Bize Ulasin
 - [ ] Review and polish: Uygulama Bilgileri ve Guncelleme
 - [ ] Review and polish: Diger Uygulamalarimiz

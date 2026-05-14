@@ -373,15 +373,15 @@ Future content goal:
 
 Goal: publish approved ayah/hadith content from a public repo while keeping private repo as canonical source.
 
-- [ ] Define public data contract under AllApp/data/daily_content/v1/.
-- [ ] Add manifest.json contract (schema_version, content_version, generated_at, file list, checksums).
+- [x] Define public data contract under AllApp/data/daily_content/v1/.
+- [x] Add manifest.json contract (schema_version, content_version, generated_at, file list, checksums).
 - [ ] Keep private repo as canonical source; generate and sync publish artifacts to public repo.
-- [ ] Keep archive snapshots in private repo (Besmele/data/daily_panel/archive/...) as baseline history.
-- [ ] Add monthly packs (monthly/YYYY-MM.json) for ayah/hadith id pools.
-- [ ] Monthly pack generation must be random (no sequential fill).
-- [ ] Apply topic-based quota balancing in monthly generation (avoid same-topic streaks).
-- [ ] Add cooldown window across recent months to reduce repeated ids.
-- [ ] Add deterministic month seed for reproducible generation.
+- [x] Keep archive snapshots in private repo (Besmele/data/daily_panel/archive/...) as baseline history.
+- [x] Add monthly packs (monthly/YYYY-MM.json) for ayah/hadith id pools.
+- [x] Monthly pack generation must be random (no sequential fill).
+- [x] Apply topic-based quota balancing in monthly generation (avoid same-topic streaks).
+- [x] Add cooldown window across recent months to reduce repeated ids.
+- [x] Add deterministic month seed for reproducible generation.
 - [ ] App remote fetch must read from GitHub public URL first, then fallback to local assets.
 - [ ] Add timeout and parse-failure fallback rules for remote fetch.
 - [ ] Document generation + publish runbook in repo docs.

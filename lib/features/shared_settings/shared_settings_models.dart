@@ -1,9 +1,10 @@
-﻿class SharedSettingsContactConfig {
+class SharedSettingsContactConfig {
   final String email;
   final String supportFormUrl;
   final String supportFormTopic;
   final String supportFormMessage;
   final String responsePolicyText;
+  final List<String> topics;
 
   const SharedSettingsContactConfig({
     required this.email,
@@ -11,6 +12,7 @@
     required this.supportFormTopic,
     required this.supportFormMessage,
     required this.responsePolicyText,
+    this.topics = const <String>[],
   });
 }
 
@@ -118,5 +120,35 @@ class UpdateManifest {
     required this.url,
     required this.forceUpdate,
     required this.notes,
+  });
+}
+
+class SharedSettingsSendMessageResult {
+  final bool success;
+  final String? errorMessage;
+
+  const SharedSettingsSendMessageResult({
+    required this.success,
+    this.errorMessage,
+  });
+}
+
+class SharedSettingsUserMessage {
+  final String topic;
+  final String message;
+  final String status;
+  final bool adminSeen;
+  final bool awaitingReply;
+  final DateTime? createdAt;
+  final String? adminReply;
+
+  const SharedSettingsUserMessage({
+    required this.topic,
+    required this.message,
+    required this.status,
+    required this.adminSeen,
+    required this.awaitingReply,
+    required this.createdAt,
+    required this.adminReply,
   });
 }

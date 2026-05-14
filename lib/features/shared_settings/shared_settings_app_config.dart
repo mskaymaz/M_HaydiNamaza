@@ -1,4 +1,4 @@
-﻿import 'shared_settings_models.dart';
+import 'shared_settings_models.dart';
 
 const SharedSettingsAppConfig kSharedSettingsAppConfig = SharedSettingsAppConfig(
   appName: 'Haydi Namaza',
@@ -20,6 +20,12 @@ const SharedSettingsAppConfig kSharedSettingsAppConfig = SharedSettingsAppConfig
     supportFormTopic: 'Geri bildirim',
     supportFormMessage: 'Mesajinizi detayli yazabilirsiniz.',
     responsePolicyText: 'Mesajlar sirayla degerlendirilir.',
+    topics: <String>[
+      'Oneri / Geri Bildirim',
+      'Hata Bildirimi',
+      'Talepler',
+      'Diger',
+    ],
   ),
   support: SharedSettingsSupportConfig(
     title: 'Destek Olabilirsiniz',

@@ -76,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime _lastRefreshDay = DateTime.now();
   double _drawerProgress = 0;
   double _infoPanelDragDy = 0;
+  bool _showPanelAddButton = false;
   bool _showHijriDate = false;
   bool _reminderCheckInProgress = false;
   int _customPrayerSeed = 0;
@@ -615,30 +616,76 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     if (_drawerProgress > 0.02)
                                       Expanded(
-                                        child: HomePrayerList(
-                                          controller:
-                                              _prayerListScrollController,
-                                          items: items,
-                                          active: active,
-                                          style: ui.listPanel,
-                                          listPadding: ui.listPadding,
-                                          rowGap: ui.rowGap,
-                                          iconStyle: ui.iconToggle,
-                                          chipStyle: ui.reminderChip,
-                                          typography: ui.typography,
-                                          cizgiColor: palette.cizgiColor,
-                                          activeColor: palette.zeminColor,
-                                          showVoiceIcon:
-                                              _reminderSettings.showVoiceIcon,
-                                          showVisualIcon:
-                                              _reminderSettings.showVisualIcon,
-                                          showAzanIcon:
-                                              _reminderSettings.showAzanIcon,
-                                          showVibrationIcon:
-                                              _reminderSettings
-                                                  .showVibrationIcon,
-                                          onAddCustomPrayer:
-                                              _addCustomPrayerRow,
+                                        child: GestureDetector(
+                                          behavior: HitTestBehavior.translucent,
+                                          onTap: () {
+                                            setState(
+                                              () => _showPanelAddButton =
+                                                  !_showPanelAddButton,
+                                            );
+                                          },
+                                          child: Stack(
+                                            children: [
+                                              HomePrayerList(
+                                                controller:
+                                                    _prayerListScrollController,
+                                                items: items,
+                                                active: active,
+                                                style: ui.listPanel,
+                                                listPadding: ui.listPadding,
+                                                rowGap: ui.rowGap,
+                                                iconStyle: ui.iconToggle,
+                                                chipStyle: ui.reminderChip,
+                                                typography: ui.typography,
+                                                cizgiColor: palette.cizgiColor,
+                                                activeColor: palette.zeminColor,
+                                                showVoiceIcon: _reminderSettings
+                                                    .showVoiceIcon,
+                                                showVisualIcon: _reminderSettings
+                                                    .showVisualIcon,
+                                                showAzanIcon: _reminderSettings
+                                                    .showAzanIcon,
+                                                showVibrationIcon:
+                                                    _reminderSettings
+                                                        .showVibrationIcon,
+                                              ),
+                                              if (_showPanelAddButton)
+                                                Positioned(
+                                                  left: 12,
+                                                  bottom: 12,
+                                                  child: InkWell(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          999,
+                                                        ),
+                                                    onTap: _addCustomPrayerRow,
+                                                    child: Container(
+                                                      width: 36,
+                                                      height: 36,
+                                                      decoration: BoxDecoration(
+                                                        color: const Color(
+                                                          0xFFFFEB3B,
+                                                        ),
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                          color: palette
+                                                              .cizgiColor
+                                                              .withValues(
+                                                                alpha: 0.25,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      child: const Icon(
+                                                        Icons.add,
+                                                        color:
+                                                            Color(0xFF1B5E20),
+                                                        size: 19.5,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     if (_drawerProgress > 0.02)
@@ -1467,5 +1514,3 @@ class _HomeScreenState extends State<HomeScreen> {
     return ordered;
   }
 }
-
-

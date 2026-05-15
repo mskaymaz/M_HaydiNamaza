@@ -6,3 +6,6 @@
 - Diyanet official data access added as a release blocker.
 - Daily ayah/hadith and qibla engine upgrades added to the plan.
 
+## 2026-05-15
+- Ekleme (+) butonu yerlesimi/renk/davranis tasarimi guncellendi.
+

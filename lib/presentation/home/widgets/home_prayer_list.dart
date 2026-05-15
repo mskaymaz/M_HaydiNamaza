@@ -70,7 +70,6 @@ class HomePrayerList extends StatelessWidget {
   final bool showVisualIcon;
   final bool showAzanIcon;
   final bool showVibrationIcon;
-  final VoidCallback onAddCustomPrayer;
 
   const HomePrayerList({
     super.key,
@@ -89,7 +88,6 @@ class HomePrayerList extends StatelessWidget {
     required this.showVisualIcon,
     required this.showAzanIcon,
     required this.showVibrationIcon,
-    required this.onAddCustomPrayer,
   });
 
   @override
@@ -355,25 +353,6 @@ class HomePrayerList extends StatelessWidget {
             separatorBuilder: (_, _) =>
                 const Divider(height: 1, color: Color(0x22000000)),
             itemCount: items.length,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 2, 0, 12),
-          child: Center(
-            child: InkWell(
-              borderRadius: BorderRadius.circular(999),
-              onTap: onAddCustomPrayer,
-              child: Container(
-                width: 34,
-                height: 34,
-                decoration: BoxDecoration(
-                  color: cizgiColor.withValues(alpha: 0.12),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: cizgiColor.withValues(alpha: 0.25)),
-                ),
-                child: Icon(Icons.add, color: cizgiColor, size: 18),
-              ),
-            ),
           ),
         ),
       ],

@@ -192,7 +192,7 @@ class HomeDrawerHandlePainter extends CustomPainter {
 
     final path = Path()
       ..moveTo(0, pointUp ? size.height : 0)
-      ..lineTo(size.width * 0.5, pointUp ? size.height * 0.54 : size.height * 0.46)
+      ..lineTo(size.width * 0.5, size.height * 0.5)
       ..lineTo(size.width, pointUp ? size.height : 0)
       ..lineTo(size.width * 0.5, pointUp ? 0 : size.height)
       ..close();

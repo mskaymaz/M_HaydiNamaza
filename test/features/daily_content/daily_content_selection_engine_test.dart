@@ -187,7 +187,7 @@ DailyContentLoadResult _sampleLoadResult() {
     ],
     ayahOrderIds: const <String>['ayah-1', 'ayah-2', 'ayah-3'],
     hadithOrderIds: const <String>['hadith-1', 'hadith-2', 'hadith-3'],
-    sequenceStartDate: '2026-01-01',
+    sequenceStartDate: '2026-05-13',
     skippedCount: 0,
     warnings: const <String>[],
   );

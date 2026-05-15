@@ -18,6 +18,7 @@ try:
     from PySide6.QtWidgets import (
         QApplication,
         QCheckBox,
+        QComboBox,
         QFormLayout,
         QGridLayout,
         QGroupBox,
@@ -38,6 +39,28 @@ except ImportError:
 
 
 VALID_STATUSES = {"approved", "rejected", "pending"}
+VALID_PRIORITIES = {"normal", "important", "high", "seasonal", "hidden"}
+PRIORITY_LABELS_TR = {
+    "normal": "Normal gosterim",
+    "important": "Daha sik goster",
+    "high": "Cok daha sik goster",
+    "seasonal": "Belirli donemlerde one cikar",
+    "hidden": "Simdilik gosterme",
+}
+PRIORITY_EXPORT_MAP = {
+    "normal": {"priority": 1, "boost_enabled": False, "boost_weight": 1},
+    "important": {"priority": 2, "boost_enabled": True, "boost_weight": 2},
+    "high": {"priority": 3, "boost_enabled": True, "boost_weight": 3},
+    "seasonal": {"priority": 2, "boost_enabled": True, "boost_weight": 2},
+    "hidden": {"priority": 0, "boost_enabled": False, "boost_weight": 1},
+}
+
+
+def _normalize_priority(value: Any) -> str:
+    raw = str(value or "").strip().lower()
+    if raw in VALID_PRIORITIES:
+        return raw
+    return "normal"
 
 
 @dataclass(frozen=True)
@@ -147,9 +170,15 @@ class ReviewStore:
         cursor = int(self.state["cursor"])
         rec = self.records[cursor]
         decisions = self.state.get("decisions", {})
-        current_decision = decisions.get(
-            rec["_record_key"], {"status": "pending", "note": ""}
-        )
+        raw_decision = decisions.get(rec["_record_key"], {})
+        current_decision = {
+            "status": raw_decision.get("status", "pending"),
+            "note": raw_decision.get("note", ""),
+            "priority": _normalize_priority(raw_decision.get("priority", "normal")),
+            "boost_start_date": str(raw_decision.get("boost_start_date", "") or ""),
+            "boost_end_date": str(raw_decision.get("boost_end_date", "") or ""),
+            "updated_at": raw_decision.get("updated_at", "-"),
+        }
         return {
             "cursor": cursor,
             "total": len(self.records),
@@ -174,17 +203,27 @@ class ReviewStore:
         self._save_state()
         return self.current_payload()
 
-    def set_decision(
-        self, status: str, note: str = "", move_next: bool = False
+    def save_current(
+        self,
+        status: str,
+        note: str = "",
+        priority: str = "normal",
+        move_next: bool = False,
     ) -> dict[str, Any]:
         if status not in VALID_STATUSES:
             raise ValueError("Invalid status.")
+        if priority not in VALID_PRIORITIES:
+            raise ValueError("Invalid priority.")
         cursor = int(self.state["cursor"])
         rec = self.records[cursor]
         key = rec["_record_key"]
+        previous = self.state["decisions"].get(key, {})
         self.state["decisions"][key] = {
             "status": status,
             "note": note,
+            "priority": priority,
+            "boost_start_date": str(previous.get("boost_start_date", "") or ""),
+            "boost_end_date": str(previous.get("boost_end_date", "") or ""),
             "updated_at": self._utc_now(),
         }
         if move_next:
@@ -215,8 +254,22 @@ class ReviewStore:
             status = decision.get("status", "pending")
             if status not in VALID_STATUSES:
                 status = "pending"
+            priority_key = _normalize_priority(decision.get("priority", "normal"))
+            mapped = PRIORITY_EXPORT_MAP[priority_key]
             clean_record = {k: v for k, v in rec.items() if not k.startswith("_")}
             clean_record["review_status"] = status
+            clean_record["priority"] = mapped["priority"]
+            clean_record["boost"] = {
+                "enabled": mapped["boost_enabled"],
+                "weight": mapped["boost_weight"],
+            }
+            if priority_key == "seasonal":
+                clean_record["boost_start_date"] = str(
+                    decision.get("boost_start_date", "") or ""
+                )
+                clean_record["boost_end_date"] = str(
+                    decision.get("boost_end_date", "") or ""
+                )
             if decision.get("note"):
                 clean_record["review_note"] = decision["note"]
             buckets[status].append(clean_record)
@@ -302,6 +355,7 @@ class ReviewWindow(QMainWindow):
     def __init__(self, store: ReviewStore) -> None:
         super().__init__()
         self.store = store
+        self._selected_status = "pending"
         self.setWindowTitle("Daily Content Review - PySide6")
         self.resize(1080, 700)
         self.setMinimumSize(900, 600)
@@ -404,19 +458,32 @@ class ReviewWindow(QMainWindow):
         decision_box = QGroupBox("Inceleme")
         decision_layout = QVBoxLayout(decision_box)
         btn_line = QHBoxLayout()
-        self.btn_approved = QPushButton("approved")
-        self.btn_rejected = QPushButton("rejected")
-        self.btn_pending = QPushButton("pending")
+        self.btn_approved = QPushButton("Onayla")
+        self.btn_rejected = QPushButton("Reddet")
+        self.btn_pending = QPushButton("Beklet")
         self.btn_approved.setStyleSheet("background:#eaf8ef;border:1px solid #6dbd7f;")
         self.btn_rejected.setStyleSheet("background:#fff1f1;border:1px solid #e59a9a;")
         self.btn_pending.setStyleSheet("background:#fff9ee;border:1px solid #d4b16a;")
-        self.btn_approved.clicked.connect(lambda: self._mark("approved"))
-        self.btn_rejected.clicked.connect(lambda: self._mark("rejected"))
-        self.btn_pending.clicked.connect(lambda: self._mark("pending"))
+        self.btn_approved.clicked.connect(lambda: self._set_status("approved"))
+        self.btn_rejected.clicked.connect(lambda: self._set_status("rejected"))
+        self.btn_pending.clicked.connect(lambda: self._set_status("pending"))
         btn_line.addWidget(self.btn_approved)
         btn_line.addWidget(self.btn_rejected)
         btn_line.addWidget(self.btn_pending)
         decision_layout.addLayout(btn_line)
+        priority_line = QHBoxLayout()
+        priority_line.addWidget(QLabel("Oncelik:"))
+        self.priority_combo = QComboBox()
+        self.priority_combo.addItem(PRIORITY_LABELS_TR["normal"], "normal")
+        self.priority_combo.addItem(PRIORITY_LABELS_TR["important"], "important")
+        self.priority_combo.addItem(PRIORITY_LABELS_TR["high"], "high")
+        self.priority_combo.addItem(PRIORITY_LABELS_TR["seasonal"], "seasonal")
+        self.priority_combo.addItem(PRIORITY_LABELS_TR["hidden"], "hidden")
+        priority_line.addWidget(self.priority_combo, 1)
+        self.btn_save = QPushButton("Kaydet")
+        self.btn_save.clicked.connect(self._save_current)
+        priority_line.addWidget(self.btn_save)
+        decision_layout.addLayout(priority_line)
 
         self.auto_next = QCheckBox("Isaretleyince sonraki kayda gec")
         self.auto_next.setChecked(True)
@@ -473,22 +540,41 @@ class ReviewWindow(QMainWindow):
 
         self.note_edit.setPlainText(decision.get("note", "") or "")
         status = decision.get("status", "pending")
+        self._selected_status = status if status in VALID_STATUSES else "pending"
+        priority_key = _normalize_priority(decision.get("priority", "normal"))
+        index = self.priority_combo.findData(priority_key)
+        self.priority_combo.setCurrentIndex(index if index >= 0 else 0)
         updated_at = decision.get("updated_at", "-")
         self.current_decision_label.setText(
-            f"Mevcut durum: {status} | guncelleme: {updated_at}"
+            f"Mevcut durum: {self._selected_status} | oncelik: {priority_key} | guncelleme: {updated_at}"
         )
 
     def _navigate(self, direction: str) -> None:
+        self._save_current(show_message=False)
         self.store.move_cursor(direction)
         self.refresh()
 
-    def _mark(self, status: str) -> None:
+    def _set_status(self, status: str) -> None:
+        self._selected_status = status
+        self._save_current(move_next=self.auto_next.isChecked(), show_message=False)
+
+    def _save_current(
+        self, move_next: bool = False, show_message: bool = False
+    ) -> None:
         note = self.note_edit.toPlainText().strip()
-        move_next = self.auto_next.isChecked()
-        self.store.set_decision(status=status, note=note, move_next=move_next)
+        priority = str(self.priority_combo.currentData() or "normal")
+        self.store.save_current(
+            status=self._selected_status,
+            note=note,
+            priority=priority,
+            move_next=move_next,
+        )
         self.refresh()
+        if show_message:
+            QMessageBox.information(self, "Kaydedildi", "Kayit guncellendi.")
 
     def _export(self) -> None:
+        self._save_current(show_message=False)
         out = self.store.export()
         self.refresh()
         QMessageBox.information(

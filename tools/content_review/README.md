@@ -8,6 +8,8 @@ Kapsam:
 - Teknik bilgileri (tur, sure/hadis bilgisi, numara, kaynak notu) ayri alanda gosterir.
 - Turkce, Arapca, Ingilizce metinleri ayri panellerde gosterir.
 - Kayitlari `approved`, `rejected`, `pending` olarak isaretler.
+- Oncelik alani sabit listeden secilir (`normal`, `important`, `high`, `seasonal`, `hidden`).
+- Save / Onceki / Sonraki islemleri mevcut kayit kararini aninda `review_state.json` dosyasina yazar.
 - Kaynak JSON dosyalarini degistirmez.
 - Inceleme ilerlemesini ayri `review_state.json` dosyasina kaydeder.
 - Cikti dosyalarini `output/` altina zaman damgali klasorlerde yazar.

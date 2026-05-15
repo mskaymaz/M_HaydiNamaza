@@ -56,10 +56,28 @@ void main() {
       expect(afterCycle.state.ayahCycleId, 1);
       expect(afterCycle.state.hadithCycleId, 1);
     });
+
+    test('changes at local day boundary even when start date is in the future', () async {
+      final clock = _FakeClock(DateTime(2026, 5, 13, 23, 59));
+      final repository = _InMemoryStateRepository();
+      final engine = DailyContentSelectionEngine(
+        loader: _FakeLoader(_sampleLoadResult(startDate: '2026-05-20')),
+        stateRepository: repository,
+        clock: clock,
+        recentWindow: 2,
+      );
+
+      final beforeMidnight = await engine.selectToday();
+      clock.setNow(DateTime(2026, 5, 14, 0, 1));
+      final afterMidnight = await engine.selectToday();
+
+      expect(afterMidnight.ayah?.id, isNot(beforeMidnight.ayah?.id));
+      expect(afterMidnight.hadith?.id, isNot(beforeMidnight.hadith?.id));
+    });
   });
 }
 
-DailyContentLoadResult _sampleLoadResult() {
+DailyContentLoadResult _sampleLoadResult({String startDate = '2026-05-13'}) {
   const approval = DailyContentApproval(
     approvedBy: 'test_editor',
     approvedAt: '2026-05-13T09:00:00Z',
@@ -187,7 +205,7 @@ DailyContentLoadResult _sampleLoadResult() {
     ],
     ayahOrderIds: const <String>['ayah-1', 'ayah-2', 'ayah-3'],
     hadithOrderIds: const <String>['hadith-1', 'hadith-2', 'hadith-3'],
-    sequenceStartDate: '2026-05-13',
+    sequenceStartDate: startDate,
     skippedCount: 0,
     warnings: const <String>[],
   );

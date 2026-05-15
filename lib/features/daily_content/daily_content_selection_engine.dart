@@ -34,6 +34,8 @@ class DailyContentSelectionEngine {
     final dayIndex = _dayIndex(startDate, now);
     final ayahId = _idAt(loadResult.ayahOrderIds, dayIndex);
     final hadithId = _idAt(loadResult.hadithOrderIds, dayIndex);
+    final ayahCycleId = _cycleId(loadResult.ayahOrderIds, dayIndex);
+    final hadithCycleId = _cycleId(loadResult.hadithOrderIds, dayIndex);
 
     final currentState = await _stateRepository.read(warnings: warnings);
     final nextState = currentState.copyWith(
@@ -48,8 +50,8 @@ class DailyContentSelectionEngine {
       recentHadithIds: const <String>[],
       seenAyahIds: const <String>[],
       seenHadithIds: const <String>[],
-      ayahCycleId: 0,
-      hadithCycleId: 0,
+      ayahCycleId: ayahCycleId,
+      hadithCycleId: hadithCycleId,
       updatedAt: now.toIso8601String(),
     );
     await _stateRepository.write(nextState);
@@ -85,14 +87,20 @@ class DailyContentSelectionEngine {
 
   int _dayIndex(DateTime startDateUtc, DateTime now) {
     final todayUtc = DateTime.utc(now.year, now.month, now.day);
-    final diff = todayUtc.difference(startDateUtc).inDays;
-    return diff < 0 ? 0 : diff;
+    return todayUtc.difference(startDateUtc).inDays;
   }
 
   String? _idAt(List<String> orderedIds, int dayIndex) {
     if (orderedIds.isEmpty) return null;
-    final index = dayIndex % orderedIds.length;
+    final size = orderedIds.length;
+    final index = ((dayIndex % size) + size) % size;
     return orderedIds[index];
+  }
+
+  int _cycleId(List<String> orderedIds, int dayIndex) {
+    if (orderedIds.isEmpty) return 0;
+    if (dayIndex < 0) return 0;
+    return dayIndex ~/ orderedIds.length;
   }
 
   List<DailyAyahRecord> _dedupeAyahRecords(

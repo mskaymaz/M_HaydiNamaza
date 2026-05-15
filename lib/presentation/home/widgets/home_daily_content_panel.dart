@@ -1,4 +1,6 @@
-﻿import 'package:flutter/material.dart';
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
 
 import '../../../features/daily_content/daily_content_models.dart';
 import '../../../features/daily_content/daily_content_selection_models.dart';
@@ -9,6 +11,7 @@ class HomeDailyContentPanel extends StatefulWidget {
   final bool hasError;
   final Color cizgiColor;
   final Color panelColor;
+  final double? maxHeight;
 
   const HomeDailyContentPanel({
     super.key,
@@ -17,6 +20,7 @@ class HomeDailyContentPanel extends StatefulWidget {
     required this.hasError,
     required this.cizgiColor,
     required this.panelColor,
+    this.maxHeight,
   });
 
   @override
@@ -83,9 +87,20 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     final frameColor =
         Color.lerp(widget.panelColor, Colors.white, 0.52) ?? widget.panelColor;
     final contentColor = widget.panelColor;
+    const panelVerticalPadding = 20.0;
+    const defaultPageHeight = 270.0;
+    final effectiveMaxHeight = widget.maxHeight == null
+        ? null
+        : math.max(140.0, widget.maxHeight!);
+    final pageHeight = effectiveMaxHeight == null
+        ? defaultPageHeight
+        : (effectiveMaxHeight - panelVerticalPadding).clamp(140.0, 270.0);
 
     return Container(
       width: double.infinity,
+      constraints: effectiveMaxHeight == null
+          ? null
+          : BoxConstraints(maxHeight: effectiveMaxHeight),
       padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
       decoration: BoxDecoration(
         color: frameColor,
@@ -93,10 +108,11 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
         border: Border.all(color: widget.panelColor.withValues(alpha: 0.35)),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 270,
+            height: pageHeight.toDouble(),
             child: PageView.builder(
               controller: _pageController,
               itemBuilder: (context, index) {
@@ -474,4 +490,5 @@ class _DailyContentSection extends StatelessWidget {
     return arabicRegex.hasMatch(value);
   }
 }
+
 

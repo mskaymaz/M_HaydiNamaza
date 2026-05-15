@@ -50,6 +50,7 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 class _HomeScreenState extends State<HomeScreen> {
   final _locationStorage = LocationStorage();
   final _methodStorage = CalculationMethodStorage();
@@ -76,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime _lastRefreshDay = DateTime.now();
   double _drawerProgress = 0;
   double _infoPanelDragDy = 0;
+  bool _isLandscapePanelsExpanded = false;
   bool _showPanelAddButton = false;
   bool _showHijriDate = false;
   bool _reminderCheckInProgress = false;
@@ -368,9 +370,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openQibla(LocationData? location) async {
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (_) => HomeQiblaScreen(location: location)));
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => HomeQiblaScreen(location: location)),
+    );
   }
 
   @override
@@ -403,9 +405,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           final times = data.times;
           if (times == null) {
-            return HomePrayerTimesUnavailablePanel(
-              message: l10n.comingSoon,
-            );
+            return HomePrayerTimesUnavailablePanel(message: l10n.comingSoon);
           }
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -418,8 +418,14 @@ class _HomeScreenState extends State<HomeScreen> {
           final countdown = _formatCountdown(_now, next.time);
           final nextTime = homeFormatTime(next.time);
           final location = data.location!;
-          final provinceLabel = homeTitleCase(location.province, l10n.localeName);
-          final districtLabel = homeTitleCase(location.district, l10n.localeName);
+          final provinceLabel = homeTitleCase(
+            location.province,
+            l10n.localeName,
+          );
+          final districtLabel = homeTitleCase(
+            location.district,
+            l10n.localeName,
+          );
           final dateYearLabel = _showHijriDate
               ? homeFormatHijriYear(_now)
               : homeFormatGregorianYear(_now, l10n);
@@ -489,14 +495,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         )!;
 
                         void updateDrawerProgress(DragUpdateDetails details) {
-                          final travel = (drawerLayout.maxDrawerHeight -
-                                  drawerLayout.minDrawerHeight)
-                              .clamp(1.0, double.infinity);
+                          final travel =
+                              (drawerLayout.maxDrawerHeight -
+                                      drawerLayout.minDrawerHeight)
+                                  .clamp(1.0, double.infinity);
                           setState(() {
-                            _drawerProgress = (_drawerProgress +
-                                    (details.delta.dy / travel))
-                                .clamp(0.0, 1.0)
-                                .toDouble();
+                            _drawerProgress =
+                                (_drawerProgress + (details.delta.dy / travel))
+                                    .clamp(0.0, 1.0)
+                                    .toDouble();
                           });
                         }
 
@@ -514,6 +521,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         }
 
                         const infoPanelGap = 3.0;
+                        const infoPanelBottomPadding = 8.0;
                         final closedHandleBottom =
                             drawerLayout.topPanelHeight -
                             1 +
@@ -523,6 +531,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         final infoPanelTop =
                             math.max(drawerBottom, closedHandleBottom) +
                             infoPanelGap;
+                        final infoPanelMaxHeight = math.max(
+                          140.0,
+                          constraints.maxHeight -
+                              infoPanelTop -
+                              infoPanelBottomPadding,
+                        );
+                        final isLandscape =
+                            MediaQuery.of(context).orientation ==
+                            Orientation.landscape;
+                        final panelWidthFactor = isLandscape
+                            ? (_isLandscapePanelsExpanded ? 0.9 : 0.72)
+                            : 1.0;
 
                         Widget buildHandleBand({
                           required bool pointUp,
@@ -589,26 +609,32 @@ class _HomeScreenState extends State<HomeScreen> {
                               top: drawerLayout.drawerTop,
                               left: 0,
                               right: 0,
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 220),
-                                curve: Curves.easeOutCubic,
-                                height: drawerLayout.drawerHeight,
-                                decoration: BoxDecoration(
-                                  color: ui.listPanel.color,
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(20),
-                                    bottomRight: Radius.circular(20),
-                                  ),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color(0x22000000),
-                                      blurRadius: 12,
-                                      offset: Offset(0, 8),
+                              child: Align(
+                                alignment: Alignment.topCenter,
+                                child: FractionallySizedBox(
+                                  widthFactor: panelWidthFactor,
+                                  child: AnimatedContainer(
+                                    duration: const Duration(milliseconds: 220),
+                                    curve: Curves.easeOutCubic,
+                                    height: _drawerProgress <= 0.02
+                                        ? 0
+                                        : drawerLayout.drawerHeight,
+                                    decoration: BoxDecoration(
+                                      color: ui.listPanel.color,
+                                      borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(20),
+                                        bottomRight: Radius.circular(20),
+                                      ),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Color(0x22000000),
+                                          blurRadius: 12,
+                                          offset: Offset(0, 8),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                                clipBehavior: Clip.antiAlias,
-                                child: Column(
+                                    clipBehavior: Clip.antiAlias,
+                                    child: Column(
                                   children: [
                                     if (_drawerProgress > 0.02)
                                       SizedBox(
@@ -623,6 +649,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                               () => _showPanelAddButton =
                                                   !_showPanelAddButton,
                                             );
+                                          },
+                                          onDoubleTap: () {
+                                            if (!isLandscape) return;
+                                            setState(() {
+                                              _isLandscapePanelsExpanded =
+                                                  !_isLandscapePanelsExpanded;
+                                            });
                                           },
                                           child: Stack(
                                             children: [
@@ -641,8 +674,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 activeColor: palette.zeminColor,
                                                 showVoiceIcon: _reminderSettings
                                                     .showVoiceIcon,
-                                                showVisualIcon: _reminderSettings
-                                                    .showVisualIcon,
+                                                showVisualIcon:
+                                                    _reminderSettings
+                                                        .showVisualIcon,
                                                 showAzanIcon: _reminderSettings
                                                     .showAzanIcon,
                                                 showVibrationIcon:
@@ -701,18 +735,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                 ),
                               ),
+                                ),
+                              ),
                             ),
                             if (_drawerProgress <= 0.02)
                               Positioned(
                                 top: drawerLayout.topPanelHeight - 1,
                                 left: 0,
                                 right: 0,
-                                child: buildHandleBand(
-                                  pointUp: false,
-                                  border: Border(
-                                    top: BorderSide(
-                                      color: palette.cizgiColor.withValues(
-                                        alpha: 0.12,
+                                child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: FractionallySizedBox(
+                                    widthFactor: panelWidthFactor,
+                                    child: buildHandleBand(
+                                      pointUp: false,
+                                      border: Border(
+                                        top: BorderSide(
+                                          color: palette.cizgiColor.withValues(
+                                            alpha: 0.12,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -755,28 +797,48 @@ class _HomeScreenState extends State<HomeScreen> {
                               left: 0,
                               right: 0,
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                                padding: const EdgeInsets.fromLTRB(
+                                  0,
+                                  0,
+                                  0,
+                                  infoPanelBottomPadding,
+                                ),
                                 child: GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onVerticalDragStart: _onInfoPanelDragStart,
                                   onVerticalDragUpdate: _onInfoPanelDragUpdate,
                                   onVerticalDragEnd: _onInfoPanelDragEnd,
-                                  child: FutureBuilder<
-                                    DailyContentSelectionResult
-                                  >(
-                                    future: _dailyContentFuture,
-                                    builder: (context, snapshot) {
-                                      return HomeDailyContentPanel(
-                                        result: snapshot.data,
-                                        isLoading:
-                                            snapshot.connectionState ==
-                                            ConnectionState.waiting,
-                                        hasError: snapshot.hasError,
-                                        cizgiColor: palette.cizgiColor,
-                                        panelColor: palette.zeminColor,
-                                      );
-                                    },
-                                  ),
+                                  onDoubleTap: () {
+                                    if (!isLandscape) return;
+                                    setState(() {
+                                      _isLandscapePanelsExpanded =
+                                          !_isLandscapePanelsExpanded;
+                                    });
+                                  },
+                                  child:
+                                      Align(
+                                        alignment: Alignment.topCenter,
+                                        child: FractionallySizedBox(
+                                          widthFactor: panelWidthFactor,
+                                          child: FutureBuilder<
+                                            DailyContentSelectionResult
+                                          >(
+                                            future: _dailyContentFuture,
+                                            builder: (context, snapshot) {
+                                              return HomeDailyContentPanel(
+                                                result: snapshot.data,
+                                                isLoading:
+                                                    snapshot.connectionState ==
+                                                    ConnectionState.waiting,
+                                                hasError: snapshot.hasError,
+                                                cizgiColor: palette.cizgiColor,
+                                                panelColor: palette.zeminColor,
+                                                maxHeight: infoPanelMaxHeight,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
                                 ),
                               ),
                             ),
@@ -1171,7 +1233,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Material(
-                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
                     shape: const CircleBorder(),
                     child: IconButton(
                       onPressed: () => Navigator.of(context).pop(),
@@ -1182,10 +1246,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(width: 6),
                   Material(
-                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.14),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.14),
                     shape: const CircleBorder(),
                     child: IconButton(
-                      onPressed: () => Navigator.of(context).pop(editController.text),
+                      onPressed: () =>
+                          Navigator.of(context).pop(editController.text),
                       visualDensity: VisualDensity.compact,
                       tooltip: 'Tamam',
                       icon: const Icon(Icons.check_rounded),
@@ -1427,7 +1494,10 @@ class _HomeScreenState extends State<HomeScreen> {
     unawaited(_persistCustomPrayerRows());
   }
 
-  List<HomePrayerListItem> _buildItems(AppLocalizations l10n, PrayerTimes times) {
+  List<HomePrayerListItem> _buildItems(
+    AppLocalizations l10n,
+    PrayerTimes times,
+  ) {
     HomePrayerListItem itemFor(Prayer prayer, String label, DateTime time) {
       final settings = _settingsFor(prayer);
       return HomePrayerListItem(
@@ -1473,7 +1543,9 @@ class _HomeScreenState extends State<HomeScreen> {
           labelController: row.labelController,
           onLabelChanged: (value) => _setCustomPrayerLabel(row, value),
           onLabelEditingComplete: () => _normalizeCustomPrayerLabel(row),
-          timeLabel: resolvedTime == null ? '--:--' : homeFormatTime(resolvedTime),
+          timeLabel: resolvedTime == null
+              ? '--:--'
+              : homeFormatTime(resolvedTime),
           onTimeTap: () => _openCustomTimeEditor(row, l10n),
           reminderController: row.reminderController,
           onReminderChanged: (value) => _setCustomReminderMinutes(row, value),

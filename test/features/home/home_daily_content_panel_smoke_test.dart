@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mhaydinamaza/features/daily_content/daily_content_models.dart';
 import 'package:mhaydinamaza/features/daily_content/daily_content_selection_models.dart';
+import 'package:mhaydinamaza/l10n/app_localizations.dart';
 import 'package:mhaydinamaza/presentation/home/widgets/home_daily_content_panel.dart';
 
 void main() {
@@ -11,6 +12,8 @@ void main() {
     await tester.pumpWidget(
       const MaterialApp(
         locale: Locale('tr'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: HomeDailyContentPanel(
             result: null,
@@ -96,6 +99,8 @@ void main() {
     await tester.pumpWidget(
       const MaterialApp(
         locale: Locale('tr'),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: HomeDailyContentPanel(
             result: result,

@@ -339,6 +339,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             textColor: palette.cizgiColor,
             backgroundColor: palette.backgroundZeminColor,
             backgroundLineColor: palette.backgroundCizgiColor,
+            selectedBackgroundPatternAssetPath:
+                palette.backgroundPatternAssetPath,
+            backgroundPatternScale: palette.backgroundPatternScale,
             onEditPanelColor: () => _editColor(
               context: context,
               title: 'Panel Rengi',
@@ -363,6 +366,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
               initialColor: palette.backgroundCizgiColor,
               onApply: widget.uiPaletteController.setBackgroundCizgiColor,
             ),
+            onBackgroundPatternChanged: (value) async {
+              await widget.uiPaletteController.setBackgroundPatternAssetPath(
+                value,
+              );
+              if (!context.mounted) return;
+              setState(() {});
+            },
+            onBackgroundPatternScaleChanged: (value) async {
+              await widget.uiPaletteController.setBackgroundPatternScale(value);
+              if (!context.mounted) return;
+              setState(() {});
+            },
             onResetInterfaceColors: () async {
               await widget.uiPaletteController.setZeminColor(
                 ConfigRegistry.defaultPalette.zeminColor,
@@ -379,6 +394,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               );
               await widget.uiPaletteController.setBackgroundCizgiColor(
                 ConfigRegistry.defaultPalette.backgroundCizgiColor,
+              );
+              await widget.uiPaletteController.setBackgroundPatternAssetPath(
+                ConfigRegistry.defaultPalette.backgroundPatternAssetPath,
+              );
+              await widget.uiPaletteController.setBackgroundPatternScale(
+                ConfigRegistry.defaultPalette.backgroundPatternScale,
               );
               if (!context.mounted) return;
               setState(() {});

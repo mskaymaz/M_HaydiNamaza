@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 import 'package:vibration/vibration.dart';
 
+import '../../app/background/patterned_background.dart';
+
 import '../../app/calculation_method_storage.dart';
 import '../../app/custom_prayer_storage.dart';
 import '../../app/locale_controller.dart';
@@ -441,11 +443,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
           return AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.dark,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: ColoredBox(color: palette.backgroundZeminColor),
-                ),
+            child: PatternedBackground(
+              backgroundColor: palette.backgroundZeminColor,
+              patternColor: palette.backgroundCizgiColor,
+              patternAssetPath: palette.backgroundPatternAssetPath,
+              patternScale: palette.backgroundPatternScale,
+              child: Stack(
+                children: [
                 const Positioned(
                   top: 0,
                   left: 0,
@@ -866,6 +870,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
               ],
+            ),
             ),
           );
         },

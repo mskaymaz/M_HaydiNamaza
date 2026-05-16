@@ -6,12 +6,16 @@ class UiPaletteConfig {
   final Color cizgiColor;
   final Color backgroundZeminColor;
   final Color backgroundCizgiColor;
+  final String backgroundPatternAssetPath;
+  final double backgroundPatternScale;
 
   const UiPaletteConfig({
     required this.zeminColor,
     required this.cizgiColor,
     required this.backgroundZeminColor,
     required this.backgroundCizgiColor,
+    required this.backgroundPatternAssetPath,
+    required this.backgroundPatternScale,
   });
 
   UiPaletteConfig copyWith({
@@ -19,6 +23,8 @@ class UiPaletteConfig {
     Color? cizgiColor,
     Color? backgroundZeminColor,
     Color? backgroundCizgiColor,
+    String? backgroundPatternAssetPath,
+    double? backgroundPatternScale,
   }) {
     return UiPaletteConfig(
       zeminColor: zeminColor ?? this.zeminColor,
@@ -26,6 +32,10 @@ class UiPaletteConfig {
       backgroundZeminColor: backgroundZeminColor ?? this.backgroundZeminColor,
       backgroundCizgiColor:
           backgroundCizgiColor ?? this.backgroundCizgiColor,
+      backgroundPatternAssetPath:
+          backgroundPatternAssetPath ?? this.backgroundPatternAssetPath,
+      backgroundPatternScale:
+          backgroundPatternScale ?? this.backgroundPatternScale,
     );
   }
 }
@@ -217,6 +227,8 @@ class ConfigRegistry {
     cizgiColor: Color(0xFFFFFFFF),
     backgroundZeminColor: Color(0xFFF3EFE2),
     backgroundCizgiColor: Color(0xFF7A8F6A),
+    backgroundPatternAssetPath: 'img/Desen/DesM01.svg',
+    backgroundPatternScale: 1.0,
   );
 
   static MainUiConfig mainUiFor(UiPaletteConfig palette) {

@@ -42,12 +42,15 @@ class _AppState extends State<App> {
         return ValueListenableBuilder(
           valueListenable: _uiPaletteController,
           builder: (context, palette, _) {
-            final colorScheme = ColorScheme.fromSeed(seedColor: palette.zeminColor);
+            final colorScheme = ColorScheme.fromSeed(
+              seedColor: palette.zeminColor,
+            );
             return MaterialApp(
               onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
               theme: ThemeData(
                 colorScheme: colorScheme,
                 useMaterial3: true,
+                scaffoldBackgroundColor: palette.backgroundZeminColor,
                 appBarTheme: AppBarTheme(
                   backgroundColor: colorScheme.surface,
                   foregroundColor: colorScheme.onSurface,

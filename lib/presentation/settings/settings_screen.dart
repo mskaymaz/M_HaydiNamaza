@@ -11,6 +11,7 @@ import '../../app/reminder_text_settings_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
 import '../../features/shared_settings/shared_settings_remote_client.dart';
+import '../reminders/flashing_reminder_card.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
 import 'settings_audio_mode_texts.dart';
@@ -18,6 +19,7 @@ import 'settings_color_formatters.dart';
 import 'settings_favorite_matcher.dart';
 import 'settings_reminder_runtime_helpers.dart';
 import 'settings_reminder_snapshot.dart';
+import 'settings_text_formatters.dart';
 import 'settings_ui_mappers.dart';
 import 'settings_voice_key.dart';
 import 'widgets/settings_color_picker_widgets.dart';
@@ -63,6 +65,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       TextEditingController();
   final TextEditingController _visualReopenController = TextEditingController();
   final List<_VoiceOption> _voiceOptions = [];
+  final List<_VoiceOption> _turkishMaleVoiceOptions = [];
+  String? _selectedTestVoiceKey;
 
   LocationData? _location;
   List<LocationFavorite> _favorites = [];
@@ -154,12 +158,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _loadVoiceOptions() async {
     final options = await _reminderAudioService.loadVoiceOptions();
+    final turkishMale = await _reminderAudioService.loadVoiceOptions(
+      onlyTurkishMale: true,
+    );
     if (!mounted) return;
     setState(() {
       _voiceOptions
         ..clear()
         ..addAll(
           options.map(
+            (voice) => _VoiceOption(name: voice.name, locale: voice.locale),
+          ),
+        );
+      _turkishMaleVoiceOptions
+        ..clear()
+        ..addAll(
+          turkishMale.map(
             (voice) => _VoiceOption(name: voice.name, locale: voice.locale),
           ),
         );
@@ -271,6 +285,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _persistReminderTexts();
             },
             selectedVoiceKey: _selectedVoiceKey,
+            selectedTestVoiceKey: _selectedTestVoiceKey,
             voiceItems: [
               const DropdownMenuItem<String?>(
                 value: null,
@@ -283,9 +298,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ],
+            testVoiceItems: [
+              const DropdownMenuItem<String?>(
+                value: null,
+                child: Text('Sistem Varsayilani'),
+              ),
+              ..._turkishMaleVoiceOptions.map(
+                (voice) => DropdownMenuItem<String?>(
+                  value: voice.key,
+                  child: Text(voice.label),
+                ),
+              ),
+            ],
             onVoiceChanged: (value) {
               setState(() => _selectedVoiceKey = value);
               _persistReminderTexts();
+            },
+            onTestVoiceChanged: (value) {
+              setState(() => _selectedTestVoiceKey = value);
             },
             onPickAudio: () => _pickReminderAudio(context),
             audioPickerButtonLabel: audioPickerButtonLabel(_selectedAudioMode),
@@ -293,6 +323,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               selectedAudioLabel: _selectedAudioLabel,
               selectedAudioMode: _selectedAudioMode,
             ),
+            onVoiceTest: () => _playVoiceReminderTest(context, l10n),
             voiceReminderController: _voiceReminderController,
             voiceRepeatController: _voiceRepeatController,
             onVoiceTextChanged: (_) => _persistReminderTexts(),
@@ -303,6 +334,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onVisualTextChanged: (_) => _persistReminderTexts(),
             onVisualDisplayChanged: (_) => _persistReminderTexts(),
             onVisualReopenChanged: (_) => _persistReminderTexts(),
+            onShowPreview: () => _showVisualReminderPreview(context, l10n),
             panelColor: palette.zeminColor,
             textColor: palette.cizgiColor,
             backgroundColor: palette.backgroundZeminColor,
@@ -379,6 +411,59 @@ class _SettingsScreenState extends State<SettingsScreen> {
     await _reminderTextStorage.write(_currentReminderSettingsSnapshot());
   }
 
+  Future<void> _playVoiceReminderTest(
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
+    var settings = _currentReminderSettingsSnapshot();
+    if (settings.audioMode != ReminderAudioMode.textToSpeech &&
+        (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Test icin once bir ses dosyasi secin.')),
+      );
+      return;
+    }
+    try {
+      // If a test voice is selected in the test dropdown, override settings
+      if ((_selectedTestVoiceKey ?? '').isNotEmpty) {
+        final parts = _selectedTestVoiceKey!.split('|');
+        if (parts.length == 2) {
+          final locale = parts[0];
+          final name = parts[1];
+          settings = ReminderTextSettings(
+            voiceText: settings.voiceText,
+            visualText: settings.visualText,
+            audioMode: settings.audioMode,
+            showVoiceIcon: settings.showVoiceIcon,
+            showVisualIcon: settings.showVisualIcon,
+            showAzanIcon: settings.showAzanIcon,
+            showVibrationIcon: settings.showVibrationIcon,
+            sortCustomPrayersByTime: settings.sortCustomPrayersByTime,
+            voiceRepeatSeconds: settings.voiceRepeatSeconds,
+            vibrationDurationSeconds: settings.vibrationDurationSeconds,
+            vibrationPauseSeconds: settings.vibrationPauseSeconds,
+            visualDisplaySeconds: settings.visualDisplaySeconds,
+            visualReopenSeconds: settings.visualReopenSeconds,
+            selectedVoiceName: name,
+            selectedVoiceLocale: locale,
+            selectedAudioPath: settings.selectedAudioPath,
+            selectedAudioLabel: settings.selectedAudioLabel,
+          );
+        }
+      }
+      await _reminderAudioService.playReminder(
+        settings: settings,
+        selectedLocale: widget.localeController.value,
+        prayerLabel: l10n.prayerDhuhr,
+      );
+    } catch (_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Sesli test baslatilamadi.')),
+      );
+    }
+  }
+
   ReminderTextSettings _currentReminderSettingsSnapshot() {
     final selectedVoice = selectedVoiceOption<_VoiceOption>(
       selectedVoiceKey: _selectedVoiceKey,
@@ -403,6 +488,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
       selectedVoiceLocale: selectedVoice?.locale,
       selectedAudioPath: _selectedAudioPath,
       selectedAudioLabel: _selectedAudioLabel,
+    );
+  }
+
+  Future<void> _showVisualReminderPreview(
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
+    final effectiveText = effectiveVisualReminderText(
+      visualText: _visualReminderController.text,
+      voiceText: _voiceReminderController.text,
+    ).trim();
+    if (effectiveText.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Onizleme icin once metin girin.')),
+      );
+      return;
+    }
+    await showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
+          content: FlashingReminderCard(
+            prayerLabel: '${toTurkishUpper(l10n.prayerDhuhr)} VAKTI',
+            message: effectiveText,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Kapat'),
+            ),
+          ],
+        );
+      },
     );
   }
 

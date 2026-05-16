@@ -594,3 +594,80 @@ Acceptance:
 
 
 
+
+---
+
+## TASK-13 - Erkek TTS Ses Havuzu Genisletme (Plan + Kaynak Kilidi)
+
+Goal: Mevcut `tr-TR-AhmetNeural` sesini koruyarak 3-4 ek erkek ses secenegi sunmak.
+
+Scope note:
+- [ ] Bu gorevde once kaynak ve edinme yontemi kilitlenecek.
+- [ ] Tam entegrasyon ikinci asamada (TASK-13A/TASK-13B) yapilacak.
+
+### Kaynak matrisi (AI asistanlari icin sabit referans)
+
+1) Mevcut ses (korunacak)
+- Voice id: `tr-TR-AhmetNeural` (Male)
+- Resmi kaynak:
+  - https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support
+- Listeleme/yoklama yontemi:
+  - `edge-tts --list-voices` (CLI listeleme)
+  - https://github.com/rany2/edge-tts/blob/master/README.md
+- Mobil edinme yontemi:
+  - `flutter_tts.getVoices` ile cihaz/engine tarafindan donen seslerden secim.
+
+2) Ek erkek ses #1 (offline aday)
+- Voice id: `tr_TR-fahrettin-medium`
+- Kaynak listesi:
+  - https://github.com/rhasspy/piper/blob/master/VOICES.md
+- Model dosyalari:
+  - https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/tr/tr_TR/fahrettin/medium/tr_TR-fahrettin-medium.onnx
+  - https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/tr/tr_TR/fahrettin/medium/tr_TR-fahrettin-medium.onnx.json
+- Edinme yontemi:
+  - Model + config dosyalari versiyonlu URL ile indirilir.
+  - Uygulama icinde runtime TTS icin ONNX tabanli yerel piper calistirma katmani gerekir.
+
+3) Ek erkek ses #2 (offline aday)
+- Voice id: `tr_TR-fettah-medium`
+- Kaynak listesi:
+  - https://github.com/rhasspy/piper/blob/master/VOICES.md
+- Model dosyalari:
+  - https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/tr/tr_TR/fettah/medium/tr_TR-fettah-medium.onnx
+  - https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/tr/tr_TR/fettah/medium/tr_TR-fettah-medium.onnx.json
+- Edinme yontemi:
+  - Model + config dosyalari versiyonlu URL ile indirilir.
+  - Uygulama icinde runtime TTS icin ONNX tabanli yerel piper calistirma katmani gerekir.
+
+4) Ek erkek ses #3 (offline aday)
+- Voice id: `tr_TR-dfki-medium`
+- Kaynak listesi:
+  - https://github.com/rhasspy/piper/blob/master/VOICES.md
+- Model dosyalari:
+  - https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/tr/tr_TR/dfki/medium/tr_TR-dfki-medium.onnx
+  - https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/tr/tr_TR/dfki/medium/tr_TR-dfki-medium.onnx.json
+- Edinme yontemi:
+  - Model + config dosyalari versiyonlu URL ile indirilir.
+  - Uygulama icinde runtime TTS icin ONNX tabanli yerel piper calistirma katmani gerekir.
+
+5) Opsiyonel ek erkek ses #4 (cloud multilingual fallback)
+- Voice id: `en-US-RyanMultilingualNeural` (Male, multilingual)
+- Resmi kaynak:
+  - https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support
+- Not:
+  - Multilingual sesler desteklenen dillerde (Turkce dahil) okunabilir; aksan/dogal akicilik Turkce-native seslerden farkli olabilir.
+  - Bu ses flutter_tts tarafinda engine'de mevcutsa secilebilir, degilse dogrudan kullanilamaz.
+
+### Uygulama uygunluk notu (oncesinde netlestirilecek)
+
+- [ ] Sadece `flutter_tts` ile kalinacaksa:
+  - Uygulama yalniz cihaz/engine tarafinda mevcut sesleri gosterebilir.
+  - Harici Piper sesleri dogrudan "eklenemez", sadece cihazda o engine kuruluysa secilebilir.
+- [ ] Piper sesleri kesin eklenecekse:
+  - Android/iOS icin yerel TTS runtime (ONNX + native bridge) tasarimi gerekir.
+  - Paket boyutu, lisans, performans, offline depolama ve model guncelleme akisi netlestirilmelidir.
+
+Acceptance (TASK-13 plan asamasi):
+- Kaynak URL'leri sabit ve versiyonlu olarak dokumante edildi.
+- Hangi sesin hangi yolla alinacagi acikca yazildi.
+- Implementasyon oncesi teknik secim kapisi tanimlandi.

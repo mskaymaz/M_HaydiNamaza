@@ -27,11 +27,15 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final ReminderAudioMode selectedAudioMode;
   final ValueChanged<ReminderAudioMode?> onAudioModeChanged;
   final String? selectedVoiceKey;
+  final String? selectedTestVoiceKey;
   final List<DropdownMenuItem<String?>> voiceItems;
+  final List<DropdownMenuItem<String?>> testVoiceItems;
   final ValueChanged<String?> onVoiceChanged;
+  final ValueChanged<String?> onTestVoiceChanged;
   final VoidCallback onPickAudio;
   final String audioPickerButtonLabel;
   final String audioInfoText;
+  final VoidCallback onVoiceTest;
   final TextEditingController voiceReminderController;
   final TextEditingController voiceRepeatController;
   final ValueChanged<String> onVoiceTextChanged;
@@ -42,6 +46,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final ValueChanged<String> onVisualTextChanged;
   final ValueChanged<String> onVisualDisplayChanged;
   final ValueChanged<String> onVisualReopenChanged;
+  final VoidCallback onShowPreview;
   final Color panelColor;
   final Color textColor;
   final Color backgroundColor;
@@ -74,11 +79,15 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.selectedAudioMode,
     required this.onAudioModeChanged,
     required this.selectedVoiceKey,
+    required this.selectedTestVoiceKey,
     required this.voiceItems,
+    required this.testVoiceItems,
     required this.onVoiceChanged,
+    required this.onTestVoiceChanged,
     required this.onPickAudio,
     required this.audioPickerButtonLabel,
     required this.audioInfoText,
+    required this.onVoiceTest,
     required this.voiceReminderController,
     required this.voiceRepeatController,
     required this.onVoiceTextChanged,
@@ -89,6 +98,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.onVisualTextChanged,
     required this.onVisualDisplayChanged,
     required this.onVisualReopenChanged,
+    required this.onShowPreview,
     required this.panelColor,
     required this.textColor,
     required this.backgroundColor,
@@ -249,6 +259,28 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<String?>(
+                          initialValue: selectedTestVoiceKey,
+                          decoration: const InputDecoration(
+                            labelText: 'Test Sesi',
+                            border: OutlineInputBorder(),
+                          ),
+                          items: testVoiceItems,
+                          onChanged: onTestVoiceChanged,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      OutlinedButton.icon(
+                        onPressed: onVoiceTest,
+                        icon: const Icon(Icons.play_arrow_rounded),
+                        label: const Text('Sesli Test'),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -288,6 +320,15 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: OutlinedButton.icon(
+                      onPressed: onShowPreview,
+                      icon: const Icon(Icons.visibility_outlined),
+                      label: const Text('Gorsel Uyariyi Goster'),
+                    ),
                   ),
                 ],
               ),

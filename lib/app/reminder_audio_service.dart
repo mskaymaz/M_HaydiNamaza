@@ -9,10 +9,7 @@ class ReminderVoiceOption {
   final String name;
   final String locale;
 
-  const ReminderVoiceOption({
-    required this.name,
-    required this.locale,
-  });
+  const ReminderVoiceOption({required this.name, required this.locale});
 
   String get key => '$locale|$name';
   String get label => '$name ($locale)';
@@ -21,8 +18,24 @@ class ReminderVoiceOption {
 class ReminderAudioService {
   final FlutterTts _flutterTts = FlutterTts();
   final AudioPlayer _audioPlayer = AudioPlayer();
+  static const String _preferredTurkishNeuralVoice = 'tr-TR-AhmetNeural';
+  static const double _stableTtsPitch = 1.0;
+  static const double _stableTtsRate = 0.52;
+  static const double _stableTtsVolume = 1.0;
+  static const Duration _ttsRestartGap = Duration(milliseconds: 80);
+  static const Duration _ttsDebounce = Duration(milliseconds: 400);
+  bool _ttsInProgress = false;
+  DateTime? _lastTtsStartAt;
 
-  Future<List<ReminderVoiceOption>> loadVoiceOptions() async {
+  Future<List<ReminderVoiceOption>> loadVoiceOptions({
+    bool onlyTurkishMale = false,
+  }) async {
+    return _loadVoiceOptionsInternal(onlyTurkishMale: onlyTurkishMale);
+  }
+
+  Future<List<ReminderVoiceOption>> _loadVoiceOptionsInternal({
+    required bool onlyTurkishMale,
+  }) async {
     dynamic voices;
     try {
       voices = await _flutterTts.getVoices;
@@ -36,6 +49,13 @@ class ReminderAudioService {
       final name = (item['name'] ?? '').toString().trim();
       final locale = (item['locale'] ?? '').toString().trim();
       if (name.isEmpty || locale.isEmpty) continue;
+      if (onlyTurkishMale) {
+        // Heuristic: locale starts with tr and voice looks male
+        final normalized = Map<String, dynamic>.from(item);
+        final voiceLocale = (normalized['locale'] ?? '').toString().toLowerCase();
+        if (!voiceLocale.startsWith('tr')) continue;
+        if (!_voiceLooksMale(normalized)) continue;
+      }
       options.add(ReminderVoiceOption(name: name, locale: locale));
     }
     options.sort((a, b) => a.label.compareTo(b.label));
@@ -50,7 +70,9 @@ class ReminderAudioService {
     switch (settings.audioMode) {
       case ReminderAudioMode.textToSpeech:
         final trimmed = settings.voiceText.trim();
-        final spokenText = trimmed.isEmpty ? '$prayerLabel vakti.' : '$prayerLabel vakti. $trimmed';
+        final spokenText = trimmed.isEmpty
+            ? '$prayerLabel vakti.'
+            : '$prayerLabel vakti. $trimmed';
         await _speakWithFallback(
           spokenText,
           selectedLocale: selectedLocale,
@@ -81,11 +103,13 @@ class ReminderAudioService {
     try {
       await _flutterTts.stop();
     } catch (_) {}
+    _ttsInProgress = false;
   }
 
   void dispose() {
     _audioPlayer.dispose();
     _flutterTts.stop();
+    _ttsInProgress = false;
   }
 
   Future<void> _applyPreferredVoice({
@@ -122,22 +146,7 @@ class ReminderAudioService {
       return;
     }
     if (voices is! List) return;
-    Map<String, dynamic>? matchedVoice;
-    for (final voice in voices) {
-      if (voice is! Map) continue;
-      final name = (voice['name'] ?? '').toString().toLowerCase();
-      final localeName = (voice['locale'] ?? '').toString().toLowerCase();
-      final sameLocale =
-          localeName.startsWith(locale.languageCode.toLowerCase());
-      if (!sameLocale) continue;
-      if (name.contains('male') ||
-          name.contains('erkek') ||
-          name.contains('man')) {
-        matchedVoice = Map<String, dynamic>.from(voice);
-        break;
-      }
-      matchedVoice ??= Map<String, dynamic>.from(voice);
-    }
+    final matchedVoice = _pickBestFallbackVoice(voices: voices, locale: locale);
     if (matchedVoice == null) return;
     try {
       await _flutterTts.setVoice({
@@ -153,32 +162,106 @@ class ReminderAudioService {
     String? selectedVoiceName,
     String? selectedVoiceLocale,
   }) async {
-    await _flutterTts.stop();
+    final now = DateTime.now();
+    final last = _lastTtsStartAt;
+    if (_ttsInProgress) return;
+    if (last != null && now.difference(last) < _ttsDebounce) return;
+
+    _ttsInProgress = true;
+    _lastTtsStartAt = now;
     try {
-      await _flutterTts.awaitSpeakCompletion(true);
-    } catch (_) {}
-    try {
-      await _applyPreferredVoice(
-        selectedLocale: selectedLocale,
-        selectedVoiceName: selectedVoiceName,
-        selectedVoiceLocale: selectedVoiceLocale,
-      );
-    } catch (_) {}
-    try {
-      await _flutterTts.setPitch(0.95);
-    } catch (_) {}
-    try {
-      await _flutterTts.setSpeechRate(0.45);
-    } catch (_) {}
-    final result = await _flutterTts.speak(spokenText);
-    if (result == 1 || result == null) {
-      return;
+      await _flutterTts.stop();
+      await Future<void>.delayed(_ttsRestartGap);
+      try {
+        await _flutterTts.awaitSpeakCompletion(true);
+      } catch (_) {}
+      try {
+        await _flutterTts.setQueueMode(0);
+      } catch (_) {}
+      try {
+        await _applyPreferredVoice(
+          selectedLocale: selectedLocale,
+          selectedVoiceName: selectedVoiceName,
+          selectedVoiceLocale: selectedVoiceLocale,
+        );
+      } catch (_) {}
+      try {
+        await _flutterTts.setVolume(_stableTtsVolume);
+      } catch (_) {}
+      try {
+        await _flutterTts.setPitch(_stableTtsPitch);
+      } catch (_) {}
+      try {
+        await _flutterTts.setSpeechRate(_stableTtsRate);
+      } catch (_) {}
+      final result = await _flutterTts.speak(spokenText);
+      if (result == 1 || result == null) {
+        return;
+      }
+      await _flutterTts.setVoice(const <String, String>{});
+      final retry = await _flutterTts.speak(spokenText);
+      if (retry == 1 || retry == null) {
+        return;
+      }
+      throw Exception('tts_failed');
+    } finally {
+      _ttsInProgress = false;
     }
-    await _flutterTts.setVoice(const <String, String>{});
-    final retry = await _flutterTts.speak(spokenText);
-    if (retry == 1 || retry == null) {
-      return;
+  }
+
+  Map<String, dynamic>? _pickBestFallbackVoice({
+    required List voices,
+    required Locale locale,
+  }) {
+    final localeCode = locale.languageCode.toLowerCase();
+    final localeVoices = <Map<String, dynamic>>[];
+    for (final voice in voices) {
+      if (voice is! Map) continue;
+      final normalized = Map<String, dynamic>.from(voice);
+      final voiceLocale = (normalized['locale'] ?? '').toString().toLowerCase();
+      if (voiceLocale.startsWith(localeCode)) {
+        localeVoices.add(normalized);
+      }
     }
-    throw Exception('tts_failed');
+    if (localeVoices.isEmpty) return null;
+
+    if (localeCode == 'tr') {
+      for (final voice in localeVoices) {
+        final key = _voiceCompositeKey(voice);
+        if (key.contains(_preferredTurkishNeuralVoice.toLowerCase())) {
+          return voice;
+        }
+      }
+      for (final voice in localeVoices) {
+        final key = _voiceCompositeKey(voice);
+        if (key.contains('ahmet')) {
+          return voice;
+        }
+      }
+    }
+
+    for (final voice in localeVoices) {
+      if (_voiceLooksMale(voice)) {
+        return voice;
+      }
+    }
+    return localeVoices.first;
+  }
+
+  String _voiceCompositeKey(Map<String, dynamic> voice) {
+    final name = (voice['name'] ?? '').toString().toLowerCase();
+    final locale = (voice['locale'] ?? '').toString().toLowerCase();
+    final identifier = (voice['identifier'] ?? '').toString().toLowerCase();
+    final shortName = (voice['shortName'] ?? '').toString().toLowerCase();
+    return '$locale|$name|$identifier|$shortName';
+  }
+
+  bool _voiceLooksMale(Map<String, dynamic> voice) {
+    final key = _voiceCompositeKey(voice);
+    final gender = (voice['gender'] ?? '').toString().toLowerCase();
+    return key.contains('male') ||
+        key.contains('erkek') ||
+        key.contains('man') ||
+        gender == 'male';
   }
 }

@@ -27,12 +27,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final ValueChanged<String> onVibrationPauseChanged;
   final ReminderAudioMode selectedAudioMode;
   final ValueChanged<ReminderAudioMode?> onAudioModeChanged;
-  final String? selectedVoiceKey;
-  final String? selectedTestVoiceKey;
-  final List<DropdownMenuItem<String?>> voiceItems;
-  final List<DropdownMenuItem<String?>> testVoiceItems;
-  final ValueChanged<String?> onVoiceChanged;
-  final ValueChanged<String?> onTestVoiceChanged;
   final VoidCallback onPickAudio;
   final String audioPickerButtonLabel;
   final String audioInfoText;
@@ -87,12 +81,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.onVibrationPauseChanged,
     required this.selectedAudioMode,
     required this.onAudioModeChanged,
-    required this.selectedVoiceKey,
-    required this.selectedTestVoiceKey,
-    required this.voiceItems,
-    required this.testVoiceItems,
-    required this.onVoiceChanged,
-    required this.onTestVoiceChanged,
     required this.onPickAudio,
     required this.audioPickerButtonLabel,
     required this.audioInfoText,
@@ -243,16 +231,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                     onChanged: onAudioModeChanged,
                   ),
                   if (selectedAudioMode == ReminderAudioMode.textToSpeech) ...[
-                    const SizedBox(height: 6),
-                    DropdownButtonFormField<String?>(
-                      initialValue: selectedVoiceKey,
-                      decoration: const InputDecoration(
-                        labelText: 'Sistem Sesi',
-                        border: OutlineInputBorder(),
-                      ),
-                      items: voiceItems,
-                      onChanged: onVoiceChanged,
-                    ),
                     const SizedBox(height: 10),
                     SettingsReminderTextField(
                       label: 'Sesli Hatirlatma Metni',
@@ -280,26 +258,13 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                     ),
                   ],
                   const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DropdownButtonFormField<String?>(
-                          initialValue: selectedTestVoiceKey,
-                          decoration: const InputDecoration(
-                            labelText: 'Test Sesi',
-                            border: OutlineInputBorder(),
-                          ),
-                          items: testVoiceItems,
-                          onChanged: onTestVoiceChanged,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      OutlinedButton.icon(
-                        onPressed: onVoiceTest,
-                        icon: const Icon(Icons.play_arrow_rounded),
-                        label: const Text('Sesli Test'),
-                      ),
-                    ],
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: OutlinedButton.icon(
+                      onPressed: onVoiceTest,
+                      icon: const Icon(Icons.play_arrow_rounded),
+                      label: const Text('Sesli Test'),
+                    ),
                   ),
                 ],
               ),

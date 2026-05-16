@@ -18,7 +18,8 @@ class ReminderVoiceOption {
 class ReminderAudioService {
   final FlutterTts _flutterTts = FlutterTts();
   final AudioPlayer _audioPlayer = AudioPlayer();
-  static const String _preferredTurkishNeuralVoice = 'tr-TR-AhmetNeural';
+  static const String defaultTurkishVoiceName = 'tr-tr-x-tmc-network';
+  static const String defaultTurkishVoiceLocale = 'tr-TR';
   static const double _stableTtsPitch = 1.0;
   static const double _stableTtsRate = 0.52;
   static const double _stableTtsVolume = 1.0;
@@ -52,7 +53,9 @@ class ReminderAudioService {
       if (onlyTurkishMale) {
         // Heuristic: locale starts with tr and voice looks male
         final normalized = Map<String, dynamic>.from(item);
-        final voiceLocale = (normalized['locale'] ?? '').toString().toLowerCase();
+        final voiceLocale = (normalized['locale'] ?? '')
+            .toString()
+            .toLowerCase();
         if (!voiceLocale.startsWith('tr')) continue;
         if (!_voiceLooksMale(normalized)) continue;
       }
@@ -73,12 +76,7 @@ class ReminderAudioService {
         final spokenText = trimmed.isEmpty
             ? '$prayerLabel vakti.'
             : '$prayerLabel vakti. $trimmed';
-        await _speakWithFallback(
-          spokenText,
-          selectedLocale: selectedLocale,
-          selectedVoiceName: settings.selectedVoiceName,
-          selectedVoiceLocale: settings.selectedVoiceLocale,
-        );
+        await _speakWithFallback(spokenText, selectedLocale: selectedLocale);
         return;
       case ReminderAudioMode.deviceAudio:
       case ReminderAudioMode.mp3File:
@@ -112,33 +110,26 @@ class ReminderAudioService {
     _ttsInProgress = false;
   }
 
-  Future<void> _applyPreferredVoice({
-    required Locale? selectedLocale,
-    String? selectedVoiceName,
-    String? selectedVoiceLocale,
-  }) async {
+  Future<void> _applyPreferredVoice({required Locale? selectedLocale}) async {
     final deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
     final locale = selectedLocale ?? deviceLocale;
     final localeKey = locale.countryCode == null || locale.countryCode!.isEmpty
         ? locale.languageCode
         : '${locale.languageCode}-${locale.countryCode}';
     try {
-      await _flutterTts.setLanguage(selectedVoiceLocale ?? localeKey);
+      await _flutterTts.setLanguage(defaultTurkishVoiceLocale);
     } catch (_) {
       try {
-        await _flutterTts.setLanguage(locale.languageCode);
+        await _flutterTts.setLanguage(localeKey);
       } catch (_) {}
     }
-    if ((selectedVoiceName ?? '').isNotEmpty &&
-        (selectedVoiceLocale ?? '').isNotEmpty) {
-      try {
-        await _flutterTts.setVoice({
-          'name': selectedVoiceName!,
-          'locale': selectedVoiceLocale!,
-        });
-        return;
-      } catch (_) {}
-    }
+    try {
+      await _flutterTts.setVoice(const {
+        'name': defaultTurkishVoiceName,
+        'locale': defaultTurkishVoiceLocale,
+      });
+      return;
+    } catch (_) {}
     dynamic voices;
     try {
       voices = await _flutterTts.getVoices;
@@ -159,8 +150,6 @@ class ReminderAudioService {
   Future<void> _speakWithFallback(
     String spokenText, {
     required Locale? selectedLocale,
-    String? selectedVoiceName,
-    String? selectedVoiceLocale,
   }) async {
     final now = DateTime.now();
     final last = _lastTtsStartAt;
@@ -179,11 +168,7 @@ class ReminderAudioService {
         await _flutterTts.setQueueMode(0);
       } catch (_) {}
       try {
-        await _applyPreferredVoice(
-          selectedLocale: selectedLocale,
-          selectedVoiceName: selectedVoiceName,
-          selectedVoiceLocale: selectedVoiceLocale,
-        );
+        await _applyPreferredVoice(selectedLocale: selectedLocale);
       } catch (_) {}
       try {
         await _flutterTts.setVolume(_stableTtsVolume);
@@ -228,13 +213,7 @@ class ReminderAudioService {
     if (localeCode == 'tr') {
       for (final voice in localeVoices) {
         final key = _voiceCompositeKey(voice);
-        if (key.contains(_preferredTurkishNeuralVoice.toLowerCase())) {
-          return voice;
-        }
-      }
-      for (final voice in localeVoices) {
-        final key = _voiceCompositeKey(voice);
-        if (key.contains('ahmet')) {
+        if (key.contains(defaultTurkishVoiceName.toLowerCase())) {
           return voice;
         }
       }

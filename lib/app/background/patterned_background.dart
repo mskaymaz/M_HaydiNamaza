@@ -89,6 +89,7 @@ class PatternedBackground extends StatelessWidget {
   final Color patternColor;
   final String patternAssetPath;
   final double patternScale;
+  final double patternOpacity;
   final Widget child;
 
   const PatternedBackground({
@@ -97,6 +98,7 @@ class PatternedBackground extends StatelessWidget {
     required this.patternColor,
     required this.patternAssetPath,
     required this.patternScale,
+    required this.patternOpacity,
     required this.child,
   });
 
@@ -104,7 +106,7 @@ class PatternedBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     final pattern = BackgroundPatternRegistry.forAssetPath(patternAssetPath);
     final tileSize = math.max(64.0, pattern.baseTileSize * patternScale);
-    final tint = patternColor.withValues(alpha: 0.16);
+    final tint = patternColor.withValues(alpha: patternOpacity.clamp(0.0, 1.0));
 
     return Stack(
       fit: StackFit.expand,
@@ -118,9 +120,10 @@ class PatternedBackground extends StatelessWidget {
                   1,
                   (constraints.maxWidth / tileSize).ceil() + 1,
                 );
+                final cellExtent = constraints.maxWidth / columns;
                 final rows = math.max(
                   1,
-                  (constraints.maxHeight / tileSize).ceil() + 1,
+                  (constraints.maxHeight / cellExtent).ceil() + 1,
                 );
                 return GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
@@ -137,10 +140,7 @@ class PatternedBackground extends StatelessWidget {
                         child: SvgPicture.asset(
                           pattern.assetPath,
                           fit: BoxFit.contain,
-                          colorFilter: ColorFilter.mode(
-                            tint,
-                            BlendMode.srcIn,
-                          ),
+                          colorFilter: ColorFilter.mode(tint, BlendMode.srcIn),
                         ),
                       ),
                     );

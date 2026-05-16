@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -448,287 +448,319 @@ class _HomeScreenState extends State<HomeScreen> {
               patternColor: palette.backgroundCizgiColor,
               patternAssetPath: palette.backgroundPatternAssetPath,
               patternScale: palette.backgroundPatternScale,
+              patternOpacity: palette.backgroundPatternOpacity,
               child: Stack(
                 children: [
-                const Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 30,
-                  child: SizedBox.shrink(),
-                ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: 30,
-                  child: ColoredBox(color: statusBarColor),
-                ),
-                Positioned.fill(
-                  top: 30,
-                  child: IgnorePointer(
-                    child: Image.asset(
-                      'img/templates_line/bg_motif02.png',
-                      fit: BoxFit.cover,
-                      alignment: Alignment.topCenter,
-                      color: palette.backgroundCizgiColor.withValues(
-                        alpha: 0.5,
-                      ),
-                      colorBlendMode: BlendMode.modulate,
-                    ),
+                  const Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 30,
+                    child: SizedBox.shrink(),
                   ),
-                ),
-                SafeArea(
-                  child: Padding(
-                    padding: ui.screenPadding,
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        final drawerLayout = _computeDrawerLayout(
-                          settingsIconBoxSize: ui.settingsIconBoxSize,
-                          locationTextSize: ui.typography.locationSize,
-                          nextTimeTextSize: ui.typography.nextTimeSize,
-                          nextLabelTextSize: ui.typography.nextLabelSize,
-                          topPanelVerticalPadding: ui.topPanelPadding.vertical,
-                          constraintsMaxHeight: constraints.maxHeight,
-                          drawerProgress: _drawerProgress,
-                        );
-                        final bandColor = Color.lerp(
-                          ui.listPanel.color,
-                          palette.zeminColor,
-                          0.16,
-                        )!;
-
-                        void updateDrawerProgress(DragUpdateDetails details) {
-                          final travel =
-                              (drawerLayout.maxDrawerHeight -
-                                      drawerLayout.minDrawerHeight)
-                                  .clamp(1.0, double.infinity);
-                          setState(() {
-                            _drawerProgress =
-                                (_drawerProgress + (details.delta.dy / travel))
-                                    .clamp(0.0, 1.0)
-                                    .toDouble();
-                          });
-                        }
-
-                        void settleDrawerProgress(DragEndDetails details) {
-                          final velocity = details.primaryVelocity ?? 0;
-                          setState(() {
-                            if (velocity > 250) {
-                              _drawerProgress = 1;
-                            } else if (velocity < -250) {
-                              _drawerProgress = 0;
-                            } else {
-                              _drawerProgress = _drawerProgress >= 0.35 ? 1 : 0;
-                            }
-                          });
-                        }
-
-                        const infoPanelGap = 3.0;
-                        const infoPanelBottomPadding = 8.0;
-                        final closedHandleBottom =
-                            drawerLayout.topPanelHeight -
-                            1 +
-                            drawerLayout.handleAreaHeight;
-                        final drawerBottom =
-                            drawerLayout.drawerTop + drawerLayout.drawerHeight;
-                        final infoPanelTop =
-                            math.max(drawerBottom, closedHandleBottom) +
-                            infoPanelGap;
-                        final infoPanelMaxHeight = math.max(
-                          140.0,
-                          constraints.maxHeight -
-                              infoPanelTop -
-                              infoPanelBottomPadding,
-                        );
-                        final isLandscape =
-                            MediaQuery.of(context).orientation ==
-                            Orientation.landscape;
-                        final panelWidthFactor = isLandscape
-                            ? (_isLandscapePanelsExpanded ? 0.9 : 0.72)
-                            : 1.0;
-
-                        Widget buildHandleBand({
-                          required bool pointUp,
-                          Border? border,
-                        }) {
-                          return GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onTap: _toggleDrawer,
-                            onVerticalDragUpdate: updateDrawerProgress,
-                            onVerticalDragEnd: settleDrawerProgress,
-                            child: Container(
-                              height: drawerLayout.handleAreaHeight,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    bandColor.withValues(alpha: 0.98),
-                                    ui.listPanel.color,
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(999),
-                                border: border,
-                              ),
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 18,
-                                    ),
-                                    child: Container(
-                                      height: 2,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withValues(
-                                          alpha: 0.18,
-                                        ),
-                                        borderRadius: BorderRadius.circular(
-                                          999,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  CustomPaint(
-                                    size: const Size(78, 12),
-                                    painter: HomeDrawerHandlePainter(
-                                      color: palette.cizgiColor.withValues(
-                                        alpha: 0.8,
-                                      ),
-                                      pointUp: pointUp,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: 30,
+                    child: ColoredBox(color: statusBarColor),
+                  ),
+                  SafeArea(
+                    child: Padding(
+                      padding: ui.screenPadding,
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          final drawerLayout = _computeDrawerLayout(
+                            settingsIconBoxSize: ui.settingsIconBoxSize,
+                            locationTextSize: ui.typography.locationSize,
+                            nextTimeTextSize: ui.typography.nextTimeSize,
+                            nextLabelTextSize: ui.typography.nextLabelSize,
+                            topPanelVerticalPadding:
+                                ui.topPanelPadding.vertical,
+                            constraintsMaxHeight: constraints.maxHeight,
+                            drawerProgress: _drawerProgress,
                           );
-                        }
+                          final bandColor = Color.lerp(
+                            ui.listPanel.color,
+                            palette.zeminColor,
+                            0.16,
+                          )!;
 
-                        return Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            Positioned(
-                              top: drawerLayout.drawerTop,
-                              left: 0,
-                              right: 0,
-                              child: Align(
-                                alignment: Alignment.topCenter,
-                                child: FractionallySizedBox(
-                                  widthFactor: panelWidthFactor,
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 220),
-                                    curve: Curves.easeOutCubic,
-                                    height: _drawerProgress <= 0.02
-                                        ? 0
-                                        : drawerLayout.drawerHeight,
-                                    decoration: BoxDecoration(
-                                      color: ui.listPanel.color,
-                                      borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(20),
-                                        bottomRight: Radius.circular(20),
-                                      ),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Color(0x22000000),
-                                          blurRadius: 12,
-                                          offset: Offset(0, 8),
-                                        ),
-                                      ],
-                                    ),
-                                    clipBehavior: Clip.antiAlias,
-                                    child: Column(
+                          void updateDrawerProgress(DragUpdateDetails details) {
+                            final travel =
+                                (drawerLayout.maxDrawerHeight -
+                                        drawerLayout.minDrawerHeight)
+                                    .clamp(1.0, double.infinity);
+                            setState(() {
+                              _drawerProgress =
+                                  (_drawerProgress +
+                                          (details.delta.dy / travel))
+                                      .clamp(0.0, 1.0)
+                                      .toDouble();
+                            });
+                          }
+
+                          void settleDrawerProgress(DragEndDetails details) {
+                            final velocity = details.primaryVelocity ?? 0;
+                            setState(() {
+                              if (velocity > 250) {
+                                _drawerProgress = 1;
+                              } else if (velocity < -250) {
+                                _drawerProgress = 0;
+                              } else {
+                                _drawerProgress = _drawerProgress >= 0.35
+                                    ? 1
+                                    : 0;
+                              }
+                            });
+                          }
+
+                          const infoPanelGap = 3.0;
+                          const infoPanelBottomPadding = 8.0;
+                          final closedHandleBottom =
+                              drawerLayout.topPanelHeight -
+                              1 +
+                              drawerLayout.handleAreaHeight;
+                          final drawerBottom =
+                              drawerLayout.drawerTop +
+                              drawerLayout.drawerHeight;
+                          final infoPanelTop =
+                              math.max(drawerBottom, closedHandleBottom) +
+                              infoPanelGap;
+                          final infoPanelMaxHeight = math.max(
+                            140.0,
+                            constraints.maxHeight -
+                                infoPanelTop -
+                                infoPanelBottomPadding,
+                          );
+                          final isLandscape =
+                              MediaQuery.of(context).orientation ==
+                              Orientation.landscape;
+                          final panelWidthFactor = isLandscape
+                              ? (_isLandscapePanelsExpanded ? 0.9 : 0.72)
+                              : 1.0;
+
+                          Widget buildHandleBand({
+                            required bool pointUp,
+                            Border? border,
+                          }) {
+                            return GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: _toggleDrawer,
+                              onVerticalDragUpdate: updateDrawerProgress,
+                              onVerticalDragEnd: settleDrawerProgress,
+                              child: Container(
+                                height: drawerLayout.handleAreaHeight,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      bandColor.withValues(alpha: 0.98),
+                                      ui.listPanel.color,
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(999),
+                                  border: border,
+                                ),
+                                child: Stack(
+                                  alignment: Alignment.center,
                                   children: [
-                                    if (_drawerProgress > 0.02)
-                                      SizedBox(
-                                        height: drawerLayout.panelOverlap + 12,
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 18,
                                       ),
-                                    if (_drawerProgress > 0.02)
-                                      Expanded(
-                                        child: GestureDetector(
-                                          behavior: HitTestBehavior.translucent,
-                                          onTap: () {
-                                            setState(
-                                              () => _showPanelAddButton =
-                                                  !_showPanelAddButton,
-                                            );
-                                          },
-                                          onDoubleTap: () {
-                                            if (!isLandscape) return;
-                                            setState(() {
-                                              _isLandscapePanelsExpanded =
-                                                  !_isLandscapePanelsExpanded;
-                                            });
-                                          },
-                                          child: Stack(
-                                            children: [
-                                              HomePrayerList(
-                                                controller:
-                                                    _prayerListScrollController,
-                                                items: items,
-                                                active: active,
-                                                style: ui.listPanel,
-                                                listPadding: ui.listPadding,
-                                                rowGap: ui.rowGap,
-                                                iconStyle: ui.iconToggle,
-                                                chipStyle: ui.reminderChip,
-                                                typography: ui.typography,
-                                                cizgiColor: palette.cizgiColor,
-                                                activeColor: palette.zeminColor,
-                                                showVoiceIcon: _reminderSettings
-                                                    .showVoiceIcon,
-                                                showVisualIcon:
-                                                    _reminderSettings
-                                                        .showVisualIcon,
-                                                showAzanIcon: _reminderSettings
-                                                    .showAzanIcon,
-                                                showVibrationIcon:
-                                                    _reminderSettings
-                                                        .showVibrationIcon,
-                                              ),
-                                              if (_showPanelAddButton)
-                                                Positioned(
-                                                  left: 12,
-                                                  bottom: 12,
-                                                  child: InkWell(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          999,
-                                                        ),
-                                                    onTap: _addCustomPrayerRow,
-                                                    child: Container(
-                                                      width: 36,
-                                                      height: 36,
-                                                      decoration: BoxDecoration(
-                                                        color: const Color(
-                                                          0xFFFFEB3B,
-                                                        ),
-                                                        shape: BoxShape.circle,
-                                                        border: Border.all(
-                                                          color: palette
-                                                              .cizgiColor
-                                                              .withValues(
-                                                                alpha: 0.25,
-                                                              ),
-                                                        ),
-                                                      ),
-                                                      child: const Icon(
-                                                        Icons.add,
-                                                        color:
-                                                            Color(0xFF1B5E20),
-                                                        size: 19.5,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                            ],
+                                      child: Container(
+                                        height: 2,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withValues(
+                                            alpha: 0.18,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            999,
                                           ),
                                         ),
                                       ),
-                                    if (_drawerProgress > 0.02)
-                                      buildHandleBand(
-                                        pointUp: true,
+                                    ),
+                                    CustomPaint(
+                                      size: const Size(78, 12),
+                                      painter: HomeDrawerHandlePainter(
+                                        color: palette.cizgiColor.withValues(
+                                          alpha: 0.8,
+                                        ),
+                                        pointUp: pointUp,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+
+                          return Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Positioned(
+                                top: drawerLayout.drawerTop,
+                                left: 0,
+                                right: 0,
+                                child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: FractionallySizedBox(
+                                    widthFactor: panelWidthFactor,
+                                    child: AnimatedContainer(
+                                      duration: const Duration(
+                                        milliseconds: 220,
+                                      ),
+                                      curve: Curves.easeOutCubic,
+                                      height: _drawerProgress <= 0.02
+                                          ? 0
+                                          : drawerLayout.drawerHeight,
+                                      decoration: BoxDecoration(
+                                        color: ui.listPanel.color,
+                                        borderRadius: const BorderRadius.only(
+                                          bottomLeft: Radius.circular(20),
+                                          bottomRight: Radius.circular(20),
+                                        ),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Color(0x22000000),
+                                            blurRadius: 12,
+                                            offset: Offset(0, 8),
+                                          ),
+                                        ],
+                                      ),
+                                      clipBehavior: Clip.antiAlias,
+                                      child: Column(
+                                        children: [
+                                          if (_drawerProgress > 0.02)
+                                            SizedBox(
+                                              height:
+                                                  drawerLayout.panelOverlap +
+                                                  12,
+                                            ),
+                                          if (_drawerProgress > 0.02)
+                                            Expanded(
+                                              child: GestureDetector(
+                                                behavior:
+                                                    HitTestBehavior.translucent,
+                                                onTap: () {
+                                                  setState(
+                                                    () => _showPanelAddButton =
+                                                        !_showPanelAddButton,
+                                                  );
+                                                },
+                                                onDoubleTap: () {
+                                                  if (!isLandscape) return;
+                                                  setState(() {
+                                                    _isLandscapePanelsExpanded =
+                                                        !_isLandscapePanelsExpanded;
+                                                  });
+                                                },
+                                                child: Stack(
+                                                  children: [
+                                                    HomePrayerList(
+                                                      controller:
+                                                          _prayerListScrollController,
+                                                      items: items,
+                                                      active: active,
+                                                      style: ui.listPanel,
+                                                      listPadding:
+                                                          ui.listPadding,
+                                                      rowGap: ui.rowGap,
+                                                      iconStyle: ui.iconToggle,
+                                                      chipStyle:
+                                                          ui.reminderChip,
+                                                      typography: ui.typography,
+                                                      cizgiColor:
+                                                          palette.cizgiColor,
+                                                      activeColor:
+                                                          palette.zeminColor,
+                                                      showVoiceIcon:
+                                                          _reminderSettings
+                                                              .showVoiceIcon,
+                                                      showVisualIcon:
+                                                          _reminderSettings
+                                                              .showVisualIcon,
+                                                      showAzanIcon:
+                                                          _reminderSettings
+                                                              .showAzanIcon,
+                                                      showVibrationIcon:
+                                                          _reminderSettings
+                                                              .showVibrationIcon,
+                                                    ),
+                                                    if (_showPanelAddButton)
+                                                      Positioned(
+                                                        left: 12,
+                                                        bottom: 12,
+                                                        child: InkWell(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                999,
+                                                              ),
+                                                          onTap:
+                                                              _addCustomPrayerRow,
+                                                          child: Container(
+                                                            width: 36,
+                                                            height: 36,
+                                                            decoration: BoxDecoration(
+                                                              color:
+                                                                  const Color(
+                                                                    0xFFFFEB3B,
+                                                                  ),
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              border: Border.all(
+                                                                color: palette
+                                                                    .cizgiColor
+                                                                    .withValues(
+                                                                      alpha:
+                                                                          0.25,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                            child: const Icon(
+                                                              Icons.add,
+                                                              color: Color(
+                                                                0xFF1B5E20,
+                                                              ),
+                                                              size: 19.5,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          if (_drawerProgress > 0.02)
+                                            buildHandleBand(
+                                              pointUp: true,
+                                              border: Border(
+                                                top: BorderSide(
+                                                  color: palette.cizgiColor
+                                                      .withValues(alpha: 0.12),
+                                                ),
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              if (_drawerProgress <= 0.02)
+                                Positioned(
+                                  top: drawerLayout.topPanelHeight - 1,
+                                  left: 0,
+                                  right: 0,
+                                  child: Align(
+                                    alignment: Alignment.topCenter,
+                                    child: FractionallySizedBox(
+                                      widthFactor: panelWidthFactor,
+                                      child: buildHandleBand(
+                                        pointUp: false,
                                         border: Border(
                                           top: BorderSide(
                                             color: palette.cizgiColor
@@ -736,141 +768,120 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                         ),
                                       ),
-                                  ],
+                                    ),
+                                  ),
                                 ),
-                              ),
-                                ),
-                              ),
-                            ),
-                            if (_drawerProgress <= 0.02)
                               Positioned(
-                                top: drawerLayout.topPanelHeight - 1,
+                                top: 0,
                                 left: 0,
                                 right: 0,
-                                child: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: FractionallySizedBox(
-                                    widthFactor: panelWidthFactor,
-                                    child: buildHandleBand(
-                                      pointUp: false,
-                                      border: Border(
-                                        top: BorderSide(
-                                          color: palette.cizgiColor.withValues(
-                                            alpha: 0.12,
-                                          ),
-                                        ),
+                                child: GestureDetector(
+                                  onDoubleTap: _toggleDrawer,
+                                  child: HomeTopPanel(
+                                    provinceLabel: provinceLabel,
+                                    districtLabel: districtLabel,
+                                    nextLabel: next.label,
+                                    nextTime: nextTime,
+                                    countdown: countdown,
+                                    dateYearLabel: dateYearLabel,
+                                    dateDayMonthLabel: dateDayMonthLabel,
+                                    timeLabel: timeLabel,
+                                    onToggleDate: () => setState(
+                                      () => _showHijriDate = !_showHijriDate,
+                                    ),
+                                    onLocationTap: () =>
+                                        _openLocationSettings(location),
+                                    onQibla: () => _openQibla(location),
+                                    onSettings: _openSettings,
+                                    style: ui.topPanel,
+                                    padding: ui.topPanelPadding,
+                                    settingsIconSize: ui.settingsIconSize,
+                                    settingsIconBoxSize: ui.settingsIconBoxSize,
+                                    settingsIconOpacity: ui.settingsIconOpacity,
+                                    typography: ui.typography,
+                                    cizgiColor: palette.cizgiColor,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: infoPanelTop,
+                                left: 0,
+                                right: 0,
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    0,
+                                    0,
+                                    0,
+                                    infoPanelBottomPadding,
+                                  ),
+                                  child: GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
+                                    onVerticalDragStart: _onInfoPanelDragStart,
+                                    onVerticalDragUpdate:
+                                        _onInfoPanelDragUpdate,
+                                    onVerticalDragEnd: _onInfoPanelDragEnd,
+                                    onDoubleTap: () {
+                                      if (!isLandscape) return;
+                                      setState(() {
+                                        _isLandscapePanelsExpanded =
+                                            !_isLandscapePanelsExpanded;
+                                      });
+                                    },
+                                    child: Align(
+                                      alignment: Alignment.topCenter,
+                                      child: FractionallySizedBox(
+                                        widthFactor: panelWidthFactor,
+                                        child:
+                                            FutureBuilder<
+                                              DailyContentSelectionResult
+                                            >(
+                                              future: _dailyContentFuture,
+                                              builder: (context, snapshot) {
+                                                return HomeDailyContentPanel(
+                                                  result: snapshot.data,
+                                                  isLoading:
+                                                      snapshot
+                                                          .connectionState ==
+                                                      ConnectionState.waiting,
+                                                  hasError: snapshot.hasError,
+                                                  cizgiColor:
+                                                      palette.cizgiColor,
+                                                  panelColor:
+                                                      palette.zeminColor,
+                                                  maxHeight: infoPanelMaxHeight,
+                                                );
+                                              },
+                                            ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            Positioned(
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              child: GestureDetector(
-                                onDoubleTap: _toggleDrawer,
-                                child: HomeTopPanel(
-                                  provinceLabel: provinceLabel,
-                                  districtLabel: districtLabel,
-                                  nextLabel: next.label,
-                                  nextTime: nextTime,
-                                  countdown: countdown,
-                                  dateYearLabel: dateYearLabel,
-                                  dateDayMonthLabel: dateDayMonthLabel,
-                                  timeLabel: timeLabel,
-                                  onToggleDate: () => setState(
-                                    () => _showHijriDate = !_showHijriDate,
-                                  ),
-                                  onLocationTap: () =>
-                                      _openLocationSettings(location),
-                                  onQibla: () => _openQibla(location),
-                                  onSettings: _openSettings,
-                                  style: ui.topPanel,
-                                  padding: ui.topPanelPadding,
-                                  settingsIconSize: ui.settingsIconSize,
-                                  settingsIconBoxSize: ui.settingsIconBoxSize,
-                                  settingsIconOpacity: ui.settingsIconOpacity,
-                                  typography: ui.typography,
-                                  cizgiColor: palette.cizgiColor,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: infoPanelTop,
-                              left: 0,
-                              right: 0,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                  0,
-                                  0,
-                                  0,
-                                  infoPanelBottomPadding,
-                                ),
-                                child: GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onVerticalDragStart: _onInfoPanelDragStart,
-                                  onVerticalDragUpdate: _onInfoPanelDragUpdate,
-                                  onVerticalDragEnd: _onInfoPanelDragEnd,
-                                  onDoubleTap: () {
-                                    if (!isLandscape) return;
-                                    setState(() {
-                                      _isLandscapePanelsExpanded =
-                                          !_isLandscapePanelsExpanded;
-                                    });
-                                  },
-                                  child:
-                                      Align(
-                                        alignment: Alignment.topCenter,
-                                        child: FractionallySizedBox(
-                                          widthFactor: panelWidthFactor,
-                                          child: FutureBuilder<
-                                            DailyContentSelectionResult
-                                          >(
-                                            future: _dailyContentFuture,
-                                            builder: (context, snapshot) {
-                                              return HomeDailyContentPanel(
-                                                result: snapshot.data,
-                                                isLoading:
-                                                    snapshot.connectionState ==
-                                                    ConnectionState.waiting,
-                                                hasError: snapshot.hasError,
-                                                cizgiColor: palette.cizgiColor,
-                                                panelColor: palette.zeminColor,
-                                                maxHeight: infoPanelMaxHeight,
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                if (_voiceLoopUntil != null || _visualLoopUntil != null)
-                  Positioned(
-                    left: 16,
-                    right: 16,
-                    bottom: 16,
-                    child: SafeArea(
-                      top: false,
-                      child: HomeActiveReminderPanel(
-                        voicePrayerLabel: _voiceLoopPrayerLabel,
-                        visualPrayerLabel: _visualLoopPrayerLabel,
-                        visualMessage: _visualLoopMessage,
-                        showVisualCard: _showVisualOverlay,
-                        onCloseVoice: _dismissVoiceReminder,
-                        onCloseVisual: _dismissVisualReminder,
+                            ],
+                          );
+                        },
                       ),
                     ),
                   ),
-              ],
-            ),
+                  if (_voiceLoopUntil != null || _visualLoopUntil != null)
+                    Positioned(
+                      left: 16,
+                      right: 16,
+                      bottom: 16,
+                      child: SafeArea(
+                        top: false,
+                        child: HomeActiveReminderPanel(
+                          voicePrayerLabel: _voiceLoopPrayerLabel,
+                          visualPrayerLabel: _visualLoopPrayerLabel,
+                          visualMessage: _visualLoopMessage,
+                          showVisualCard: _showVisualOverlay,
+                          onCloseVoice: _dismissVoiceReminder,
+                          onCloseVisual: _dismissVisualReminder,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
           );
         },

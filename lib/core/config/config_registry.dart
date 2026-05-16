@@ -8,6 +8,7 @@ class UiPaletteConfig {
   final Color backgroundCizgiColor;
   final String backgroundPatternAssetPath;
   final double backgroundPatternScale;
+  final double backgroundPatternOpacity;
 
   const UiPaletteConfig({
     required this.zeminColor,
@@ -16,6 +17,7 @@ class UiPaletteConfig {
     required this.backgroundCizgiColor,
     required this.backgroundPatternAssetPath,
     required this.backgroundPatternScale,
+    required this.backgroundPatternOpacity,
   });
 
   UiPaletteConfig copyWith({
@@ -25,17 +27,19 @@ class UiPaletteConfig {
     Color? backgroundCizgiColor,
     String? backgroundPatternAssetPath,
     double? backgroundPatternScale,
+    double? backgroundPatternOpacity,
   }) {
     return UiPaletteConfig(
       zeminColor: zeminColor ?? this.zeminColor,
       cizgiColor: cizgiColor ?? this.cizgiColor,
       backgroundZeminColor: backgroundZeminColor ?? this.backgroundZeminColor,
-      backgroundCizgiColor:
-          backgroundCizgiColor ?? this.backgroundCizgiColor,
+      backgroundCizgiColor: backgroundCizgiColor ?? this.backgroundCizgiColor,
       backgroundPatternAssetPath:
           backgroundPatternAssetPath ?? this.backgroundPatternAssetPath,
       backgroundPatternScale:
           backgroundPatternScale ?? this.backgroundPatternScale,
+      backgroundPatternOpacity:
+          backgroundPatternOpacity ?? this.backgroundPatternOpacity,
     );
   }
 }
@@ -178,10 +182,7 @@ class DataSourcesConfig {
   final DiyanetDataSourceConfig diyanet;
   final AladhanDataSourceConfig aladhan;
 
-  const DataSourcesConfig({
-    required this.diyanet,
-    required this.aladhan,
-  });
+  const DataSourcesConfig({required this.diyanet, required this.aladhan});
 }
 
 @immutable
@@ -229,6 +230,7 @@ class ConfigRegistry {
     backgroundCizgiColor: Color(0xFF7A8F6A),
     backgroundPatternAssetPath: 'img/Desen/DesM01.svg',
     backgroundPatternScale: 1.0,
+    backgroundPatternOpacity: 0.16,
   );
 
   static MainUiConfig mainUiFor(UiPaletteConfig palette) {

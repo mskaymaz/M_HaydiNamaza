@@ -12,6 +12,8 @@ class UiPaletteStorage {
       'ui_palette_background_pattern_asset_path';
   static const String _backgroundPatternScaleKey =
       'ui_palette_background_pattern_scale';
+  static const String _backgroundPatternOpacityKey =
+      'ui_palette_background_pattern_opacity';
 
   Future<UiPaletteConfig> read() async {
     final prefs = await SharedPreferences.getInstance();
@@ -23,6 +25,9 @@ class UiPaletteStorage {
       _backgroundPatternAssetPathKey,
     );
     final backgroundPatternScale = prefs.getDouble(_backgroundPatternScaleKey);
+    final backgroundPatternOpacity = prefs.getDouble(
+      _backgroundPatternOpacityKey,
+    );
     return ConfigRegistry.defaultPalette.copyWith(
       zeminColor: zeminValue == null ? null : Color(zeminValue),
       cizgiColor: cizgiValue == null ? null : Color(cizgiValue),
@@ -34,6 +39,7 @@ class UiPaletteStorage {
           : Color(backgroundCizgiValue),
       backgroundPatternAssetPath: backgroundPatternAssetPath,
       backgroundPatternScale: backgroundPatternScale,
+      backgroundPatternOpacity: backgroundPatternOpacity,
     );
   }
 
@@ -56,6 +62,10 @@ class UiPaletteStorage {
     await prefs.setDouble(
       _backgroundPatternScaleKey,
       palette.backgroundPatternScale,
+    );
+    await prefs.setDouble(
+      _backgroundPatternOpacityKey,
+      palette.backgroundPatternOpacity,
     );
   }
 }

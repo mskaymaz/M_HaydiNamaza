@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../app/background/patterned_background.dart';
 import '../../../../app/reminder_text_settings_storage.dart';
@@ -54,14 +54,18 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final Color backgroundLineColor;
   final String selectedBackgroundPatternAssetPath;
   final double backgroundPatternScale;
+  final double backgroundPatternOpacity;
+  final bool hasPendingBackgroundChanges;
   final VoidCallback onEditPanelColor;
   final VoidCallback onEditTextColor;
   final VoidCallback onEditBackgroundColor;
   final VoidCallback onEditBackgroundLineColor;
   final Future<void> Function() onResetInterfaceColors;
   final Future<void> Function() onResetBackgroundColors;
+  final Future<void> Function() onApplyBackgroundStyle;
   final ValueChanged<String> onBackgroundPatternChanged;
   final ValueChanged<double> onBackgroundPatternScaleChanged;
+  final ValueChanged<double> onBackgroundPatternOpacityChanged;
 
   const SettingsLegacyAccordionGroup({
     super.key,
@@ -110,14 +114,18 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.backgroundLineColor,
     required this.selectedBackgroundPatternAssetPath,
     required this.backgroundPatternScale,
+    required this.backgroundPatternOpacity,
+    required this.hasPendingBackgroundChanges,
     required this.onEditPanelColor,
     required this.onEditTextColor,
     required this.onEditBackgroundColor,
     required this.onEditBackgroundLineColor,
     required this.onResetInterfaceColors,
     required this.onResetBackgroundColors,
+    required this.onApplyBackgroundStyle,
     required this.onBackgroundPatternChanged,
     required this.onBackgroundPatternScaleChanged,
+    required this.onBackgroundPatternOpacityChanged,
   });
 
   @override
@@ -165,7 +173,10 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  Divider(color: Colors.white.withValues(alpha: 0.9), height: 1),
+                  Divider(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    height: 1,
+                  ),
                   const SizedBox(height: 10),
                   CheckboxListTile(
                     value: sortCustomPrayersByTime,
@@ -370,10 +381,15 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                   const SizedBox(height: 8),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: SettingsResetIconButton(onTap: onResetInterfaceColors),
+                    child: SettingsResetIconButton(
+                      onTap: onResetInterfaceColors,
+                    ),
                   ),
                   const SizedBox(height: 12),
-                  Divider(color: Colors.white.withValues(alpha: 0.9), height: 1),
+                  Divider(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    height: 1,
+                  ),
                   const SizedBox(height: 12),
                   const Text(
                     'Arkaplan Renkleri',
@@ -394,49 +410,49 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                   const SizedBox(height: 8),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: SettingsResetIconButton(onTap: onResetBackgroundColors),
+                    child: SettingsResetIconButton(
+                      onTap: onResetBackgroundColors,
+                    ),
                   ),
                   const SizedBox(height: 12),
-                  Divider(color: Colors.white.withValues(alpha: 0.9), height: 1),
+                  Divider(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    height: 1,
+                  ),
                   const SizedBox(height: 12),
                   const Text(
                     'Arkaplan Deseni',
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 8),
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      final availableWidth = constraints.maxWidth;
-                      final crossAxisCount = availableWidth >= 380 ? 4 : 3;
-                      final cardWidth =
-                          (availableWidth - (crossAxisCount - 1) * 8) /
-                          crossAxisCount;
-                      return GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.zero,
-                        gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: crossAxisCount,
-                              mainAxisSpacing: 8,
-                              crossAxisSpacing: 8,
-                              mainAxisExtent: cardWidth * 0.92 + 38,
-                            ),
-                        itemCount: BackgroundPatternRegistry.patterns.length,
-                        itemBuilder: (context, index) {
-                          final pattern = BackgroundPatternRegistry.patterns[index];
-                          final isSelected =
-                              pattern.assetPath == selectedBackgroundPatternAssetPath;
-                          return _PatternChoiceCard(
+                  SizedBox(
+                    height: 132,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.zero,
+                      itemCount: BackgroundPatternRegistry.patterns.length,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 8),
+                      itemBuilder: (context, index) {
+                        final pattern =
+                            BackgroundPatternRegistry.patterns[index];
+                        final isSelected =
+                            pattern.assetPath ==
+                            selectedBackgroundPatternAssetPath;
+                        return SizedBox(
+                          width: 108,
+                          child: _PatternChoiceCard(
                             pattern: pattern,
                             backgroundColor: backgroundColor,
                             backgroundLineColor: backgroundLineColor,
+                            backgroundPatternOpacity: backgroundPatternOpacity,
                             isSelected: isSelected,
-                            onTap: () => onBackgroundPatternChanged(pattern.assetPath),
-                          );
-                        },
-                      );
-                    },
+                            onTap: () =>
+                                onBackgroundPatternChanged(pattern.assetPath),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Text(
@@ -450,6 +466,42 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                     divisions: 12,
                     label: backgroundPatternScale.toStringAsFixed(2),
                     onChanged: onBackgroundPatternScaleChanged,
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    'Desen Seffafligi: ${(backgroundPatternOpacity * 100).round()}%',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  Slider(
+                    value: backgroundPatternOpacity.clamp(0.0, 1.0),
+                    min: 0.0,
+                    max: 1.0,
+                    divisions: 20,
+                    label: '${(backgroundPatternOpacity * 100).round()}%',
+                    onChanged: onBackgroundPatternOpacityChanged,
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'Not: Secimler ana sayfaya sadece Uygula butonuyla yansir.',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      OutlinedButton.icon(
+                        onPressed: () => onResetBackgroundColors(),
+                        icon: const Icon(Icons.restart_alt_rounded),
+                        label: const Text('Varsayilan'),
+                      ),
+                      const Spacer(),
+                      FilledButton.icon(
+                        onPressed: hasPendingBackgroundChanges
+                            ? () => onApplyBackgroundStyle()
+                            : null,
+                        icon: const Icon(Icons.check_rounded),
+                        label: const Text('Uygula'),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -472,6 +524,7 @@ class _PatternChoiceCard extends StatelessWidget {
   final BackgroundPatternDefinition pattern;
   final Color backgroundColor;
   final Color backgroundLineColor;
+  final double backgroundPatternOpacity;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -479,6 +532,7 @@ class _PatternChoiceCard extends StatelessWidget {
     required this.pattern,
     required this.backgroundColor,
     required this.backgroundLineColor,
+    required this.backgroundPatternOpacity,
     required this.isSelected,
     required this.onTap,
   });
@@ -517,6 +571,7 @@ class _PatternChoiceCard extends StatelessWidget {
                     patternColor: backgroundLineColor,
                     patternAssetPath: pattern.assetPath,
                     patternScale: 0.72,
+                    patternOpacity: backgroundPatternOpacity,
                     child: const SizedBox.shrink(),
                   ),
                 ),

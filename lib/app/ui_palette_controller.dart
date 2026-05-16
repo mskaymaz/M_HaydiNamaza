@@ -7,8 +7,8 @@ class UiPaletteController extends ValueNotifier<UiPaletteConfig> {
   final UiPaletteStorage _storage;
 
   UiPaletteController({UiPaletteStorage? storage})
-      : _storage = storage ?? UiPaletteStorage(),
-        super(ConfigRegistry.defaultPalette);
+    : _storage = storage ?? UiPaletteStorage(),
+      super(ConfigRegistry.defaultPalette);
 
   Future<void> load() async {
     value = await _storage.read();
@@ -41,5 +41,9 @@ class UiPaletteController extends ValueNotifier<UiPaletteConfig> {
 
   Future<void> setBackgroundPatternScale(double scale) async {
     await setPalette(value.copyWith(backgroundPatternScale: scale));
+  }
+
+  Future<void> setBackgroundPatternOpacity(double opacity) async {
+    await setPalette(value.copyWith(backgroundPatternOpacity: opacity));
   }
 }

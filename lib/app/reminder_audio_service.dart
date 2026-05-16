@@ -94,6 +94,12 @@ class ReminderAudioService {
     await SystemSound.play(SystemSoundType.alert);
   }
 
+  Future<void> speakText({required String text, Locale? selectedLocale}) async {
+    final spokenText = text.trim();
+    if (spokenText.isEmpty) return;
+    await _speakWithFallback(spokenText, selectedLocale: selectedLocale);
+  }
+
   Future<void> stop() async {
     try {
       await _audioPlayer.stop();

@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../../../app/reminder_audio_service.dart';
 import '../../../features/daily_content/daily_content_models.dart';
 import '../../../features/daily_content/daily_content_selection_models.dart';
 
@@ -31,7 +32,8 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
   static const String _headingAyah = 'G\u00FCn\u00FCn Ayeti';
   static const String _headingHadith = 'G\u00FCn\u00FCn Hadisi';
   static const String _labelArabic = '\u0639\u0631\u0628\u064A';
-  static const String _noteLoading = 'G\u00FCnl\u00FCk i\u00E7erik y\u00FCkleniyor...';
+  static const String _noteLoading =
+      'G\u00FCnl\u00FCk i\u00E7erik y\u00FCkleniyor...';
   static const String _noteError =
       'G\u00FCnl\u00FCk i\u00E7erik \u015Fu an g\u00F6sterilemiyor.';
   static const String _noteAyahMissing =
@@ -40,6 +42,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       'Bug\u00FCn i\u00E7in hadis i\u00E7eri\u011Fi hen\u00FCz haz\u0131r de\u011Fil.';
 
   late final PageController _pageController;
+  final ReminderAudioService _reminderAudioService = ReminderAudioService();
   bool _showTurkish = true;
   bool _showEnglish = true;
   bool _showArabic = true;
@@ -54,6 +57,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
   @override
   void dispose() {
     _pageController.dispose();
+    _reminderAudioService.dispose();
     super.dispose();
   }
 
@@ -205,10 +209,11 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
           ),
           boxShadow: [
             BoxShadow(
-              color: (selected
-                      ? Colors.black
-                      : widget.cizgiColor.withValues(alpha: 0.35))
-                  .withValues(alpha: selected ? 0.28 : 0.12),
+              color:
+                  (selected
+                          ? Colors.black
+                          : widget.cizgiColor.withValues(alpha: 0.35))
+                      .withValues(alpha: selected ? 0.28 : 0.12),
               blurRadius: selected ? 8 : 3,
               offset: const Offset(0, 1),
             ),
@@ -290,6 +295,9 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       cizgiColor: widget.cizgiColor,
       contentColor: contentColor,
       referenceColor: const Color(0xFFF9A825),
+      onReadTurkishTap: _showTurkish && ayah.textTr.trim().isNotEmpty
+          ? () => _readTurkishText(ayah.textTr)
+          : null,
     );
   }
 
@@ -331,7 +339,19 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       cizgiColor: widget.cizgiColor,
       contentColor: contentColor,
       referenceColor: const Color(0xFFF9A825),
+      onReadTurkishTap: _showTurkish && hadith.textTr.trim().isNotEmpty
+          ? () => _readTurkishText(hadith.textTr)
+          : null,
     );
+  }
+
+  Future<void> _readTurkishText(String text) async {
+    try {
+      await _reminderAudioService.speakText(
+        text: text,
+        selectedLocale: Localizations.localeOf(context),
+      );
+    } catch (_) {}
   }
 
   Widget _buildNote({
@@ -381,6 +401,7 @@ class _DailyContentSection extends StatelessWidget {
   final Color cizgiColor;
   final Color contentColor;
   final Color referenceColor;
+  final VoidCallback? onReadTurkishTap;
 
   const _DailyContentSection({
     required this.title,
@@ -394,6 +415,7 @@ class _DailyContentSection extends StatelessWidget {
     required this.cizgiColor,
     required this.contentColor,
     required this.referenceColor,
+    required this.onReadTurkishTap,
   });
 
   @override
@@ -418,6 +440,7 @@ class _DailyContentSection extends StatelessWidget {
       fontWeight: FontWeight.w600,
       fontSize: 17,
     );
+    final hasReadAction = onReadTurkishTap != null;
 
     final textArIsArabic = _hasArabic(arabicText);
     final textTrIsArabic = _hasArabic(turkishText);
@@ -431,54 +454,81 @@ class _DailyContentSection extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: cizgiColor.withValues(alpha: 0.12)),
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (title.trim().isNotEmpty) ...[
-              Text(title, style: titleStyle),
-              const SizedBox(height: 4),
-            ],
-            if (showArabic && arabicText.trim().isNotEmpty) ...[
-              Text(
-                arabicText,
-                style: textStyle,
-                textAlign: TextAlign.center,
-                textDirection: textArIsArabic
-                    ? TextDirection.rtl
-                    : TextDirection.ltr,
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(top: hasReadAction ? 30 : 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (title.trim().isNotEmpty) ...[
+                    Text(title, style: titleStyle),
+                    const SizedBox(height: 4),
+                  ],
+                  if (showArabic && arabicText.trim().isNotEmpty) ...[
+                    Text(
+                      arabicText,
+                      style: textStyle,
+                      textAlign: TextAlign.center,
+                      textDirection: textArIsArabic
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                    ),
+                  ],
+                  if (showTurkish && turkishText.trim().isNotEmpty) ...[
+                    if (showArabic && arabicText.trim().isNotEmpty)
+                      const SizedBox(height: 15),
+                    Text(
+                      turkishText,
+                      style: subStyle,
+                      textAlign: TextAlign.center,
+                      textDirection: textTrIsArabic
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                    ),
+                  ],
+                  if (showEnglish && englishText.trim().isNotEmpty) ...[
+                    if ((showArabic && arabicText.trim().isNotEmpty) ||
+                        (showTurkish && turkishText.trim().isNotEmpty))
+                      const SizedBox(height: 15),
+                    Text(
+                      englishText,
+                      style: subStyle?.copyWith(fontStyle: FontStyle.normal),
+                      textAlign: TextAlign.center,
+                      textDirection: textEnIsArabic
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                    ),
+                  ],
+                  const SizedBox(height: 20),
+                  Center(child: Text(reference, style: refStyle)),
+                ],
               ),
-            ],
-            if (showTurkish && turkishText.trim().isNotEmpty) ...[
-              if (showArabic && arabicText.trim().isNotEmpty)
-                const SizedBox(height: 15),
-              Text(
-                turkishText,
-                style: subStyle,
-                textAlign: TextAlign.center,
-                textDirection: textTrIsArabic
-                    ? TextDirection.rtl
-                    : TextDirection.ltr,
+            ),
+          ),
+          if (hasReadAction)
+            Positioned(
+              top: 6,
+              right: 6,
+              child: Material(
+                color: Colors.black.withValues(alpha: 0.14),
+                borderRadius: BorderRadius.circular(14),
+                child: InkWell(
+                  onTap: onReadTurkishTap,
+                  borderRadius: BorderRadius.circular(14),
+                  child: const Padding(
+                    padding: EdgeInsets.all(6),
+                    child: Icon(
+                      Icons.volume_up_rounded,
+                      size: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
-            ],
-            if (showEnglish && englishText.trim().isNotEmpty) ...[
-              if (
-                  (showArabic && arabicText.trim().isNotEmpty) ||
-                      (showTurkish && turkishText.trim().isNotEmpty))
-              const SizedBox(height: 15),
-              Text(
-                englishText,
-                style: subStyle?.copyWith(fontStyle: FontStyle.normal),
-                textAlign: TextAlign.center,
-                textDirection: textEnIsArabic
-                    ? TextDirection.rtl
-                    : TextDirection.ltr,
-              ),
-            ],
-            const SizedBox(height: 20),
-            Center(child: Text(reference, style: refStyle)),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
@@ -490,5 +540,3 @@ class _DailyContentSection extends StatelessWidget {
     return arabicRegex.hasMatch(value);
   }
 }
-
-

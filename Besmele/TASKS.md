@@ -692,3 +692,19 @@ Tarih: 2026-05-22
 - assets/data/daily_content/approved/ayahs.v1.approved.json
   - Unicode/encoding yapisi kontrol edildi ve temiz durum kayda alindi.
   - `text_ar`, `text_tr`, `text_en` alanlari tamlik kontrolunden gecirildi.
+
+### AllApp Uzak Yayin Kaydi
+
+Tarih: 2026-05-22
+R etiketi: `R260522_0117`
+Hedef uzak repo: `https://github.com/mskaymaz/AllApp.git`
+Hedef branch: `main`
+Uzak commit: `ec4afb0`
+
+Yuklenen JSON dosyalari (sadece ayet/hadis):
+- data/daily_content/v1/publish/ayahs.v1.approved.json
+- data/daily_content/v1/publish/hadiths.v1.approved.json
+
+Not:
+- Hedefte ayni isimli dosya bulunursa `*.old.R<zaman>` kurali ile eski dosya adlandirilip yeni dosya gecerli dosya olarak yuklenecek sekilde akisa alindi.
+- Bu kayit, ileride AllApp uzerindeki gecerli publish dosyalarina hizli erisim icin tutulur.

@@ -14,6 +14,7 @@ class HomeDailyContentPanel extends StatefulWidget {
   final Color cizgiColor;
   final Color panelColor;
   final double? maxHeight;
+  final VoidCallback? onCycleContentTap;
 
   const HomeDailyContentPanel({
     super.key,
@@ -23,6 +24,7 @@ class HomeDailyContentPanel extends StatefulWidget {
     required this.cizgiColor,
     required this.panelColor,
     this.maxHeight,
+    this.onCycleContentTap,
   });
 
   @override
@@ -140,6 +142,28 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (widget.onCycleContentTap != null) ...[
+            Align(
+              alignment: Alignment.centerRight,
+              child: Material(
+                color: Colors.black.withValues(alpha: 0.14),
+                borderRadius: BorderRadius.circular(14),
+                child: InkWell(
+                  onTap: widget.onCycleContentTap,
+                  borderRadius: BorderRadius.circular(14),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Icon(
+                      Icons.shuffle_rounded,
+                      size: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
           SizedBox(
             height: pageHeight.toDouble(),
             child: PageView.builder(
@@ -542,26 +566,38 @@ class _DailyContentSection extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (title.trim().isNotEmpty) ...[
-              Text(title, style: titleStyle),
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: titleStyle,
+                ),
+              ),
               const SizedBox(height: 4),
             ],
             if (showArabic && arabicText.trim().isNotEmpty) ...[
-              Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: hasArabicReadAction ? 24 : 0),
-                    child: Text(
-                      arabicText,
-                      style: textStyle,
-                      textAlign: TextAlign.center,
-                      textDirection: textArIsArabic
-                          ? TextDirection.rtl
-                          : TextDirection.ltr,
+              SizedBox(
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: hasArabicReadAction ? 24 : 0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          arabicText,
+                          style: textStyle,
+                          textAlign: TextAlign.center,
+                          textDirection: textArIsArabic
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
+                        ),
+                      ),
                     ),
-                  ),
                   if (hasArabicReadAction || onScanArabicTap != null)
                     Positioned(
                       top: 0,
@@ -607,29 +643,35 @@ class _DailyContentSection extends StatelessWidget {
                         ],
                       ),
                     ),
-                ],
+                  ],
+                ),
               ),
             ],
             if (showTurkish && turkishText.trim().isNotEmpty) ...[
               if (showArabic && arabicText.trim().isNotEmpty)
                 const SizedBox(height: 15),
-              Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: hasTurkishReadAction ? 24 : 0),
-                    child: Padding(
-                      padding: EdgeInsets.only(right: hasTurkishReadAction ? 30 : 0),
-                      child: Text(
-                        turkishText,
-                        style: subStyle,
-                        textAlign: TextAlign.center,
-                        textDirection: textTrIsArabic
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
+              SizedBox(
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: hasTurkishReadAction ? 24 : 0),
+                      child: Padding(
+                        padding: EdgeInsets.only(right: hasTurkishReadAction ? 30 : 0),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Text(
+                            turkishText,
+                            style: subStyle,
+                            textAlign: TextAlign.center,
+                            textDirection: textTrIsArabic
+                                ? TextDirection.rtl
+                                : TextDirection.ltr,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  if (hasTurkishReadAction)
+                    if (hasTurkishReadAction)
                     Positioned(
                       top: 0,
                       right: 0,
@@ -650,27 +692,33 @@ class _DailyContentSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                ],
+                  ],
+                ),
               ),
             ],
             if (showEnglish && englishText.trim().isNotEmpty) ...[
               if ((showArabic && arabicText.trim().isNotEmpty) ||
                   (showTurkish && turkishText.trim().isNotEmpty))
                 const SizedBox(height: 15),
-              Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: hasEnglishReadAction ? 24 : 0),
-                    child: Text(
-                      englishText,
-                      style: subStyle?.copyWith(fontStyle: FontStyle.normal),
-                      textAlign: TextAlign.center,
-                      textDirection: textEnIsArabic
-                          ? TextDirection.rtl
-                          : TextDirection.ltr,
+              SizedBox(
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: hasEnglishReadAction ? 24 : 0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          englishText,
+                          style: subStyle?.copyWith(fontStyle: FontStyle.normal),
+                          textAlign: TextAlign.center,
+                          textDirection: textEnIsArabic
+                              ? TextDirection.rtl
+                              : TextDirection.ltr,
+                        ),
+                      ),
                     ),
-                  ),
-                  if (hasEnglishReadAction)
+                    if (hasEnglishReadAction)
                     Positioned(
                       top: 0,
                       right: 0,
@@ -691,7 +739,8 @@ class _DailyContentSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                ],
+                  ],
+                ),
               ),
             ],
             const SizedBox(height: 20),

@@ -21,6 +21,20 @@ class DailyContentSelectionEngine {
        _clock = clock ?? SystemDailyContentClock();
 
   Future<DailyContentSelectionResult> selectToday() async {
+    return _selectInternal(ayahOffset: 0, hadithOffset: 0);
+  }
+
+  Future<DailyContentSelectionResult> selectPreview({
+    int ayahOffset = 0,
+    int hadithOffset = 0,
+  }) async {
+    return _selectInternal(ayahOffset: ayahOffset, hadithOffset: hadithOffset);
+  }
+
+  Future<DailyContentSelectionResult> _selectInternal({
+    required int ayahOffset,
+    required int hadithOffset,
+  }) async {
     final warnings = <String>[];
     final now = _clock.now();
     final loadResult = await _loader.loadApprovedSampleContent(referenceDate: now);
@@ -32,10 +46,10 @@ class DailyContentSelectionEngine {
 
     final startDate = _parseStartDate(loadResult.sequenceStartDate);
     final dayIndex = _dayIndex(startDate, now);
-    final ayahId = _idAt(loadResult.ayahOrderIds, dayIndex);
-    final hadithId = _idAt(loadResult.hadithOrderIds, dayIndex);
-    final ayahCycleId = _cycleId(loadResult.ayahOrderIds, dayIndex);
-    final hadithCycleId = _cycleId(loadResult.hadithOrderIds, dayIndex);
+    final ayahId = _idAt(loadResult.ayahOrderIds, dayIndex + ayahOffset);
+    final hadithId = _idAt(loadResult.hadithOrderIds, dayIndex + hadithOffset);
+    final ayahCycleId = _cycleId(loadResult.ayahOrderIds, dayIndex + ayahOffset);
+    final hadithCycleId = _cycleId(loadResult.hadithOrderIds, dayIndex + hadithOffset);
 
     final currentState = await _stateRepository.read(warnings: warnings);
     final nextState = currentState.copyWith(

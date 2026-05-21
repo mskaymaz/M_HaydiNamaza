@@ -74,4 +74,14 @@ class DailyContentService {
       );
     }
   }
+
+  Future<DailyContentSelectionResult> loadPreview({
+    int ayahOffset = 0,
+    int hadithOffset = 0,
+  }) async {
+    return _selectionEngine.selectPreview(
+      ayahOffset: ayahOffset,
+      hadithOffset: hadithOffset,
+    );
+  }
 }

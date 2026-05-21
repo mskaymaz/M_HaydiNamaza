@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late Future<_HomeData> _future;
   late Future<DailyContentSelectionResult> _dailyContentFuture;
+  int _dailyContentPreviewOffset = 0;
   Timer? _ticker;
   Timer? _voiceRepeatTimer;
   Timer? _visualCycleTimer;
@@ -121,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (dayChanged) {
           _lastRefreshDay = DateTime(now.year, now.month, now.day);
           _future = _loadData();
+          _dailyContentPreviewOffset = 0;
           _dailyContentFuture = _dailyContentService.loadToday();
         }
       });
@@ -216,6 +218,16 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     setState(() {
       _reminderSettings = settings;
+    });
+  }
+
+  Future<void> _cycleDailyContent() async {
+    setState(() {
+      _dailyContentPreviewOffset += 1;
+      _dailyContentFuture = _dailyContentService.loadPreview(
+        ayahOffset: _dailyContentPreviewOffset,
+        hadithOffset: _dailyContentPreviewOffset,
+      );
     });
   }
 
@@ -882,6 +894,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   panelColor:
                                                       palette.zeminColor,
                                                   maxHeight: infoPanelMaxHeight,
+                                                  onCycleContentTap:
+                                                    _cycleDailyContent,
                                                 );
                                               },
                                             ),

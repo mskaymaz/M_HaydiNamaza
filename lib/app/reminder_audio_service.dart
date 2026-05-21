@@ -22,6 +22,7 @@ class ReminderAudioService {
   static const String defaultTurkishVoiceLocale = 'tr-TR';
   static const double _stableTtsPitch = 1.0;
   static const double _stableTtsRate = 0.52;
+  static const double _arabicTtsRate = 0.45;
   static const double _stableTtsVolume = 1.0;
   static const Duration _ttsRestartGap = Duration(milliseconds: 80);
   static const Duration _ttsDebounce = Duration(milliseconds: 400);
@@ -252,16 +253,6 @@ class ReminderAudioService {
             }
           } catch (_) {}
 
-          // For Arabic voices prefer a slower rate to avoid letter-by-letter
-          // rendering on some engines.
-          try {
-            final langTag = (voiceLocale ?? selectedLocale?.toLanguageTag() ?? '').toLowerCase();
-            if (langTag.startsWith('ar')) {
-              await _flutterTts.setSpeechRate(0.45);
-              await _flutterTts.setPitch(_stableTtsPitch);
-            }
-          } catch (_) {}
-
           await _flutterTts.setVoice({
             'name': voiceName,
             'locale': voiceLocale ?? (selectedLocale?.toLanguageTag() ?? ''),
@@ -277,7 +268,9 @@ class ReminderAudioService {
         await _flutterTts.setPitch(_stableTtsPitch);
       } catch (_) {}
       try {
-        await _flutterTts.setSpeechRate(_stableTtsRate);
+        await _flutterTts.setSpeechRate(
+          _speechRateForLocale(selectedLocale, voiceLocale: voiceLocale),
+        );
       } catch (_) {}
       // If Arabic, try SSML first and fallback to chunked speaking.
       final langTag = (voiceLocale ?? selectedLocale?.toLanguageTag() ?? '').toLowerCase();
@@ -447,7 +440,7 @@ class ReminderAudioService {
         await _flutterTts.setPitch(_stableTtsPitch);
       } catch (_) {}
       try {
-        await _flutterTts.setSpeechRate(_stableTtsRate);
+        await _flutterTts.setSpeechRate(_speechRateForLocale(selectedLocale));
       } catch (_) {}
       final result = await _flutterTts.speak(spokenText);
       if (result == 1 || result == null) {
@@ -572,6 +565,22 @@ class ReminderAudioService {
       default:
         return locale;
     }
+  }
+
+  double _speechRateForLocale(Locale? locale, {String? voiceLocale}) {
+    final localeTag = (voiceLocale ?? locale?.toLanguageTag() ?? WidgetsBinding.instance.platformDispatcher.locale.toLanguageTag())
+        .toLowerCase();
+    final languageCode = localeTag.split(RegExp('[-_]')).first;
+    if (languageCode == 'ar') {
+      return _arabicTtsRate;
+    }
+    final fallbackLanguageCode = (locale ?? WidgetsBinding.instance.platformDispatcher.locale)
+        .languageCode
+        .toLowerCase();
+    if (fallbackLanguageCode == 'ar') {
+      return _arabicTtsRate;
+    }
+    return _stableTtsRate;
   }
 
   Locale _localeFromTag(String tag) {

@@ -100,8 +100,10 @@ class DailyContentSelectionEngine {
   }
 
   int _dayIndex(DateTime startDateUtc, DateTime now) {
-    final todayUtc = DateTime.utc(now.year, now.month, now.day);
-    return todayUtc.difference(startDateUtc).inDays;
+    // compute the number of 6-hour periods since startDateUtc
+    final nowUtc = DateTime.utc(now.year, now.month, now.day, now.hour);
+    final diffHours = nowUtc.difference(startDateUtc).inHours;
+    return diffHours ~/ 6;
   }
 
   String? _idAt(List<String> orderedIds, int dayIndex) {

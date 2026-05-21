@@ -61,6 +61,7 @@ class DailyHadithRecord {
   final String sourceAr;
   final String sourceTr;
   final String sourceEn;
+  final String bookReferenceTr;
   final String grade;
   final String sourceNote;
   final List<String> topics;
@@ -80,6 +81,7 @@ class DailyHadithRecord {
     required this.sourceAr,
     required this.sourceTr,
     required this.sourceEn,
+    this.bookReferenceTr = '',
     required this.grade,
     required this.sourceNote,
     required this.topics,

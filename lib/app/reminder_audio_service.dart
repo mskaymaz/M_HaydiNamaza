@@ -1,4 +1,4 @@
-import 'package:audioplayers/audioplayers.dart';
+﻿import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -173,7 +173,13 @@ class ReminderAudioService {
         final spokenText = trimmed.isEmpty
             ? '$prayerLabel vakti.'
             : '$prayerLabel vakti. $trimmed';
-        await _speakWithFallback(spokenText, selectedLocale: selectedLocale);
+        await _speakWithFallback(
+          _normalizeTurkishSpeechText(
+            spokenText,
+            selectedLocale: selectedLocale,
+          ),
+          selectedLocale: selectedLocale,
+        );
         return;
       case ReminderAudioMode.deviceAudio:
       case ReminderAudioMode.mp3File:
@@ -194,7 +200,13 @@ class ReminderAudioService {
   Future<void> speakText({required String text, Locale? selectedLocale}) async {
     final spokenText = text.trim();
     if (spokenText.isEmpty) return;
-    await _speakWithFallback(spokenText, selectedLocale: selectedLocale);
+    await _speakWithFallback(
+      _normalizeTurkishSpeechText(
+        spokenText,
+        selectedLocale: selectedLocale,
+      ),
+      selectedLocale: selectedLocale,
+    );
   }
 
   /// Speak with an explicit voice selection (name + locale). If [voiceName]
@@ -207,6 +219,11 @@ class ReminderAudioService {
   }) async {
     final spokenText = text.trim();
     if (spokenText.isEmpty) return;
+    final normalizedText = _normalizeTurkishSpeechText(
+      spokenText,
+      selectedLocale: selectedLocale,
+      voiceLocale: voiceLocale,
+    );
     final now = DateTime.now();
     final last = _lastTtsStartAt;
     if (_ttsInProgress) return;
@@ -279,12 +296,12 @@ class ReminderAudioService {
         if (ok) return;
       }
 
-      final result = await _flutterTts.speak(spokenText);
+      final result = await _flutterTts.speak(normalizedText);
       if (result == 1 || result == null) {
         return;
       }
       await _flutterTts.setVoice(const <String, String>{});
-      final retry = await _flutterTts.speak(spokenText);
+      final retry = await _flutterTts.speak(normalizedText);
       if (retry == 1 || retry == null) {
         return;
       }
@@ -567,6 +584,39 @@ class ReminderAudioService {
     }
   }
 
+  String _normalizeTurkishSpeechText(
+    String text, {
+    Locale? selectedLocale,
+    String? voiceLocale,
+  }) {
+    final localeTag = (voiceLocale ?? selectedLocale?.toLanguageTag() ?? '')
+        .toLowerCase();
+    final languageCode = localeTag.split(RegExp('[-_]')).first;
+    final fallbackLanguageCode =
+        (selectedLocale ?? WidgetsBinding.instance.platformDispatcher.locale)
+            .languageCode
+            .toLowerCase();
+    final isTurkish = languageCode == 'tr' || fallbackLanguageCode == 'tr';
+    if (!isTurkish) {
+      return text;
+    }
+
+    var normalized = text;
+    normalized = normalized.replaceAll(
+      RegExp(r'\(\s*ra\s*\)', caseSensitive: false),
+      'radiyallahu anhu',
+    );
+    normalized = normalized.replaceAll(
+      RegExp(r'\bHz\.', caseSensitive: false),
+      'Hazreti',
+    );
+    normalized = normalized.replaceAll(
+      RegExp(r'\bb\.(?=\s|$)', caseSensitive: true),
+      'Bin',
+    );
+    return normalized;
+  }
+
   double _speechRateForLocale(Locale? locale, {String? voiceLocale}) {
     final localeTag = (voiceLocale ?? locale?.toLanguageTag() ?? WidgetsBinding.instance.platformDispatcher.locale.toLanguageTag())
         .toLowerCase();
@@ -624,7 +674,7 @@ class ReminderAudioService {
 
     // Fallback: split into sentences/clauses and speak one by one.
     try {
-      final parts = text.split(RegExp(r'[\.\?\!\،\؛\؟]'));
+      final parts = text.split(RegExp(r'[\.\?\!\Ïî\Ïø\Ïş]'));
       for (final part in parts) {
         final p = part.trim();
         if (p.isEmpty) continue;

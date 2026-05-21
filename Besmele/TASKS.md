@@ -192,6 +192,8 @@ Completed:
   - Type/data block is not extracted now because benefit is modest versus visibility/API churn.
   - No behavior change intended.
   - Historical note: final TASK-03 status is updated in the final audit section above.
+  - TTS experiment note: English/Arabic voice picker, voice scan dialog, and per-language read actions were prototyped in settings and daily-content surfaces, then rolled back to keep the stable Turkish-only read path.
+  - Technical reason: device TTS voice identity can drift across engines/updates; retaining explicit non-Turkish read surfaces without a pinned voice contract created unstable UX.
 - Continuation checkpoint:
   - Bottom private model/type block extracted to `lib/presentation/home/home_models.dart` via `part/part of`.
   - Moved: `_HomeData`, `_PrayerRowSettings`, `_CustomPrayerDraft`, `_CustomPrayerTimeMode`, `_CustomPrayerTimeRule`, `_ReminderStage`, `_PrayerNext`.

@@ -413,12 +413,13 @@ class DailyContentLoader {
     final hadithNumber = _readRequiredString(json, 'hadith_number');
     final narrator = _readRequiredString(json, 'narrator');
     final textAr = _readRequiredString(json, 'text_ar') ?? _readRequiredString(json, 'text');
-    final textTr = _readRequiredString(json, 'text_tr') ?? _readRequiredString(json, 'text');
+    final rawTextTr = _readRequiredString(json, 'text_tr') ?? _readRequiredString(json, 'text');
     final textEn = _readRequiredString(json, 'text_en') ?? _readRequiredString(json, 'translation');
     final sourceAr = _readRequiredString(json, 'source_ar');
     final sourceTr = _readRequiredString(json, 'source_tr');
     final sourceEn = _readRequiredString(json, 'source_en');
     final grade = _readRequiredString(json, 'grade');
+    final bookReferenceTr = _readOptionalString(json, 'book_reference_tr') ?? '';
     final sourceNote = _readRequiredString(json, 'source_note') ?? '';
     final topics = _readRequiredStringList(json, 'topics');
     final status = _readOptionalString(json, 'status') ?? 'approved';
@@ -431,7 +432,7 @@ class DailyContentLoader {
         hadithNumber == null ||
         narrator == null ||
         textAr == null ||
-        textTr == null ||
+        rawTextTr == null ||
         textEn == null ||
         sourceAr == null ||
         sourceTr == null ||
@@ -451,6 +452,11 @@ class DailyContentLoader {
       return null;
     }
 
+    final turkishTextAndReference = _normalizeTurkishHadithTextAndReference(
+      rawText: rawTextTr,
+      explicitBookReferenceTr: bookReferenceTr,
+    );
+
     return DailyHadithRecord(
       id: id,
       type: type,
@@ -459,17 +465,89 @@ class DailyContentLoader {
       hadithNumber: hadithNumber,
       narrator: narrator,
       textAr: textAr,
-      textTr: textTr,
+      textTr: turkishTextAndReference.textTr,
       textEn: textEn,
       sourceAr: sourceAr,
       sourceTr: sourceTr,
       sourceEn: sourceEn,
+      bookReferenceTr: turkishTextAndReference.bookReferenceTr,
       grade: grade,
       sourceNote: sourceNote,
       topics: topics,
       status: status,
       approval: approval,
     );
+  }
+
+  _TurkishHadithTextAndReference _normalizeTurkishHadithTextAndReference({
+    required String rawText,
+    required String explicitBookReferenceTr,
+  }) {
+    final explicitReference = explicitBookReferenceTr.trim();
+    final normalizedText = rawText.replaceAll('\r\n', '\n');
+    if (explicitReference.isNotEmpty) {
+      final text = _stripTrailingExactReference(
+        text: normalizedText,
+        reference: explicitReference,
+      );
+      return _TurkishHadithTextAndReference(
+        textTr: text,
+        bookReferenceTr: explicitReference,
+      );
+    }
+
+    final extractedReference = _extractTrailingReferenceLine(normalizedText);
+    if (extractedReference != null) {
+      final text = _stripTrailingExactReference(
+        text: normalizedText,
+        reference: extractedReference,
+      );
+      return _TurkishHadithTextAndReference(
+        textTr: text,
+        bookReferenceTr: extractedReference,
+      );
+    }
+
+    return _TurkishHadithTextAndReference(
+      textTr: normalizedText,
+      bookReferenceTr: '',
+    );
+  }
+
+  String _stripTrailingExactReference({
+    required String text,
+    required String reference,
+  }) {
+    final trimmedRightText = text.trimRight();
+    if (!trimmedRightText.endsWith(reference)) {
+      return text;
+    }
+    final withoutReference = trimmedRightText.substring(
+      0,
+      trimmedRightText.length - reference.length,
+    );
+    return withoutReference.trimRight();
+  }
+
+  String? _extractTrailingReferenceLine(String text) {
+    final lines = text.split('\n');
+    var lastNonEmptyIndex = -1;
+    for (var i = lines.length - 1; i >= 0; i--) {
+      if (lines[i].trim().isNotEmpty) {
+        lastNonEmptyIndex = i;
+        break;
+      }
+    }
+    if (lastNonEmptyIndex < 0) {
+      return null;
+    }
+    final candidate = lines[lastNonEmptyIndex].trim();
+    if (candidate.startsWith('(') &&
+        candidate.contains(')') &&
+        RegExp(r'[A-Z][0-9]{2,}').hasMatch(candidate)) {
+      return candidate;
+    }
+    return null;
   }
 
   DailyContentApproval _parseApprovalOrDefault(Map<String, dynamic> json) {
@@ -651,5 +729,15 @@ class _LocalSequenceAsset {
     required this.startDate,
     required this.ayahOrderIds,
     required this.hadithOrderIds,
+  });
+}
+
+class _TurkishHadithTextAndReference {
+  final String textTr;
+  final String bookReferenceTr;
+
+  const _TurkishHadithTextAndReference({
+    required this.textTr,
+    required this.bookReferenceTr,
   });
 }

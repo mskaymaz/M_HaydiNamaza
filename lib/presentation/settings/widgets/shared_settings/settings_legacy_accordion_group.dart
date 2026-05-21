@@ -7,7 +7,6 @@ import '../../settings_audio_mode_texts.dart';
 import '../settings_color_action_widgets.dart';
 import '../settings_reminder_fields.dart';
 import 'shared_settings_section_styles.dart';
-import '../../voice_test_screen.dart';
 
 class SettingsLegacyAccordionGroup extends StatelessWidget {
   final EdgeInsets outerPadding;
@@ -61,11 +60,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final ValueChanged<String> onBackgroundPatternChanged;
   final ValueChanged<double> onBackgroundPatternScaleChanged;
   final ValueChanged<double> onBackgroundPatternOpacityChanged;
-  final List<DropdownMenuItem<String?>> voiceItems;
-  final String? selectedEnglishVoiceKey;
-  final String? selectedArabicVoiceKey;
-  final ValueChanged<String?> onEnglishVoiceChanged;
-  final ValueChanged<String?> onArabicVoiceChanged;
 
   const SettingsLegacyAccordionGroup({
     super.key,
@@ -120,11 +114,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.onBackgroundPatternChanged,
     required this.onBackgroundPatternScaleChanged,
     required this.onBackgroundPatternOpacityChanged,
-    required this.voiceItems,
-    required this.selectedEnglishVoiceKey,
-    required this.selectedArabicVoiceKey,
-    required this.onEnglishVoiceChanged,
-    required this.onArabicVoiceChanged,
   });
 
   @override
@@ -243,26 +232,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                   ),
                   if (selectedAudioMode == ReminderAudioMode.textToSpeech) ...[
                     const SizedBox(height: 10),
-                    DropdownButtonFormField<String?>(
-                      initialValue: selectedEnglishVoiceKey,
-                      decoration: const InputDecoration(
-                        labelText: 'English Voice (Tercih)',
-                        border: OutlineInputBorder(),
-                      ),
-                      items: voiceItems,
-                      onChanged: onEnglishVoiceChanged,
-                    ),
-                    const SizedBox(height: 8),
-                    DropdownButtonFormField<String?>(
-                      initialValue: selectedArabicVoiceKey,
-                      decoration: const InputDecoration(
-                        labelText: 'Arabic Voice (Tercih)',
-                        border: OutlineInputBorder(),
-                      ),
-                      items: voiceItems,
-                      onChanged: onArabicVoiceChanged,
-                    ),
-                    const SizedBox(height: 8),
                     SettingsReminderTextField(
                       label: 'Sesli Hatirlatma Metni',
                       controller: voiceReminderController,
@@ -291,25 +260,10 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                   const SizedBox(height: 8),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        OutlinedButton.icon(
-                          onPressed: onVoiceTest,
-                          icon: const Icon(Icons.play_arrow_rounded),
-                          label: const Text('Sesli Test'),
-                        ),
-                        const SizedBox(width: 8),
-                        OutlinedButton.icon(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => VoiceTestScreen(voiceItems: voiceItems),
-                            ));
-                          },
-                          icon: const Icon(Icons.search_rounded),
-                          label: const Text('Ses Tespit'),
-                        ),
-                      ],
+                    child: OutlinedButton.icon(
+                      onPressed: onVoiceTest,
+                      icon: const Icon(Icons.play_arrow_rounded),
+                      label: const Text('Sesli Test'),
                     ),
                   ),
                 ],

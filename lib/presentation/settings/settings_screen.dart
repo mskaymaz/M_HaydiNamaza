@@ -76,9 +76,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _showAzanIcon = true;
   bool _showVibrationIcon = true;
   bool _sortCustomPrayersByTime = true;
-  List<DropdownMenuItem<String?>> _voiceDropdownItems = [];
-  String? _selectedEnglishVoiceKey;
-  String? _selectedArabicVoiceKey;
   Color? _draftBackgroundColor;
   Color? _draftBackgroundLineColor;
   String? _draftBackgroundPatternAssetPath;
@@ -92,51 +89,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _loadFavorites();
     _loadMethod();
     _loadReminderTexts();
-    _dumpEnglishArabicVoices();
-    _loadVoiceOptions();
-  }
-
-  Future<void> _loadVoiceOptions() async {
-    try {
-      final voices = await _reminderAudioService.loadVoiceOptions();
-      final items = <DropdownMenuItem<String?>>[];
-      // Add an empty (auto) option
-      items.add(const DropdownMenuItem<String?>(
-        value: null,
-        child: Text('Otomatik (Cihaz tercihleri)'),
-      ));
-      for (final v in voices) {
-        final key = '${v.locale}|${v.name}';
-        items.add(DropdownMenuItem<String?>(value: key, child: Text(v.label)));
-      }
-      if (!mounted) return;
-      setState(() {
-        _voiceDropdownItems = items;
-      });
-    } catch (_) {}
-  }
-
-  Future<void> _dumpEnglishArabicVoices() async {
-    try {
-      final voices = await _reminderAudioService.loadVoiceOptions();
-      final englishVoices = voices
-          .where((voice) => voice.locale.toLowerCase().startsWith('en'))
-          .toList();
-      final arabicVoices = voices
-          .where((voice) => voice.locale.toLowerCase().startsWith('ar'))
-          .toList();
-      debugPrint('[TTS][en] count=${englishVoices.length}');
-      for (final voice in englishVoices) {
-        debugPrint('[TTS][en] ${voice.label}');
-      }
-      debugPrint('[TTS][ar] count=${arabicVoices.length}');
-      for (final voice in arabicVoices) {
-        debugPrint('[TTS][ar] ${voice.label}');
-      }
-    } catch (error, stackTrace) {
-      debugPrint('[TTS] voice dump failed: $error');
-      debugPrintStack(stackTrace: stackTrace);
-    }
   }
 
   Future<void> _loadLocation() async {
@@ -192,17 +144,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _showAzanIcon = settings.showAzanIcon;
     _showVibrationIcon = settings.showVibrationIcon;
     _sortCustomPrayersByTime = settings.sortCustomPrayersByTime;
-    // map stored english/arabic selections to dropdown keys
-    if (settings.selectedEnglishVoiceName != null &&
-        settings.selectedEnglishVoiceLocale != null) {
-      _selectedEnglishVoiceKey =
-          '${settings.selectedEnglishVoiceLocale}|${settings.selectedEnglishVoiceName}';
-    }
-    if (settings.selectedArabicVoiceName != null &&
-        settings.selectedArabicVoiceLocale != null) {
-      _selectedArabicVoiceKey =
-          '${settings.selectedArabicVoiceLocale}|${settings.selectedArabicVoiceName}';
-    }
     if (!mounted) return;
     setState(() {});
   }
@@ -326,17 +267,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               selectedAudioMode: _selectedAudioMode,
             ),
             onVoiceTest: () => _playVoiceReminderTest(context, l10n),
-            voiceItems: _voiceDropdownItems,
-            selectedEnglishVoiceKey: _selectedEnglishVoiceKey,
-            selectedArabicVoiceKey: _selectedArabicVoiceKey,
-            onEnglishVoiceChanged: (v) {
-              setState(() => _selectedEnglishVoiceKey = v);
-              _persistReminderTexts();
-            },
-            onArabicVoiceChanged: (v) {
-              setState(() => _selectedArabicVoiceKey = v);
-              _persistReminderTexts();
-            },
             voiceReminderController: _voiceReminderController,
             voiceRepeatController: _voiceRepeatController,
             onVoiceTextChanged: (_) => _persistReminderTexts(),
@@ -559,26 +489,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       visualReopenSecondsText: _visualReopenController.text,
         selectedVoiceName: ReminderAudioService.defaultTurkishVoiceName,
         selectedVoiceLocale: ReminderAudioService.defaultTurkishVoiceLocale,
-        selectedEnglishVoiceName: _selectedEnglishVoiceKey == null
-          ? null
-          : _selectedEnglishVoiceKey!.split('|').length >= 2
-            ? _selectedEnglishVoiceKey!.split('|')[1]
-            : null,
-        selectedEnglishVoiceLocale: _selectedEnglishVoiceKey == null
-          ? null
-          : _selectedEnglishVoiceKey!.split('|').length >= 2
-            ? _selectedEnglishVoiceKey!.split('|')[0]
-            : null,
-        selectedArabicVoiceName: _selectedArabicVoiceKey == null
-          ? null
-          : _selectedArabicVoiceKey!.split('|').length >= 2
-            ? _selectedArabicVoiceKey!.split('|')[1]
-            : null,
-        selectedArabicVoiceLocale: _selectedArabicVoiceKey == null
-          ? null
-          : _selectedArabicVoiceKey!.split('|').length >= 2
-            ? _selectedArabicVoiceKey!.split('|')[0]
-            : null,
+      selectedEnglishVoiceName: null,
+      selectedEnglishVoiceLocale: null,
+      selectedArabicVoiceName: null,
+      selectedArabicVoiceLocale: null,
       selectedAudioPath: _selectedAudioPath,
       selectedAudioLabel: _selectedAudioLabel,
     );

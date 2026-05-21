@@ -673,3 +673,22 @@ Acceptance (TASK-13 plan asamasi):
 - Kaynak URL'leri sabit ve versiyonlu olarak dokumante edildi.
 - Hangi sesin hangi yolla alinacagi acikca yazildi.
 - Implementasyon oncesi teknik secim kapisi tanimlandi.
+
+---
+
+## JSON Duzeltme Kaydi (Daily Content)
+
+Tarih: 2026-05-22
+
+- Besmele/data/daily_panel/publish/hadisler.json
+  - Unicode/encoding yapisi duzeltildi.
+  - `text_ar`, `text_tr`, `text_en` alanlari tamlik kontrolunden gecirildi.
+- Besmele/data/daily_panel/publish/ayetler.json
+  - Unicode/encoding yapisi kontrol edildi ve temiz durum kayda alindi.
+  - `text_ar`, `text_tr`, `text_en` alanlari tamlik kontrolunden gecirildi.
+- assets/data/daily_content/approved/hadiths.v1.approved.json
+  - Unicode/encoding yapisi duzeltildi.
+  - `text_ar`, `text_tr`, `text_en` alanlari tamlik kontrolunden gecirildi.
+- assets/data/daily_content/approved/ayahs.v1.approved.json
+  - Unicode/encoding yapisi kontrol edildi ve temiz durum kayda alindi.
+  - `text_ar`, `text_tr`, `text_en` alanlari tamlik kontrolunden gecirildi.

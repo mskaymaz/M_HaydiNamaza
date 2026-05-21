@@ -16,6 +16,10 @@ class ReminderTextSettingsMapperInput {
   final String visualReopenSecondsText;
   final String? selectedVoiceName;
   final String? selectedVoiceLocale;
+  final String? selectedEnglishVoiceName;
+  final String? selectedEnglishVoiceLocale;
+  final String? selectedArabicVoiceName;
+  final String? selectedArabicVoiceLocale;
   final String? selectedAudioPath;
   final String? selectedAudioLabel;
 
@@ -35,6 +39,10 @@ class ReminderTextSettingsMapperInput {
     required this.visualReopenSecondsText,
     this.selectedVoiceName,
     this.selectedVoiceLocale,
+    this.selectedEnglishVoiceName,
+    this.selectedEnglishVoiceLocale,
+    this.selectedArabicVoiceName,
+    this.selectedArabicVoiceLocale,
     this.selectedAudioPath,
     this.selectedAudioLabel,
   });
@@ -74,6 +82,10 @@ ReminderTextSettings mapReminderTextSettings(
     ),
     selectedVoiceName: input.selectedVoiceName,
     selectedVoiceLocale: input.selectedVoiceLocale,
+    selectedEnglishVoiceName: input.selectedEnglishVoiceName,
+    selectedEnglishVoiceLocale: input.selectedEnglishVoiceLocale,
+    selectedArabicVoiceName: input.selectedArabicVoiceName,
+    selectedArabicVoiceLocale: input.selectedArabicVoiceLocale,
     selectedAudioPath: input.selectedAudioPath,
     selectedAudioLabel: input.selectedAudioLabel,
   );

@@ -45,6 +45,10 @@ class ReminderTextSettings {
   final int visualReopenSeconds;
   final String? selectedVoiceName;
   final String? selectedVoiceLocale;
+  final String? selectedEnglishVoiceName;
+  final String? selectedEnglishVoiceLocale;
+  final String? selectedArabicVoiceName;
+  final String? selectedArabicVoiceLocale;
   final String? selectedAudioPath;
   final String? selectedAudioLabel;
 
@@ -64,6 +68,10 @@ class ReminderTextSettings {
     this.visualReopenSeconds = 4,
     this.selectedVoiceName,
     this.selectedVoiceLocale,
+    this.selectedEnglishVoiceName,
+    this.selectedEnglishVoiceLocale,
+    this.selectedArabicVoiceName,
+    this.selectedArabicVoiceLocale,
     this.selectedAudioPath,
     this.selectedAudioLabel,
   });
@@ -94,6 +102,14 @@ class ReminderTextSettingsStorage {
   static const String _selectedVoiceNameKey = 'reminder_selected_voice_name';
   static const String _selectedVoiceLocaleKey =
       'reminder_selected_voice_locale';
+    static const String _selectedEnglishVoiceNameKey =
+      'reminder_selected_english_voice_name';
+    static const String _selectedEnglishVoiceLocaleKey =
+      'reminder_selected_english_voice_locale';
+    static const String _selectedArabicVoiceNameKey =
+      'reminder_selected_arabic_voice_name';
+    static const String _selectedArabicVoiceLocaleKey =
+      'reminder_selected_arabic_voice_locale';
   static const String _selectedAudioPathKey = 'reminder_selected_audio_path';
   static const String _selectedAudioLabelKey = 'reminder_selected_audio_label';
   static const _legacyDefaultVoiceTexts = <String>{
@@ -144,6 +160,12 @@ class ReminderTextSettingsStorage {
       ),
       selectedVoiceName: prefs.getString(_selectedVoiceNameKey),
       selectedVoiceLocale: prefs.getString(_selectedVoiceLocaleKey),
+        selectedEnglishVoiceName: prefs.getString(_selectedEnglishVoiceNameKey),
+        selectedEnglishVoiceLocale:
+          prefs.getString(_selectedEnglishVoiceLocaleKey),
+        selectedArabicVoiceName: prefs.getString(_selectedArabicVoiceNameKey),
+        selectedArabicVoiceLocale:
+          prefs.getString(_selectedArabicVoiceLocaleKey),
       selectedAudioPath: prefs.getString(_selectedAudioPathKey),
       selectedAudioLabel: prefs.getString(_selectedAudioLabelKey),
     );
@@ -189,6 +211,42 @@ class ReminderTextSettingsStorage {
         settings.selectedVoiceLocale!,
       );
     }
+    if (settings.selectedEnglishVoiceName == null ||
+        settings.selectedEnglishVoiceName!.isEmpty) {
+      await prefs.remove(_selectedEnglishVoiceNameKey);
+    } else {
+      await prefs.setString(
+        _selectedEnglishVoiceNameKey,
+        settings.selectedEnglishVoiceName!,
+      );
+    }
+    if (settings.selectedEnglishVoiceLocale == null ||
+        settings.selectedEnglishVoiceLocale!.isEmpty) {
+      await prefs.remove(_selectedEnglishVoiceLocaleKey);
+    } else {
+      await prefs.setString(
+        _selectedEnglishVoiceLocaleKey,
+        settings.selectedEnglishVoiceLocale!,
+      );
+    }
+    if (settings.selectedArabicVoiceName == null ||
+        settings.selectedArabicVoiceName!.isEmpty) {
+      await prefs.remove(_selectedArabicVoiceNameKey);
+    } else {
+      await prefs.setString(
+        _selectedArabicVoiceNameKey,
+        settings.selectedArabicVoiceName!,
+      );
+    }
+    if (settings.selectedArabicVoiceLocale == null ||
+        settings.selectedArabicVoiceLocale!.isEmpty) {
+      await prefs.remove(_selectedArabicVoiceLocaleKey);
+    } else {
+      await prefs.setString(
+        _selectedArabicVoiceLocaleKey,
+        settings.selectedArabicVoiceLocale!,
+      );
+    }
     if (settings.selectedAudioPath == null ||
         settings.selectedAudioPath!.isEmpty) {
       await prefs.remove(_selectedAudioPathKey);
@@ -203,6 +261,37 @@ class ReminderTextSettingsStorage {
         _selectedAudioLabelKey,
         settings.selectedAudioLabel!,
       );
+    }
+  }
+
+  /// Convenience: update only the stored selected English/Arabic voice fields.
+  Future<void> writeSelectedLanguageVoices({
+    String? englishVoiceName,
+    String? englishVoiceLocale,
+    String? arabicVoiceName,
+    String? arabicVoiceLocale,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (englishVoiceName == null || englishVoiceName.isEmpty) {
+      await prefs.remove(_selectedEnglishVoiceNameKey);
+    } else {
+      await prefs.setString(_selectedEnglishVoiceNameKey, englishVoiceName);
+    }
+    if (englishVoiceLocale == null || englishVoiceLocale.isEmpty) {
+      await prefs.remove(_selectedEnglishVoiceLocaleKey);
+    } else {
+      await prefs.setString(_selectedEnglishVoiceLocaleKey, englishVoiceLocale);
+    }
+
+    if (arabicVoiceName == null || arabicVoiceName.isEmpty) {
+      await prefs.remove(_selectedArabicVoiceNameKey);
+    } else {
+      await prefs.setString(_selectedArabicVoiceNameKey, arabicVoiceName);
+    }
+    if (arabicVoiceLocale == null || arabicVoiceLocale.isEmpty) {
+      await prefs.remove(_selectedArabicVoiceLocaleKey);
+    } else {
+      await prefs.setString(_selectedArabicVoiceLocaleKey, arabicVoiceLocale);
     }
   }
 }

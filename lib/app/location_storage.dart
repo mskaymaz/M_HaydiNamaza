@@ -93,6 +93,18 @@ class LocationStorage {
     );
   }
 
+  static const String _useCurrentLocationKey = 'location_use_current';
+
+  Future<bool> readUseCurrentLocation() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_useCurrentLocationKey) ?? false;
+  }
+
+  Future<void> writeUseCurrentLocation(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_useCurrentLocationKey, value);
+  }
+
   Future<void> write(LocationData data) async {
     final prefs = await SharedPreferences.getInstance();
     if (data.countryId != null) {

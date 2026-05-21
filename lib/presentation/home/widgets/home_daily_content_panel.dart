@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../../app/reminder_audio_service.dart';
+import '../../settings/voice_scan_dialog.dart';
 import '../../../features/daily_content/daily_content_models.dart';
 import '../../../features/daily_content/daily_content_selection_models.dart';
 
@@ -52,6 +53,30 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 1000);
+    _dumpEnglishArabicVoices();
+  }
+
+  Future<void> _dumpEnglishArabicVoices() async {
+    try {
+      final voices = await _reminderAudioService.loadVoiceOptions();
+      final englishVoices = voices
+          .where((voice) => voice.locale.toLowerCase().startsWith('en'))
+          .toList();
+      final arabicVoices = voices
+          .where((voice) => voice.locale.toLowerCase().startsWith('ar'))
+          .toList();
+      debugPrint('[TTS][en] count=${englishVoices.length}');
+      for (final voice in englishVoices) {
+        debugPrint('[TTS][en] ${voice.label}');
+      }
+      debugPrint('[TTS][ar] count=${arabicVoices.length}');
+      for (final voice in arabicVoices) {
+        debugPrint('[TTS][ar] ${voice.label}');
+      }
+    } catch (error, stackTrace) {
+      debugPrint('[TTS] voice dump failed: $error');
+      debugPrintStack(stackTrace: stackTrace);
+    }
   }
 
   @override
@@ -298,6 +323,15 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       onReadTurkishTap: _showTurkish && ayah.textTr.trim().isNotEmpty
           ? () => _readTurkishText(ayah.textTr)
           : null,
+      onReadEnglishTap: _showEnglish && ayah.textEn.trim().isNotEmpty
+          ? () => _readEnglishText(ayah.textEn)
+          : null,
+      onReadArabicTap: _showArabic && ayah.textAr.trim().isNotEmpty
+        ? () => _readArabicText(ayah.textAr)
+        : null,
+      onScanArabicTap: _showArabic && ayah.textAr.trim().isNotEmpty
+        ? () => _openArabicVoiceScanner(ayah.textAr)
+        : null,
     );
   }
 
@@ -342,6 +376,15 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       onReadTurkishTap: _showTurkish && hadith.textTr.trim().isNotEmpty
           ? () => _readTurkishText(hadith.textTr)
           : null,
+      onReadEnglishTap: _showEnglish && hadith.textEn.trim().isNotEmpty
+          ? () => _readEnglishText(hadith.textEn)
+          : null,
+      onReadArabicTap: _showArabic && hadith.textAr.trim().isNotEmpty
+        ? () => _readArabicText(hadith.textAr)
+        : null,
+      onScanArabicTap: _showArabic && hadith.textAr.trim().isNotEmpty
+        ? () => _openArabicVoiceScanner(hadith.textAr)
+        : null,
     );
   }
 
@@ -350,6 +393,41 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       await _reminderAudioService.speakText(
         text: text,
         selectedLocale: Localizations.localeOf(context),
+      );
+    } catch (_) {}
+  }
+
+  Future<void> _readEnglishText(String text) async {
+    try {
+      await _reminderAudioService.speakText(
+        text: text,
+        selectedLocale: const Locale('en'),
+      );
+    } catch (_) {}
+  }
+
+  Future<void> _readArabicText(String text) async {
+    try {
+      await _reminderAudioService.speakText(
+        text: text,
+        selectedLocale: const Locale('ar'),
+      );
+    } catch (_) {}
+  }
+
+  Future<void> _openArabicVoiceScanner(String sampleText) async {
+    try {
+      final voices = await _reminderAudioService.loadVoiceOptions();
+      final arabic = voices.where((v) => v.locale.toLowerCase().startsWith('ar')).toList();
+      if (arabic.isEmpty) return;
+      if (!mounted) return;
+      await showDialog<void>(
+        context: context,
+        builder: (_) => VoiceScanDialog(
+          reminderAudioService: _reminderAudioService,
+          arabicVoices: arabic,
+          sampleText: sampleText,
+        ),
       );
     } catch (_) {}
   }
@@ -402,6 +480,9 @@ class _DailyContentSection extends StatelessWidget {
   final Color contentColor;
   final Color referenceColor;
   final VoidCallback? onReadTurkishTap;
+  final VoidCallback? onReadEnglishTap;
+  final VoidCallback? onReadArabicTap;
+  final VoidCallback? onScanArabicTap;
 
   const _DailyContentSection({
     required this.title,
@@ -416,6 +497,9 @@ class _DailyContentSection extends StatelessWidget {
     required this.contentColor,
     required this.referenceColor,
     required this.onReadTurkishTap,
+    required this.onReadEnglishTap,
+    required this.onReadArabicTap,
+    required this.onScanArabicTap,
   });
 
   @override
@@ -440,7 +524,9 @@ class _DailyContentSection extends StatelessWidget {
       fontWeight: FontWeight.w600,
       fontSize: 17,
     );
-    final hasReadAction = onReadTurkishTap != null;
+    final hasTurkishReadAction = onReadTurkishTap != null;
+    final hasArabicReadAction = onReadArabicTap != null;
+    final hasEnglishReadAction = onReadEnglishTap != null;
 
     final textArIsArabic = _hasArabic(arabicText);
     final textTrIsArabic = _hasArabic(turkishText);
@@ -454,20 +540,20 @@ class _DailyContentSection extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: cizgiColor.withValues(alpha: 0.12)),
       ),
-      child: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(top: hasReadAction ? 30 : 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (title.trim().isNotEmpty) ...[
+              Text(title, style: titleStyle),
+              const SizedBox(height: 4),
+            ],
+            if (showArabic && arabicText.trim().isNotEmpty) ...[
+              Stack(
                 children: [
-                  if (title.trim().isNotEmpty) ...[
-                    Text(title, style: titleStyle),
-                    const SizedBox(height: 4),
-                  ],
-                  if (showArabic && arabicText.trim().isNotEmpty) ...[
-                    Text(
+                  Padding(
+                    padding: EdgeInsets.only(top: hasArabicReadAction ? 24 : 0),
+                    child: Text(
                       arabicText,
                       style: textStyle,
                       textAlign: TextAlign.center,
@@ -475,24 +561,107 @@ class _DailyContentSection extends StatelessWidget {
                           ? TextDirection.rtl
                           : TextDirection.ltr,
                     ),
-                  ],
-                  if (showTurkish && turkishText.trim().isNotEmpty) ...[
-                    if (showArabic && arabicText.trim().isNotEmpty)
-                      const SizedBox(height: 15),
-                    Text(
-                      turkishText,
-                      style: subStyle,
-                      textAlign: TextAlign.center,
-                      textDirection: textTrIsArabic
-                          ? TextDirection.rtl
-                          : TextDirection.ltr,
+                  ),
+                  if (hasArabicReadAction || onScanArabicTap != null)
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Material(
+                            color: Colors.black.withValues(alpha: 0.14),
+                            borderRadius: BorderRadius.circular(14),
+                            child: InkWell(
+                              onTap: onReadArabicTap,
+                              borderRadius: BorderRadius.circular(14),
+                              child: const Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Icon(
+                                  Icons.volume_up_rounded,
+                                  size: 18,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          if (onScanArabicTap != null) ...[
+                            const SizedBox(width: 6),
+                            Material(
+                              color: Colors.black.withValues(alpha: 0.14),
+                              borderRadius: BorderRadius.circular(14),
+                              child: InkWell(
+                                onTap: onScanArabicTap,
+                                borderRadius: BorderRadius.circular(14),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(6),
+                                  child: Icon(
+                                    Icons.search_rounded,
+                                    size: 18,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
                     ),
-                  ],
-                  if (showEnglish && englishText.trim().isNotEmpty) ...[
-                    if ((showArabic && arabicText.trim().isNotEmpty) ||
-                        (showTurkish && turkishText.trim().isNotEmpty))
-                      const SizedBox(height: 15),
-                    Text(
+                ],
+              ),
+            ],
+            if (showTurkish && turkishText.trim().isNotEmpty) ...[
+              if (showArabic && arabicText.trim().isNotEmpty)
+                const SizedBox(height: 15),
+              Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: hasTurkishReadAction ? 24 : 0),
+                    child: Padding(
+                      padding: EdgeInsets.only(right: hasTurkishReadAction ? 30 : 0),
+                      child: Text(
+                        turkishText,
+                        style: subStyle,
+                        textAlign: TextAlign.center,
+                        textDirection: textTrIsArabic
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
+                      ),
+                    ),
+                  ),
+                  if (hasTurkishReadAction)
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Material(
+                        color: Colors.black.withValues(alpha: 0.14),
+                        borderRadius: BorderRadius.circular(14),
+                        child: InkWell(
+                          onTap: onReadTurkishTap,
+                          borderRadius: BorderRadius.circular(14),
+                          child: const Padding(
+                            padding: EdgeInsets.all(6),
+                            child: Icon(
+                              Icons.volume_up_rounded,
+                              size: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ],
+            if (showEnglish && englishText.trim().isNotEmpty) ...[
+              if ((showArabic && arabicText.trim().isNotEmpty) ||
+                  (showTurkish && turkishText.trim().isNotEmpty))
+                const SizedBox(height: 15),
+              Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: hasEnglishReadAction ? 24 : 0),
+                    child: Text(
                       englishText,
                       style: subStyle?.copyWith(fontStyle: FontStyle.normal),
                       textAlign: TextAlign.center,
@@ -500,35 +669,35 @@ class _DailyContentSection extends StatelessWidget {
                           ? TextDirection.rtl
                           : TextDirection.ltr,
                     ),
-                  ],
-                  const SizedBox(height: 20),
-                  Center(child: Text(reference, style: refStyle)),
+                  ),
+                  if (hasEnglishReadAction)
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: Material(
+                        color: Colors.black.withValues(alpha: 0.14),
+                        borderRadius: BorderRadius.circular(14),
+                        child: InkWell(
+                          onTap: onReadEnglishTap,
+                          borderRadius: BorderRadius.circular(14),
+                          child: const Padding(
+                            padding: EdgeInsets.all(6),
+                            child: Icon(
+                              Icons.volume_up_rounded,
+                              size: 18,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
-            ),
-          ),
-          if (hasReadAction)
-            Positioned(
-              top: 6,
-              right: 6,
-              child: Material(
-                color: Colors.black.withValues(alpha: 0.14),
-                borderRadius: BorderRadius.circular(14),
-                child: InkWell(
-                  onTap: onReadTurkishTap,
-                  borderRadius: BorderRadius.circular(14),
-                  child: const Padding(
-                    padding: EdgeInsets.all(6),
-                    child: Icon(
-                      Icons.volume_up_rounded,
-                      size: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-        ],
+            ],
+            const SizedBox(height: 20),
+            Center(child: Text(reference, style: refStyle)),
+          ],
+        ),
       ),
     );
   }

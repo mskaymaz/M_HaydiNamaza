@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 import 'package:vibration/vibration.dart';
+import 'package:geocoding/geocoding.dart';
 
 import '../../app/background/patterned_background.dart';
 
@@ -12,6 +13,7 @@ import '../../app/calculation_method_storage.dart';
 import '../../app/custom_prayer_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_storage.dart';
+import 'package:geolocator/geolocator.dart';
 import '../../app/reminder_audio_service.dart';
 import '../../app/prayer_row_settings_storage.dart';
 import '../../app/prayer_service.dart';
@@ -144,6 +146,37 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<_HomeData> _loadData() async {
+    final useCurrent = await _locationStorage.readUseCurrentLocation();
+    if (useCurrent) {
+      try {
+        final position = await Geolocator.getCurrentPosition().timeout(const Duration(seconds: 6));
+        // compare with stored location; if differs significantly, update stored
+        try {
+          final stored = await _locationStorage.read();
+          if (stored != null) {
+            final storedLat = double.tryParse(stored.latitude) ?? 0.0;
+            final storedLon = double.tryParse(stored.longitude) ?? 0.0;
+            final dLat = (storedLat - position.latitude).abs();
+            final dLon = (storedLon - position.longitude).abs();
+            if (dLat > 0.01 || dLon > 0.01) {
+              // significant change, update stored location
+              final placemarks = await placemarkFromCoordinates(position.latitude, position.longitude).timeout(const Duration(seconds: 3), onTimeout: () => <Placemark>[]);
+              final placemark = placemarks.isEmpty ? null : placemarks.first;
+              final province = (placemark?.administrativeArea ?? '').trim();
+              final district = placemark == null ? '' : (placemark.subAdministrativeArea ?? '') ;
+              await _locationStorage.write(LocationData(
+                countryId: null,
+                countryName: placemark?.country ?? '',
+                province: province.isEmpty ? stored.province : province,
+                district: district.isEmpty ? stored.district : district,
+                latitude: position.latitude.toString(),
+                longitude: position.longitude.toString(),
+              ));
+            }
+          }
+        } catch (_) {}
+      } catch (_) {}
+    }
     final location = await _locationStorage.read();
     var methodCode = await _methodStorage.readCode();
     methodCode ??= 'turkey';

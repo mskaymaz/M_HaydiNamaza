@@ -242,6 +242,9 @@ class _LocationScreenState extends State<LocationScreen> {
       setState(() {
         _useCurrentLocation = false;
       });
+      try {
+        await _storage.writeUseCurrentLocation(false);
+      } catch (_) {}
       return;
     }
     if (!mounted) return;
@@ -297,6 +300,19 @@ class _LocationScreenState extends State<LocationScreen> {
         _latController.text = position.latitude.toString();
         _lonController.text = position.longitude.toString();
       });
+      // Persist the automatic location selection and location data.
+      try {
+        final data = LocationData(
+          countryId: null,
+          countryName: _selectedCountryName,
+          province: province,
+          district: district,
+          latitude: position.latitude.toString(),
+          longitude: position.longitude.toString(),
+        );
+        await _storage.write(data);
+        await _storage.writeUseCurrentLocation(true);
+      } catch (_) {}
       await _loadStates(_selectedCountryId!);
       if (province.isEmpty || district.isEmpty) {
         if (!mounted) return;

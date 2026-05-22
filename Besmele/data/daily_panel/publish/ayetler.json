@@ -20,12 +20,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-191",
@@ -44,12 +39,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-192",
@@ -68,12 +58,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-193",
@@ -92,12 +77,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-216",
@@ -116,12 +96,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-217",
@@ -140,12 +115,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-244",
@@ -164,12 +134,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-140",
@@ -188,12 +153,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-141",
@@ -212,12 +172,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-142",
@@ -236,12 +191,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-143",
@@ -260,12 +210,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-146",
@@ -284,12 +229,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-147",
@@ -308,12 +248,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-148",
@@ -332,12 +267,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-152",
@@ -356,12 +286,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-153",
@@ -380,12 +305,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-154",
@@ -404,12 +324,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-155",
@@ -428,12 +343,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-156",
@@ -452,12 +362,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-157",
@@ -476,12 +381,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-158",
@@ -500,12 +400,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-165",
@@ -524,12 +419,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-166",
@@ -548,12 +438,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-167",
@@ -572,12 +457,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-169",
@@ -596,12 +476,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-170",
@@ -620,12 +495,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-171",
@@ -644,12 +514,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-172",
@@ -668,12 +533,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-173",
@@ -692,12 +552,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-174",
@@ -716,12 +571,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-71",
@@ -740,12 +590,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-72",
@@ -764,12 +609,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-73",
@@ -788,12 +628,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-74",
@@ -812,12 +647,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-75",
@@ -836,12 +666,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-76",
@@ -860,12 +685,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-77",
@@ -884,12 +704,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-84",
@@ -908,12 +723,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-89",
@@ -932,12 +742,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-90",
@@ -956,12 +761,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-91",
@@ -980,12 +780,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-94",
@@ -1004,12 +799,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-95",
@@ -1028,12 +818,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-96",
@@ -1052,12 +837,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-100",
@@ -1076,12 +856,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-21",
@@ -1100,12 +875,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-22",
@@ -1124,12 +894,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-23",
@@ -1148,12 +913,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-24",
@@ -1172,12 +932,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-25",
@@ -1196,12 +951,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-26",
@@ -1220,12 +970,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-27",
@@ -1244,12 +989,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-28",
@@ -1268,12 +1008,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-29",
@@ -1292,12 +1027,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-19",
@@ -1316,12 +1046,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-20",
@@ -1340,12 +1065,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-64",
@@ -1364,12 +1084,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-85",
@@ -1388,12 +1103,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-104",
@@ -1412,12 +1122,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-110",
@@ -1436,12 +1141,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-114",
@@ -1460,12 +1160,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-170",
@@ -1484,12 +1179,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-174",
@@ -1508,12 +1198,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-15",
@@ -1532,12 +1217,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-16",
@@ -1556,12 +1236,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-19",
@@ -1580,12 +1255,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-48",
@@ -1604,12 +1274,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-70",
@@ -1628,12 +1293,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-90",
@@ -1652,12 +1312,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-91",
@@ -1676,12 +1331,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-92",
@@ -1700,12 +1350,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-7-158",
@@ -1724,12 +1369,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-10-25",
@@ -1748,12 +1388,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-10-57",
@@ -1772,12 +1407,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-12-108",
@@ -1796,12 +1426,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-13-36",
@@ -1820,12 +1445,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-14-1",
@@ -1844,12 +1464,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-16-125",
@@ -1868,12 +1483,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-21-107",
@@ -1892,12 +1502,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-22-67",
@@ -1916,12 +1521,7 @@
       "topics": [
         "islama_cagirma"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-40",
@@ -1940,12 +1540,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-41",
@@ -1964,12 +1559,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-42",
@@ -1988,12 +1578,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-43",
@@ -2012,12 +1597,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-44",
@@ -2036,12 +1616,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-45",
@@ -2060,12 +1635,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-46",
@@ -2084,12 +1654,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-47",
@@ -2108,12 +1673,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-48",
@@ -2132,12 +1692,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-49",
@@ -2156,12 +1711,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-50",
@@ -2180,12 +1730,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-51",
@@ -2204,12 +1749,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-52",
@@ -2228,12 +1768,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-53",
@@ -2252,12 +1787,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-54",
@@ -2276,12 +1806,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-55",
@@ -2300,12 +1825,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-56",
@@ -2324,12 +1844,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-57",
@@ -2348,12 +1863,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-58",
@@ -2372,12 +1882,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-59",
@@ -2396,12 +1901,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-60",
@@ -2420,12 +1920,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-61",
@@ -2444,12 +1939,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-62",
@@ -2468,12 +1958,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-63",
@@ -2492,12 +1977,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-64",
@@ -2516,12 +1996,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-65",
@@ -2540,12 +2015,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-66",
@@ -2564,12 +2034,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-67",
@@ -2588,12 +2053,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-68",
@@ -2612,12 +2072,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-69",
@@ -2636,12 +2091,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-70",
@@ -2660,12 +2110,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-71",
@@ -2684,12 +2129,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-72",
@@ -2708,12 +2148,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-73",
@@ -2732,12 +2167,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-74",
@@ -2756,12 +2186,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-75",
@@ -2780,12 +2205,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-76",
@@ -2804,12 +2224,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-77",
@@ -2828,12 +2243,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-78",
@@ -2852,12 +2262,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-79",
@@ -2876,12 +2281,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-80",
@@ -2900,12 +2300,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-81",
@@ -2924,12 +2319,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-82",
@@ -2948,12 +2338,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-83",
@@ -2972,12 +2357,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-84",
@@ -2996,12 +2376,7 @@
       "topics": [
         "ehl_i_kitap_tarihi_uyarilar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-58",
@@ -3020,12 +2395,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-59",
@@ -3044,12 +2414,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-60",
@@ -3068,12 +2433,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-61",
@@ -3092,12 +2452,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-62",
@@ -3116,12 +2471,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-63",
@@ -3140,12 +2490,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-64",
@@ -3164,12 +2509,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-65",
@@ -3188,12 +2528,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-44",
@@ -3212,12 +2547,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-45",
@@ -3236,12 +2566,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-47",
@@ -3260,12 +2585,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-48",
@@ -3284,12 +2604,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-49",
@@ -3308,12 +2623,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-50",
@@ -3332,12 +2642,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-1",
@@ -3356,12 +2661,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-41",
@@ -3380,12 +2680,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-60",
@@ -3404,12 +2699,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-22-41",
@@ -3428,12 +2718,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-55",
@@ -3452,12 +2737,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-42-38",
@@ -3476,12 +2756,7 @@
       "topics": [
         "islam_devleti_yapisi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-177",
@@ -3500,12 +2775,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-178",
@@ -3524,12 +2794,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-179",
@@ -3548,12 +2813,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-180",
@@ -3572,12 +2832,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-181",
@@ -3596,12 +2851,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-182",
@@ -3620,12 +2870,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-188",
@@ -3644,12 +2889,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-282",
@@ -3668,12 +2908,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-159",
@@ -3692,12 +2927,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-29",
@@ -3716,12 +2946,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-30",
@@ -3740,12 +2965,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-35",
@@ -3764,12 +2984,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-85",
@@ -3788,12 +3003,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-105",
@@ -3812,12 +3022,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-106",
@@ -3836,12 +3041,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-107",
@@ -3860,12 +3060,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-108",
@@ -3884,12 +3079,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-109",
@@ -3908,12 +3098,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-135",
@@ -3932,12 +3117,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-8",
@@ -3956,12 +3136,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-42",
@@ -3980,12 +3155,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-16-90",
@@ -4004,12 +3174,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-42-15",
@@ -4028,12 +3193,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-49-9",
@@ -4052,12 +3212,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-49-10",
@@ -4076,12 +3231,7 @@
       "topics": [
         "islami_devlet_yonetimi"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-3",
@@ -4100,12 +3250,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-4",
@@ -4124,12 +3269,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-5",
@@ -4148,12 +3288,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-110",
@@ -4172,12 +3307,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-153",
@@ -4196,12 +3326,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-195",
@@ -4220,12 +3345,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-197",
@@ -4244,12 +3364,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-208",
@@ -4268,12 +3383,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-254",
@@ -4292,12 +3402,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-102",
@@ -4316,12 +3421,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-133",
@@ -4340,12 +3440,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-134",
@@ -4364,12 +3459,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-135",
@@ -4388,12 +3478,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-136",
@@ -4412,12 +3497,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-200",
@@ -4436,12 +3516,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-36",
@@ -4460,12 +3535,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-2",
@@ -4484,12 +3554,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-35",
@@ -4508,12 +3573,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-151",
@@ -4532,12 +3592,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-152",
@@ -4556,12 +3611,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-153",
@@ -4580,12 +3630,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-17-23",
@@ -4604,12 +3649,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-17-24",
@@ -4628,12 +3668,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-17-27",
@@ -4652,12 +3687,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-17-26",
@@ -4676,12 +3706,7 @@
       "topics": [
         "prensipli_hayat_yasama"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-194",
@@ -4700,12 +3725,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-251",
@@ -4724,12 +3744,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-57",
@@ -4748,12 +3763,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-86",
@@ -4772,12 +3782,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-22-39",
@@ -4796,12 +3801,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-141",
@@ -4820,12 +3820,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-148",
@@ -4844,12 +3839,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-33",
@@ -4868,12 +3858,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-34",
@@ -4892,12 +3877,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-39",
@@ -4916,12 +3896,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-60",
@@ -4940,12 +3915,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-61",
@@ -4964,12 +3934,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-12",
@@ -4988,12 +3953,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-13",
@@ -5012,12 +3972,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-14",
@@ -5036,12 +3991,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-36",
@@ -5060,12 +4010,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-16-126",
@@ -5084,12 +4029,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-16-127",
@@ -5108,12 +4048,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-22-40",
@@ -5132,12 +4067,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-22-60",
@@ -5156,12 +4086,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-26-227",
@@ -5180,12 +4105,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-28-5",
@@ -5204,12 +4124,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-28-6",
@@ -5228,12 +4143,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-42-39",
@@ -5252,12 +4162,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-42-40",
@@ -5276,12 +4181,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-42-41",
@@ -5300,12 +4200,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-42-42",
@@ -5324,12 +4219,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-42-43",
@@ -5348,12 +4238,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-60-8",
@@ -5372,12 +4257,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-60-9",
@@ -5396,12 +4276,7 @@
       "topics": [
         "zulme_ve_zalime_karsi_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-114",
@@ -5420,12 +4295,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-124",
@@ -5444,12 +4314,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-145",
@@ -5468,12 +4333,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-229",
@@ -5492,12 +4352,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-231",
@@ -5516,12 +4371,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-258",
@@ -5540,12 +4390,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-270",
@@ -5564,12 +4409,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-279",
@@ -5588,12 +4428,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-117",
@@ -5612,12 +4447,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-10",
@@ -5636,12 +4466,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-40",
@@ -5660,12 +4485,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-110",
@@ -5684,12 +4504,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-112",
@@ -5708,12 +4523,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-168",
@@ -5732,12 +4542,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-21",
@@ -5756,12 +4561,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-82",
@@ -5780,12 +4580,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-93",
@@ -5804,12 +4599,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-135",
@@ -5828,12 +4618,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-7-23",
@@ -5852,12 +4637,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-7-41",
@@ -5876,12 +4656,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-7-44",
@@ -5900,12 +4675,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-7-148",
@@ -5924,12 +4694,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-7-162",
@@ -5948,12 +4713,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-10-13",
@@ -5972,12 +4732,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-10-44",
@@ -5996,12 +4751,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-10-52",
@@ -6020,12 +4770,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-11-18",
@@ -6044,12 +4789,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-11-101",
@@ -6068,12 +4808,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-14-42",
@@ -6092,12 +4827,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-31-13",
@@ -6116,12 +4846,7 @@
       "topics": [
         "zulum_nedir_zalim_kimdir"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-263",
@@ -6140,12 +4865,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-264",
@@ -6164,12 +4884,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-267",
@@ -6188,12 +4903,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-271",
@@ -6212,12 +4922,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-273",
@@ -6236,12 +4941,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-1",
@@ -6260,12 +4960,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-2",
@@ -6284,12 +4979,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-3",
@@ -6308,12 +4998,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-6",
@@ -6332,12 +5017,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-8",
@@ -6356,12 +5036,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-9",
@@ -6380,12 +5055,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-19",
@@ -6404,12 +5074,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-32",
@@ -6428,12 +5093,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-86",
@@ -6452,12 +5112,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-114",
@@ -6476,12 +5131,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-128",
@@ -6500,12 +5150,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-129",
@@ -6524,12 +5169,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-17-28",
@@ -6548,12 +5188,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-17-29",
@@ -6572,12 +5207,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-17-53",
@@ -6596,12 +5226,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-27",
@@ -6620,12 +5245,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-28",
@@ -6644,12 +5264,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-31-14",
@@ -6668,12 +5283,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-31-15",
@@ -6692,12 +5302,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-49-11",
@@ -6716,12 +5321,7 @@
       "topics": [
         "insani_iliskiler"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-112",
@@ -6740,12 +5340,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-131",
@@ -6764,12 +5359,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-132",
@@ -6788,12 +5378,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-136",
@@ -6812,12 +5397,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-138",
@@ -6836,12 +5416,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-139",
@@ -6860,12 +5435,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-31",
@@ -6884,12 +5454,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-32",
@@ -6908,12 +5473,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-52",
@@ -6932,12 +5492,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-83",
@@ -6956,12 +5511,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-3",
@@ -6980,12 +5530,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-54",
@@ -7004,12 +5549,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-55",
@@ -7028,12 +5568,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-56",
@@ -7052,12 +5587,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-162",
@@ -7076,12 +5606,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-163",
@@ -7100,12 +5625,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-24",
@@ -7124,12 +5644,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-111",
@@ -7148,12 +5663,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-10-84",
@@ -7172,12 +5682,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-36",
@@ -7196,12 +5701,7 @@
       "topics": [
         "islama_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-39-11",
@@ -7220,12 +5720,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-39-12",
@@ -7244,12 +5739,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-39-14",
@@ -7268,12 +5758,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-41-30",
@@ -7292,12 +5777,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-42-13",
@@ -7316,12 +5796,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-143",
@@ -7340,12 +5815,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-213",
@@ -7364,12 +5834,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-103",
@@ -7388,12 +5853,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-105",
@@ -7412,12 +5872,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-6-159",
@@ -7436,12 +5891,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-46",
@@ -7460,12 +5910,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-72",
@@ -7484,12 +5929,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-73",
@@ -7508,12 +5948,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-71",
@@ -7532,12 +5967,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-100",
@@ -7556,12 +5986,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-21-92",
@@ -7580,12 +6005,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-22-78",
@@ -7604,12 +6024,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-23-52",
@@ -7628,12 +6043,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-6",
@@ -7652,12 +6062,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-23",
@@ -7676,12 +6081,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-35",
@@ -7700,12 +6100,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-48-29",
@@ -7724,12 +6119,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-49-13",
@@ -7748,12 +6138,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-59-9",
@@ -7772,12 +6157,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-61-4",
@@ -7796,12 +6176,7 @@
       "topics": [
         "ummet_bilinci"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-220",
@@ -7820,12 +6195,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-224",
@@ -7844,12 +6214,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-237",
@@ -7868,12 +6233,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-25",
@@ -7892,12 +6252,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-92",
@@ -7916,12 +6271,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-93",
@@ -7940,12 +6290,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-63",
@@ -7964,12 +6309,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-11",
@@ -7988,12 +6328,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-15-47",
@@ -8012,12 +6347,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-22",
@@ -8036,12 +6366,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-61",
@@ -8060,12 +6385,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-5",
@@ -8084,12 +6404,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-53",
@@ -8108,12 +6423,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-56",
@@ -8132,12 +6442,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-49-12",
@@ -8156,12 +6461,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-59-10",
@@ -8180,12 +6480,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-59-11",
@@ -8204,12 +6499,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-59-12",
@@ -8228,12 +6518,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-60-7",
@@ -8252,12 +6537,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-64-14",
@@ -8276,12 +6556,7 @@
       "topics": [
         "kardeslige_baglilik"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-215",
@@ -8300,12 +6575,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-58",
@@ -8324,12 +6594,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-59",
@@ -8348,12 +6613,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-60",
@@ -8372,12 +6632,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-28-23",
@@ -8396,12 +6651,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-28-24",
@@ -8420,12 +6670,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-46-15",
@@ -8444,12 +6689,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-46-16",
@@ -8468,12 +6708,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-93-9",
@@ -8492,12 +6727,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-93-10",
@@ -8516,12 +6746,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-80",
@@ -8540,12 +6765,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-115",
@@ -8564,12 +6784,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-7-157",
@@ -8588,12 +6803,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-20",
@@ -8612,12 +6822,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-24",
@@ -8636,12 +6841,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-51",
@@ -8660,12 +6860,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-52",
@@ -8684,12 +6879,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-54",
@@ -8708,12 +6898,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-24-56",
@@ -8732,12 +6917,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-21",
@@ -8756,12 +6936,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-40",
@@ -8780,12 +6955,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-45",
@@ -8804,12 +6974,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-46",
@@ -8828,12 +6993,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-47-33",
@@ -8852,12 +7012,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-59-7",
@@ -8876,12 +7031,7 @@
       "topics": [
         "buyuklere_ve_kucuklere_davranis"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-261",
@@ -8900,12 +7050,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-2-262",
@@ -8924,12 +7069,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-92",
@@ -8948,12 +7088,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-32",
@@ -8972,12 +7107,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-28-77",
@@ -8996,12 +7126,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-76-8",
@@ -9020,12 +7145,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-76-9",
@@ -9044,12 +7164,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-90-13",
@@ -9068,12 +7183,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-90-14",
@@ -9092,12 +7202,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-107-3",
@@ -9116,12 +7221,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-7-199",
@@ -9140,12 +7240,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-119",
@@ -9164,12 +7259,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-22-30",
@@ -9188,12 +7278,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-25-63",
@@ -9212,12 +7297,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-31-17",
@@ -9236,12 +7316,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-33-70",
@@ -9260,12 +7335,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-39-18",
@@ -9284,12 +7354,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-41-33",
@@ -9308,12 +7373,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-103-1",
@@ -9332,12 +7392,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-103-3",
@@ -9356,12 +7411,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-23-1",
@@ -9380,12 +7430,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-23-2",
@@ -9404,12 +7449,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-23-3",
@@ -9428,12 +7468,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-23-4",
@@ -9452,12 +7487,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-23-5",
@@ -9476,12 +7506,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-23-8",
@@ -9500,12 +7525,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-23-9",
@@ -9524,12 +7544,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-23-10",
@@ -9548,12 +7563,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-31-18",
@@ -9572,12 +7582,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-31-19",
@@ -9596,12 +7601,7 @@
       "topics": [
         "peygamber_sozlerine_itibar"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-9-41",
@@ -9620,12 +7620,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-29-69",
@@ -9644,12 +7639,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-61-11",
@@ -9668,12 +7658,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-67",
@@ -9692,12 +7677,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-78",
@@ -9716,12 +7696,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-4-46",
@@ -9740,12 +7715,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-5-13",
@@ -9764,12 +7734,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-8-27",
@@ -9788,12 +7753,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-38-26",
@@ -9812,12 +7772,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-7-29",
@@ -9836,12 +7791,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-11-112",
@@ -9860,12 +7810,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-70-32",
@@ -9884,12 +7829,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-18-57",
@@ -9908,12 +7848,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-39-32",
@@ -9932,12 +7867,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-58-11",
@@ -9956,12 +7886,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-64-12",
@@ -9980,12 +7905,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-90-12",
@@ -10004,12 +7924,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-90-15",
@@ -10028,12 +7943,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-90-16",
@@ -10052,12 +7962,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-90-17",
@@ -10076,12 +7981,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-3-17",
@@ -10100,12 +8000,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-39-33",
@@ -10124,12 +8019,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-49-15",
@@ -10148,12 +8038,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     },
     {
       "id": "ayah-68-4",
@@ -10172,12 +8057,7 @@
       "topics": [
         "cihad"
       ],
-      "status": "draft",
-      "approval": {
-        "approved_by": "Gemini_AI_Editor",
-        "approved_at": "2026-05-14T00:00:00Z",
-        "review_note": "Diyanet Kur'an Yolu standartlarına göre doğrulandı."
-      }
+      "status": "pending"
     }
   ]
 }

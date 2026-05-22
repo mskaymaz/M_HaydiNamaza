@@ -3,7 +3,7 @@
 
 Usage:
   py tool.py
-  py tool.py --ayah ".../ayahs_draft.json" --hadith ".../hadiths_draft.json"
+  py tool.py --ayah ".../ayetler.json" --hadith ".../hadisler.json"
 """
 
 from __future__ import annotations

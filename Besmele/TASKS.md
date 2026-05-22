@@ -708,3 +708,17 @@ Yuklenen JSON dosyalari (sadece ayet/hadis):
 Not:
 - Hedefte ayni isimli dosya bulunursa `*.old.R<zaman>` kurali ile eski dosya adlandirilip yeni dosya gecerli dosya olarak yuklenecek sekilde akisa alindi.
 - Bu kayit, ileride AllApp uzerindeki gecerli publish dosyalarina hizli erisim icin tutulur.
+
+### Local JSON Arsivleme Kaydi
+
+Tarih: 2026-05-22
+Amac: Inceleme aracinda karmasayi azaltmak icin aktif cift disindaki publish JSON dosyalarini ayri arsive tasima.
+
+Aktif birakilanlar:
+- Besmele/data/daily_panel/publish/ayetler.json
+- Besmele/data/daily_panel/publish/hadisler.json
+
+Arsive tasinanlar:
+- Besmele/data/daily_panel/archive/pending_json_2026-05-22_084948/ayahs.v1.approved.json
+- Besmele/data/daily_panel/archive/pending_json_2026-05-22_084948/hadiths.v1.approved.json
+- Besmele/data/daily_panel/archive/pending_json_2026-05-22_084948/sequence.v1.json

@@ -51,3 +51,7 @@ _archive_instruction_old_*/
 .cache/
 .vscode/
 _external/AllAppRef/
+
+# Content review tool local artifacts
+tools/content_review/review_state.json
+Besmele/data/daily_panel/publish/*.bak.*

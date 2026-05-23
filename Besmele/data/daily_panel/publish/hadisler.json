@@ -11,7 +11,7 @@
       "hadith_number": "7",
       "narrator": "requires verification",
       "text_ar": "- وعن أبي هريرة عبد الرحمن بن صخر رضي الله عنه قال قال رسول الله صلى الله عليه وسلم : \" إن الله لا ينظر إلى أجسامكم ، ولا إلى صوركم، ولكن ينظر إلى قلوبكم وأعمالكم \" ( ( رواه مسلم ) ) .",
-      "text_tr": "Ebû Hüreyre Abdurrahmân b. Sahr’dan (ra)\nrivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nAllah, sizin cüsselerinize ve şekillerinize değil, kalplerinize ve amellerinize bakar.4",
+      "text_tr": "Ebû Hüreyre Abdurrahmân b. Sahr’dan (ra)\nrivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nAllah, sizin cüsselerinize ve şekillerinize değil, kalplerinize ve amellerinize bakar.",
       "text_en": "Abu Hurairah (May Allah be pleased with him) narrated: Messenger of Allah (ﷺ) said, \"Allah does not look at your figures, nor at your attire but He looks at your hearts and accomplishments\". [Muslim] .",
       "source_ar": "https://api.islamic.app/v1/hadith/collections/riyadussalihin/books/introduction/hadiths/7",
       "source_tr": "https://dijital.diyanet.gov.tr/e-kitap/riyazus-salihin-metin-ve-ceviri-1/dib/hadis-ve-siyer/2335",
@@ -21,8 +21,8 @@
       "topics": [
         "hadis_draft_pool"
       ],
-      "status": "pending",
-      "book_reference_tr": "(M6542 Müslim, Birr, 33)"
+      "status": "approved",
+      "book_reference_tr": "(M6542, Müslim, Birr, 33)"
     },
     {
       "id": "hadith-riyadussalihin-13",
@@ -42,8 +42,8 @@
       "topics": [
         "hadis_draft_pool"
       ],
-      "status": "pending",
-      "book_reference_tr": "(B6307 Buhr, Deavt, 3)"
+      "status": "approved",
+      "book_reference_tr": "(B6307, Buhari, Daevat, 3)"
     },
     {
       "id": "hadith-riyadussalihin-14",
@@ -63,8 +63,8 @@
       "topics": [
         "hadis_draft_pool"
       ],
-      "status": "pending",
-      "book_reference_tr": "(M6859 Müslim, Zikir, 42)"
+      "status": "approved",
+      "book_reference_tr": "(M6859, Müslim, Zikir, 42)"
     },
     {
       "id": "hadith-riyadussalihin-17",

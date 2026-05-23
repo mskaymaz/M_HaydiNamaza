@@ -41,7 +41,7 @@ py tools/content_review/review_tool.py
 Komut, yerel bir masaustu pencere acar.
 Varsayilan kaynaklar: `Besmele/data/daily_panel/publish/ayetler.json` ve `Besmele/data/daily_panel/publish/hadisler.json`.
 
-Istersen dogrudan tek grupla baslatabilirsin:
+Istersen dogrudan tek grupla baslatabilirsin (arac, baslangicta sadece secilen JSON'u yukler):
 
 ```powershell
 py tools/content_review/review_tool.py --dataset ayah

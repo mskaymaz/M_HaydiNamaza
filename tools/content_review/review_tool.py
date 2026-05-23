@@ -16,7 +16,7 @@ from typing import Any, Optional
 
 try:
     from PySide6.QtCore import QTimer, Qt
-    from PySide6.QtGui import QFont, QTextOption
+    from PySide6.QtGui import QFont, QFontDatabase, QTextOption
     from PySide6.QtWidgets import (
         QApplication,
         QCheckBox,
@@ -78,7 +78,7 @@ class ReviewStore:
         root: Path,
         inputs: InputConfig,
         state_path: Path,
-        dataset_filter: str = "all",
+        dataset_filter: str = "ayah",
     ) -> None:
         self.root = root
         self.inputs = inputs
@@ -93,27 +93,15 @@ class ReviewStore:
             "hadith": inputs.hadith_path,
         }
         self._roots: dict[str, Any] = {}
-        self._records_by_dataset: dict[str, list[dict[str, Any]]] = {}
+        self._raw_records_by_dataset: dict[str, list[dict[str, Any]]] = {}
+        self._view_records_by_dataset: dict[str, list[dict[str, Any]]] = {}
         self._root_is_list: dict[str, bool] = {}
         self._backups_done: set[Path] = set()
 
-        ayah_root, ayah_records, ayah_is_list = self._read_json_payload(inputs.ayah_path)
-        hadith_root, hadith_records, hadith_is_list = self._read_json_payload(inputs.hadith_path)
-        self._roots["ayah"] = ayah_root
-        self._roots["hadith"] = hadith_root
-        self._records_by_dataset["ayah"] = ayah_records
-        self._records_by_dataset["hadith"] = hadith_records
-        self._root_is_list["ayah"] = ayah_is_list
-        self._root_is_list["hadith"] = hadith_is_list
+        self._loaded_datasets: set[str] = set()
 
-        self._all_records: list[dict[str, Any]] = []
-        for idx, rec in enumerate(ayah_records):
-            self._all_records.append(self._normalize_record(rec, "ayah", idx))
-        for idx, rec in enumerate(hadith_records):
-            self._all_records.append(self._normalize_record(rec, "hadith", idx))
-
-        if not self._all_records:
-            raise RuntimeError("No records found in input files.")
+        # Lazy-load: do not read both datasets upfront.
+        self.records: list[dict[str, Any]] = []
 
         self.state = self._load_or_init_state()
         self._apply_dataset_filter(self._dataset_filter, save_state=False)
@@ -122,9 +110,9 @@ class ReviewStore:
     @staticmethod
     def _normalize_dataset_filter(value: str) -> str:
         raw = str(value or "").strip().lower()
-        if raw in {"all", "ayah", "hadith"}:
+        if raw in {"ayah", "hadith"}:
             return raw
-        return "all"
+        return "ayah"
 
     def set_dataset_filter(self, dataset_filter: str) -> None:
         new_filter = self._normalize_dataset_filter(dataset_filter)
@@ -137,17 +125,18 @@ class ReviewStore:
         return self._dataset_filter
 
     def _apply_dataset_filter(self, dataset_filter: str, save_state: bool) -> None:
-        if dataset_filter == "all":
-            self.records = list(self._all_records)
-        else:
-            self.records = [r for r in self._all_records if str(r.get("_dataset", "")) == dataset_filter]
+        self._load_dataset_if_needed(dataset_filter)
+        self.records = list(self._view_records_by_dataset.get(dataset_filter, []))
 
-        self.state.setdefault("cursors", {"all": 0, "ayah": 0, "hadith": 0})
+        if not self.records:
+            raise RuntimeError(f"No records found for dataset={dataset_filter} in input files.")
+
+        self.state.setdefault("cursors", {"ayah": 0, "hadith": 0})
         cursors = self.state.get("cursors")
         if not isinstance(cursors, dict):
-            cursors = {"all": 0, "ayah": 0, "hadith": 0}
+            cursors = {"ayah": 0, "hadith": 0}
             self.state["cursors"] = cursors
-        for key in ("all", "ayah", "hadith"):
+        for key in ("ayah", "hadith"):
             if key not in cursors:
                 cursors[key] = 0
 
@@ -156,6 +145,20 @@ class ReviewStore:
         cursors[dataset_filter] = cursor
         if save_state:
             self._save_state()
+
+    def _load_dataset_if_needed(self, dataset: str) -> None:
+        dataset_key = self._normalize_dataset_filter(dataset)
+        if dataset_key in self._loaded_datasets:
+            return
+        path = self._dataset_paths[dataset_key]
+        root_obj, raw_records, is_list = self._read_json_payload(path)
+        self._roots[dataset_key] = root_obj
+        self._root_is_list[dataset_key] = is_list
+        self._raw_records_by_dataset[dataset_key] = raw_records
+        self._view_records_by_dataset[dataset_key] = [
+            self._normalize_record(rec, dataset_key, idx) for idx, rec in enumerate(raw_records)
+        ]
+        self._loaded_datasets.add(dataset_key)
 
     @staticmethod
     def _read_json_payload(path: Path) -> tuple[Any, list[dict[str, Any]], bool]:
@@ -182,10 +185,10 @@ class ReviewStore:
         path = self._dataset_paths[dataset]
         self._ensure_backup(path)
         if self._root_is_list[dataset]:
-            payload = self._records_by_dataset[dataset]
+            payload = self._raw_records_by_dataset[dataset]
         else:
             root_obj = self._roots[dataset]
-            root_obj["records"] = self._records_by_dataset[dataset]
+            root_obj["records"] = self._raw_records_by_dataset[dataset]
             payload = root_obj
         self._atomic_json_write(path, payload)
 
@@ -276,7 +279,7 @@ class ReviewStore:
                 "created_at": now,
                 "updated_at": now,
                 "cursor": 0,
-                "cursors": {"all": 0, "ayah": 0, "hadith": 0},
+                "cursors": {"ayah": 0, "hadith": 0},
                 "input_files": {
                     "ayah": str(self.inputs.ayah_path),
                     "hadith": str(self.inputs.hadith_path),
@@ -288,16 +291,19 @@ class ReviewStore:
         state.setdefault("created_at", now)
         state.setdefault("updated_at", now)
         state.setdefault("cursor", 0)
-        state.setdefault("cursors", {"all": int(state.get("cursor", 0) or 0), "ayah": 0, "hadith": 0})
+        state.setdefault("cursors", {"ayah": 0, "hadith": 0})
         state.setdefault("input_files", {})
         state.setdefault("decisions", {})
 
         # Backwards compatibility: old state used a single cursor over the full list.
         cursors = state.get("cursors")
         if not isinstance(cursors, dict):
-            cursors = {"all": int(state.get("cursor", 0) or 0), "ayah": 0, "hadith": 0}
+            cursors = {"ayah": 0, "hadith": 0}
             state["cursors"] = cursors
-        for key in ("all", "ayah", "hadith"):
+        # If older state had an 'all' cursor, carry it into 'ayah' as a sane default.
+        if "all" in cursors and "ayah" not in cursors:
+            cursors["ayah"] = int(cursors.get("all", 0) or 0)
+        for key in ("ayah", "hadith"):
             if key not in cursors:
                 cursors[key] = 0
         state["cursor"] = max(0, int(state.get("cursor", 0) or 0))
@@ -399,7 +405,7 @@ class ReviewStore:
         rec = self.records[cursor]
         dataset = str(rec.get("_dataset", ""))
         rec_index = int(rec.get("_record_index", 0))
-        base_record = self._records_by_dataset[dataset][rec_index]
+        base_record = self._raw_records_by_dataset[dataset][rec_index]
         key = rec["_record_key"]
         previous = self.state["decisions"].get(key, {})
         clean_tr = str(text_tr or "")
@@ -430,6 +436,42 @@ class ReviewStore:
             self.state["cursor"] = next_cursor
             if isinstance(cursors, dict):
                 cursors[self._dataset_filter] = next_cursor
+        self._save_state()
+        return self.current_payload()
+
+    def delete_current(self) -> dict[str, Any]:
+        cursors = self.state.get("cursors", {})
+        cursor = int((cursors.get(self._dataset_filter, 0) if isinstance(cursors, dict) else 0) or 0)
+        cursor = max(0, min(cursor, len(self.records) - 1))
+        rec = self.records[cursor]
+        dataset = str(rec.get("_dataset", ""))
+        rec_index = int(rec.get("_record_index", 0))
+        record_key = str(rec.get("_record_key", ""))
+
+        raw = self._raw_records_by_dataset.get(dataset)
+        if raw is None:
+            raise RuntimeError("Dataset not loaded.")
+        if rec_index < 0 or rec_index >= len(raw):
+            raise RuntimeError("Record index out of range.")
+
+        del raw[rec_index]
+        self._view_records_by_dataset[dataset] = [
+            self._normalize_record(r, dataset, idx) for idx, r in enumerate(raw)
+        ]
+        self._persist_dataset(dataset)
+
+        decisions = self.state.get("decisions")
+        if isinstance(decisions, dict) and record_key:
+            decisions.pop(record_key, None)
+
+        self.records = list(self._view_records_by_dataset.get(dataset, []))
+        if not self.records:
+            raise RuntimeError(f"No records left after delete for dataset={dataset}.")
+
+        new_cursor = min(cursor, len(self.records) - 1)
+        self.state["cursor"] = new_cursor
+        if isinstance(cursors, dict):
+            cursors[self._dataset_filter] = new_cursor
         self._save_state()
         return self.current_payload()
 
@@ -623,7 +665,6 @@ class ReviewWindow(QMainWindow):
         summary_line.addWidget(self.summary_label, 1)
         summary_line.addWidget(QLabel("Grup:"))
         self.dataset_filter_combo = QComboBox()
-        self.dataset_filter_combo.addItem("Tumu", "all")
         self.dataset_filter_combo.addItem("Ayetler", "ayah")
         self.dataset_filter_combo.addItem("Hadisler", "hadith")
         self.dataset_filter_combo.currentIndexChanged.connect(self._on_dataset_filter_changed)
@@ -680,24 +721,6 @@ class ReviewWindow(QMainWindow):
         left_layout.addWidget(self.record_title)
         left_layout.addWidget(self.record_meta)
 
-        info_box = QGroupBox("Teknik Bilgi")
-        info_grid = QGridLayout(info_box)
-        self.info_type = QLabel("-")
-        self.info_id = QLabel("-")
-        self.info_technical = QLabel("-")
-        self.info_source = QLabel("-")
-        self.info_technical.setWordWrap(True)
-        self.info_source.setWordWrap(True)
-        info_grid.addWidget(QLabel("Tur:"), 0, 0)
-        info_grid.addWidget(self.info_type, 0, 1)
-        info_grid.addWidget(QLabel("Kayit ID:"), 0, 2)
-        info_grid.addWidget(self.info_id, 0, 3)
-        info_grid.addWidget(QLabel("Bilgi:"), 1, 0)
-        info_grid.addWidget(self.info_technical, 1, 1, 1, 3)
-        info_grid.addWidget(QLabel("Kaynak Notu:"), 2, 0)
-        info_grid.addWidget(self.info_source, 2, 1, 1, 3)
-        left_layout.addWidget(info_box)
-
         lang_splitter = QSplitter(Qt.Orientation.Vertical)
         tr_box = QGroupBox("Turkce Metin")
         tr_layout = QVBoxLayout(tr_box)
@@ -714,6 +737,7 @@ class ReviewWindow(QMainWindow):
         ar_layout = QVBoxLayout(ar_box)
         self.ar_text = QTextEdit()
         self._configure_flow_text(self.ar_text, extra_pt=2)
+        self._configure_arabic_flow_text(self.ar_text)
         self.ar_text.textChanged.connect(self._schedule_autosave)
         ar_layout.addWidget(self.ar_text)
 
@@ -727,18 +751,14 @@ class ReviewWindow(QMainWindow):
         self.en_warning.setWordWrap(True)
         en_layout.addWidget(self.en_text)
         en_layout.addWidget(self.en_warning)
-        self.book_ref_edit = QLineEdit()
-        self.book_ref_edit.setPlaceholderText("Hadis referansi (book_reference_tr)")
-        self.book_ref_edit.textChanged.connect(self._on_book_ref_changed)
-        en_layout.addWidget(QLabel("Hadis Referans (book_reference_tr)"))
-        en_layout.addWidget(self.book_ref_edit)
 
         lang_splitter.addWidget(tr_box)
         lang_splitter.addWidget(ar_box)
         lang_splitter.addWidget(en_box)
-        lang_splitter.setStretchFactor(0, 3)
-        lang_splitter.setStretchFactor(1, 3)
-        lang_splitter.setStretchFactor(2, 3)
+        # Give more vertical space to TR + AR; EN remains visible but smaller by default.
+        lang_splitter.setStretchFactor(0, 4)
+        lang_splitter.setStretchFactor(1, 4)
+        lang_splitter.setStretchFactor(2, 2)
         left_layout.addWidget(lang_splitter, 1)
 
         right_panel = QWidget()
@@ -750,15 +770,19 @@ class ReviewWindow(QMainWindow):
         self.btn_approved = QPushButton("Onaylandi")
         self.btn_rejected = QPushButton("Arkaya At")
         self.btn_pending = QPushButton("Beklet")
+        self.btn_delete = QPushButton("Sil")
         self.btn_approved.setStyleSheet("background:#eaf8ef;border:1px solid #6dbd7f;")
         self.btn_rejected.setStyleSheet("background:#fff1f1;border:1px solid #e59a9a;")
         self.btn_pending.setStyleSheet("background:#fff9ee;border:1px solid #d4b16a;")
+        self.btn_delete.setStyleSheet("background:#ffecec;border:1px solid #cc6b6b;")
         self.btn_approved.clicked.connect(lambda: self._set_status("approved"))
         self.btn_rejected.clicked.connect(lambda: self._set_status("backlog"))
         self.btn_pending.clicked.connect(lambda: self._set_status("pending"))
+        self.btn_delete.clicked.connect(self._delete_current)
         btn_line.addWidget(self.btn_approved)
         btn_line.addWidget(self.btn_rejected)
         btn_line.addWidget(self.btn_pending)
+        btn_line.addWidget(self.btn_delete)
         decision_layout.addLayout(btn_line)
         priority_line = QHBoxLayout()
         priority_line.addWidget(QLabel("Oncelik:"))
@@ -786,16 +810,56 @@ class ReviewWindow(QMainWindow):
         self.note_edit.textChanged.connect(self._schedule_autosave)
         decision_layout.addWidget(self.note_edit)
 
+        self.book_ref_label = QLabel("Book Reference")
+        decision_layout.addWidget(self.book_ref_label)
+        self.book_ref_edit = QTextEdit()
+        self.book_ref_edit.setPlaceholderText("B574 Buhr, Mevkts-salt, 26; M1438 Mslim, Mescid, 215")
+        self.book_ref_edit.setFixedHeight(70)
+        self.book_ref_edit.textChanged.connect(self._on_book_ref_changed)
+        decision_layout.addWidget(self.book_ref_edit)
+
         self.current_decision_label = QLabel("-")
         decision_layout.addWidget(self.current_decision_label)
 
         right_layout.addWidget(decision_box)
+
+        # Push technical info to the bottom empty area.
         right_layout.addStretch(1)
+
+        # Collapsible "Teknik Bilgi" in right-bottom area (default collapsed)
+        self.tech_box = QGroupBox("Teknik Bilgi")
+        self.tech_box.setCheckable(True)
+        self.tech_box.setChecked(False)
+        tech_layout = QVBoxLayout(self.tech_box)
+        self.tech_content = QWidget()
+        info_grid = QGridLayout(self.tech_content)
+        self.info_type = QLabel("-")
+        self.info_id = QLabel("-")
+        self.info_technical = QLabel("-")
+        self.info_source = QLabel("-")
+        self.info_technical.setWordWrap(True)
+        self.info_source.setWordWrap(True)
+        info_grid.addWidget(QLabel("Tur:"), 0, 0)
+        info_grid.addWidget(self.info_type, 0, 1)
+        info_grid.addWidget(QLabel("Kayit ID:"), 0, 2)
+        info_grid.addWidget(self.info_id, 0, 3)
+        info_grid.addWidget(QLabel("Bilgi:"), 1, 0)
+        info_grid.addWidget(self.info_technical, 1, 1, 1, 3)
+        info_grid.addWidget(QLabel("Kaynak Notu:"), 2, 0)
+        info_grid.addWidget(self.info_source, 2, 1, 1, 3)
+        self.tech_content.setVisible(False)
+        self.tech_box.toggled.connect(self.tech_content.setVisible)
+        tech_layout.addWidget(self.tech_content)
+        right_layout.addWidget(self.tech_box)
 
         splitter.addWidget(left_panel)
         splitter.addWidget(right_panel)
         splitter.setStretchFactor(0, 5)
         splitter.setStretchFactor(1, 2)
+
+        # Keep right panel width stable across ayah/hadith so text area width doesn't jump.
+        right_panel.setMinimumWidth(340)
+        right_panel.setMaximumWidth(460)
         root_layout.addWidget(splitter, 1)
 
     @staticmethod
@@ -809,6 +873,41 @@ class ReviewWindow(QMainWindow):
         widget.setWordWrapMode(QTextOption.WrapMode.WrapAtWordBoundaryOrAnywhere)
         widget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
+    @staticmethod
+    def _configure_arabic_flow_text(widget: QTextEdit) -> None:
+        # Make Arabic with harakat easier to read: RTL direction, right alignment,
+        # and prefer fonts that render diacritics cleanly on Windows.
+        widget.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+        widget.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
+
+        preferred_families = [
+            "Traditional Arabic",
+            "Simplified Arabic",
+            "Amiri",
+            "Scheherazade New",
+            "Noto Naskh Arabic",
+            "Noto Sans Arabic",
+            "Segoe UI Historic",
+            "Tahoma",
+            "Arial",
+        ]
+        available = set(QFontDatabase.families())
+        font = widget.font()
+        for family in preferred_families:
+            if family in available:
+                font.setFamily(family)
+                break
+
+        # Slight extra size helps harakat readability.
+        if font.pointSize() > 0:
+            font.setPointSize(font.pointSize() + 1)
+
+        widget.setFont(font)
+        widget.document().setDefaultFont(font)
+
+        # Add breathing room similar to mushaf layout.
+        widget.setStyleSheet("QTextEdit { padding: 10px; }")
+
     def refresh(self) -> None:
         self._suspend_autosave = True
         payload = self.store.current_payload()
@@ -821,7 +920,7 @@ class ReviewWindow(QMainWindow):
         self.summary_label.setText(
             f"Kayit {cursor + 1}/{total} | approved: {summary['approved']} | backlog: {summary['backlog']} | pending: {summary['pending']}"
         )
-        index = self.dataset_filter_combo.findData(payload.get("dataset_filter", "all"))
+        index = self.dataset_filter_combo.findData(payload.get("dataset_filter", "ayah"))
         if index >= 0:
             self.dataset_filter_combo.setCurrentIndex(index)
         view = _extract_record_view(rec)
@@ -834,8 +933,10 @@ class ReviewWindow(QMainWindow):
         self.tr_text.setPlainText(view["tr_text"])
         self.ar_text.setPlainText(view["ar_text"])
         self.en_text.setPlainText(view["en_text"])
-        self.book_ref_edit.setText(str(rec.get("book_reference_tr", "")))
-        self.book_ref_edit.setVisible(str(rec.get("_dataset", "")) == "hadith")
+        is_hadith = str(rec.get("_dataset", "")) == "hadith"
+        self.book_ref_edit.setPlainText(self._book_ref_to_display(str(rec.get("book_reference_tr", ""))))
+        self.book_ref_label.setVisible(is_hadith)
+        self.book_ref_edit.setVisible(is_hadith)
         self.tr_ref_preview.setVisible(str(rec.get("_dataset", "")) == "hadith")
         self.en_warning.setText(_english_caps_warning(view["en_text"]))
 
@@ -856,8 +957,28 @@ class ReviewWindow(QMainWindow):
     def _on_dataset_filter_changed(self) -> None:
         if self._suspend_autosave:
             return
-        self._save_current(show_message=False)
-        new_filter = str(self.dataset_filter_combo.currentData() or "all")
+
+        new_filter = str(self.dataset_filter_combo.currentData() or "ayah")
+        if new_filter == self.store.get_dataset_filter():
+            return
+
+        # Persist current record WITHOUT calling refresh(), otherwise the combobox selection
+        # gets reset back to the previous dataset before we read currentData().
+        if self._autosave_timer.isActive():
+            self._autosave_timer.stop()
+        note = self.note_edit.toPlainText().strip()
+        priority = str(self.priority_combo.currentData() or "normal")
+        self.store.save_current(
+            status=self._selected_status if self._selected_status in VALID_STATUSES else "pending",
+            text_tr=self.tr_text.toPlainText(),
+            text_ar=self.ar_text.toPlainText(),
+            text_en=self.en_text.toPlainText(),
+            book_reference_tr=self._book_ref_from_input(self.book_ref_edit.toPlainText()),
+            note=note,
+            priority=priority,
+            move_next=False,
+        )
+
         self.store.set_dataset_filter(new_filter)
         self.refresh()
 
@@ -876,7 +997,7 @@ class ReviewWindow(QMainWindow):
             self.tr_ref_preview.setText("")
             return
         original_tr = self.tr_text.toPlainText()
-        existing_ref = self.book_ref_edit.text().strip()
+        existing_ref = self._book_ref_from_input(self.book_ref_edit.toPlainText())
         tails = ReviewStore._detect_trailing_book_ref_tails(original_tr)
         cleaned_tr, merged_ref = ReviewStore._extract_trailing_book_ref(original_tr, existing_ref)
         if not tails and cleaned_tr == original_tr and (merged_ref or "") == (existing_ref or ""):
@@ -889,6 +1010,24 @@ class ReviewWindow(QMainWindow):
         if merged_ref:
             text += f"book_reference_tr (hedef): {merged_ref}"
         self.tr_ref_preview.setText(text.strip())
+
+    def _delete_current(self) -> None:
+        if self._autosave_timer.isActive():
+            self._autosave_timer.stop()
+        payload = self.store.current_payload()
+        rec = payload.get("record", {})
+        rec_id = str(rec.get("id", "-"))
+        dataset = str(rec.get("_dataset", "-"))
+        answer = QMessageBox.question(
+            self,
+            "Sil",
+            f"Bu kayit silinsin mi?\n\n{dataset}: {rec_id}",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        )
+        if answer != QMessageBox.StandardButton.Yes:
+            return
+        self.store.delete_current()
+        self.refresh()
 
     def _schedule_autosave(self) -> None:
         if self._suspend_autosave:
@@ -905,7 +1044,7 @@ class ReviewWindow(QMainWindow):
             text_tr=self.tr_text.toPlainText(),
             text_ar=self.ar_text.toPlainText(),
             text_en=self.en_text.toPlainText(),
-            book_reference_tr=self.book_ref_edit.text().strip(),
+            book_reference_tr=self._book_ref_from_input(self.book_ref_edit.toPlainText()),
             note=note,
             priority=priority,
             move_next=False,
@@ -962,7 +1101,7 @@ class ReviewWindow(QMainWindow):
             text_tr=self.tr_text.toPlainText(),
             text_ar=self.ar_text.toPlainText(),
             text_en=self.en_text.toPlainText(),
-            book_reference_tr=self.book_ref_edit.text().strip(),
+            book_reference_tr=self._book_ref_from_input(self.book_ref_edit.toPlainText()),
             note=note,
             priority=priority,
             move_next=move_next,
@@ -970,6 +1109,23 @@ class ReviewWindow(QMainWindow):
         self.refresh()
         if show_message:
             QMessageBox.information(self, "Kaydedildi", "Kayit guncellendi.")
+
+    @staticmethod
+    def _book_ref_to_display(value: str) -> str:
+        raw = str(value or "").strip()
+        if len(raw) >= 2 and raw.startswith("(") and raw.endswith(")"):
+            return raw[1:-1].strip()
+        return raw
+
+    @staticmethod
+    def _book_ref_from_input(value: str) -> str:
+        raw = str(value or "").strip()
+        if not raw:
+            return ""
+        if raw.startswith("(") and raw.endswith(")"):
+            inner = raw[1:-1].strip()
+            return f"({inner})" if inner else ""
+        return f"({raw})"
 
     def _export(self) -> None:
         self._save_current(show_message=False)
@@ -992,9 +1148,9 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Local daily ayah/hadith review desktop tool.")
     parser.add_argument(
         "--dataset",
-        default="all",
-        choices=["all", "ayah", "hadith"],
-        help="Which group to review: all | ayah | hadith",
+        default="ayah",
+        choices=["ayah", "hadith"],
+        help="Which group to review: ayah | hadith",
     )
     parser.add_argument(
         "--ayah",

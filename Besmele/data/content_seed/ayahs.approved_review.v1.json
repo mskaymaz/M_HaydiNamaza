@@ -1,0 +1,722 @@
+{
+  "metadata": {
+    "project": "M_HaydiNamaza",
+    "sourceFile": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\Besmele\\data\\content_seed\\ayahs.pending_review.v1.json",
+    "exportedAt": "2026-06-02T10:44:36+00:00",
+    "status": "approved_review",
+    "totalItems": 10,
+    "totalAyahObjects": 11,
+    "notes": [
+      "Bu dosya pending_review ayet havuzundan yalniz approved kayitlari icerir.",
+      "Ingilizce alanlari approved sonrasinda bu dosyada doldurulabilir."
+    ]
+  },
+  "items": [
+    {
+      "ref": "001/004",
+      "id": "001/004",
+      "surah": 1,
+      "ayahStart": 4,
+      "ayahEnd": 4,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": 1,
+        "ref": "001/004",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 111,
+        "input_status": "kaynak_birlesik:001/002-004",
+        "input_source_ref_groups": "001/002-004"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "001/002-004"
+      ],
+      "ayahs": [
+        {
+          "ref": "001/004",
+          "surah": 1,
+          "ayah": 4,
+          "arabic": "مَـٰلِكِ يَوْمِ ٱلدِّينِ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "Din gününün malikidir."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "Sovereign of the Day of Recompense."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Din Gününün sahibidir."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "The Master of the Day of Recompense."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "2-4 ayetler olmalı arapça metin değişecek",
+        "updated_at": "2026-06-02T10:43:14+00:00"
+      },
+      "text_tr": "Din gününün malikidir.",
+      "text_ar": "مَـٰلِكِ يَوْمِ ٱلدِّينِ",
+      "text_en": "Sovereign of the Day of Recompense."
+    },
+    {
+      "ref": "001/006",
+      "id": "001/006",
+      "surah": 1,
+      "ayahStart": 6,
+      "ayahEnd": 6,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": 2,
+        "ref": "001/006",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 110,
+        "input_status": "kaynak_birlesik:001/006-007",
+        "input_source_ref_groups": "001/006-007"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "001/006-007"
+      ],
+      "ayahs": [
+        {
+          "ref": "001/006",
+          "surah": 1,
+          "ayah": 6,
+          "arabic": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "Bizi doğru yola ilet;"
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "Guide us to the straight path -"
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Bizi doğru yola eriştir."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "Direct us on to the Straight Way,"
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "6-7 ayetler olacak. arapça metin de 6-7. ayetler alınacak.",
+        "updated_at": "2026-06-02T10:43:22+00:00"
+      },
+      "text_tr": "Bizi doğru yola ilet;",
+      "text_ar": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
+      "text_en": "Guide us to the straight path -"
+    },
+    {
+      "ref": "001/007",
+      "id": "001/007",
+      "surah": 1,
+      "ayahStart": 7,
+      "ayahEnd": 7,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": 3,
+        "ref": "001/007",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 110,
+        "input_status": "kaynak_birlesik:001/006-007",
+        "input_source_ref_groups": "001/006-007"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "001/006-007"
+      ],
+      "ayahs": [
+        {
+          "ref": "001/007",
+          "surah": 1,
+          "ayah": 7,
+          "arabic": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "Kendilerine nimet verdiklerinin yoluna gazaba uğrayanların ve sapmışlarınkine değil."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Nimete erdirdiğin kimselerin yoluna; gazaba uğrayanların, ya da sapıtanların yoluna değil."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "The way of those whom You have favoured, who did not incur Your wrath, who are not astray."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "",
+        "updated_at": "2026-06-02T09:29:52+00:00"
+      }
+    },
+    {
+      "ref": "002/002",
+      "id": "002/002",
+      "surah": 2,
+      "ayahStart": 2,
+      "ayahEnd": 2,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": 4,
+        "ref": "002/002",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 96,
+        "input_status": "ok",
+        "input_source_ref_groups": "002/002"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/002"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/002",
+          "surah": 2,
+          "ayah": 2,
+          "arabic": "ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "Bu, kendisinde şüphe olmayan, muttakiler için yol gösterici olan bir Kitap'tır."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "This is the Book about which there is no doubt, a guidance for those conscious of Allah -"
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Bu, doğruluğu şüphe götürmeyen ve Allah'a karşı gelmekten sakınanlara yol gösteren Kitap'dır."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "This is the Book of Allah: there is no doubt about it. It is guidance to Godfearing people,"
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "",
+        "updated_at": "2026-06-02T09:29:52+00:00"
+      }
+    },
+    {
+      "ref": "002/003",
+      "id": "002/003",
+      "surah": 2,
+      "ayahStart": 3,
+      "ayahEnd": 3,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": 5,
+        "ref": "002/003",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 115,
+        "input_status": "ok",
+        "input_source_ref_groups": "002/003"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/003"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/003",
+          "surah": 2,
+          "ayah": 3,
+          "arabic": "ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "Onlar, gaybe inanırlar, namazı dosdoğru kılarlar ve kendilerine rızık olarak verdiklerimizden infak ederler."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "Who believe in the unseen, establish prayer, and spend out of what We have provided for them,"
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Onlar, gaybe inanırlar, namazı kılarlar, kendilerine verdiğimiz rızıktan yerli yerince sarfederler."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "who believe in the unseen, establish the Salats and expend (in Our way) out of what We have bestowed on them;"
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "",
+        "updated_at": "2026-06-02T09:39:49+00:00"
+      }
+    },
+    {
+      "ref": "002/006",
+      "id": "002/006",
+      "surah": 2,
+      "ayahStart": 6,
+      "ayahEnd": 6,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": 6,
+        "ref": "002/006",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 91,
+        "input_status": "ok",
+        "input_source_ref_groups": "002/006"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/006"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/006",
+          "surah": 2,
+          "ayah": 6,
+          "arabic": "إِنَّ ٱلَّذِينَ كَفَرُوا۟ سَوَآءٌ عَلَيْهِمْ ءَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "Şüphesiz, inkar edenleri uyarsan da, uyarmasan da, onlar için fark etmez; inanmazlar."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "Indeed, those who disbelieve - it is all the same for them whether you warn them or do not warn them - they will not believe."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Şüphe yok ki, inkar edenleri, başlarına gelecekle uyarsan da uyarmasan da birdir, inanmazlar."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "As for those who have rejected (these things), it is all the same to them whether you warn them or do not warn them: they are not going to believe."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "",
+        "updated_at": "2026-06-02T10:43:35+00:00"
+      },
+      "text_tr": "Şüphesiz, inkar edenleri uyarsan da, uyarmasan da, onlar için fark etmez; inanmazlar.",
+      "text_ar": "إِنَّ ٱلَّذِينَ كَفَرُوا۟ سَوَآءٌ عَلَيْهِمْ ءَأَنذَرْتَهُمْ أَمْ لَمْ تُنذِرْهُمْ لَا يُؤْمِنُونَ",
+      "text_en": "Indeed, those who disbelieve - it is all the same for them whether you warn them or do not warn them - they will not believe."
+    },
+    {
+      "ref": "002/002-003",
+      "id": "002/002-003",
+      "surah": 2,
+      "ayahStart": 2,
+      "ayahEnd": 3,
+      "type": "range",
+      "ayahCount": 2,
+      "input": {
+        "sira": 7,
+        "ref": "002/002-003",
+        "input_type": "aralık",
+        "input_ayah_count": 2,
+        "input_char_count": 212,
+        "input_status": "ok",
+        "input_source_ref_groups": "002/002, 002/003"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/002",
+        "002/003"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/002",
+          "surah": 2,
+          "ayah": 2,
+          "arabic": "ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "Bu, kendisinde şüphe olmayan, muttakiler için yol gösterici olan bir Kitap'tır."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "This is the Book about which there is no doubt, a guidance for those conscious of Allah -"
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Bu, doğruluğu şüphe götürmeyen ve Allah'a karşı gelmekten sakınanlara yol gösteren Kitap'dır."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "This is the Book of Allah: there is no doubt about it. It is guidance to Godfearing people,"
+            }
+          }
+        },
+        {
+          "ref": "002/003",
+          "surah": 2,
+          "ayah": 3,
+          "arabic": "ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "Onlar, gaybe inanırlar, namazı dosdoğru kılarlar ve kendilerine rızık olarak verdiklerimizden infak ederler."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "Who believe in the unseen, establish prayer, and spend out of what We have provided for them,"
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Onlar, gaybe inanırlar, namazı kılarlar, kendilerine verdiğimiz rızıktan yerli yerince sarfederler."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "who believe in the unseen, establish the Salats and expend (in Our way) out of what We have bestowed on them;"
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "",
+        "updated_at": "2026-06-02T10:43:57+00:00"
+      },
+      "text_tr": "Bu, kendisinde şüphe olmayan, muttakiler için yol gösterici olan bir Kitap'tır.\nOnlar, gaybe inanırlar, namazı dosdoğru kılarlar ve kendilerine rızık olarak verdiklerimizden infak ederler.",
+      "text_ar": "ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ\n\nٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
+      "text_en": "This is the Book about which there is no doubt, a guidance for those conscious of Allah -\nWho believe in the unseen, establish prayer, and spend out of what We have provided for them,"
+    },
+    {
+      "ref": "002/007",
+      "id": "002/007",
+      "surah": 2,
+      "ayahStart": 7,
+      "ayahEnd": 7,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": 8,
+        "ref": "002/007",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 127,
+        "input_status": "ok",
+        "input_source_ref_groups": "002/007"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/007"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/007",
+          "surah": 2,
+          "ayah": 7,
+          "arabic": "خَتَمَ ٱللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰٓ أَبْصَـٰرِهِمْ غِشَـٰوَةٌ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "Allah, onların kalplerini ve kulaklarını mühürlemiştir; gözlerinin üzerinde perdeler vardır. Ve büyük azap onlaradır."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "Allah has set a seal upon their hearts and upon their hearing, and over their vision is a veil. And for them is a great punishment."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Allah onların kalblerini ve kulaklarını mühürlemiştir, gözlerinde de perde vardır ve büyük azab onlar içindir."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "Allah has sealed up their hearts and ears and a covering has fallen over their eyes, and they have incurred the severest punishment."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "",
+        "updated_at": "2026-06-02T10:44:11+00:00"
+      },
+      "text_tr": "Allah, onların kalplerini ve kulaklarını mühürlemiştir; gözlerinin üzerinde perdeler vardır. Ve büyük azap onlaradır.",
+      "text_ar": "خَتَمَ ٱللَّهُ عَلَىٰ قُلُوبِهِمْ وَعَلَىٰ سَمْعِهِمْ ۖ وَعَلَىٰٓ أَبْصَـٰرِهِمْ غِشَـٰوَةٌ ۖ وَلَهُمْ عَذَابٌ عَظِيمٌ",
+      "text_en": "Allah has set a seal upon their hearts and upon their hearing, and over their vision is a veil. And for them is a great punishment."
+    },
+    {
+      "ref": "002/008",
+      "id": "002/008",
+      "surah": 2,
+      "ayahStart": 8,
+      "ayahEnd": 8,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": 9,
+        "ref": "002/008",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 88,
+        "input_status": "ok",
+        "input_source_ref_groups": "002/008"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/008"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/008",
+          "surah": 2,
+          "ayah": 8,
+          "arabic": "وَمِنَ ٱلنَّاسِ مَن يَقُولُ ءَامَنَّا بِٱللَّهِ وَبِٱلْيَوْمِ ٱلْءَاخِرِ وَمَا هُم بِمُؤْمِنِينَ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "İnsanlardan öyleleri vardır ki: \"Biz Allah'a ve ahiret gününe iman ettik\" derler; oysa inanmış değillerdir."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "And of the people are some who say, \"We believe in Allah and the Last Day,\" but they are not believers."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "İnsanlardan, inanmadıkları halde, \"Allah'a ve ahiret gününe inandık\" diyenler vardır."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "Then there are some who say, \"We believe in Allah and the Last Day\", whereas they do not believe at all."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "",
+        "updated_at": "2026-06-02T10:44:24+00:00"
+      },
+      "text_tr": "İnsanlardan öyleleri vardır ki: \"Biz Allah'a ve ahiret gününe iman ettik\" derler; oysa inanmış değillerdir.",
+      "text_ar": "وَمِنَ ٱلنَّاسِ مَن يَقُولُ ءَامَنَّا بِٱللَّهِ وَبِٱلْيَوْمِ ٱلْءَاخِرِ وَمَا هُم بِمُؤْمِنِينَ",
+      "text_en": "And of the people are some who say, \"We believe in Allah and the Last Day,\" but they are not believers."
+    },
+    {
+      "ref": "002/009",
+      "id": "002/009",
+      "surah": 2,
+      "ayahStart": 9,
+      "ayahEnd": 9,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": 10,
+        "ref": "002/009",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 110,
+        "input_status": "ok",
+        "input_source_ref_groups": "002/009"
+      },
+      "source": {
+        "arabic": "Existing clean UTF-8 Uthmani Arabic text from prior working dataset; Tanzil Uthmani Arabic verification/fetch script available",
+        "tr": "Tanzil tr.bulac - Ali Bulaç",
+        "en": "Tanzil en.sahih - Saheeh International",
+        "tr_alternative": "Tanzil tr.diyanet - Diyanet İşleri",
+        "en_alternative": "Tanzil en.maududi - Abul A’la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/009"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/009",
+          "surah": 2,
+          "ayah": 9,
+          "arabic": "يُخَـٰدِعُونَ ٱللَّهَ وَٱلَّذِينَ ءَامَنُوا۟ وَمَا يَخْدَعُونَ إِلَّآ أَنفُسَهُمْ وَمَا يَشْعُرُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac - Ali Bulaç",
+            "text": "(Sözde) Allah'ı ve iman edenleri aldatırlar. Oysa onlar, yalnızca kendilerini aldatıyorlar ve şuurunda değiller."
+          },
+          "en": {
+            "source": "Tanzil en.sahih - Saheeh International",
+            "text": "They [think to] deceive Allah and those who believe, but they deceive not except themselves and perceive [it] not."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet - Diyanet İşleri",
+              "text": "Bunlar Allah'ı ve inananları aldatmaya çalışırlar, oysa sadece kendilerini aldatırlar da farkında değildirler."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi - Abul A’la Maududi",
+              "text": "They thus try to deceive Allah and the Believers, but they succeed in deceiving none except themselves and they realize it not."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "",
+        "updated_at": "2026-06-02T10:44:36+00:00"
+      },
+      "text_tr": "(Sözde) Allah'ı ve iman edenleri aldatırlar. Oysa onlar, yalnızca kendilerini aldatıyorlar ve şuurunda değiller.",
+      "text_ar": "يُخَـٰدِعُونَ ٱللَّهَ وَٱلَّذِينَ ءَامَنُوا۟ وَمَا يَخْدَعُونَ إِلَّآ أَنفُسَهُمْ وَمَا يَشْعُرُونَ",
+      "text_en": "They [think to] deceive Allah and those who believe, but they deceive not except themselves and perceive [it] not."
+    }
+  ]
+}

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import os
 import re
@@ -16,7 +17,7 @@ from typing import Any, Optional
 
 try:
     from PySide6.QtCore import QTimer, Qt
-    from PySide6.QtGui import QFont, QFontDatabase, QTextOption
+    from PySide6.QtGui import QFont, QTextOption
     from PySide6.QtWidgets import (
         QApplication,
         QCheckBox,
@@ -30,6 +31,7 @@ try:
         QMainWindow,
         QMessageBox,
         QPushButton,
+        QSpinBox,
         QSplitter,
         QTextEdit,
         QVBoxLayout,
@@ -57,6 +59,8 @@ PRIORITY_EXPORT_MAP = {
     "seasonal": {"priority": 2, "boost_enabled": True, "boost_weight": 2},
     "hidden": {"priority": 0, "boost_enabled": False, "boost_weight": 1},
 }
+
+ARABIC_REVIEW_FONT_FAMILY = "ZWAdobeF"
 
 
 def _normalize_priority(value: Any) -> str:
@@ -96,6 +100,7 @@ class ReviewStore:
         self._raw_records_by_dataset: dict[str, list[dict[str, Any]]] = {}
         self._view_records_by_dataset: dict[str, list[dict[str, Any]]] = {}
         self._root_is_list: dict[str, bool] = {}
+        self._root_records_key: dict[str, str] = {}
         self._backups_done: set[Path] = set()
 
         self._loaded_datasets: set[str] = set()
@@ -126,9 +131,10 @@ class ReviewStore:
 
     def _apply_dataset_filter(self, dataset_filter: str, save_state: bool) -> None:
         self._load_dataset_if_needed(dataset_filter)
-        self.records = list(self._view_records_by_dataset.get(dataset_filter, []))
+        all_records = list(self._view_records_by_dataset.get(dataset_filter, []))
+        self.records = self._visible_records_for_review(dataset_filter)
 
-        if not self.records:
+        if not all_records:
             raise RuntimeError(f"No records found for dataset={dataset_filter} in input files.")
 
         self.state.setdefault("cursors", {"ayah": 0, "hadith": 0})
@@ -146,14 +152,36 @@ class ReviewStore:
         if save_state:
             self._save_state()
 
+    def _effective_status(self, rec: dict[str, Any]) -> str:
+        key = str(rec.get("_record_key", "")).strip()
+        decisions = self.state.get("decisions", {})
+        status = ""
+        if isinstance(decisions, dict) and key:
+            status = str(decisions.get(key, {}).get("status", "") or "").strip().lower()
+        if not status:
+            status = str(rec.get("status", "pending") or "pending").strip().lower()
+        if status == "rejected":
+            status = "backlog"
+        if status not in VALID_STATUSES:
+            status = "pending"
+        return status
+
+    def _visible_records_for_review(self, dataset: str) -> list[dict[str, Any]]:
+        return [
+            rec
+            for rec in self._view_records_by_dataset.get(dataset, [])
+            if self._effective_status(rec) != "approved"
+        ]
+
     def _load_dataset_if_needed(self, dataset: str) -> None:
         dataset_key = self._normalize_dataset_filter(dataset)
         if dataset_key in self._loaded_datasets:
             return
         path = self._dataset_paths[dataset_key]
-        root_obj, raw_records, is_list = self._read_json_payload(path)
+        root_obj, raw_records, is_list, records_key = self._read_json_payload(path)
         self._roots[dataset_key] = root_obj
         self._root_is_list[dataset_key] = is_list
+        self._root_records_key[dataset_key] = records_key
         self._raw_records_by_dataset[dataset_key] = raw_records
         self._view_records_by_dataset[dataset_key] = [
             self._normalize_record(rec, dataset_key, idx) for idx, rec in enumerate(raw_records)
@@ -161,25 +189,67 @@ class ReviewStore:
         self._loaded_datasets.add(dataset_key)
 
     @staticmethod
-    def _read_json_payload(path: Path) -> tuple[Any, list[dict[str, Any]], bool]:
+    def _read_json_payload(path: Path) -> tuple[Any, list[dict[str, Any]], bool, str]:
         # utf-8-sig handles both BOM and non-BOM UTF-8 safely.
         with path.open("r", encoding="utf-8-sig") as f:
             data = json.load(f)
         if isinstance(data, list):
-            return data, data, True
+            return data, data, True, "list"
         if isinstance(data, dict) and isinstance(data.get("records"), list):
-            return data, data["records"], False
-        raise ValueError(f"Expected JSON array or object with records[] in {path}")
+            return data, data["records"], False, "records"
+        if isinstance(data, dict) and isinstance(data.get("items"), list):
+            return data, data["items"], False, "items"
+        raise ValueError(f"Expected JSON array or object with records[] or items[] in {path}")
 
     @staticmethod
     def _normalize_record(record: dict[str, Any], dataset: str, record_index: int) -> dict[str, Any]:
-        if "id" not in record:
-            raise ValueError(f"Record missing id in dataset={dataset}")
         out = dict(record)
+        if "id" not in out:
+            if dataset == "ayah" and str(out.get("ref", "")).strip():
+                out["id"] = str(out.get("ref", "")).strip()
+            else:
+                raise ValueError(f"Record missing id in dataset={dataset}")
+        if dataset == "ayah" and isinstance(out.get("ayahs"), list):
+            out.setdefault("surah_number", out.get("surah"))
+            out.setdefault("ayah_number", out.get("ref", ""))
+            out.setdefault("surah_name", out.get("surah_name", "-"))
+            out.setdefault("text_tr", ReviewStore._join_structured_ayah_text(out, "tr"))
+            out.setdefault("text_ar", ReviewStore._join_structured_ayah_text(out, "ar"))
+            out.setdefault("text_en", ReviewStore._join_structured_ayah_text(out, "en"))
+            out["_structured_ayah"] = True
         out["_dataset"] = dataset
         out["_record_index"] = record_index
-        out["_record_key"] = f"{dataset}:{record['id']}"
+        out["_record_key"] = f"{dataset}:{out['id']}"
         return out
+
+    @staticmethod
+    def _join_structured_ayah_text(record: dict[str, Any], language: str) -> str:
+        ayahs = record.get("ayahs")
+        if not isinstance(ayahs, list):
+            return ""
+        parts: list[str] = []
+        for ayah in ayahs:
+            if not isinstance(ayah, dict):
+                continue
+            text = ""
+            if language == "ar":
+                text = str(ayah.get("arabic", "") or "")
+            elif language == "tr":
+                tr_obj = ayah.get("tr")
+                if isinstance(tr_obj, dict):
+                    text = str(tr_obj.get("text", "") or "")
+                else:
+                    text = str(ayah.get("text_tr", "") or "")
+            elif language == "en":
+                en_obj = ayah.get("en")
+                if isinstance(en_obj, dict):
+                    text = str(en_obj.get("text", "") or "")
+                else:
+                    text = str(ayah.get("text_en", "") or "")
+            text = text.strip()
+            if text:
+                parts.append(text)
+        return "\n\n".join(parts)
 
     def _persist_dataset(self, dataset: str) -> None:
         path = self._dataset_paths[dataset]
@@ -188,7 +258,8 @@ class ReviewStore:
             payload = self._raw_records_by_dataset[dataset]
         else:
             root_obj = self._roots[dataset]
-            root_obj["records"] = self._raw_records_by_dataset[dataset]
+            records_key = self._root_records_key.get(dataset, "records")
+            root_obj[records_key] = self._raw_records_by_dataset[dataset]
             payload = root_obj
         self._atomic_json_write(path, payload)
 
@@ -327,27 +398,34 @@ class ReviewStore:
 
     def summary(self) -> dict[str, int]:
         totals = {"approved": 0, "backlog": 0, "pending": 0}
-        for rec in self.records:
-            status = str(rec.get("status", "pending") or "pending").strip().lower()
-            if status == "rejected":
-                status = "backlog"
-            if status not in VALID_STATUSES:
-                status = "pending"
-            totals[status] += 1
+        for rec in self._view_records_by_dataset.get(self._dataset_filter, []):
+            totals[self._effective_status(rec)] += 1
         return totals
 
     def current_payload(self) -> dict[str, Any]:
+        if not self.records:
+            return {
+                "cursor": 0,
+                "total": 0,
+                "record": {},
+                "decision": {
+                    "status": "-",
+                    "note": "",
+                    "priority": "normal",
+                    "boost_start_date": "",
+                    "boost_end_date": "",
+                    "updated_at": "-",
+                },
+                "summary": self.summary(),
+                "dataset_filter": self._dataset_filter,
+            }
         cursors = self.state.get("cursors", {})
         cursor = int((cursors.get(self._dataset_filter, 0) if isinstance(cursors, dict) else 0) or 0)
         cursor = max(0, min(cursor, len(self.records) - 1))
         rec = self.records[cursor]
         decisions = self.state.get("decisions", {})
         raw_decision = decisions.get(rec["_record_key"], {})
-        status = str(rec.get("status", "pending") or "pending").strip().lower()
-        if status == "rejected":
-            status = "backlog"
-        if status not in VALID_STATUSES:
-            status = "pending"
+        status = self._effective_status(rec)
         current_decision = {
             "status": status,
             "note": raw_decision.get("note", ""),
@@ -366,6 +444,8 @@ class ReviewStore:
         }
 
     def move_cursor(self, direction: str) -> dict[str, Any]:
+        if not self.records:
+            return self.current_payload()
         cursors = self.state.get("cursors", {})
         cursor = int((cursors.get(self._dataset_filter, 0) if isinstance(cursors, dict) else 0) or 0)
         if direction == "next":
@@ -399,6 +479,8 @@ class ReviewStore:
             raise ValueError("Invalid status.")
         if priority not in VALID_PRIORITIES:
             raise ValueError("Invalid priority.")
+        if not self.records:
+            return self.current_payload()
         cursors = self.state.get("cursors", {})
         cursor = int((cursors.get(self._dataset_filter, 0) if isinstance(cursors, dict) else 0) or 0)
         cursor = max(0, min(cursor, len(self.records) - 1))
@@ -431,15 +513,24 @@ class ReviewStore:
             "boost_end_date": str(previous.get("boost_end_date", "") or ""),
             "updated_at": self._utc_now(),
         }
-        if move_next:
-            next_cursor = min(cursor + 1, len(self.records) - 1)
-            self.state["cursor"] = next_cursor
-            if isinstance(cursors, dict):
-                cursors[self._dataset_filter] = next_cursor
+        if dataset == "ayah" and self._root_records_key.get("ayah") == "items":
+            self._write_approved_ayah_review_file()
+        self.records = self._visible_records_for_review(self._dataset_filter)
+        if status == "approved":
+            next_cursor = min(cursor, max(0, len(self.records) - 1))
+        elif move_next:
+            next_cursor = min(cursor + 1, max(0, len(self.records) - 1))
+        else:
+            next_cursor = min(cursor, max(0, len(self.records) - 1))
+        self.state["cursor"] = next_cursor
+        if isinstance(cursors, dict):
+            cursors[self._dataset_filter] = next_cursor
         self._save_state()
         return self.current_payload()
 
     def delete_current(self) -> dict[str, Any]:
+        if not self.records:
+            return self.current_payload()
         cursors = self.state.get("cursors", {})
         cursor = int((cursors.get(self._dataset_filter, 0) if isinstance(cursors, dict) else 0) or 0)
         cursor = max(0, min(cursor, len(self.records) - 1))
@@ -464,11 +555,11 @@ class ReviewStore:
         if isinstance(decisions, dict) and record_key:
             decisions.pop(record_key, None)
 
-        self.records = list(self._view_records_by_dataset.get(dataset, []))
-        if not self.records:
-            raise RuntimeError(f"No records left after delete for dataset={dataset}.")
+        self.records = self._visible_records_for_review(dataset)
 
-        new_cursor = min(cursor, len(self.records) - 1)
+        new_cursor = min(cursor, max(0, len(self.records) - 1))
+        if dataset == "ayah" and self._root_records_key.get("ayah") == "items":
+            self._write_approved_ayah_review_file()
         self.state["cursor"] = new_cursor
         if isinstance(cursors, dict):
             cursors[self._dataset_filter] = new_cursor
@@ -497,6 +588,8 @@ class ReviewStore:
     def move_to_next_status(self, status: str) -> Optional[dict[str, Any]]:
         if status not in VALID_STATUSES:
             raise ValueError("Invalid status.")
+        if not self.records:
+            return None
         cursors = self.state.get("cursors", {})
         current = int((cursors.get(self._dataset_filter, 0) if isinstance(cursors, dict) else 0) or 0)
         decisions = self.state.get("decisions", {})
@@ -579,13 +672,101 @@ class ReviewStore:
             },
         )
 
+        approved_review_path = ""
+        if self._dataset_filter == "ayah" and self._root_records_key.get("ayah") == "items":
+            approved_review_path = str(self._write_approved_ayah_review_file())
+
         return {
             "directory": str(target),
             "approved": str(approved_path),
             "rejected": str(rejected_path),
             "pending": str(pending_path),
             "decisions": str(decisions_path),
+            "approved_review": approved_review_path,
         }
+
+    def _write_approved_ayah_review_file(self) -> Path:
+        source_path = self._dataset_paths["ayah"]
+        items = self._raw_records_by_dataset.get("ayah", [])
+        decisions = self.state.get("decisions", {})
+        approved_items: list[dict[str, Any]] = []
+
+        for idx, item in enumerate(items):
+            if not isinstance(item, dict):
+                continue
+            ref = str(item.get("ref", "")).strip()
+            record_id = str(item.get("id", ref)).strip()
+            key = f"ayah:{record_id}"
+            decision = decisions.get(key, {})
+            status = str(decision.get("status", item.get("status", "pending")) or "pending").strip().lower()
+            if status != "approved":
+                continue
+
+            priority_key = _normalize_priority(decision.get("priority", "normal"))
+            mapped = PRIORITY_EXPORT_MAP[priority_key]
+            approved_item = copy.deepcopy(item)
+            approved_item["status"] = "approved"
+            approved_item["review"] = {
+                "status": "approved",
+                "priority_key": priority_key,
+                "priority": mapped["priority"],
+                "boost": {
+                    "enabled": mapped["boost_enabled"],
+                    "weight": mapped["boost_weight"],
+                },
+                "note": str(decision.get("note", "") or ""),
+                "updated_at": str(decision.get("updated_at", "") or ""),
+            }
+            if priority_key == "seasonal":
+                approved_item["review"]["boost_start_date"] = str(
+                    decision.get("boost_start_date", "") or ""
+                )
+                approved_item["review"]["boost_end_date"] = str(
+                    decision.get("boost_end_date", "") or ""
+                )
+
+            ayahs = approved_item.get("ayahs")
+            if isinstance(ayahs, list):
+                for ayah in ayahs:
+                    if not isinstance(ayah, dict):
+                        continue
+                    en_obj = ayah.get("en")
+                    if not isinstance(en_obj, dict):
+                        ayah["en"] = {"source": "", "text": ""}
+                    else:
+                        ayah["en"] = {
+                            "source": str(en_obj.get("source", "") or ""),
+                            "text": str(en_obj.get("text", "") or ""),
+                        }
+
+            approved_items.append(approved_item)
+
+        total_ayah_objects = 0
+        for item in approved_items:
+            ayahs = item.get("ayahs")
+            if isinstance(ayahs, list):
+                total_ayah_objects += len(ayahs)
+
+        payload = {
+            "metadata": {
+                "project": "M_HaydiNamaza",
+                "sourceFile": str(source_path),
+                "exportedAt": self._utc_now(),
+                "status": "approved_review",
+                "totalItems": len(approved_items),
+                "totalAyahObjects": total_ayah_objects,
+                "notes": [
+                    "Bu dosya pending_review ayet havuzundan yalniz approved kayitlari icerir.",
+                    "Ingilizce alanlari approved sonrasinda bu dosyada doldurulabilir.",
+                ],
+            },
+            "items": approved_items,
+        }
+
+        target_path = self.root.parent.parent / "Besmele" / "data" / "content_seed" / "ayahs.approved_review.v1.json"
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        self._atomic_json_write(target_path, payload)
+        return target_path
 
 
 def _extract_record_view(rec: dict[str, Any]) -> dict[str, str]:
@@ -643,6 +824,10 @@ class ReviewWindow(QMainWindow):
         self.store = store
         self._selected_status = "pending"
         self._suspend_autosave = False
+        self._selected_arabic_font_family = ARABIC_REVIEW_FONT_FAMILY
+        self._tr_font_size = 14
+        self._ar_font_size = 18
+        self._en_font_size = 12
         self._autosave_timer = QTimer(self)
         self._autosave_timer.setSingleShot(True)
         self._autosave_timer.setInterval(700)
@@ -718,14 +903,29 @@ class ReviewWindow(QMainWindow):
         title_font.setBold(True)
         self.record_title.setFont(title_font)
         self.record_meta = QLabel("-")
+        self.record_decision_badge = QLabel("-")
+        self.record_decision_badge.setWordWrap(True)
+        self.record_decision_badge.setStyleSheet(
+            "background:#f4f1d0;border:1px solid #c8b35a;border-radius:6px;padding:6px 8px;font-weight:bold;color:#5f4b00;"
+        )
         left_layout.addWidget(self.record_title)
         left_layout.addWidget(self.record_meta)
+        left_layout.addWidget(self.record_decision_badge)
 
         lang_splitter = QSplitter(Qt.Orientation.Vertical)
         tr_box = QGroupBox("Turkce Metin")
         tr_layout = QVBoxLayout(tr_box)
+        tr_font_line = QHBoxLayout()
+        tr_font_line.addStretch(1)
+        tr_font_line.addWidget(QLabel("Boyut:"))
+        self.tr_font_size_spin = QSpinBox()
+        self.tr_font_size_spin.setRange(10, 48)
+        self.tr_font_size_spin.setValue(self._tr_font_size)
+        self.tr_font_size_spin.valueChanged.connect(self._on_tr_font_size_changed)
+        tr_font_line.addWidget(self.tr_font_size_spin)
+        tr_layout.addLayout(tr_font_line)
         self.tr_text = QTextEdit()
-        self._configure_flow_text(self.tr_text, extra_pt=2)
+        self._configure_flow_text(self.tr_text, font_size=self._tr_font_size)
         self.tr_text.textChanged.connect(self._on_tr_text_changed)
         tr_layout.addWidget(self.tr_text)
         self.tr_ref_preview = QLabel("")
@@ -735,16 +935,38 @@ class ReviewWindow(QMainWindow):
 
         ar_box = QGroupBox("Arapca Metin")
         ar_layout = QVBoxLayout(ar_box)
+        ar_font_line = QHBoxLayout()
+        ar_font_line.addStretch(1)
+        ar_font_line.addWidget(QLabel("Boyut:"))
+        self.ar_font_size_spin = QSpinBox()
+        self.ar_font_size_spin.setRange(10, 64)
+        self.ar_font_size_spin.setValue(self._ar_font_size)
+        self.ar_font_size_spin.valueChanged.connect(self._on_arabic_font_size_changed)
+        ar_font_line.addWidget(self.ar_font_size_spin)
+        ar_layout.addLayout(ar_font_line)
         self.ar_text = QTextEdit()
-        self._configure_flow_text(self.ar_text, extra_pt=2)
-        self._configure_arabic_flow_text(self.ar_text)
+        self._configure_flow_text(self.ar_text, font_size=self._ar_font_size)
+        self._configure_arabic_flow_text(
+            self.ar_text,
+            self._selected_arabic_font_family,
+            font_size=self._ar_font_size,
+        )
         self.ar_text.textChanged.connect(self._schedule_autosave)
         ar_layout.addWidget(self.ar_text)
 
         en_box = QGroupBox("Ingilizce Metin")
         en_layout = QVBoxLayout(en_box)
+        en_font_line = QHBoxLayout()
+        en_font_line.addStretch(1)
+        en_font_line.addWidget(QLabel("Boyut:"))
+        self.en_font_size_spin = QSpinBox()
+        self.en_font_size_spin.setRange(10, 48)
+        self.en_font_size_spin.setValue(self._en_font_size)
+        self.en_font_size_spin.valueChanged.connect(self._on_en_font_size_changed)
+        en_font_line.addWidget(self.en_font_size_spin)
+        en_layout.addLayout(en_font_line)
         self.en_text = QTextEdit()
-        self._configure_flow_text(self.en_text)
+        self._configure_flow_text(self.en_text, font_size=self._en_font_size)
         self.en_text.textChanged.connect(self._schedule_autosave)
         self.en_warning = QLabel("")
         self.en_warning.setStyleSheet("color:#b23b3b;")
@@ -863,9 +1085,14 @@ class ReviewWindow(QMainWindow):
         root_layout.addWidget(splitter, 1)
 
     @staticmethod
-    def _configure_flow_text(widget: QTextEdit, extra_pt: int = 0) -> None:
+    def _configure_flow_text(
+        widget: QTextEdit, extra_pt: int = 0, font_size: Optional[int] = None
+    ) -> None:
         font = widget.font()
-        if font.pointSize() > 0:
+        if font_size is not None:
+            font.setPointSize(max(10, int(font_size)))
+            widget.setFont(font)
+        elif font.pointSize() > 0:
             base = max(font.pointSize(), 12)
             font.setPointSize(base + max(0, int(extra_pt)))
             widget.setFont(font)
@@ -873,40 +1100,41 @@ class ReviewWindow(QMainWindow):
         widget.setWordWrapMode(QTextOption.WrapMode.WrapAtWordBoundaryOrAnywhere)
         widget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
-    @staticmethod
-    def _configure_arabic_flow_text(widget: QTextEdit) -> None:
+    def _configure_arabic_flow_text(
+        self,
+        widget: QTextEdit,
+        selected_family: str = "",
+        font_size: Optional[int] = None,
+    ) -> None:
         # Make Arabic with harakat easier to read: RTL direction, right alignment,
-        # and prefer fonts that render diacritics cleanly on Windows.
+        # and prefer system Arabic/Qur'an fonts.
         widget.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         widget.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
-        preferred_families = [
-            "Traditional Arabic",
-            "Simplified Arabic",
-            "Amiri",
-            "Scheherazade New",
-            "Noto Naskh Arabic",
-            "Noto Sans Arabic",
-            "Segoe UI Historic",
-            "Tahoma",
-            "Arial",
-        ]
-        available = set(QFontDatabase.families())
         font = widget.font()
-        for family in preferred_families:
-            if family in available:
-                font.setFamily(family)
-                break
+        chosen = ARABIC_REVIEW_FONT_FAMILY
+        font.setFamily(chosen)
+        self._selected_arabic_font_family = chosen
 
-        # Slight extra size helps harakat readability.
-        if font.pointSize() > 0:
-            font.setPointSize(font.pointSize() + 1)
+        try:
+            font.setStyleHint(QFont.StyleHint.Serif, QFont.StyleStrategy.PreferQuality)
+            font.setHintingPreference(QFont.HintingPreference.PreferFullHinting)
+        except Exception:
+            pass
+
+        if font_size is not None:
+            self._ar_font_size = max(10, int(font_size))
+            font.setPointSize(self._ar_font_size)
+        elif font.pointSize() > 0:
+            # Keep Arabic area visibly larger than TR/EN for easier mushaf-like reading.
+            font.setPointSize(max(font.pointSize() + 2, 18))
 
         widget.setFont(font)
         widget.document().setDefaultFont(font)
+        widget.document().setDocumentMargin(12.0)
 
         # Add breathing room similar to mushaf layout.
-        widget.setStyleSheet("QTextEdit { padding: 10px; }")
+        widget.setStyleSheet("QTextEdit { padding: 12px; }")
 
     def refresh(self) -> None:
         self._suspend_autosave = True
@@ -918,14 +1146,48 @@ class ReviewWindow(QMainWindow):
         decision = payload["decision"]
 
         self.summary_label.setText(
-            f"Kayit {cursor + 1}/{total} | approved: {summary['approved']} | backlog: {summary['backlog']} | pending: {summary['pending']}"
+            f"Kayit {0 if total == 0 else cursor + 1}/{total} | approved: {summary['approved']} | backlog: {summary['backlog']} | pending: {summary['pending']}"
         )
         index = self.dataset_filter_combo.findData(payload.get("dataset_filter", "ayah"))
         if index >= 0:
             self.dataset_filter_combo.setCurrentIndex(index)
+        if total == 0:
+            self.record_title.setText("Incelenecek gorunur kayit kalmadi")
+            self.record_meta.setText("Approved kayitlar listeden gizlenir. Pending veya backlog kayit gelince burada gorunur.")
+            self.record_decision_badge.setText("Tum gorunur kayitlar tamamlandi")
+            self.record_decision_badge.setStyleSheet(
+                "background:#eaf8ef;border:1px solid #6dbd7f;border-radius:6px;padding:6px 8px;font-weight:bold;color:#1f6b35;"
+            )
+            self.info_type.setText("-")
+            self.info_id.setText("-")
+            self.info_technical.setText("-")
+            self.info_source.setText("-")
+            self.tr_text.setPlainText("")
+            self.ar_text.setPlainText("")
+            self.en_text.setPlainText("")
+            self.book_ref_edit.setPlainText("")
+            self.book_ref_label.setVisible(False)
+            self.book_ref_edit.setVisible(False)
+            self.tr_ref_preview.setVisible(False)
+            self.note_edit.setPlainText("")
+            self.current_decision_label.setText("Mevcut durum: -")
+            self.en_warning.setText("")
+            self._set_record_action_enabled(False)
+            self._suspend_autosave = False
+            return
         view = _extract_record_view(rec)
         self.record_title.setText(view["id"])
         self.record_meta.setText(f"Dataset: {rec.get('_dataset', '-')}")
+        status = decision.get("status", "pending")
+        priority_key = _normalize_priority(decision.get("priority", "normal"))
+        badge_text = f"Inceleme karari: {status.upper()} | Oncelik: {priority_key}"
+        badge_style = "background:#fff9ee;border:1px solid #d4b16a;border-radius:6px;padding:6px 8px;font-weight:bold;color:#7a5400;"
+        if status == "backlog":
+            badge_style = "background:#fff1f1;border:1px solid #e59a9a;border-radius:6px;padding:6px 8px;font-weight:bold;color:#8a2d2d;"
+        elif status == "pending":
+            badge_style = "background:#fff9ee;border:1px solid #d4b16a;border-radius:6px;padding:6px 8px;font-weight:bold;color:#7a5400;"
+        self.record_decision_badge.setText(badge_text)
+        self.record_decision_badge.setStyleSheet(badge_style)
         self.info_type.setText(view["record_type"])
         self.info_id.setText(view["id"])
         self.info_technical.setText(view["technical"])
@@ -943,16 +1205,39 @@ class ReviewWindow(QMainWindow):
         self._update_tr_ref_preview()
 
         self.note_edit.setPlainText(decision.get("note", "") or "")
-        status = decision.get("status", "pending")
         self._selected_status = status if status in VALID_STATUSES else "pending"
-        priority_key = _normalize_priority(decision.get("priority", "normal"))
         index = self.priority_combo.findData(priority_key)
         self.priority_combo.setCurrentIndex(index if index >= 0 else 0)
         updated_at = decision.get("updated_at", "-")
         self.current_decision_label.setText(
             f"Mevcut durum: {self._selected_status} | oncelik: {priority_key} | guncelleme: {updated_at}"
         )
+        self._set_record_action_enabled(True)
         self._suspend_autosave = False
+
+    def _set_record_action_enabled(self, enabled: bool) -> None:
+        for widget in (
+            self.btn_first,
+            self.btn_prev,
+            self.btn_next,
+            self.btn_last,
+            self.btn_next_pending,
+            self.btn_approved,
+            self.btn_rejected,
+            self.btn_pending,
+            self.btn_delete,
+            self.btn_save,
+            self.priority_combo,
+            self.auto_next,
+            self.note_edit,
+            self.tr_text,
+            self.ar_text,
+            self.en_text,
+            self.book_ref_edit,
+            self.jump_id,
+            self.btn_jump,
+        ):
+            widget.setEnabled(enabled)
 
     def _on_dataset_filter_changed(self) -> None:
         if self._suspend_autosave:
@@ -981,6 +1266,27 @@ class ReviewWindow(QMainWindow):
 
         self.store.set_dataset_filter(new_filter)
         self.refresh()
+
+    def _on_tr_font_size_changed(self) -> None:
+        if self._suspend_autosave:
+            return
+        self._tr_font_size = int(self.tr_font_size_spin.value())
+        self._configure_flow_text(self.tr_text, font_size=self._tr_font_size)
+
+    def _on_arabic_font_size_changed(self) -> None:
+        if self._suspend_autosave:
+            return
+        self._ar_font_size = int(self.ar_font_size_spin.value())
+        self._configure_arabic_flow_text(
+            self.ar_text,
+            font_size=self._ar_font_size,
+        )
+
+    def _on_en_font_size_changed(self) -> None:
+        if self._suspend_autosave:
+            return
+        self._en_font_size = int(self.en_font_size_spin.value())
+        self._configure_flow_text(self.en_text, font_size=self._en_font_size)
 
     def _on_tr_text_changed(self) -> None:
         self._update_tr_ref_preview()
@@ -1154,12 +1460,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--ayah",
-        default=str(repo_root / "Besmele" / "data" / "daily_panel" / "publish" / "ayetler.json"),
+        default=str(repo_root / "Besmele" / "data" / "content_seed" / "ayahs.pending_review.v1.json"),
         help="Path to ayah JSON file.",
     )
     parser.add_argument(
         "--hadith",
-        default=str(repo_root / "Besmele" / "data" / "daily_panel" / "publish" / "hadisler.json"),
+        default=str(repo_root / "assets" / "data" / "daily_content" / "approved" / "hadiths.v1.approved.json"),
         help="Path to hadith JSON file.",
     )
     parser.add_argument(

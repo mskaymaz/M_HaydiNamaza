@@ -14,10 +14,10 @@ TASK-06 is completed with location-based qibla bearing + sensor fallback + beari
 TASK-10 is completed with storage fallback/recovery hardening and log-safe non-fatal reporting.
 TASK-11 is completed and pushed in current flow.
 TASK-12 release-readiness documentation/checklist outputs are completed.
-Ayah/hadith data work is completed for current scope (approved sample set + draft pool workflow records).
+Ayah/hadith data reset was executed on 2026-06-02; old lists, publish payloads, archives, and source folders were removed, and a new clean seed structure was created.
 
 ## Next action
-Wait for explicit start instruction before TASK-09 or release-gate closure actions.
+Refill `Besmele/data/content_seed/ayetler.md` and `Besmele/data/content_seed/hadisler.md`, then rebuild runtime payloads from the new clean pool.
 
 ## Important blockers
 - Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.

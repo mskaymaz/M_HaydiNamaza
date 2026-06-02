@@ -1,0 +1,1775 @@
+{
+  "metadata": {
+    "project": "M_HaydiNamaza",
+    "dataset": "hadiths",
+    "version": "v1",
+    "work": "Riyazus Salihin",
+    "sourceFile": "Besmele/data/content_seed/hadis/RS_20_Hadis_Pilot_sunnah_ar_pending_review.xlsx",
+    "exportedAt": "2026-06-02T13:03:59Z",
+    "status": "pending_review",
+    "languages": [
+      "ar",
+      "tr",
+      "en"
+    ],
+    "totalItems": 20,
+    "notes": [
+      "Aktif hadis pending_review dosyasi xlsx kaynagindan dogrudan unicode olarak yeniden uretildi.",
+      "Ana metinler TTS icin temiz tutuldu; kaynak satiri sourceInfo.display altinda ayrildi."
+    ]
+  },
+  "items": [
+    {
+      "id": "hadith_000042",
+      "ref": "riyazussalihin/42",
+      "hadithNo": 42,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 1,
+      "input": {
+        "hadithNo_diyanet": 42,
+        "sunnahNo_candidate": 42,
+        "first_topic_tr": "Acele",
+        "topics_tr": "Acele",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن ابن مسعود رضي الله عنه قال ‏:‏ لما كان يوم حنين آثر رسول الله صلى الله عليه وسلم ناساً في القسمة، فأعطى الأقرع بن حابس مائة من الإبل، وأعطى عيينة بن حصن مثل ذلك، وأعطى ناساً من أشراف العرب وآثرهم يومئذ في القسمة‏.‏ فقال رجل‏:‏ والله إن هذه قسمة ما عدل فيها، وما أريد فيها وجه الله، فقلت ‏:‏ والله لأخبرن رسول الله صلى الله عليه وسلم ، فأتيته فأخبرته بما قال‏:‏ فتغير وجههه حتى كان كالصرف ‏.‏ ثم قال ‏ \"‏ فمن يعدل إذا لم يعدل الله ورسوله‏؟‏ ثم قال‏:‏ يرحم الله موسى قد أوذي بأكثر من هذا فصبر‏\"‏‏.‏ فقلت‏:‏ لا جرم لا أرفع إليه بعدها حديثاً‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "sourceText": "وعن ابن مسعود رضي الله عنه قال ‏:‏ لما كان يوم حنين آثر رسول الله صلى الله عليه وسلم ناساً في القسمة، فأعطى الأقرع بن حابس مائة من الإبل، وأعطى عيينة بن حصن مثل ذلك، وأعطى ناساً من أشراف العرب وآثرهم يومئذ في القسمة‏.‏ فقال رجل‏:‏ والله إن هذه قسمة ما عدل فيها، وما أريد فيها وجه الله، فقلت ‏:‏ والله لأخبرن رسول الله صلى الله عليه وسلم ، فأتيته فأخبرته بما قال‏:‏ فتغير وجههه حتى كان كالصرف ‏.‏ ثم قال ‏ \"‏ فمن يعدل إذا لم يعدل الله ورسوله‏؟‏ ثم قال‏:‏ يرحم الله موسى قد أوذي بأكثر من هذا فصبر‏\"‏‏.‏ فقلت‏:‏ لا جرم لا أرفع إليه بعدها حديثاً‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "ttsText": "وعن ابن مسعود رضي الله عنه قال ‏:‏ لما كان يوم حنين آثر رسول الله صلى الله عليه وسلم ناساً في القسمة، فأعطى الأقرع بن حابس مائة من الإبل، وأعطى عيينة بن حصن مثل ذلك، وأعطى ناساً من أشراف العرب وآثرهم يومئذ في القسمة‏.‏ فقال رجل‏:‏ والله إن هذه قسمة ما عدل فيها، وما أريد فيها وجه الله، فقلت ‏:‏ والله لأخبرن رسول الله صلى الله عليه وسلم ، فأتيته فأخبرته بما قال‏:‏ فتغير وجههه حتى كان كالصرف ‏.‏ ثم قال ‏ \"‏ فمن يعدل إذا لم يعدل الله ورسوله‏؟‏ ثم قال‏:‏ يرحم الله موسى قد أوذي بأكثر من هذا فصبر‏\"‏‏.‏ فقلت‏:‏ لا جرم لا أرفع إليه بعدها حديثاً‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "İbn Mes’ûd (ra) anlatıyor:\nResûlullah, Huneyn gününde ganimeti taksim ederken bazı kimselere fazla verdi. Akra’ b. Hâbis’e yüz deve, Uyeyne b. Hısn’a da bir o kadar deve verdiği gibi, Arap eşrafından bir topluluğa da hayli miktarda mal verdi. O gün onlara öncelik verdi. Bunun üzerine bir adam:\n–Vallahi bu taksimde adalet yoktur, bunda Allah’ın rızası gözetilmemiştir, dedi. Ben de;\n–Vallahi bunu Allah Resûlü’ne söyleyeceğim, dedim ve Peygamber’in yanına gittim, o adamın sözlerini aktardım. Bunun üzerine Peygamber’in yüzünün rengi değişti ve kıpkırmızı oldu. Sonra:\n“Allah ve Resûlü adil olmazsa, başka kim adil olur?” dedi. Sonra, “Allah Musa’ya rahmet etsin, o bundan fazla sıkıntıya uğradığı hâlde sabretti.” buyurdu. Ben de bundan böyle Peygamber’e hiç kimsenin sözünü götürmeyeceğim, diye ahdettim.",
+          "sourceText": "İbn Mes’ûd (ra) anlatıyor:\nResûlullah, Huneyn gününde ganimeti taksim ederken bazı kimselere fazla verdi. Akra’ b. Hâbis’e yüz deve, Uyeyne b. Hısn’a da bir o kadar deve verdiği gibi, Arap eşrafından bir topluluğa da hayli miktarda mal verdi. O gün onlara öncelik verdi. Bunun üzerine bir adam:\n–Vallahi bu taksimde adalet yoktur, bunda Allah’ın rızası gözetilmemiştir, dedi. Ben de;\n–Vallahi bunu Allah Resûlü’ne söyleyeceğim, dedim ve Peygamber’in yanına gittim, o adamın sözlerini aktardım. Bunun üzerine Peygamber’in yüzünün rengi değişti ve kıpkırmızı oldu. Sonra:\n“Allah ve Resûlü adil olmazsa, başka kim adil olur?” dedi. Sonra, “Allah Musa’ya rahmet etsin, o bundan fazla sıkıntıya uğradığı hâlde sabretti.” buyurdu. Ben de bundan böyle Peygamber’e hiç kimsenin sözünü götürmeyeceğim, diye ahdettim.",
+          "ttsText": "İbn Mes’ûd (ra) anlatıyor:\nResûlullah, Huneyn gününde ganimeti taksim ederken bazı kimselere fazla verdi. Akra’ b. Hâbis’e yüz deve, Uyeyne b. Hısn’a da bir o kadar deve verdiği gibi, Arap eşrafından bir topluluğa da hayli miktarda mal verdi. O gün onlara öncelik verdi. Bunun üzerine bir adam:\n–Vallahi bu taksimde adalet yoktur, bunda Allah’ın rızası gözetilmemiştir, dedi. Ben de;\n–Vallahi bunu Allah Resûlü’ne söyleyeceğim, dedim ve Peygamber’in yanına gittim, o adamın sözlerini aktardım. Bunun üzerine Peygamber’in yüzünün rengi değişti ve kıpkırmızı oldu. Sonra:\n“Allah ve Resûlü adil olmazsa, başka kim adil olur?” dedi. Sonra, “Allah Musa’ya rahmet etsin, o bundan fazla sıkıntıya uğradığı hâlde sabretti.” buyurdu. Ben de bundan böyle Peygamber’e hiç kimsenin sözünü götürmeyeceğim, diye ahdettim.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Ibn Mas'ud (ra) reported: On the day of Hunayn, the Messenger of Allah distributed spoils and favored certain people. When a man objected that justice had not been done and Allah's pleasure had not been sought, Ibn Mas'ud informed the Prophet. His face changed, and he said: “Who will be just if Allah and His Messenger are not just?” Then he said: “May Allah have mercy on Moses; he suffered more than this and remained patient.”",
+          "sourceText": "Ibn Mas'ud (ra) reported: On the day of Hunayn, the Messenger of Allah distributed spoils and favored certain people. When a man objected that justice had not been done and Allah's pleasure had not been sought, Ibn Mas'ud informed the Prophet. His face changed, and he said: “Who will be just if Allah and His Messenger are not just?” Then he said: “May Allah have mercy on Moses; he suffered more than this and remained patient.”",
+          "ttsText": "Ibn Mas'ud (ra) reported: On the day of Hunayn, the Messenger of Allah distributed spoils and favored certain people. When a man objected that justice had not been done and Allah's pleasure had not been sought, Ibn Mas'ud informed the Prophet. His face changed, and he said: “Who will be just if Allah and His Messenger are not just?” Then he said: “May Allah have mercy on Moses; he suffered more than this and remained patient.”",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(M2447 Müslim, Zekât, 140; B3150 Buhârî, Humus, 19)",
+          "en": "(M2447 Müslim, Zekât, 140; B3150 Buhârî, Humus, 19)"
+        },
+        "sunnah": {
+          "candidateNo": 42,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:42",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Acele",
+        "topics_tr": "Acele"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000706",
+      "ref": "riyazussalihin/706",
+      "hadithNo": 706,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 2,
+      "input": {
+        "hadithNo_diyanet": 706,
+        "sunnahNo_candidate": 706,
+        "first_topic_tr": "Acele",
+        "topics_tr": "Acele\nArefe Günü",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن أبي شريح خويلد بن عمرو الخزاعي رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من كان يؤمن بالله واليوم الآخر فليكرم ضيفه جائزته‏\"‏ قالوا‏:‏ وما جائزته يا رسول الله صلى الله عليه وسلم قال‏:‏ ‏\"‏يومه وليلته‏.‏ والضيافة ثلاثة أيام، فما كان وراء ذلك فهو صدقة عليه” ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏\n\nوفي ‏(‏‏(‏رواية لمسلم‏)‏‏)‏‏:‏ ‏\"‏لا يحل لمسلم أن يقيم عند أخيه حتى يؤثمة‏\"‏ قالوا‏:‏ يا رسول الله ، وكيف يؤثمه‏؟‏ قال‏:‏ ‏\"‏يقيم عنده ولا شيء له يقريه به‏\"‏‏.‏",
+          "sourceText": "وعن أبي شريح خويلد بن عمرو الخزاعي رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من كان يؤمن بالله واليوم الآخر فليكرم ضيفه جائزته‏\"‏ قالوا‏:‏ وما جائزته يا رسول الله صلى الله عليه وسلم قال‏:‏ ‏\"‏يومه وليلته‏.‏ والضيافة ثلاثة أيام، فما كان وراء ذلك فهو صدقة عليه” ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏\n\nوفي ‏(‏‏(‏رواية لمسلم‏)‏‏)‏‏:‏ ‏\"‏لا يحل لمسلم أن يقيم عند أخيه حتى يؤثمة‏\"‏ قالوا‏:‏ يا رسول الله ، وكيف يؤثمه‏؟‏ قال‏:‏ ‏\"‏يقيم عنده ولا شيء له يقريه به‏\"‏‏.‏",
+          "ttsText": "وعن أبي شريح خويلد بن عمرو الخزاعي رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من كان يؤمن بالله واليوم الآخر فليكرم ضيفه جائزته‏\"‏ قالوا‏:‏ وما جائزته يا رسول الله صلى الله عليه وسلم قال‏:‏ ‏\"‏يومه وليلته‏.‏ والضيافة ثلاثة أيام، فما كان وراء ذلك فهو صدقة عليه” ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏\n\nوفي ‏(‏‏(‏رواية لمسلم‏)‏‏)‏‏:‏ ‏\"‏لا يحل لمسلم أن يقيم عند أخيه حتى يؤثمة‏\"‏ قالوا‏:‏ يا رسول الله ، وكيف يؤثمه‏؟‏ قال‏:‏ ‏\"‏يقيم عنده ولا شيء له يقريه به‏\"‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Hz. Âişe (ra) şöyle demiştir:\nBen Resûlullah küçük dili görünecek kadar kahkaha ile katıla katıla güldüğünü hiç görmedim; O, sadece gülümserdi.\n...Her kim de Allah’ın nişanelerine (kurbanlıklarına) saygı gösterirse şüphesiz ki bu kalplerin takvasından (Allah’a karşı gelmekten sakınmasından)dır.\n(Hac, 22/32)",
+          "sourceText": "Hz. Âişe (ra) şöyle demiştir:\nBen Resûlullah küçük dili görünecek kadar kahkaha ile katıla katıla güldüğünü hiç görmedim; O, sadece gülümserdi.\n...Her kim de Allah’ın nişanelerine (kurbanlıklarına) saygı gösterirse şüphesiz ki bu kalplerin takvasından (Allah’a karşı gelmekten sakınmasından)dır.\n(Hac, 22/32)",
+          "ttsText": "Hz. Âişe (ra) şöyle demiştir:\nBen Resûlullah küçük dili görünecek kadar kahkaha ile katıla katıla güldüğünü hiç görmedim; O, sadece gülümserdi.\n...Her kim de Allah’ın nişanelerine (kurbanlıklarına) saygı gösterirse şüphesiz ki bu kalplerin takvasından (Allah’a karşı gelmekten sakınmasından)dır.\n(Hac, 22/32)",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Aishah (ra) said: I never saw the Messenger of Allah laugh so heartily that his uvula could be seen; he would only smile.",
+          "sourceText": "Aishah (ra) said: I never saw the Messenger of Allah laugh so heartily that his uvula could be seen; he would only smile.",
+          "ttsText": "Aishah (ra) said: I never saw the Messenger of Allah laugh so heartily that his uvula could be seen; he would only smile.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(B6092 Buhârî, Edeb, 68; M2086 Müslim, İstiskâ, 16)",
+          "en": "(B6092 Buhârî, Edeb, 68; M2086 Müslim, İstiskâ, 16)"
+        },
+        "sunnah": {
+          "candidateNo": 706,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:706",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Acele",
+        "topics_tr": "Acele\nArefe Günü"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000067",
+      "ref": "riyazussalihin/67",
+      "hadithNo": 67,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 3,
+      "input": {
+        "hadithNo_diyanet": 67,
+        "sunnahNo_candidate": 67,
+        "first_topic_tr": "Acizlik",
+        "topics_tr": "Acizlik",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "الثامن‏:‏ عن أبي هريرة رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏ \"‏ من حسن إسلام المرء تركه ما لا يعنيه‏\"‏ ‏(‏‏(‏حديث حسن رواه الترمذي وغيره‏)‏‏)‏",
+          "sourceText": "الثامن‏:‏ عن أبي هريرة رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏ \"‏ من حسن إسلام المرء تركه ما لا يعنيه‏\"‏ ‏(‏‏(‏حديث حسن رواه الترمذي وغيره‏)‏‏)‏",
+          "ttsText": "الثامن‏:‏ عن أبي هريرة رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏ \"‏ من حسن إسلام المرء تركه ما لا يعنيه‏\"‏ ‏(‏‏(‏حديث حسن رواه الترمذي وغيره‏)‏‏)‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nKendisini ilgilendirmeyen ve faydası olmayan (mâlâyâni) şeyleri terk etmesi, kişinin iyi Müslüman oluşundandır.",
+          "sourceText": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nKendisini ilgilendirmeyen ve faydası olmayan (mâlâyâni) şeyleri terk etmesi, kişinin iyi Müslüman oluşundandır.",
+          "ttsText": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nKendisini ilgilendirmeyen ve faydası olmayan (mâlâyâni) şeyleri terk etmesi, kişinin iyi Müslüman oluşundandır.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Abu Hurairah (ra) reported that the Messenger of Allah said: Part of a person's good Islam is leaving what does not concern him.",
+          "sourceText": "Abu Hurairah (ra) reported that the Messenger of Allah said: Part of a person's good Islam is leaving what does not concern him.",
+          "ttsText": "Abu Hurairah (ra) reported that the Messenger of Allah said: Part of a person's good Islam is leaving what does not concern him.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(T2317 Tirmizî, Zühd, 11)",
+          "en": "(T2317 Tirmizî, Zühd, 11)"
+        },
+        "sunnah": {
+          "candidateNo": 67,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:67",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Acizlik",
+        "topics_tr": "Acizlik"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000101",
+      "ref": "riyazussalihin/101",
+      "hadithNo": 101,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 4,
+      "input": {
+        "hadithNo_diyanet": 101,
+        "sunnahNo_candidate": 101,
+        "first_topic_tr": "Acizlik",
+        "topics_tr": "Acizlik",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "السابع‏:‏ عنه أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏ \"‏ حجبت النار بالشهوات، وحجبت الجنة بالمكاره‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+          "sourceText": "السابع‏:‏ عنه أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏ \"‏ حجبت النار بالشهوات، وحجبت الجنة بالمكاره‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+          "ttsText": "السابع‏:‏ عنه أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏ \"‏ حجبت النار بالشهوات، وحجبت الجنة بالمكاره‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Peygamber şöyle buyurmuştur:\nCehennem, nefsin arzu ettiği şehevî şeylerle, cennet ise nefsin hoşlanmadığı şeylerle perdelenmiştir.",
+          "sourceText": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Peygamber şöyle buyurmuştur:\nCehennem, nefsin arzu ettiği şehevî şeylerle, cennet ise nefsin hoşlanmadığı şeylerle perdelenmiştir.",
+          "ttsText": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Peygamber şöyle buyurmuştur:\nCehennem, nefsin arzu ettiği şehevî şeylerle, cennet ise nefsin hoşlanmadığı şeylerle perdelenmiştir.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Abu Hurairah (ra) reported that the Prophet said: Hell is veiled with desires, and Paradise is veiled with hardships.",
+          "sourceText": "Abu Hurairah (ra) reported that the Prophet said: Hell is veiled with desires, and Paradise is veiled with hardships.",
+          "ttsText": "Abu Hurairah (ra) reported that the Prophet said: Hell is veiled with desires, and Paradise is veiled with hardships.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(B6487 Buhârî, Rikâk, 28; M7130 Müslim, Cennet, 1)",
+          "en": "(B6487 Buhârî, Rikâk, 28; M7130 Müslim, Cennet, 1)"
+        },
+        "sunnah": {
+          "candidateNo": 101,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:101",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Acizlik",
+        "topics_tr": "Acizlik"
+      },
+      "status": "pending",
+      "book_reference_tr": "(B6487 Buhârî, Rikâk, 28; M7130 Müslim, Cennet, 1)",
+      "text_tr": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Peygamber şöyle buyurmuştur:\nCehennem, nefsin arzu ettiği şehevî şeylerle, cennet ise nefsin hoşlanmadığı şeylerle perdelenmiştir.",
+      "text_ar": "السابع‏:‏ عنه أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏ \"‏ حجبت النار بالشهوات، وحجبت الجنة بالمكاره‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+      "text_en": "Abu Hurairah (ra) reported that the Prophet said: Hell is veiled with desires, and Paradise is veiled with hardships."
+    },
+    {
+      "id": "hadith_001477",
+      "ref": "riyazussalihin/1477",
+      "hadithNo": 1477,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 5,
+      "input": {
+        "hadithNo_diyanet": 1477,
+        "sunnahNo_candidate": 1477,
+        "first_topic_tr": "Acizlik",
+        "topics_tr": "Acizlik\nCimrilik\nFitne",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن عائشة، رضي الله عنها، أن النبي صلى الله عليه وسلم، كان يقول في دعائه‏:‏ ‏ \"‏اللهم إني أعوذ بك من شر ما عملت ومن شر ما لم أعمل‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+          "sourceText": "وعن عائشة، رضي الله عنها، أن النبي صلى الله عليه وسلم، كان يقول في دعائه‏:‏ ‏ \"‏اللهم إني أعوذ بك من شر ما عملت ومن شر ما لم أعمل‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+          "ttsText": "وعن عائشة، رضي الله عنها، أن النبي صلى الله عليه وسلم، كان يقول في دعائه‏:‏ ‏ \"‏اللهم إني أعوذ بك من شر ما عملت ومن شر ما لم أعمل‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Yine Ebû Hüreyre anlatıyor: Resûlullah şöyle dua ederdi:\nAllah’ım, güvencem olan dinimi bana güzelce yaşat. Geçim kaynağım olan dünyamı düzelt. Son durağım olan ahiretimi de düzelt. Hayatımı her türlü hayrı artırma vesilesi; ölümümü de her türlü kötülükten kurtuluş vesilesi eyle.",
+          "sourceText": "Yine Ebû Hüreyre anlatıyor: Resûlullah şöyle dua ederdi:\nAllah’ım, güvencem olan dinimi bana güzelce yaşat. Geçim kaynağım olan dünyamı düzelt. Son durağım olan ahiretimi de düzelt. Hayatımı her türlü hayrı artırma vesilesi; ölümümü de her türlü kötülükten kurtuluş vesilesi eyle.",
+          "ttsText": "Yine Ebû Hüreyre anlatıyor: Resûlullah şöyle dua ederdi:\nAllah’ım, güvencem olan dinimi bana güzelce yaşat. Geçim kaynağım olan dünyamı düzelt. Son durağım olan ahiretimi de düzelt. Hayatımı her türlü hayrı artırma vesilesi; ölümümü de her türlü kötülükten kurtuluş vesilesi eyle.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Abu Hurairah reported that the Messenger of Allah would supplicate: O Allah, set right for me my religion, which is the safeguard of my affairs; set right for me my worldly life, in which is my livelihood; set right for me my Hereafter, to which is my return. Make life an increase for me in every good, and make death a relief for me from every evil.",
+          "sourceText": "Abu Hurairah reported that the Messenger of Allah would supplicate: O Allah, set right for me my religion, which is the safeguard of my affairs; set right for me my worldly life, in which is my livelihood; set right for me my Hereafter, to which is my return. Make life an increase for me in every good, and make death a relief for me from every evil.",
+          "ttsText": "Abu Hurairah reported that the Messenger of Allah would supplicate: O Allah, set right for me my religion, which is the safeguard of my affairs; set right for me my worldly life, in which is my livelihood; set right for me my Hereafter, to which is my return. Make life an increase for me in every good, and make death a relief for me from every evil.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(M6903 Müslim, Zikir, 71)",
+          "en": "(M6903 Müslim, Zikir, 71)"
+        },
+        "sunnah": {
+          "candidateNo": 1477,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:1477",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Acizlik",
+        "topics_tr": "Acizlik\nCimrilik\nFitne"
+      },
+      "status": "pending",
+      "book_reference_tr": "(M6903 Müslim, Zikir, 71)",
+      "text_tr": "Yine Ebû Hüreyre anlatıyor: Resûlullah şöyle dua ederdi:\nAllah’ım, güvencem olan dinimi bana güzelce yaşat. Geçim kaynağım olan dünyamı düzelt. Son durağım olan ahiretimi de düzelt. Hayatımı her türlü hayrı artırma vesilesi; ölümümü de her türlü kötülükten kurtuluş vesilesi eyle.",
+      "text_ar": "وعن عائشة، رضي الله عنها، أن النبي صلى الله عليه وسلم، كان يقول في دعائه‏:‏ ‏ \"‏اللهم إني أعوذ بك من شر ما عملت ومن شر ما لم أعمل‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+      "text_en": "Abu Hurairah reported that the Messenger of Allah would supplicate: O Allah, set right for me my religion, which is the safeguard of my affairs; set right for me my worldly life, in which is my livelihood; set right for me my Hereafter, to which is my return. Make life an increase for me in every good, and make death a relief for me from every evil."
+    },
+    {
+      "id": "hadith_001482",
+      "ref": "riyazussalihin/1482",
+      "hadithNo": 1482,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 6,
+      "input": {
+        "hadithNo_diyanet": 1482,
+        "sunnahNo_candidate": 1482,
+        "first_topic_tr": "Acizlik",
+        "topics_tr": "Acizlik\nCimrilik",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن زياد بن علاقة عن عمه، وهو قطبة بن مالك، رضي الله عنه، قال‏:‏ كان النبي صلى الله عليه وسلم، يقول‏:‏ ‏ \"‏اللهم إني أعوذ بك من منكرات الأخلاق، والأعمال، والأهواء‏\"‏‏.‏ رواه الترمذي وقال حديث حسن‏.‏",
+          "sourceText": "وعن زياد بن علاقة عن عمه، وهو قطبة بن مالك، رضي الله عنه، قال‏:‏ كان النبي صلى الله عليه وسلم، يقول‏:‏ ‏ \"‏اللهم إني أعوذ بك من منكرات الأخلاق، والأعمال، والأهواء‏\"‏‏.‏ رواه الترمذي وقال حديث حسن‏.‏",
+          "ttsText": "وعن زياد بن علاقة عن عمه، وهو قطبة بن مالك، رضي الله عنه، قال‏:‏ كان النبي صلى الله عليه وسلم، يقول‏:‏ ‏ \"‏اللهم إني أعوذ بك من منكرات الأخلاق، والأعمال، والأهواء‏\"‏‏.‏ رواه الترمذي وقال حديث حسن‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Âişe’den (ra) rivayet edildiğine göre Peygamber şöyle dua ederdi:\nAllah’ım, şimdiye kadar yaptıklarımın ve henüz yapmadıklarımın şerrinden sana sığınırım.",
+          "sourceText": "Âişe’den (ra) rivayet edildiğine göre Peygamber şöyle dua ederdi:\nAllah’ım, şimdiye kadar yaptıklarımın ve henüz yapmadıklarımın şerrinden sana sığınırım.",
+          "ttsText": "Âişe’den (ra) rivayet edildiğine göre Peygamber şöyle dua ederdi:\nAllah’ım, şimdiye kadar yaptıklarımın ve henüz yapmadıklarımın şerrinden sana sığınırım.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "It was narrated from Qutbah ibn Malik (ra) that the Prophet used to say: O Allah, I seek refuge in You from reprehensible manners, deeds and desires.",
+          "sourceText": "It was narrated from Qutbah ibn Malik (ra) that the Prophet used to say: O Allah, I seek refuge in You from reprehensible manners, deeds and desires.",
+          "ttsText": "It was narrated from Qutbah ibn Malik (ra) that the Prophet used to say: O Allah, I seek refuge in You from reprehensible manners, deeds and desires.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(M6895 Müslim, Zikir, 65)",
+          "en": "(M6895 Müslim, Zikir, 65)"
+        },
+        "sunnah": {
+          "candidateNo": 1482,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:1482",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Acizlik",
+        "topics_tr": "Acizlik\nCimrilik"
+      },
+      "status": "pending",
+      "book_reference_tr": "(M6895 Müslim, Zikir, 65)",
+      "text_tr": "Âişe’den (ra) rivayet edildiğine göre Peygamber şöyle dua ederdi:\nAllah’ım, şimdiye kadar yaptıklarımın ve henüz yapmadıklarımın şerrinden sana sığınırım.",
+      "text_ar": "وعن زياد بن علاقة عن عمه، وهو قطبة بن مالك، رضي الله عنه، قال‏:‏ كان النبي صلى الله عليه وسلم، يقول‏:‏ ‏ \"‏اللهم إني أعوذ بك من منكرات الأخلاق، والأعمال، والأهواء‏\"‏‏.‏ رواه الترمذي وقال حديث حسن‏.‏",
+      "text_en": "It was narrated from Qutbah ibn Malik (ra) that the Prophet used to say: O Allah, I seek refuge in You from reprehensible manners, deeds and desires."
+    },
+    {
+      "id": "hadith_000510",
+      "ref": "riyazussalihin/510",
+      "hadithNo": 510,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 7,
+      "input": {
+        "hadithNo_diyanet": 510,
+        "sunnahNo_candidate": 510,
+        "first_topic_tr": "Adak",
+        "topics_tr": "Adak\nİhanet",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن عبيد الله بن محصن الأنصاري الخطمي رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ من أصبح منكم آمنا في سربه، معافى في جسده، عنده قوت يومه، فكأنما حيزت له الدنيا بحذافيرها‏\"‏ ‏(‏‏(‏رواه الترمذي وقال‏:‏ حديث حسن‏)‏‏)‏‏.‏",
+          "sourceText": "وعن عبيد الله بن محصن الأنصاري الخطمي رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ من أصبح منكم آمنا في سربه، معافى في جسده، عنده قوت يومه، فكأنما حيزت له الدنيا بحذافيرها‏\"‏ ‏(‏‏(‏رواه الترمذي وقال‏:‏ حديث حسن‏)‏‏)‏‏.‏",
+          "ttsText": "وعن عبيد الله بن محصن الأنصاري الخطمي رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ من أصبح منكم آمنا في سربه، معافى في جسده، عنده قوت يومه، فكأنما حيزت له الدنيا بحذافيرها‏\"‏ ‏(‏‏(‏رواه الترمذي وقال‏:‏ حديث حسن‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "İbn Ömer (ra) anlatıyor:\nBiz Resûlullah’la oturuyorduk, bu sırada ensardan biri gelip selâm verdikten sonra döndü. Bunun üzerine Resûlullah :\n–Ey ensar kardeş, kardeşim Sa’d b. Ubâde nasıl, diye sordu. O da:\n–İyi, cevabını verdi, Resûlullah :\n–Sizden kim onu ziyaret etmek ister, buyurdu ve kalktı. Biz de onunla beraber on, on beş kişi kalktık; ayaklarımız çıplak ve başlarımız açıktı, üzerimizde gömleğimiz bile yoktu. Çorak bir zeminde yürüyerek Sa’d’ın yanına geldik. Yakınları geri çekildiler ve Resûlullah’la ashâbı onun yanına kadar geldiler.",
+          "sourceText": "İbn Ömer (ra) anlatıyor:\nBiz Resûlullah’la oturuyorduk, bu sırada ensardan biri gelip selâm verdikten sonra döndü. Bunun üzerine Resûlullah :\n–Ey ensar kardeş, kardeşim Sa’d b. Ubâde nasıl, diye sordu. O da:\n–İyi, cevabını verdi, Resûlullah :\n–Sizden kim onu ziyaret etmek ister, buyurdu ve kalktı. Biz de onunla beraber on, on beş kişi kalktık; ayaklarımız çıplak ve başlarımız açıktı, üzerimizde gömleğimiz bile yoktu. Çorak bir zeminde yürüyerek Sa’d’ın yanına geldik. Yakınları geri çekildiler ve Resûlullah’la ashâbı onun yanına kadar geldiler.",
+          "ttsText": "İbn Ömer (ra) anlatıyor:\nBiz Resûlullah’la oturuyorduk, bu sırada ensardan biri gelip selâm verdikten sonra döndü. Bunun üzerine Resûlullah :\n–Ey ensar kardeş, kardeşim Sa’d b. Ubâde nasıl, diye sordu. O da:\n–İyi, cevabını verdi, Resûlullah :\n–Sizden kim onu ziyaret etmek ister, buyurdu ve kalktı. Biz de onunla beraber on, on beş kişi kalktık; ayaklarımız çıplak ve başlarımız açıktı, üzerimizde gömleğimiz bile yoktu. Çorak bir zeminde yürüyerek Sa’d’ın yanına geldik. Yakınları geri çekildiler ve Resûlullah’la ashâbı onun yanına kadar geldiler.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Ubaydullah ibn Mihsan al-Ansari (ra) reported that the Messenger of Allah said: Whoever among you wakes up secure in his family, healthy in his body, and possessing the food of his day, it is as if the whole world has been gathered for him.",
+          "sourceText": "Ubaydullah ibn Mihsan al-Ansari (ra) reported that the Messenger of Allah said: Whoever among you wakes up secure in his family, healthy in his body, and possessing the food of his day, it is as if the whole world has been gathered for him.",
+          "ttsText": "Ubaydullah ibn Mihsan al-Ansari (ra) reported that the Messenger of Allah said: Whoever among you wakes up secure in his family, healthy in his body, and possessing the food of his day, it is as if the whole world has been gathered for him.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(M2138 Müslim, Cenâiz, 13)",
+          "en": "(M2138 Müslim, Cenâiz, 13)"
+        },
+        "sunnah": {
+          "candidateNo": 510,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:510",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adak",
+        "topics_tr": "Adak\nİhanet"
+      },
+      "status": "pending",
+      "book_reference_tr": "(M2138 Müslim, Cenâiz, 13)",
+      "text_tr": "İbn Ömer (ra) anlatıyor:\nBiz Resûlullah’la oturuyorduk, bu sırada ensardan biri gelip selâm verdikten sonra döndü. Bunun üzerine Resûlullah :\n–Ey ensar kardeş, kardeşim Sa’d b. Ubâde nasıl, diye sordu. O da:\n–İyi, cevabını verdi, Resûlullah :\n–Sizden kim onu ziyaret etmek ister, buyurdu ve kalktı. Biz de onunla beraber on, on beş kişi kalktık; ayaklarımız çıplak ve başlarımız açıktı, üzerimizde gömleğimiz bile yoktu. Çorak bir zeminde yürüyerek Sa’d’ın yanına geldik. Yakınları geri çekildiler ve Resûlullah’la ashâbı onun yanına kadar geldiler.",
+      "text_ar": "وعن عبيد الله بن محصن الأنصاري الخطمي رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ من أصبح منكم آمنا في سربه، معافى في جسده، عنده قوت يومه، فكأنما حيزت له الدنيا بحذافيرها‏\"‏ ‏(‏‏(‏رواه الترمذي وقال‏:‏ حديث حسن‏)‏‏)‏‏.‏",
+      "text_en": "Ubaydullah ibn Mihsan al-Ansari (ra) reported that the Messenger of Allah said: Whoever among you wakes up secure in his family, healthy in his body, and possessing the food of his day, it is as if the whole world has been gathered for him."
+    },
+    {
+      "id": "hadith_001863",
+      "ref": "riyazussalihin/1863",
+      "hadithNo": 1863,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 8,
+      "input": {
+        "hadithNo_diyanet": 1863,
+        "sunnahNo_candidate": 1863,
+        "first_topic_tr": "Adak",
+        "topics_tr": "Adak\nAğlamak",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "-وعن أم شريك رضي الله عنها أن رسول الله صلى الله عليه وسلم أمرها بقتل الأوزاغ وقال‏:‏ “كان ينفخ على إبراهيم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+          "sourceText": "-وعن أم شريك رضي الله عنها أن رسول الله صلى الله عليه وسلم أمرها بقتل الأوزاغ وقال‏:‏ “كان ينفخ على إبراهيم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+          "ttsText": "-وعن أم شريك رضي الله عنها أن رسول الله صلى الله عليه وسلم أمرها بقتل الأوزاغ وقال‏:‏ “كان ينفخ على إبراهيم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Amr b. Âs (ra), Resûlullah’ın şöyle buyurduğunu işittim, demiştir:\nHâkim, içtihat eder de doğru hüküm verirse iki sevap; hata ederse (içtihadından dolayı) bir sevap alır.",
+          "sourceText": "Amr b. Âs (ra), Resûlullah’ın şöyle buyurduğunu işittim, demiştir:\nHâkim, içtihat eder de doğru hüküm verirse iki sevap; hata ederse (içtihadından dolayı) bir sevap alır.",
+          "ttsText": "Amr b. Âs (ra), Resûlullah’ın şöyle buyurduğunu işittim, demiştir:\nHâkim, içtihat eder de doğru hüküm verirse iki sevap; hata ederse (içtihadından dolayı) bir sevap alır.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Umm Sharik (ra) reported that the Messenger of Allah ordered her to kill geckos and said: It used to blow on Ibrahim.",
+          "sourceText": "Umm Sharik (ra) reported that the Messenger of Allah ordered her to kill geckos and said: It used to blow on Ibrahim.",
+          "ttsText": "Umm Sharik (ra) reported that the Messenger of Allah ordered her to kill geckos and said: It used to blow on Ibrahim.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(B7352 Buhârî, İ’tisâm, 21; M4487 Müslim, Akdiye, 15)",
+          "en": "(B7352 Buhârî, İ’tisâm, 21; M4487 Müslim, Akdiye, 15)"
+        },
+        "sunnah": {
+          "candidateNo": 1863,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:1863",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adak",
+        "topics_tr": "Adak\nAğlamak"
+      },
+      "status": "pending",
+      "book_reference_tr": "(B7352 Buhârî, İ’tisâm, 21; M4487 Müslim, Akdiye, 15)",
+      "text_tr": "Amr b. Âs (ra), Resûlullah’ın şöyle buyurduğunu işittim, demiştir:\nHâkim, içtihat eder de doğru hüküm verirse iki sevap; hata ederse (içtihadından dolayı) bir sevap alır.",
+      "text_ar": "-وعن أم شريك رضي الله عنها أن رسول الله صلى الله عليه وسلم أمرها بقتل الأوزاغ وقال‏:‏ “كان ينفخ على إبراهيم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+      "text_en": "Umm Sharik (ra) reported that the Messenger of Allah ordered her to kill geckos and said: It used to blow on Ibrahim."
+    },
+    {
+      "id": "hadith_000043",
+      "ref": "riyazussalihin/43",
+      "hadithNo": 43,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 9,
+      "input": {
+        "hadithNo_diyanet": 43,
+        "sunnahNo_candidate": 43,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن أنس رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏‏\"‏إذا أراد الله بعبده خيراً عجل له العقوبة في الدنيا، وإذا أراد الله بعبده الشر أمسك عنه بذنبه حتى يوافي به يوم القيامة‏\"‏‏.‏\n\nوقال النبي صلى الله عليه وسلم ‏:‏ ‏\"‏إن عظم الجزاء مع عظم البلاء، وإن الله تعالى إذا أحب قوماً ابتلاهم، فمن رضي فله الرضى، ومن سخط فله السخط‏\"‏ ‏(‏‏(‏رواه الترمذي وقال ‏:‏ حديث حسن‏)‏‏)‏‏.‏",
+          "sourceText": "وعن أنس رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏‏\"‏إذا أراد الله بعبده خيراً عجل له العقوبة في الدنيا، وإذا أراد الله بعبده الشر أمسك عنه بذنبه حتى يوافي به يوم القيامة‏\"‏‏.‏\n\nوقال النبي صلى الله عليه وسلم ‏:‏ ‏\"‏إن عظم الجزاء مع عظم البلاء، وإن الله تعالى إذا أحب قوماً ابتلاهم، فمن رضي فله الرضى، ومن سخط فله السخط‏\"‏ ‏(‏‏(‏رواه الترمذي وقال ‏:‏ حديث حسن‏)‏‏)‏‏.‏",
+          "ttsText": "وعن أنس رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏‏\"‏إذا أراد الله بعبده خيراً عجل له العقوبة في الدنيا، وإذا أراد الله بعبده الشر أمسك عنه بذنبه حتى يوافي به يوم القيامة‏\"‏‏.‏\n\nوقال النبي صلى الله عليه وسلم ‏:‏ ‏\"‏إن عظم الجزاء مع عظم البلاء، وإن الله تعالى إذا أحب قوماً ابتلاهم، فمن رضي فله الرضى، ومن سخط فله السخط‏\"‏ ‏(‏‏(‏رواه الترمذي وقال ‏:‏ حديث حسن‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Enes’ten (ra) rivayet edildiğine göre Resûlullah şöyle demiştir:\nAllah Teâlâ, bir kulunun iyiliğini dilerse onun cezasını dünyada verir. Eğer bir kulunun kötülüğünü dilerse günahı karşılığı onu dünyada cezalandırmaz; kıyamet gününde cezasını tam olarak verir.\nYine Hz. Peygamber şöyle buyurdu:\nMükâfatın büyüklüğü, sıkıntının büyüklüğü nispetindedir. Allah Teâlâ bir topluluğu severse onları sıkıntıya uğratır. Kim hâline razı olursa Allah da ondan razı olur. Kim de başına gelenden dolayı öfkelenirse gazaba uğrar.",
+          "sourceText": "Enes’ten (ra) rivayet edildiğine göre Resûlullah şöyle demiştir:\nAllah Teâlâ, bir kulunun iyiliğini dilerse onun cezasını dünyada verir. Eğer bir kulunun kötülüğünü dilerse günahı karşılığı onu dünyada cezalandırmaz; kıyamet gününde cezasını tam olarak verir.\nYine Hz. Peygamber şöyle buyurdu:\nMükâfatın büyüklüğü, sıkıntının büyüklüğü nispetindedir. Allah Teâlâ bir topluluğu severse onları sıkıntıya uğratır. Kim hâline razı olursa Allah da ondan razı olur. Kim de başına gelenden dolayı öfkelenirse gazaba uğrar.",
+          "ttsText": "Enes’ten (ra) rivayet edildiğine göre Resûlullah şöyle demiştir:\nAllah Teâlâ, bir kulunun iyiliğini dilerse onun cezasını dünyada verir. Eğer bir kulunun kötülüğünü dilerse günahı karşılığı onu dünyada cezalandırmaz; kıyamet gününde cezasını tam olarak verir.\nYine Hz. Peygamber şöyle buyurdu:\nMükâfatın büyüklüğü, sıkıntının büyüklüğü nispetindedir. Allah Teâlâ bir topluluğu severse onları sıkıntıya uğratır. Kim hâline razı olursa Allah da ondan razı olur. Kim de başına gelenden dolayı öfkelenirse gazaba uğrar.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Anas (ra) reported that the Messenger of Allah said: When Allah intends good for His servant, He hastens punishment for him in this world; and when He intends otherwise for His servant, He withholds punishment for his sin until he comes with it on the Day of Resurrection.",
+          "sourceText": "Anas (ra) reported that the Messenger of Allah said: When Allah intends good for His servant, He hastens punishment for him in this world; and when He intends otherwise for His servant, He withholds punishment for his sin until he comes with it on the Day of Resurrection.",
+          "ttsText": "Anas (ra) reported that the Messenger of Allah said: When Allah intends good for His servant, He hastens punishment for him in this world; and when He intends otherwise for His servant, He withholds punishment for his sin until he comes with it on the Day of Resurrection.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(T2396 Tirmizî, Zühd, 56)",
+          "en": "(T2396 Tirmizî, Zühd, 56)"
+        },
+        "sunnah": {
+          "candidateNo": 43,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:43",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet"
+      },
+      "status": "pending",
+      "book_reference_tr": "(T2396 Tirmizî, Zühd, 56)",
+      "text_tr": "Enes’ten (ra) rivayet edildiğine göre Resûlullah şöyle demiştir:\nAllah Teâlâ, bir kulunun iyiliğini dilerse onun cezasını dünyada verir. Eğer bir kulunun kötülüğünü dilerse günahı karşılığı onu dünyada cezalandırmaz; kıyamet gününde cezasını tam olarak verir.\nYine Hz. Peygamber şöyle buyurdu:\nMükâfatın büyüklüğü, sıkıntının büyüklüğü nispetindedir. Allah Teâlâ bir topluluğu severse onları sıkıntıya uğratır. Kim hâline razı olursa Allah da ondan razı olur. Kim de başına gelenden dolayı öfkelenirse gazaba uğrar.",
+      "text_ar": "وعن أنس رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏‏\"‏إذا أراد الله بعبده خيراً عجل له العقوبة في الدنيا، وإذا أراد الله بعبده الشر أمسك عنه بذنبه حتى يوافي به يوم القيامة‏\"‏‏.‏\n\nوقال النبي صلى الله عليه وسلم ‏:‏ ‏\"‏إن عظم الجزاء مع عظم البلاء، وإن الله تعالى إذا أحب قوماً ابتلاهم، فمن رضي فله الرضى، ومن سخط فله السخط‏\"‏ ‏(‏‏(‏رواه الترمذي وقال ‏:‏ حديث حسن‏)‏‏)‏‏.‏",
+      "text_en": "Anas (ra) reported that the Messenger of Allah said: When Allah intends good for His servant, He hastens punishment for him in this world; and when He intends otherwise for His servant, He withholds punishment for his sin until he comes with it on the Day of Resurrection."
+    },
+    {
+      "id": "hadith_000051",
+      "ref": "riyazussalihin/51",
+      "hadithNo": 51,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 10,
+      "input": {
+        "hadithNo_diyanet": 51,
+        "sunnahNo_candidate": 51,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet\nCahillik\nİyiliği Emretmek",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن ابن مسعود رضي الله عنه أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏ \"‏ إنها ستكون بعدي أثرة وأمور تنكرونها ‏!‏ قالوا‏:‏ يا رسول الله فما تأمرنا‏؟‏ قال‏:‏ تؤدون الحق الذى عليكم ، وتسألون الله الذى لكم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "sourceText": "وعن ابن مسعود رضي الله عنه أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏ \"‏ إنها ستكون بعدي أثرة وأمور تنكرونها ‏!‏ قالوا‏:‏ يا رسول الله فما تأمرنا‏؟‏ قال‏:‏ تؤدون الحق الذى عليكم ، وتسألون الله الذى لكم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "ttsText": "وعن ابن مسعود رضي الله عنه أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏ \"‏ إنها ستكون بعدي أثرة وأمور تنكرونها ‏!‏ قالوا‏:‏ يا رسول الله فما تأمرنا‏؟‏ قال‏:‏ تؤدون الحق الذى عليكم ، وتسألون الله الذى لكم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Resûlullah :\n–Kuşkusuz benden sonra adam kayırmalar ve yadırgayacağınız birtakım işler olacak, buyurdu.\n–Ey Allah’ın Resûlü, o zaman ne yapmamızı emredersiniz, dediler. Resûlullah :\n–Yükümlülüklerinizi yerine getirir, kendi hakkınızı ise Allah’tan istersiniz, dedi.",
+          "sourceText": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Resûlullah :\n–Kuşkusuz benden sonra adam kayırmalar ve yadırgayacağınız birtakım işler olacak, buyurdu.\n–Ey Allah’ın Resûlü, o zaman ne yapmamızı emredersiniz, dediler. Resûlullah :\n–Yükümlülüklerinizi yerine getirir, kendi hakkınızı ise Allah’tan istersiniz, dedi.",
+          "ttsText": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Resûlullah :\n–Kuşkusuz benden sonra adam kayırmalar ve yadırgayacağınız birtakım işler olacak, buyurdu.\n–Ey Allah’ın Resûlü, o zaman ne yapmamızı emredersiniz, dediler. Resûlullah :\n–Yükümlülüklerinizi yerine getirir, kendi hakkınızı ise Allah’tan istersiniz, dedi.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Ibn Mas'ud (ra) reported that the Messenger of Allah said: After me there will be favoritism and things you will disapprove of. They asked: What do you command us to do? He said: Fulfill the rights due from you and ask Allah for what is due to you.",
+          "sourceText": "Ibn Mas'ud (ra) reported that the Messenger of Allah said: After me there will be favoritism and things you will disapprove of. They asked: What do you command us to do? He said: Fulfill the rights due from you and ask Allah for what is due to you.",
+          "ttsText": "Ibn Mas'ud (ra) reported that the Messenger of Allah said: After me there will be favoritism and things you will disapprove of. They asked: What do you command us to do? He said: Fulfill the rights due from you and ask Allah for what is due to you.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(B3603 Buhârî, Menâkıb, 25; M4775 Müslim, İmâre, 45)",
+          "en": "(B3603 Buhârî, Menâkıb, 25; M4775 Müslim, İmâre, 45)"
+        },
+        "sunnah": {
+          "candidateNo": 51,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:51",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet\nCahillik\nİyiliği Emretmek"
+      },
+      "status": "pending",
+      "book_reference_tr": "(B3603 Buhârî, Menâkıb, 25; M4775 Müslim, İmâre, 45)",
+      "text_tr": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Resûlullah :\n–Kuşkusuz benden sonra adam kayırmalar ve yadırgayacağınız birtakım işler olacak, buyurdu.\n–Ey Allah’ın Resûlü, o zaman ne yapmamızı emredersiniz, dediler. Resûlullah :\n–Yükümlülüklerinizi yerine getirir, kendi hakkınızı ise Allah’tan istersiniz, dedi.",
+      "text_ar": "وعن ابن مسعود رضي الله عنه أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏ \"‏ إنها ستكون بعدي أثرة وأمور تنكرونها ‏!‏ قالوا‏:‏ يا رسول الله فما تأمرنا‏؟‏ قال‏:‏ تؤدون الحق الذى عليكم ، وتسألون الله الذى لكم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+      "text_en": "Ibn Mas'ud (ra) reported that the Messenger of Allah said: After me there will be favoritism and things you will disapprove of. They asked: What do you command us to do? He said: Fulfill the rights due from you and ask Allah for what is due to you."
+    },
+    {
+      "id": "hadith_000123",
+      "ref": "riyazussalihin/123",
+      "hadithNo": 123,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 11,
+      "input": {
+        "hadithNo_diyanet": 123,
+        "sunnahNo_candidate": 123,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "السادس عشر‏:‏ عن أبي موسى الأشعري رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ من صلى البردين دخل الجنة‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+          "sourceText": "السادس عشر‏:‏ عن أبي موسى الأشعري رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ من صلى البردين دخل الجنة‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+          "ttsText": "السادس عشر‏:‏ عن أبي موسى الأشعري رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ من صلى البردين دخل الجنة‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Peygamber şöyle buyurmuştur:\nBir kimse sabah veya akşam mescide giderse, her gidişinde Allah Teâlâ onun için cennette yer hazırlar.",
+          "sourceText": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Peygamber şöyle buyurmuştur:\nBir kimse sabah veya akşam mescide giderse, her gidişinde Allah Teâlâ onun için cennette yer hazırlar.",
+          "ttsText": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Peygamber şöyle buyurmuştur:\nBir kimse sabah veya akşam mescide giderse, her gidişinde Allah Teâlâ onun için cennette yer hazırlar.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Abu Hurairah (ra) reported that the Prophet said: Whoever goes to the mosque in the morning or evening, Allah prepares for him a place in Paradise every time he goes or returns.",
+          "sourceText": "Abu Hurairah (ra) reported that the Prophet said: Whoever goes to the mosque in the morning or evening, Allah prepares for him a place in Paradise every time he goes or returns.",
+          "ttsText": "Abu Hurairah (ra) reported that the Prophet said: Whoever goes to the mosque in the morning or evening, Allah prepares for him a place in Paradise every time he goes or returns.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(M1524 Müslim, Mesâcid, 285; B662 Buhârî, Ezân, 37)",
+          "en": "(M1524 Müslim, Mesâcid, 285; B662 Buhârî, Ezân, 37)"
+        },
+        "sunnah": {
+          "candidateNo": 123,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:123",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet"
+      },
+      "status": "pending",
+      "book_reference_tr": "(M1524 Müslim, Mesâcid, 285; B662 Buhârî, Ezân, 37)",
+      "text_tr": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Peygamber şöyle buyurmuştur:\nBir kimse sabah veya akşam mescide giderse, her gidişinde Allah Teâlâ onun için cennette yer hazırlar.",
+      "text_ar": "السادس عشر‏:‏ عن أبي موسى الأشعري رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ من صلى البردين دخل الجنة‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏",
+      "text_en": "Abu Hurairah (ra) reported that the Prophet said: Whoever goes to the mosque in the morning or evening, Allah prepares for him a place in Paradise every time he goes or returns."
+    },
+    {
+      "id": "hadith_000196",
+      "ref": "riyazussalihin/196",
+      "hadithNo": 196,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 12,
+      "input": {
+        "hadithNo_diyanet": 196,
+        "sunnahNo_candidate": 196,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet\nCihad\nZalim",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "الثالث عشر‏:‏ عن ابن مسعود رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏إن أول ما دخل النقص على بني إسرائيل أنه كان الرجل يلقى الرجل فيقول‏:‏ يا هذا اتق الله ودع ما تصنع فإنه لا يحل لك، ثم يلقاه من الغد وهو على حاله، فلا يمنعه ذلك أن يكون أكيله وشريبه وقعيده، فلما فعلوا ذلك ضرب الله قلوب بعضهم ببعض‏\"‏ ثم قال‏:‏ ‏{‏لعن الذين كفروا من بني إسرائيل على لسان داود وعيسى ابن مريم ذلك بما عصوا وكانوا يعتدون‏.‏ كانوا لا يتناهون عن منكر فعلوه لبئس ما كانوا يفعلون‏.‏ ترى كثيرًا منهم يتولون الذين كفروا لبئس ما قدمت لهم أنفسهم ‏}‏ إلى قوله‏:‏ ‏{‏فاسقون‏}‏ ‏(‏‏(‏المائد‏:‏ 78،81‏)‏‏)‏ ثم قال‏:‏ ‏\"‏ كلا، والله لتأمرن بالمعروف ولتنهون عن المنكر، ولتأخذن على يد الظالم ولتأطرنه على الحق أطرا، ولتقصرنه على الحق قصرا، أو ليضربن الله بقلوب بعضكم على بعض، ثم ليلعننكم كما لعنهم‏\"‏ ‏(‏‏(‏رواه أبو داود، والترمذي وقال‏:‏ حديث حسن‏)‏‏)‏‏.‏\n\nهذا لفظ أبي داود، ولفظ الترمذي‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ ‏لما وقعت بنو إسرائيل في المعاصي نهتهم علماؤهم فلم ينتهوا، فجالسوهم في مجالسهم وواكلوهم وشاربوهم، فضرب الله قلوب بعضهم ببعض، ولعنهم على لسان داود وعيسى ابن مريم ذلك بما عصوا وكانوا يعتدون‏ ‏ فجلس رسول الله صلى الله عليه وسلم، وكان متكئًا فقال‏:‏ ‏ ‏لا والذي نفسي بيده حتى تأطروهم على الحق أطرا‏ ‏‏.‏",
+          "sourceText": "الثالث عشر‏:‏ عن ابن مسعود رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏إن أول ما دخل النقص على بني إسرائيل أنه كان الرجل يلقى الرجل فيقول‏:‏ يا هذا اتق الله ودع ما تصنع فإنه لا يحل لك، ثم يلقاه من الغد وهو على حاله، فلا يمنعه ذلك أن يكون أكيله وشريبه وقعيده، فلما فعلوا ذلك ضرب الله قلوب بعضهم ببعض‏\"‏ ثم قال‏:‏ ‏{‏لعن الذين كفروا من بني إسرائيل على لسان داود وعيسى ابن مريم ذلك بما عصوا وكانوا يعتدون‏.‏ كانوا لا يتناهون عن منكر فعلوه لبئس ما كانوا يفعلون‏.‏ ترى كثيرًا منهم يتولون الذين كفروا لبئس ما قدمت لهم أنفسهم ‏}‏ إلى قوله‏:‏ ‏{‏فاسقون‏}‏ ‏(‏‏(‏المائد‏:‏ 78،81‏)‏‏)‏ ثم قال‏:‏ ‏\"‏ كلا، والله لتأمرن بالمعروف ولتنهون عن المنكر، ولتأخذن على يد الظالم ولتأطرنه على الحق أطرا، ولتقصرنه على الحق قصرا، أو ليضربن الله بقلوب بعضكم على بعض، ثم ليلعننكم كما لعنهم‏\"‏ ‏(‏‏(‏رواه أبو داود، والترمذي وقال‏:‏ حديث حسن‏)‏‏)‏‏.‏\n\nهذا لفظ أبي داود، ولفظ الترمذي‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ ‏لما وقعت بنو إسرائيل في المعاصي نهتهم علماؤهم فلم ينتهوا، فجالسوهم في مجالسهم وواكلوهم وشاربوهم، فضرب الله قلوب بعضهم ببعض، ولعنهم على لسان داود وعيسى ابن مريم ذلك بما عصوا وكانوا يعتدون‏ ‏ فجلس رسول الله صلى الله عليه وسلم، وكان متكئًا فقال‏:‏ ‏ ‏لا والذي نفسي بيده حتى تأطروهم على الحق أطرا‏ ‏‏.‏",
+          "ttsText": "الثالث عشر‏:‏ عن ابن مسعود رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏إن أول ما دخل النقص على بني إسرائيل أنه كان الرجل يلقى الرجل فيقول‏:‏ يا هذا اتق الله ودع ما تصنع فإنه لا يحل لك، ثم يلقاه من الغد وهو على حاله، فلا يمنعه ذلك أن يكون أكيله وشريبه وقعيده، فلما فعلوا ذلك ضرب الله قلوب بعضهم ببعض‏\"‏ ثم قال‏:‏ ‏{‏لعن الذين كفروا من بني إسرائيل على لسان داود وعيسى ابن مريم ذلك بما عصوا وكانوا يعتدون‏.‏ كانوا لا يتناهون عن منكر فعلوه لبئس ما كانوا يفعلون‏.‏ ترى كثيرًا منهم يتولون الذين كفروا لبئس ما قدمت لهم أنفسهم ‏}‏ إلى قوله‏:‏ ‏{‏فاسقون‏}‏ ‏(‏‏(‏المائد‏:‏ 78،81‏)‏‏)‏ ثم قال‏:‏ ‏\"‏ كلا، والله لتأمرن بالمعروف ولتنهون عن المنكر، ولتأخذن على يد الظالم ولتأطرنه على الحق أطرا، ولتقصرنه على الحق قصرا، أو ليضربن الله بقلوب بعضكم على بعض، ثم ليلعننكم كما لعنهم‏\"‏ ‏(‏‏(‏رواه أبو داود، والترمذي وقال‏:‏ حديث حسن‏)‏‏)‏‏.‏\n\nهذا لفظ أبي داود، ولفظ الترمذي‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ ‏لما وقعت بنو إسرائيل في المعاصي نهتهم علماؤهم فلم ينتهوا، فجالسوهم في مجالسهم وواكلوهم وشاربوهم، فضرب الله قلوب بعضهم ببعض، ولعنهم على لسان داود وعيسى ابن مريم ذلك بما عصوا وكانوا يعتدون‏ ‏ فجلس رسول الله صلى الله عليه وسلم، وكان متكئًا فقال‏:‏ ‏ ‏لا والذي نفسي بيده حتى تأطروهم على الحق أطرا‏ ‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Ebû Zeyd Üsâme b. Zeyd b. Hârise’nin (ra) Resûlullah’tan şöyle işittiği nakledilmiştir:\nKıyamet gününde bir kimse getirilir ve cehenneme atılır; bağırsakları karnından dışarıya fırlar; ve o hâliyle değirmen çeviren merkep gibi döner. Cehennemdekiler onun yanına toplanırlar ve:\n–Yâ filan, bu ne hâl! İyiliği emreden ve kötülüğü yasaklayan sen değil miydin, derler. O da:\n–Evet, iyiliği emrederdim fakat onu yapmazdım. Kötülüğü yasaklardım, fakat onu kendim yapardım, der.\nAllah (cc) size, emanetleri ehline vermenizi emrediyor...\n(Nisâ, 4/58)\nŞüphesiz biz emaneti göklere, yere ve dağlara teklif ettik de onlar onu yüklenmek istemediler, ondan çekindiler. Onu insan yüklendi. O çok zalimdir, çok cahildir.\n(Ahzâb, 33/72)",
+          "sourceText": "Ebû Zeyd Üsâme b. Zeyd b. Hârise’nin (ra) Resûlullah’tan şöyle işittiği nakledilmiştir:\nKıyamet gününde bir kimse getirilir ve cehenneme atılır; bağırsakları karnından dışarıya fırlar; ve o hâliyle değirmen çeviren merkep gibi döner. Cehennemdekiler onun yanına toplanırlar ve:\n–Yâ filan, bu ne hâl! İyiliği emreden ve kötülüğü yasaklayan sen değil miydin, derler. O da:\n–Evet, iyiliği emrederdim fakat onu yapmazdım. Kötülüğü yasaklardım, fakat onu kendim yapardım, der.\nAllah (cc) size, emanetleri ehline vermenizi emrediyor...\n(Nisâ, 4/58)\nŞüphesiz biz emaneti göklere, yere ve dağlara teklif ettik de onlar onu yüklenmek istemediler, ondan çekindiler. Onu insan yüklendi. O çok zalimdir, çok cahildir.\n(Ahzâb, 33/72)",
+          "ttsText": "Ebû Zeyd Üsâme b. Zeyd b. Hârise’nin (ra) Resûlullah’tan şöyle işittiği nakledilmiştir:\nKıyamet gününde bir kimse getirilir ve cehenneme atılır; bağırsakları karnından dışarıya fırlar; ve o hâliyle değirmen çeviren merkep gibi döner. Cehennemdekiler onun yanına toplanırlar ve:\n–Yâ filan, bu ne hâl! İyiliği emreden ve kötülüğü yasaklayan sen değil miydin, derler. O da:\n–Evet, iyiliği emrederdim fakat onu yapmazdım. Kötülüğü yasaklardım, fakat onu kendim yapardım, der.\nAllah (cc) size, emanetleri ehline vermenizi emrediyor...\n(Nisâ, 4/58)\nŞüphesiz biz emaneti göklere, yere ve dağlara teklif ettik de onlar onu yüklenmek istemediler, ondan çekindiler. Onu insan yüklendi. O çok zalimdir, çok cahildir.\n(Ahzâb, 33/72)",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Usamah ibn Zayd (ra) reported that he heard the Messenger of Allah say: A man will be brought on the Day of Resurrection and thrown into Hell; his intestines will spill out and he will go around like a donkey around a millstone. The people of Hell will gather around him and ask why, since he used to command good and forbid evil. He will say: I used to command good but not do it, and forbid evil but do it.",
+          "sourceText": "Usamah ibn Zayd (ra) reported that he heard the Messenger of Allah say: A man will be brought on the Day of Resurrection and thrown into Hell; his intestines will spill out and he will go around like a donkey around a millstone. The people of Hell will gather around him and ask why, since he used to command good and forbid evil. He will say: I used to command good but not do it, and forbid evil but do it.",
+          "ttsText": "Usamah ibn Zayd (ra) reported that he heard the Messenger of Allah say: A man will be brought on the Day of Resurrection and thrown into Hell; his intestines will spill out and he will go around like a donkey around a millstone. The people of Hell will gather around him and ask why, since he used to command good and forbid evil. He will say: I used to command good but not do it, and forbid evil but do it.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(M7483 Müslim, Zühd, 51; B3267 Buhârî, Bed’ü’l-halk, 10)",
+          "en": "(M7483 Müslim, Zühd, 51; B3267 Buhârî, Bed’ü’l-halk, 10)"
+        },
+        "sunnah": {
+          "candidateNo": 196,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:196",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet\nCihad\nZalim"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000250",
+      "ref": "riyazussalihin/250",
+      "hadithNo": 250,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 13,
+      "input": {
+        "hadithNo_diyanet": 250,
+        "sunnahNo_candidate": 250,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن عائشة رضي الله عنها قالت‏:‏ سمع رسول الله صلى الله عليه وسلم صوت خصوم بالباب عالية أصواتهما، وإذا أحدهما يستوضع الآخر ويسترفقه في شيء، وهو يقول‏:‏ والله لا أفعل، فخرج عليهما رسول الله صلى الله عليه وسلم فقال‏:‏ “أين المتألي على الله لا يفعل المعروف‏؟‏ ‏\"‏ فقال‏:‏ أنا يا رسول الله ، فله أي ذلك أحب ، ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "sourceText": "وعن عائشة رضي الله عنها قالت‏:‏ سمع رسول الله صلى الله عليه وسلم صوت خصوم بالباب عالية أصواتهما، وإذا أحدهما يستوضع الآخر ويسترفقه في شيء، وهو يقول‏:‏ والله لا أفعل، فخرج عليهما رسول الله صلى الله عليه وسلم فقال‏:‏ “أين المتألي على الله لا يفعل المعروف‏؟‏ ‏\"‏ فقال‏:‏ أنا يا رسول الله ، فله أي ذلك أحب ، ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "ttsText": "وعن عائشة رضي الله عنها قالت‏:‏ سمع رسول الله صلى الله عليه وسلم صوت خصوم بالباب عالية أصواتهما، وإذا أحدهما يستوضع الآخر ويسترفقه في شيء، وهو يقول‏:‏ والله لا أفعل، فخرج عليهما رسول الله صلى الله عليه وسلم فقال‏:‏ “أين المتألي على الله لا يفعل المعروف‏؟‏ ‏\"‏ فقال‏:‏ أنا يا رسول الله ، فله أي ذلك أحب ، ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Hârise b. Vehb’in (ra) Resûlullah’tan şöyle işittiği nakledilmiştir:\nCennetliklerin kimler olduğunu size bildireyim mi? İnsanlar tarafından hor görülüp hiçe sayılan, zayıf, alçak gönüllü kimselerdir; eğer Allah’a yemin etse Allah onu yemininde doğru çıkarır.\nCehennemliklerin kim olduğunu bildireyim mi? Onlar da, katı kalpli, kaba saba ve kurularak yürüyen, kibirli kimselerdir.",
+          "sourceText": "Hârise b. Vehb’in (ra) Resûlullah’tan şöyle işittiği nakledilmiştir:\nCennetliklerin kimler olduğunu size bildireyim mi? İnsanlar tarafından hor görülüp hiçe sayılan, zayıf, alçak gönüllü kimselerdir; eğer Allah’a yemin etse Allah onu yemininde doğru çıkarır.\nCehennemliklerin kim olduğunu bildireyim mi? Onlar da, katı kalpli, kaba saba ve kurularak yürüyen, kibirli kimselerdir.",
+          "ttsText": "Hârise b. Vehb’in (ra) Resûlullah’tan şöyle işittiği nakledilmiştir:\nCennetliklerin kimler olduğunu size bildireyim mi? İnsanlar tarafından hor görülüp hiçe sayılan, zayıf, alçak gönüllü kimselerdir; eğer Allah’a yemin etse Allah onu yemininde doğru çıkarır.\nCehennemliklerin kim olduğunu bildireyim mi? Onlar da, katı kalpli, kaba saba ve kurularak yürüyen, kibirli kimselerdir.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Harithah ibn Wahb (ra) reported that he heard the Messenger of Allah say: Shall I tell you who the people of Paradise are? Every weak, humble person who is disregarded by people; if he swore by Allah, Allah would fulfill his oath. Shall I tell you who the people of Hell are? Every harsh, arrogant and proud person.",
+          "sourceText": "Harithah ibn Wahb (ra) reported that he heard the Messenger of Allah say: Shall I tell you who the people of Paradise are? Every weak, humble person who is disregarded by people; if he swore by Allah, Allah would fulfill his oath. Shall I tell you who the people of Hell are? Every harsh, arrogant and proud person.",
+          "ttsText": "Harithah ibn Wahb (ra) reported that he heard the Messenger of Allah say: Shall I tell you who the people of Paradise are? Every weak, humble person who is disregarded by people; if he swore by Allah, Allah would fulfill his oath. Shall I tell you who the people of Hell are? Every harsh, arrogant and proud person.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(B4918 Buhârî, Tefsîr, (Kalem)1; M7187 Müslim, Cennet, 46)",
+          "en": "(B4918 Buhârî, Tefsîr, (Kalem)1; M7187 Müslim, Cennet, 46)"
+        },
+        "sunnah": {
+          "candidateNo": 250,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:250",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000355",
+      "ref": "riyazussalihin/355",
+      "hadithNo": 355,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 14,
+      "input": {
+        "hadithNo_diyanet": 355,
+        "sunnahNo_candidate": 355,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet\nDevlet Başkanı",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن عمرو بن شعيب، عن أبيه ، عن جده رضي الله عنهم قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ليس منا من لم يرحم صغيرنا، ويعرف شرف كبيرنا‏\"‏ ‏(‏‏(‏حديث صحيح رواه أبو داود والترمذي، وقال الترمذي‏:‏ حديث حسن صحيح‏)‏‏)‏‏.‏",
+          "sourceText": "وعن عمرو بن شعيب، عن أبيه ، عن جده رضي الله عنهم قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ليس منا من لم يرحم صغيرنا، ويعرف شرف كبيرنا‏\"‏ ‏(‏‏(‏حديث صحيح رواه أبو داود والترمذي، وقال الترمذي‏:‏ حديث حسن صحيح‏)‏‏)‏‏.‏",
+          "ttsText": "وعن عمرو بن شعيب، عن أبيه ، عن جده رضي الله عنهم قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏ \"‏ليس منا من لم يرحم صغيرنا، ويعرف شرف كبيرنا‏\"‏ ‏(‏‏(‏حديث صحيح رواه أبو داود والترمذي، وقال الترمذي‏:‏ حديث حسن صحيح‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Meymûn b. Ebû Şebîb (ra) anlatıyor:\nBir gün Âişe’ye (ra) bir dilenci gelmişti. Ona bir parça ekmek verdi. Kılığı kıyafeti yerinde bir adam daha gelmişti. Onu da sofraya oturtmuş, o kimse de yemek yemişti. Sebebini soranlara Âişe:\n“Resûlullah, ‘Herkese konumuna göre davranın.’ buyurdu.” diye cevap verdi.\nAncak ravi Meymûn, Hz. Âişe’ye erişmemiştir. Müslim bu hadisi, Sahîh ’inin baş kısmında isnadsız olarak rivayet etmiş ve şöyle demiştir:\nHz. Âişe’den (ra) rivayet edildiğine göre o, “Resûlullah bize, insanlara, konumlarına göre muamele etmemizi emir buyurmuştu.” demiştir.\n(Müslim, Mukaddime)",
+          "sourceText": "Meymûn b. Ebû Şebîb (ra) anlatıyor:\nBir gün Âişe’ye (ra) bir dilenci gelmişti. Ona bir parça ekmek verdi. Kılığı kıyafeti yerinde bir adam daha gelmişti. Onu da sofraya oturtmuş, o kimse de yemek yemişti. Sebebini soranlara Âişe:\n“Resûlullah, ‘Herkese konumuna göre davranın.’ buyurdu.” diye cevap verdi.\nAncak ravi Meymûn, Hz. Âişe’ye erişmemiştir. Müslim bu hadisi, Sahîh ’inin baş kısmında isnadsız olarak rivayet etmiş ve şöyle demiştir:\nHz. Âişe’den (ra) rivayet edildiğine göre o, “Resûlullah bize, insanlara, konumlarına göre muamele etmemizi emir buyurmuştu.” demiştir.\n(Müslim, Mukaddime)",
+          "ttsText": "Meymûn b. Ebû Şebîb (ra) anlatıyor:\nBir gün Âişe’ye (ra) bir dilenci gelmişti. Ona bir parça ekmek verdi. Kılığı kıyafeti yerinde bir adam daha gelmişti. Onu da sofraya oturtmuş, o kimse de yemek yemişti. Sebebini soranlara Âişe:\n“Resûlullah, ‘Herkese konumuna göre davranın.’ buyurdu.” diye cevap verdi.\nAncak ravi Meymûn, Hz. Âişe’ye erişmemiştir. Müslim bu hadisi, Sahîh ’inin baş kısmında isnadsız olarak rivayet etmiş ve şöyle demiştir:\nHz. Âişe’den (ra) rivayet edildiğine göre o, “Resûlullah bize, insanlara, konumlarına göre muamele etmemizi emir buyurmuştu.” demiştir.\n(Müslim, Mukaddime)",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Maymun ibn Abi Shabib reported that a beggar came to Aishah (ra), and she gave him a piece of bread. Then a well-dressed man came, and she seated him and fed him. When asked about this, she said: The Messenger of Allah said, “Give people the position they deserve.”",
+          "sourceText": "Maymun ibn Abi Shabib reported that a beggar came to Aishah (ra), and she gave him a piece of bread. Then a well-dressed man came, and she seated him and fed him. When asked about this, she said: The Messenger of Allah said, “Give people the position they deserve.”",
+          "ttsText": "Maymun ibn Abi Shabib reported that a beggar came to Aishah (ra), and she gave him a piece of bread. Then a well-dressed man came, and she seated him and fed him. When asked about this, she said: The Messenger of Allah said, “Give people the position they deserve.”",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(D4842 Ebû Dâvûd, Edeb, 20)",
+          "en": "(D4842 Ebû Dâvûd, Edeb, 20)"
+        },
+        "sunnah": {
+          "candidateNo": 355,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:355",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet\nDevlet Başkanı"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000358",
+      "ref": "riyazussalihin/358",
+      "hadithNo": 358,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 15,
+      "input": {
+        "hadithNo_diyanet": 358,
+        "sunnahNo_candidate": 358,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet\nCahillik\nİyiliği Emretmek",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن أبي سعيد سمرة بن جندب رضي الله عنه قال‏:‏ لقد كنت على عهد رسول الله صلى الله عليه وسلم غلامًا ، فكنت أحفظ عنه، فما يمنعني من القول إلا أن ههنا رجالاً أسن مني‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "sourceText": "وعن أبي سعيد سمرة بن جندب رضي الله عنه قال‏:‏ لقد كنت على عهد رسول الله صلى الله عليه وسلم غلامًا ، فكنت أحفظ عنه، فما يمنعني من القول إلا أن ههنا رجالاً أسن مني‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "ttsText": "وعن أبي سعيد سمرة بن جندب رضي الله عنه قال‏:‏ لقد كنت على عهد رسول الله صلى الله عليه وسلم غلامًا ، فكنت أحفظ عنه، فما يمنعني من القول إلا أن ههنا رجالاً أسن مني‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Enes’ten (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nHerhangi bir genç, bir ihtiyara yaşından dolayı hürmet ederse, Allah da ihtiyarlığında ona hizmet edecek kimseler lütfeder.\nHani Mûsâ, beraberindeki gence şöyle demişti: “İki denizin birleştiği yere varıncaya kadar durmayacağım, ya da uzun zaman gideceğim.” …Mûsâ ona, “Sana öğretilen bilgilerden bana, doğruya iletici bir bilgi öğretmen için sana tabi olayım mı?” dedi.\n(Kehf, 18/60, 66)\nSabah akşam Rablerine, O’nun rızasını dileyerek dua edenlerle birlikte nefsini tut!\n(Kehf, 18/28)",
+          "sourceText": "Enes’ten (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nHerhangi bir genç, bir ihtiyara yaşından dolayı hürmet ederse, Allah da ihtiyarlığında ona hizmet edecek kimseler lütfeder.\nHani Mûsâ, beraberindeki gence şöyle demişti: “İki denizin birleştiği yere varıncaya kadar durmayacağım, ya da uzun zaman gideceğim.” …Mûsâ ona, “Sana öğretilen bilgilerden bana, doğruya iletici bir bilgi öğretmen için sana tabi olayım mı?” dedi.\n(Kehf, 18/60, 66)\nSabah akşam Rablerine, O’nun rızasını dileyerek dua edenlerle birlikte nefsini tut!\n(Kehf, 18/28)",
+          "ttsText": "Enes’ten (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nHerhangi bir genç, bir ihtiyara yaşından dolayı hürmet ederse, Allah da ihtiyarlığında ona hizmet edecek kimseler lütfeder.\nHani Mûsâ, beraberindeki gence şöyle demişti: “İki denizin birleştiği yere varıncaya kadar durmayacağım, ya da uzun zaman gideceğim.” …Mûsâ ona, “Sana öğretilen bilgilerden bana, doğruya iletici bir bilgi öğretmen için sana tabi olayım mı?” dedi.\n(Kehf, 18/60, 66)\nSabah akşam Rablerine, O’nun rızasını dileyerek dua edenlerle birlikte nefsini tut!\n(Kehf, 18/28)",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Anas (ra) reported that the Messenger of Allah said: No young person honors an elder because of his age except that Allah appoints someone to honor him when he becomes old.",
+          "sourceText": "Anas (ra) reported that the Messenger of Allah said: No young person honors an elder because of his age except that Allah appoints someone to honor him when he becomes old.",
+          "ttsText": "Anas (ra) reported that the Messenger of Allah said: No young person honors an elder because of his age except that Allah appoints someone to honor him when he becomes old.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(T2022 Tirmizî, Birr, 75)",
+          "en": "(T2022 Tirmizî, Birr, 75)"
+        },
+        "sunnah": {
+          "candidateNo": 358,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:358",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet\nCahillik\nİyiliği Emretmek"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000450",
+      "ref": "riyazussalihin/450",
+      "hadithNo": 450,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 16,
+      "input": {
+        "hadithNo_diyanet": 450,
+        "sunnahNo_candidate": 450,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet\nAğlamak",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن عبد الله بن الشخير، رضي الله عنه ، قال‏:‏ أتيت رسول الله صلى الله عليه وسلم، وهو يصلي ولجوفه أزيز كأزير المرجل من البكاء‏.‏ ‏(‏‏(‏حديث صحيح رواه أبو داود، والترمذي بإسناد صحيح‏)‏‏)‏‏.‏",
+          "sourceText": "وعن عبد الله بن الشخير، رضي الله عنه ، قال‏:‏ أتيت رسول الله صلى الله عليه وسلم، وهو يصلي ولجوفه أزيز كأزير المرجل من البكاء‏.‏ ‏(‏‏(‏حديث صحيح رواه أبو داود، والترمذي بإسناد صحيح‏)‏‏)‏‏.‏",
+          "ttsText": "وعن عبد الله بن الشخير، رضي الله عنه ، قال‏:‏ أتيت رسول الله صلى الله عليه وسلم، وهو يصلي ولجوفه أزيز كأزير المرجل من البكاء‏.‏ ‏(‏‏(‏حديث صحيح رواه أبو داود، والترمذي بإسناد صحيح‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Enes (ra) şöyle demiştir:\nResûlullah, benzerini daha önce işitmediğim bir konuşma yaptı ve:\nEğer siz benim bildiklerimi bilmiş olsaydınız, az güler çok ağlardınız, dedi.\nRavi diyor ki: Bunun üzerine Resûlullah’ın arkadaşları, yüzlerini kapatıp hıçkıra hıçkıra ağladılar.",
+          "sourceText": "Enes (ra) şöyle demiştir:\nResûlullah, benzerini daha önce işitmediğim bir konuşma yaptı ve:\nEğer siz benim bildiklerimi bilmiş olsaydınız, az güler çok ağlardınız, dedi.\nRavi diyor ki: Bunun üzerine Resûlullah’ın arkadaşları, yüzlerini kapatıp hıçkıra hıçkıra ağladılar.",
+          "ttsText": "Enes (ra) şöyle demiştir:\nResûlullah, benzerini daha önce işitmediğim bir konuşma yaptı ve:\nEğer siz benim bildiklerimi bilmiş olsaydınız, az güler çok ağlardınız, dedi.\nRavi diyor ki: Bunun üzerine Resûlullah’ın arkadaşları, yüzlerini kapatıp hıçkıra hıçkıra ağladılar.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Anas (ra) said: The Messenger of Allah gave a sermon unlike any I had heard before and said: If you knew what I know, you would laugh little and weep much. The Companions covered their faces and wept.",
+          "sourceText": "Anas (ra) said: The Messenger of Allah gave a sermon unlike any I had heard before and said: If you knew what I know, you would laugh little and weep much. The Companions covered their faces and wept.",
+          "ttsText": "Anas (ra) said: The Messenger of Allah gave a sermon unlike any I had heard before and said: If you knew what I know, you would laugh little and weep much. The Companions covered their faces and wept.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(B4621 Buhârî, Tefsîr, (Mâide) 12; M6119 Müslim, Fedâil, 134)",
+          "en": "(B4621 Buhârî, Tefsîr, (Mâide) 12; M6119 Müslim, Fedâil, 134)"
+        },
+        "sunnah": {
+          "candidateNo": 450,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:450",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet\nAğlamak"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000660",
+      "ref": "riyazussalihin/660",
+      "hadithNo": 660,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 17,
+      "input": {
+        "hadithNo_diyanet": 660,
+        "sunnahNo_candidate": 660,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet\nDevlet Başkanı",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن عوف بن مالك رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ “خياركم أئمتكم الذين تحبونهم ويحبونكم، وتصلون عليهم ويصلون عليكم، وشرار أئمتكم الذين تبغضونهم ويبغضونكم، وتلعنونهم ويلعنونهم‏!‏” قال‏:‏ قلنا يا رسول الله، أفلا ننابذه‏؟‏ قال‏:‏ لا، ما أقاموا فيكم الصلاة، لا ما أقاموا فيكم الصلاة” ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+          "sourceText": "وعن عوف بن مالك رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ “خياركم أئمتكم الذين تحبونهم ويحبونكم، وتصلون عليهم ويصلون عليكم، وشرار أئمتكم الذين تبغضونهم ويبغضونكم، وتلعنونهم ويلعنونهم‏!‏” قال‏:‏ قلنا يا رسول الله، أفلا ننابذه‏؟‏ قال‏:‏ لا، ما أقاموا فيكم الصلاة، لا ما أقاموا فيكم الصلاة” ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+          "ttsText": "وعن عوف بن مالك رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ “خياركم أئمتكم الذين تحبونهم ويحبونكم، وتصلون عليهم ويصلون عليكم، وشرار أئمتكم الذين تبغضونهم ويبغضونكم، وتلعنونهم ويلعنونهم‏!‏” قال‏:‏ قلنا يا رسول الله، أفلا ننابذه‏؟‏ قال‏:‏ لا، ما أقاموا فيكم الصلاة، لا ما أقاموا فيكم الصلاة” ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Âiz b. Amr’dan (ra) rivayet edildiğine göre o, Ubeydullah b. Ziyâd’ın yanına girmiş ve ona şöyle demiştir:\nOğlum, ben Resûlullah’ın, “Yöneticilerin en kötüsü, zorba olanlardır.” dediğini işittim. Sen, sakın onlardan olma.",
+          "sourceText": "Âiz b. Amr’dan (ra) rivayet edildiğine göre o, Ubeydullah b. Ziyâd’ın yanına girmiş ve ona şöyle demiştir:\nOğlum, ben Resûlullah’ın, “Yöneticilerin en kötüsü, zorba olanlardır.” dediğini işittim. Sen, sakın onlardan olma.",
+          "ttsText": "Âiz b. Amr’dan (ra) rivayet edildiğine göre o, Ubeydullah b. Ziyâd’ın yanına girmiş ve ona şöyle demiştir:\nOğlum, ben Resûlullah’ın, “Yöneticilerin en kötüsü, zorba olanlardır.” dediğini işittim. Sen, sakın onlardan olma.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "A'idh ibn Amr (ra) entered upon Ubaydullah ibn Ziyad and said: My son, I heard the Messenger of Allah say, “The worst of rulers are the harsh and oppressive ones.” Beware lest you be one of them.",
+          "sourceText": "A'idh ibn Amr (ra) entered upon Ubaydullah ibn Ziyad and said: My son, I heard the Messenger of Allah say, “The worst of rulers are the harsh and oppressive ones.” Beware lest you be one of them.",
+          "ttsText": "A'idh ibn Amr (ra) entered upon Ubaydullah ibn Ziyad and said: My son, I heard the Messenger of Allah say, “The worst of rulers are the harsh and oppressive ones.” Beware lest you be one of them.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(M4733 Müslim, İmâre, 23)",
+          "en": "(M4733 Müslim, İmâre, 23)"
+        },
+        "sunnah": {
+          "candidateNo": 660,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:660",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet\nDevlet Başkanı"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000661",
+      "ref": "riyazussalihin/661",
+      "hadithNo": 661,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 18,
+      "input": {
+        "hadithNo_diyanet": 661,
+        "sunnahNo_candidate": 661,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن عياض بن حمار رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ “أهل الجنة ثلاثة‏:‏ ذو سلطان مقسط موفق، ورجل رحيم رفيق القلب لكل ذي قربى ومسلم، وعفيف متعفف ذو عيال”‏.‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+          "sourceText": "وعن عياض بن حمار رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ “أهل الجنة ثلاثة‏:‏ ذو سلطان مقسط موفق، ورجل رحيم رفيق القلب لكل ذي قربى ومسلم، وعفيف متعفف ذو عيال”‏.‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+          "ttsText": "وعن عياض بن حمار رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ “أهل الجنة ثلاثة‏:‏ ذو سلطان مقسط موفق، ورجل رحيم رفيق القلب لكل ذي قربى ومسلم، وعفيف متعفف ذو عيال”‏.‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Ebû Meryem el-Ezdî’den (ra) nakledildiğine göre o, Muâviye’ye (ra) şöyle demiştir:\nResûlullah’ın, “Allah birini Müslümanların başına idareci yapar da o kimse, (halkla arasına engeller koyarak) Müslümanların dertleri, sıkıntıları ve ihtiyaçlarıyla ilgilenmezse, Allah da kıyamet gününde onun derdi, sıkıntısı ve ihtiyacı ile ilgilenmez.” buyurduğunu işittim.\nBunun üzerine Muâviye, halkın (şikâyetlerini dinlemek) ve ihtiyaçlarını kendisine iletmek üzere bir adam görevlendirdi.\nŞüphesiz Allah, adaleti ve ihsanı … emreder...\n(Nahl, 16/90)\n...ve (onlara) adaletli davranın. Çünkü Allah, adaletli davrananları sever.\n(Hucurât, 49/9)",
+          "sourceText": "Ebû Meryem el-Ezdî’den (ra) nakledildiğine göre o, Muâviye’ye (ra) şöyle demiştir:\nResûlullah’ın, “Allah birini Müslümanların başına idareci yapar da o kimse, (halkla arasına engeller koyarak) Müslümanların dertleri, sıkıntıları ve ihtiyaçlarıyla ilgilenmezse, Allah da kıyamet gününde onun derdi, sıkıntısı ve ihtiyacı ile ilgilenmez.” buyurduğunu işittim.\nBunun üzerine Muâviye, halkın (şikâyetlerini dinlemek) ve ihtiyaçlarını kendisine iletmek üzere bir adam görevlendirdi.\nŞüphesiz Allah, adaleti ve ihsanı … emreder...\n(Nahl, 16/90)\n...ve (onlara) adaletli davranın. Çünkü Allah, adaletli davrananları sever.\n(Hucurât, 49/9)",
+          "ttsText": "Ebû Meryem el-Ezdî’den (ra) nakledildiğine göre o, Muâviye’ye (ra) şöyle demiştir:\nResûlullah’ın, “Allah birini Müslümanların başına idareci yapar da o kimse, (halkla arasına engeller koyarak) Müslümanların dertleri, sıkıntıları ve ihtiyaçlarıyla ilgilenmezse, Allah da kıyamet gününde onun derdi, sıkıntısı ve ihtiyacı ile ilgilenmez.” buyurduğunu işittim.\nBunun üzerine Muâviye, halkın (şikâyetlerini dinlemek) ve ihtiyaçlarını kendisine iletmek üzere bir adam görevlendirdi.\nŞüphesiz Allah, adaleti ve ihsanı … emreder...\n(Nahl, 16/90)\n...ve (onlara) adaletli davranın. Çünkü Allah, adaletli davrananları sever.\n(Hucurât, 49/9)",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Abu Maryam al-Azdi (ra) said to Mu'awiyah: I heard the Messenger of Allah say: When Allah appoints someone over the Muslims and he shuts himself off from their needs, poverty and difficulties, Allah will shut Himself off from his need, poverty and difficulty on the Day of Resurrection.",
+          "sourceText": "Abu Maryam al-Azdi (ra) said to Mu'awiyah: I heard the Messenger of Allah say: When Allah appoints someone over the Muslims and he shuts himself off from their needs, poverty and difficulties, Allah will shut Himself off from his need, poverty and difficulty on the Day of Resurrection.",
+          "ttsText": "Abu Maryam al-Azdi (ra) said to Mu'awiyah: I heard the Messenger of Allah say: When Allah appoints someone over the Muslims and he shuts himself off from their needs, poverty and difficulties, Allah will shut Himself off from his need, poverty and difficulty on the Day of Resurrection.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(D2948 Ebû Dâvûd, İmâre, 13; T1332 Tirmizî, Ahkâm, 6)",
+          "en": "(D2948 Ebû Dâvûd, İmâre, 13; T1332 Tirmizî, Ahkâm, 6)"
+        },
+        "sunnah": {
+          "candidateNo": 661,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:661",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000663",
+      "ref": "riyazussalihin/663",
+      "hadithNo": 663,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 19,
+      "input": {
+        "hadithNo_diyanet": 663,
+        "sunnahNo_candidate": 663,
+        "first_topic_tr": "Adalet",
+        "topics_tr": "Adalet\nCennet Ehli\nDevlet Başkanı",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعنه قال‏:‏ كنا إذا بايعنا رسول الله صلى الله عليه وسلم على السمع والطاعة يقول لنا‏:‏ “فيما استطعتم” ‏(‏‏(‏متفق عليه‏)‏‏)‏",
+          "sourceText": "وعنه قال‏:‏ كنا إذا بايعنا رسول الله صلى الله عليه وسلم على السمع والطاعة يقول لنا‏:‏ “فيما استطعتم” ‏(‏‏(‏متفق عليه‏)‏‏)‏",
+          "ttsText": "وعنه قال‏:‏ كنا إذا بايعنا رسول الله صلى الله عليه وسلم على السمع والطاعة يقول لنا‏:‏ “فيما استطعتم” ‏(‏‏(‏متفق عليه‏)‏‏)‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Abdullah b. Amr b. Âs’tan (ra) rivayet edildiğine göre Resûlullah şöyle demiştir:\nAilesi ve idaresi altında bulunanların hak ve hukukunda adaletle davrananlar, Allah katında nurdan koltuklara otururlar.",
+          "sourceText": "Abdullah b. Amr b. Âs’tan (ra) rivayet edildiğine göre Resûlullah şöyle demiştir:\nAilesi ve idaresi altında bulunanların hak ve hukukunda adaletle davrananlar, Allah katında nurdan koltuklara otururlar.",
+          "ttsText": "Abdullah b. Amr b. Âs’tan (ra) rivayet edildiğine göre Resûlullah şöyle demiştir:\nAilesi ve idaresi altında bulunanların hak ve hukukunda adaletle davrananlar, Allah katında nurdan koltuklara otururlar.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Abdullah ibn Amr ibn al-'As (ra) reported that the Messenger of Allah said: Those who are just in dealing with their families and those under their authority will be on pulpits of light near Allah.",
+          "sourceText": "Abdullah ibn Amr ibn al-'As (ra) reported that the Messenger of Allah said: Those who are just in dealing with their families and those under their authority will be on pulpits of light near Allah.",
+          "ttsText": "Abdullah ibn Amr ibn al-'As (ra) reported that the Messenger of Allah said: Those who are just in dealing with their families and those under their authority will be on pulpits of light near Allah.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(M4721 Müslim, İmâre, 18)",
+          "en": "(M4721 Müslim, İmâre, 18)"
+        },
+        "sunnah": {
+          "candidateNo": 663,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:663",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adalet",
+        "topics_tr": "Adalet\nCennet Ehli\nDevlet Başkanı"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "hadith_000052",
+      "ref": "riyazussalihin/52",
+      "hadithNo": 52,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 20,
+      "input": {
+        "hadithNo_diyanet": 52,
+        "sunnahNo_candidate": 52,
+        "first_topic_tr": "Adam Kayırma",
+        "topics_tr": "Adam Kayırma",
+        "matchStatus": "xlsx_import_pending_review",
+        "note": "Hadis pilot xlsx kaynagindan dogrudan unicode olarak aktarıldı."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن أبي يحيى أسيد بن حضير رضي الله عنه أن رجلاً من الأنصار قال‏:‏ يا رسول الله ألا تستعملني كما استعملت فلاناً فقال‏:‏ ‏ \"‏إنكم ستلقون بعدي أثرة، فاصبروا حتى تلقوني على الحوض‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "sourceText": "وعن أبي يحيى أسيد بن حضير رضي الله عنه أن رجلاً من الأنصار قال‏:‏ يا رسول الله ألا تستعملني كما استعملت فلاناً فقال‏:‏ ‏ \"‏إنكم ستلقون بعدي أثرة، فاصبروا حتى تلقوني على الحوض‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "ttsText": "وعن أبي يحيى أسيد بن حضير رضي الله عنه أن رجلاً من الأنصار قال‏:‏ يا رسول الله ألا تستعملني كما استعملت فلاناً فقال‏:‏ ‏ \"‏إنكم ستلقون بعدي أثرة، فاصبروا حتى تلقوني على الحوض‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "sunnah_com_replaced_pending_review"
+        },
+        "tr": {
+          "clean": "Ebû Yahyâ Üseyd b. Hudayr (ra) anlatıyor:\n–Ey Allah’ın Resûlü, filan kimseyi vali tayin ettiğiniz gibi, beni de vali tayin etmez misin, dedi. Peygamber :\n–Siz benden sonra adam kayırma gibi durumlarla karşılaşacaksınız, bana (âhirette) havuz başında kavuşuncaya kadar sabredin, buyurdu.",
+          "sourceText": "Ebû Yahyâ Üseyd b. Hudayr (ra) anlatıyor:\n–Ey Allah’ın Resûlü, filan kimseyi vali tayin ettiğiniz gibi, beni de vali tayin etmez misin, dedi. Peygamber :\n–Siz benden sonra adam kayırma gibi durumlarla karşılaşacaksınız, bana (âhirette) havuz başında kavuşuncaya kadar sabredin, buyurdu.",
+          "ttsText": "Ebû Yahyâ Üseyd b. Hudayr (ra) anlatıyor:\n–Ey Allah’ın Resûlü, filan kimseyi vali tayin ettiğiniz gibi, beni de vali tayin etmez misin, dedi. Peygamber :\n–Siz benden sonra adam kayırma gibi durumlarla karşılaşacaksınız, bana (âhirette) havuz başında kavuşuncaya kadar sabredin, buyurdu.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Usayd ibn Hudayr (ra) reported that a man from the Ansar said: O Messenger of Allah, will you not appoint me as you appointed so-and-so? He said: After me you will encounter favoritism, so be patient until you meet me at the Hawd.",
+          "sourceText": "Usayd ibn Hudayr (ra) reported that a man from the Ansar said: O Messenger of Allah, will you not appoint me as you appointed so-and-so? He said: After me you will encounter favoritism, so be patient until you meet me at the Hawd.",
+          "ttsText": "Usayd ibn Hudayr (ra) reported that a man from the Ansar said: O Messenger of Allah, will you not appoint me as you appointed so-and-so? He said: After me you will encounter favoritism, so be patient until you meet me at the Hawd.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "display": {
+          "tr": "(B3792 Buhârî, Menâkıbü’l-ensâr, 8; M4779 Müslim, İmâre, 48)",
+          "en": "(B3792 Buhârî, Menâkıbü’l-ensâr, 8; M4779 Müslim, İmâre, 48)"
+        },
+        "sunnah": {
+          "candidateNo": 52,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:52",
+          "matchStatus": "xlsx_import_pending_review"
+        }
+      },
+      "review": {
+        "status": "pending",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false
+      },
+      "tags": {
+        "firstTopic_tr": "Adam Kayırma",
+        "topics_tr": "Adam Kayırma"
+      },
+      "status": "pending"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "project": "M_HaydiNamaza",
+    "contentType": "hadith",
+    "sourceList": "Hadis_440.xlsx",
+    "count": 0,
+    "generatedAt": "2026-06-02T13:47:02.940471+00:00",
+    "status": "approved_review",
+    "sources": {
+      "turkish": "Diyanet Dijital Riyazü’s-Salihin Metin ve Çeviri / uploaded Hadis_440.xlsx",
+      "arabic_english": "Sunnah.com data from uploaded hadith-json-1.2.0.zip, riyad_assalihin.json"
+    },
+    "notes": [
+      "Arabic text is taken from Sunnah source block with narrator/introduction preserved, per user decision.",
+      "Turkish text is taken from the Diyanet-derived uploaded 440 workbook.",
+      "English text is taken from the same Sunnah source as Arabic.",
+      "Rows with low Arabic similarity are filled by local sequence offset and marked for manual review."
+    ],
+    "qualitySummary": {
+      "total": 440,
+      "highConfidence": 337,
+      "needsManualReview": 103
+    }
+  },
+  "items": []
+}

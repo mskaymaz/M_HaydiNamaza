@@ -788,7 +788,7 @@
           }
         }
       ],
-      "status": "pending_review",
+      "status": "pending",
       "review": {
         "status": "pending_review",
         "priority_key": "normal",
@@ -799,7 +799,10 @@
         },
         "note": "",
         "updated_at": null
-      }
+      },
+      "text_tr": "Kalplerinde hastalık vardır. Allah da hastalıklarını arttırmıştır. Yalan söylemekte olduklarından dolayı, onlar için acı bir azap vardır.",
+      "text_ar": "فِى قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ ٱللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ",
+      "text_en": "In their hearts is disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie."
     },
     {
       "ref": "002/011",

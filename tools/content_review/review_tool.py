@@ -70,6 +70,26 @@ def _normalize_priority(value: Any) -> str:
     return "normal"
 
 
+def _first_non_empty_str(*values: Any, fallback: str = "") -> str:
+    for value in values:
+        text = str(value or "").strip()
+        if text:
+            return text
+    return fallback
+
+
+def _default_hadith_input_path(repo_root: Path) -> Path:
+    candidates = [
+        repo_root / "Besmele" / "data" / "content_seed" / "hadiths.pending_review.v1.json",
+        repo_root / "Besmele" / "data" / "content_seed" / "hadis" / "hadiths.pending_review.440.clean_sunnah_ar_en.v1.json",
+        repo_root / "assets" / "data" / "daily_content" / "approved" / "hadiths.v1.approved.json",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return candidates[0]
+
+
 @dataclass(frozen=True)
 class InputConfig:
     ayah_path: Path
@@ -131,11 +151,7 @@ class ReviewStore:
 
     def _apply_dataset_filter(self, dataset_filter: str, save_state: bool) -> None:
         self._load_dataset_if_needed(dataset_filter)
-        all_records = list(self._view_records_by_dataset.get(dataset_filter, []))
         self.records = self._visible_records_for_review(dataset_filter)
-
-        if not all_records:
-            raise RuntimeError(f"No records found for dataset={dataset_filter} in input files.")
 
         self.state.setdefault("cursors", {"ayah": 0, "hadith": 0})
         cursors = self.state.get("cursors")
@@ -217,6 +233,67 @@ class ReviewStore:
             out.setdefault("text_ar", ReviewStore._join_structured_ayah_text(out, "ar"))
             out.setdefault("text_en", ReviewStore._join_structured_ayah_text(out, "en"))
             out["_structured_ayah"] = True
+        if dataset == "hadith":
+            out.setdefault(
+                "text_tr",
+                _first_non_empty_str(
+                    out.get("text_tr"),
+                    ReviewStore._join_structured_hadith_text(out, "tr"),
+                    fallback="-",
+                ),
+            )
+            out.setdefault(
+                "text_ar",
+                _first_non_empty_str(
+                    out.get("text_ar"),
+                    ReviewStore._join_structured_hadith_text(out, "ar"),
+                    fallback="-",
+                ),
+            )
+            out.setdefault(
+                "text_en",
+                _first_non_empty_str(
+                    out.get("text_en"),
+                    ReviewStore._join_structured_hadith_text(out, "en"),
+                    fallback="-",
+                ),
+            )
+            out.setdefault("hadith_number", out.get("hadithNo", out.get("hadith_number", "-")))
+            out.setdefault("collection_slug", out.get("groupKey", out.get("collection_slug", "-")))
+            out.setdefault(
+                "collection_name_tr",
+                _first_non_empty_str(
+                    out.get("collection_name_tr"),
+                    ReviewStore._structured_hadith_collection_name(out),
+                    out.get("groupKey"),
+                    fallback="-",
+                ),
+            )
+            out.setdefault(
+                "reference",
+                _first_non_empty_str(
+                    out.get("reference"),
+                    out.get("ref"),
+                    fallback="-",
+                ),
+            )
+            out.setdefault(
+                "narrator",
+                _first_non_empty_str(
+                    out.get("narrator"),
+                    ReviewStore._structured_hadith_narrator(out),
+                    fallback="-",
+                ),
+            )
+            out.setdefault(
+                "book_reference_tr",
+                _first_non_empty_str(
+                    out.get("book_reference_tr"),
+                    ReviewStore._structured_hadith_book_reference(out),
+                ),
+            )
+            if isinstance(out.get("text"), dict) or isinstance(out.get("sourceInfo"), dict):
+                out["_structured_hadith"] = True
         out["_dataset"] = dataset
         out["_record_index"] = record_index
         out["_record_key"] = f"{dataset}:{out['id']}"
@@ -250,6 +327,61 @@ class ReviewStore:
             if text:
                 parts.append(text)
         return "\n\n".join(parts)
+
+    @staticmethod
+    def _join_structured_hadith_text(record: dict[str, Any], language: str) -> str:
+        text_obj = record.get("text")
+        if not isinstance(text_obj, dict):
+            return ""
+        lang_obj = text_obj.get(language)
+        if isinstance(lang_obj, dict):
+            return _first_non_empty_str(
+                lang_obj.get("clean"),
+                lang_obj.get("ttsText"),
+                lang_obj.get("sourceText"),
+            )
+        return str(lang_obj or "").strip()
+
+    @staticmethod
+    def _structured_hadith_collection_name(record: dict[str, Any]) -> str:
+        source_info = record.get("sourceInfo")
+        if not isinstance(source_info, dict):
+            return ""
+        primary = source_info.get("primaryCollection")
+        if not isinstance(primary, dict):
+            return ""
+        return _first_non_empty_str(primary.get("title_tr"), primary.get("key"))
+
+    @staticmethod
+    def _structured_hadith_narrator(record: dict[str, Any]) -> str:
+        speaker = record.get("speaker")
+        if not isinstance(speaker, dict):
+            return ""
+        return _first_non_empty_str(speaker.get("rawi_tr"), speaker.get("rawi_en"), speaker.get("rawi_ar"))
+
+    @staticmethod
+    def _structured_hadith_book_reference(record: dict[str, Any]) -> str:
+        source_info = record.get("sourceInfo")
+        if not isinstance(source_info, dict):
+            return ""
+        display = source_info.get("display")
+        if not isinstance(display, dict):
+            return ""
+        return _first_non_empty_str(display.get("tr"), display.get("en"), display.get("ar"))
+
+    @staticmethod
+    def _update_structured_hadith_text(record: dict[str, Any], language: str, text_value: str) -> None:
+        text_obj = record.get("text")
+        if not isinstance(text_obj, dict):
+            return
+        lang_obj = text_obj.get(language)
+        if not isinstance(lang_obj, dict):
+            lang_obj = {}
+            text_obj[language] = lang_obj
+        lang_obj["clean"] = text_value
+        lang_obj["ttsText"] = text_value
+        if "sourceText" not in lang_obj or not str(lang_obj.get("sourceText", "")).strip():
+            lang_obj["sourceText"] = text_value
 
     def _persist_dataset(self, dataset: str) -> None:
         path = self._dataset_paths[dataset]
@@ -499,6 +631,17 @@ class ReviewStore:
         base_record["text_tr"] = clean_tr
         base_record["text_ar"] = str(text_ar or "")
         base_record["text_en"] = str(text_en or "")
+        if dataset == "hadith" and rec.get("_structured_hadith"):
+            self._update_structured_hadith_text(base_record, "tr", clean_tr)
+            self._update_structured_hadith_text(base_record, "ar", str(text_ar or ""))
+            self._update_structured_hadith_text(base_record, "en", str(text_en or ""))
+            source_info = base_record.get("sourceInfo")
+            if isinstance(source_info, dict):
+                display = source_info.get("display")
+                if not isinstance(display, dict):
+                    display = {}
+                    source_info["display"] = display
+                display["tr"] = clean_book_ref
         base_record["status"] = status
         rec["text_tr"] = clean_tr
         rec["text_ar"] = str(text_ar or "")
@@ -1451,6 +1594,7 @@ class ReviewWindow(QMainWindow):
 def parse_args() -> argparse.Namespace:
     root = Path(__file__).resolve().parent
     repo_root = root.parent.parent
+    default_hadith_path = _default_hadith_input_path(repo_root)
     parser = argparse.ArgumentParser(description="Local daily ayah/hadith review desktop tool.")
     parser.add_argument(
         "--dataset",
@@ -1465,7 +1609,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--hadith",
-        default=str(repo_root / "assets" / "data" / "daily_content" / "approved" / "hadiths.v1.approved.json"),
+        default=str(default_hadith_path),
         help="Path to hadith JSON file.",
     )
     parser.add_argument(

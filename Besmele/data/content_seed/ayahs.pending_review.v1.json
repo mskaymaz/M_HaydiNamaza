@@ -13636,6 +13636,154 @@
         "note": "",
         "updated_at": null
       }
+    },
+    {
+      "ref": "003/021",
+      "id": "003/021",
+      "surah": 3,
+      "ayahStart": 21,
+      "ayahEnd": 21,
+      "type": "single",
+      "ayahCount": 1,
+      "input": {
+        "sira": null,
+        "ref": "003/021",
+        "input_type": "tekil",
+        "input_ayah_count": 1,
+        "input_char_count": 0,
+        "input_status": "tool_ekle",
+        "input_source_ref_groups": "003/021"
+      },
+      "source": {
+        "arabic": "Tanzil Uthmani Quran Text",
+        "tr": "Tanzil tr.bulac / Ali Bulac",
+        "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+        "en": "Tanzil en.sahih / Saheeh International",
+        "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+      },
+      "sourceRefGroups": [
+        "003/021"
+      ],
+      "ayahs": [
+        {
+          "ref": "003/021",
+          "surah": 3,
+          "ayah": 21,
+          "arabic": "إِنَّ ٱلَّذِينَ يَكْفُرُونَ بِـَٔايَـٰتِ ٱللَّهِ وَيَقْتُلُونَ ٱلنَّبِيِّـۧنَ بِغَيْرِ حَقٍّ وَيَقْتُلُونَ ٱلَّذِينَ يَأْمُرُونَ بِٱلْقِسْطِ مِنَ ٱلنَّاسِ فَبَشِّرْهُم بِعَذَابٍ أَلِيمٍ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "003/021",
+            "text": "Allah'ın ayetlerini inkar edenler, peygamberleri haksız yere öldürenler ve insanlardan adaleti emredenleri öldürenler; işte onlara acıklı bir azabı müjdele."
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "003/021",
+            "text": "Those who disbelieve in the signs of Allah and kill the prophets without right and kill those who order justice from among the people - give them tidings of a painful punishment."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "Allah'ın ayetlerini inkar edenlere, haksız yere peygamberleri öldürenlere, insanlardan adaleti emredenleri öldürenlere elem verici bir azabı müjdele."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "Give those who refuse to follow the directives of Allah, who slay the Prophets unjustly, and who slay those who enjoin justice, give them glad tidings of a grievous chastisement."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "",
+        "updated_at": "2026-06-03T13:51:20+00:00"
+      },
+      "sourceInfo": {
+        "label": "Tanzil yerel kaynak",
+        "source_ref": "003/021",
+        "fetch_status": "local_seed_generated",
+        "details": {
+          "metadata_sources": {
+            "arabic": {
+              "name": "Tanzil Quran Text / Uthmani",
+              "url": "https://tanzil.net/download/"
+            },
+            "tr": {
+              "key": "tr.bulac",
+              "name": "Ali Bulaç",
+              "url": "https://tanzil.net/trans/tr.bulac"
+            },
+            "trAlt": {
+              "key": "tr.diyanet",
+              "name": "Diyanet İşleri",
+              "url": "https://tanzil.net/trans/tr.diyanet"
+            },
+            "en": {
+              "key": "en.sahih",
+              "name": "Saheeh International",
+              "url": "https://tanzil.net/trans/en.sahih"
+            },
+            "enAlt": {
+              "key": "en.maududi",
+              "name": "Abul A‘la Maududi",
+              "url": "https://tanzil.net/trans/en.maududi"
+            }
+          },
+          "quranFiles": {
+            "ar": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\quran-uthmani.txt",
+            "tr_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.bulac.txt",
+            "tr_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.diyanet.txt",
+            "en_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.sahih.txt",
+            "en_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.maududi.txt"
+          }
+        },
+        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\Besmele\\data\\content_seed\\ayet_1400\\ayet1400_tanzil_ar_tr_en_pending_review.json",
+        "source": {
+          "arabic": "Tanzil Uthmani Quran Text",
+          "tr": "Tanzil tr.bulac / Ali Bulac",
+          "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+          "en": "Tanzil en.sahih / Saheeh International",
+          "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+        }
+      },
+      "surah_name": "Ali Imran",
+      "text_ar": "إِنَّ ٱلَّذِينَ يَكْفُرُونَ بِـَٔايَـٰتِ ٱللَّهِ وَيَقْتُلُونَ ٱلنَّبِيِّـۧنَ بِغَيْرِ حَقٍّ وَيَقْتُلُونَ ٱلَّذِينَ يَأْمُرُونَ بِٱلْقِسْطِ مِنَ ٱلنَّاسِ فَبَشِّرْهُم بِعَذَابٍ أَلِيمٍ",
+      "text_tr": "Allah'ın ayetlerini inkar edenlere, haksız yere peygamberleri öldürenlere, insanlardan adaleti emredenleri öldürenlere elem verici bir azabı müjdele.",
+      "text_en": "Those who disbelieve in the signs of Allah and kill the prophets without right and kill those who order justice from among the people - give them tidings of a painful punishment.",
+      "text_tr_alt": "Allah'ın ayetlerini inkar edenlere, haksız yere peygamberleri öldürenlere, insanlardan adaleti emredenleri öldürenlere elem verici bir azabı müjdele.",
+      "text_en_alt": "Give those who refuse to follow the directives of Allah, who slay the Prophets unjustly, and who slay those who enjoin justice, give them glad tidings of a grievous chastisement.",
+      "selected_translation": {
+        "tr": "alt",
+        "en": "main"
+      },
+      "priority": 1,
+      "notes": "",
+      "createdAt": "2026-06-03T13:50:41+00:00",
+      "updatedAt": "2026-06-03T13:51:20+00:00",
+      "approvedAt": "2026-06-03T13:51:20+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-03T13:51:20+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": ""
+        }
+      ],
+      "ayah_number": 21
     }
   ]
 }

@@ -1,6 +1,20 @@
 {
   "schema_version": "1.0.0",
-  "content_version": "reset-2026-06-02",
+  "content_version": "tool-20260603_165120",
   "type": "ayah",
-  "records": []
+  "records": [
+    {
+      "id": "003/021",
+      "kind": "ayah",
+      "ref": "003/021",
+      "ar": "إِنَّ ٱلَّذِينَ يَكْفُرُونَ بِـَٔايَـٰتِ ٱللَّهِ وَيَقْتُلُونَ ٱلنَّبِيِّـۧنَ بِغَيْرِ حَقٍّ وَيَقْتُلُونَ ٱلَّذِينَ يَأْمُرُونَ بِٱلْقِسْطِ مِنَ ٱلنَّاسِ فَبَشِّرْهُم بِعَذَابٍ أَلِيمٍ",
+      "tr": "Allah'ın ayetlerini inkar edenlere, haksız yere peygamberleri öldürenlere, insanlardan adaleti emredenleri öldürenlere elem verici bir azabı müjdele.",
+      "en": "Those who disbelieve in the signs of Allah and kill the prophets without right and kill those who order justice from among the people - give them tidings of a painful punishment.",
+      "priority": 1,
+      "approvedAt": "2026-06-03T13:51:20+00:00",
+      "surah_number": 3,
+      "surah_name": "Ali Imran",
+      "ayah_number": 21
+    }
+  ]
 }

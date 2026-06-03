@@ -1,0 +1,1015 @@
+{
+  "metadata": {
+    "project": "M_HaydiNamaza",
+    "contentType": "asmaul_husna_seed",
+    "version": "v1.0-draft",
+    "languageFields": [
+      "ar",
+      "tr",
+      "en"
+    ],
+    "totalItems": 99,
+    "notes": [
+      "The 99-name ordering follows the widely used hadith/Tirmidhi-style list also published by the Turkish Presidency of Religious Affairs High Board.",
+      "Descriptions are concise app-ready paraphrases prepared for seed data, not long quotations from any single source.",
+      "Arabic descriptions are short explanatory summaries and should be reviewed by a qualified Arabic/Islamic studies reviewer before production publication."
+    ],
+    "sourceBasis": [
+      "Diyanet High Board of Religious Affairs: Turkish 99 names list and meanings",
+      "IslamicAPI Asma-ul-Husna documentation: English/API field model reference",
+      "AlAdhan Asma Al Husna API: Arabic-English JSON availability reference"
+    ]
+  },
+  "items": [
+    {
+      "id": 1,
+      "slug": "allah",
+      "arabicName": "اللَّهُ",
+      "latinTr": "Allah",
+      "latinEn": "Allah",
+      "descriptionAr": "هو الاسم الجامع للرب الإله الحق، المتصف بكل كمال والمنزه عن كل نقص.",
+      "descriptionTr": "Varlığı zorunlu, bütün kemal sıfatlarını kendinde toplayan tek ve hak mabuddur.",
+      "descriptionEn": "The proper name of the one true God, possessing every perfection and free from every deficiency."
+    },
+    {
+      "id": 2,
+      "slug": "ar-rahman",
+      "arabicName": "الرَّحْمٰنُ",
+      "latinTr": "Er-Rahmân",
+      "latinEn": "Ar-Rahman",
+      "descriptionAr": "هو الواسع الرحمة، يعمّ برحمته جميع خلقه في الدنيا.",
+      "descriptionTr": "Rahmeti bütün varlıkları kuşatan, dünyada herkese lütuf ve ihsanda bulunandır.",
+      "descriptionEn": "The All-Merciful, whose vast mercy embraces all creation in this world."
+    },
+    {
+      "id": 3,
+      "slug": "ar-rahim",
+      "arabicName": "الرَّحِيمُ",
+      "latinTr": "Er-Rahîm",
+      "latinEn": "Ar-Rahim",
+      "descriptionAr": "هو كثير الرحمة بعباده المؤمنين، يفيض عليهم لطفه ومغفرته.",
+      "descriptionTr": "Mümin kullarına özel rahmet, lütuf ve bağışlama ile muamele edendir.",
+      "descriptionEn": "The Especially Merciful, who bestows enduring mercy and forgiveness upon His believing servants."
+    },
+    {
+      "id": 4,
+      "slug": "al-malik",
+      "arabicName": "الْمَلِكُ",
+      "latinTr": "El-Melik",
+      "latinEn": "Al-Malik",
+      "descriptionAr": "هو المالك المتصرف في ملكه، له الحكم والأمر كله.",
+      "descriptionTr": "Bütün varlıkların gerçek sahibi ve mutlak hükümdarıdır.",
+      "descriptionEn": "The Sovereign King, owner and ruler of all existence."
+    },
+    {
+      "id": 5,
+      "slug": "al-quddus",
+      "arabicName": "الْقُدُّوسُ",
+      "latinTr": "El-Kuddûs",
+      "latinEn": "Al-Quddus",
+      "descriptionAr": "هو المنزه عن كل نقص وعيب، الكامل في ذاته وصفاته.",
+      "descriptionTr": "Her türlü eksiklikten uzak, zatında ve sıfatlarında mutlak kemal sahibidir.",
+      "descriptionEn": "The Absolutely Pure, free from every imperfection and defect."
+    },
+    {
+      "id": 6,
+      "slug": "as-salam",
+      "arabicName": "السَّلَامُ",
+      "latinTr": "Es-Selâm",
+      "latinEn": "As-Salam",
+      "descriptionAr": "هو مصدر السلامة، المنزه عن الفناء والنقص، وواهب الأمن لعباده.",
+      "descriptionTr": "Esenlik ve güven veren, yok oluş ve eksiklikten uzak olandır.",
+      "descriptionEn": "The Source of Peace and Safety, free from defect and decay."
+    },
+    {
+      "id": 7,
+      "slug": "al-mumin",
+      "arabicName": "الْمُؤْمِنُ",
+      "latinTr": "El-Mü’min",
+      "latinEn": "Al-Mu’min",
+      "descriptionAr": "هو الذي يمنح الأمن ويصدق رسله ويؤمن عباده من الخوف.",
+      "descriptionTr": "Güven veren, peygamberlerini doğrulayan ve kullarına emniyet bahşedendir.",
+      "descriptionEn": "The Giver of Faith and Security, who grants safety and confirms truth."
+    },
+    {
+      "id": 8,
+      "slug": "al-muhaymin",
+      "arabicName": "الْمُهَيْمِنُ",
+      "latinTr": "El-Müheymin",
+      "latinEn": "Al-Muhaymin",
+      "descriptionAr": "هو الرقيب الحافظ، المحيط بأحوال الخلق وتدبيرهم.",
+      "descriptionTr": "Bütün varlığı gözeten, koruyan ve işleri hükmü altında tutandır.",
+      "descriptionEn": "The Guardian and Overseer, fully watchful over creation."
+    },
+    {
+      "id": 9,
+      "slug": "al-aziz",
+      "arabicName": "الْعَزِيزُ",
+      "latinTr": "El-Azîz",
+      "latinEn": "Al-Aziz",
+      "descriptionAr": "هو الغالب الذي لا يُغلب، له العزة والقوة كلها.",
+      "descriptionTr": "Galip gelen, yenilmeyen, izzet ve kudretin tamamına sahip olandır.",
+      "descriptionEn": "The Almighty, unconquerable and supreme in might."
+    },
+    {
+      "id": 10,
+      "slug": "al-jabbar",
+      "arabicName": "الْجَبَّارُ",
+      "latinTr": "El-Cebbâr",
+      "latinEn": "Al-Jabbar",
+      "descriptionAr": "هو الذي تنفذ مشيئته، يجبر كسر عباده ويقهر الجبابرة.",
+      "descriptionTr": "Dilediğini gerçekleştiren, kırıkları onaran ve her şeyi iradesi altında tutandır.",
+      "descriptionEn": "The Compeller and Restorer, whose will prevails and who mends what is broken."
+    },
+    {
+      "id": 11,
+      "slug": "al-mutakabbir",
+      "arabicName": "الْمُتَكَبِّرُ",
+      "latinTr": "El-Mütekebbir",
+      "latinEn": "Al-Mutakabbir",
+      "descriptionAr": "هو المتعالي عن صفات الخلق، صاحب الكبرياء والعظمة.",
+      "descriptionTr": "Yaratılmışlara ait eksikliklerden yüce, büyüklük ve ululuk sahibidir.",
+      "descriptionEn": "The Supremely Majestic, exalted above all creaturely limitation."
+    },
+    {
+      "id": 12,
+      "slug": "al-khaliq",
+      "arabicName": "الْخَالِقُ",
+      "latinTr": "El-Hâlik",
+      "latinEn": "Al-Khaliq",
+      "descriptionAr": "هو المبدع المقدر، يخلق كل شيء بحكمة وتقدير.",
+      "descriptionTr": "Her şeyi hikmet ve ölçü ile yaratan gerçek yaratıcıdır.",
+      "descriptionEn": "The Creator, who brings all things into being with wisdom and measure."
+    },
+    {
+      "id": 13,
+      "slug": "al-bari",
+      "arabicName": "الْبَارِئُ",
+      "latinTr": "El-Bâri’",
+      "latinEn": "Al-Bari",
+      "descriptionAr": "هو المنشئ من العدم على غير مثال سابق.",
+      "descriptionTr": "Madde ve örnek olmaksızın yoktan var edendir.",
+      "descriptionEn": "The Originator, who brings creation forth without prior model."
+    },
+    {
+      "id": 14,
+      "slug": "al-musawwir",
+      "arabicName": "الْمُصَوِّرُ",
+      "latinTr": "El-Musavvir",
+      "latinEn": "Al-Musawwir",
+      "descriptionAr": "هو الذي يعطي كل مخلوق صورته وهيئته المناسبة.",
+      "descriptionTr": "Varlıklara şekil, suret ve kendilerine uygun özellikler verendir.",
+      "descriptionEn": "The Fashioner, who gives every being its form and proportion."
+    },
+    {
+      "id": 15,
+      "slug": "al-ghaffar",
+      "arabicName": "الْغَفَّارُ",
+      "latinTr": "El-Gaffâr",
+      "latinEn": "Al-Ghaffar",
+      "descriptionAr": "هو كثير المغفرة، يستر الذنوب ويفتح باب التوبة.",
+      "descriptionTr": "Günahları çokça örten, bağışlayan ve tövbe kapısını açık tutandır.",
+      "descriptionEn": "The Oft-Forgiving, who repeatedly covers and forgives sins."
+    },
+    {
+      "id": 16,
+      "slug": "al-qahhar",
+      "arabicName": "الْقَهَّارُ",
+      "latinTr": "El-Kahhâr",
+      "latinEn": "Al-Qahhar",
+      "descriptionAr": "هو القاهر فوق عباده، تخضع له القوى كلها.",
+      "descriptionTr": "Her şeye üstün gelen, bütün güçleri kudreti altında tutandır.",
+      "descriptionEn": "The Subduer, before whose authority all powers submit."
+    },
+    {
+      "id": 17,
+      "slug": "al-wahhab",
+      "arabicName": "الْوَهَّابُ",
+      "latinTr": "El-Vehhâb",
+      "latinEn": "Al-Wahhab",
+      "descriptionAr": "هو كثير العطاء بلا عوض، يهب النعم فضلاً وكرماً.",
+      "descriptionTr": "Karşılıksız ve bol nimet veren sonsuz ihsan sahibidir.",
+      "descriptionEn": "The Bestower, who gives abundantly without needing return."
+    },
+    {
+      "id": 18,
+      "slug": "ar-razzaq",
+      "arabicName": "الرَّزَّاقُ",
+      "latinTr": "Er-Rezzâk",
+      "latinEn": "Ar-Razzaq",
+      "descriptionAr": "هو خالق الأرزاق وميسر أسبابها لجميع الخلق.",
+      "descriptionTr": "Maddi ve manevi rızıkları yaratan ve sebeplerini kolaylaştırandır.",
+      "descriptionEn": "The Provider, who creates and delivers all forms of sustenance."
+    },
+    {
+      "id": 19,
+      "slug": "al-fattah",
+      "arabicName": "الْفَتَّاحُ",
+      "latinTr": "El-Fettâh",
+      "latinEn": "Al-Fattah",
+      "descriptionAr": "هو الذي يفتح أبواب الخير والرحمة ويحكم بالحق.",
+      "descriptionTr": "Hayır kapılarını açan, hak ve adaletle hükmedendir.",
+      "descriptionEn": "The Opener, who opens doors of mercy and judges with truth."
+    },
+    {
+      "id": 20,
+      "slug": "al-alim",
+      "arabicName": "الْعَلِيمُ",
+      "latinTr": "El-Alîm",
+      "latinEn": "Al-Alim",
+      "descriptionAr": "هو المحيط علمه بكل ظاهر وباطن، لا يخفى عليه شيء.",
+      "descriptionTr": "Açık-gizli her şeyi bilen, ilminden hiçbir şey kaçmayandır.",
+      "descriptionEn": "The All-Knowing, whose knowledge encompasses the seen and unseen."
+    },
+    {
+      "id": 21,
+      "slug": "al-qabid",
+      "arabicName": "الْقَابِضُ",
+      "latinTr": "El-Kâbız",
+      "latinEn": "Al-Qabid",
+      "descriptionAr": "هو الذي يقبض الأرواح ويضيق الأرزاق بحكمته عند الحاجة.",
+      "descriptionTr": "Hikmetiyle rızkı daraltan, vakti gelince canları teslim alandır.",
+      "descriptionEn": "The Constrictor, who with wisdom withholds and takes souls at their appointed time."
+    },
+    {
+      "id": 22,
+      "slug": "al-basit",
+      "arabicName": "الْبَاسِطُ",
+      "latinTr": "El-Bâsıt",
+      "latinEn": "Al-Basit",
+      "descriptionAr": "هو الذي يوسع الرزق والفضل ويمدّ لعباده أسباب الخير.",
+      "descriptionTr": "Rızkı, imkânı ve lütfu genişleten, kullarına ferahlık verendir.",
+      "descriptionEn": "The Expander, who broadens provision, opportunity, and mercy."
+    },
+    {
+      "id": 23,
+      "slug": "al-khafid",
+      "arabicName": "الْخَافِضُ",
+      "latinTr": "El-Hâfıd",
+      "latinEn": "Al-Khafid",
+      "descriptionAr": "هو الذي يخفض أهل الكبر والظلم بعدله وحكمته.",
+      "descriptionTr": "Kibir ve zulüm sahiplerini adaletiyle alçaltandır.",
+      "descriptionEn": "The Abaser, who lowers arrogance and injustice by His justice."
+    },
+    {
+      "id": 24,
+      "slug": "ar-rafi",
+      "arabicName": "الرَّافِعُ",
+      "latinTr": "Er-Râfi‘",
+      "latinEn": "Ar-Rafi",
+      "descriptionAr": "هو الذي يرفع من شاء بالإيمان والعلم والطاعة.",
+      "descriptionTr": "İman, ilim ve salih amel sahiplerini yükseltendir.",
+      "descriptionEn": "The Exalter, who raises whom He wills through faith, knowledge, and obedience."
+    },
+    {
+      "id": 25,
+      "slug": "al-muizz",
+      "arabicName": "الْمُعِزُّ",
+      "latinTr": "El-Muizz",
+      "latinEn": "Al-Muizz",
+      "descriptionAr": "هو الذي يمنح العزة والقوة لمن شاء بطاعته.",
+      "descriptionTr": "Dilediğine izzet, güç ve şeref verendir.",
+      "descriptionEn": "The Giver of Honor, who grants dignity and strength to whom He wills."
+    },
+    {
+      "id": 26,
+      "slug": "al-mudhill",
+      "arabicName": "الْمُذِلُّ",
+      "latinTr": "El-Müzill",
+      "latinEn": "Al-Mudhill",
+      "descriptionAr": "هو الذي يذل من تكبر وعصى وابتعد عن الحق.",
+      "descriptionTr": "Haktan uzaklaşan kibir ve isyan sahiplerini zelil kılandır.",
+      "descriptionEn": "The Humiliator, who brings low those who persist in arrogance and falsehood."
+    },
+    {
+      "id": 27,
+      "slug": "as-sami",
+      "arabicName": "السَّمِيعُ",
+      "latinTr": "Es-Semî‘",
+      "latinEn": "As-Sami",
+      "descriptionAr": "هو السميع لكل صوت ودعاء، لا تختلط عليه الأصوات.",
+      "descriptionTr": "Bütün sesleri ve duaları eksiksiz işitendir.",
+      "descriptionEn": "The All-Hearing, who hears every voice and supplication perfectly."
+    },
+    {
+      "id": 28,
+      "slug": "al-basir",
+      "arabicName": "الْبَصِيرُ",
+      "latinTr": "El-Basîr",
+      "latinEn": "Al-Basir",
+      "descriptionAr": "هو البصير بكل شيء، يرى الظاهر والخفي.",
+      "descriptionTr": "Açık ve gizli her şeyi gören, hiçbir şey kendisine saklı kalmayandır.",
+      "descriptionEn": "The All-Seeing, who sees the manifest and the hidden."
+    },
+    {
+      "id": 29,
+      "slug": "al-hakam",
+      "arabicName": "الْحَكَمُ",
+      "latinTr": "El-Hakem",
+      "latinEn": "Al-Hakam",
+      "descriptionAr": "هو الحاكم بالحق، إليه الفصل النهائي بين الخلق.",
+      "descriptionTr": "Nihai hükmü veren, hak ile hükmedendir.",
+      "descriptionEn": "The Judge, whose judgment is final and perfectly true."
+    },
+    {
+      "id": 30,
+      "slug": "al-adl",
+      "arabicName": "الْعَدْلُ",
+      "latinTr": "El-Adl",
+      "latinEn": "Al-Adl",
+      "descriptionAr": "هو العادل الذي يضع كل شيء في موضعه بحكمة.",
+      "descriptionTr": "Her şeyi yerli yerince yapan, mutlak adalet sahibidir.",
+      "descriptionEn": "The Just, who places everything rightly and never wrongs anyone."
+    },
+    {
+      "id": 31,
+      "slug": "al-latif",
+      "arabicName": "اللَّطِيفُ",
+      "latinTr": "El-Latîf",
+      "latinEn": "Al-Latif",
+      "descriptionAr": "هو العالم بالدقائق، يوصل لطفه لعباده بطرق خفية.",
+      "descriptionTr": "En ince şeyleri bilen, lütfunu gizli ve zarif yollarla ulaştırandır.",
+      "descriptionEn": "The Subtle and Gentle, who knows the finest realities and grants hidden kindness."
+    },
+    {
+      "id": 32,
+      "slug": "al-khabir",
+      "arabicName": "الْخَبِيرُ",
+      "latinTr": "El-Habîr",
+      "latinEn": "Al-Khabir",
+      "descriptionAr": "هو الخبير بحقائق الأمور وبواطنها ونتائجها.",
+      "descriptionTr": "İşlerin iç yüzünü, gizlisini ve sonucunu bilen haberdardır.",
+      "descriptionEn": "The All-Aware, fully acquainted with inner realities and outcomes."
+    },
+    {
+      "id": 33,
+      "slug": "al-halim",
+      "arabicName": "الْحَلِيمُ",
+      "latinTr": "El-Halîm",
+      "latinEn": "Al-Halim",
+      "descriptionAr": "هو الذي لا يعجل بالعقوبة مع قدرته ويفتح باب الإمهال.",
+      "descriptionTr": "Gücü yettiği hâlde acele cezalandırmayan, mühlet ve fırsat verendir.",
+      "descriptionEn": "The Forbearing, who does not hasten punishment despite full power."
+    },
+    {
+      "id": 34,
+      "slug": "al-azim",
+      "arabicName": "الْعَظِيمُ",
+      "latinTr": "El-Azîm",
+      "latinEn": "Al-Azim",
+      "descriptionAr": "هو العظيم في ذاته وصفاته، لا يدرك الخلق عظمته.",
+      "descriptionTr": "Zatı ve sıfatları bakımından akılların kuşatamayacağı yücelik sahibidir.",
+      "descriptionEn": "The Magnificent, whose greatness in essence and attributes surpasses comprehension."
+    },
+    {
+      "id": 35,
+      "slug": "al-ghafur",
+      "arabicName": "الْغَفُورُ",
+      "latinTr": "El-Gafûr",
+      "latinEn": "Al-Ghafur",
+      "descriptionAr": "هو الواسع المغفرة، يمحو الذنوب لمن تاب وأناب.",
+      "descriptionTr": "Tövbe eden kulların günahlarını bolca bağışlayandır.",
+      "descriptionEn": "The Ever-Forgiving, whose forgiveness is vast for those who return to Him."
+    },
+    {
+      "id": 36,
+      "slug": "ash-shakur",
+      "arabicName": "الشَّكُورُ",
+      "latinTr": "Eş-Şekûr",
+      "latinEn": "Ash-Shakur",
+      "descriptionAr": "هو الذي يثيب على القليل من الطاعة ثواباً عظيماً.",
+      "descriptionTr": "Az bir iyiliğe bile büyük karşılık veren, şükrü kabul edendir.",
+      "descriptionEn": "The Appreciative, who rewards even small acts of obedience abundantly."
+    },
+    {
+      "id": 37,
+      "slug": "al-aliyy",
+      "arabicName": "الْعَلِيُّ",
+      "latinTr": "El-Aliyy",
+      "latinEn": "Al-Aliyy",
+      "descriptionAr": "هو المتعالي فوق خلقه قدراً وقهراً وكمالاً.",
+      "descriptionTr": "Yücelikte, hükümranlıkta ve kemalde eşi olmayan en yücedir.",
+      "descriptionEn": "The Most High, exalted in rank, power, and perfection."
+    },
+    {
+      "id": 38,
+      "slug": "al-kabir",
+      "arabicName": "الْكَبِيرُ",
+      "latinTr": "El-Kebîr",
+      "latinEn": "Al-Kabir",
+      "descriptionAr": "هو الكبير الذي كل شيء دونه صغير وفقير إليه.",
+      "descriptionTr": "Her şeyin kendisine muhtaç olduğu, azamet sahibi en büyüktür.",
+      "descriptionEn": "The Great, before whom all creation is small and dependent."
+    },
+    {
+      "id": 39,
+      "slug": "al-hafiz",
+      "arabicName": "الْحَفِيظُ",
+      "latinTr": "El-Hafîz",
+      "latinEn": "Al-Hafiz",
+      "descriptionAr": "هو الحافظ لكل شيء، يحفظ الكون والعباد بأمره.",
+      "descriptionTr": "Her şeyi koruyan, kâinatı düzen ve denge içinde tutandır.",
+      "descriptionEn": "The Preserver, who guards all things and maintains creation."
+    },
+    {
+      "id": 40,
+      "slug": "al-muqit",
+      "arabicName": "الْمُقِيتُ",
+      "latinTr": "El-Mukît",
+      "latinEn": "Al-Muqit",
+      "descriptionAr": "هو الذي يخلق الأقوات ويبلغها إلى خلقه، وهو القدير الحفيظ.",
+      "descriptionTr": "Mahlukatın gıdasını ve gücünü yaratan, koruyup gözetendir.",
+      "descriptionEn": "The Sustainer, who provides nourishment, power, and care for creation."
+    },
+    {
+      "id": 41,
+      "slug": "al-hasib",
+      "arabicName": "الْحَسِيبُ",
+      "latinTr": "El-Hasîb",
+      "latinEn": "Al-Hasib",
+      "descriptionAr": "هو الكافي لعباده، المحاسب لهم على أعمالهم.",
+      "descriptionTr": "Kullarına yeten ve amellerin hesabını eksiksiz görendir.",
+      "descriptionEn": "The Reckoner and Sufficient One, who accounts for all deeds."
+    },
+    {
+      "id": 42,
+      "slug": "al-jalil",
+      "arabicName": "الْجَلِيلُ",
+      "latinTr": "El-Celîl",
+      "latinEn": "Al-Jalil",
+      "descriptionAr": "هو صاحب الجلال والعظمة والقدر الرفيع.",
+      "descriptionTr": "Azamet, yücelik ve en üstün mertebe sahibidir.",
+      "descriptionEn": "The Majestic, possessing grandeur, dignity, and exalted rank."
+    },
+    {
+      "id": 43,
+      "slug": "al-karim",
+      "arabicName": "الْكَرِيمُ",
+      "latinTr": "El-Kerîm",
+      "latinEn": "Al-Karim",
+      "descriptionAr": "هو الجواد الكثير الخير، يعطي بكرم ويعفو بفضل.",
+      "descriptionTr": "Cömertliği sınırsız, nimeti ve ihsanı bol olandır.",
+      "descriptionEn": "The Generous, abundant in goodness, giving and forgiving with nobility."
+    },
+    {
+      "id": 44,
+      "slug": "ar-raqib",
+      "arabicName": "الرَّقِيبُ",
+      "latinTr": "Er-Rakîb",
+      "latinEn": "Ar-Raqib",
+      "descriptionAr": "هو المراقب لأحوال الخلق، لا يغيب عنه عمل ولا نية.",
+      "descriptionTr": "Bütün hâlleri, işleri ve niyetleri gözeten mutlak murakıp olandır.",
+      "descriptionEn": "The Watchful, from whom no deed, state, or intention is hidden."
+    },
+    {
+      "id": 45,
+      "slug": "al-mujib",
+      "arabicName": "الْمُجِيبُ",
+      "latinTr": "El-Mücîb",
+      "latinEn": "Al-Mujib",
+      "descriptionAr": "هو الذي يجيب دعاء الداعين ويقضي الحاجات بحكمة.",
+      "descriptionTr": "Dua edenlere icabet eden, ihtiyaçları hikmetle karşılayandır.",
+      "descriptionEn": "The Responsive, who answers supplications and meets needs with wisdom."
+    },
+    {
+      "id": 46,
+      "slug": "al-wasi",
+      "arabicName": "الْوَاسِعُ",
+      "latinTr": "El-Vâsi‘",
+      "latinEn": "Al-Wasi",
+      "descriptionAr": "هو الواسع علماً ورحمة وقدرة وفضلاً.",
+      "descriptionTr": "İlmi, rahmeti, kudreti ve lütfu her şeyi kuşatandır.",
+      "descriptionEn": "The All-Encompassing, vast in knowledge, mercy, power, and grace."
+    },
+    {
+      "id": 47,
+      "slug": "al-hakim",
+      "arabicName": "الْحَكِيمُ",
+      "latinTr": "El-Hakîm",
+      "latinEn": "Al-Hakim",
+      "descriptionAr": "هو الذي يضع الأمور في مواضعها، وأحكامه كلها حكمة.",
+      "descriptionTr": "Her işi, emri ve yasağı hikmet üzere olan mutlak hikmet sahibidir.",
+      "descriptionEn": "The Perfectly Wise, whose commands, acts, and judgments are full of wisdom."
+    },
+    {
+      "id": 48,
+      "slug": "al-wadud",
+      "arabicName": "الْوَدُودُ",
+      "latinTr": "El-Vedûd",
+      "latinEn": "Al-Wadud",
+      "descriptionAr": "هو المحب لعباده الصالحين والمحبوب عند أوليائه.",
+      "descriptionTr": "Salih kullarını seven ve onlar tarafından sevilen sevgi sahibidir.",
+      "descriptionEn": "The Loving, who loves the righteous and is loved by His close servants."
+    },
+    {
+      "id": 49,
+      "slug": "al-majid",
+      "arabicName": "الْمَجِيدُ",
+      "latinTr": "El-Mecîd",
+      "latinEn": "Al-Majid",
+      "descriptionAr": "هو العظيم المجيد، له الشرف الكامل والفضل الواسع.",
+      "descriptionTr": "Şanı yüce, ikramı ve lütfu bol olan mutlak yücelik sahibidir.",
+      "descriptionEn": "The Glorious, perfect in honor, nobility, and abundant grace."
+    },
+    {
+      "id": 50,
+      "slug": "al-baith",
+      "arabicName": "الْبَاعِثُ",
+      "latinTr": "El-Bâis",
+      "latinEn": "Al-Baith",
+      "descriptionAr": "هو الذي يبعث الرسل ويحيي الموتى يوم القيامة.",
+      "descriptionTr": "Peygamberler gönderen ve ölüleri yeniden diriltecek olandır.",
+      "descriptionEn": "The Resurrector, who sends messengers and raises the dead."
+    },
+    {
+      "id": 51,
+      "slug": "ash-shahid",
+      "arabicName": "الشَّهِيدُ",
+      "latinTr": "Eş-Şehîd",
+      "latinEn": "Ash-Shahid",
+      "descriptionAr": "هو الحاضر بعلمه، الشاهد على كل شيء.",
+      "descriptionTr": "Her şeye ilmiyle şahit olan, hiçbir şey kendisine gizli kalmayandır.",
+      "descriptionEn": "The Witness, fully aware and present by knowledge over all things."
+    },
+    {
+      "id": 52,
+      "slug": "al-haqq",
+      "arabicName": "الْحَقُّ",
+      "latinTr": "El-Hakk",
+      "latinEn": "Al-Haqq",
+      "descriptionAr": "هو الموجود الحق، ووعده وحكمه ودينه حق.",
+      "descriptionTr": "Varlığı gerçek, vaadi, hükmü ve dini hak olandır.",
+      "descriptionEn": "The Truth, whose existence, promise, judgment, and religion are true."
+    },
+    {
+      "id": 53,
+      "slug": "al-wakil",
+      "arabicName": "الْوَكِيلُ",
+      "latinTr": "El-Vekîl",
+      "latinEn": "Al-Wakil",
+      "descriptionAr": "هو الكفيل المدبر، يعتمد عليه الخلق في شؤونهم.",
+      "descriptionTr": "Bütün işlerde güvenilip dayanılan, işleri en güzel idare edendir.",
+      "descriptionEn": "The Trustee, on whom creation relies in all affairs."
+    },
+    {
+      "id": 54,
+      "slug": "al-qawiyy",
+      "arabicName": "الْقَوِيُّ",
+      "latinTr": "El-Kavî",
+      "latinEn": "Al-Qawiyy",
+      "descriptionAr": "هو كامل القوة، لا يعجزه شيء في الأرض ولا في السماء.",
+      "descriptionTr": "Gücü her şeye yeten, hiçbir şey kendisini aciz bırakamayandır.",
+      "descriptionEn": "The All-Strong, whom nothing in the heavens or earth can weaken."
+    },
+    {
+      "id": 55,
+      "slug": "al-matin",
+      "arabicName": "الْمَتِينُ",
+      "latinTr": "El-Metîn",
+      "latinEn": "Al-Matin",
+      "descriptionAr": "هو شديد القوة الثابتة، لا يلحقه تعب ولا ضعف.",
+      "descriptionTr": "Kuvveti sarsılmaz, yorgunluk ve zayıflık kendisine ulaşmayandır.",
+      "descriptionEn": "The Firm and Powerful, whose strength never weakens or tires."
+    },
+    {
+      "id": 56,
+      "slug": "al-waliyy",
+      "arabicName": "الْوَلِيُّ",
+      "latinTr": "El-Velî",
+      "latinEn": "Al-Waliyy",
+      "descriptionAr": "هو ناصر المؤمنين ومتولي أمورهم بلطفه.",
+      "descriptionTr": "Müminlerin dostu, yardımcısı ve işlerini gözetendir.",
+      "descriptionEn": "The Protecting Friend, supporter and guardian of the believers."
+    },
+    {
+      "id": 57,
+      "slug": "al-hamid",
+      "arabicName": "الْحَمِيدُ",
+      "latinTr": "El-Hamîd",
+      "latinEn": "Al-Hamid",
+      "descriptionAr": "هو المستحق لكل حمد، محمود في ذاته وأفعاله.",
+      "descriptionTr": "Bütün övgülere layık, zatında ve fiillerinde hamde değer olandır.",
+      "descriptionEn": "The Praiseworthy, worthy of all praise in His essence and acts."
+    },
+    {
+      "id": 58,
+      "slug": "al-muhsi",
+      "arabicName": "الْمُحْصِي",
+      "latinTr": "El-Muhsî",
+      "latinEn": "Al-Muhsi",
+      "descriptionAr": "هو الذي أحصى كل شيء عدداً وعلماً وتقديراً.",
+      "descriptionTr": "Gizli-açık her şeyin sayısını, ölçüsünü ve ayrıntısını bilendir.",
+      "descriptionEn": "The Enumerator, who knows the count, measure, and detail of all things."
+    },
+    {
+      "id": 59,
+      "slug": "al-mubdi",
+      "arabicName": "الْمُبْدِئُ",
+      "latinTr": "El-Mübdi’",
+      "latinEn": "Al-Mubdi",
+      "descriptionAr": "هو الذي يبدأ الخلق من غير مثال سابق.",
+      "descriptionTr": "Varlıkları ilk defa yoktan var edendir.",
+      "descriptionEn": "The Originating Creator, who begins creation without precedent."
+    },
+    {
+      "id": 60,
+      "slug": "al-muid",
+      "arabicName": "الْمُعِيدُ",
+      "latinTr": "El-Muîd",
+      "latinEn": "Al-Muid",
+      "descriptionAr": "هو الذي يعيد الخلق بعد فنائهم ويبعثهم للحساب.",
+      "descriptionTr": "Ölümden sonra varlıkları yeniden yaratıp diriltendir.",
+      "descriptionEn": "The Restorer, who brings creation back after death."
+    },
+    {
+      "id": 61,
+      "slug": "al-muhyi",
+      "arabicName": "الْمُحْيِي",
+      "latinTr": "El-Muhyî",
+      "latinEn": "Al-Muhyi",
+      "descriptionAr": "هو واهب الحياة ومحيي القلوب والأجساد بإذنه.",
+      "descriptionTr": "Hayat veren, yaşatan ve dilediğini diriltendir.",
+      "descriptionEn": "The Giver of Life, who grants and restores life by His command."
+    },
+    {
+      "id": 62,
+      "slug": "al-mumit",
+      "arabicName": "الْمُمِيتُ",
+      "latinTr": "El-Mümît",
+      "latinEn": "Al-Mumit",
+      "descriptionAr": "هو الذي يميت الأحياء عند انقضاء آجالهم.",
+      "descriptionTr": "Ecelleri geldiğinde canlıların canını alan, ölümü yaratandır.",
+      "descriptionEn": "The Bringer of Death, who causes living beings to die at their appointed time."
+    },
+    {
+      "id": 63,
+      "slug": "al-hayy",
+      "arabicName": "الْحَيُّ",
+      "latinTr": "El-Hayy",
+      "latinEn": "Al-Hayy",
+      "descriptionAr": "هو الحي حياة كاملة أزلية أبدية لا يلحقها موت.",
+      "descriptionTr": "Ezelî ve ebedî diri, hayatı kusursuz ve ölümsüz olandır.",
+      "descriptionEn": "The Ever-Living, whose perfect life has no beginning, end, or death."
+    },
+    {
+      "id": 64,
+      "slug": "al-qayyum",
+      "arabicName": "الْقَيُّومُ",
+      "latinTr": "El-Kayyûm",
+      "latinEn": "Al-Qayyum",
+      "descriptionAr": "هو القائم بنفسه، المقيم لكل ما سواه.",
+      "descriptionTr": "Varlığı kendinden olan, bütün varlıkları ayakta tutan ve idare edendir.",
+      "descriptionEn": "The Self-Subsisting Sustainer, by whom all else exists and stands."
+    },
+    {
+      "id": 65,
+      "slug": "al-wajid",
+      "arabicName": "الْوَاجِدُ",
+      "latinTr": "El-Vâcid",
+      "latinEn": "Al-Wajid",
+      "descriptionAr": "هو الغني الواجد لكل كمال، لا يفوته مطلوب.",
+      "descriptionTr": "Hiçbir şeye muhtaç olmayan, dilediğini eksiksiz gerçekleştiren kemal sahibidir.",
+      "descriptionEn": "The Finder, rich and complete, lacking nothing and accomplishing what He wills."
+    },
+    {
+      "id": 66,
+      "slug": "al-majid_alt",
+      "arabicName": "الْمَاجِدُ",
+      "latinTr": "El-Mâcid",
+      "latinEn": "Al-Majid",
+      "descriptionAr": "هو صاحب المجد والكرم الواسع والفضل العظيم.",
+      "descriptionTr": "Şanı yüce, keremi ve fazlı geniş olandır.",
+      "descriptionEn": "The Noble and Glorious, abundant in honor, generosity, and grace."
+    },
+    {
+      "id": 67,
+      "slug": "al-wahid",
+      "arabicName": "الْوَاحِدُ",
+      "latinTr": "El-Vâhid",
+      "latinEn": "Al-Wahid",
+      "descriptionAr": "هو الواحد الأحد، لا شريك له في ذاته ولا ربوبيته.",
+      "descriptionTr": "Zatında, ilahlığında ve rab oluşunda ortağı olmayan tek olandır.",
+      "descriptionEn": "The One, without partner in essence, divinity, or lordship."
+    },
+    {
+      "id": 68,
+      "slug": "as-samad",
+      "arabicName": "الصَّمَدُ",
+      "latinTr": "Es-Samed",
+      "latinEn": "As-Samad",
+      "descriptionAr": "هو السيد المقصود في الحوائج، الغني عن كل شيء.",
+      "descriptionTr": "Herkesin kendisine muhtaç olduğu, kendisi hiçbir şeye muhtaç olmayan yüce mercidir.",
+      "descriptionEn": "The Eternal Refuge, needed by all while needing none."
+    },
+    {
+      "id": 69,
+      "slug": "al-qadir",
+      "arabicName": "الْقَادِرُ",
+      "latinTr": "El-Kâdir",
+      "latinEn": "Al-Qadir",
+      "descriptionAr": "هو القادر على كل شيء بلا عجز ولا مشقة.",
+      "descriptionTr": "Her şeye gücü yeten, acizlik ve zorluktan uzak olandır.",
+      "descriptionEn": "The All-Capable, able to do all things without weakness."
+    },
+    {
+      "id": 70,
+      "slug": "al-muqtadir",
+      "arabicName": "الْمُقْتَدِرُ",
+      "latinTr": "El-Muktedir",
+      "latinEn": "Al-Muqtadir",
+      "descriptionAr": "هو بالغ القدرة، لا يحد قدرته حد ولا مانع.",
+      "descriptionTr": "Kudreti sınırsız, hiçbir engelin güç yetiremeyeceği olandır.",
+      "descriptionEn": "The Omnipotent, whose power is complete and unrestricted."
+    },
+    {
+      "id": 71,
+      "slug": "al-muqaddim",
+      "arabicName": "الْمُقَدِّمُ",
+      "latinTr": "El-Mukaddim",
+      "latinEn": "Al-Muqaddim",
+      "descriptionAr": "هو الذي يقدم من شاء وما شاء بحكمة.",
+      "descriptionTr": "Hikmeti gereği dilediğini öne alan ve ileri geçirendir.",
+      "descriptionEn": "The Expediter, who brings forward whom and what He wills with wisdom."
+    },
+    {
+      "id": 72,
+      "slug": "al-muakhkhir",
+      "arabicName": "الْمُؤَخِّرُ",
+      "latinTr": "El-Muahhir",
+      "latinEn": "Al-Muakhkhir",
+      "descriptionAr": "هو الذي يؤخر من شاء وما شاء لحكمة يعلمها.",
+      "descriptionTr": "Hikmeti gereği dilediğini geriye bırakan ve erteleyendir.",
+      "descriptionEn": "The Delayer, who sets back whom and what He wills with wisdom."
+    },
+    {
+      "id": 73,
+      "slug": "al-awwal",
+      "arabicName": "الأَوَّلُ",
+      "latinTr": "El-Evvel",
+      "latinEn": "Al-Awwal",
+      "descriptionAr": "هو الأول بلا ابتداء، كان قبل كل شيء.",
+      "descriptionTr": "Başlangıcı olmayan, her şeyden önce var olan ezelî olandır.",
+      "descriptionEn": "The First, without beginning, existing before all things."
+    },
+    {
+      "id": 74,
+      "slug": "al-akhir",
+      "arabicName": "الآخِرُ",
+      "latinTr": "El-Âhir",
+      "latinEn": "Al-Akhir",
+      "descriptionAr": "هو الآخر بلا انتهاء، يبقى بعد فناء الخلق.",
+      "descriptionTr": "Sonu olmayan, her şeyden sonra da baki kalacak ebedî olandır.",
+      "descriptionEn": "The Last, without end, remaining after all creation passes."
+    },
+    {
+      "id": 75,
+      "slug": "az-zahir",
+      "arabicName": "الظَّاهِرُ",
+      "latinTr": "Ez-Zâhir",
+      "latinEn": "Az-Zahir",
+      "descriptionAr": "هو الظاهر بآياته ودلائل قدرته ووحدانيته.",
+      "descriptionTr": "Varlığı ve birliği delilleriyle apaçık olan, her şeyin üstünde olandır.",
+      "descriptionEn": "The Manifest, whose signs make His existence and oneness evident."
+    },
+    {
+      "id": 76,
+      "slug": "al-batin",
+      "arabicName": "الْبَاطِنُ",
+      "latinTr": "El-Bâtın",
+      "latinEn": "Al-Batin",
+      "descriptionAr": "هو المحتجب عن إدراك الأبصار، العالم بكل خفي.",
+      "descriptionTr": "Zatı duyularla kuşatılamayan, bütün gizlilikleri bilendir.",
+      "descriptionEn": "The Hidden, beyond sensory grasp and fully aware of every secret."
+    },
+    {
+      "id": 77,
+      "slug": "al-wali",
+      "arabicName": "الْوَالِي",
+      "latinTr": "El-Vâlî",
+      "latinEn": "Al-Wali",
+      "descriptionAr": "هو المتولي تدبير الكون وأمور الخلق.",
+      "descriptionTr": "Kâinatı yöneten, varlıkların işlerini üstlenen mutlak idarecidir.",
+      "descriptionEn": "The Governor, who administers the universe and the affairs of creation."
+    },
+    {
+      "id": 78,
+      "slug": "al-mutaali",
+      "arabicName": "الْمُتَعَالِي",
+      "latinTr": "El-Müteâlî",
+      "latinEn": "Al-Mutaali",
+      "descriptionAr": "هو المتعالي عن النقائص وعن مشابهة المخلوقات.",
+      "descriptionTr": "Eksikliklerden ve yaratılmışlara benzemekten yüce ve aşkın olandır.",
+      "descriptionEn": "The Supremely Exalted, far above imperfection and resemblance to creation."
+    },
+    {
+      "id": 79,
+      "slug": "al-barr",
+      "arabicName": "الْبَرُّ",
+      "latinTr": "El-Berr",
+      "latinEn": "Al-Barr",
+      "descriptionAr": "هو كثير البر والإحسان، يفيض الخير على عباده.",
+      "descriptionTr": "Kullarına çokça iyilik eden, hayır ve ihsanı bol olandır.",
+      "descriptionEn": "The Source of Goodness, abundant in kindness and beneficence."
+    },
+    {
+      "id": 80,
+      "slug": "at-tawwab",
+      "arabicName": "التَّوَّابُ",
+      "latinTr": "Et-Tevvâb",
+      "latinEn": "At-Tawwab",
+      "descriptionAr": "هو الذي يوفق للتوبة ويقبلها من عباده مراراً.",
+      "descriptionTr": "Kullarına tövbe nasip eden ve tövbeleri çokça kabul edendir.",
+      "descriptionEn": "The Acceptor of Repentance, who enables and repeatedly accepts repentance."
+    },
+    {
+      "id": 81,
+      "slug": "al-muntaqim",
+      "arabicName": "الْمُنْتَقِمُ",
+      "latinTr": "El-Müntakım",
+      "latinEn": "Al-Muntaqim",
+      "descriptionAr": "هو الذي ينتصر للحق ويجازي المجرمين بعدله.",
+      "descriptionTr": "Hakkı üstün kılan, suç ve zulüm sahiplerini adaletiyle cezalandırandır.",
+      "descriptionEn": "The Avenger, who upholds truth and recompenses wrongdoing with justice."
+    },
+    {
+      "id": 82,
+      "slug": "al-afuw",
+      "arabicName": "الْعَفُوُّ",
+      "latinTr": "El-Afüvv",
+      "latinEn": "Al-Afuw",
+      "descriptionAr": "هو كثير العفو، يمحو أثر الذنب بفضله.",
+      "descriptionTr": "Çokça affeden, günahın izini lütfuyla silendir.",
+      "descriptionEn": "The Pardoner, who effaces sins through His grace."
+    },
+    {
+      "id": 83,
+      "slug": "ar-rauf",
+      "arabicName": "الرَّؤُوفُ",
+      "latinTr": "Er-Raûf",
+      "latinEn": "Ar-Rauf",
+      "descriptionAr": "هو شديد الرأفة والرحمة بعباده.",
+      "descriptionTr": "Kullarına karşı merhameti ve şefkati çok güçlü olandır.",
+      "descriptionEn": "The Most Kind, intensely compassionate toward His servants."
+    },
+    {
+      "id": 84,
+      "slug": "malik-ul-mulk",
+      "arabicName": "مَالِكُ الْمُلْكِ",
+      "latinTr": "Mâlikü’l-Mülk",
+      "latinEn": "Malik al-Mulk",
+      "descriptionAr": "هو مالك الملك كله، يعطي الملك وينزعه ممن يشاء.",
+      "descriptionTr": "Mülkün gerçek sahibi, dilediğine mülk veren ve dilediğinden alandır.",
+      "descriptionEn": "The Owner of Sovereignty, who grants and removes dominion as He wills."
+    },
+    {
+      "id": 85,
+      "slug": "dhul-jalali-wal-ikram",
+      "arabicName": "ذُو الْجَلَالِ وَالإِكْرَامِ",
+      "latinTr": "Zü’l-Celâli ve’l-İkrâm",
+      "latinEn": "Dhu al-Jalal wa al-Ikram",
+      "descriptionAr": "هو صاحب العظمة المطلقة والكرم الواسع.",
+      "descriptionTr": "Sonsuz yücelik, azamet ve ikram sahibidir.",
+      "descriptionEn": "The Lord of Majesty and Honor, possessor of absolute grandeur and generosity."
+    },
+    {
+      "id": 86,
+      "slug": "al-muqsit",
+      "arabicName": "الْمُقْسِطُ",
+      "latinTr": "El-Muksit",
+      "latinEn": "Al-Muqsit",
+      "descriptionAr": "هو العادل في حكمه، يقيم القسط بين عباده.",
+      "descriptionTr": "Adaleti gerçekleştiren, kulları arasında hakkaniyetle hükmedendir.",
+      "descriptionEn": "The Equitable, who establishes justice and fairness among His servants."
+    },
+    {
+      "id": 87,
+      "slug": "al-jami",
+      "arabicName": "الْجَامِعُ",
+      "latinTr": "El-Câmi‘",
+      "latinEn": "Al-Jami",
+      "descriptionAr": "هو الذي يجمع الخلق ليوم لا ريب فيه ويجمع القلوب على الحق.",
+      "descriptionTr": "Bütün mahlukatı kıyamet günü toplayacak ve dilediğini hakta birleştirendir.",
+      "descriptionEn": "The Gatherer, who will assemble creation and unite hearts upon truth."
+    },
+    {
+      "id": 88,
+      "slug": "al-ghaniyy",
+      "arabicName": "الْغَنِيُّ",
+      "latinTr": "El-Ganî",
+      "latinEn": "Al-Ghaniyy",
+      "descriptionAr": "هو الغني بذاته، لا يحتاج إلى أحد وكل شيء محتاج إليه.",
+      "descriptionTr": "Hiçbir şeye muhtaç olmayan, herkesin kendisine muhtaç olduğu zengindir.",
+      "descriptionEn": "The Self-Sufficient, needing none while all need Him."
+    },
+    {
+      "id": 89,
+      "slug": "al-mughni",
+      "arabicName": "الْمُغْنِي",
+      "latinTr": "El-Muğnî",
+      "latinEn": "Al-Mughni",
+      "descriptionAr": "هو الذي يغني من شاء ويكفيه بحكمته وفضله.",
+      "descriptionTr": "Dilediğini ihtiyaçtan kurtaran, zengin ve yeterli kılandır.",
+      "descriptionEn": "The Enricher, who frees from need and grants sufficiency."
+    },
+    {
+      "id": 90,
+      "slug": "al-mani",
+      "arabicName": "الْمَانِعُ",
+      "latinTr": "El-Mâni‘",
+      "latinEn": "Al-Mani",
+      "descriptionAr": "هو الذي يمنع الضرر أو العطاء بحكمة، ولا مانع لما أعطى.",
+      "descriptionTr": "Hikmetiyle engel koyan; verdiğine engel, engellediğine verici bulunmayandır.",
+      "descriptionEn": "The Withholder, who prevents or withholds by wisdom; none can block what He gives."
+    },
+    {
+      "id": 91,
+      "slug": "ad-darr",
+      "arabicName": "الضَّارُّ",
+      "latinTr": "Ed-Dârr",
+      "latinEn": "Ad-Darr",
+      "descriptionAr": "هو خالق أسباب الضرر والابتلاء بحكمة وعدل.",
+      "descriptionTr": "Hikmet ve adaletle zarar ve imtihan sebeplerini yaratandır.",
+      "descriptionEn": "The Creator of harm and trial, decreeing hardship with wisdom and justice."
+    },
+    {
+      "id": 92,
+      "slug": "an-nafi",
+      "arabicName": "النَّافِعُ",
+      "latinTr": "En-Nâfi‘",
+      "latinEn": "An-Nafi",
+      "descriptionAr": "هو خالق النفع والخير، يوصل المنافع إلى من يشاء.",
+      "descriptionTr": "Fayda ve hayrı yaratan, dilediğine yarar ulaştırandır.",
+      "descriptionEn": "The Benefiter, who creates benefit and conveys good to whom He wills."
+    },
+    {
+      "id": 93,
+      "slug": "an-nur",
+      "arabicName": "النُّورُ",
+      "latinTr": "En-Nûr",
+      "latinEn": "An-Nur",
+      "descriptionAr": "هو نور السماوات والأرض، يهدي القلوب ويظهر الحق.",
+      "descriptionTr": "Göklerin ve yerin nuru, kalpleri hidayetle aydınlatandır.",
+      "descriptionEn": "The Light, who illuminates the heavens, the earth, and hearts with guidance."
+    },
+    {
+      "id": 94,
+      "slug": "al-hadi",
+      "arabicName": "الْهَادِي",
+      "latinTr": "El-Hâdî",
+      "latinEn": "Al-Hadi",
+      "descriptionAr": "هو الذي يبين الطريق المستقيم ويهدي من شاء إليه.",
+      "descriptionTr": "Doğru yolu gösteren ve dilediğini hidayete erdirendir.",
+      "descriptionEn": "The Guide, who shows the straight path and guides whom He wills."
+    },
+    {
+      "id": 95,
+      "slug": "al-badi",
+      "arabicName": "الْبَدِيعُ",
+      "latinTr": "El-Bedî‘",
+      "latinEn": "Al-Badi",
+      "descriptionAr": "هو المبدع للخلق على غير مثال سابق.",
+      "descriptionTr": "Örneksiz ve benzersiz biçimde yoktan yaratandır.",
+      "descriptionEn": "The Incomparable Originator, who creates without precedent."
+    },
+    {
+      "id": 96,
+      "slug": "al-baqi",
+      "arabicName": "الْبَاقِي",
+      "latinTr": "El-Bâkî",
+      "latinEn": "Al-Baqi",
+      "descriptionAr": "هو الدائم الذي لا يفنى ولا يزول.",
+      "descriptionTr": "Varlığı sürekli olan, yok olmayan ve sonu bulunmayandır.",
+      "descriptionEn": "The Everlasting, who does not perish or cease."
+    },
+    {
+      "id": 97,
+      "slug": "al-warith",
+      "arabicName": "الْوَارِثُ",
+      "latinTr": "El-Vâris",
+      "latinEn": "Al-Warith",
+      "descriptionAr": "هو الباقي بعد فناء الخلق، إليه ترجع الملكية كلها.",
+      "descriptionTr": "Her şey yok olduktan sonra baki kalan, mülkün nihai sahibi olandır.",
+      "descriptionEn": "The Inheritor, remaining after creation and to whom all ownership returns."
+    },
+    {
+      "id": 98,
+      "slug": "ar-rashid",
+      "arabicName": "الرَّشِيدُ",
+      "latinTr": "Er-Reşîd",
+      "latinEn": "Ar-Rashid",
+      "descriptionAr": "هو المرشد إلى الصواب، أفعاله كلها على السداد والحكمة.",
+      "descriptionTr": "Doğru yolu gösteren, bütün işleri isabet ve hikmet üzere olandır.",
+      "descriptionEn": "The Rightly Guiding, whose actions are sound, wise, and rightly directed."
+    },
+    {
+      "id": 99,
+      "slug": "as-sabur",
+      "arabicName": "الصَّبُورُ",
+      "latinTr": "Es-Sabûr",
+      "latinEn": "As-Sabur",
+      "descriptionAr": "هو كثير الصبر، لا يعجل بالعقوبة ويمهل عباده.",
+      "descriptionTr": "Çok sabırlı olan, günahkârları hemen cezalandırmayıp mühlet verendir.",
+      "descriptionEn": "The Patient One, who does not hasten punishment and grants time to His servants."
+    }
+  ]
+}

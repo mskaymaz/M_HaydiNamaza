@@ -722,3 +722,35 @@ Arsive tasinanlar:
 - Besmele/data/daily_panel/archive/pending_json_2026-05-22_084948/ayahs.v1.approved.json
 - Besmele/data/daily_panel/archive/pending_json_2026-05-22_084948/hadiths.v1.approved.json
 - Besmele/data/daily_panel/archive/pending_json_2026-05-22_084948/sequence.v1.json
+
+### Daily Content Kaynak Onay Guncellemesi
+
+Tarih: 2026-05-29
+
+Amac: Ayet/hadis ekleme paneli icin "hangi veri nereden cekiliyor" notlarini tek yerde netlestirmek.
+
+- Diyanet Kuran API erisim kapisi dogrulandi:
+  - `https://acikkaynakkuran-dev.diyanet.gov.tr/`
+  - Not: API anahtari almak icin GitHub ile giris gerektirir.
+- Diyanet acik kaynak Kuran istemci reposunda da token gereksinimi notu var:
+  - `https://github.com/diyanet-bid/Kuran`
+- Ayet cekimi icin dokumante edilmis endpointler dogrulandi (islamic.app):
+  - Dokuman: `https://docs.islamic.app/api-reference/verses`
+  - Ornek endpoint: `GET /v1/verses/by_key/{surah}:{ayah}`
+- Riyazus Salihin hadis cekimi icin dokumante edilmis endpointler dogrulandi (islamic.app):
+  - Dokuman: `https://docs.islamic.app/api-reference/hadith-hadiths`
+  - Ornek endpoint: `GET /v1/hadith/collections/riyadussalihin/books/{bookNumber}/hadiths/{hadithNumber}`
+- islamic.app kullanim sinirlari ve erisim modeli dogrulandi:
+  - Kimlik dogrulama: `no signup, no API key` (dokumana gore)
+  - Limit: `1000 request/saat/IP`
+  - Referanslar:
+    - `https://docs.islamic.app/quickstart`
+    - `https://docs.islamic.app/concepts/rate-limits`
+- Kaynak/attribution notu:
+  - islamic.app hadith verisinin sunnah.com aynasini kullandigini belirtir; yayin oncesi atif/lisans notu korunmalidir.
+  - Referans: `https://islamic.app/attributions`
+
+Operasyonel sonuc (bu tarih itibariyla):
+- Diyanet tokeni mevcutsa TR ayet metni/meali Diyanet API'den alinabilir.
+- AR/EN ayet ve Riyazus Salihin hadis metinlerinde islamic.app cekimi teknik olarak uygulanabilir.
+- Tum otomatik cekilen kayitlar panelde insan onayindan gecmeden `approved` yapilmaz.

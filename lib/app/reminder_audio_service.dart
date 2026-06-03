@@ -602,18 +602,19 @@ class ReminderAudioService {
     }
 
     var normalized = text;
-    normalized = normalized.replaceAll(
-      RegExp(r'\(\s*ra\s*\)', caseSensitive: false),
-      'radiyallahu anhu',
-    );
-    normalized = normalized.replaceAll(
-      RegExp(r'\bHz\.', caseSensitive: false),
-      'Hazreti',
-    );
-    normalized = normalized.replaceAll(
-      RegExp(r'\bb\.(?=\s|$)', caseSensitive: true),
-      'Bin',
-    );
+    const replacements = <MapEntry<Pattern, String>>[
+      MapEntry(RegExp(r'\(\s*r\.?\s*a\.?\s*\)', caseSensitive: false), 'radiyallahu anhu'),
+      MapEntry(RegExp(r'\(\s*a\.?\s*s\.?\s*\)', caseSensitive: false), 'aleyhisselam'),
+      MapEntry(
+        RegExp(r'\(\s*(?:s\.?\s*a\.?\s*v\.?|s\.?\s*a\.?)\s*\)', caseSensitive: false),
+        'Sallallahu aleyhi vesselam',
+      ),
+      MapEntry(RegExp(r'\bHz\.', caseSensitive: false), 'Hazreti'),
+      MapEntry(RegExp(r'\bb\.(?=\s|$)', caseSensitive: true), 'Bin'),
+    ];
+    for (final replacement in replacements) {
+      normalized = normalized.replaceAll(replacement.key, replacement.value);
+    }
     return normalized;
   }
 

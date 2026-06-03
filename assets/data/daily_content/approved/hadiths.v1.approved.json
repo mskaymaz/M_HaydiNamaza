@@ -1,6 +1,33 @@
 {
   "schema_version": "1.0.0",
-  "content_version": "reset-2026-06-02",
+  "content_version": "tool-20260603_165018",
   "type": "hadith",
-  "records": []
+  "records": [
+    {
+      "id": "hadith_000055",
+      "kind": "hadith",
+      "ref": "riyazussalihin/55",
+      "ar": "فالأول عن ابن مسعود رضي الله عن النبي صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إن الصدق يهدي إلى البر وإن البر يهدي إلى الجنة، وإن الرجل ليصدق حتى يكتب عند الله صديقاً، وإن الكذب يهدي إلى الفجور، وإن الفجور يهدي إلى النار، وإن الرجل ليكذب حتى يكتب عند الله كذاباً‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+      "tr": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Peygamber şöyle demiştir:\nDoğruluk iyiliğe, iyilik de cennete götürür. İnsan doğru söyleye söyleye Allah katında “sıddîk (dürüst)” olarak tescillenir. Yalan söylemek kötülüğe, kötülük de cehenneme götürür. İnsan yalan söyleye söyleye sonunda Allah katında “yalancı” olarak tescillenir.",
+      "en": "Abdullah bin Mas'ud (May Allah be pleased with him) reported:\nThe Prophet (ﷺ) said, \"Truth leads to piety and piety leads to Jannah. A man persists in speaking the truth till he is enrolled with Allah as a truthful. Falsehood leads to vice and vice leads to the Fire (Hell), and a person persists on telling lies until he is enrolled as a liar\".'.",
+      "priority": 2,
+      "approvedAt": "2026-06-03T13:39:28+00:00",
+      "hadith_number": 55,
+      "book_reference_tr": "",
+      "book_reference_en": ""
+    },
+    {
+      "id": "hadith_000444",
+      "kind": "hadith",
+      "ref": "riyazussalihin/444",
+      "ar": "وعن أبي سعيد الخدري، رضي الله عنه ، أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إذا وضعت الجنازة واحتملها الناس أو الرجال على أعناقهم، فإن كانت صالحة قالت‏:‏ فدموني قدموني، وإن كانت غير صالحة، قالت يا ويلها‏!‏ أين تذهبون بها‏؟‏ يسمع صوته كل شئ إلا الإنسان، ولو سمعه صعق‏\"‏ ‏(‏‏(‏رواه البخاري‏)‏‏)‏‏.‏",
+      "tr": "Ebû Saîd el-Hudrî’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nCenaze tabuta konulup da insanlar onu omuzlarına aldığı zaman, ölen kimse salihlerden ise “Beni bir an evvel yerime ulaştırın!” der. Eğer salihlerden değilse “Eyvah, beni nereye götürüyorsunuz?” der ve onun sesini insanlardan başka her şey duyar. Eğer insan bu sesi duysaydı, (dehşetten) bayılıp düşerdi.",
+      "en": "Abu Sa'id Al-Khudri (May Allah be pleased with him) reported:\nMessenger of Allah (ﷺ) said, \"When a dead body is placed on a bier and men carry it on their shoulders, if the deceased was pious, it (the corpse) will say: 'Take me in haste'; but if he was not, it will say (to its bearers): 'Woe to it. Where are you taking it?' Everything except man hears its voice. Had a human being heard its voice, he would have surely died\".",
+      "priority": 2,
+      "approvedAt": "2026-06-03T13:50:17+00:00",
+      "hadith_number": 444,
+      "book_reference_tr": "",
+      "book_reference_en": ""
+    }
+  ]
 }

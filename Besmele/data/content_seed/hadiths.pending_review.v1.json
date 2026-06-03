@@ -69,25 +69,30 @@
         }
       },
       "sourceInfo": {
-        "primaryCollection": {
-          "key": "riyazussalihin",
-          "title_ar": "رياض الصالحين",
-          "title_tr": "Riyazus Salihin",
-          "title_en": "Riyad as-Salihin"
-        },
-        "chapter": {
-          "title_tr": "Ağırbaşlılık (Vakar)"
-        },
-        "display": {
-          "tr": "(B6092 Buhârî, Edeb, 68; M2086 Müslim, İstiskâ, 16)",
-          "en": "(B6092 Buhârî, Edeb, 68; M2086 Müslim, İstiskâ, 16)"
-        },
-        "sunnah": {
-          "candidateNo": 702,
-          "candidateUrl": "https://sunnah.com/riyadussalihin:702",
-          "matchStatus": "matched_high_confidence",
-          "matchScore": 7882,
-          "matchMethod": "arabic_similarity_local_window"
+        "label": "Riyazus Salihin",
+        "source_ref": "https://sunnah.com/riyadussalihin:702",
+        "fetch_status": "pending",
+        "details": {
+          "primaryCollection": {
+            "key": "riyazussalihin",
+            "title_ar": "رياض الصالحين",
+            "title_tr": "Riyazus Salihin",
+            "title_en": "Riyad as-Salihin"
+          },
+          "chapter": {
+            "title_tr": "Ağırbaşlılık (Vakar)"
+          },
+          "display": {
+            "tr": "(B6092 Buhârî, Edeb, 68; M2086 Müslim, İstiskâ, 16)",
+            "en": "(B6092 Buhârî, Edeb, 68; M2086 Müslim, İstiskâ, 16)"
+          },
+          "sunnah": {
+            "candidateNo": 702,
+            "candidateUrl": "https://sunnah.com/riyadussalihin:702",
+            "matchStatus": "matched_high_confidence",
+            "matchScore": 7882,
+            "matchMethod": "arabic_similarity_local_window"
+          }
         }
       },
       "review": {
@@ -125,11 +130,34 @@
           "Arefe Günü"
         ]
       },
-      "status": "pending",
+      "status": "draft",
       "book_reference_tr": "(B6092 Buhârî, Edeb, 68; M2086 Müslim, İstiskâ, 16)",
-      "text_tr": "Hz. Âişe (ra) şöyle demiştir:\nBen Resûlullah küçük dili görünecek kadar kahkaha ile katıla katıla güldüğünü hiç görmedim; O, sadece gülümserdi.\n...Her kim de Allah’ın nişanelerine (kurbanlıklarına) saygı gösterirse şüphesiz ki bu kalplerin takvasından (Allah’a karşı gelmekten sakınmasından)dır.\n(Hac, 22/32)",
+      "text_tr": "Hz. Âişe (ra) şöyle demiştir:\nBen Resûlullah küçük dili görünecek kadar kahkaha ile katıla katıla güldüğünü hiç görmedim; O, sadece gülümserdi.",
       "text_ar": "عن عائشة رضي الله عنها قالت‏:‏ ما رأيت رسول الله صلى الله عليه وسلم مستجمعا قط ضاحكاً حتى ترى منه لهواته، إنما كان يتبسم ‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
-      "text_en": "'Aishah (May Allah be pleased with him) reported:\nI have never seen Messenger of Allah (ﷺ) laughing so heartily that his uvula could be seen. He used to smile only."
+      "text_en": "'Aishah (May Allah be pleased with him) reported:\nI have never seen Messenger of Allah (ﷺ) laughing so heartily that his uvula could be seen. He used to smile only.",
+      "priority": 1,
+      "notes": "",
+      "createdAt": "2026-06-03T11:25:49+00:00",
+      "updatedAt": "2026-06-03T11:25:49+00:00",
+      "approvedAt": "",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-03T11:25:49+00:00",
+          "status": "draft",
+          "priority": 1,
+          "notes": ""
+        }
+      ],
+      "hadith_number": 706,
+      "book_reference_en": "(B6092 Buhârî, Edeb, 68; M2086 Müslim, İstiskâ, 16)"
     },
     {
       "id": "hadith_000067",
@@ -45534,6 +45562,345 @@
         "topics_tr": "Münafık"
       },
       "status": "pending_review"
+    },
+    {
+      "id": "hadith_000055",
+      "ref": "riyazussalihin/55",
+      "hadithNo": 55,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 272,
+      "input": {
+        "hadithNo_diyanet": 55,
+        "sunnahNo_candidate": 54,
+        "topics_tr": "Düşmanlık",
+        "chapter_tr": "Doğru Söylemek (Sıdk)",
+        "source_tr": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)",
+        "source_sunnah_url": "https://sunnah.com/riyadussalihin:54",
+        "matchStatus": "matched_high_confidence",
+        "matchScore": 7413,
+        "matchMethod": "arabic_similarity_local_window",
+        "manualControl": "NO",
+        "note": "Hadis_440 xlsx kaynagindan dogrudan unicode olarak uretildi."
+      },
+      "text": {
+        "ar": {
+          "clean": "فالأول عن ابن مسعود رضي الله عن النبي صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إن الصدق يهدي إلى البر وإن البر يهدي إلى الجنة، وإن الرجل ليصدق حتى يكتب عند الله صديقاً، وإن الكذب يهدي إلى الفجور، وإن الفجور يهدي إلى النار، وإن الرجل ليكذب حتى يكتب عند الله كذاباً‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "sourceText": "فالأول عن ابن مسعود رضي الله عن النبي صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إن الصدق يهدي إلى البر وإن البر يهدي إلى الجنة، وإن الرجل ليصدق حتى يكتب عند الله صديقاً، وإن الكذب يهدي إلى الفجور، وإن الفجور يهدي إلى النار، وإن الرجل ليكذب حتى يكتب عند الله كذاباً‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "ttsText": "فالأول عن ابن مسعود رضي الله عن النبي صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إن الصدق يهدي إلى البر وإن البر يهدي إلى الجنة، وإن الرجل ليصدق حتى يكتب عند الله صديقاً، وإن الكذب يهدي إلى الفجور، وإن الفجور يهدي إلى النار، وإن الرجل ليكذب حتى يكتب عند الله كذاباً‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "needs_review"
+        },
+        "tr": {
+          "clean": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Peygamber şöyle demiştir:\nDoğruluk iyiliğe, iyilik de cennete götürür. İnsan doğru söyleye söyleye Allah katında “sıddîk (dürüst)” olarak tescillenir. Yalan söylemek kötülüğe, kötülük de cehenneme götürür. İnsan yalan söyleye söyleye sonunda Allah katında “yalancı” olarak tescillenir.",
+          "sourceText": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Peygamber şöyle demiştir:\nDoğruluk iyiliğe, iyilik de cennete götürür. İnsan doğru söyleye söyleye Allah katında “sıddîk (dürüst)” olarak tescillenir. Yalan söylemek kötülüğe, kötülük de cehenneme götürür. İnsan yalan söyleye söyleye sonunda Allah katında “yalancı” olarak tescillenir.",
+          "ttsText": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Peygamber şöyle demiştir:\nDoğruluk iyiliğe, iyilik de cennete götürür. İnsan doğru söyleye söyleye Allah katında “sıddîk (dürüst)” olarak tescillenir. Yalan söylemek kötülüğe, kötülük de cehenneme götürür. İnsan yalan söyleye söyleye sonunda Allah katında “yalancı” olarak tescillenir.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Abdullah bin Mas'ud (May Allah be pleased with him) reported:\nThe Prophet (ﷺ) said, \"Truth leads to piety and piety leads to Jannah. A man persists in speaking the truth till he is enrolled with Allah as a truthful. Falsehood leads to vice and vice leads to the Fire (Hell), and a person persists on telling lies until he is enrolled as a liar\".'.",
+          "sourceText": "Abdullah bin Mas'ud (May Allah be pleased with him) reported:\nThe Prophet (ﷺ) said, \"Truth leads to piety and piety leads to Jannah. A man persists in speaking the truth till he is enrolled with Allah as a truthful. Falsehood leads to vice and vice leads to the Fire (Hell), and a person persists on telling lies until he is enrolled as a liar\".'.",
+          "ttsText": "Abdullah bin Mas'ud (May Allah be pleased with him) reported:\nThe Prophet (ﷺ) said, \"Truth leads to piety and piety leads to Jannah. A man persists in speaking the truth till he is enrolled with Allah as a truthful. Falsehood leads to vice and vice leads to the Fire (Hell), and a person persists on telling lies until he is enrolled as a liar\".'.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "chapter": {
+          "title_tr": "Doğru Söylemek (Sıdk)"
+        },
+        "display": {
+          "tr": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)",
+          "en": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)"
+        },
+        "sunnah": {
+          "candidateNo": 54,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:54",
+          "matchStatus": "matched_high_confidence",
+          "matchScore": 7413,
+          "matchMethod": "arabic_similarity_local_window"
+        },
+        "tr": {
+          "sourceName": "Diyanet Dijital Riyazus-Salihin",
+          "sourceType": "seed/json",
+          "reference": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)"
+        },
+        "ar_en": {
+          "sourceName": "Sunnah.com Riyad as-Salihin",
+          "sourceType": "seed/json",
+          "url": "https://sunnah.com/riyadussalihin:54",
+          "reference": "Riyad as-Salihin 54",
+          "matchStatus": "matched_high_confidence",
+          "matchScore": 7413
+        },
+        "label": "Diyanet TR + Sunnah yerel seed",
+        "source_ref": "riyazussalihin/54",
+        "fetch_status": "local_hadith_nearby",
+        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\Besmele\\data\\content_seed\\hadis\\hadiths.pending_review.440.clean_sunnah_ar_en.v1.json"
+      },
+      "review": {
+        "status": "approved",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 2,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null,
+        "updated_at": "2026-06-03T13:39:29+00:00"
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false,
+        "needsManualReview": false,
+        "arabicCharCount": 281,
+        "turkishCharCount": 329,
+        "englishCharCount": 347,
+        "matchScore": 7413,
+        "matchMethod": "arabic_similarity_local_window",
+        "matchConfidence": "medium",
+        "matchStatus": "needs_light_review",
+        "numberMatch": false,
+        "semanticMatch": "medium",
+        "narratorMatch": "unknown",
+        "topicMatch": "unknown",
+        "notes": [
+          "Hadis no farki: -1",
+          "Eslesme skoru: 7413"
+        ]
+      },
+      "tags": {
+        "firstTopic_tr": "D",
+        "topics_tr": "Düşmanlık"
+      },
+      "status": "approved",
+      "text_ar": "فالأول عن ابن مسعود رضي الله عن النبي صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إن الصدق يهدي إلى البر وإن البر يهدي إلى الجنة، وإن الرجل ليصدق حتى يكتب عند الله صديقاً، وإن الكذب يهدي إلى الفجور، وإن الفجور يهدي إلى النار، وإن الرجل ليكذب حتى يكتب عند الله كذاباً‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+      "text_tr": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Peygamber şöyle demiştir:\nDoğruluk iyiliğe, iyilik de cennete götürür. İnsan doğru söyleye söyleye Allah katında “sıddîk (dürüst)” olarak tescillenir. Yalan söylemek kötülüğe, kötülük de cehenneme götürür. İnsan yalan söyleye söyleye sonunda Allah katında “yalancı” olarak tescillenir.",
+      "text_en": "Abdullah bin Mas'ud (May Allah be pleased with him) reported:\nThe Prophet (ﷺ) said, \"Truth leads to piety and piety leads to Jannah. A man persists in speaking the truth till he is enrolled with Allah as a truthful. Falsehood leads to vice and vice leads to the Fire (Hell), and a person persists on telling lies until he is enrolled as a liar\".'.",
+      "priority": 2,
+      "notes": "",
+      "createdAt": "2026-06-03T13:38:46+00:00",
+      "updatedAt": "2026-06-03T13:39:29+00:00",
+      "approvedAt": "2026-06-03T13:39:28+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": true,
+        "possibleDuplicate": true,
+        "archiveMatches": [
+          {
+            "record_id": "hadith_000054",
+            "reason": "arabic",
+            "score": 1.0,
+            "ref": "riyazussalihin/54"
+          },
+          {
+            "record_id": "hadith_000054",
+            "reason": "similar_text",
+            "score": 1.0,
+            "ref": "riyazussalihin/54"
+          }
+        ],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-03T13:39:29+00:00",
+          "status": "approved",
+          "priority": 2,
+          "notes": ""
+        }
+      ],
+      "hadith_number": 55,
+      "book_reference_tr": "",
+      "book_reference_en": ""
+    },
+    {
+      "id": "hadith_000444",
+      "ref": "riyazussalihin/444",
+      "hadithNo": 444,
+      "type": "single",
+      "groupKey": "riyazussalihin",
+      "sourceListOrder": 19,
+      "input": {
+        "hadithNo_diyanet": 444,
+        "sunnahNo_candidate": 444,
+        "topics_tr": "Ağlamak",
+        "chapter_tr": "Korku ile Ümit Arasında Yaşamak",
+        "source_tr": "(B1314 Buhârî, Cenâiz, 50)",
+        "source_sunnah_url": "https://sunnah.com/riyadussalihin:444",
+        "matchStatus": "matched_high_confidence",
+        "matchScore": 6995,
+        "matchMethod": "arabic_similarity_local_window",
+        "manualControl": "NO",
+        "note": "Hadis_440 xlsx kaynagindan dogrudan unicode olarak uretildi."
+      },
+      "text": {
+        "ar": {
+          "clean": "وعن أبي سعيد الخدري، رضي الله عنه ، أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إذا وضعت الجنازة واحتملها الناس أو الرجال على أعناقهم، فإن كانت صالحة قالت‏:‏ فدموني قدموني، وإن كانت غير صالحة، قالت يا ويلها‏!‏ أين تذهبون بها‏؟‏ يسمع صوته كل شئ إلا الإنسان، ولو سمعه صعق‏\"‏ ‏(‏‏(‏رواه البخاري‏)‏‏)‏‏.‏",
+          "sourceText": "وعن أبي سعيد الخدري، رضي الله عنه ، أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إذا وضعت الجنازة واحتملها الناس أو الرجال على أعناقهم، فإن كانت صالحة قالت‏:‏ فدموني قدموني، وإن كانت غير صالحة، قالت يا ويلها‏!‏ أين تذهبون بها‏؟‏ يسمع صوته كل شئ إلا الإنسان، ولو سمعه صعق‏\"‏ ‏(‏‏(‏رواه البخاري‏)‏‏)‏‏.‏",
+          "ttsText": "وعن أبي سعيد الخدري، رضي الله عنه ، أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إذا وضعت الجنازة واحتملها الناس أو الرجال على أعناقهم، فإن كانت صالحة قالت‏:‏ فدموني قدموني، وإن كانت غير صالحة، قالت يا ويلها‏!‏ أين تذهبون بها‏؟‏ يسمع صوته كل شئ إلا الإنسان، ولو سمعه صعق‏\"‏ ‏(‏‏(‏رواه البخاري‏)‏‏)‏‏.‏",
+          "direction": "rtl",
+          "script": "Arabic",
+          "status": "needs_review"
+        },
+        "tr": {
+          "clean": "Ebû Saîd el-Hudrî’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nCenaze tabuta konulup da insanlar onu omuzlarına aldığı zaman, ölen kimse salihlerden ise “Beni bir an evvel yerime ulaştırın!” der. Eğer salihlerden değilse “Eyvah, beni nereye götürüyorsunuz?” der ve onun sesini insanlardan başka her şey duyar. Eğer insan bu sesi duysaydı, (dehşetten) bayılıp düşerdi.",
+          "sourceText": "Ebû Saîd el-Hudrî’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nCenaze tabuta konulup da insanlar onu omuzlarına aldığı zaman, ölen kimse salihlerden ise “Beni bir an evvel yerime ulaştırın!” der. Eğer salihlerden değilse “Eyvah, beni nereye götürüyorsunuz?” der ve onun sesini insanlardan başka her şey duyar. Eğer insan bu sesi duysaydı, (dehşetten) bayılıp düşerdi.",
+          "ttsText": "Ebû Saîd el-Hudrî’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nCenaze tabuta konulup da insanlar onu omuzlarına aldığı zaman, ölen kimse salihlerden ise “Beni bir an evvel yerime ulaştırın!” der. Eğer salihlerden değilse “Eyvah, beni nereye götürüyorsunuz?” der ve onun sesini insanlardan başka her şey duyar. Eğer insan bu sesi duysaydı, (dehşetten) bayılıp düşerdi.",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        },
+        "en": {
+          "clean": "Abu Sa'id Al-Khudri (May Allah be pleased with him) reported:\nMessenger of Allah (ﷺ) said, \"When a dead body is placed on a bier and men carry it on their shoulders, if the deceased was pious, it (the corpse) will say: 'Take me in haste'; but if he was not, it will say (to its bearers): 'Woe to it. Where are you taking it?' Everything except man hears its voice. Had a human being heard its voice, he would have surely died\".",
+          "sourceText": "Abu Sa'id Al-Khudri (May Allah be pleased with him) reported:\nMessenger of Allah (ﷺ) said, \"When a dead body is placed on a bier and men carry it on their shoulders, if the deceased was pious, it (the corpse) will say: 'Take me in haste'; but if he was not, it will say (to its bearers): 'Woe to it. Where are you taking it?' Everything except man hears its voice. Had a human being heard its voice, he would have surely died\".",
+          "ttsText": "Abu Sa'id Al-Khudri (May Allah be pleased with him) reported:\nMessenger of Allah (ﷺ) said, \"When a dead body is placed on a bier and men carry it on their shoulders, if the deceased was pious, it (the corpse) will say: 'Take me in haste'; but if he was not, it will say (to its bearers): 'Woe to it. Where are you taking it?' Everything except man hears its voice. Had a human being heard its voice, he would have surely died\".",
+          "direction": "ltr",
+          "script": "Latin",
+          "status": "needs_review"
+        }
+      },
+      "sourceInfo": {
+        "primaryCollection": {
+          "key": "riyazussalihin",
+          "title_ar": "رياض الصالحين",
+          "title_tr": "Riyazus Salihin",
+          "title_en": "Riyad as-Salihin"
+        },
+        "chapter": {
+          "title_tr": "Korku ile Ümit Arasında Yaşamak"
+        },
+        "display": {
+          "tr": "(B1314 Buhârî, Cenâiz, 50)",
+          "en": "(B1314 Buhârî, Cenâiz, 50)"
+        },
+        "sunnah": {
+          "candidateNo": 444,
+          "candidateUrl": "https://sunnah.com/riyadussalihin:444",
+          "matchStatus": "matched_high_confidence",
+          "matchScore": 6995,
+          "matchMethod": "arabic_similarity_local_window"
+        },
+        "tr": {
+          "sourceName": "Diyanet Dijital Riyazus-Salihin",
+          "sourceType": "seed/json",
+          "reference": "(B1314 Buhârî, Cenâiz, 50)"
+        },
+        "ar_en": {
+          "sourceName": "Sunnah.com Riyad as-Salihin",
+          "sourceType": "seed/json",
+          "url": "https://sunnah.com/riyadussalihin:444",
+          "reference": "Riyad as-Salihin 444",
+          "matchStatus": "matched_high_confidence",
+          "matchScore": 6995
+        },
+        "label": "Diyanet TR + Sunnah yerel seed",
+        "source_ref": "riyazussalihin/447",
+        "fetch_status": "local_hadith_nearby",
+        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\Besmele\\data\\content_seed\\hadis\\hadiths.pending_review.440.clean_sunnah_ar_en.v1.json"
+      },
+      "review": {
+        "status": "approved",
+        "decision": null,
+        "priorityKey": "normal",
+        "priority": 2,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "queue": "active",
+        "note": "",
+        "reviewedAt": null,
+        "reviewedBy": null,
+        "updated_at": "2026-06-03T13:50:18+00:00"
+      },
+      "quality": {
+        "textCleaned": true,
+        "sourceSeparated": true,
+        "ttsReady": true,
+        "arabicChecked": false,
+        "turkishChecked": false,
+        "englishChecked": false,
+        "needsManualReview": false,
+        "arabicCharCount": 299,
+        "turkishCharCount": 385,
+        "englishCharCount": 427,
+        "matchScore": 6995,
+        "matchMethod": "arabic_similarity_local_window",
+        "matchConfidence": "high",
+        "matchStatus": "verified_candidate",
+        "numberMatch": true,
+        "semanticMatch": "high",
+        "narratorMatch": "unknown",
+        "topicMatch": "unknown",
+        "notes": [
+          "Eslesme skoru: 6995"
+        ]
+      },
+      "tags": {
+        "firstTopic_tr": "A",
+        "topics_tr": "Ağlamak"
+      },
+      "status": "approved",
+      "text_ar": "وعن أبي سعيد الخدري، رضي الله عنه ، أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إذا وضعت الجنازة واحتملها الناس أو الرجال على أعناقهم، فإن كانت صالحة قالت‏:‏ فدموني قدموني، وإن كانت غير صالحة، قالت يا ويلها‏!‏ أين تذهبون بها‏؟‏ يسمع صوته كل شئ إلا الإنسان، ولو سمعه صعق‏\"‏ ‏(‏‏(‏رواه البخاري‏)‏‏)‏‏.‏",
+      "text_tr": "Ebû Saîd el-Hudrî’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nCenaze tabuta konulup da insanlar onu omuzlarına aldığı zaman, ölen kimse salihlerden ise “Beni bir an evvel yerime ulaştırın!” der. Eğer salihlerden değilse “Eyvah, beni nereye götürüyorsunuz?” der ve onun sesini insanlardan başka her şey duyar. Eğer insan bu sesi duysaydı, (dehşetten) bayılıp düşerdi.",
+      "text_en": "Abu Sa'id Al-Khudri (May Allah be pleased with him) reported:\nMessenger of Allah (ﷺ) said, \"When a dead body is placed on a bier and men carry it on their shoulders, if the deceased was pious, it (the corpse) will say: 'Take me in haste'; but if he was not, it will say (to its bearers): 'Woe to it. Where are you taking it?' Everything except man hears its voice. Had a human being heard its voice, he would have surely died\".",
+      "priority": 2,
+      "notes": "",
+      "createdAt": "2026-06-03T13:48:39+00:00",
+      "updatedAt": "2026-06-03T13:50:18+00:00",
+      "approvedAt": "2026-06-03T13:50:17+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": true,
+        "possibleDuplicate": true,
+        "archiveMatches": [
+          {
+            "record_id": "hadith_000447",
+            "reason": "arabic",
+            "score": 1.0,
+            "ref": "riyazussalihin/447"
+          },
+          {
+            "record_id": "hadith_000447",
+            "reason": "similar_text",
+            "score": 1.0,
+            "ref": "riyazussalihin/447"
+          }
+        ],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-03T13:50:18+00:00",
+          "status": "approved",
+          "priority": 2,
+          "notes": ""
+        }
+      ],
+      "hadith_number": 444,
+      "book_reference_tr": "",
+      "book_reference_en": ""
     }
   ]
 }

@@ -8,8 +8,8 @@ from typing import Any
 def default_hadith_seed_paths() -> list[Path]:
     repo_root = Path(__file__).resolve().parents[4]
     return [
-        repo_root / "Besmele" / "data" / "content_seed" / "hadis" / "hadiths.pending_review.440.clean_sunnah_ar_en.v1.json",
-        repo_root / "Besmele" / "data" / "content_seed" / "hadiths.pending_review.v1.json",
+        repo_root / "assets" / "data" / "daily_content" / "archive" / "hadiths.pending_review.440.clean_sunnah_ar_en.v1.json",
+        repo_root / "assets" / "data" / "daily_content" / "archive" / "hadiths.pending_review.v1.json",
     ]
 
 

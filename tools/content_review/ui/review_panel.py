@@ -20,8 +20,9 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from core.models import AyahRecord, BaseRecord, HadithRecord, STATUS_VALUES
+from core.models import AyahRecord, BaseRecord, EsmaRecord, HadithRecord, STATUS_VALUES
 from core.storage import ContentRepository, StorageConflictError
+from ui.mobile_preview import MobilePreviewWindow
 
 
 STATUS_LABELS = {
@@ -41,6 +42,7 @@ class ReviewPanel(QWidget):
     def __init__(self, repository: ContentRepository) -> None:
         super().__init__()
         self.repository = repository
+        self._preview_window: MobilePreviewWindow | None = None
         self._current_kind = "ayah"
         self._records: list[BaseRecord] = []
         self._current_record: BaseRecord | None = None
@@ -59,6 +61,7 @@ class ReviewPanel(QWidget):
         self.kind_combo = QComboBox()
         self.kind_combo.addItem("Ayet", "ayah")
         self.kind_combo.addItem("Hadis", "hadith")
+        self.kind_combo.addItem("Esmaül Hüsna", "esma")
         self.kind_combo.currentIndexChanged.connect(self._on_kind_changed)
         self.summary_label = QLabel("-")
         self.nearby_hadith_check = self._build_status_check("Yakın hadis adayı")
@@ -77,10 +80,13 @@ class ReviewPanel(QWidget):
         self.reload_btn.clicked.connect(self.refresh)
         self.undo_btn = QPushButton("Son Yazimi Geri Al")
         self.undo_btn.clicked.connect(self._undo_last)
+        self.preview_btn = QPushButton("Mobil Önizleme / Mobile Preview")
+        self.preview_btn.clicked.connect(self._open_mobile_preview)
         top_layout.addWidget(QLabel("Tur"), 0, 0)
         top_layout.addWidget(self.kind_combo, 0, 1)
         top_layout.addWidget(self.summary_label, 0, 2, 1, 3)
         top_layout.addWidget(self.nearby_hadith_check, 0, 5)
+        top_layout.addWidget(self.preview_btn, 0, 6)
         top_layout.addWidget(self.jump_edit, 1, 0, 1, 2)
         top_layout.addWidget(self.jump_btn, 1, 2)
         top_layout.addWidget(self.prev_btn, 1, 3)
@@ -125,6 +131,8 @@ class ReviewPanel(QWidget):
         self.hadith_source_edit = QTextEdit()
         self.hadith_source_edit.setFixedHeight(56)
         self.hadith_source_edit.setReadOnly(True)
+        self.esma_name_edit = QTextEdit()
+        self.esma_name_edit.setMinimumHeight(80)
         self.ar_edit = QTextEdit()
         self.tr_edit = QTextEdit()
         self.en_edit = QTextEdit()
@@ -145,11 +153,14 @@ class ReviewPanel(QWidget):
         self.en_main_check.toggled.connect(lambda checked: self._sync_translation_checks("en", checked, True))
         self.en_alt_check.toggled.connect(lambda checked: self._sync_translation_checks("en", checked, False))
         self.ar_font_spin = self._build_font_spin()
+        self.esma_name_font_spin = self._build_font_spin()
         self.tr_font_spin = self._build_font_spin()
         self.en_font_spin = self._build_font_spin()
         self.tr_alt_font_spin = self._build_font_spin()
         self.en_alt_font_spin = self._build_font_spin()
         self.ar_font_spin.setValue(18)
+        self.esma_name_font_spin.setValue(22)
+        self._bind_font_size(self.esma_name_font_spin, self.esma_name_edit)
         self._bind_font_size(self.ar_font_spin, self.ar_edit)
         self._bind_font_size(self.tr_font_spin, self.tr_edit)
         self._bind_font_size(self.en_font_spin, self.en_edit)
@@ -157,6 +168,7 @@ class ReviewPanel(QWidget):
         self._bind_font_size(self.en_alt_font_spin, self.en_alt_edit)
 
         self.ayah_source_row = self._labeled_editor("Ayet kaynak ozeti", self.ayah_source_edit)
+        self.esma_name_row = self._labeled_editor_with_font("Esma adı / Arapça isim", self.esma_name_font_spin, self.esma_name_edit)
         self.hadith_summary_row = QWidget()
         hadith_summary_layout = QHBoxLayout(self.hadith_summary_row)
         hadith_summary_layout.setContentsMargins(0, 0, 0, 0)
@@ -208,6 +220,7 @@ class ReviewPanel(QWidget):
         info_layout.addRow(priority_notes_row)
         info_layout.addRow("Ayet kaynak", self.ayah_source_row)
         info_layout.addRow("Hadis özeti", self.hadith_summary_row)
+        info_layout.addRow(self.esma_name_row)
         info_layout.addRow("Arapça metin", self._editor_with_font_row(self.ar_font_spin, self.ar_edit))
         info_layout.addRow("Türkçe metin", self.tr_translation_row)
         info_layout.addRow("İngilizce metin", self.en_translation_row)
@@ -239,12 +252,14 @@ class ReviewPanel(QWidget):
     def _load_record(self) -> None:
         record = self._current_record
         hadith_visible = isinstance(record, HadithRecord)
+        esma_visible = isinstance(record, EsmaRecord)
         self.book_ref_tr_edit.setVisible(False)
         self.book_ref_en_edit.setVisible(False)
         self.ayah_source_row.setVisible(not hadith_visible)
         self._set_row_visible(self.hadith_summary_row, hadith_visible)
-        self._configure_translation_mode(hadith_visible)
-        self._set_translation_alt_visible(not hadith_visible)
+        self._set_row_visible(self.esma_name_row, esma_visible)
+        self._configure_translation_mode(hadith_visible, esma_visible)
+        self._set_translation_alt_visible(not hadith_visible and not esma_visible)
         if record is None:
             self.nearby_hadith_check.setChecked(False)
             self.match_warning_label.setText("")
@@ -252,6 +267,7 @@ class ReviewPanel(QWidget):
                 label.setText("-")
             for edit in (
                 self.notes_edit,
+                self.esma_name_edit,
                 self.ar_edit,
                 self.tr_edit,
                 self.en_edit,
@@ -286,6 +302,7 @@ class ReviewPanel(QWidget):
         self.status_combo.setCurrentIndex(max(0, self.status_combo.findData(record.status)))
         self.priority_combo.setCurrentIndex(max(0, self.priority_combo.findData(self._normalize_priority(record.priority))))
         self.notes_edit.setPlainText(record.notes)
+        self.esma_name_edit.setPlainText("")
         self.ar_edit.setPlainText(record.ar)
         self.tr_edit.setPlainText(record.tr)
         self.en_edit.setPlainText(record.en)
@@ -299,10 +316,22 @@ class ReviewPanel(QWidget):
             self.en_main_check.setChecked(True)
             self.hadith_quality_edit.setPlainText(self._extract_hadith_quality_summary(record))
             self.hadith_source_edit.setPlainText(self._extract_hadith_source_summary(record))
+        elif isinstance(record, EsmaRecord):
+            self.book_ref_tr_edit.setPlainText("")
+            self.book_ref_en_edit.setPlainText("")
+            self.ayah_source_edit.setPlainText(self._extract_esma_summary(record))
+            self.esma_name_edit.setPlainText(record.arabic_name)
+            self.tr_alt_edit.setPlainText("")
+            self.en_alt_edit.setPlainText("")
+            self.tr_main_check.setChecked(True)
+            self.en_main_check.setChecked(True)
+            self.hadith_quality_edit.setPlainText("")
+            self.hadith_source_edit.setPlainText("")
         else:
             self.book_ref_tr_edit.setPlainText("")
             self.book_ref_en_edit.setPlainText("")
             self.ayah_source_edit.setPlainText(self._extract_ayah_source_summary(record))
+            self.esma_name_edit.setPlainText("")
             tr_alt_text = self._extract_ayah_alt_text(record, "tr")
             en_alt_text = self._extract_ayah_alt_text(record, "en")
             self.tr_alt_edit.setPlainText(tr_alt_text)
@@ -340,6 +369,11 @@ class ReviewPanel(QWidget):
                 updated,
                 book_reference_tr=self.book_ref_tr_edit.toPlainText().strip(),
                 book_reference_en=self.book_ref_en_edit.toPlainText().strip(),
+            )
+        if isinstance(updated, EsmaRecord):
+            updated = replace(
+                updated,
+                arabic_name=self.esma_name_edit.toPlainText().strip(),
             )
         if updated.status == "approved" and not updated.approved_at:
             updated = replace(
@@ -387,6 +421,15 @@ class ReviewPanel(QWidget):
             return
         self.refresh()
 
+    def _open_mobile_preview(self) -> None:
+        if self._preview_window is None:
+            self._preview_window = MobilePreviewWindow(self.repository)
+        else:
+            self._preview_window.refresh()
+        self._preview_window.show()
+        self._preview_window.raise_()
+        self._preview_window.activateWindow()
+
     def _build_font_spin(self) -> QSpinBox:
         spin = QSpinBox()
         spin.setRange(14, 36)
@@ -408,6 +451,24 @@ class ReviewPanel(QWidget):
         top.addWidget(QLabel("Yazi boyutu"))
         top.addWidget(spin)
         top.addStretch(1)
+        panel_layout.addLayout(top)
+        panel_layout.addWidget(editor)
+        return panel
+
+    def _labeled_editor_with_font(self, title: str, spin: QSpinBox, editor: QTextEdit) -> QWidget:
+        panel = QWidget()
+        panel.setStyleSheet("background:#fafafa; border:1px solid #d8d8d8; border-radius:8px;")
+        panel_layout = QVBoxLayout(panel)
+        panel_layout.setContentsMargins(8, 8, 8, 8)
+        panel_layout.setSpacing(8)
+        top = QHBoxLayout()
+        top.setContentsMargins(0, 0, 0, 0)
+        title_label = QLabel(title)
+        title_label.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        top.addWidget(title_label)
+        top.addStretch(1)
+        top.addWidget(QLabel("Yazi boyutu"))
+        top.addWidget(spin)
         panel_layout.addLayout(top)
         panel_layout.addWidget(editor)
         return panel
@@ -498,14 +559,18 @@ class ReviewPanel(QWidget):
             self.tr_main_check.setChecked(True)
             self.en_main_check.setChecked(True)
 
-    def _configure_translation_mode(self, is_hadith: bool) -> None:
-        self.tr_main_check.setVisible(not is_hadith)
-        self.en_main_check.setVisible(not is_hadith)
-        self.tr_alt_check.setVisible(not is_hadith)
-        self.en_alt_check.setVisible(not is_hadith)
+    def _configure_translation_mode(self, is_hadith: bool, is_esma: bool) -> None:
+        show_choices = not is_hadith and not is_esma
+        self.tr_main_check.setVisible(show_choices)
+        self.en_main_check.setVisible(show_choices)
+        self.tr_alt_check.setVisible(show_choices)
+        self.en_alt_check.setVisible(show_choices)
         if is_hadith:
             self.tr_translation_row.left_panel.title_label.setText("Hadis Türkçe metni")
             self.en_translation_row.left_panel.title_label.setText("Hadis İngilizce metni")
+        elif is_esma:
+            self.tr_translation_row.left_panel.title_label.setText("Esma Türkçe açıklaması")
+            self.en_translation_row.left_panel.title_label.setText("Esma İngilizce açıklaması")
         else:
             self.tr_translation_row.left_panel.title_label.setText("Türkçe ana kaynak")
             self.tr_translation_row.right_panel.title_label.setText("Türkçe alternatif kaynak")
@@ -553,11 +618,28 @@ class ReviewPanel(QWidget):
             self.en_main_check.setChecked(not use_alt)
 
     def _selected_translation_text(self, language: str) -> str:
-        if self._current_kind == "hadith":
+        if self._current_kind in {"hadith", "esma"}:
             return self.tr_edit.toPlainText().strip() if language == "tr" else self.en_edit.toPlainText().strip()
         if language == "tr":
             return self.tr_alt_edit.toPlainText().strip() if self.tr_alt_check.isChecked() else self.tr_edit.toPlainText().strip()
         return self.en_alt_edit.toPlainText().strip() if self.en_alt_check.isChecked() else self.en_edit.toPlainText().strip()
+
+    def _extract_esma_summary(self, record: EsmaRecord) -> str:
+        source_basis = []
+        if isinstance(record.raw, dict):
+            raw_basis = record.raw.get("sourceBasis")
+            if isinstance(raw_basis, list):
+                source_basis = [str(item).strip() for item in raw_basis if str(item).strip()]
+        parts = [
+            f"Esma no: {record.esma_number or '-'}",
+            f"Slug: {record.slug or '-'}",
+            f"Arapça ad: {record.arabic_name or '-'}",
+            f"TR okunuş: {record.latin_tr or '-'}",
+            f"EN okunuş: {record.latin_en or '-'}",
+        ]
+        if source_basis:
+            parts.append("Kaynak: " + " | ".join(source_basis[:2]))
+        return "\n".join(parts)
 
     def _extract_ayah_source_summary(self, record: BaseRecord) -> str:
         source = record.raw.get("source") if isinstance(record.raw, dict) else None
@@ -583,14 +665,17 @@ class ReviewPanel(QWidget):
         for item in record.raw.get("ayahs", []):
             if not isinstance(item, dict):
                 continue
+            ayah_no = item.get("ayah")
             alternatives = item.get("alternatives")
-            if not isinstance(alternatives, dict):
-                continue
-            alt = alternatives.get("tr_diyanet_tanzil") if language == "tr" else alternatives.get("en_maududi")
+            alt = None
+            if isinstance(alternatives, dict):
+                alt = alternatives.get("tr_diyanet_tanzil") if language == "tr" else alternatives.get("en_maududi")
             if not isinstance(alt, dict):
-                continue
-            text = str(alt.get("text") or "").strip()
+                alt = item.get("trAlt") if language == "tr" else item.get("enAlt")
+            text = str(alt.get("text") if isinstance(alt, dict) else "").strip()
             if text:
+                if len(record.raw.get("ayahs", [])) > 1 and ayah_no is not None:
+                    text = f"[{ayah_no}] {text}"
                 parts.append(text)
         return "\n\n".join(parts)
 

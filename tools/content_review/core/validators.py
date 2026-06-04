@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .models import ApprovedRecord, AyahRecord, BaseRecord, HadithRecord, PRIORITY_VALUES, STATUS_VALUES
+from .models import ApprovedRecord, AyahRecord, BaseRecord, EsmaRecord, HadithRecord, PRIORITY_VALUES, STATUS_VALUES
 
 
 def validate_status(status: str) -> str:
@@ -33,6 +33,9 @@ def validate_record(record: BaseRecord) -> None:
     if isinstance(record, HadithRecord):
         if not record.hadith_number or int(record.hadith_number) <= 0:
             raise ValueError("Hadis kaydinda gecerli hadis numarasi olmali.")
+    if isinstance(record, EsmaRecord):
+        if not record.esma_number or int(record.esma_number) <= 0:
+            raise ValueError("Esma kaydinda gecerli esma numarasi olmali.")
 
 
 def validate_approved_record(record: ApprovedRecord) -> None:
@@ -49,3 +52,6 @@ def validate_approved_record(record: ApprovedRecord) -> None:
     if record.kind == "hadith":
         if not record.hadith_number:
             raise ValueError("Approved hadis kaydinda hadis numarasi olmali.")
+    if record.kind == "esma":
+        if not record.esma_number:
+            raise ValueError("Approved esma kaydinda esma numarasi olmali.")

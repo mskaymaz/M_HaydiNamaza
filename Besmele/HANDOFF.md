@@ -1,6 +1,8 @@
 ﻿# HANDOFF.md
 
 ## Current status
+Daily content review tool now has approved-only mobile preview for ayah/hadith/esma, unified archive root `assets/data/daily_content/archive/`, and unified approved root `assets/data/daily_content/approved/`.
+Current approved counts are `ayah=0`, `hadith=2`, `esma=99`.
 TASK-03 is closed and pushed on `main`.
 TASK-00 is completed on 2026-05-10 with documented exceptions.
 TASK-04A is closed (checkpoints completed; orchestration-safe extraction scope finalized).
@@ -17,7 +19,7 @@ TASK-12 release-readiness documentation/checklist outputs are completed.
 Ayah/hadith data reset was executed on 2026-06-02; old lists, publish payloads, archives, and source folders were removed, and a new clean seed structure was created.
 
 ## Next action
-Refill `Besmele/data/content_seed/ayetler.md` and `Besmele/data/content_seed/hadisler.md`, then rebuild runtime payloads from the new clean pool.
+Continue ayah/hadith manual review from `assets/data/daily_content/archive/` and rebuild approved runtime payloads under `assets/data/daily_content/approved/`.
 
 ## Important blockers
 - Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.

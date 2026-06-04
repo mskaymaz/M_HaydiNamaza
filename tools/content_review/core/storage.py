@@ -20,6 +20,7 @@ from .models import (
     ContentKind,
     DuplicateCheckResult,
     DuplicateMatch,
+    EsmaRecord,
     HadithRecord,
     SourceInfo,
     ToolState,
@@ -49,10 +50,12 @@ class ContentRepository:
         self._archive_payloads = {
             "ayah": self._read_payload(self.paths.archive_ayah_path),
             "hadith": self._read_payload(self.paths.archive_hadith_path),
+            "esma": self._read_payload(self.paths.archive_esma_path),
         }
         self._approved_payloads = {
             "ayah": self._read_payload(self.paths.approved_ayah_path, default_type="approved"),
             "hadith": self._read_payload(self.paths.approved_hadith_path, default_type="approved"),
+            "esma": self._read_payload(self.paths.approved_esma_path, default_type="approved"),
         }
 
     def list_archive_records(self, kind: ContentKind) -> list[BaseRecord]:
@@ -168,7 +171,12 @@ class ContentRepository:
         root_key: str,
         index: int,
     ) -> BaseRecord:
-        ref = str(raw.get("ref") or raw.get("id") or "").strip()
+        if kind == "esma":
+            esma_number = self._safe_int(raw.get("id") or raw.get("esma_number"))
+            fallback_ref = f"esma/{esma_number}" if esma_number is not None else ""
+            ref = str(raw.get("ref") or raw.get("slug") or fallback_ref).strip()
+        else:
+            ref = str(raw.get("ref") or raw.get("id") or "").strip()
         status = self._normalize_status(raw.get("status") or raw.get("review", {}).get("status"))
         priority = self._normalize_priority(raw.get("priority") or raw.get("review", {}).get("priority"))
         notes = str(raw.get("notes") or raw.get("review", {}).get("note") or "").strip()
@@ -200,14 +208,31 @@ class ContentRepository:
         if kind == "ayah":
             surah_number = self._safe_int(raw.get("surah_number") or raw.get("surah"))
             ayah_number = self._safe_int(raw.get("ayah_number") or raw.get("ayah") or self._extract_ayah_no_from_ref(ref))
+            ayah_end_number = self._safe_int(raw.get("ayah_end_number") or raw.get("ayahEnd") or self._extract_ayah_end_from_ref(ref))
             surah_name = str(raw.get("surah_name") or SURAH_NAMES_TR.get(surah_number or 0, "")).strip()
-            return AyahRecord(**base_kwargs, surah_number=surah_number, ayah_number=ayah_number, surah_name=surah_name)
-        hadith_number = self._safe_int(raw.get("hadith_number") or raw.get("hadithNo"))
-        return HadithRecord(
+            return AyahRecord(
+                **base_kwargs,
+                surah_number=surah_number,
+                ayah_number=ayah_number,
+                ayah_end_number=ayah_end_number,
+                surah_name=surah_name,
+            )
+        if kind == "hadith":
+            hadith_number = self._safe_int(raw.get("hadith_number") or raw.get("hadithNo"))
+            return HadithRecord(
+                **base_kwargs,
+                hadith_number=hadith_number,
+                book_reference_tr=self._extract_book_reference(raw, "tr"),
+                book_reference_en=self._extract_book_reference(raw, "en"),
+            )
+        esma_number = self._safe_int(raw.get("id") or raw.get("esma_number"))
+        return EsmaRecord(
             **base_kwargs,
-            hadith_number=hadith_number,
-            book_reference_tr=self._extract_book_reference(raw, "tr"),
-            book_reference_en=self._extract_book_reference(raw, "en"),
+            esma_number=esma_number,
+            slug=str(raw.get("slug") or "").strip(),
+            arabic_name=str(raw.get("arabicName") or raw.get("arabic_name") or "").strip(),
+            latin_tr=str(raw.get("latinTr") or raw.get("latin_tr") or "").strip(),
+            latin_en=str(raw.get("latinEn") or raw.get("latin_en") or "").strip(),
         )
 
     def _parse_approved_record(self, kind: ContentKind, raw: dict[str, Any]) -> BaseRecord:
@@ -223,9 +248,15 @@ class ContentRepository:
             surah_number=self._safe_int(raw.get("surah_number")),
             surah_name=str(raw.get("surah_name") or "").strip(),
             ayah_number=self._safe_int(raw.get("ayah_number")),
+            ayah_end_number=self._safe_int(raw.get("ayah_end_number") or raw.get("ayahEnd")),
             hadith_number=self._safe_int(raw.get("hadith_number")),
             book_reference_tr=str(raw.get("book_reference_tr") or "").strip(),
             book_reference_en=str(raw.get("book_reference_en") or "").strip(),
+            esma_number=self._safe_int(raw.get("esma_number") or raw.get("id")),
+            slug=str(raw.get("slug") or "").strip(),
+            arabic_name=str(raw.get("arabic_name") or raw.get("arabicName") or "").strip(),
+            latin_tr=str(raw.get("latin_tr") or raw.get("latinTr") or "").strip(),
+            latin_en=str(raw.get("latin_en") or raw.get("latinEn") or "").strip(),
         )
         validate_approved_record(approved)
         if kind == "ayah":
@@ -245,11 +276,35 @@ class ContentRepository:
                 created_at="",
                 updated_at="",
                 approved_at=approved.approved_at,
+                raw=dict(raw),
                 surah_number=approved.surah_number or (self._safe_int(approved.ref.split("/")[0]) if "/" in approved.ref else None),
                 ayah_number=approved.ayah_number or (self._safe_int(approved.ref.split("/")[1]) if "/" in approved.ref else None),
+                ayah_end_number=approved.ayah_end_number or self._extract_ayah_end_from_ref(approved.ref),
                 surah_name=approved.surah_name,
             )
-        return HadithRecord(
+        if kind == "hadith":
+            return HadithRecord(
+                id=approved.id,
+                kind=kind,
+                ref=approved.ref,
+                ar=approved.ar,
+                tr=approved.tr,
+                en=approved.en,
+                status="approved",
+                priority=approved.priority,
+                notes="",
+                source_info=SourceInfo(label="approved_payload"),
+                duplicate_info=DuplicateCheckResult(),
+                review_history=[],
+                created_at="",
+                updated_at="",
+                approved_at=approved.approved_at,
+                raw=dict(raw),
+                hadith_number=approved.hadith_number or self._safe_int(approved.ref.split("/")[-1]),
+                book_reference_tr=approved.book_reference_tr,
+                book_reference_en=approved.book_reference_en,
+            )
+        return EsmaRecord(
             id=approved.id,
             kind=kind,
             ref=approved.ref,
@@ -265,9 +320,12 @@ class ContentRepository:
             created_at="",
             updated_at="",
             approved_at=approved.approved_at,
-            hadith_number=approved.hadith_number or self._safe_int(approved.ref.split("/")[-1]),
-            book_reference_tr=approved.book_reference_tr,
-            book_reference_en=approved.book_reference_en,
+            raw=dict(raw),
+            esma_number=approved.esma_number,
+            slug=approved.slug,
+            arabic_name=approved.arabic_name,
+            latin_tr=approved.latin_tr,
+            latin_en=approved.latin_en,
         )
 
     @staticmethod
@@ -275,11 +333,30 @@ class ContentRepository:
         if "/" not in ref:
             return None
         try:
-            return int(ref.split("/")[-1])
+            return int(ref.split("/")[-1].split("-")[0])
+        except ValueError:
+            return None
+
+    @staticmethod
+    def _extract_ayah_end_from_ref(ref: str) -> int | None:
+        if "/" not in ref:
+            return None
+        tail = ref.split("/")[-1]
+        try:
+            if "-" in tail:
+                return int(tail.split("-")[-1])
+            return int(tail)
         except ValueError:
             return None
 
     def _extract_text(self, raw: dict[str, Any], kind: ContentKind, language: str) -> str:
+        if kind == "esma":
+            mapping = {
+                "ar": "descriptionAr",
+                "tr": "descriptionTr",
+                "en": "descriptionEn",
+            }
+            return str(raw.get(mapping[language]) or raw.get(f"text_{language}") or "").strip()
         direct_key = f"text_{language}"
         direct_value = str(raw.get(direct_key) or "").strip()
         if direct_value:
@@ -290,15 +367,19 @@ class ContentRepository:
             ayahs = raw.get("ayahs")
             if isinstance(ayahs, list):
                 parts: list[str] = []
+                include_numbers = len(ayahs) > 1
                 for item in ayahs:
                     if not isinstance(item, dict):
                         continue
+                    ayah_no = self._safe_int(item.get("ayah"))
                     if language == "ar":
                         value = str(item.get("arabic") or "").strip()
                     else:
                         nested = item.get(language)
                         value = str(nested.get("text") if isinstance(nested, dict) else "").strip()
                     if value:
+                        if include_numbers and ayah_no is not None:
+                            value = f"﴿{ayah_no}﴾ {value}" if language == "ar" else f"[{ayah_no}] {value}"
                         parts.append(value)
                 return "\n\n".join(parts)
         text_obj = raw.get("text")
@@ -325,6 +406,15 @@ class ContentRepository:
         return ""
 
     def _extract_source_info(self, raw: dict[str, Any]) -> SourceInfo:
+        if any(key in raw for key in ("arabicName", "latinTr", "latinEn", "descriptionAr", "descriptionTr", "descriptionEn")):
+            source_basis = raw.get("sourceBasis")
+            details = {"sourceBasis": source_basis} if isinstance(source_basis, list) else {}
+            return SourceInfo(
+                label=str(raw.get("sourceLabel") or "Esmaül Hüsna seed").strip(),
+                source_ref=str(raw.get("sourceRef") or "").strip(),
+                fetch_status=str(raw.get("sourceStatus") or raw.get("status") or "loaded").strip(),
+                details=details,
+            )
         source_info = raw.get("sourceInfo")
         if isinstance(source_info, dict):
             sunnah = source_info.get("sunnah")
@@ -400,10 +490,24 @@ class ContentRepository:
             raw["surah_number"] = approved.surah_number
             raw["surah_name"] = approved.surah_name
             raw["ayah_number"] = approved.ayah_number
+            raw["ayah_end_number"] = approved.ayah_end_number
         if approved.kind == "hadith":
             raw["hadith_number"] = approved.hadith_number
             raw["book_reference_tr"] = approved.book_reference_tr
             raw["book_reference_en"] = approved.book_reference_en
+        if approved.kind == "esma":
+            raw["esma_number"] = approved.esma_number
+            raw["slug"] = approved.slug
+            raw["arabic_name"] = approved.arabic_name
+            raw["latin_tr"] = approved.latin_tr
+            raw["latin_en"] = approved.latin_en
+            if isinstance(record.raw, dict):
+                source_label = str(record.raw.get("sourceLabel") or "").strip()
+                source_basis = record.raw.get("sourceBasis")
+                if source_label:
+                    raw["source_label"] = source_label
+                if isinstance(source_basis, list) and source_basis:
+                    raw["source_basis"] = list(source_basis)
         replaced = False
         for index, row in enumerate(rows):
             if not isinstance(row, dict):
@@ -432,7 +536,7 @@ class ContentRepository:
         with self.paths.state_path.open("r", encoding="utf-8") as handle:
             data = json.load(handle)
         return ToolState(
-            cursors=dict(data.get("cursors") or {"ayah": 0, "hadith": 0}),
+            cursors=dict(data.get("cursors") or {"ayah": 0, "hadith": 0, "esma": 0}),
             last_undo=dict(data.get("last_undo") or {}),
         )
 
@@ -448,7 +552,7 @@ class ContentRepository:
         if not path.exists():
             path.parent.mkdir(parents=True, exist_ok=True)
             if default_type == "approved":
-                kind = "ayah" if "ayah" in path.name else "hadith"
+                kind = self._kind_from_path(path)
                 root = {"schema_version": "1.0.0", "content_version": "tool-init", "type": kind, "records": []}
                 self._atomic_json_write(path, root)
             else:
@@ -461,6 +565,17 @@ class ContentRepository:
             return {"path": path, "root": root, "records": root, "root_key": "list"}
         if isinstance(root, dict):
             if isinstance(root.get("items"), list):
+                if self._kind_from_path(path) == "esma":
+                    metadata = root.get("metadata") if isinstance(root.get("metadata"), dict) else {}
+                    source_basis = metadata.get("sourceBasis") if isinstance(metadata.get("sourceBasis"), list) else []
+                    source_label = str(metadata.get("contentType") or "Esmaül Hüsna seed").strip()
+                    for row in root["items"]:
+                        if not isinstance(row, dict):
+                            continue
+                        if source_basis and "sourceBasis" not in row:
+                            row["sourceBasis"] = list(source_basis)
+                        if source_label and "sourceLabel" not in row:
+                            row["sourceLabel"] = source_label
                 return {"path": path, "root": root, "records": root["items"], "root_key": "items"}
             if isinstance(root.get("records"), list):
                 return {"path": path, "root": root, "records": root["records"], "root_key": "records"}
@@ -476,10 +591,11 @@ class ContentRepository:
     def _write_payload(self, path: Path, root: Any, is_approved: bool) -> None:
         self._atomic_json_write(path, root)
         self._hashes[path] = self._file_hash(path)
+        kind = self._kind_from_path(path)
         if is_approved:
-            self._approved_payloads["ayah" if "ayah" in path.name else "hadith"] = self._read_payload(path, default_type="approved")
+            self._approved_payloads[kind] = self._read_payload(path, default_type="approved")
         else:
-            self._archive_payloads["ayah" if "ayah" in path.name else "hadith"] = self._read_payload(path)
+            self._archive_payloads[kind] = self._read_payload(path)
 
     @staticmethod
     def _atomic_json_write(path: Path, data: Any) -> None:
@@ -547,10 +663,29 @@ class ContentRepository:
         raise RuntimeError("instance method expected")
 
     def _archive_path(self, kind: ContentKind) -> Path:
-        return self.paths.archive_ayah_path if kind == "ayah" else self.paths.archive_hadith_path
+        mapping = {
+            "ayah": self.paths.archive_ayah_path,
+            "hadith": self.paths.archive_hadith_path,
+            "esma": self.paths.archive_esma_path,
+        }
+        return mapping[kind]
 
     def _approved_path(self, kind: ContentKind) -> Path:
-        return self.paths.approved_ayah_path if kind == "ayah" else self.paths.approved_hadith_path
+        mapping = {
+            "ayah": self.paths.approved_ayah_path,
+            "hadith": self.paths.approved_hadith_path,
+            "esma": self.paths.approved_esma_path,
+        }
+        return mapping[kind]
+
+    @staticmethod
+    def _kind_from_path(path: Path) -> ContentKind:
+        lower_name = path.name.lower()
+        if "ayah" in lower_name:
+            return "ayah"
+        if "hadith" in lower_name:
+            return "hadith"
+        return "esma"
 
     @staticmethod
     def _utc_now() -> str:

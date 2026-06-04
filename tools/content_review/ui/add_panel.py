@@ -722,17 +722,20 @@ class AddPanel(QWidget):
         for item in record.raw.get("ayahs", []):
             if not isinstance(item, dict):
                 continue
+            ayah_no = item.get("ayah")
             alternatives = item.get("alternatives")
-            if not isinstance(alternatives, dict):
-                continue
-            if language == "tr":
-                alt = alternatives.get("tr_diyanet_tanzil")
-            else:
-                alt = alternatives.get("en_maududi")
+            alt = None
+            if isinstance(alternatives, dict):
+                if language == "tr":
+                    alt = alternatives.get("tr_diyanet_tanzil")
+                else:
+                    alt = alternatives.get("en_maududi")
             if not isinstance(alt, dict):
-                continue
-            text = str(alt.get("text") or "").strip()
+                alt = item.get("trAlt") if language == "tr" else item.get("enAlt")
+            text = str(alt.get("text") if isinstance(alt, dict) else "").strip()
             if text:
+                if len(record.raw.get("ayahs", [])) > 1 and ayah_no is not None:
+                    text = f"[{ayah_no}] {text}"
                 parts.append(text)
         return "\n\n".join(parts)
 

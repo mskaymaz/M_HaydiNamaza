@@ -164,19 +164,28 @@ class TanzilAyahProvider:
         for ayah in ayahs:
             if not isinstance(ayah, dict):
                 continue
-            ar_parts.append(normalize_storage_text(str(ayah.get("arabic") or "")))
+            ayah_no = self._safe_int(ayah.get("ayah"))
+            arabic_text = normalize_storage_text(str(ayah.get("arabic") or ""))
+            if arabic_text:
+                ar_parts.append(self._format_ayah_line(arabic_text, ayah_no, is_arabic=True, include_numbers=len(ayahs) > 1))
             tr_obj = ayah.get("tr")
             en_obj = ayah.get("en")
             if isinstance(tr_obj, dict):
-                tr_parts.append(normalize_storage_text(str(tr_obj.get("text") or "")))
+                tr_text = normalize_storage_text(str(tr_obj.get("text") or ""))
+                if tr_text:
+                    tr_parts.append(self._format_ayah_line(tr_text, ayah_no, include_numbers=len(ayahs) > 1))
             if isinstance(en_obj, dict):
-                en_parts.append(normalize_storage_text(str(en_obj.get("text") or "")))
+                en_text = normalize_storage_text(str(en_obj.get("text") or ""))
+                if en_text:
+                    en_parts.append(self._format_ayah_line(en_text, ayah_no, include_numbers=len(ayahs) > 1))
         raw_record["id"] = str(normalized["id"])
         raw_record["ref"] = str(normalized["ref"])
         raw_record["surah"] = int(normalized["surah_number"])
         raw_record["surah_name"] = str(normalized["surah_name"])
         raw_record["ayahStart"] = int(normalized["ayah_start"])
         raw_record["ayahEnd"] = int(normalized["ayah_end"])
+        raw_record["ayah_number"] = int(normalized["ayah_start"])
+        raw_record["ayah_end_number"] = int(normalized["ayah_end"])
         raw_record["ayahCount"] = int(normalized["ayah_count"])
         raw_record["type"] = str(normalized["record_type"])
         raw_record["text_ar"] = "\n\n".join(part for part in ar_parts if part)
@@ -211,3 +220,20 @@ class TanzilAyahProvider:
             en=str(raw_record.get("text_en") or ""),
             extra={"raw_record": raw_record},
         )
+
+    @staticmethod
+    def _safe_int(value: object) -> int | None:
+        try:
+            if value is None or value == "":
+                return None
+            return int(value)
+        except (TypeError, ValueError):
+            return None
+
+    @staticmethod
+    def _format_ayah_line(text: str, ayah_no: int | None, *, include_numbers: bool, is_arabic: bool = False) -> str:
+        if not include_numbers or ayah_no is None:
+            return text
+        if is_arabic:
+            return f"﴿{ayah_no}﴾ {text}"
+        return f"[{ayah_no}] {text}"

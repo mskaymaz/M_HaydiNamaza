@@ -1,16 +1,17 @@
 # STATE.md
 
-last_update: 2026-06-02
+last_update: 2026-06-04
 project: M_HaydiNamaza
-status: daily_content_reset_started_clean_seed_created
+status: daily_content_review_tool_mobile_preview_ready_archive_paths_unified
 active_phase: advanced_architecture_upgrade
 active_task: TASK-09-not-started-release-gate-active
 blockers:
   - Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.
   - TASK-05B public sync remains blocked until public target repo URL/branch is defined.
 next_step:
-  - Rebuild ayah and hadith source lists from the new clean seed files.
-  - Recreate approved runtime payloads only after the new source pool is reviewed.
+  - Continue ayah and hadith review from `assets/data/daily_content/archive/`.
+  - Keep approved runtime payloads under `assets/data/daily_content/approved/`.
+  - Refill ayah/hadith approved payloads after manual review in the Python tool.
   - Keep TASK-09 and later tasks pending until explicit instruction.
 
 ## Current known risks
@@ -19,4 +20,4 @@ next_step:
 - Diyanet/AwqatSalah official API references are documented; production decision remains pending until explicit access/usage clearance.
 - Public content distribution sync target (repo/branch) is still not configured.
 - Qibla direction must distinguish mathematical bearing from sensor accuracy.
-- Daily content repository was reset on 2026-06-02; ayah and hadith pools are intentionally empty until refill.
+- Daily content archive/approved roots were unified on 2026-06-04 and the Python review tool now depends on those fixed paths.

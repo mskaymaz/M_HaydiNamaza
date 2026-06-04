@@ -28,13 +28,17 @@ from ui.review_panel import ReviewPanel
 
 
 def _default_paths(repo_root: Path, tool_root: Path) -> AppPaths:
+    archive_root = repo_root / "assets" / "data" / "daily_content" / "archive"
+    approved_root = repo_root / "assets" / "data" / "daily_content" / "approved"
     return AppPaths(
         repo_root=repo_root,
         tool_root=tool_root,
-        archive_ayah_path=repo_root / "Besmele" / "data" / "content_seed" / "ayahs.pending_review.v1.json",
-        archive_hadith_path=repo_root / "Besmele" / "data" / "content_seed" / "hadiths.pending_review.v1.json",
-        approved_ayah_path=repo_root / "assets" / "data" / "daily_content" / "approved" / "ayahs.v1.approved.json",
-        approved_hadith_path=repo_root / "assets" / "data" / "daily_content" / "approved" / "hadiths.v1.approved.json",
+        archive_ayah_path=archive_root / "ayahs.pending_review.v1.json",
+        archive_hadith_path=archive_root / "hadiths.pending_review.v1.json",
+        archive_esma_path=archive_root / "esmaul_husna.pending_review.v1.json",
+        approved_ayah_path=approved_root / "ayahs.v1.approved.json",
+        approved_hadith_path=approved_root / "hadiths.v1.approved.json",
+        approved_esma_path=approved_root / "esmaul_husna.v1.approved.json",
         state_path=tool_root / "review_state.json",
         log_path=tool_root / "tool.log",
         backup_dir=tool_root / "backups",
@@ -60,8 +64,10 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Local daily ayah/hadith review+add desktop tool.")
     parser.add_argument("--ayah", default=str(defaults.archive_ayah_path), help="Archive ayah JSON path.")
     parser.add_argument("--hadith", default=str(defaults.archive_hadith_path), help="Archive hadith JSON path.")
+    parser.add_argument("--esma", default=str(defaults.archive_esma_path), help="Archive esma JSON path.")
     parser.add_argument("--approved-ayah", default=str(defaults.approved_ayah_path), help="Approved ayah JSON path.")
     parser.add_argument("--approved-hadith", default=str(defaults.approved_hadith_path), help="Approved hadith JSON path.")
+    parser.add_argument("--approved-esma", default=str(defaults.approved_esma_path), help="Approved esma JSON path.")
     parser.add_argument("--state", default=str(defaults.state_path), help="Tool state JSON path.")
     return parser.parse_args()
 
@@ -75,8 +81,10 @@ def main() -> None:
         tool_root=tool_root,
         archive_ayah_path=Path(args.ayah).resolve(),
         archive_hadith_path=Path(args.hadith).resolve(),
+        archive_esma_path=Path(args.esma).resolve(),
         approved_ayah_path=Path(args.approved_ayah).resolve(),
         approved_hadith_path=Path(args.approved_hadith).resolve(),
+        approved_esma_path=Path(args.approved_esma).resolve(),
         state_path=Path(args.state).resolve(),
         log_path=tool_root / "tool.log",
         backup_dir=tool_root / "backups",

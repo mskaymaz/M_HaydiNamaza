@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Literal
 
-ContentKind = Literal["ayah", "hadith"]
+ContentKind = Literal["ayah", "hadith", "esma"]
 
 STATUS_VALUES = (
     "draft",
@@ -27,8 +27,10 @@ class AppPaths:
     tool_root: Path
     archive_ayah_path: Path
     archive_hadith_path: Path
+    archive_esma_path: Path
     approved_ayah_path: Path
     approved_hadith_path: Path
+    approved_esma_path: Path
     state_path: Path
     log_path: Path
     backup_dir: Path
@@ -92,6 +94,7 @@ class BaseRecord:
 class AyahRecord(BaseRecord):
     surah_number: int | None = None
     ayah_number: int | None = None
+    ayah_end_number: int | None = None
     surah_name: str = ""
 
 
@@ -100,6 +103,15 @@ class HadithRecord(BaseRecord):
     hadith_number: int | None = None
     book_reference_tr: str = ""
     book_reference_en: str = ""
+
+
+@dataclass(slots=True)
+class EsmaRecord(BaseRecord):
+    esma_number: int | None = None
+    slug: str = ""
+    arabic_name: str = ""
+    latin_tr: str = ""
+    latin_en: str = ""
 
 
 @dataclass(slots=True)
@@ -115,9 +127,15 @@ class ApprovedRecord:
     surah_number: int | None = None
     surah_name: str = ""
     ayah_number: int | None = None
+    ayah_end_number: int | None = None
     hadith_number: int | None = None
     book_reference_tr: str = ""
     book_reference_en: str = ""
+    esma_number: int | None = None
+    slug: str = ""
+    arabic_name: str = ""
+    latin_tr: str = ""
+    latin_en: str = ""
 
 
 @dataclass(slots=True)
@@ -134,5 +152,5 @@ class FetchResult:
 
 @dataclass(slots=True)
 class ToolState:
-    cursors: dict[str, int] = field(default_factory=lambda: {"ayah": 0, "hadith": 0})
+    cursors: dict[str, int] = field(default_factory=lambda: {"ayah": 0, "hadith": 0, "esma": 0})
     last_undo: dict[str, str] = field(default_factory=dict)

@@ -25,8 +25,8 @@ _BASMALA = "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّح�
 def default_tanzil_seed_paths() -> list[Path]:
     repo_root = Path(__file__).resolve().parents[4]
     return [
-        repo_root / "Besmele" / "data" / "content_seed" / "ayet_1400" / "ayet1400_tanzil_ar_tr_en_pending_review.json",
-        repo_root / "Besmele" / "data" / "content_seed" / "ayahs.pending_review.v1.json",
+        repo_root / "assets" / "data" / "daily_content" / "archive" / "ayet1400_tanzil_ar_tr_en_pending_review.json",
+        repo_root / "assets" / "data" / "daily_content" / "archive" / "ayahs.pending_review.v1.json",
     ]
 
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict
 from copy import deepcopy
 
-from .models import ApprovedRecord, AyahRecord, BaseRecord, HadithRecord
+from .models import ApprovedRecord, AyahRecord, BaseRecord, EsmaRecord, HadithRecord
 
 
 def to_approved_record(record: BaseRecord) -> ApprovedRecord:
@@ -21,10 +21,17 @@ def to_approved_record(record: BaseRecord) -> ApprovedRecord:
         approved.surah_number = record.surah_number
         approved.surah_name = record.surah_name
         approved.ayah_number = record.ayah_number
+        approved.ayah_end_number = record.ayah_end_number
     if isinstance(record, HadithRecord):
         approved.hadith_number = record.hadith_number
         approved.book_reference_tr = record.book_reference_tr
         approved.book_reference_en = record.book_reference_en
+    if isinstance(record, EsmaRecord):
+        approved.esma_number = record.esma_number
+        approved.slug = record.slug
+        approved.arabic_name = record.arabic_name
+        approved.latin_tr = record.latin_tr
+        approved.latin_en = record.latin_en
     return approved
 
 
@@ -32,9 +39,6 @@ def apply_record_to_raw(record: BaseRecord) -> dict:
     raw = dict(record.raw or {})
     raw["id"] = record.id
     raw["ref"] = record.ref
-    raw["text_ar"] = record.ar
-    raw["text_tr"] = record.tr
-    raw["text_en"] = record.en
     raw["status"] = record.status
     raw["priority"] = record.priority
     raw["notes"] = record.notes
@@ -58,10 +62,25 @@ def apply_record_to_raw(record: BaseRecord) -> dict:
     review["updated_at"] = record.updated_at
     raw["review"] = review
 
+    if isinstance(record, EsmaRecord):
+        raw["id"] = record.esma_number if record.esma_number is not None else record.id
+        raw["slug"] = record.slug
+        raw["arabicName"] = record.arabic_name
+        raw["latinTr"] = record.latin_tr
+        raw["latinEn"] = record.latin_en
+        raw["descriptionAr"] = record.ar
+        raw["descriptionTr"] = record.tr
+        raw["descriptionEn"] = record.en
+        return raw
+
+    raw["text_ar"] = record.ar
+    raw["text_tr"] = record.tr
+    raw["text_en"] = record.en
     if isinstance(record, AyahRecord):
         raw["surah"] = record.surah_number
         raw["surah_name"] = record.surah_name
         raw["ayah_number"] = record.ayah_number
+        raw["ayahEnd"] = record.ayah_end_number
     if isinstance(record, HadithRecord):
         raw["text"] = _merge_hadith_text(raw.get("text"), record)
         raw["hadithNo"] = record.hadith_number

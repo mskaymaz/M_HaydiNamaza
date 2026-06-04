@@ -54,4 +54,5 @@ _external/AllAppRef/
 
 # Content review tool local artifacts
 tools/content_review/review_state.json
+tools/content_review/backups/
 Besmele/data/daily_panel/publish/*.bak.*

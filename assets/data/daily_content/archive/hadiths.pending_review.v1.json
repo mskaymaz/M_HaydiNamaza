@@ -44646,210 +44646,6 @@
       "status": "pending_review"
     },
     {
-      "id": "hadith_001590",
-      "ref": "riyazussalihin/1590",
-      "hadithNo": 1590,
-      "type": "single",
-      "groupKey": "riyazussalihin",
-      "sourceListOrder": 432,
-      "input": {
-        "hadithNo_diyanet": 1590,
-        "sunnahNo_candidate": 1583,
-        "topics_tr": "Yönetici",
-        "chapter_tr": "Hile ve Aldatma",
-        "source_tr": "(D5170 Ebû Dâvûd, Edeb, 125, 126)",
-        "source_sunnah_url": "https://sunnah.com/riyadussalihin:1583",
-        "matchStatus": "matched_needs_review_low_arabic_score",
-        "matchScore": 5472,
-        "matchMethod": "offset_fallback_nearest_high_confidence",
-        "manualControl": "YES",
-        "note": "Hadis_440 xlsx kaynagindan dogrudan unicode olarak uretildi."
-      },
-      "text": {
-        "ar": {
-          "clean": "وعن أبي هريرة رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من خبب زوجة امرئ، أو مملوكه، فليس منا‏\"‏‏.‏ \n‏\"‏خَبَب‏\"‏ بخاء معجمة، ثم باء موحدة مكررة‏:‏ أي‏:‏ أفسده وخدعه‏.‏",
-          "sourceText": "وعن أبي هريرة رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من خبب زوجة امرئ، أو مملوكه، فليس منا‏\"‏‏.‏ \n‏\"‏خَبَب‏\"‏ بخاء معجمة، ثم باء موحدة مكررة‏:‏ أي‏:‏ أفسده وخدعه‏.‏",
-          "ttsText": "وعن أبي هريرة رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من خبب زوجة امرئ، أو مملوكه، فليس منا‏\"‏‏.‏ \n‏\"‏خَبَب‏\"‏ بخاء معجمة، ثم باء موحدة مكررة‏:‏ أي‏:‏ أفسده وخدعه‏.‏",
-          "direction": "rtl",
-          "script": "Arabic",
-          "status": "needs_review"
-        },
-        "tr": {
-          "clean": "Ebû Hüreyre’den (ra) nakledildiğine göre Resûlullah şöyle buyurmuştur:\nBir kimsenin eşini veya uşağını ayartan bizden değildir.\nEy iman edenler! Akitlerinizi yerine getirin...\n(Mâide, 5/1)\n...Verdiğiniz sözü de yerine getirin. Çünkü söz (veren, sözünden) sorumludur.\n(İsrâ, 17/34)",
-          "sourceText": "Ebû Hüreyre’den (ra) nakledildiğine göre Resûlullah şöyle buyurmuştur:\nBir kimsenin eşini veya uşağını ayartan bizden değildir.\nEy iman edenler! Akitlerinizi yerine getirin...\n(Mâide, 5/1)\n...Verdiğiniz sözü de yerine getirin. Çünkü söz (veren, sözünden) sorumludur.\n(İsrâ, 17/34)",
-          "ttsText": "Ebû Hüreyre’den (ra) nakledildiğine göre Resûlullah şöyle buyurmuştur:\nBir kimsenin eşini veya uşağını ayartan bizden değildir.\nEy iman edenler! Akitlerinizi yerine getirin...\n(Mâide, 5/1)\n...Verdiğiniz sözü de yerine getirin. Çünkü söz (veren, sözünden) sorumludur.\n(İsrâ, 17/34)",
-          "direction": "ltr",
-          "script": "Latin",
-          "status": "needs_review"
-        },
-        "en": {
-          "clean": "Abu Hurairah (May Allah be pleased with him) said:\nThe Messenger of Allah (ﷺ) said, \"He who deceives another's wife or his slave is none of us.\".",
-          "sourceText": "Abu Hurairah (May Allah be pleased with him) said:\nThe Messenger of Allah (ﷺ) said, \"He who deceives another's wife or his slave is none of us.\".",
-          "ttsText": "Abu Hurairah (May Allah be pleased with him) said:\nThe Messenger of Allah (ﷺ) said, \"He who deceives another's wife or his slave is none of us.\".",
-          "direction": "ltr",
-          "script": "Latin",
-          "status": "needs_review"
-        }
-      },
-      "sourceInfo": {
-        "primaryCollection": {
-          "key": "riyazussalihin",
-          "title_ar": "رياض الصالحين",
-          "title_tr": "Riyazus Salihin",
-          "title_en": "Riyad as-Salihin"
-        },
-        "chapter": {
-          "title_tr": "Hile ve Aldatma"
-        },
-        "display": {
-          "tr": "(D5170 Ebû Dâvûd, Edeb, 125, 126)",
-          "en": "(D5170 Ebû Dâvûd, Edeb, 125, 126)"
-        },
-        "sunnah": {
-          "candidateNo": 1583,
-          "candidateUrl": "https://sunnah.com/riyadussalihin:1583",
-          "matchStatus": "matched_needs_review_low_arabic_score",
-          "matchScore": 5472,
-          "matchMethod": "offset_fallback_nearest_high_confidence"
-        }
-      },
-      "review": {
-        "status": "pending",
-        "decision": null,
-        "priorityKey": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "queue": "active",
-        "note": "",
-        "reviewedAt": null,
-        "reviewedBy": null
-      },
-      "quality": {
-        "textCleaned": true,
-        "sourceSeparated": true,
-        "ttsReady": true,
-        "arabicChecked": false,
-        "turkishChecked": false,
-        "englishChecked": false,
-        "needsManualReview": true,
-        "arabicCharCount": 185,
-        "turkishCharCount": 280,
-        "englishCharCount": 145,
-        "matchScore": 5472,
-        "matchMethod": "offset_fallback_nearest_high_confidence"
-      },
-      "tags": {
-        "firstTopic_tr": "Y",
-        "topics_tr": "Yönetici"
-      },
-      "status": "pending_review"
-    },
-    {
-      "id": "hadith_001610",
-      "ref": "riyazussalihin/1610",
-      "hadithNo": 1610,
-      "type": "single",
-      "groupKey": "riyazussalihin",
-      "sourceListOrder": 433,
-      "input": {
-        "hadithNo_diyanet": 1610,
-        "sunnahNo_candidate": 1603,
-        "topics_tr": "Yönetici",
-        "chapter_tr": "İşkence Etmemek",
-        "source_tr": "(M4302-M4304 Müslim, Eymân, 32, 33)",
-        "source_sunnah_url": "https://sunnah.com/riyadussalihin:1603",
-        "matchStatus": "matched_high_confidence",
-        "matchScore": 9428,
-        "matchMethod": "arabic_similarity_local_window",
-        "manualControl": "NO",
-        "note": "Hadis_440 xlsx kaynagindan dogrudan unicode olarak uretildi."
-      },
-      "text": {
-        "ar": {
-          "clean": "وعن أبي علي سويد بن مقرن رضي الله عنه قال‏:‏ لقد رأيتني سابع سبعة من بني مقرن ما لنا خادم إلا واحدة لطمها أصغرنا فأمرنا رسول الله صلى الله عليه وسلم أن نعتقها‏.‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏ ورواية‏:‏ ‏\n\"‏سابع إخوة لي‏\"‏‏.‏",
-          "sourceText": "وعن أبي علي سويد بن مقرن رضي الله عنه قال‏:‏ لقد رأيتني سابع سبعة من بني مقرن ما لنا خادم إلا واحدة لطمها أصغرنا فأمرنا رسول الله صلى الله عليه وسلم أن نعتقها‏.‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏ ورواية‏:‏ ‏\n\"‏سابع إخوة لي‏\"‏‏.‏",
-          "ttsText": "وعن أبي علي سويد بن مقرن رضي الله عنه قال‏:‏ لقد رأيتني سابع سبعة من بني مقرن ما لنا خادم إلا واحدة لطمها أصغرنا فأمرنا رسول الله صلى الله عليه وسلم أن نعتقها‏.‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏ ورواية‏:‏ ‏\n\"‏سابع إخوة لي‏\"‏‏.‏",
-          "direction": "rtl",
-          "script": "Arabic",
-          "status": "needs_review"
-        },
-        "tr": {
-          "clean": "Ebû Alî Süveyd b. Mukarrin (ra) şöyle anlatıyor:\nBen Mukarrinoğulları’ndan yedi kardeşin yedincisi idim. Bizim tek bir uşağımız vardı. En küçüğümüz onu tokatlamıştı. Bunun üzerine Resûlullah, onu azat etmemizi emretti.\nMüslim’in bir rivayetine göre “yedi kardeşin yedincisi” yerine “kardeşlerimin yedincisi idim” denilmiştir.",
-          "sourceText": "Ebû Alî Süveyd b. Mukarrin (ra) şöyle anlatıyor:\nBen Mukarrinoğulları’ndan yedi kardeşin yedincisi idim. Bizim tek bir uşağımız vardı. En küçüğümüz onu tokatlamıştı. Bunun üzerine Resûlullah, onu azat etmemizi emretti.\nMüslim’in bir rivayetine göre “yedi kardeşin yedincisi” yerine “kardeşlerimin yedincisi idim” denilmiştir.",
-          "ttsText": "Ebû Alî Süveyd b. Mukarrin (ra) şöyle anlatıyor:\nBen Mukarrinoğulları’ndan yedi kardeşin yedincisi idim. Bizim tek bir uşağımız vardı. En küçüğümüz onu tokatlamıştı. Bunun üzerine Resûlullah, onu azat etmemizi emretti.\nMüslim’in bir rivayetine göre “yedi kardeşin yedincisi” yerine “kardeşlerimin yedincisi idim” denilmiştir.",
-          "direction": "ltr",
-          "script": "Latin",
-          "status": "needs_review"
-        },
-        "en": {
-          "clean": "Abu Ali Suwaid bin Muqarrin (May Allah be pleased with him) said:\nI was the seventh child of Banu Muqarrin and we had only one slave-girl. When the youngest of us once happened to slap her (on the face) the Messenger of Allah (ﷺ) ordered us to set her free.",
-          "sourceText": "Abu Ali Suwaid bin Muqarrin (May Allah be pleased with him) said:\nI was the seventh child of Banu Muqarrin and we had only one slave-girl. When the youngest of us once happened to slap her (on the face) the Messenger of Allah (ﷺ) ordered us to set her free.",
-          "ttsText": "Abu Ali Suwaid bin Muqarrin (May Allah be pleased with him) said:\nI was the seventh child of Banu Muqarrin and we had only one slave-girl. When the youngest of us once happened to slap her (on the face) the Messenger of Allah (ﷺ) ordered us to set her free.",
-          "direction": "ltr",
-          "script": "Latin",
-          "status": "needs_review"
-        }
-      },
-      "sourceInfo": {
-        "primaryCollection": {
-          "key": "riyazussalihin",
-          "title_ar": "رياض الصالحين",
-          "title_tr": "Riyazus Salihin",
-          "title_en": "Riyad as-Salihin"
-        },
-        "chapter": {
-          "title_tr": "İşkence Etmemek"
-        },
-        "display": {
-          "tr": "(M4302-M4304 Müslim, Eymân, 32, 33)",
-          "en": "(M4302-M4304 Müslim, Eymân, 32, 33)"
-        },
-        "sunnah": {
-          "candidateNo": 1603,
-          "candidateUrl": "https://sunnah.com/riyadussalihin:1603",
-          "matchStatus": "matched_high_confidence",
-          "matchScore": 9428,
-          "matchMethod": "arabic_similarity_local_window"
-        }
-      },
-      "review": {
-        "status": "pending",
-        "decision": null,
-        "priorityKey": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "queue": "active",
-        "note": "",
-        "reviewedAt": null,
-        "reviewedBy": null
-      },
-      "quality": {
-        "textCleaned": true,
-        "sourceSeparated": true,
-        "ttsReady": true,
-        "arabicChecked": false,
-        "turkishChecked": false,
-        "englishChecked": false,
-        "needsManualReview": false,
-        "arabicCharCount": 219,
-        "turkishCharCount": 325,
-        "englishCharCount": 257,
-        "matchScore": 9428,
-        "matchMethod": "arabic_similarity_local_window"
-      },
-      "tags": {
-        "firstTopic_tr": "Y",
-        "topics_tr": "Yönetici"
-      },
-      "status": "pending_review"
-    },
-    {
       "id": "hadith_000153",
       "ref": "riyazussalihin/153",
       "hadithNo": 153,
@@ -44915,10 +44711,13 @@
           "matchStatus": "matched_high_confidence",
           "matchScore": 6809,
           "matchMethod": "arabic_similarity_local_window"
-        }
+        },
+        "label": "Riyazus Salihin",
+        "source_ref": "https://sunnah.com/riyadussalihin:153",
+        "fetch_status": "pending_review"
       },
       "review": {
-        "status": "pending",
+        "status": "approved",
         "decision": null,
         "priorityKey": "normal",
         "priority": 1,
@@ -44929,7 +44728,8 @@
         "queue": "active",
         "note": "",
         "reviewedAt": null,
-        "reviewedBy": null
+        "reviewedBy": null,
+        "updated_at": "2026-06-05T13:21:33+00:00"
       },
       "quality": {
         "textCleaned": true,
@@ -44949,7 +44749,34 @@
         "firstTopic_tr": "M",
         "topics_tr": "Münafık"
       },
-      "status": "pending_review"
+      "status": "approved",
+      "priority": 1,
+      "notes": "",
+      "createdAt": "2026-06-05T13:21:33+00:00",
+      "updatedAt": "2026-06-05T13:21:33+00:00",
+      "approvedAt": "2026-06-05T13:21:33+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-05T13:21:33+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": ""
+        }
+      ],
+      "text_ar": "وعن عمر بن الخطاب رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏\n\"‏ من نام عن حزبه من الليل، أو عن شيء منه فقرأه ما بين صلاة الفجر وصلاة الظهر، كتب له كأنما قرأه من الليل‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+      "text_tr": "Ömer b. Hattâb’dan (ra) rivayet edildiğine göre Resûlullah şöyle demiştir:\nBir kimse, geceleyin Kur’an’dan okumayı âdet edindiği bölümü okumadan yahut tamamlamadan uyuyakalır, sonra sabah namazı ile öğle namazı arasında onu okursa (veya tamamlarsa) o kimse için gece okumuş gibi sevap yazılır.",
+      "text_en": "'Umar bin Al-Khattab (May Allah be pleased with him) reported:\nMessenger of Allah (ﷺ) said, \"Should anyone fall asleep at night and fail to recite his portion of the Qur'an, or a part of it, if he recites it between the Fajr prayer and the Zuhr prayer, it will be recorded for him as though he had recited it during the night\".",
+      "hadith_number": 153,
+      "book_reference_tr": "(M1745 Müslim, Müsâfirîn, 142)",
+      "book_reference_en": "(M1745 Müslim, Müsâfirîn, 142)"
     },
     {
       "id": "hadith_000381",
@@ -45017,10 +44844,13 @@
           "matchStatus": "matched_high_confidence",
           "matchScore": 7482,
           "matchMethod": "arabic_similarity_local_window"
-        }
+        },
+        "label": "Riyazus Salihin",
+        "source_ref": "https://sunnah.com/riyadussalihin:380",
+        "fetch_status": "pending_review"
       },
       "review": {
-        "status": "pending",
+        "status": "approved",
         "decision": null,
         "priorityKey": "normal",
         "priority": 1,
@@ -45031,7 +44861,8 @@
         "queue": "active",
         "note": "",
         "reviewedAt": null,
-        "reviewedBy": null
+        "reviewedBy": null,
+        "updated_at": "2026-06-05T13:12:16+00:00"
       },
       "quality": {
         "textCleaned": true,
@@ -45051,109 +44882,34 @@
         "firstTopic_tr": "M",
         "topics_tr": "Münafık"
       },
-      "status": "pending_review"
-    },
-    {
-      "id": "hadith_000418",
-      "ref": "riyazussalihin/418",
-      "hadithNo": 418,
-      "type": "single",
-      "groupKey": "riyazussalihin",
-      "sourceListOrder": 436,
-      "input": {
-        "hadithNo_diyanet": 418,
-        "sunnahNo_candidate": 415,
-        "topics_tr": "Münafık",
-        "chapter_tr": "Allah’tan Yana Ümitvar Olmak (Recâ)",
-        "source_tr": "(M148 Müslim, Îmân, 53; B128 Buhârî, İlim, 45)",
-        "source_sunnah_url": "https://sunnah.com/riyadussalihin:415",
-        "matchStatus": "matched_high_confidence",
-        "matchScore": 6615,
-        "matchMethod": "arabic_similarity_local_window",
-        "manualControl": "NO",
-        "note": "Hadis_440 xlsx kaynagindan dogrudan unicode olarak uretildi."
+      "status": "approved",
+      "priority": 1,
+      "notes": "",
+      "createdAt": "2026-06-05T13:12:16+00:00",
+      "updatedAt": "2026-06-05T13:12:16+00:00",
+      "approvedAt": "2026-06-05T13:12:15+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
       },
-      "text": {
-        "ar": {
-          "clean": "وعن أنس ، رضي الله عنه ، أن النبي صلى الله عليه وسلم، ومعاذ رديفه على الرحل قال‏:‏ ‏\"‏يا معاذ‏\"‏ قال‏:‏ لبيك يا رسول الله وسعديك، قال‏:‏ ‏\"‏يامعاذ‏\"‏ قال ‏:‏لبيك يا رسول الله وسعديك‏.‏ قال‏:‏ ‏\"‏يا معاذ‏\"‏ قال‏:‏ لبيك يا رسول الله وسعديك ثلاثاً، قال‏:‏ ‏\"‏ما من عبد يشهد أن لا إله إلا الله ، وأن محمداً عبده ورسوله صدقاً من قلبه إلا حرمه الله على النار‏\"‏ قال‏:‏ يا رسول الله أفلا أخبر بها الناس فيستبشروا‏؟‏ قال‏:‏ ‏\"‏إذا يتكلوا‏\"‏ فأخبر بها معاذ عند موته تأثما ‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
-          "sourceText": "وعن أنس ، رضي الله عنه ، أن النبي صلى الله عليه وسلم، ومعاذ رديفه على الرحل قال‏:‏ ‏\"‏يا معاذ‏\"‏ قال‏:‏ لبيك يا رسول الله وسعديك، قال‏:‏ ‏\"‏يامعاذ‏\"‏ قال ‏:‏لبيك يا رسول الله وسعديك‏.‏ قال‏:‏ ‏\"‏يا معاذ‏\"‏ قال‏:‏ لبيك يا رسول الله وسعديك ثلاثاً، قال‏:‏ ‏\"‏ما من عبد يشهد أن لا إله إلا الله ، وأن محمداً عبده ورسوله صدقاً من قلبه إلا حرمه الله على النار‏\"‏ قال‏:‏ يا رسول الله أفلا أخبر بها الناس فيستبشروا‏؟‏ قال‏:‏ ‏\"‏إذا يتكلوا‏\"‏ فأخبر بها معاذ عند موته تأثما ‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
-          "ttsText": "وعن أنس ، رضي الله عنه ، أن النبي صلى الله عليه وسلم، ومعاذ رديفه على الرحل قال‏:‏ ‏\"‏يا معاذ‏\"‏ قال‏:‏ لبيك يا رسول الله وسعديك، قال‏:‏ ‏\"‏يامعاذ‏\"‏ قال ‏:‏لبيك يا رسول الله وسعديك‏.‏ قال‏:‏ ‏\"‏يا معاذ‏\"‏ قال‏:‏ لبيك يا رسول الله وسعديك ثلاثاً، قال‏:‏ ‏\"‏ما من عبد يشهد أن لا إله إلا الله ، وأن محمداً عبده ورسوله صدقاً من قلبه إلا حرمه الله على النار‏\"‏ قال‏:‏ يا رسول الله أفلا أخبر بها الناس فيستبشروا‏؟‏ قال‏:‏ ‏\"‏إذا يتكلوا‏\"‏ فأخبر بها معاذ عند موته تأثما ‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
-          "direction": "rtl",
-          "script": "Arabic",
-          "status": "needs_review"
-        },
-        "tr": {
-          "clean": "Enes (ra) anlatıyor:\nPeygamber, bineğinin arkasındaki Muâz’a üç defa:\n–Ey Muâz, diye seslenmiş, onun da her seferinde:\n–Buyur yâ Resûlallah, diye karşılık vermesi üzerine:\n–Bir insan samimi olarak, “ Eşhedü en lâ ilâhe illâllâh ve enne Muhammeden abdühû ve resûlühû” derse, Allah ona cehennemi haram kılar, buyurdu. Muâz:\n–Yâ Resûlallah, bu müjdeyi halka haber vereyim de sevinsinler mi? deyince Resûlullah :\n–Söylersen, onlar buna güvenirler (ve ibadet ve taatta gevşeklik gösterirler), buyurdu.\nMuâz bunu (gizlediğinden dolayı günaha girmekten korktuğu için) ölürken söylemiştir.",
-          "sourceText": "Enes (ra) anlatıyor:\nPeygamber, bineğinin arkasındaki Muâz’a üç defa:\n–Ey Muâz, diye seslenmiş, onun da her seferinde:\n–Buyur yâ Resûlallah, diye karşılık vermesi üzerine:\n–Bir insan samimi olarak, “ Eşhedü en lâ ilâhe illâllâh ve enne Muhammeden abdühû ve resûlühû” derse, Allah ona cehennemi haram kılar, buyurdu. Muâz:\n–Yâ Resûlallah, bu müjdeyi halka haber vereyim de sevinsinler mi? deyince Resûlullah :\n–Söylersen, onlar buna güvenirler (ve ibadet ve taatta gevşeklik gösterirler), buyurdu.\nMuâz bunu (gizlediğinden dolayı günaha girmekten korktuğu için) ölürken söylemiştir.",
-          "ttsText": "Enes (ra) anlatıyor:\nPeygamber, bineğinin arkasındaki Muâz’a üç defa:\n–Ey Muâz, diye seslenmiş, onun da her seferinde:\n–Buyur yâ Resûlallah, diye karşılık vermesi üzerine:\n–Bir insan samimi olarak, “ Eşhedü en lâ ilâhe illâllâh ve enne Muhammeden abdühû ve resûlühû” derse, Allah ona cehennemi haram kılar, buyurdu. Muâz:\n–Yâ Resûlallah, bu müjdeyi halka haber vereyim de sevinsinler mi? deyince Resûlullah :\n–Söylersen, onlar buna güvenirler (ve ibadet ve taatta gevşeklik gösterirler), buyurdu.\nMuâz bunu (gizlediğinden dolayı günaha girmekten korktuğu için) ölürken söylemiştir.",
-          "direction": "ltr",
-          "script": "Latin",
-          "status": "needs_review"
-        },
-        "en": {
-          "clean": "Anas bin Malik (May Allah be pleased with him) reported:\nMu'adh bin Jabal was riding on the beast with the Prophet (ﷺ), when he (ﷺ) said to him, \"O Mu'adh!\" Mu'adh replied, \"Here I am responding to you, and at your pleasure, O Messenger of Allah.\" He (ﷺ) again called out, \"O Mu'adh.\" He (again) replied, \"Here I am responding your call, and at your pleasure.\" He (Messenger of Allah) addressed him (again), \"O Mu'adh!\" He replied, \"Here I am responding to you, and at your pleasure, O Messenger of Allah.\" Upon this he (the Prophet (ﷺ)) said, \"If anyone testifies sincerely that there is no true god except Allah, and Muhammad is His slave and Messenger, truly from his heart, Allah will safeguard him from Hell.\" He (Mu'adh) said, \"O Messenger of Allah, shall I not then inform people of it, so that they may have glad tidings.\" He (ﷺ) replied, \"Then they will rely on it alone (and thus give up good works altogether).\" Mu'adh (May Allah be pleased with him) disclosed this Hadith at the time of his death, to avoid sinning for concealing.",
-          "sourceText": "Anas bin Malik (May Allah be pleased with him) reported:\nMu'adh bin Jabal was riding on the beast with the Prophet (ﷺ), when he (ﷺ) said to him, \"O Mu'adh!\" Mu'adh replied, \"Here I am responding to you, and at your pleasure, O Messenger of Allah.\" He (ﷺ) again called out, \"O Mu'adh.\" He (again) replied, \"Here I am responding your call, and at your pleasure.\" He (Messenger of Allah) addressed him (again), \"O Mu'adh!\" He replied, \"Here I am responding to you, and at your pleasure, O Messenger of Allah.\" Upon this he (the Prophet (ﷺ)) said, \"If anyone testifies sincerely that there is no true god except Allah, and Muhammad is His slave and Messenger, truly from his heart, Allah will safeguard him from Hell.\" He (Mu'adh) said, \"O Messenger of Allah, shall I not then inform people of it, so that they may have glad tidings.\" He (ﷺ) replied, \"Then they will rely on it alone (and thus give up good works altogether).\" Mu'adh (May Allah be pleased with him) disclosed this Hadith at the time of his death, to avoid sinning for concealing.",
-          "ttsText": "Anas bin Malik (May Allah be pleased with him) reported:\nMu'adh bin Jabal was riding on the beast with the Prophet (ﷺ), when he (ﷺ) said to him, \"O Mu'adh!\" Mu'adh replied, \"Here I am responding to you, and at your pleasure, O Messenger of Allah.\" He (ﷺ) again called out, \"O Mu'adh.\" He (again) replied, \"Here I am responding your call, and at your pleasure.\" He (Messenger of Allah) addressed him (again), \"O Mu'adh!\" He replied, \"Here I am responding to you, and at your pleasure, O Messenger of Allah.\" Upon this he (the Prophet (ﷺ)) said, \"If anyone testifies sincerely that there is no true god except Allah, and Muhammad is His slave and Messenger, truly from his heart, Allah will safeguard him from Hell.\" He (Mu'adh) said, \"O Messenger of Allah, shall I not then inform people of it, so that they may have glad tidings.\" He (ﷺ) replied, \"Then they will rely on it alone (and thus give up good works altogether).\" Mu'adh (May Allah be pleased with him) disclosed this Hadith at the time of his death, to avoid sinning for concealing.",
-          "direction": "ltr",
-          "script": "Latin",
-          "status": "needs_review"
+      "reviewHistory": [
+        {
+          "at": "2026-06-05T13:12:16+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": ""
         }
-      },
-      "sourceInfo": {
-        "primaryCollection": {
-          "key": "riyazussalihin",
-          "title_ar": "رياض الصالحين",
-          "title_tr": "Riyazus Salihin",
-          "title_en": "Riyad as-Salihin"
-        },
-        "chapter": {
-          "title_tr": "Allah’tan Yana Ümitvar Olmak (Recâ)"
-        },
-        "display": {
-          "tr": "(M148 Müslim, Îmân, 53; B128 Buhârî, İlim, 45)",
-          "en": "(M148 Müslim, Îmân, 53; B128 Buhârî, İlim, 45)"
-        },
-        "sunnah": {
-          "candidateNo": 415,
-          "candidateUrl": "https://sunnah.com/riyadussalihin:415",
-          "matchStatus": "matched_high_confidence",
-          "matchScore": 6615,
-          "matchMethod": "arabic_similarity_local_window"
-        }
-      },
-      "review": {
-        "status": "pending",
-        "decision": null,
-        "priorityKey": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "queue": "active",
-        "note": "",
-        "reviewedAt": null,
-        "reviewedBy": null
-      },
-      "quality": {
-        "textCleaned": true,
-        "sourceSeparated": true,
-        "ttsReady": true,
-        "arabicChecked": false,
-        "turkishChecked": false,
-        "englishChecked": false,
-        "needsManualReview": false,
-        "arabicCharCount": 492,
-        "turkishCharCount": 581,
-        "englishCharCount": 1042,
-        "matchScore": 6615,
-        "matchMethod": "arabic_similarity_local_window"
-      },
-      "tags": {
-        "firstTopic_tr": "M",
-        "topics_tr": "Münafık"
-      },
-      "status": "pending_review"
+      ],
+      "text_ar": "وعن البراء بن عازب رضي الله عنهما عن النبي صلى الله عليه وسلم أنه قال في الأنصار‏:‏ ‏\n\"‏لا يحبهم إلا مؤمن، ولا يبغضهم إلا منافق، من أحبهم أحبه الله، ومن أبغضهم أبغضه الله‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+      "text_tr": "Berâ b. Âzib’den (ra) rivayet edildiğine göre Hz. Peygamber, ensar hakkında şöyle buyurmuştur:\nEnsarı ancak mümin olan sever ve onlara münafıktan başkası kin gütmez. Onları seveni Allah da sever, onlara kin güdenlere Allah da buğzeder.\nAllah Teâlâ, “Benim için birbirini sevenlere, nebîlerin ve şehitlerin bile imrenecekleri nurdan minberler vardır.” buyurmuştur.",
+      "text_en": "Al-Bara' bin 'Azib (May Allah be pleased with them) reported:\nThe Prophet (ﷺ) said about the Ansar: \"Only a believer loves them, and only a hypocrite hates them. Allah loves him who loves them and Allah hates him who hates them\".",
+      "hadith_number": 381,
+      "book_reference_tr": "(M237 Müslim, Îmân, 129; B3783 Buhârî, Menâkıbü’l-ensâr, 4); (T2390 Tirmizî, Zühd, 53)",
+      "book_reference_en": "(M237 Müslim, Îmân, 129; B3783 Buhârî, Menâkıbü’l-ensâr, 4); (T2390 Tirmizî, Zühd, 53)"
     },
     {
       "id": "hadith_001075",
@@ -45177,8 +44933,8 @@
       },
       "text": {
         "ar": {
-          "clean": "عن عثمان بن عفان رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من صلى العشاء في جماعة، فكأنما قام نصف الليل ومن صلى الصبح في جماعة، فكانما صلى الليل كله‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏ \nوفي رواية الترمذي عن عثمان بن عفان رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من شهد العشاء في جماعة كان له قيام نصف ليلة، ومن شهد العشاء والفجر في جماعة، كان له كقيام ليلة‏\"‏ ‏(‏‏(‏قال الترمذي حديث حسن صحيح‏)‏‏)‏",
-          "sourceText": "عن عثمان بن عفان رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من صلى العشاء في جماعة، فكأنما قام نصف الليل ومن صلى الصبح في جماعة، فكانما صلى الليل كله‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏ \nوفي رواية الترمذي عن عثمان بن عفان رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من شهد العشاء في جماعة كان له قيام نصف ليلة، ومن شهد العشاء والفجر في جماعة، كان له كقيام ليلة‏\"‏ ‏(‏‏(‏قال الترمذي حديث حسن صحيح‏)‏‏)‏",
+          "clean": "عن عثمان بن عفان رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من صلى العشاء في جماعة، فكأنما قام نصف الليل ومن صلى الصبح في جماعة، فكانما صلى الليل كله‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏\nوفي رواية الترمذي عن عثمان بن عفان رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من شهد العشاء في جماعة كان له قيام نصف ليلة، ومن شهد العشاء والفجر في جماعة، كان له كقيام ليلة‏\"‏ ‏(‏‏(‏قال الترمذي حديث حسن صحيح‏)‏‏)‏",
+          "sourceText": "عن عثمان بن عفان رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من صلى العشاء في جماعة، فكأنما قام نصف الليل ومن صلى الصبح في جماعة، فكانما صلى الليل كله‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏\nوفي رواية الترمذي عن عثمان بن عفان رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من شهد العشاء في جماعة كان له قيام نصف ليلة، ومن شهد العشاء والفجر في جماعة، كان له كقيام ليلة‏\"‏ ‏(‏‏(‏قال الترمذي حديث حسن صحيح‏)‏‏)‏",
           "ttsText": "عن عثمان بن عفان رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من صلى العشاء في جماعة، فكأنما قام نصف الليل ومن صلى الصبح في جماعة، فكانما صلى الليل كله‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏ \nوفي رواية الترمذي عن عثمان بن عفان رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من شهد العشاء في جماعة كان له قيام نصف ليلة، ومن شهد العشاء والفجر في جماعة، كان له كقيام ليلة‏\"‏ ‏(‏‏(‏قال الترمذي حديث حسن صحيح‏)‏‏)‏",
           "direction": "rtl",
           "script": "Arabic",
@@ -45221,10 +44977,13 @@
           "matchStatus": "matched_high_confidence",
           "matchScore": 8367,
           "matchMethod": "arabic_similarity_local_window"
-        }
+        },
+        "label": "Riyazus Salihin",
+        "source_ref": "https://sunnah.com/riyadussalihin:1071",
+        "fetch_status": "pending_review"
       },
       "review": {
-        "status": "pending",
+        "status": "approved",
         "decision": null,
         "priorityKey": "normal",
         "priority": 1,
@@ -45235,7 +44994,8 @@
         "queue": "active",
         "note": "",
         "reviewedAt": null,
-        "reviewedBy": null
+        "reviewedBy": null,
+        "updated_at": "2026-06-05T13:08:59+00:00"
       },
       "quality": {
         "textCleaned": true,
@@ -45255,7 +45015,34 @@
         "firstTopic_tr": "M",
         "topics_tr": "Münafık"
       },
-      "status": "pending_review"
+      "status": "approved",
+      "priority": 1,
+      "notes": "",
+      "createdAt": "2026-06-05T13:08:59+00:00",
+      "updatedAt": "2026-06-05T13:08:59+00:00",
+      "approvedAt": "2026-06-05T13:08:59+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-05T13:08:59+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": ""
+        }
+      ],
+      "text_ar": "عن عثمان بن عفان رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من صلى العشاء في جماعة، فكأنما قام نصف الليل ومن صلى الصبح في جماعة، فكانما صلى الليل كله‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏\nوفي رواية الترمذي عن عثمان بن عفان رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من شهد العشاء في جماعة كان له قيام نصف ليلة، ومن شهد العشاء والفجر في جماعة، كان له كقيام ليلة‏\"‏ ‏(‏‏(‏قال الترمذي حديث حسن صحيح‏)‏‏)‏",
+      "text_tr": "Osman b. Affân’ın (ra) işittiğine göre Resûlullah :\nYatsı namazını cemaatle kılan bir kimse, gece yarısına kadar ibadet etmiş gibi olur. Sabah namazını cemaatle kılan bir kimse de, bütün geceyi ibadetle geçirmiş gibi sevap kazanır, buyurmuştur.\nTirmizî’nin Osman b. Affân’dan (ra) rivayeti ise şöyledir:\nResûlullah “Yatsı namazını cemaatle kılan kimse, gece yarısına kadar ibadet etmiş gibi olur, yatsı ve sabah namazlarını cemaatle kılan kimse ise, bütün geceyi ibadetle geçirmiş gibi sevap kazanır.” buyurdu.",
+      "text_en": "'Uthman bin 'Affan (May Allah be pleased with him) reported:\nI heard the Messenger of Allah (ﷺ) saying: \"One who performs 'Isha' prayer in congregation, is as if he has performed Salat for half of the night. And one who performs the Fajr prayer in congregation, is as if he has performed Salat the whole night.\"The narration of At-Tirmidhi says: 'Uthman bin Affan (May Allah be pleased with him) narrated that he had heard the Messenger of Allah (ﷺ) saying: \"He who attends 'Isha' in congregation, is as if he has performed Salat for half of the night; and he who attends 'Isha' and Fajr prayers in congregation, is as if he has performed Salat for the whole night.\"",
+      "hadith_number": 1075,
+      "book_reference_tr": "(M1491 Müslim, Mesâcid, 260); (T221 Tirmizî, Salât, 51)",
+      "book_reference_en": "(M1491 Müslim, Mesâcid, 260); (T221 Tirmizî, Salât, 51)"
     },
     {
       "id": "hadith_001218",
@@ -45323,10 +45110,13 @@
           "matchStatus": "matched_needs_review_low_arabic_score",
           "matchScore": 5455,
           "matchMethod": "offset_fallback_nearest_high_confidence"
-        }
+        },
+        "label": "Riyazus Salihin",
+        "source_ref": "https://sunnah.com/riyadussalihin:1213",
+        "fetch_status": "pending_review"
       },
       "review": {
-        "status": "pending",
+        "status": "approved",
         "decision": null,
         "priorityKey": "normal",
         "priority": 1,
@@ -45337,7 +45127,8 @@
         "queue": "active",
         "note": "",
         "reviewedAt": null,
-        "reviewedBy": null
+        "reviewedBy": null,
+        "updated_at": "2026-06-05T13:07:38+00:00"
       },
       "quality": {
         "textCleaned": true,
@@ -45357,7 +45148,34 @@
         "firstTopic_tr": "M",
         "topics_tr": "Münafık"
       },
-      "status": "pending_review"
+      "status": "approved",
+      "priority": 1,
+      "notes": "",
+      "createdAt": "2026-06-05T13:07:38+00:00",
+      "updatedAt": "2026-06-05T13:07:38+00:00",
+      "approvedAt": "2026-06-05T13:07:37+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-05T13:07:38+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": ""
+        }
+      ],
+      "text_ar": "وعن جرير بن عبد الله، رضي الله عنه، قال‏:‏ بايعت النبي، صلى الله عليه وسلم، على إقام الصلاة، وإيتاء الزكاة، والنصح لكل مسلم‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+      "text_tr": "Cerîr b. Abdullah’tan (ra) rivayet edildiğine göre o, şöyle demiştir:\nBen namaz kılmak, zekât vermek ve bütün Müslümanlara samimi davranmak üzere Peygamber’e biat ettim.",
+      "text_en": "Jarir bin 'Abdullah (May Allah be pleased with him) reported:\nI pledged allegiance to the Prophet (ﷺ) to establish Salat, to pay the Zakat and to have the welfare of every Muslim at heart.",
+      "hadith_number": 1218,
+      "book_reference_tr": "(B57 Buhârî, Îmân, 42; M199 Müslim, Îmân, 97)",
+      "book_reference_en": "(B57 Buhârî, Îmân, 42; M199 Müslim, Îmân, 97)"
     },
     {
       "id": "hadith_001535",
@@ -45425,10 +45243,13 @@
           "matchStatus": "matched_needs_review_low_arabic_score",
           "matchScore": 5779,
           "matchMethod": "offset_fallback_nearest_high_confidence"
-        }
+        },
+        "label": "Riyazus Salihin",
+        "source_ref": "https://sunnah.com/riyadussalihin:1530",
+        "fetch_status": "pending_review"
       },
       "review": {
-        "status": "pending",
+        "status": "approved",
         "decision": null,
         "priorityKey": "normal",
         "priority": 1,
@@ -45439,7 +45260,8 @@
         "queue": "active",
         "note": "",
         "reviewedAt": null,
-        "reviewedBy": null
+        "reviewedBy": null,
+        "updated_at": "2026-06-05T13:07:14+00:00"
       },
       "quality": {
         "textCleaned": true,
@@ -45459,7 +45281,34 @@
         "firstTopic_tr": "M",
         "topics_tr": "Münafık"
       },
-      "status": "pending_review"
+      "status": "approved",
+      "priority": 1,
+      "notes": "",
+      "createdAt": "2026-06-05T13:07:14+00:00",
+      "updatedAt": "2026-06-05T13:07:14+00:00",
+      "approvedAt": "2026-06-05T13:07:13+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-05T13:07:14+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": ""
+        }
+      ],
+      "text_ar": "وعن كعب بن مالك رضي الله عنه في حديثه الطويل في قصة توبته وقد سبق في بابه التوبة‏.‏ قال‏:‏ قال النبي صلى الله عليه وسلم وهو جالس في القوم بتبوك‏:‏ ‏\"‏ما فعل كعب مالك‏؟‏ فقال رجل من بني سلمة‏:‏ يا رسول الله حبسه برداه، والنظر في عطفيه فقال معاذ بن جبل رضي الله عنه بئس ما قلت والله يا رسول الله ما علمنا عليه إلا خيرًا، فسكت رسول الله صلى الله عليه وسلم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏ \"عِطْفَاهُ\"جانِباهُ، وهو إشارةٌ إلى إعجابِهِ بنفسهِ.",
+      "text_tr": "Ka’b b. Mâlik’ten (ra) rivayet edildiğine göre, tövbe bahsinde geçen ve onun tövbe edişini anlatan uzun bir hadiste o şöyle demiştir:\nResûlullah Tebük’te cemaat içinde otururken:\n–Ka’b b. Mâlik ne yaptı, demişti. Bunun üzerine Benî Selime’den bir adam:\n–Yâ Resûlullah! Giysilerine ve boyuna posuna bakıp gururlanması, onu (cihada çıkmaktan) alıkoydu, deyince Muâz b. Cebel (ra) ona:\n–Ne kötü bir söz söyledin, dedi. (Sonra Hz. Peygamber’e dönerek), vallahi ey Allah’ın Resûlü, Ka’b hakkında iyilikten başka bir şey bilmiyoruz, diye onu aklaması üzerine, Resûl-i Ekrem (hoş görerek) sustu.",
+      "text_en": "Ka'b bin Malik (May Allah be pleased with him) said in his long story about his repentance:\nThe Prophet (ﷺ) was sitting among the people in Tabuk. He (ﷺ) said, \"What happened to Ka'b bin Malik?\" A person from the tribe of Banu Salamah said: \"O Messenger of Allah! the embellishment of his cloak and an appreciation of his sides have allured him, and he was thus detained.\" Mu'adh bin Jabal (May Allah be pleased with him) said: \"Woe be upon you! You have passed indecent remarks. O Messenger of Allah! by Allah, we know nothing about him but good.\" The Messenger of Allah (ﷺ) remained silent.",
+      "hadith_number": 1535,
+      "book_reference_tr": "(B4418 Buhârî, Megâzî, 80; M7016 Müslim, Tevbe, 53)",
+      "book_reference_en": "(B4418 Buhârî, Megâzî, 80; M7016 Müslim, Tevbe, 53)"
     },
     {
       "id": "hadith_001729",
@@ -45527,10 +45376,13 @@
           "matchStatus": "matched_high_confidence",
           "matchScore": 6667,
           "matchMethod": "arabic_similarity_local_window"
-        }
+        },
+        "label": "Riyazus Salihin",
+        "source_ref": "https://sunnah.com/riyadussalihin:1722",
+        "fetch_status": "pending_review"
       },
       "review": {
-        "status": "pending",
+        "status": "approved",
         "decision": null,
         "priorityKey": "normal",
         "priority": 1,
@@ -45541,7 +45393,8 @@
         "queue": "active",
         "note": "",
         "reviewedAt": null,
-        "reviewedBy": null
+        "reviewedBy": null,
+        "updated_at": "2026-06-05T13:01:39+00:00"
       },
       "quality": {
         "textCleaned": true,
@@ -45561,7 +45414,34 @@
         "firstTopic_tr": "M",
         "topics_tr": "Münafık"
       },
-      "status": "pending_review"
+      "status": "approved",
+      "priority": 1,
+      "notes": "",
+      "createdAt": "2026-06-05T13:01:39+00:00",
+      "updatedAt": "2026-06-05T13:01:39+00:00",
+      "approvedAt": "2026-06-05T13:01:39+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-05T13:01:39+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": ""
+        }
+      ],
+      "text_ar": "عن جابر رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\n\"‏لا يسأل بوجه الله إلا الجنة‏\"‏ ‏(‏‏(‏رواه أبو داود‏)‏‏)‏‏.‏",
+      "text_tr": "Câbir’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nAllah’ın rızası ile sadece cennet istenir.",
+      "text_en": "Jabir (May Allah be pleased with him) said:\nThe Messenger of Allah (ﷺ) said, \"No one should ask in the Face of Allah for anything except Jannah.\".",
+      "hadith_number": 1729,
+      "book_reference_tr": "(D1671 Ebû Dâvûd, Zekât, 37)",
+      "book_reference_en": "(D1671 Ebû Dâvûd, Zekât, 37)"
     },
     {
       "id": "hadith_000055",
@@ -45643,8 +45523,8 @@
           "matchStatus": "matched_high_confidence",
           "matchScore": 7413
         },
-        "label": "Diyanet TR + Sunnah yerel seed",
-        "source_ref": "riyazussalihin/54",
+        "label": "Riyazus Salihin",
+        "source_ref": "https://sunnah.com/riyadussalihin:54",
         "fetch_status": "local_hadith_nearby",
         "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\Besmele\\data\\content_seed\\hadis\\hadiths.pending_review.440.clean_sunnah_ar_en.v1.json"
       },
@@ -45661,7 +45541,7 @@
         "note": "",
         "reviewedAt": null,
         "reviewedBy": null,
-        "updated_at": "2026-06-03T13:39:29+00:00"
+        "updated_at": "2026-06-05T13:03:13+00:00"
       },
       "quality": {
         "textCleaned": true,
@@ -45698,7 +45578,7 @@
       "priority": 2,
       "notes": "",
       "createdAt": "2026-06-03T13:38:46+00:00",
-      "updatedAt": "2026-06-03T13:39:29+00:00",
+      "updatedAt": "2026-06-05T13:03:13+00:00",
       "approvedAt": "2026-06-03T13:39:28+00:00",
       "duplicateInfo": {
         "existsInArchive": false,
@@ -45706,6 +45586,12 @@
         "exactDuplicate": true,
         "possibleDuplicate": true,
         "archiveMatches": [
+          {
+            "record_id": "hadith_000054",
+            "reason": "sourceRef",
+            "score": 1.0,
+            "ref": "riyazussalihin/54"
+          },
           {
             "record_id": "hadith_000054",
             "reason": "arabic",
@@ -45719,7 +45605,20 @@
             "ref": "riyazussalihin/54"
           }
         ],
-        "approvedMatches": []
+        "approvedMatches": [
+          {
+            "record_id": "hadith_000055",
+            "reason": "arabic",
+            "score": 1.0,
+            "ref": "riyazussalihin/55"
+          },
+          {
+            "record_id": "hadith_000055",
+            "reason": "similar_text",
+            "score": 1.0,
+            "ref": "riyazussalihin/55"
+          }
+        ]
       },
       "reviewHistory": [
         {
@@ -45727,11 +45626,17 @@
           "status": "approved",
           "priority": 2,
           "notes": ""
+        },
+        {
+          "at": "2026-06-05T13:03:13+00:00",
+          "status": "approved",
+          "priority": 2,
+          "notes": ""
         }
       ],
       "hadith_number": 55,
-      "book_reference_tr": "",
-      "book_reference_en": ""
+      "book_reference_tr": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)",
+      "book_reference_en": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)"
     },
     {
       "id": "hadith_000444",
@@ -45813,8 +45718,8 @@
           "matchStatus": "matched_high_confidence",
           "matchScore": 6995
         },
-        "label": "Diyanet TR + Sunnah yerel seed",
-        "source_ref": "riyazussalihin/447",
+        "label": "Riyazus Salihin",
+        "source_ref": "https://sunnah.com/riyadussalihin:444",
         "fetch_status": "local_hadith_nearby",
         "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\Besmele\\data\\content_seed\\hadis\\hadiths.pending_review.440.clean_sunnah_ar_en.v1.json"
       },
@@ -45822,7 +45727,7 @@
         "status": "approved",
         "decision": null,
         "priorityKey": "normal",
-        "priority": 2,
+        "priority": 1,
         "boost": {
           "enabled": false,
           "weight": 1
@@ -45831,7 +45736,7 @@
         "note": "",
         "reviewedAt": null,
         "reviewedBy": null,
-        "updated_at": "2026-06-03T13:50:18+00:00"
+        "updated_at": "2026-06-05T13:04:25+00:00"
       },
       "quality": {
         "textCleaned": true,
@@ -45864,10 +45769,10 @@
       "text_ar": "وعن أبي سعيد الخدري، رضي الله عنه ، أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إذا وضعت الجنازة واحتملها الناس أو الرجال على أعناقهم، فإن كانت صالحة قالت‏:‏ فدموني قدموني، وإن كانت غير صالحة، قالت يا ويلها‏!‏ أين تذهبون بها‏؟‏ يسمع صوته كل شئ إلا الإنسان، ولو سمعه صعق‏\"‏ ‏(‏‏(‏رواه البخاري‏)‏‏)‏‏.‏",
       "text_tr": "Ebû Saîd el-Hudrî’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nCenaze tabuta konulup da insanlar onu omuzlarına aldığı zaman, ölen kimse salihlerden ise “Beni bir an evvel yerime ulaştırın!” der. Eğer salihlerden değilse “Eyvah, beni nereye götürüyorsunuz?” der ve onun sesini insanlardan başka her şey duyar. Eğer insan bu sesi duysaydı, (dehşetten) bayılıp düşerdi.",
       "text_en": "Abu Sa'id Al-Khudri (May Allah be pleased with him) reported:\nMessenger of Allah (ﷺ) said, \"When a dead body is placed on a bier and men carry it on their shoulders, if the deceased was pious, it (the corpse) will say: 'Take me in haste'; but if he was not, it will say (to its bearers): 'Woe to it. Where are you taking it?' Everything except man hears its voice. Had a human being heard its voice, he would have surely died\".",
-      "priority": 2,
+      "priority": 1,
       "notes": "",
       "createdAt": "2026-06-03T13:48:39+00:00",
-      "updatedAt": "2026-06-03T13:50:18+00:00",
+      "updatedAt": "2026-06-05T13:04:25+00:00",
       "approvedAt": "2026-06-03T13:50:17+00:00",
       "duplicateInfo": {
         "existsInArchive": false,
@@ -45875,6 +45780,12 @@
         "exactDuplicate": true,
         "possibleDuplicate": true,
         "archiveMatches": [
+          {
+            "record_id": "hadith_000447",
+            "reason": "sourceRef",
+            "score": 1.0,
+            "ref": "riyazussalihin/447"
+          },
           {
             "record_id": "hadith_000447",
             "reason": "arabic",
@@ -45888,7 +45799,20 @@
             "ref": "riyazussalihin/447"
           }
         ],
-        "approvedMatches": []
+        "approvedMatches": [
+          {
+            "record_id": "hadith_000444",
+            "reason": "arabic",
+            "score": 1.0,
+            "ref": "riyazussalihin/444"
+          },
+          {
+            "record_id": "hadith_000444",
+            "reason": "similar_text",
+            "score": 1.0,
+            "ref": "riyazussalihin/444"
+          }
+        ]
       },
       "reviewHistory": [
         {
@@ -45896,11 +45820,17 @@
           "status": "approved",
           "priority": 2,
           "notes": ""
+        },
+        {
+          "at": "2026-06-05T13:04:25+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": ""
         }
       ],
       "hadith_number": 444,
-      "book_reference_tr": "",
-      "book_reference_en": ""
+      "book_reference_tr": "(B1314 Buhârî, Cenâiz, 50)",
+      "book_reference_en": "(B1314 Buhârî, Cenâiz, 50)"
     }
   ]
 }

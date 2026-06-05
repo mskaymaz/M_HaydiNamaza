@@ -16,6 +16,7 @@ from PySide6.QtWidgets import (
     QMessageBox,
     QProgressBar,
     QPushButton,
+    QSizePolicy,
     QSpinBox,
     QTextEdit,
     QVBoxLayout,
@@ -33,6 +34,7 @@ from core.models import (
 )
 from core.reference_parser import normalize_reference
 from core.storage import ContentRepository, StorageConflictError
+from ui.scale import pt, scale
 
 
 STATUS_LABELS = {
@@ -46,6 +48,8 @@ STATUS_LABELS = {
     "duplicate": "Mükerrer",
     "archived": "Arşive kaldırıldı",
 }
+
+TEXT_EDITOR_BASE_HEIGHT = 30
 
 
 def _fetch_status_label(status: str) -> str:
@@ -72,17 +76,21 @@ class AddPanel(QWidget):
         self._current_record: BaseRecord | None = None
         self._current_duplicate = DuplicateCheckResult()
         self._current_source = SourceInfo()
+        self._text_resize_base_height: int | None = None
+        self._expanding_text_edits: list[QTextEdit] = []
         self._build_ui()
 
     def _build_ui(self) -> None:
         layout = QVBoxLayout(self)
-        layout.setSpacing(14)
-        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(0)
+        layout.setContentsMargins(0, 0, 0, 0)
 
         top_box = QGroupBox("Ekleme")
+        top_box.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
         top_layout = QGridLayout(top_box)
-        top_layout.setHorizontalSpacing(10)
-        top_layout.setVerticalSpacing(10)
+        top_layout.setContentsMargins(0, 0, 0, 0)
+        top_layout.setHorizontalSpacing(0)
+        top_layout.setVerticalSpacing(0)
         self.kind_combo = QComboBox()
         self.kind_combo.addItem("Ayet", "ayah")
         self.kind_combo.addItem("Hadis", "hadith")
@@ -103,7 +111,7 @@ class AddPanel(QWidget):
         badges_row = QWidget()
         badges_layout = QHBoxLayout(badges_row)
         badges_layout.setContentsMargins(0, 0, 0, 0)
-        badges_layout.setSpacing(16)
+        badges_layout.setSpacing(0)
         self.archive_check = self._build_status_check("Arşivde")
         self.approved_check = self._build_status_check("Onaylıda")
         self.exact_check = self._build_status_check("Tam aynı kayıt")
@@ -118,14 +126,14 @@ class AddPanel(QWidget):
 
         self.fetch_status_label = QLabel("-")
         self.fetch_status_label.setWordWrap(True)
-        self.fetch_status_label.setStyleSheet("font-size: 14pt; font-weight: 600; color: #0b5d8a;")
+        self.fetch_status_label.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600; color: #0b5d8a;")
         self.match_warning_label = QLabel("")
         self.match_warning_label.setWordWrap(True)
-        self.match_warning_label.setStyleSheet("font-size: 14pt; font-weight: 700; color: #8a4b00;")
+        self.match_warning_label.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 700; color: #8a4b00;")
         self.fetch_progress = QProgressBar()
         self.fetch_progress.setRange(0, 0)
         self.fetch_progress.setVisible(False)
-        self.fetch_progress.setFixedHeight(16)
+        self.fetch_progress.setFixedHeight(scale(16))
         top_layout.addWidget(badges_row, 1, 0, 1, 6)
         top_layout.addWidget(self.fetch_status_label, 2, 0, 1, 6)
         top_layout.addWidget(self.match_warning_label, 3, 0, 1, 6)
@@ -133,47 +141,65 @@ class AddPanel(QWidget):
         layout.addWidget(top_box)
 
         form_box = QGroupBox("Kayıt")
-        form = QFormLayout(form_box)
-        form.setVerticalSpacing(12)
-        form.setHorizontalSpacing(12)
+        form_box.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        form_box_layout = QVBoxLayout(form_box)
+        form_box_layout.setContentsMargins(0, 0, 0, 0)
+        form_box_layout.setSpacing(0)
+        form = QFormLayout()
+        form.setContentsMargins(0, 0, 0, 0)
+        form.setVerticalSpacing(0)
+        form.setHorizontalSpacing(0)
+        text_form = QFormLayout()
+        text_form.setContentsMargins(0, 0, 0, 0)
+        text_form.setVerticalSpacing(0)
+        text_form.setHorizontalSpacing(0)
         self.id_label = QLabel("-")
         self.ref_label = QLabel("-")
         self.status_combo = QComboBox()
         for value in STATUS_VALUES:
             self.status_combo.addItem(STATUS_LABELS.get(value, value), value)
-        self.status_combo.setMaximumWidth(220)
+        self.status_combo.setMaximumWidth(scale(220))
         self.priority_combo = QComboBox()
         self.priority_combo.addItem("Normal", 1)
         self.priority_combo.addItem("Sık", 2)
         self.priority_combo.addItem("Daha sık", 3)
         self.priority_combo.setCurrentIndex(0)
-        self.priority_combo.setFixedWidth(140)
+        self.priority_combo.setFixedWidth(scale(140))
         self.notes_edit = QTextEdit()
-        self.notes_edit.setFixedHeight(44)
-        self.notes_edit.setMaximumHeight(44)
-        self.notes_edit.setMaximumWidth(260)
+        self.notes_edit.setFixedHeight(scale(22))
+        self.notes_edit.setMaximumHeight(scale(22))
+        self.notes_edit.setMaximumWidth(scale(260))
         self.book_ref_tr_edit = QTextEdit()
-        self.book_ref_tr_edit.setFixedHeight(50)
+        self.book_ref_tr_edit.setFixedHeight(scale(25))
         self.book_ref_en_edit = QTextEdit()
-        self.book_ref_en_edit.setFixedHeight(50)
+        self.book_ref_en_edit.setFixedHeight(scale(25))
         self.ayah_source_edit = QTextEdit()
-        self.ayah_source_edit.setFixedHeight(72)
+        self.ayah_source_edit.setFixedHeight(scale(36))
         self.ayah_source_edit.setReadOnly(True)
         self.hadith_quality_edit = QTextEdit()
-        self.hadith_quality_edit.setFixedHeight(56)
+        self.hadith_quality_edit.setFixedHeight(scale(28))
         self.hadith_quality_edit.setReadOnly(True)
         self.hadith_source_edit = QTextEdit()
-        self.hadith_source_edit.setFixedHeight(56)
+        self.hadith_source_edit.setFixedHeight(scale(28))
         self.hadith_source_edit.setReadOnly(True)
         self.ar_edit = QTextEdit()
         self.tr_edit = QTextEdit()
         self.en_edit = QTextEdit()
         self.tr_alt_edit = QTextEdit()
         self.en_alt_edit = QTextEdit()
+        self._expanding_text_edits = [
+            self.ar_edit,
+            self.tr_edit,
+            self.en_edit,
+            self.tr_alt_edit,
+            self.en_alt_edit,
+        ]
         for widget in (self.ar_edit, self.tr_edit, self.en_edit):
-            widget.setMinimumHeight(120)
+            widget.setFixedHeight(TEXT_EDITOR_BASE_HEIGHT)
+            widget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         for widget in (self.tr_alt_edit, self.en_alt_edit):
-            widget.setMinimumHeight(120)
+            widget.setFixedHeight(TEXT_EDITOR_BASE_HEIGHT)
+            widget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
 
         self.tr_main_check = self._build_translation_check("Ali Bulaç")
         self.tr_alt_check = self._build_translation_check("Diyanet")
@@ -200,9 +226,10 @@ class AddPanel(QWidget):
 
         self.ayah_source_row = self._labeled_editor("Ayet kaynak ozeti", self.ayah_source_edit)
         self.hadith_summary_row = QWidget()
+        self.hadith_summary_row.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         hadith_summary_layout = QHBoxLayout(self.hadith_summary_row)
         hadith_summary_layout.setContentsMargins(0, 0, 0, 0)
-        hadith_summary_layout.setSpacing(12)
+        hadith_summary_layout.setSpacing(0)
         hadith_summary_layout.addWidget(self._labeled_editor("Hadis eşleşme özeti", self.hadith_quality_edit))
         hadith_summary_layout.addWidget(self._labeled_editor("Hadis kaynak ozeti", self.hadith_source_edit))
         self.tr_translation_row = self._two_editor_choice_row(
@@ -228,7 +255,7 @@ class AddPanel(QWidget):
         identity_row = QWidget()
         identity_layout = QHBoxLayout(identity_row)
         identity_layout.setContentsMargins(0, 0, 0, 0)
-        identity_layout.setSpacing(16)
+        identity_layout.setSpacing(0)
         identity_layout.addWidget(QLabel("Kimlik"))
         identity_layout.addWidget(self.id_label, 1)
         identity_layout.addWidget(QLabel("Referans"))
@@ -238,7 +265,7 @@ class AddPanel(QWidget):
         priority_notes_row = QWidget()
         priority_notes_layout = QHBoxLayout(priority_notes_row)
         priority_notes_layout.setContentsMargins(0, 0, 0, 0)
-        priority_notes_layout.setSpacing(10)
+        priority_notes_layout.setSpacing(0)
         priority_notes_layout.addWidget(QLabel("Öncelik"))
         priority_notes_layout.addWidget(self.priority_combo)
         priority_notes_layout.addStretch(1)
@@ -247,13 +274,15 @@ class AddPanel(QWidget):
         form.addRow(priority_notes_row)
         form.addRow("Ayet kaynak", self.ayah_source_row)
         form.addRow("Hadis özeti", self.hadith_summary_row)
-        form.addRow("Arapça metin", self._editor_with_font_row(self.ar_font_spin, self.ar_edit))
-        form.addRow("Türkçe metin", self.tr_translation_row)
-        form.addRow("İngilizce metin", self.en_translation_row)
+        text_form.addRow("Arapça metin", self._editor_with_font_row(self.ar_font_spin, self.ar_edit))
+        text_form.addRow("Türkçe metin", self.tr_translation_row)
+        text_form.addRow("İngilizce metin", self.en_translation_row)
+        form_box_layout.addLayout(form)
+        form_box_layout.addLayout(text_form, 1)
         layout.addWidget(form_box, 1)
 
         buttons = QHBoxLayout()
-        buttons.setSpacing(10)
+        buttons.setSpacing(0)
         self.save_btn = QPushButton("Taslak olarak kaydet")
         self.save_btn.clicked.connect(self._save_draft)
         self.approve_btn = QPushButton("Onayla ve kaydet")
@@ -262,6 +291,16 @@ class AddPanel(QWidget):
         buttons.addWidget(self.approve_btn)
         layout.addLayout(buttons)
         self._toggle_kind_fields()
+
+    def resizeEvent(self, event) -> None:
+        super().resizeEvent(event)
+        if self._text_resize_base_height is None:
+            self._text_resize_base_height = self.height()
+        extra_height = max(0, self.height() - self._text_resize_base_height)
+        editor_height = TEXT_EDITOR_BASE_HEIGHT + (extra_height // 3)
+        for editor in self._expanding_text_edits:
+            editor.setFixedHeight(editor_height)
+            editor.updateGeometry()
 
     def _toggle_kind_fields(self, *_args) -> None:
         self._reset_form_for_kind_change()
@@ -356,7 +395,7 @@ class AddPanel(QWidget):
                 tr=tr,
                 en=en,
                 status="draft",
-                priority=3,
+                priority=1,
                 notes="",
                 source_info=source_info,
                 duplicate_info=DuplicateCheckResult(),
@@ -377,7 +416,7 @@ class AddPanel(QWidget):
             tr=tr,
             en=en,
             status="draft",
-            priority=3,
+            priority=1,
             notes="",
             source_info=source_info,
             duplicate_info=DuplicateCheckResult(),
@@ -485,10 +524,10 @@ class AddPanel(QWidget):
 
     def _build_font_spin(self) -> QSpinBox:
         spin = QSpinBox()
-        spin.setRange(14, 36)
-        spin.setValue(14)
+        spin.setRange(13, 36)
+        spin.setValue(13)
         spin.setSuffix(" pt")
-        spin.setMaximumWidth(90)
+        spin.setMaximumWidth(scale(90))
         return spin
 
     def _bind_font_size(self, spin: QSpinBox, editor: QTextEdit) -> None:
@@ -497,10 +536,13 @@ class AddPanel(QWidget):
 
     def _editor_with_font_row(self, spin: QSpinBox, editor: QTextEdit) -> QWidget:
         panel = QWidget()
+        panel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         panel_layout = QVBoxLayout(panel)
         panel_layout.setContentsMargins(0, 0, 0, 0)
+        panel_layout.setSpacing(0)
         top = QHBoxLayout()
         top.setContentsMargins(0, 0, 0, 0)
+        top.setSpacing(0)
         top.addWidget(QLabel("Yazi boyutu"))
         top.addWidget(spin)
         top.addStretch(1)
@@ -520,9 +562,10 @@ class AddPanel(QWidget):
         right_editor: QTextEdit,
     ) -> QWidget:
         row = QWidget()
+        row.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         row_layout = QHBoxLayout(row)
         row_layout.setContentsMargins(0, 0, 0, 0)
-        row_layout.setSpacing(12)
+        row_layout.setSpacing(0)
         left_panel = self._choice_editor_panel(left_title, left_check, left_spin, left_editor)
         right_panel = self._choice_editor_panel(right_title, right_check, right_spin, right_editor)
         row.left_panel = left_panel
@@ -533,15 +576,16 @@ class AddPanel(QWidget):
 
     def _choice_editor_panel(self, title: str, check: QCheckBox, spin: QSpinBox, editor: QTextEdit) -> QWidget:
         panel = QWidget()
+        panel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         panel.setStyleSheet("background:#fafafa; border:1px solid #d8d8d8; border-radius:8px;")
         panel_layout = QVBoxLayout(panel)
-        panel_layout.setContentsMargins(8, 8, 8, 8)
-        panel_layout.setSpacing(8)
+        panel_layout.setContentsMargins(0, 0, 0, 0)
+        panel_layout.setSpacing(0)
         title_row = QHBoxLayout()
         title_row.setContentsMargins(0, 0, 0, 0)
-        title_row.setSpacing(8)
+        title_row.setSpacing(0)
         label = QLabel(title)
-        label.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        label.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         panel.title_label = label
         title_row.addWidget(check)
         title_row.addWidget(label)
@@ -554,12 +598,13 @@ class AddPanel(QWidget):
 
     def _labeled_editor(self, label: str, editor: QTextEdit) -> QWidget:
         panel = QWidget()
+        panel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         panel.setStyleSheet("background:#fafafa; border:1px solid #d8d8d8; border-radius:8px;")
         panel_layout = QVBoxLayout(panel)
-        panel_layout.setContentsMargins(8, 8, 8, 8)
-        panel_layout.setSpacing(8)
+        panel_layout.setContentsMargins(0, 0, 0, 0)
+        panel_layout.setSpacing(0)
         title = QLabel(label)
-        title.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        title.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         panel_layout.addWidget(title)
         panel_layout.addWidget(editor)
         return panel
@@ -567,12 +612,12 @@ class AddPanel(QWidget):
     def _build_status_check(self, label: str) -> QCheckBox:
         check = QCheckBox(label)
         check.setEnabled(False)
-        check.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        check.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         return check
 
     def _build_translation_check(self, label: str) -> QCheckBox:
         check = QCheckBox(label)
-        check.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        check.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         return check
 
     def _normalize_priority(self, value: int) -> int:

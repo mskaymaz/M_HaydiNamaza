@@ -120,6 +120,7 @@ class ContentRepository:
         self._write_payload(payload["path"], payload["root"], record.kind == "approved")
 
         approved_backup: Path | None = None
+        self._refresh_approved_payload_if_changed(record.kind)
         if record.status == "approved":
             approved_backup = self._backup_and_assert_hash(self._approved_path(record.kind))
             self._upsert_approved_record(record)
@@ -140,6 +141,44 @@ class ContentRepository:
         if saved is None:
             raise RuntimeError("Kaydedilen kayit tekrar bulunamadi.")
         return saved
+
+    def delete_archive_record(self, record: BaseRecord) -> None:
+        archive_backup = self._backup_and_assert_hash(self._archive_path(record.kind))
+        payload = self._archive_payloads[record.kind]
+        rows = payload["records"]
+        original_count = len(rows)
+        rows = [
+            row
+            for index, row in enumerate(rows)
+            if not (
+                isinstance(row, dict)
+                and (
+                    (record.location and record.location.path == payload["path"] and index == record.location.index)
+                    or str(row.get("id") or "").strip() == record.id
+                    or str(row.get("ref") or "").strip() == record.ref
+                )
+            )
+        ]
+        if len(rows) == original_count:
+            raise RuntimeError("Silinecek arşiv kaydı bulunamadı.")
+        payload["records"] = rows
+        payload["root"][payload["root_key"]] = rows
+        self._write_payload(payload["path"], payload["root"], is_approved=False)
+
+        approved_backup: Path | None = None
+        self._refresh_approved_payload_if_changed(record.kind)
+        approved_backup = self._backup_and_assert_hash(self._approved_path(record.kind))
+        self._remove_approved_record(record.kind, record.id)
+
+        self.state.last_undo = {
+            "archive_target": str(self._archive_path(record.kind)),
+            "archive_backup": str(archive_backup or ""),
+            "approved_target": str(self._approved_path(record.kind)),
+            "approved_backup": str(approved_backup or ""),
+        }
+        self._save_state()
+        self.reload()
+        self.logger.log("delete_archive_record", kind=record.kind, record_id=record.id, ref=record.ref)
 
     def undo_last_write(self) -> bool:
         last = self.state.last_undo
@@ -529,6 +568,13 @@ class ContentRepository:
         payload["root"]["records"] = rows
         payload["root"]["content_version"] = f"tool-{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         self._write_payload(payload["path"], payload["root"], is_approved=True)
+
+    def _refresh_approved_payload_if_changed(self, kind: ContentKind) -> None:
+        path = self._approved_path(kind)
+        current_hash = self._file_hash(path)
+        known_hash = self._hashes.get(path, current_hash)
+        if current_hash != known_hash:
+            self._approved_payloads[kind] = self._read_payload(path, default_type="approved")
 
     def _load_state(self) -> ToolState:
         if not self.paths.state_path.exists():

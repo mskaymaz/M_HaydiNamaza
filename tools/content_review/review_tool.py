@@ -12,8 +12,9 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 try:
+    from PySide6.QtCore import Qt
     from PySide6.QtGui import QFont
-    from PySide6.QtWidgets import QApplication, QMainWindow, QTabWidget
+    from PySide6.QtWidgets import QApplication, QMainWindow, QScrollArea, QTabWidget, QWidget
 except ImportError:
     print("PySide6 not found.")
     print("Install command: py -m pip install PySide6")
@@ -25,6 +26,7 @@ from core.models import AppPaths
 from core.storage import ContentRepository
 from ui.add_panel import AddPanel
 from ui.review_panel import ReviewPanel
+from ui.scale import scale
 
 
 def _default_paths(repo_root: Path, tool_root: Path) -> AppPaths:
@@ -49,12 +51,20 @@ class MainWindow(QMainWindow):
     def __init__(self, repository: ContentRepository) -> None:
         super().__init__()
         self.setWindowTitle("İçerik İnceleme ve Ekleme Aracı")
-        self.resize(1200, 860)
+        self.resize(scale(1200), 520)
         tabs = QTabWidget()
-        tabs.addTab(AddPanel(repository), "Ekle")
-        tabs.addTab(ReviewPanel(repository), "Incele")
+        tabs.addTab(self._scrollable(AddPanel(repository)), "Ekle")
+        tabs.addTab(self._scrollable(ReviewPanel(repository)), "Incele")
         tabs.setCurrentIndex(0)
         self.setCentralWidget(tabs)
+
+    @staticmethod
+    def _scrollable(widget: QWidget) -> QScrollArea:
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scroll.setWidget(widget)
+        return scroll
 
 
 def parse_args() -> argparse.Namespace:
@@ -94,7 +104,7 @@ def main() -> None:
     repository = ContentRepository(paths, logger, backup_manager)
     app = QApplication(sys.argv)
     base_font = QFont(app.font())
-    base_font.setPointSizeF(max(14.0, base_font.pointSizeF()))
+    base_font.setPointSizeF(max(10.0, base_font.pointSizeF()))
     app.setFont(base_font)
     window = MainWindow(repository)
     window.show()

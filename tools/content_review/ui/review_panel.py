@@ -14,6 +14,7 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QMessageBox,
     QPushButton,
+    QSizePolicy,
     QSpinBox,
     QTextEdit,
     QVBoxLayout,
@@ -23,6 +24,7 @@ from PySide6.QtWidgets import (
 from core.models import AyahRecord, BaseRecord, EsmaRecord, HadithRecord, STATUS_VALUES
 from core.storage import ContentRepository, StorageConflictError
 from ui.mobile_preview import MobilePreviewWindow
+from ui.scale import pt, scale
 
 
 STATUS_LABELS = {
@@ -37,6 +39,8 @@ STATUS_LABELS = {
     "archived": "Arşive kaldırıldı",
 }
 
+TEXT_EDITOR_BASE_HEIGHT = 30
+
 
 class ReviewPanel(QWidget):
     def __init__(self, repository: ContentRepository) -> None:
@@ -46,18 +50,22 @@ class ReviewPanel(QWidget):
         self._current_kind = "ayah"
         self._records: list[BaseRecord] = []
         self._current_record: BaseRecord | None = None
+        self._text_resize_base_height: int | None = None
+        self._expanding_text_edits: list[QTextEdit] = []
         self._build_ui()
         self.refresh()
 
     def _build_ui(self) -> None:
         layout = QVBoxLayout(self)
-        layout.setSpacing(14)
-        layout.setContentsMargins(10, 10, 10, 10)
+        layout.setSpacing(0)
+        layout.setContentsMargins(0, 0, 0, 0)
 
         top_box = QGroupBox("Inceleme")
+        top_box.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
         top_layout = QGridLayout(top_box)
-        top_layout.setHorizontalSpacing(10)
-        top_layout.setVerticalSpacing(10)
+        top_layout.setContentsMargins(0, 0, 0, 0)
+        top_layout.setHorizontalSpacing(0)
+        top_layout.setVerticalSpacing(0)
         self.kind_combo = QComboBox()
         self.kind_combo.addItem("Ayet", "ayah")
         self.kind_combo.addItem("Hadis", "hadith")
@@ -67,7 +75,7 @@ class ReviewPanel(QWidget):
         self.nearby_hadith_check = self._build_status_check("Yakın hadis adayı")
         self.match_warning_label = QLabel("")
         self.match_warning_label.setWordWrap(True)
-        self.match_warning_label.setStyleSheet("font-size: 14pt; font-weight: 700; color: #8a4b00;")
+        self.match_warning_label.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 700; color: #8a4b00;")
         self.jump_edit = QLineEdit()
         self.jump_edit.setPlaceholderText("Kimlik / referans")
         self.jump_btn = QPushButton("Git")
@@ -97,9 +105,18 @@ class ReviewPanel(QWidget):
         layout.addWidget(top_box)
 
         info_box = QGroupBox("Kayıt")
-        info_layout = QFormLayout(info_box)
-        info_layout.setVerticalSpacing(12)
-        info_layout.setHorizontalSpacing(12)
+        info_box.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        info_box_layout = QVBoxLayout(info_box)
+        info_box_layout.setContentsMargins(0, 0, 0, 0)
+        info_box_layout.setSpacing(0)
+        info_layout = QFormLayout()
+        info_layout.setContentsMargins(0, 0, 0, 0)
+        info_layout.setVerticalSpacing(0)
+        info_layout.setHorizontalSpacing(0)
+        text_layout = QFormLayout()
+        text_layout.setContentsMargins(0, 0, 0, 0)
+        text_layout.setVerticalSpacing(0)
+        text_layout.setHorizontalSpacing(0)
         self.id_label = QLabel("-")
         self.ref_label = QLabel("-")
         self.source_label = QLabel("-")
@@ -107,41 +124,51 @@ class ReviewPanel(QWidget):
         self.status_combo = QComboBox()
         for value in STATUS_VALUES:
             self.status_combo.addItem(STATUS_LABELS.get(value, value), value)
-        self.status_combo.setMaximumWidth(220)
+        self.status_combo.setMaximumWidth(scale(220))
         self.priority_combo = QComboBox()
         self.priority_combo.addItem("Normal", 1)
         self.priority_combo.addItem("Sık", 2)
         self.priority_combo.addItem("Daha sık", 3)
         self.priority_combo.setCurrentIndex(0)
-        self.priority_combo.setFixedWidth(140)
+        self.priority_combo.setFixedWidth(scale(140))
         self.notes_edit = QTextEdit()
-        self.notes_edit.setFixedHeight(44)
-        self.notes_edit.setMaximumHeight(44)
-        self.notes_edit.setMaximumWidth(260)
+        self.notes_edit.setFixedHeight(scale(22))
+        self.notes_edit.setMaximumHeight(scale(22))
+        self.notes_edit.setMaximumWidth(scale(260))
         self.book_ref_tr_edit = QTextEdit()
-        self.book_ref_tr_edit.setFixedHeight(50)
+        self.book_ref_tr_edit.setFixedHeight(scale(25))
         self.book_ref_en_edit = QTextEdit()
-        self.book_ref_en_edit.setFixedHeight(50)
+        self.book_ref_en_edit.setFixedHeight(scale(25))
         self.ayah_source_edit = QTextEdit()
-        self.ayah_source_edit.setFixedHeight(72)
+        self.ayah_source_edit.setFixedHeight(scale(36))
         self.ayah_source_edit.setReadOnly(True)
         self.hadith_quality_edit = QTextEdit()
-        self.hadith_quality_edit.setFixedHeight(56)
+        self.hadith_quality_edit.setFixedHeight(scale(28))
         self.hadith_quality_edit.setReadOnly(True)
         self.hadith_source_edit = QTextEdit()
-        self.hadith_source_edit.setFixedHeight(56)
+        self.hadith_source_edit.setFixedHeight(scale(28))
         self.hadith_source_edit.setReadOnly(True)
         self.esma_name_edit = QTextEdit()
-        self.esma_name_edit.setMinimumHeight(80)
+        self.esma_name_edit.setFixedHeight(scale(40))
+        self.esma_name_edit.setMaximumHeight(scale(40))
         self.ar_edit = QTextEdit()
         self.tr_edit = QTextEdit()
         self.en_edit = QTextEdit()
         self.tr_alt_edit = QTextEdit()
         self.en_alt_edit = QTextEdit()
+        self._expanding_text_edits = [
+            self.ar_edit,
+            self.tr_edit,
+            self.en_edit,
+            self.tr_alt_edit,
+            self.en_alt_edit,
+        ]
         for widget in (self.ar_edit, self.tr_edit, self.en_edit):
-            widget.setMinimumHeight(120)
+            widget.setFixedHeight(TEXT_EDITOR_BASE_HEIGHT)
+            widget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         for widget in (self.tr_alt_edit, self.en_alt_edit):
-            widget.setMinimumHeight(120)
+            widget.setFixedHeight(TEXT_EDITOR_BASE_HEIGHT)
+            widget.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         self.tr_main_check = self._build_translation_check("Ali Bulaç")
         self.tr_alt_check = self._build_translation_check("Diyanet")
         self.en_main_check = self._build_translation_check("Saheeh International")
@@ -170,9 +197,10 @@ class ReviewPanel(QWidget):
         self.ayah_source_row = self._labeled_editor("Ayet kaynak ozeti", self.ayah_source_edit)
         self.esma_name_row = self._labeled_editor_with_font("Esma adı / Arapça isim", self.esma_name_font_spin, self.esma_name_edit)
         self.hadith_summary_row = QWidget()
+        self.hadith_summary_row.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         hadith_summary_layout = QHBoxLayout(self.hadith_summary_row)
         hadith_summary_layout.setContentsMargins(0, 0, 0, 0)
-        hadith_summary_layout.setSpacing(12)
+        hadith_summary_layout.setSpacing(0)
         hadith_summary_layout.addWidget(self._labeled_editor("Hadis eşleşme özeti", self.hadith_quality_edit))
         hadith_summary_layout.addWidget(self._labeled_editor("Hadis kaynak ozeti", self.hadith_source_edit))
         self.tr_translation_row = self._two_editor_choice_row(
@@ -199,7 +227,7 @@ class ReviewPanel(QWidget):
         identity_row = QWidget()
         identity_layout = QHBoxLayout(identity_row)
         identity_layout.setContentsMargins(0, 0, 0, 0)
-        identity_layout.setSpacing(16)
+        identity_layout.setSpacing(0)
         identity_layout.addWidget(QLabel("Kimlik"))
         identity_layout.addWidget(self.id_label, 1)
         identity_layout.addWidget(QLabel("Referans"))
@@ -211,7 +239,7 @@ class ReviewPanel(QWidget):
         priority_notes_row = QWidget()
         priority_notes_layout = QHBoxLayout(priority_notes_row)
         priority_notes_layout.setContentsMargins(0, 0, 0, 0)
-        priority_notes_layout.setSpacing(10)
+        priority_notes_layout.setSpacing(0)
         priority_notes_layout.addWidget(QLabel("Öncelik"))
         priority_notes_layout.addWidget(self.priority_combo)
         priority_notes_layout.addStretch(1)
@@ -221,28 +249,50 @@ class ReviewPanel(QWidget):
         info_layout.addRow("Ayet kaynak", self.ayah_source_row)
         info_layout.addRow("Hadis özeti", self.hadith_summary_row)
         info_layout.addRow(self.esma_name_row)
-        info_layout.addRow("Arapça metin", self._editor_with_font_row(self.ar_font_spin, self.ar_edit))
-        info_layout.addRow("Türkçe metin", self.tr_translation_row)
-        info_layout.addRow("İngilizce metin", self.en_translation_row)
+        text_layout.addRow("Arapça metin", self._editor_with_font_row(self.ar_font_spin, self.ar_edit))
+        text_layout.addRow("Türkçe metin", self.tr_translation_row)
+        text_layout.addRow("İngilizce metin", self.en_translation_row)
+        info_box_layout.addLayout(info_layout)
+        info_box_layout.addLayout(text_layout, 1)
         layout.addWidget(info_box, 1)
 
         buttons = QHBoxLayout()
-        buttons.setSpacing(10)
+        buttons.setSpacing(0)
         self.save_btn = QPushButton("Kaydet")
         self.save_btn.clicked.connect(self._save_current)
         self.approve_btn = QPushButton("Onayla")
         self.approve_btn.clicked.connect(lambda: self._save_current("approved"))
+        self.keep_draft_btn = QPushButton("Yayına alma / Taslak bırak")
+        self.keep_draft_btn.clicked.connect(lambda: self._save_current("draft", move_next=True))
         self.unapprove_btn = QPushButton("Onayi kaldir")
         self.unapprove_btn.clicked.connect(lambda: self._save_current("needs_review"))
+        self.delete_btn = QPushButton("Sil")
+        self.delete_btn.clicked.connect(self._delete_current_archive)
         buttons.addWidget(self.save_btn)
         buttons.addWidget(self.approve_btn)
+        buttons.addWidget(self.keep_draft_btn)
         buttons.addWidget(self.unapprove_btn)
+        buttons.addWidget(self.delete_btn)
         layout.addLayout(buttons)
+
+    def resizeEvent(self, event) -> None:
+        super().resizeEvent(event)
+        if self._text_resize_base_height is None:
+            self._text_resize_base_height = self.height()
+        extra_height = max(0, self.height() - self._text_resize_base_height)
+        editor_height = TEXT_EDITOR_BASE_HEIGHT + (extra_height // 3)
+        for editor in self._expanding_text_edits:
+            editor.setFixedHeight(editor_height)
+            editor.updateGeometry()
 
     def refresh(self) -> None:
         self.repository.reload()
         self._current_kind = str(self.kind_combo.currentData() or "ayah")
-        self._records = self.repository.list_archive_records(self._current_kind)
+        self._records = [
+            record
+            for record in self.repository.list_archive_records(self._current_kind)
+            if record.status != "approved"
+        ]
         cursor = min(self.repository.get_cursor(self._current_kind), max(0, len(self._records) - 1))
         self.repository.set_cursor(self._current_kind, cursor)
         self.summary_label.setText(f"{len(self._records)} kayıt | cursor: {cursor + 1 if self._records else 0}")
@@ -341,10 +391,11 @@ class ReviewPanel(QWidget):
             self.hadith_quality_edit.setPlainText("")
             self.hadith_source_edit.setPlainText("")
 
-    def _save_current(self, force_status: str | None = None) -> None:
+    def _save_current(self, force_status: str | None = None, move_next: bool = False) -> None:
         record = self._current_record
         if record is None:
             return
+        cursor = self.repository.get_cursor(self._current_kind)
         status = force_status or str(self.status_combo.currentData() or "needs_review")
         updated = replace(
             record,
@@ -380,6 +431,8 @@ class ReviewPanel(QWidget):
                 updated,
                 approved_at=datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
             )
+        if updated.status != "approved" and updated.approved_at:
+            updated = replace(updated, approved_at="")
         try:
             self.repository.save_record(updated)
         except StorageConflictError as exc:
@@ -387,6 +440,34 @@ class ReviewPanel(QWidget):
             return
         except Exception as exc:
             QMessageBox.critical(self, "Kaydetme hatası", str(exc))
+            return
+        if move_next:
+            self.repository.set_cursor(self._current_kind, cursor + 1)
+        self.refresh()
+
+    def _delete_current_archive(self) -> None:
+        record = self._current_record
+        if record is None:
+            return
+        if self._current_kind not in {"ayah", "hadith"}:
+            QMessageBox.information(self, "Sil", "Silme işlemi ayet ve hadis kayıtları içindir.")
+            return
+        answer = QMessageBox.question(
+            self,
+            "Arşiv kaydını sil",
+            f"Bu kayıt arşivden silinecek:\n{record.ref or record.id}\n\nDevam edilsin mi?",
+            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.No,
+        )
+        if answer != QMessageBox.Yes:
+            return
+        try:
+            self.repository.delete_archive_record(record)
+        except StorageConflictError as exc:
+            QMessageBox.critical(self, "Hash catismasi", str(exc))
+            return
+        except Exception as exc:
+            QMessageBox.critical(self, "Silme hatası", str(exc))
             return
         self.refresh()
 
@@ -432,10 +513,10 @@ class ReviewPanel(QWidget):
 
     def _build_font_spin(self) -> QSpinBox:
         spin = QSpinBox()
-        spin.setRange(14, 36)
-        spin.setValue(14)
+        spin.setRange(13, 36)
+        spin.setValue(13)
         spin.setSuffix(" pt")
-        spin.setMaximumWidth(90)
+        spin.setMaximumWidth(scale(90))
         return spin
 
     def _bind_font_size(self, spin: QSpinBox, editor: QTextEdit) -> None:
@@ -444,10 +525,13 @@ class ReviewPanel(QWidget):
 
     def _editor_with_font_row(self, spin: QSpinBox, editor: QTextEdit) -> QWidget:
         panel = QWidget()
+        panel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         panel_layout = QVBoxLayout(panel)
         panel_layout.setContentsMargins(0, 0, 0, 0)
+        panel_layout.setSpacing(0)
         top = QHBoxLayout()
         top.setContentsMargins(0, 0, 0, 0)
+        top.setSpacing(0)
         top.addWidget(QLabel("Yazi boyutu"))
         top.addWidget(spin)
         top.addStretch(1)
@@ -457,14 +541,16 @@ class ReviewPanel(QWidget):
 
     def _labeled_editor_with_font(self, title: str, spin: QSpinBox, editor: QTextEdit) -> QWidget:
         panel = QWidget()
+        panel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         panel.setStyleSheet("background:#fafafa; border:1px solid #d8d8d8; border-radius:8px;")
         panel_layout = QVBoxLayout(panel)
-        panel_layout.setContentsMargins(8, 8, 8, 8)
-        panel_layout.setSpacing(8)
+        panel_layout.setContentsMargins(0, 0, 0, 0)
+        panel_layout.setSpacing(0)
         top = QHBoxLayout()
         top.setContentsMargins(0, 0, 0, 0)
+        top.setSpacing(0)
         title_label = QLabel(title)
-        title_label.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        title_label.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         top.addWidget(title_label)
         top.addStretch(1)
         top.addWidget(QLabel("Yazi boyutu"))
@@ -485,9 +571,10 @@ class ReviewPanel(QWidget):
         right_editor: QTextEdit,
     ) -> QWidget:
         row = QWidget()
+        row.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         row_layout = QHBoxLayout(row)
         row_layout.setContentsMargins(0, 0, 0, 0)
-        row_layout.setSpacing(12)
+        row_layout.setSpacing(0)
         left_panel = self._choice_editor_panel(left_title, left_check, left_spin, left_editor)
         right_panel = self._choice_editor_panel(right_title, right_check, right_spin, right_editor)
         row.left_panel = left_panel
@@ -498,15 +585,16 @@ class ReviewPanel(QWidget):
 
     def _choice_editor_panel(self, title: str, check: QCheckBox, spin: QSpinBox, editor: QTextEdit) -> QWidget:
         panel = QWidget()
+        panel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         panel.setStyleSheet("background:#fafafa; border:1px solid #d8d8d8; border-radius:8px;")
         panel_layout = QVBoxLayout(panel)
-        panel_layout.setContentsMargins(8, 8, 8, 8)
-        panel_layout.setSpacing(8)
+        panel_layout.setContentsMargins(0, 0, 0, 0)
+        panel_layout.setSpacing(0)
         title_row = QHBoxLayout()
         title_row.setContentsMargins(0, 0, 0, 0)
-        title_row.setSpacing(8)
+        title_row.setSpacing(0)
         label = QLabel(title)
-        label.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        label.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         panel.title_label = label
         title_row.addWidget(check)
         title_row.addWidget(label)
@@ -519,12 +607,13 @@ class ReviewPanel(QWidget):
 
     def _labeled_editor(self, label: str, editor: QTextEdit) -> QWidget:
         panel = QWidget()
+        panel.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Fixed)
         panel.setStyleSheet("background:#fafafa; border:1px solid #d8d8d8; border-radius:8px;")
         panel_layout = QVBoxLayout(panel)
-        panel_layout.setContentsMargins(8, 8, 8, 8)
-        panel_layout.setSpacing(8)
+        panel_layout.setContentsMargins(0, 0, 0, 0)
+        panel_layout.setSpacing(0)
         title = QLabel(label)
-        title.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        title.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         panel_layout.addWidget(title)
         panel_layout.addWidget(editor)
         return panel
@@ -532,12 +621,12 @@ class ReviewPanel(QWidget):
     def _build_status_check(self, label: str) -> QCheckBox:
         check = QCheckBox(label)
         check.setEnabled(False)
-        check.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        check.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         return check
 
     def _build_translation_check(self, label: str) -> QCheckBox:
         check = QCheckBox(label)
-        check.setStyleSheet("font-size: 14pt; font-weight: 600;")
+        check.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         return check
 
     def _normalize_priority(self, value: int) -> int:

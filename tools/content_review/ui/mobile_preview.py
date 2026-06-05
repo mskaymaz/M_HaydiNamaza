@@ -18,6 +18,7 @@ from PySide6.QtWidgets import (
 
 from core.approved_preview import ApprovedContentNavigator, MISSING_TEXT, MobilePreviewItem
 from core.storage import ContentRepository
+from ui.scale import pt, scale
 
 
 class MobilePreviewCard(QFrame):
@@ -33,7 +34,7 @@ class MobilePreviewCard(QFrame):
         )
 
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(10, 8, 10, 8)
+        layout.setContentsMargins(scale(10), scale(8), scale(10), scale(8))
         layout.setSpacing(0)
 
         scroll = QScrollArea()
@@ -45,7 +46,7 @@ class MobilePreviewCard(QFrame):
         content = QWidget()
         self._content_layout = QVBoxLayout(content)
         self._content_layout.setContentsMargins(0, 0, 0, 0)
-        self._content_layout.setSpacing(8)
+        self._content_layout.setSpacing(scale(8))
 
         self.arabic_title_section, self.arabic_title_label = self._build_section()
         self.arabic_section, self.arabic_label = self._build_section()
@@ -55,8 +56,8 @@ class MobilePreviewCard(QFrame):
         self.english_section, self.english_label = self._build_section()
         self.footer_section = QWidget()
         footer_layout = QVBoxLayout(self.footer_section)
-        footer_layout.setContentsMargins(0, 2, 0, 0)
-        footer_layout.setSpacing(4)
+        footer_layout.setContentsMargins(0, scale(2), 0, 0)
+        footer_layout.setSpacing(scale(4))
         self.reference_label = self._build_text_label()
         self.source_label = self._build_text_label()
         footer_layout.addWidget(self.reference_label)
@@ -92,13 +93,13 @@ class MobilePreviewCard(QFrame):
             self.english_section.setVisible(False)
             self.footer_section.setVisible(True)
             self.arabic_label.setText(
-                self._format_html(empty_message, font_size=18, color="#FFFFFF", italic=True)
+                self._format_html(empty_message, font_size=pt(18), color="#FFFFFF", italic=True)
             )
             self.reference_label.setText(
-                self._format_html(MISSING_TEXT, font_size=17, color="#F9A825", weight=600)
+                self._format_html(MISSING_TEXT, font_size=pt(17), color="#F9A825", weight=600)
             )
             self.source_label.setText(
-                self._format_html(MISSING_TEXT, font_size=15, color="#FFFFFF", italic=True, weight=500)
+                self._format_html(MISSING_TEXT, font_size=pt(15), color="#FFFFFF", italic=True, weight=500)
             )
             self._sync_label_heights()
             return
@@ -119,7 +120,7 @@ class MobilePreviewCard(QFrame):
         self.arabic_title_label.setText(
             self._format_html(
                 item.arabic_title_text,
-                font_size=24,
+                font_size=pt(24),
                 color="#FFFFFF",
                 line_height=1.15,
                 direction="rtl",
@@ -129,7 +130,7 @@ class MobilePreviewCard(QFrame):
         self.arabic_label.setText(
             self._format_html(
                 item.arabic_text,
-                font_size=19,
+                font_size=pt(19),
                 color="#FFFFFF",
                 line_height=1.22,
                 direction="rtl",
@@ -138,7 +139,7 @@ class MobilePreviewCard(QFrame):
         self.turkish_label.setText(
             self._format_html(
                 item.turkish_text,
-                font_size=17,
+                font_size=pt(17),
                 color="#EAF4EC",
                 italic=True,
                 line_height=1.18,
@@ -147,17 +148,17 @@ class MobilePreviewCard(QFrame):
         self.english_label.setText(
             self._format_html(
                 item.english_text,
-                font_size=17,
+                font_size=pt(17),
                 color="#EAF4EC",
                 line_height=1.18,
             )
         )
         if item.kind != "esma":
             self.reference_label.setText(
-                self._format_html(item.reference_text, font_size=17, color="#F9A825", weight=600)
+                self._format_html(item.reference_text, font_size=pt(17), color="#F9A825", weight=600)
             )
             self.source_label.setText(
-                self._format_html(item.source_text, font_size=15, color="#FFFFFF", italic=True, weight=500)
+                self._format_html(item.source_text, font_size=pt(15), color="#FFFFFF", italic=True, weight=500)
             )
         self._sync_label_heights()
 
@@ -173,7 +174,7 @@ class MobilePreviewCard(QFrame):
     @staticmethod
     def _build_divider() -> QFrame:
         divider = QFrame()
-        divider.setFixedHeight(1)
+        divider.setFixedHeight(scale(1))
         divider.setStyleSheet("background: rgba(255, 255, 255, 0.22); border: none;")
         divider.setVisible(False)
         return divider
@@ -207,7 +208,7 @@ class MobilePreviewCard(QFrame):
         document.setDefaultFont(label.font())
         document.setHtml(label.text())
         document.setTextWidth(width)
-        label.setMinimumHeight(int(document.size().height()) + 6)
+        label.setMinimumHeight(int(document.size().height()) + scale(6))
 
     @staticmethod
     def _format_html(
@@ -246,7 +247,7 @@ class MobilePreviewWindow(QWidget):
         self._type_buttons: dict[str, QPushButton] = {}
         self._language_buttons: dict[str, QPushButton] = {}
         self.setWindowTitle("Mobil Önizleme / Mobile Preview")
-        self.resize(540, 1020)
+        self.resize(scale(540), scale(1020))
         self._build_ui()
         self.refresh()
 
@@ -259,15 +260,15 @@ class MobilePreviewWindow(QWidget):
 
     def _build_ui(self) -> None:
         root = QVBoxLayout(self)
-        root.setContentsMargins(18, 18, 18, 18)
-        root.setSpacing(12)
+        root.setContentsMargins(scale(18), scale(18), scale(18), scale(18))
+        root.setSpacing(scale(12))
 
         title = QLabel("Mobil Önizleme / Mobile Preview")
-        title.setStyleSheet("font-size: 18pt; font-weight: 700;")
+        title.setStyleSheet(f"font-size: {pt(18)}pt; font-weight: 700;")
         root.addWidget(title)
 
         selector_row = QHBoxLayout()
-        selector_row.setSpacing(8)
+        selector_row.setSpacing(scale(8))
         self._type_buttons["ayah"] = self._build_selector_button("Ayet")
         self._type_buttons["hadith"] = self._build_selector_button("Hadis")
         self._type_buttons["esma"] = self._build_selector_button("Esmaül Hüsna")
@@ -279,18 +280,18 @@ class MobilePreviewWindow(QWidget):
         root.addLayout(selector_row)
 
         control_row = QHBoxLayout()
-        control_row.setSpacing(10)
+        control_row.setSpacing(scale(10))
         self.kind_badge = QLabel("-")
         self.kind_badge.setAlignment(Qt.AlignCenter)
-        self.kind_badge.setFixedHeight(34)
-        self.kind_badge.setMinimumWidth(110)
+        self.kind_badge.setFixedHeight(scale(34))
+        self.kind_badge.setMinimumWidth(scale(110))
         self.kind_badge.setStyleSheet(
-            "background: #1F7A3E; color: white; border-radius: 17px; font-size: 13pt; font-weight: 700; padding: 0 12px;"
+            f"background: #1F7A3E; color: white; border-radius: {scale(17)}px; font-size: {pt(13)}pt; font-weight: 700; padding: 0 {scale(12)}px;"
         )
         self.position_label = QLabel("0 / 0")
-        self.position_label.setStyleSheet("font-size: 13pt; font-weight: 600;")
+        self.position_label.setStyleSheet(f"font-size: {pt(13)}pt; font-weight: 600;")
         self.start_edit = QLineEdit()
-        self.start_edit.setMinimumWidth(150)
+        self.start_edit.setMinimumWidth(scale(150))
         self.start_edit.returnPressed.connect(self._jump_to_value)
         self.start_btn = QPushButton("Git")
         self.start_btn.clicked.connect(self._jump_to_value)
@@ -311,37 +312,37 @@ class MobilePreviewWindow(QWidget):
         root.addLayout(control_row)
 
         phone_shell = QFrame()
-        phone_shell.setFixedSize(430, 860)
+        phone_shell.setFixedSize(scale(430), scale(860))
         phone_shell.setStyleSheet(
-            "background: #171717; border: 2px solid #2F2F2F; border-radius: 34px;"
+            f"background: #171717; border: {scale(2)}px solid #2F2F2F; border-radius: {scale(34)}px;"
         )
         phone_layout = QVBoxLayout(phone_shell)
-        phone_layout.setContentsMargins(14, 18, 14, 18)
+        phone_layout.setContentsMargins(scale(14), scale(18), scale(14), scale(18))
 
         screen = QFrame()
-        screen.setStyleSheet("background: #F3EFE2; border-radius: 26px;")
+        screen.setStyleSheet(f"background: #F3EFE2; border-radius: {scale(26)}px;")
         screen_layout = QVBoxLayout(screen)
-        screen_layout.setContentsMargins(18, 40, 18, 24)
-        screen_layout.setSpacing(14)
+        screen_layout.setContentsMargins(scale(18), scale(40), scale(18), scale(24))
+        screen_layout.setSpacing(scale(14))
 
         preview_panel = QFrame()
         preview_panel.setStyleSheet(
-            "background: #93BFA2; border: 1px solid rgba(31, 122, 62, 0.35); border-radius: 14px;"
+            f"background: #93BFA2; border: {scale(1)}px solid rgba(31, 122, 62, 0.35); border-radius: {scale(14)}px;"
         )
         preview_layout = QVBoxLayout(preview_panel)
-        preview_layout.setContentsMargins(12, 10, 12, 10)
-        preview_layout.setSpacing(10)
+        preview_layout.setContentsMargins(scale(12), scale(10), scale(12), scale(10))
+        preview_layout.setSpacing(scale(10))
 
         top_row = QHBoxLayout()
         top_row.setContentsMargins(0, 0, 0, 0)
-        top_row.setSpacing(8)
+        top_row.setSpacing(scale(8))
         self.heading_label = QLabel("-")
         self.heading_label.setAlignment(Qt.AlignCenter)
-        self.heading_label.setStyleSheet("font-size: 20pt; font-weight: 700; color: #111111;")
+        self.heading_label.setStyleSheet(f"font-size: {pt(20)}pt; font-weight: 700; color: #111111;")
         top_row.addWidget(self.heading_label, 1)
         self._language_buttons["tr"] = self._build_toggle_chip("TR")
         self._language_buttons["en"] = self._build_toggle_chip("EN")
-        self._language_buttons["ar"] = self._build_toggle_chip("عربي", font_size=10)
+        self._language_buttons["ar"] = self._build_toggle_chip("عربي", font_size=pt(10))
         self._language_buttons["tr"].clicked.connect(lambda: self._toggle_language("tr"))
         self._language_buttons["en"].clicked.connect(lambda: self._toggle_language("en"))
         self._language_buttons["ar"].clicked.connect(lambda: self._toggle_language("ar"))
@@ -361,7 +362,7 @@ class MobilePreviewWindow(QWidget):
         self.meta_label = QLabel("-")
         self.meta_label.setWordWrap(True)
         self.meta_label.setAlignment(Qt.AlignCenter)
-        self.meta_label.setStyleSheet("font-size: 11pt; color: #5A5A5A;")
+        self.meta_label.setStyleSheet(f"font-size: {pt(11)}pt; color: #5A5A5A;")
         root.addWidget(self.meta_label)
 
     def _select_type(self, kind: str) -> None:
@@ -406,7 +407,7 @@ class MobilePreviewWindow(QWidget):
         for code, button in self._language_buttons.items():
             selected = states[code]
             button.setChecked(selected)
-            button.setStyleSheet(self._toggle_style(selected, font_size=10 if code == "ar" else 11))
+            button.setStyleSheet(self._toggle_style(selected, font_size=pt(10) if code == "ar" else pt(11)))
 
     def _sync_view(self) -> None:
         item = self._navigator.current_item()
@@ -454,17 +455,18 @@ class MobilePreviewWindow(QWidget):
     def _build_selector_button(label: str) -> QPushButton:
         button = QPushButton(label)
         button.setCheckable(True)
-        button.setMinimumHeight(36)
+        button.setMinimumHeight(scale(36))
         return button
 
     @staticmethod
-    def _build_toggle_chip(label: str, font_size: int = 11) -> QPushButton:
+    def _build_toggle_chip(label: str, font_size: int | None = None) -> QPushButton:
         chip = QPushButton(label)
+        resolved_font_size = font_size if font_size is not None else pt(11)
         chip.setCheckable(True)
-        chip.setFixedSize(36, 36)
+        chip.setFixedSize(scale(36), scale(36))
         chip.setCursor(Qt.PointingHandCursor)
         chip.setFocusPolicy(Qt.NoFocus)
-        chip.setStyleSheet(MobilePreviewWindow._toggle_style(True, font_size=font_size))
+        chip.setStyleSheet(MobilePreviewWindow._toggle_style(True, font_size=resolved_font_size))
         return chip
 
     @staticmethod
@@ -472,12 +474,12 @@ class MobilePreviewWindow(QWidget):
         if selected:
             return (
                 "background: #121212; color: white; border: 2px solid #121212; "
-                "border-radius: 18px; font-weight: 700;"
+                f"border-radius: {scale(18)}px; font-weight: 700;"
                 f"font-size: {font_size}pt;"
             )
         return (
             "background: white; color: #111111; border: 1.5px solid #FFFFFF; "
-            "border-radius: 18px; font-weight: 700;"
+            f"border-radius: {scale(18)}px; font-weight: 700;"
             f"font-size: {font_size}pt;"
         )
 
@@ -486,9 +488,9 @@ class MobilePreviewWindow(QWidget):
         if selected:
             return (
                 "background: #1F7A3E; color: white; border: 1px solid #1F7A3E; "
-                "border-radius: 10px; font-size: 12pt; font-weight: 700; padding: 6px 12px;"
+                f"border-radius: {scale(10)}px; font-size: {pt(12)}pt; font-weight: 700; padding: {scale(6)}px {scale(12)}px;"
             )
         return (
             "background: #F1F1F1; color: #222222; border: 1px solid #D0D0D0; "
-            "border-radius: 10px; font-size: 12pt; font-weight: 600; padding: 6px 12px;"
+            f"border-radius: {scale(10)}px; font-size: {pt(12)}pt; font-weight: 600; padding: {scale(6)}px {scale(12)}px;"
         )

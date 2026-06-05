@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "content_version": "tool-20260603_165018",
+  "content_version": "tool-20260605_162302",
   "type": "hadith",
   "records": [
     {
@@ -13,8 +13,8 @@
       "priority": 2,
       "approvedAt": "2026-06-03T13:39:28+00:00",
       "hadith_number": 55,
-      "book_reference_tr": "",
-      "book_reference_en": ""
+      "book_reference_tr": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)",
+      "book_reference_en": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)"
     },
     {
       "id": "hadith_000444",
@@ -23,11 +23,89 @@
       "ar": "وعن أبي سعيد الخدري، رضي الله عنه ، أن رسول الله صلى الله عليه وسلم قال‏:‏ ‏\n\"‏إذا وضعت الجنازة واحتملها الناس أو الرجال على أعناقهم، فإن كانت صالحة قالت‏:‏ فدموني قدموني، وإن كانت غير صالحة، قالت يا ويلها‏!‏ أين تذهبون بها‏؟‏ يسمع صوته كل شئ إلا الإنسان، ولو سمعه صعق‏\"‏ ‏(‏‏(‏رواه البخاري‏)‏‏)‏‏.‏",
       "tr": "Ebû Saîd el-Hudrî’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nCenaze tabuta konulup da insanlar onu omuzlarına aldığı zaman, ölen kimse salihlerden ise “Beni bir an evvel yerime ulaştırın!” der. Eğer salihlerden değilse “Eyvah, beni nereye götürüyorsunuz?” der ve onun sesini insanlardan başka her şey duyar. Eğer insan bu sesi duysaydı, (dehşetten) bayılıp düşerdi.",
       "en": "Abu Sa'id Al-Khudri (May Allah be pleased with him) reported:\nMessenger of Allah (ﷺ) said, \"When a dead body is placed on a bier and men carry it on their shoulders, if the deceased was pious, it (the corpse) will say: 'Take me in haste'; but if he was not, it will say (to its bearers): 'Woe to it. Where are you taking it?' Everything except man hears its voice. Had a human being heard its voice, he would have surely died\".",
-      "priority": 2,
+      "priority": 1,
       "approvedAt": "2026-06-03T13:50:17+00:00",
       "hadith_number": 444,
-      "book_reference_tr": "",
-      "book_reference_en": ""
+      "book_reference_tr": "(B1314 Buhârî, Cenâiz, 50)",
+      "book_reference_en": "(B1314 Buhârî, Cenâiz, 50)"
+    },
+    {
+      "id": "hadith_001729",
+      "kind": "hadith",
+      "ref": "riyazussalihin/1729",
+      "ar": "عن جابر رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\n\"‏لا يسأل بوجه الله إلا الجنة‏\"‏ ‏(‏‏(‏رواه أبو داود‏)‏‏)‏‏.‏",
+      "tr": "Câbir’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur:\nAllah’ın rızası ile sadece cennet istenir.",
+      "en": "Jabir (May Allah be pleased with him) said:\nThe Messenger of Allah (ﷺ) said, \"No one should ask in the Face of Allah for anything except Jannah.\".",
+      "priority": 1,
+      "approvedAt": "2026-06-05T13:01:39+00:00",
+      "hadith_number": 1729,
+      "book_reference_tr": "(D1671 Ebû Dâvûd, Zekât, 37)",
+      "book_reference_en": "(D1671 Ebû Dâvûd, Zekât, 37)"
+    },
+    {
+      "id": "hadith_001535",
+      "kind": "hadith",
+      "ref": "riyazussalihin/1535",
+      "ar": "وعن كعب بن مالك رضي الله عنه في حديثه الطويل في قصة توبته وقد سبق في بابه التوبة‏.‏ قال‏:‏ قال النبي صلى الله عليه وسلم وهو جالس في القوم بتبوك‏:‏ ‏\"‏ما فعل كعب مالك‏؟‏ فقال رجل من بني سلمة‏:‏ يا رسول الله حبسه برداه، والنظر في عطفيه فقال معاذ بن جبل رضي الله عنه بئس ما قلت والله يا رسول الله ما علمنا عليه إلا خيرًا، فسكت رسول الله صلى الله عليه وسلم‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏‏.‏ \"عِطْفَاهُ\"جانِباهُ، وهو إشارةٌ إلى إعجابِهِ بنفسهِ.",
+      "tr": "Ka’b b. Mâlik’ten (ra) rivayet edildiğine göre, tövbe bahsinde geçen ve onun tövbe edişini anlatan uzun bir hadiste o şöyle demiştir:\nResûlullah Tebük’te cemaat içinde otururken:\n–Ka’b b. Mâlik ne yaptı, demişti. Bunun üzerine Benî Selime’den bir adam:\n–Yâ Resûlullah! Giysilerine ve boyuna posuna bakıp gururlanması, onu (cihada çıkmaktan) alıkoydu, deyince Muâz b. Cebel (ra) ona:\n–Ne kötü bir söz söyledin, dedi. (Sonra Hz. Peygamber’e dönerek), vallahi ey Allah’ın Resûlü, Ka’b hakkında iyilikten başka bir şey bilmiyoruz, diye onu aklaması üzerine, Resûl-i Ekrem (hoş görerek) sustu.",
+      "en": "Ka'b bin Malik (May Allah be pleased with him) said in his long story about his repentance:\nThe Prophet (ﷺ) was sitting among the people in Tabuk. He (ﷺ) said, \"What happened to Ka'b bin Malik?\" A person from the tribe of Banu Salamah said: \"O Messenger of Allah! the embellishment of his cloak and an appreciation of his sides have allured him, and he was thus detained.\" Mu'adh bin Jabal (May Allah be pleased with him) said: \"Woe be upon you! You have passed indecent remarks. O Messenger of Allah! by Allah, we know nothing about him but good.\" The Messenger of Allah (ﷺ) remained silent.",
+      "priority": 1,
+      "approvedAt": "2026-06-05T13:07:13+00:00",
+      "hadith_number": 1535,
+      "book_reference_tr": "(B4418 Buhârî, Megâzî, 80; M7016 Müslim, Tevbe, 53)",
+      "book_reference_en": "(B4418 Buhârî, Megâzî, 80; M7016 Müslim, Tevbe, 53)"
+    },
+    {
+      "id": "hadith_001218",
+      "kind": "hadith",
+      "ref": "riyazussalihin/1218",
+      "ar": "وعن جرير بن عبد الله، رضي الله عنه، قال‏:‏ بايعت النبي، صلى الله عليه وسلم، على إقام الصلاة، وإيتاء الزكاة، والنصح لكل مسلم‏.‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+      "tr": "Cerîr b. Abdullah’tan (ra) rivayet edildiğine göre o, şöyle demiştir:\nBen namaz kılmak, zekât vermek ve bütün Müslümanlara samimi davranmak üzere Peygamber’e biat ettim.",
+      "en": "Jarir bin 'Abdullah (May Allah be pleased with him) reported:\nI pledged allegiance to the Prophet (ﷺ) to establish Salat, to pay the Zakat and to have the welfare of every Muslim at heart.",
+      "priority": 1,
+      "approvedAt": "2026-06-05T13:07:37+00:00",
+      "hadith_number": 1218,
+      "book_reference_tr": "(B57 Buhârî, Îmân, 42; M199 Müslim, Îmân, 97)",
+      "book_reference_en": "(B57 Buhârî, Îmân, 42; M199 Müslim, Îmân, 97)"
+    },
+    {
+      "id": "hadith_001075",
+      "kind": "hadith",
+      "ref": "riyazussalihin/1075",
+      "ar": "عن عثمان بن عفان رضي الله عنه قال‏:‏ سمعت رسول الله صلى الله عليه وسلم يقول‏:‏ ‏\"‏من صلى العشاء في جماعة، فكأنما قام نصف الليل ومن صلى الصبح في جماعة، فكانما صلى الليل كله‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏\nوفي رواية الترمذي عن عثمان بن عفان رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم ‏:‏ ‏\"‏من شهد العشاء في جماعة كان له قيام نصف ليلة، ومن شهد العشاء والفجر في جماعة، كان له كقيام ليلة‏\"‏ ‏(‏‏(‏قال الترمذي حديث حسن صحيح‏)‏‏)‏",
+      "tr": "Osman b. Affân’ın (ra) işittiğine göre Resûlullah :\nYatsı namazını cemaatle kılan bir kimse, gece yarısına kadar ibadet etmiş gibi olur. Sabah namazını cemaatle kılan bir kimse de, bütün geceyi ibadetle geçirmiş gibi sevap kazanır, buyurmuştur.\nTirmizî’nin Osman b. Affân’dan (ra) rivayeti ise şöyledir:\nResûlullah “Yatsı namazını cemaatle kılan kimse, gece yarısına kadar ibadet etmiş gibi olur, yatsı ve sabah namazlarını cemaatle kılan kimse ise, bütün geceyi ibadetle geçirmiş gibi sevap kazanır.” buyurdu.",
+      "en": "'Uthman bin 'Affan (May Allah be pleased with him) reported:\nI heard the Messenger of Allah (ﷺ) saying: \"One who performs 'Isha' prayer in congregation, is as if he has performed Salat for half of the night. And one who performs the Fajr prayer in congregation, is as if he has performed Salat the whole night.\"The narration of At-Tirmidhi says: 'Uthman bin Affan (May Allah be pleased with him) narrated that he had heard the Messenger of Allah (ﷺ) saying: \"He who attends 'Isha' in congregation, is as if he has performed Salat for half of the night; and he who attends 'Isha' and Fajr prayers in congregation, is as if he has performed Salat for the whole night.\"",
+      "priority": 1,
+      "approvedAt": "2026-06-05T13:08:59+00:00",
+      "hadith_number": 1075,
+      "book_reference_tr": "(M1491 Müslim, Mesâcid, 260); (T221 Tirmizî, Salât, 51)",
+      "book_reference_en": "(M1491 Müslim, Mesâcid, 260); (T221 Tirmizî, Salât, 51)"
+    },
+    {
+      "id": "hadith_000381",
+      "kind": "hadith",
+      "ref": "riyazussalihin/381",
+      "ar": "وعن البراء بن عازب رضي الله عنهما عن النبي صلى الله عليه وسلم أنه قال في الأنصار‏:‏ ‏\n\"‏لا يحبهم إلا مؤمن، ولا يبغضهم إلا منافق، من أحبهم أحبه الله، ومن أبغضهم أبغضه الله‏\"‏ ‏(‏‏(‏متفق عليه‏)‏‏)‏ ‏.‏",
+      "tr": "Berâ b. Âzib’den (ra) rivayet edildiğine göre Hz. Peygamber, ensar hakkında şöyle buyurmuştur:\nEnsarı ancak mümin olan sever ve onlara münafıktan başkası kin gütmez. Onları seveni Allah da sever, onlara kin güdenlere Allah da buğzeder.\nAllah Teâlâ, “Benim için birbirini sevenlere, nebîlerin ve şehitlerin bile imrenecekleri nurdan minberler vardır.” buyurmuştur.",
+      "en": "Al-Bara' bin 'Azib (May Allah be pleased with them) reported:\nThe Prophet (ﷺ) said about the Ansar: \"Only a believer loves them, and only a hypocrite hates them. Allah loves him who loves them and Allah hates him who hates them\".",
+      "priority": 1,
+      "approvedAt": "2026-06-05T13:12:15+00:00",
+      "hadith_number": 381,
+      "book_reference_tr": "(M237 Müslim, Îmân, 129; B3783 Buhârî, Menâkıbü’l-ensâr, 4); (T2390 Tirmizî, Zühd, 53)",
+      "book_reference_en": "(M237 Müslim, Îmân, 129; B3783 Buhârî, Menâkıbü’l-ensâr, 4); (T2390 Tirmizî, Zühd, 53)"
+    },
+    {
+      "id": "hadith_000153",
+      "kind": "hadith",
+      "ref": "riyazussalihin/153",
+      "ar": "وعن عمر بن الخطاب رضي الله عنه قال‏:‏ قال رسول الله صلى الله عليه وسلم‏:‏ ‏\n\"‏ من نام عن حزبه من الليل، أو عن شيء منه فقرأه ما بين صلاة الفجر وصلاة الظهر، كتب له كأنما قرأه من الليل‏\"‏ ‏(‏‏(‏رواه مسلم‏)‏‏)‏‏.‏",
+      "tr": "Ömer b. Hattâb’dan (ra) rivayet edildiğine göre Resûlullah şöyle demiştir:\nBir kimse, geceleyin Kur’an’dan okumayı âdet edindiği bölümü okumadan yahut tamamlamadan uyuyakalır, sonra sabah namazı ile öğle namazı arasında onu okursa (veya tamamlarsa) o kimse için gece okumuş gibi sevap yazılır.",
+      "en": "'Umar bin Al-Khattab (May Allah be pleased with him) reported:\nMessenger of Allah (ﷺ) said, \"Should anyone fall asleep at night and fail to recite his portion of the Qur'an, or a part of it, if he recites it between the Fajr prayer and the Zuhr prayer, it will be recorded for him as though he had recited it during the night\".",
+      "priority": 1,
+      "approvedAt": "2026-06-05T13:21:33+00:00",
+      "hadith_number": 153,
+      "book_reference_tr": "(M1745 Müslim, Müsâfirîn, 142)",
+      "book_reference_en": "(M1745 Müslim, Müsâfirîn, 142)"
     }
   ]
 }

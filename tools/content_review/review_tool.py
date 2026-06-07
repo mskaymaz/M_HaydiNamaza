@@ -1,5 +1,5 @@
 ﻿#!/usr/bin/env python3
-"""Local-only desktop content review/add tool (PySide6)."""
+"""Local-only desktop content review tool (PySide6)."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ if str(SCRIPT_DIR) not in sys.path:
 try:
     from PySide6.QtCore import Qt
     from PySide6.QtGui import QFont
-    from PySide6.QtWidgets import QApplication, QMainWindow, QScrollArea, QTabWidget, QWidget
+    from PySide6.QtWidgets import QApplication, QMainWindow, QScrollArea, QWidget
 except ImportError:
     print("PySide6 not found.")
     print("Install command: py -m pip install PySide6")
@@ -24,7 +24,6 @@ from core.backup import BackupManager
 from core.logger import ActionLogger
 from core.models import AppPaths
 from core.storage import ContentRepository
-from ui.add_panel import AddPanel
 from ui.review_panel import ReviewPanel
 from ui.scale import scale
 
@@ -50,13 +49,9 @@ def _default_paths(repo_root: Path, tool_root: Path) -> AppPaths:
 class MainWindow(QMainWindow):
     def __init__(self, repository: ContentRepository) -> None:
         super().__init__()
-        self.setWindowTitle("İçerik İnceleme ve Ekleme Aracı")
+        self.setWindowTitle("İçerik İnceleme Aracı")
         self.resize(scale(1200), 520)
-        tabs = QTabWidget()
-        tabs.addTab(self._scrollable(AddPanel(repository)), "Ekle")
-        tabs.addTab(self._scrollable(ReviewPanel(repository)), "Incele")
-        tabs.setCurrentIndex(0)
-        self.setCentralWidget(tabs)
+        self.setCentralWidget(self._scrollable(ReviewPanel(repository)))
 
     @staticmethod
     def _scrollable(widget: QWidget) -> QScrollArea:
@@ -71,7 +66,7 @@ def parse_args() -> argparse.Namespace:
     tool_root = SCRIPT_DIR
     repo_root = tool_root.parent.parent
     defaults = _default_paths(repo_root, tool_root)
-    parser = argparse.ArgumentParser(description="Local daily ayah/hadith review+add desktop tool.")
+    parser = argparse.ArgumentParser(description="Local daily ayah/hadith review desktop tool.")
     parser.add_argument("--ayah", default=str(defaults.archive_ayah_path), help="Archive ayah JSON path.")
     parser.add_argument("--hadith", default=str(defaults.archive_hadith_path), help="Archive hadith JSON path.")
     parser.add_argument("--esma", default=str(defaults.archive_esma_path), help="Archive esma JSON path.")

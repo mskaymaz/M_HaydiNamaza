@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Repo-root launcher for the temporary daily content review desktop tool.
+"""Repo-root launcher for the temporary daily content review-only desktop tool.
 
 Usage:
   py tool.py

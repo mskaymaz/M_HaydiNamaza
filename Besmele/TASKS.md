@@ -754,3 +754,4 @@ Operasyonel sonuc (bu tarih itibariyla):
 - Diyanet tokeni mevcutsa TR ayet metni/meali Diyanet API'den alinabilir.
 - AR/EN ayet ve Riyazus Salihin hadis metinlerinde islamic.app cekimi teknik olarak uygulanabilir.
 - Tum otomatik cekilen kayitlar panelde insan onayindan gecmeden `approved` yapilmaz.
+arayüz sıkıntılı. metinler yukarıdan aşağıya akıyor. Derin bir kontrol yapıp düzelt.

@@ -4,7 +4,7 @@ last_update: 2026-06-09
 project: M_HaydiNamaza
 status: bulk_ayah_hadith_approved_local_pending_allapp_push
 active_phase: advanced_architecture_upgrade
-active_task: TASK-09-not-started-release-gate-active
+active_task: TASK-09-ui-ux-professionalization-in-progress
 blockers:
   - Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.
 next_step:

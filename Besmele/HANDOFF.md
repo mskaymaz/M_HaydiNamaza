@@ -168,6 +168,22 @@ Continue ayah/hadith manual review from `assets/data/daily_content/archive/`, re
 - Newer package versions are available but incompatible with current dependency constraints; this is not a TASK-00 blocker.
 - Root `tools/` remains intentionally active because it contains utility scripts, not instruction-only duplicates.
 
+## TASK-09 UI/UX Professionalization (2026-06-09)
+
+- Scope:
+  - Daily content panel: replaced stacked multi-language text layout with single-language tabbed view
+  - State panels: added icons, better spacing, polished card layouts for missing-location, invalid-location, and prayer-times-unavailable states
+  - Visual hierarchy: clarified content structure with consistent spacing and typography
+- Changed files:
+  - `lib/presentation/home/widgets/home_daily_content_panel.dart`
+  - `lib/presentation/home/widgets/home_state_panels.dart`
+  - `Besmele/TASKS.md`
+  - `STATE.md`
+  - `Besmele/HANDOFF.md`
+- Validation:
+  - flutter analyze was not run in this step by scope rule.
+  - Note: original note "arayüz sıkıntılı, metinler yukarıdan aşağıya akıyor" addressed via single-language tab display.
+
 ## Do not forget
 - The app must stay working during refactors.
 - Large files must be split gradually.

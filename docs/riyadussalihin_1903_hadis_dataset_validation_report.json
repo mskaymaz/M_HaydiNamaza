@@ -1,0 +1,45 @@
+{
+  "row_count": 1903,
+  "column_count": 21,
+  "headers": [
+    "epub_no",
+    "diyanet_konu",
+    "sunnah_bolum",
+    "sunnah_no",
+    "sunnah_url",
+    "sunnah_bolum_ici_no",
+    "json_id",
+    "json_idInBook",
+    "json_chapterId",
+    "eslesme_durumu",
+    "guven",
+    "notlar",
+    "CPT_turkish_translation",
+    "CPT_english_translation",
+    "sunnah.com_arabic_full_text",
+    "turkish_full_text",
+    "english_full_text",
+    "kaynak_tr",
+    "source_en",
+    "arabic_source_raw",
+    "json_english_narrator"
+  ],
+  "epub_no_min": 1,
+  "epub_no_max": 1903,
+  "missing_epub_sequence": [],
+  "duplicate_epub_numbers": [],
+  "missing_counts": {
+    "sunnah_arabic_full_text": 0,
+    "turkish_full_text": 0,
+    "english_full_text": 0,
+    "CPT_turkish_translation": 0,
+    "CPT_english_translation": 0
+  },
+  "missing_lists": {
+    "sunnah_arabic_full_text": [],
+    "turkish_full_text": [],
+    "english_full_text": [],
+    "CPT_turkish_translation": [],
+    "CPT_english_translation": []
+  }
+}

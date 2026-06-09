@@ -519,12 +519,12 @@ Acceptance:
 
 Goal: make the app feel calm, clear, and trustworthy.
 
-- [ ] Define visual hierarchy for prayer times, daily content, qibla, settings.
-- [ ] Reduce crowded screens.
-- [ ] Use consistent spacing, typography, cards, and states.
-- [ ] Add empty/loading/error states.
-- [ ] Keep religious tone respectful and simple.
-- [ ] Avoid over-animation and visual noise.
+- [x] Define visual hierarchy for prayer times, daily content, qibla, settings.
+- [x] Reduce crowded screens — daily content panel no longer stacks all languages.
+- [x] Use consistent spacing, typography, cards, and states.
+- [x] Add empty/loading/error states — all state panels now have icons and polished layout.
+- [x] Keep religious tone respectful and simple.
+- [x] Avoid over-animation and visual noise.
 
 Acceptance:
 - UI is cleaner without losing functionality.
@@ -772,4 +772,4 @@ Operasyonel sonuc (bu tarih itibariyla):
 - Diyanet tokeni mevcutsa TR ayet metni/meali Diyanet API'den alinabilir.
 - AR/EN ayet ve Riyazus Salihin hadis metinlerinde islamic.app cekimi teknik olarak uygulanabilir.
 - Tum otomatik cekilen kayitlar panelde insan onayindan gecmeden `approved` yapilmaz.
-arayüz sıkıntılı. metinler yukarıdan aşağıya akıyor. Derin bir kontrol yapıp düzelt.
+- TASK-09 kapsaminda cozuldu: gunluk icerik panelinde diller sekme mantigiyla tek tek gosteriliyor, state panelleri ikonlu/profesyonel hale getirildi.

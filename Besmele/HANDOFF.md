@@ -1,15 +1,16 @@
 ﻿# HANDOFF.md
 
 ## Current status
+R260609_1528 commit hazırlığı: Python arayüzü üzerinden ayet ve hadis eklemeleri yapılacak; yerel approved JSON yapısı, `onay.py`, `incele.py`, bulk ekleme araçları ve AllApp publish/push yardımcıları bu akışı destekleyecek şekilde güncellendi.
 Daily content review tool now has approved-only mobile preview for ayah/hadith/esma, unified archive root `assets/data/daily_content/archive/`, and unified approved root `assets/data/daily_content/approved/`.
-Current approved counts are `ayah=0`, `hadith=2`, `esma=99`.
+Current approved counts are `ayah=1438`, `hadith=438`, `esma=99`.
 TASK-03 is closed and pushed on `main`.
 TASK-00 is completed on 2026-05-10 with documented exceptions.
 TASK-04A is closed (checkpoints completed; orchestration-safe extraction scope finalized).
 TASK-04B documentation scope is closed, including official Diyanet/AwqatSalah API source strategy notes.
 TASK-05 checkpoints 1-14 are synchronized with `Besmele/TASKS.md` for current scope.
 TASK-05 content target closure is recorded (`approved` counts: ayah=424, hadith=550).
-TASK-05B publish runbook documentation is completed.
+TASK-05B publish runbook documentation is completed, and AllApp public publish sync target is configured.
 TASK-07 shared settings modules are completed with config-driven integration.
 TASK-08 AllApp shared settings template/contracts are completed for current scope.
 TASK-06 is completed with location-based qibla bearing + sensor fallback + bearing validation tests.
@@ -19,11 +20,55 @@ TASK-12 release-readiness documentation/checklist outputs are completed.
 Ayah/hadith data reset was executed on 2026-06-02; old lists, publish payloads, archives, and source folders were removed, and a new clean seed structure was created.
 
 ## Next action
-Continue ayah/hadith manual review from `assets/data/daily_content/archive/` and rebuild approved runtime payloads under `assets/data/daily_content/approved/`.
+Continue ayah/hadith manual review from `assets/data/daily_content/archive/`, rebuild approved runtime payloads under `assets/data/daily_content/approved/`, then sync AllApp publish artifacts.
 
 ## Important blockers
 - Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.
-- TASK-05B public sync remains blocked because public target repo URL/branch is not configured yet.
+
+## AllApp daily content publish sync (2026-06-09)
+- Target repo/branch: `https://github.com/mskaymaz/AllApp.git` / `main`.
+- Remote commit: `12399cd` (`daily-content: sync local approved publish v1`).
+- Published files:
+  - `data/daily_content/v1/manifest.json`
+  - `data/daily_content/v1/publish/ayahs.v1.approved.json`
+  - `data/daily_content/v1/publish/hadiths.v1.approved.json`
+- Remote raw validation:
+  - `manifest=local-approved-20260609_074542`
+  - `ayah_count=37`
+  - `hadith_count=8`
+
+## Bulk hadith local approval update (2026-06-09)
+- Requested hadith numbers: `436`.
+- Already approved before run: `6` (`1729`, `1218`, `153`, `381`, `1075`, `1535`).
+- Newly added to local approved payload: `430`.
+- Local approved hadith total after run: `438`.
+- Validation:
+  - requested missing from approved: `0`
+  - duplicate hadith numbers in approved: `0`
+  - blank AR/TR/EN text records: `0`
+- AllApp remote publish was not pushed after this bulk local approval update.
+
+## Bulk ayah local approval update (2026-06-09)
+- Requested ayah refs: `118`.
+- Already covered by approved records before run: `28`.
+- Newly added to local approved payload: `90`.
+- Local approved ayah total after run: `127`.
+- Validation:
+  - requested refs missing from approved coverage: `0`
+  - duplicate exact refs in approved: `0`
+  - blank AR/TR/EN text records: `0`
+- AllApp remote publish was not pushed after this bulk local approval update.
+
+## Bulk ayah local approval update 2 (2026-06-09)
+- Requested ayah refs: `1400`.
+- Already covered by approved records before run: `89`.
+- Newly added to local approved payload: `1311`.
+- Local approved ayah total after run: `1438`.
+- Validation:
+  - requested refs missing from approved coverage: `0`
+  - duplicate exact refs in approved: `0`
+  - blank AR/TR/EN text records: `0`
+- AllApp remote publish was not pushed after this bulk local approval update.
 
 ## Final stabilization checkpoint (2026-05-14)
 - Scope:

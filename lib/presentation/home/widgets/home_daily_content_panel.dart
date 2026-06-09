@@ -6,6 +6,18 @@ import '../../../app/reminder_audio_service.dart';
 import '../../../features/daily_content/daily_content_models.dart';
 import '../../../features/daily_content/daily_content_selection_models.dart';
 
+const _dailyContentArabicLocale = Locale('ar');
+const _dailyContentArabicFontFallback = <String>[
+  'Mirza',
+  'Lateef',
+  'NotoNaskhArabic',
+  'Amiri',
+  'Droid Arabic Naskh',
+  'Geeza Pro',
+  'Arial',
+  'Times New Roman',
+];
+
 class HomeDailyContentPanel extends StatefulWidget {
   final DailyContentSelectionResult? result;
   final bool isLoading;
@@ -461,6 +473,7 @@ class _DailyContentSection extends StatelessWidget {
       height: 1.35,
       fontSize: 20,
     );
+    final arabicStyle = _arabicContentStyle(textStyle);
     final subStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
       color: cizgiColor.withValues(alpha: 0.85),
       height: 1.3,
@@ -516,11 +529,18 @@ class _DailyContentSection extends StatelessWidget {
                 width: double.infinity,
                 child: Text(
                   arabicText,
-                  style: textStyle,
+                  locale: _dailyContentArabicLocale,
+                  strutStyle: _arabicStrut(arabicStyle),
+                  textHeightBehavior: const TextHeightBehavior(
+                    applyHeightToFirstAscent: false,
+                    applyHeightToLastDescent: false,
+                  ),
+                  style: arabicStyle,
                   textAlign: TextAlign.center,
                   textDirection: textArIsArabic
                       ? TextDirection.rtl
                       : TextDirection.ltr,
+                  softWrap: true,
                 ),
               ),
             ],
@@ -532,9 +552,13 @@ class _DailyContentSection extends StatelessWidget {
                 child: Stack(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: hasTurkishReadAction ? 24 : 0),
+                      padding: EdgeInsets.only(
+                        top: hasTurkishReadAction ? 24 : 0,
+                      ),
                       child: Padding(
-                        padding: EdgeInsets.only(right: hasTurkishReadAction ? 30 : 0),
+                        padding: EdgeInsets.only(
+                          right: hasTurkishReadAction ? 30 : 0,
+                        ),
                         child: SizedBox(
                           width: double.infinity,
                           child: Text(
@@ -549,26 +573,26 @@ class _DailyContentSection extends StatelessWidget {
                       ),
                     ),
                     if (hasTurkishReadAction)
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: Material(
-                        color: Colors.black.withValues(alpha: 0.14),
-                        borderRadius: BorderRadius.circular(14),
-                        child: InkWell(
-                          onTap: onReadTurkishTap,
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Material(
+                          color: Colors.black.withValues(alpha: 0.14),
                           borderRadius: BorderRadius.circular(14),
-                          child: const Padding(
-                            padding: EdgeInsets.all(6),
-                            child: Icon(
-                              Icons.volume_up_rounded,
-                              size: 18,
-                              color: Colors.white,
+                          child: InkWell(
+                            onTap: onReadTurkishTap,
+                            borderRadius: BorderRadius.circular(14),
+                            child: const Padding(
+                              padding: EdgeInsets.all(6),
+                              child: Icon(
+                                Icons.volume_up_rounded,
+                                size: 18,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -640,5 +664,26 @@ class _DailyContentSection extends StatelessWidget {
       r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]',
     );
     return arabicRegex.hasMatch(value);
+  }
+
+  TextStyle _arabicContentStyle(TextStyle? baseStyle) {
+    return (baseStyle ?? const TextStyle()).copyWith(
+      fontFamily: 'Mirza',
+      fontFamilyFallback: _dailyContentArabicFontFallback,
+      fontSize: 22,
+      height: 1.45,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0,
+    );
+  }
+
+  StrutStyle _arabicStrut(TextStyle style) {
+    return StrutStyle(
+      fontFamilyFallback: _dailyContentArabicFontFallback,
+      fontSize: style.fontSize,
+      height: 1.45,
+      leading: 0.18,
+      forceStrutHeight: false,
+    );
   }
 }

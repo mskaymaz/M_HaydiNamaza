@@ -25,36 +25,46 @@ Expected:
 - Script prints `publish payloads generated`.
 - `Besmele/data/daily_panel/archive/base_release_2026-05-14/publish_generation/publish_manifest.json` is refreshed.
 
-## Step 2 - Generate AllApp monthly packs + manifest
-Run from repo root:
+## Step 2 - Generate AllApp publish payloads + manifest
+Recommended button-based flow from repo root:
 
 ```powershell
-python tools/daily_content/generate_allapp_monthly_packs.py
+python AllApp_push.py
+```
+
+Use `AllApp'a Push Et` to run:
+- local approved summary check,
+- AllApp publish payload generation,
+- AllApp commit,
+- `git push origin main`.
+
+Console-only alternative from repo root:
+
+```powershell
+python tools/daily_content/sync_allapp_publish_from_approved.py
 ```
 
 Expected:
-- Script prints `allapp monthly packs generated`.
+- Script prints `allapp publish synced`.
 - Files are refreshed under:
-  - `AllApp/data/daily_content/v1/publish/`
-  - `AllApp/data/daily_content/v1/monthly/`
-  - `AllApp/data/daily_content/v1/manifest.json`
+  - `_external/AllAppRemote/data/daily_content/v1/publish/`
+  - `_external/AllAppRemote/data/daily_content/v1/manifest.json`
 
 ## Step 3 - Verify local outputs
 Minimum checks:
 
 ```powershell
 git status --short
-Get-Content AllApp/data/daily_content/v1/manifest.json -TotalCount 80
+Get-Content _external/AllAppRemote/data/daily_content/v1/manifest.json -TotalCount 80
 ```
 
 Verify:
 - `content_version` and `generated_at_utc` are current.
-- Monthly files exist for expected range.
 - Publish payload paths and checksums are present.
 
 ## Step 4 - Sync to public repo
 - Keep this repo as canonical source of truth.
-- Copy/sync `AllApp/data/daily_content/v1/` artifacts into the public distribution repo.
+- Commit and push `_external/AllAppRemote/data/daily_content/v1/` artifacts into the public distribution repo.
 - Commit in public repo with message format:
   - `daily-content: publish v1 <YYYY-MM-DD>`
 - Tag optional release marker if needed.

@@ -1,7 +1,7 @@
 ﻿# toolTasks.md
 
 Gecici dokuman.
-Amac: `tool.py` icin `Incele + Ekle` panelini, gercek ayet/hadis kaynak mantigina uygun hale getirmek.
+Amac: `incele.py` icin `Incele + Ekle` panelini, gercek ayet/hadis kaynak mantigina uygun hale getirmek.
 Not: Bu dosya canonical task kaynagi degildir; tasarim ve uygulama kontrol listesi icindir.
 
 ## 1. Durum ozeti
@@ -17,7 +17,7 @@ Not: Bu dosya canonical task kaynagi degildir; tasarim ve uygulama kontrol liste
 
 ## 2. Hedef mimari
 
-- [x] `tool.py` sadece launcher olacak
+- [x] `incele.py` sadece launcher olacak
 - [x] UI ve cekirdek mantik ayrilacak
 - [x] Arsiv ve approved ayri tutulacak
 - [x] Ayet ve hadis icin farkli veri toplama adapterleri var

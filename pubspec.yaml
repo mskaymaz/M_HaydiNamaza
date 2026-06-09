@@ -83,6 +83,23 @@ flutter:
     - assets/data/daily_content/approved/
     - assets/data/shared_settings/
 
+  fonts:
+    - family: ReemKufiFun
+      fonts:
+        - asset: assets/fonts/google/ReemKufiFun-wght.ttf
+    - family: Mirza
+      fonts:
+        - asset: assets/fonts/google/Mirza-Regular.ttf
+    - family: Lateef
+      fonts:
+        - asset: assets/fonts/google/Lateef-Regular.ttf
+    - family: NotoNaskhArabic
+      fonts:
+        - asset: assets/fonts/google/NotoNaskhArabic-wght.ttf
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/google/Amiri-Regular.ttf
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

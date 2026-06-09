@@ -21,9 +21,20 @@ from core.storage import ContentRepository
 from ui.scale import pt, scale
 
 
+ARABIC_TITLE_FONT_FAMILY = (
+    "'ReemKufiFun', 'Reem Kufi Fun', 'Noto Kufi Arabic', "
+    "'Traditional Arabic', 'Times New Roman', serif"
+)
+ARABIC_BODY_FONT_FAMILY = (
+    "'Mirza', 'Lateef', 'NotoNaskhArabic', 'Noto Naskh Arabic', "
+    "'Amiri', 'Droid Arabic Naskh', 'Geeza Pro', 'Times New Roman', serif"
+)
+
+
 class MobilePreviewCard(QFrame):
-    def __init__(self) -> None:
+    def __init__(self, font_boost: int = 0) -> None:
         super().__init__()
+        self._font_boost = font_boost
         self.setObjectName("mobilePreviewCard")
         self.setStyleSheet(
             "#mobilePreviewCard {"
@@ -92,14 +103,15 @@ class MobilePreviewCard(QFrame):
             self.turkish_divider.setVisible(False)
             self.english_section.setVisible(False)
             self.footer_section.setVisible(True)
+            self.source_label.setVisible(True)
             self.arabic_label.setText(
-                self._format_html(empty_message, font_size=pt(18), color="#FFFFFF", italic=True)
+                self._format_html(empty_message, font_size=self._text_pt(18), color="#FFFFFF", italic=True)
             )
             self.reference_label.setText(
-                self._format_html(MISSING_TEXT, font_size=pt(17), color="#F9A825", weight=600)
+                self._format_html(MISSING_TEXT, font_size=self._text_pt(17), color="#F9A825", weight=600)
             )
             self.source_label.setText(
-                self._format_html(MISSING_TEXT, font_size=pt(15), color="#FFFFFF", italic=True, weight=500)
+                self._format_html(MISSING_TEXT, font_size=self._text_pt(15), color="#FFFFFF", italic=True, weight=500)
             )
             self._sync_label_heights()
             return
@@ -117,29 +129,35 @@ class MobilePreviewCard(QFrame):
         self.arabic_divider.setVisible(show_arabic_section and (show_turkish_section or show_english_section))
         self.turkish_divider.setVisible(show_turkish_section and show_english_section)
 
+        title_size = 32 if item.kind == "esma" else 24
+        title_weight = 500 if item.kind == "esma" else 700
+        title_font_family = ARABIC_TITLE_FONT_FAMILY if item.kind == "esma" else ARABIC_BODY_FONT_FAMILY
         self.arabic_title_label.setText(
             self._format_html(
                 item.arabic_title_text,
-                font_size=pt(24),
-                color="#FFFFFF",
-                line_height=1.15,
-                direction="rtl",
-                weight=700,
-            )
-        )
-        self.arabic_label.setText(
-            self._format_html(
-                item.arabic_text,
-                font_size=pt(19),
+                font_size=self._text_pt(title_size),
                 color="#FFFFFF",
                 line_height=1.22,
                 direction="rtl",
+                weight=title_weight,
+                font_family=title_font_family,
+            )
+        )
+        arabic_body_size = 21 if item.kind == "esma" else 19
+        self.arabic_label.setText(
+            self._format_html(
+                item.arabic_text,
+                font_size=self._text_pt(arabic_body_size),
+                color="#FFFFFF",
+                line_height=1.28,
+                direction="rtl",
+                font_family=ARABIC_BODY_FONT_FAMILY,
             )
         )
         self.turkish_label.setText(
             self._format_html(
                 item.turkish_text,
-                font_size=pt(17),
+                font_size=self._text_pt(17),
                 color="#EAF4EC",
                 italic=True,
                 line_height=1.18,
@@ -148,19 +166,23 @@ class MobilePreviewCard(QFrame):
         self.english_label.setText(
             self._format_html(
                 item.english_text,
-                font_size=pt(17),
+                font_size=self._text_pt(17),
                 color="#EAF4EC",
                 line_height=1.18,
             )
         )
         if item.kind != "esma":
             self.reference_label.setText(
-                self._format_html(item.reference_text, font_size=pt(17), color="#F9A825", weight=600)
+                self._format_html(item.reference_text, font_size=self._text_pt(17), color="#F9A825", weight=600)
             )
+            self.source_label.setVisible(item.source_text != MISSING_TEXT)
             self.source_label.setText(
-                self._format_html(item.source_text, font_size=pt(15), color="#FFFFFF", italic=True, weight=500)
+                self._format_html(item.source_text, font_size=self._text_pt(15), color="#FFFFFF", italic=True, weight=500)
             )
         self._sync_label_heights()
+
+    def _text_pt(self, value: int) -> int:
+        return pt(value + self._font_boost)
 
     def _build_section(self) -> tuple[QWidget, QLabel]:
         section = QWidget()
@@ -220,12 +242,15 @@ class MobilePreviewCard(QFrame):
         direction: str = "ltr",
         italic: bool = False,
         weight: int = 400,
+        font_family: str = "",
     ) -> str:
         escaped = html.escape(text or MISSING_TEXT).replace("\n", "<br/>")
         font_style = "italic" if italic else "normal"
+        font_family_style = f"font-family:{font_family};" if font_family else ""
         return (
             f"<div dir='{direction}' style='"
             f"text-align:center;"
+            f"{font_family_style}"
             f"font-size:{font_size}pt;"
             f"color:{color};"
             f"line-height:{line_height};"

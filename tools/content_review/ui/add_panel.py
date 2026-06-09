@@ -74,6 +74,8 @@ class AddPanel(QWidget):
         self.ayah_fetcher = AyahFetcher()
         self.hadith_fetcher = HadithFetcher()
         self._current_record: BaseRecord | None = None
+        self._current_archive_record: BaseRecord | None = None
+        self._current_approved_record: BaseRecord | None = None
         self._current_duplicate = DuplicateCheckResult()
         self._current_source = SourceInfo()
         self._text_resize_base_height: int | None = None
@@ -217,8 +219,8 @@ class AddPanel(QWidget):
         self.en_font_spin = self._build_font_spin()
         self.tr_alt_font_spin = self._build_font_spin()
         self.en_alt_font_spin = self._build_font_spin()
-        self.ar_font_spin.setValue(18)
-        self._bind_font_size(self.ar_font_spin, self.ar_edit)
+        self.ar_font_spin.setValue(15)
+        self._bind_font_size(self.ar_font_spin, self.ar_edit, '"Times New Roman", Times, serif')
         self._bind_font_size(self.tr_font_spin, self.tr_edit)
         self._bind_font_size(self.en_font_spin, self.en_edit)
         self._bind_font_size(self.tr_alt_font_spin, self.tr_alt_edit)
@@ -323,6 +325,8 @@ class AddPanel(QWidget):
         ref = str(normalized["ref"])
         archive_record = self.repository.find_archive_record(kind, ref)
         approved_record = self.repository.find_approved_record(kind, ref)
+        self._current_archive_record = archive_record
+        self._current_approved_record = approved_record
         fetch_label = "local_archive"
         record = archive_record
         source_info = archive_record.source_info if archive_record else SourceInfo(label="manual", fetch_status="manual")
@@ -374,6 +378,7 @@ class AddPanel(QWidget):
         self.match_warning_label.setText(self._build_match_warning(record, fetch_label))
         self.fetch_status_label.setText(f"Veri durumu: {_fetch_status_label(fetch_label)}")
         self._load_record(record)
+        self._sync_availability_ui()
 
     def _build_new_record(
         self,
@@ -466,7 +471,22 @@ class AddPanel(QWidget):
     def _approve_and_save(self) -> None:
         self._save("approved")
 
-    def _save(self, forced_status: str) -> None:
+    def _replace_approved_and_save(self) -> None:
+        if self._current_approved_record is None:
+            QMessageBox.information(self, "Yayinda kayit yok", "Degistirilecek yayin kaydi bulunamadi.")
+            return
+        reply = QMessageBox.question(
+            self,
+            "Yayindaki kaydi degistir",
+            "Yayindaki mevcut kayit, ekrandaki yeni metinlerle guncellenecek. Devam edilsin mi?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if reply != QMessageBox.StandardButton.Yes:
+            return
+        self._save("approved", replace_existing_approved=True)
+
+    def _save(self, forced_status: str, replace_existing_approved: bool = False) -> None:
         if self._current_record is None:
             QMessageBox.information(self, "Kayıt yok", "Önce referans kontrolü yapin.")
             return
@@ -496,6 +516,20 @@ class AddPanel(QWidget):
                 book_reference_tr=self.book_ref_tr_edit.toPlainText().strip(),
                 book_reference_en=self.book_ref_en_edit.toPlainText().strip(),
             )
+        if record.status == "approved" and self._current_approved_record is not None:
+            if not replace_existing_approved:
+                QMessageBox.warning(
+                    self,
+                    "Yayinda mevcut",
+                    "Bu referans yayindaki onayli kayitlarda var. Yeni ekleme kapatildi; guncellemek icin Degistir'i kullanin.",
+                )
+                self._sync_availability_ui()
+                return
+            record = replace(
+                record,
+                id=self._current_approved_record.id,
+                ref=self._current_approved_record.ref,
+            )
         if record.status == "approved":
             record = replace(
                 record,
@@ -510,11 +544,15 @@ class AddPanel(QWidget):
             QMessageBox.critical(self, "Kaydetme hatası", str(exc))
             return
         self._current_record = saved
+        self._current_archive_record = saved
+        if saved.status == "approved":
+            self._current_approved_record = saved
         self._load_record(saved)
         self.archive_check.setChecked(True)
         if saved.status == "approved":
             self.approved_check.setChecked(True)
         self.fetch_status_label.setText("Veri durumu: Kayıt başarıyla yazildi")
+        self._sync_availability_ui()
 
     def _undo_last(self) -> None:
         if not self.repository.undo_last_write():
@@ -530,9 +568,15 @@ class AddPanel(QWidget):
         spin.setMaximumWidth(scale(90))
         return spin
 
-    def _bind_font_size(self, spin: QSpinBox, editor: QTextEdit) -> None:
-        spin.valueChanged.connect(lambda value: editor.setStyleSheet(f"font-size: {value}pt;"))
-        editor.setStyleSheet(f"font-size: {spin.value()}pt;")
+    def _bind_font_size(self, spin: QSpinBox, editor: QTextEdit, font_family: str = "") -> None:
+        def apply_font(value: int) -> None:
+            style_parts = [f"font-size: {value}pt"]
+            if font_family:
+                style_parts.append(f"font-family: {font_family}")
+            editor.setStyleSheet("; ".join(style_parts) + ";")
+
+        spin.valueChanged.connect(apply_font)
+        apply_font(spin.value())
 
     def _editor_with_font_row(self, spin: QSpinBox, editor: QTextEdit) -> QWidget:
         panel = QWidget()
@@ -615,6 +659,29 @@ class AddPanel(QWidget):
         check.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
         return check
 
+    def _set_presence_label(self, label: QLabel, title: str, exists: bool) -> None:
+        text = "VAR" if exists else "YOK"
+        color = "#7a1f1f" if exists and title == "Yayin" else "#1f5d35" if exists else "#555555"
+        label.setText(f"{title}: {text}")
+        label.setStyleSheet(
+            "background:#f7f7f7; border:1px solid #d6d6d6; border-radius:5px; "
+            f"padding:2px 8px; font-weight:700; color:{color};"
+        )
+
+    def _sync_availability_ui(self) -> None:
+        approved_exists = self._current_approved_record is not None
+        archive_exists = self._current_archive_record is not None
+        if hasattr(self, "archive_state_label"):
+            self._set_presence_label(self.archive_state_label, "Arsiv", archive_exists)
+        if hasattr(self, "approved_state_label"):
+            self._set_presence_label(self.approved_state_label, "Yayin", approved_exists)
+        if hasattr(self, "approve_btn"):
+            self.approve_btn.setEnabled(self._current_record is not None and not approved_exists)
+        elif hasattr(self, "save_btn"):
+            self.save_btn.setEnabled(self._current_record is not None and not approved_exists)
+        if hasattr(self, "replace_btn"):
+            self.replace_btn.setEnabled(self._current_record is not None and approved_exists)
+
     def _build_translation_check(self, label: str) -> QCheckBox:
         check = QCheckBox(label)
         check.setStyleSheet(f"font-size: {pt(14)}pt; font-weight: 600;")
@@ -632,6 +699,8 @@ class AddPanel(QWidget):
 
     def _reset_form_for_kind_change(self) -> None:
         self._current_record = None
+        self._current_archive_record = None
+        self._current_approved_record = None
         self._current_duplicate = DuplicateCheckResult()
         self._current_source = SourceInfo()
         self.reference_edit.clear()
@@ -659,6 +728,7 @@ class AddPanel(QWidget):
         self.fetch_status_label.setText("Veri durumu: henüz kontrol edilmedi")
         self.fetch_progress.setVisible(False)
         self.check_btn.setEnabled(True)
+        self._sync_availability_ui()
 
     def _set_translation_alt_visible(self, visible: bool) -> None:
         self.tr_translation_row.right_panel.setVisible(visible)

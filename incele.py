@@ -2,8 +2,8 @@
 """Repo-root launcher for the temporary daily content review-only desktop tool.
 
 Usage:
-  py tool.py
-  py tool.py --ayah ".../ayetler.json" --hadith ".../hadisler.json"
+  py incele.py
+  py incele.py --ayah ".../ayetler.json" --hadith ".../hadisler.json"
 """
 
 from __future__ import annotations

@@ -29,7 +29,7 @@ py -m pip install PySide6
 Repo kokunden:
 
 ```powershell
-py tool.py
+py incele.py
 ```
 
 veya dogrudan:

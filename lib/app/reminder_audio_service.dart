@@ -602,7 +602,7 @@ class ReminderAudioService {
     }
 
     var normalized = text;
-    const replacements = <MapEntry<Pattern, String>>[
+    final replacements = <MapEntry<Pattern, String>>[
       MapEntry(RegExp(r'\(\s*r\.?\s*a\.?\s*\)', caseSensitive: false), 'radiyallahu anhu'),
       MapEntry(RegExp(r'\(\s*a\.?\s*s\.?\s*\)', caseSensitive: false), 'aleyhisselam'),
       MapEntry(

@@ -129,7 +129,11 @@ class ApprovedContentNavigator:
 
     def _load_items(self, kind: str) -> list[MobilePreviewItem]:
         items: list[MobilePreviewItem] = []
-        for position, record in enumerate(self._repository.list_approved_records(kind), start=1):
+        position = 0
+        for record in self._repository.list_approved_records(kind):
+            if self._is_onay_processed(record):
+                continue
+            position += 1
             if kind == "ayah":
                 items.append(self._build_ayah_item(record, position))
             elif kind == "hadith":
@@ -137,6 +141,14 @@ class ApprovedContentNavigator:
             else:
                 items.append(self._build_esma_item(record, position))
         return items
+
+    @staticmethod
+    def _is_onay_processed(record: BaseRecord) -> bool:
+        raw = record.raw if isinstance(record.raw, dict) else {}
+        onay_review = raw.get("onay_review")
+        if isinstance(onay_review, dict) and str(onay_review.get("processed_at") or "").strip():
+            return True
+        return bool(str(raw.get("onay_reviewed_at") or "").strip())
 
     def _build_ayah_item(self, record: BaseRecord, position: int) -> MobilePreviewItem:
         if not isinstance(record, AyahRecord):

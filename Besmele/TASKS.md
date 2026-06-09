@@ -378,8 +378,8 @@ Goal: publish approved ayah/hadith content from a public repo while keeping priv
 
 - [x] Define public data contract under AllApp/data/daily_content/v1/.
 - [x] Add manifest.json contract (schema_version, content_version, generated_at, file list, checksums).
-- [ ] Keep private repo as canonical source; generate and sync publish artifacts to public repo.
-  - Blocker check (2026-05-14): public target repo/branch is not defined in current git remotes.
+- [x] Keep private repo as canonical source; generate and sync publish artifacts to public repo.
+  - Sync check (2026-06-09): AllApp target is `https://github.com/mskaymaz/AllApp.git` branch `main`; remote commit `12399cd`.
 - [x] Keep archive snapshots in private repo (Besmele/data/daily_panel/archive/...) as baseline history.
 - [x] Add monthly packs (monthly/YYYY-MM.json) for ayah/hadith id pools.
 - [x] Monthly pack generation must be random (no sequential fill).
@@ -694,6 +694,24 @@ Tarih: 2026-05-22
   - `text_ar`, `text_tr`, `text_en` alanlari tamlik kontrolunden gecirildi.
 
 ### AllApp Uzak Yayin Kaydi
+
+Tarih: 2026-06-09
+Hedef uzak repo: `https://github.com/mskaymaz/AllApp.git`
+Hedef branch: `main`
+Uzak commit: `12399cd`
+Content version: `local-approved-20260609_074542`
+
+Yuklenen JSON dosyalari:
+- data/daily_content/v1/manifest.json
+- data/daily_content/v1/publish/ayahs.v1.approved.json (`record_count=37`)
+- data/daily_content/v1/publish/hadiths.v1.approved.json (`record_count=8`)
+
+Not:
+- AllApp publish dosyalari yerel `assets/data/daily_content/approved/` kayitlarindan yeniden uretildi.
+- Eski uzak publish havuzundaki kayit listesi korunmadi; ciktida yalniz yerel approved ayet/hadis kayitlari var.
+- Uygulama runtime base URL: `https://raw.githubusercontent.com/mskaymaz/AllApp/main/data/daily_content/v1`.
+
+### Onceki AllApp Uzak Yayin Kaydi
 
 Tarih: 2026-05-22
 R etiketi: `R260522_0117`

@@ -258,7 +258,7 @@ class ApprovalWindow(QMainWindow):
         self._type_buttons: dict[str, QPushButton] = {}
         self._language_buttons: dict[str, QPushButton] = {}
         self.setWindowTitle("Onaylı İçerik / Mobil Önizleme")
-        self.resize(scale(980), scale(1220))
+        self.resize(scale(980), scale(1020))
         self._build_ui()
         self.refresh()
 
@@ -323,7 +323,7 @@ class ApprovalWindow(QMainWindow):
         root.addLayout(control_row)
 
         phone_shell = QFrame()
-        phone_shell.setFixedSize(scale(620), scale(980))
+        phone_shell.setFixedSize(scale(620), scale(780))
         phone_shell.setStyleSheet(
             f"background:#171717;border:{scale(2)}px solid #2F2F2F;border-radius:{scale(34)}px;"
         )

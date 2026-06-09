@@ -4,6 +4,8 @@ class DailyContentPaths {
       '${approvedRoot}ayahs.v1.approved.json';
   static const String approvedHadithsSample =
       '${approvedRoot}hadiths.v1.approved.json';
+  static const String approvedEsmaSample =
+      '${approvedRoot}esmaul_husna.v1.approved.json';
   static const String approvedSequence = '${approvedRoot}sequence.v1.json';
   static const String defaultSequenceStartDate = '2026-05-15';
 

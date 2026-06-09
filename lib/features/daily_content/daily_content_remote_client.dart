@@ -7,15 +7,21 @@ import 'daily_content_paths.dart';
 class DailyContentRemoteBundle {
   final Map<String, dynamic> ayahPayload;
   final Map<String, dynamic> hadithPayload;
+  final Map<String, dynamic> esmaPayload;
   final List<String> ayahOrderIds;
   final List<String> hadithOrderIds;
+  final List<String> esmaOrderIds;
+  final List<String> sifatOrderIds;
   final String sequenceStartDate;
 
   const DailyContentRemoteBundle({
     required this.ayahPayload,
     required this.hadithPayload,
+    required this.esmaPayload,
     required this.ayahOrderIds,
     required this.hadithOrderIds,
+    required this.esmaOrderIds,
+    required this.sifatOrderIds,
     required this.sequenceStartDate,
   });
 }
@@ -46,7 +52,8 @@ class DailyContentRemoteClient {
 
     final ayahPath = _readPublishPath(manifest, type: 'ayahs');
     final hadithPath = _readPublishPath(manifest, type: 'hadiths');
-    if (ayahPath == null || hadithPath == null) {
+    final esmaPath = _readPublishPath(manifest, type: 'esmas');
+    if (ayahPath == null || hadithPath == null || esmaPath == null) {
       warnings.add('daily_content_remote: publish dosya yolu bulunamadi.');
       return null;
     }
@@ -61,7 +68,12 @@ class DailyContentRemoteClient {
       label: hadithPath,
       warnings: warnings,
     );
-    if (ayahPayload == null || hadithPayload == null) {
+    final esmaPayload = await _getJsonObject(
+      uri: _resolveUri(esmaPath),
+      label: esmaPath,
+      warnings: warnings,
+    );
+    if (ayahPayload == null || hadithPayload == null || esmaPayload == null) {
       return null;
     }
 
@@ -82,12 +94,29 @@ class DailyContentRemoteClient {
       fallbackPayload: hadithPayload,
       warnings: warnings,
     );
+    final esmaOrderIds = await _loadOrderIds(
+      path: sequencePaths.$3,
+      payloadType: 'esma',
+      fallbackPayload: esmaPayload,
+      warnings: warnings,
+      recordKind: 'esma',
+    );
+    final sifatOrderIds = await _loadOrderIds(
+      path: sequencePaths.$4,
+      payloadType: 'sifat',
+      fallbackPayload: esmaPayload,
+      warnings: warnings,
+      recordKind: 'sifat',
+    );
 
     return DailyContentRemoteBundle(
       ayahPayload: ayahPayload,
       hadithPayload: hadithPayload,
+      esmaPayload: esmaPayload,
       ayahOrderIds: ayahOrderIds,
       hadithOrderIds: hadithOrderIds,
+      esmaOrderIds: esmaOrderIds,
+      sifatOrderIds: sifatOrderIds,
       sequenceStartDate: startDate,
     );
   }
@@ -97,8 +126,9 @@ class DailyContentRemoteClient {
     required String payloadType,
     required Map<String, dynamic> fallbackPayload,
     required List<String> warnings,
+    String? recordKind,
   }) async {
-    final fallback = _extractIdsFromPayload(fallbackPayload);
+    final fallback = _extractIdsFromPayload(fallbackPayload, recordKind: recordKind);
     if (path == null || path.trim().isEmpty) return fallback;
     final obj = await _getJsonObject(
       uri: _resolveUri(path),
@@ -116,13 +146,17 @@ class DailyContentRemoteClient {
     return ids;
   }
 
-  List<String> _extractIdsFromPayload(Map<String, dynamic> payload) {
+  List<String> _extractIdsFromPayload(
+    Map<String, dynamic> payload, {
+    String? recordKind,
+  }) {
     final records = payload['records'];
     if (records is! List) return const <String>[];
     final ids = <String>[];
     for (final row in records) {
       if (row is! Map) continue;
       final map = Map<String, dynamic>.from(row);
+      if (recordKind != null && map['kind'] != recordKind) continue;
       final id = map['id'];
       if (id is! String) continue;
       final trimmed = id.trim();
@@ -155,9 +189,11 @@ class DailyContentRemoteClient {
     return trimmed;
   }
 
-  (String?, String?) _readSequencePaths(Map<String, dynamic> manifest) {
+  (String?, String?, String?, String?) _readSequencePaths(
+    Map<String, dynamic> manifest,
+  ) {
     final raw = manifest['sequence_files'];
-    if (raw is! Map) return (null, null);
+    if (raw is! Map) return (null, null, null, null);
     final map = Map<String, dynamic>.from(raw);
 
     String? readPath(String key) {
@@ -170,7 +206,12 @@ class DailyContentRemoteClient {
       return trimmed.isEmpty ? null : trimmed;
     }
 
-    return (readPath('ayah_ids'), readPath('hadith_ids'));
+    return (
+      readPath('ayah_ids'),
+      readPath('hadith_ids'),
+      readPath('esma_ids'),
+      readPath('sifat_ids'),
+    );
   }
 
   Future<Map<String, dynamic>?> _getJsonObject({

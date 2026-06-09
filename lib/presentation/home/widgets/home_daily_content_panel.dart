@@ -35,6 +35,8 @@ class HomeDailyContentPanel extends StatefulWidget {
 class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
   static const String _headingAyah = 'G\u00FCn\u00FCn Ayeti';
   static const String _headingHadith = 'G\u00FCn\u00FCn Hadisi';
+  static const String _headingEsma = 'G\u00FCn\u00FCn Esmas\u0131';
+  static const String _headingSifat = 'G\u00FCn\u00FCn S\u0131fat\u0131';
   static const String _labelArabic = '\u0639\u0631\u0628\u064A';
   static const String _noteLoading =
       'G\u00FCnl\u00FCk i\u00E7erik y\u00FCkleniyor...';
@@ -44,6 +46,10 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       'Bug\u00FCn i\u00E7in ayet i\u00E7eri\u011Fi hen\u00FCz haz\u0131r de\u011Fil.';
   static const String _noteHadithMissing =
       'Bug\u00FCn i\u00E7in hadis i\u00E7eri\u011Fi hen\u00FCz haz\u0131r de\u011Fil.';
+  static const String _noteEsmaMissing =
+      'Bug\u00FCn i\u00E7in esma i\u00E7eri\u011Fi hen\u00FCz haz\u0131r de\u011Fil.';
+  static const String _noteSifatMissing =
+      'Bug\u00FCn i\u00E7in s\u0131fat i\u00E7eri\u011Fi hen\u00FCz haz\u0131r de\u011Fil.';
 
   late final PageController _pageController;
   final ReminderAudioService _reminderAudioService = ReminderAudioService();
@@ -84,6 +90,8 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
   Widget build(BuildContext context) {
     final ayah = widget.result?.ayah;
     final hadith = widget.result?.hadith;
+    final esma = widget.result?.esma;
+    final sifat = widget.result?.sifat;
     final frameColor =
         Color.lerp(widget.panelColor, Colors.white, 0.52) ?? widget.panelColor;
     final contentColor = widget.panelColor;
@@ -138,18 +146,42 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
             child: PageView.builder(
               controller: _pageController,
               itemBuilder: (context, index) {
-                final showAyah = index.isEven;
-                if (showAyah) {
+                final page = index % 4;
+                if (page == 0) {
                   return _buildPage(
                     context: context,
                     heading: _headingAyah,
                     child: _buildAyahTab(context, ayah, contentColor),
                   );
                 }
+                if (page == 1) {
+                  return _buildPage(
+                    context: context,
+                    heading: _headingHadith,
+                    child: _buildHadithTab(context, hadith, contentColor),
+                  );
+                }
+                if (page == 2) {
+                  return _buildPage(
+                    context: context,
+                    heading: _headingEsma,
+                    child: _buildEsmaTab(
+                      context,
+                      esma,
+                      contentColor,
+                      missingText: _noteEsmaMissing,
+                    ),
+                  );
+                }
                 return _buildPage(
                   context: context,
-                  heading: _headingHadith,
-                  child: _buildHadithTab(context, hadith, contentColor),
+                  heading: _headingSifat,
+                  child: _buildEsmaTab(
+                    context,
+                    sifat,
+                    contentColor,
+                    missingText: _noteSifatMissing,
+                  ),
                 );
               },
             ),
@@ -342,14 +374,83 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     );
   }
 
+  Widget _buildEsmaTab(
+    BuildContext context,
+    DailyEsmaRecord? record,
+    Color contentColor, {
+    required String missingText,
+  }) {
+    if (widget.isLoading) {
+      return _buildNote(
+        context: context,
+        text: _noteLoading,
+        contentColor: contentColor,
+      );
+    }
+    if (widget.hasError) {
+      return _buildNote(
+        context: context,
+        text: _noteError,
+        contentColor: contentColor,
+      );
+    }
+    if (record == null) {
+      return _buildNote(
+        context: context,
+        text: missingText,
+        contentColor: contentColor,
+      );
+    }
+    final activeText = _languageText(record, _activeLanguage);
+    final title = _languageTitle(record, _activeLanguage);
+    final isRtl = _activeLanguage == 'ar';
+    return _DailyContentSection(
+      title: title,
+      displayText: activeText,
+      isRtl: isRtl,
+      reference: record.kind == 'sifat'
+          ? '${record.category} ${record.sourceId}'
+          : 'Esm\u00E2-i H\u00FCsn\u00E2 ${record.sourceId}',
+      cizgiColor: widget.cizgiColor,
+      contentColor: contentColor,
+      referenceColor: const Color(0xFFF9A825),
+      onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
+          ? () => _readTurkishText('$title. $activeText')
+          : null,
+    );
+  }
+
   String _languageText(covariant dynamic record, String language) {
     if (language == 'tr') {
-      return (record is DailyAyahRecord) ? record.textTr : (record as DailyHadithRecord).textTr;
+      if (record is DailyAyahRecord) return record.textTr;
+      if (record is DailyHadithRecord) return record.textTr;
+      final esma = record as DailyEsmaRecord;
+      return _joinMeaningAndText(esma.meaningTr, esma.textTr);
     } else if (language == 'en') {
-      return (record is DailyAyahRecord) ? record.textEn : (record as DailyHadithRecord).textEn;
+      if (record is DailyAyahRecord) return record.textEn;
+      if (record is DailyHadithRecord) return record.textEn;
+      final esma = record as DailyEsmaRecord;
+      return _joinMeaningAndText(esma.meaningEn, esma.textEn);
     } else {
-      return (record is DailyAyahRecord) ? record.textAr : (record as DailyHadithRecord).textAr;
+      if (record is DailyAyahRecord) return record.textAr;
+      if (record is DailyHadithRecord) return record.textAr;
+      final esma = record as DailyEsmaRecord;
+      return _joinMeaningAndText(esma.meaningAr, esma.textAr);
     }
+  }
+
+  String _languageTitle(DailyEsmaRecord record, String language) {
+    if (language == 'ar') return record.nameArabic;
+    if (language == 'en') return record.nameTransliteration;
+    return record.nameTurkish;
+  }
+
+  String _joinMeaningAndText(String meaning, String text) {
+    final first = meaning.trim();
+    final second = text.trim();
+    if (first.isEmpty) return second;
+    if (second.isEmpty || second == first) return first;
+    return '$first\n\n$second';
   }
 
   Future<void> _readTurkishText(String text) async {

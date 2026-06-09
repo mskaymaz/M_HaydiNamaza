@@ -35,6 +35,7 @@ def main() -> None:
     old_hadith_payload = _read_json(publish_root / "hadiths.v1.approved.json", default={})
     local_ayah_payload = _read_json(LOCAL_APPROVED_ROOT / "ayahs.v1.approved.json")
     local_hadith_payload = _read_json(LOCAL_APPROVED_ROOT / "hadiths.v1.approved.json")
+    local_esma_payload = _read_json(LOCAL_APPROVED_ROOT / "esmaul_husna.v1.approved.json")
 
     ayah_records = _build_ayah_records(
         local_records=_records(local_ayah_payload),
@@ -59,11 +60,19 @@ def main() -> None:
         "type": "hadith",
         "records": hadith_records,
     }
+    esma_payload = {
+        "schema_version": "1.0.0",
+        "content_version": content_version,
+        "type": "esma",
+        "records": _records(local_esma_payload),
+    }
 
     ayah_path = publish_root / "ayahs.v1.approved.json"
     hadith_path = publish_root / "hadiths.v1.approved.json"
+    esma_path = publish_root / "esmaul_husna.v1.approved.json"
     _write_json(ayah_path, ayah_payload)
     _write_json(hadith_path, hadith_payload)
+    _write_json(esma_path, esma_payload)
 
     manifest = {
         "schema_version": "1.0.0",
@@ -76,6 +85,11 @@ def main() -> None:
                 hadith_path,
                 len(hadith_records),
             ),
+            "esmas": _manifest_file(
+                "publish/esmaul_husna.v1.approved.json",
+                esma_path,
+                len(esma_payload["records"]),
+            ),
         },
         "schedule": {
             "start_date": "2026-05-15",
@@ -86,6 +100,7 @@ def main() -> None:
     print("allapp publish synced")
     print(f"ayah records: {len(ayah_records)}")
     print(f"hadith records: {len(hadith_records)}")
+    print(f"esma records: {len(esma_payload['records'])}")
     print(f"target: {target_root}")
 
 

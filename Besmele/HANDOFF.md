@@ -3,7 +3,7 @@
 ## Current status
 R260609_1528 commit hazırlığı: Python arayüzü üzerinden ayet ve hadis eklemeleri yapılacak; yerel approved JSON yapısı, `onay.py`, `incele.py`, bulk ekleme araçları ve AllApp publish/push yardımcıları bu akışı destekleyecek şekilde güncellendi.
 Daily content review tool now has approved-only mobile preview for ayah/hadith/esma, unified archive root `assets/data/daily_content/archive/`, and unified approved root `assets/data/daily_content/approved/`.
-Current approved counts are `ayah=1438`, `hadith=438`, `esma=99`.
+Current approved counts are `ayah=1438`, `hadith=438`, `esma/sifat=381` (`esma=99`, `sifat=282`).
 TASK-03 is closed and pushed on `main`.
 TASK-00 is completed on 2026-05-10 with documented exceptions.
 TASK-04A is closed (checkpoints completed; orchestration-safe extraction scope finalized).
@@ -20,7 +20,7 @@ TASK-12 release-readiness documentation/checklist outputs are completed.
 Ayah/hadith data reset was executed on 2026-06-02; old lists, publish payloads, archives, and source folders were removed, and a new clean seed structure was created.
 
 ## Next action
-Continue ayah/hadith manual review from `assets/data/daily_content/archive/`, rebuild approved runtime payloads under `assets/data/daily_content/approved/`, then sync AllApp publish artifacts.
+Continue ayah/hadith/esma-sifat manual review from approved/runtime payloads, then push AllApp publish artifacts.
 
 ## Important blockers
 - Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.
@@ -36,6 +36,25 @@ Continue ayah/hadith manual review from `assets/data/daily_content/archive/`, re
   - `manifest=local-approved-20260609_074542`
   - `ayah_count=37`
   - `hadith_count=8`
+
+## Esma/Sıfat approved payload update (2026-06-09)
+- Source files checked:
+  - `docs/EsmaulHusna/Esma_ar_tr_en_99.json`: `99` records, duplicate ids `0`, missing required AR/TR/EN fields `0`.
+  - `docs/EsmaulHusna/esma_sifat_282.json`: `282` records, duplicate ids `0`, missing required AR/TR/EN fields `0`.
+- Local approved payload generated:
+  - `assets/data/daily_content/approved/esmaul_husna.v1.approved.json`
+  - Total records: `381` (`esma=99`, `sifat=282`).
+  - `assets/data/daily_content/approved/sequence.v1.json` now includes `esma_order_ids` and `sifat_order_ids`.
+- App runtime:
+  - Daily content remote manifest now requires `publish_files.esmas`.
+  - App falls back to local approved assets if remote manifest/payload is missing.
+  - Home daily panel order is `Ayet -> Hadis -> Esma -> Sıfat`.
+- AllApp local publish artifacts generated under `_external/AllAppRemote/data/daily_content/v1/`:
+  - `manifest.json`
+  - `publish/ayahs.v1.approved.json`
+  - `publish/hadiths.v1.approved.json`
+  - `publish/esmaul_husna.v1.approved.json`
+- AllApp remote push was not run in this step.
 
 ## Bulk hadith local approval update (2026-06-09)
 - Requested hadith numbers: `436`.

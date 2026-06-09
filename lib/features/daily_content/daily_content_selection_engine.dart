@@ -42,14 +42,20 @@ class DailyContentSelectionEngine {
 
     final ayahs = _dedupeAyahRecords(loadResult.ayahs, warnings);
     final hadiths = _dedupeHadithRecords(loadResult.hadiths, warnings);
+    final esmas = _dedupeEsmaRecords(loadResult.esmas, warnings, label: 'esma');
+    final sifats = _dedupeEsmaRecords(loadResult.sifats, warnings, label: 'sifat');
     final todayKey = _clock.dayKey();
 
     final startDate = _parseStartDate(loadResult.sequenceStartDate);
     final dayIndex = _dayIndex(startDate, now);
     final ayahId = _idAt(loadResult.ayahOrderIds, dayIndex + ayahOffset);
     final hadithId = _idAt(loadResult.hadithOrderIds, dayIndex + hadithOffset);
+    final esmaId = _idAt(loadResult.esmaOrderIds, dayIndex);
+    final sifatId = _idAt(loadResult.sifatOrderIds, dayIndex);
     final ayahCycleId = _cycleId(loadResult.ayahOrderIds, dayIndex + ayahOffset);
     final hadithCycleId = _cycleId(loadResult.hadithOrderIds, dayIndex + hadithOffset);
+    final esmaCycleId = _cycleId(loadResult.esmaOrderIds, dayIndex);
+    final sifatCycleId = _cycleId(loadResult.sifatOrderIds, dayIndex);
 
     final currentState = await _stateRepository.read(warnings: warnings);
     final nextState = currentState.copyWith(
@@ -60,12 +66,18 @@ class DailyContentSelectionEngine {
       clearAyahId: ayahId == null,
       hadithId: hadithId,
       clearHadithId: hadithId == null,
+      esmaId: esmaId,
+      clearEsmaId: esmaId == null,
+      sifatId: sifatId,
+      clearSifatId: sifatId == null,
       recentAyahIds: const <String>[],
       recentHadithIds: const <String>[],
       seenAyahIds: const <String>[],
       seenHadithIds: const <String>[],
       ayahCycleId: ayahCycleId,
       hadithCycleId: hadithCycleId,
+      esmaCycleId: esmaCycleId,
+      sifatCycleId: sifatCycleId,
       updatedAt: now.toIso8601String(),
     );
     await _stateRepository.write(nextState);
@@ -73,6 +85,8 @@ class DailyContentSelectionEngine {
     return DailyContentSelectionResult(
       ayah: _findAyahById(ayahs, ayahId),
       hadith: _findHadithById(hadiths, hadithId),
+      esma: _findEsmaById(esmas, esmaId),
+      sifat: _findEsmaById(sifats, sifatId),
       state: nextState,
       warnings: warnings,
       skippedCount: loadResult.skippedCount,
@@ -82,9 +96,11 @@ class DailyContentSelectionEngine {
   String _buildContentVersion(DailyContentLoadResult result) {
     final ayahVersion = (result.ayahContentVersion ?? '').trim();
     final hadithVersion = (result.hadithContentVersion ?? '').trim();
+    final esmaVersion = (result.esmaContentVersion ?? '').trim();
     final left = ayahVersion.isEmpty ? 'na' : ayahVersion;
-    final right = hadithVersion.isEmpty ? 'na' : hadithVersion;
-    return '$left|$right';
+    final middle = hadithVersion.isEmpty ? 'na' : hadithVersion;
+    final right = esmaVersion.isEmpty ? 'na' : esmaVersion;
+    return '$left|$middle|$right';
   }
 
   DateTime _parseStartDate(String raw) {
@@ -153,6 +169,24 @@ class DailyContentSelectionEngine {
     return unique;
   }
 
+  List<DailyEsmaRecord> _dedupeEsmaRecords(
+    List<DailyEsmaRecord> records,
+    List<String> warnings, {
+    required String label,
+  }) {
+    final seenIds = <String>{};
+    final unique = <DailyEsmaRecord>[];
+    for (final record in records) {
+      if (seenIds.contains(record.id)) {
+        warnings.add('$label duplicate id atlandi: ${record.id}');
+        continue;
+      }
+      seenIds.add(record.id);
+      unique.add(record);
+    }
+    return unique;
+  }
+
   DailyAyahRecord? _findAyahById(List<DailyAyahRecord> records, String? id) {
     if (id == null || id.trim().isEmpty) return null;
     for (final record in records) {
@@ -165,6 +199,14 @@ class DailyContentSelectionEngine {
     List<DailyHadithRecord> records,
     String? id,
   ) {
+    if (id == null || id.trim().isEmpty) return null;
+    for (final record in records) {
+      if (record.id == id) return record;
+    }
+    return null;
+  }
+
+  DailyEsmaRecord? _findEsmaById(List<DailyEsmaRecord> records, String? id) {
     if (id == null || id.trim().isEmpty) return null;
     for (final record in records) {
       if (record.id == id) return record;

@@ -2,7 +2,7 @@
 
 last_update: 2026-06-09
 project: M_HaydiNamaza
-status: bulk_ayah_hadith_approved_local_pending_allapp_push
+status: bulk_daily_content_esma_sifat_remote_publish_ready_pending_allapp_push
 active_phase: advanced_architecture_upgrade
 active_task: TASK-09-ui-ux-professionalization-in-progress
 blockers:
@@ -10,7 +10,7 @@ blockers:
 next_step:
   - Continue ayah and hadith review from `assets/data/daily_content/archive/`.
   - Keep approved runtime payloads under `assets/data/daily_content/approved/`.
-  - Sync AllApp publish artifacts after local approved ayah/hadith changes.
+  - Sync/push AllApp publish artifacts after local approved ayah/hadith/esma-sifat changes.
   - Keep TASK-09 and later tasks pending until explicit instruction.
 
 ## Current known risks
@@ -20,4 +20,4 @@ next_step:
 - Qibla direction must distinguish mathematical bearing from sensor accuracy.
 - Daily content archive/approved roots were unified on 2026-06-04 and the Python review tool now depends on those fixed paths.
 - AllApp public content sync target is `https://github.com/mskaymaz/AllApp.git` branch `main`; latest daily content publish sync commit is `12399cd`.
-- Local approved counts after 2026-06-09 bulk ayah/hadith add: `ayah=1438`, `hadith=438`, `esma=99`; AllApp remote publish still needs a push for these latest local additions.
+- Local approved counts after 2026-06-09 Esma/Sıfat import: `ayah=1438`, `hadith=438`, `esma/sifat=381` (`esma=99`, `sifat=282`); AllApp local publish artifacts are generated and remote push is still pending.

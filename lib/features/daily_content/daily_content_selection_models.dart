@@ -6,12 +6,16 @@ class DailyContentSelectionState {
   final String contentVersion;
   final String? ayahId;
   final String? hadithId;
+  final String? esmaId;
+  final String? sifatId;
   final List<String> recentAyahIds;
   final List<String> recentHadithIds;
   final List<String> seenAyahIds;
   final List<String> seenHadithIds;
   final int ayahCycleId;
   final int hadithCycleId;
+  final int esmaCycleId;
+  final int sifatCycleId;
   final String updatedAt;
 
   const DailyContentSelectionState({
@@ -20,12 +24,16 @@ class DailyContentSelectionState {
     required this.contentVersion,
     required this.ayahId,
     required this.hadithId,
+    this.esmaId,
+    this.sifatId,
     required this.recentAyahIds,
     required this.recentHadithIds,
     required this.seenAyahIds,
     required this.seenHadithIds,
     required this.ayahCycleId,
     required this.hadithCycleId,
+    this.esmaCycleId = 0,
+    this.sifatCycleId = 0,
     required this.updatedAt,
   });
 
@@ -36,12 +44,16 @@ class DailyContentSelectionState {
       contentVersion: '',
       ayahId: null,
       hadithId: null,
+      esmaId: null,
+      sifatId: null,
       recentAyahIds: <String>[],
       recentHadithIds: <String>[],
       seenAyahIds: <String>[],
       seenHadithIds: <String>[],
       ayahCycleId: 0,
       hadithCycleId: 0,
+      esmaCycleId: 0,
+      sifatCycleId: 0,
       updatedAt: '',
     );
   }
@@ -54,12 +66,18 @@ class DailyContentSelectionState {
     bool clearAyahId = false,
     String? hadithId,
     bool clearHadithId = false,
+    String? esmaId,
+    bool clearEsmaId = false,
+    String? sifatId,
+    bool clearSifatId = false,
     List<String>? recentAyahIds,
     List<String>? recentHadithIds,
     List<String>? seenAyahIds,
     List<String>? seenHadithIds,
     int? ayahCycleId,
     int? hadithCycleId,
+    int? esmaCycleId,
+    int? sifatCycleId,
     String? updatedAt,
   }) {
     return DailyContentSelectionState(
@@ -68,12 +86,16 @@ class DailyContentSelectionState {
       contentVersion: contentVersion ?? this.contentVersion,
       ayahId: clearAyahId ? null : (ayahId ?? this.ayahId),
       hadithId: clearHadithId ? null : (hadithId ?? this.hadithId),
+      esmaId: clearEsmaId ? null : (esmaId ?? this.esmaId),
+      sifatId: clearSifatId ? null : (sifatId ?? this.sifatId),
       recentAyahIds: recentAyahIds ?? this.recentAyahIds,
       recentHadithIds: recentHadithIds ?? this.recentHadithIds,
       seenAyahIds: seenAyahIds ?? this.seenAyahIds,
       seenHadithIds: seenHadithIds ?? this.seenHadithIds,
       ayahCycleId: ayahCycleId ?? this.ayahCycleId,
       hadithCycleId: hadithCycleId ?? this.hadithCycleId,
+      esmaCycleId: esmaCycleId ?? this.esmaCycleId,
+      sifatCycleId: sifatCycleId ?? this.sifatCycleId,
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
@@ -82,6 +104,8 @@ class DailyContentSelectionState {
 class DailyContentSelectionResult {
   final DailyAyahRecord? ayah;
   final DailyHadithRecord? hadith;
+  final DailyEsmaRecord? esma;
+  final DailyEsmaRecord? sifat;
   final DailyContentSelectionState state;
   final List<String> warnings;
   final int skippedCount;
@@ -89,9 +113,10 @@ class DailyContentSelectionResult {
   const DailyContentSelectionResult({
     required this.ayah,
     required this.hadith,
+    this.esma,
+    this.sifat,
     required this.state,
     required this.warnings,
     required this.skippedCount,
   });
 }
-

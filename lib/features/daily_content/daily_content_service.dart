@@ -48,6 +48,16 @@ class DailyContentService {
           'daily_content_service: hadith secilemedi (bos veya gecersiz icerik).',
         );
       }
+      if (result.esma == null) {
+        warnings.add(
+          'daily_content_service: esma secilemedi (bos veya gecersiz icerik).',
+        );
+      }
+      if (result.sifat == null) {
+        warnings.add(
+          'daily_content_service: sifat secilemedi (bos veya gecersiz icerik).',
+        );
+      }
 
       if (warnings.length == result.warnings.length) {
         return result;
@@ -56,6 +66,8 @@ class DailyContentService {
       return DailyContentSelectionResult(
         ayah: result.ayah,
         hadith: result.hadith,
+        esma: result.esma,
+        sifat: result.sifat,
         state: result.state,
         warnings: warnings,
         skippedCount: result.skippedCount,

@@ -41,7 +41,7 @@ SYNC_SCRIPT = Path(__file__).resolve().with_name(
 
 class PublishWorker(QThread):
     log = Signal(str)
-    remote_counts = Signal(int, int)
+    remote_counts = Signal(int, int, int)
     done = Signal(bool, str)
 
     def run(self) -> None:
@@ -58,7 +58,7 @@ class PublishWorker(QThread):
 
         counts = read_counts()
         self.log.emit(
-            f"Yerel approved: ayet={counts['ayah']}, hadis={counts['hadith']}"
+            f"Yerel approved: ayet={counts['ayah']}, hadis={counts['hadith']}, esma/sifat={counts['esma']}"
         )
         self._assert_allapp_dirty_scope_is_safe()
 
@@ -102,9 +102,13 @@ class PublishWorker(QThread):
             label="AllApp main push",
         )
         remote_counts = read_remote_counts()
-        self.remote_counts.emit(remote_counts["ayah"], remote_counts["hadith"])
+        self.remote_counts.emit(
+            remote_counts["ayah"],
+            remote_counts["hadith"],
+            remote_counts["esma"],
+        )
         self.log.emit(
-            f"Uzak yayin: ayet={remote_counts['ayah']}, hadis={remote_counts['hadith']}"
+            f"Uzak yayin: ayet={remote_counts['ayah']}, hadis={remote_counts['hadith']}, esma/sifat={remote_counts['esma']}"
         )
         head = self._run_command(
             ["git", "rev-parse", "--short", "HEAD"],
@@ -139,18 +143,27 @@ class PublishWorker(QThread):
         hadith = _read_json(
             ALLAPP_DATA_ROOT / "publish" / "hadiths.v1.approved.json"
         )
+        esma = _read_json(
+            ALLAPP_DATA_ROOT / "publish" / "esmaul_husna.v1.approved.json"
+        )
         ayah_count = len(ayah.get("records", []))
         hadith_count = len(hadith.get("records", []))
-        if ayah_count != expected["ayah"] or hadith_count != expected["hadith"]:
+        esma_count = len(esma.get("records", []))
+        if (
+            ayah_count != expected["ayah"]
+            or hadith_count != expected["hadith"]
+            or esma_count != expected["esma"]
+        ):
             raise RuntimeError(
                 "Uretilen AllApp kayit sayisi yerel approved ile eslesmiyor: "
                 f"ayah={ayah_count}/{expected['ayah']}, "
-                f"hadith={hadith_count}/{expected['hadith']}"
+                f"hadith={hadith_count}/{expected['hadith']}, "
+                f"esma={esma_count}/{expected['esma']}"
             )
         self.log.emit(
             "AllApp manifest: "
             f"{manifest.get('content_version', '-')}; "
-            f"ayet={ayah_count}, hadis={hadith_count}"
+            f"ayet={ayah_count}, hadis={hadith_count}, esma/sifat={esma_count}"
         )
 
     def _run_command(
@@ -193,8 +206,10 @@ class AllAppPushWindow(QMainWindow):
         summary = QGridLayout()
         self.local_ayah_count = QLabel("-")
         self.local_hadith_count = QLabel("-")
+        self.local_esma_count = QLabel("-")
         self.remote_ayah_count = QLabel("-")
         self.remote_hadith_count = QLabel("-")
+        self.remote_esma_count = QLabel("-")
         self.manifest_version = QLabel("-")
         self.allapp_path = QLabel(str(ALLAPP_ROOT))
         self.allapp_path.setTextInteractionFlags(Qt.TextSelectableByMouse)
@@ -205,6 +220,8 @@ class AllAppPushWindow(QMainWindow):
         local_layout.addWidget(self.local_ayah_count, 0, 1)
         local_layout.addWidget(QLabel("Onayli hadis"), 1, 0)
         local_layout.addWidget(self.local_hadith_count, 1, 1)
+        local_layout.addWidget(QLabel("Onayli esma/sifat"), 2, 0)
+        local_layout.addWidget(self.local_esma_count, 2, 1)
 
         remote_box = QGroupBox("Yayinda")
         remote_layout = QGridLayout(remote_box)
@@ -212,6 +229,8 @@ class AllAppPushWindow(QMainWindow):
         remote_layout.addWidget(self.remote_ayah_count, 0, 1)
         remote_layout.addWidget(QLabel("Hadis"), 1, 0)
         remote_layout.addWidget(self.remote_hadith_count, 1, 1)
+        remote_layout.addWidget(QLabel("Esma/Sifat"), 2, 0)
+        remote_layout.addWidget(self.remote_esma_count, 2, 1)
 
         summary.addWidget(local_box, 0, 0)
         summary.addWidget(remote_box, 0, 1)
@@ -243,11 +262,16 @@ class AllAppPushWindow(QMainWindow):
             counts = read_counts()
             self.local_ayah_count.setText(str(counts["ayah"]))
             self.local_hadith_count.setText(str(counts["hadith"]))
+            self.local_esma_count.setText(str(counts["esma"]))
             manifest = _read_json(ALLAPP_DATA_ROOT / "manifest.json", default={})
             self.manifest_version.setText(str(manifest.get("content_version") or "-"))
             try:
                 remote_counts = read_remote_counts()
-                self._set_remote_counts(remote_counts["ayah"], remote_counts["hadith"])
+                self._set_remote_counts(
+                    remote_counts["ayah"],
+                    remote_counts["hadith"],
+                    remote_counts["esma"],
+                )
             except Exception as exc:
                 self._append_log(f"Uzak yayin sayisi okunamadi: {exc}")
             self._append_log("Ozet yenilendi.")
@@ -260,7 +284,7 @@ class AllAppPushWindow(QMainWindow):
         reply = QMessageBox.question(
             self,
             "AllApp'a push",
-            "Yerel approved ayet/hadisler AllApp publish dosyalarina yazilip GitHub main branch'e push edilecek. Devam edilsin mi?",
+            "Yerel approved ayet/hadis/esma-sifat kayitlari AllApp publish dosyalarina yazilip GitHub main branch'e push edilecek. Devam edilsin mi?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             QMessageBox.StandardButton.No,
         )
@@ -276,9 +300,15 @@ class AllAppPushWindow(QMainWindow):
         self.worker.done.connect(self._publish_done)
         self.worker.start()
 
-    def _set_remote_counts(self, ayah_count: int, hadith_count: int) -> None:
+    def _set_remote_counts(
+        self,
+        ayah_count: int,
+        hadith_count: int,
+        esma_count: int,
+    ) -> None:
         self.remote_ayah_count.setText(str(ayah_count))
         self.remote_hadith_count.setText(str(hadith_count))
+        self.remote_esma_count.setText(str(esma_count))
 
     def _publish_done(self, ok: bool, message: str) -> None:
         self.push_btn.setEnabled(True)
@@ -298,6 +328,7 @@ def read_counts() -> dict[str, int]:
     return {
         "ayah": _record_count(APPROVED_ROOT / "ayahs.v1.approved.json"),
         "hadith": _record_count(APPROVED_ROOT / "hadiths.v1.approved.json"),
+        "esma": _record_count(APPROVED_ROOT / "esmaul_husna.v1.approved.json"),
     }
 
 
@@ -305,6 +336,7 @@ def read_remote_counts() -> dict[str, int]:
     return {
         "ayah": _remote_record_count("publish/ayahs.v1.approved.json"),
         "hadith": _remote_record_count("publish/hadiths.v1.approved.json"),
+        "esma": _remote_record_count("publish/esmaul_husna.v1.approved.json"),
     }
 
 

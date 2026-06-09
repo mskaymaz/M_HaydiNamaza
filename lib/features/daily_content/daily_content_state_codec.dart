@@ -26,12 +26,16 @@ class DailyContentStateCodec {
         contentVersion: _readString(map, 'content_version') ?? '',
         ayahId: _readString(map, 'ayah_id'),
         hadithId: _readString(map, 'hadith_id'),
+        esmaId: _readString(map, 'esma_id'),
+        sifatId: _readString(map, 'sifat_id'),
         recentAyahIds: _readStringList(map, 'recent_ayah_ids'),
         recentHadithIds: _readStringList(map, 'recent_hadith_ids'),
         seenAyahIds: _readStringList(map, 'seen_ayah_ids'),
         seenHadithIds: _readStringList(map, 'seen_hadith_ids'),
         ayahCycleId: _readInt(map, 'ayah_cycle_id'),
         hadithCycleId: _readInt(map, 'hadith_cycle_id'),
+        esmaCycleId: _readInt(map, 'esma_cycle_id'),
+        sifatCycleId: _readInt(map, 'sifat_cycle_id'),
         updatedAt: _readString(map, 'updated_at') ?? '',
       );
     } catch (_) {
@@ -47,12 +51,16 @@ class DailyContentStateCodec {
       'content_version': state.contentVersion,
       'ayah_id': state.ayahId,
       'hadith_id': state.hadithId,
+      'esma_id': state.esmaId,
+      'sifat_id': state.sifatId,
       'recent_ayah_ids': state.recentAyahIds,
       'recent_hadith_ids': state.recentHadithIds,
       'seen_ayah_ids': state.seenAyahIds,
       'seen_hadith_ids': state.seenHadithIds,
       'ayah_cycle_id': state.ayahCycleId,
       'hadith_cycle_id': state.hadithCycleId,
+      'esma_cycle_id': state.esmaCycleId,
+      'sifat_cycle_id': state.sifatCycleId,
       'updated_at': state.updatedAt,
     };
     return jsonEncode(map);
@@ -91,4 +99,3 @@ class DailyContentStateCodec {
     return result;
   }
 }
-

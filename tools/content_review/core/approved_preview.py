@@ -33,6 +33,7 @@ class ApprovedContentNavigator:
         self._items_by_type: dict[str, list[MobilePreviewItem]] = {key: [] for key in PREVIEW_TYPES}
         self._current_type = "ayah"
         self._indices: dict[str, int] = {key: 0 for key in PREVIEW_TYPES}
+        self._loaded_types: set[str] = set()
 
     @property
     def current_type(self) -> str:
@@ -40,12 +41,8 @@ class ApprovedContentNavigator:
 
     def reload(self) -> None:
         self._repository.reload()
-        self._items_by_type["ayah"] = self._load_items("ayah")
-        self._items_by_type["hadith"] = self._load_items("hadith")
-        self._items_by_type["esma"] = self._load_items("esma")
-        for kind in PREVIEW_TYPES:
-            items = self._items_by_type[kind]
-            self._indices[kind] = 0 if not items else min(max(self._indices[kind], 0), len(items) - 1)
+        self._loaded_types.clear()
+        self._load_current_type()
 
     def set_content_type(self, kind: str, *, reset_index: bool = False) -> None:
         if kind not in PREVIEW_TYPES:
@@ -53,23 +50,29 @@ class ApprovedContentNavigator:
         self._current_type = kind
         if reset_index:
             self._indices[kind] = 0
+        self._load_current_type()
 
     def count(self) -> int:
+        self._load_current_type()
         return len(self._items_by_type[self._current_type])
 
     def current_index(self) -> int:
+        self._load_current_type()
         return self._indices[self._current_type]
 
     def current_item(self) -> MobilePreviewItem | None:
+        self._load_current_type()
         items = self._items_by_type[self._current_type]
         if not items:
             return None
         return items[self._indices[self._current_type]]
 
     def can_go_previous(self) -> bool:
+        self._load_current_type()
         return self._indices[self._current_type] > 0
 
     def can_go_next(self) -> bool:
+        self._load_current_type()
         return self._indices[self._current_type] + 1 < len(self._items_by_type[self._current_type])
 
     def go_previous(self) -> MobilePreviewItem | None:
@@ -86,6 +89,7 @@ class ApprovedContentNavigator:
         value = raw_value.strip()
         if not value:
             return self.current_item()
+        self._load_current_type()
         items = self._items_by_type[self._current_type]
         if not items:
             return None
@@ -108,10 +112,21 @@ class ApprovedContentNavigator:
         return None
 
     def position_label(self) -> str:
+        self._load_current_type()
         total = self.count()
         if total == 0:
             return "0 / 0"
         return f"{self.current_index() + 1} / {total}"
+
+    def remove_current_item(self) -> MobilePreviewItem | None:
+        self._load_current_type()
+        items = self._items_by_type[self._current_type]
+        if not items:
+            return None
+        index = self._indices[self._current_type]
+        removed = items.pop(index)
+        self._indices[self._current_type] = 0 if not items else min(index, len(items) - 1)
+        return removed
 
     def empty_message(self) -> str:
         if self._current_type == "ayah":
@@ -130,6 +145,7 @@ class ApprovedContentNavigator:
     def _load_items(self, kind: str) -> list[MobilePreviewItem]:
         items: list[MobilePreviewItem] = []
         position = 0
+        archive_lookup = self._archive_lookup(kind) if kind == "hadith" else {}
         for record in self._repository.list_approved_records(kind):
             if self._is_onay_processed(record):
                 continue
@@ -137,14 +153,33 @@ class ApprovedContentNavigator:
             if kind == "ayah":
                 items.append(self._build_ayah_item(record, position))
             elif kind == "hadith":
-                items.append(self._build_hadith_item(record, position))
+                items.append(self._build_hadith_item(record, position, archive_lookup))
             else:
                 items.append(self._build_esma_item(record, position))
         return items
 
+    def _load_current_type(self) -> None:
+        kind = self._current_type
+        if kind in self._loaded_types:
+            return
+        self._items_by_type[kind] = self._load_items(kind)
+        items = self._items_by_type[kind]
+        self._indices[kind] = 0 if not items else min(max(self._indices[kind], 0), len(items) - 1)
+        self._loaded_types.add(kind)
+
+    def _archive_lookup(self, kind: str) -> dict[str, BaseRecord]:
+        lookup: dict[str, BaseRecord] = {}
+        for record in self._repository.list_archive_records(kind):
+            for key in (record.id, record.ref):
+                if key:
+                    lookup.setdefault(key, record)
+        return lookup
+
     @staticmethod
     def _is_onay_processed(record: BaseRecord) -> bool:
         raw = record.raw if isinstance(record.raw, dict) else {}
+        if str(raw.get("status") or "").strip() == "approved":
+            return True
         onay_review = raw.get("onay_review")
         if isinstance(onay_review, dict) and str(onay_review.get("processed_at") or "").strip():
             return True
@@ -172,11 +207,16 @@ class ApprovedContentNavigator:
             search_tokens=(record.id, record.ref, reference_text, str(position)),
         )
 
-    def _build_hadith_item(self, record: BaseRecord, position: int) -> MobilePreviewItem:
+    def _build_hadith_item(
+        self,
+        record: BaseRecord,
+        position: int,
+        archive_lookup: dict[str, BaseRecord],
+    ) -> MobilePreviewItem:
         if not isinstance(record, HadithRecord):
             raise TypeError("Expected HadithRecord for hadith preview item.")
         raw = record.raw if isinstance(record.raw, dict) else {}
-        archive_record = self._repository.find_archive_record("hadith", record.id) or self._repository.find_archive_record("hadith", record.ref)
+        archive_record = archive_lookup.get(record.id) or archive_lookup.get(record.ref)
         archive_raw = archive_record.raw if archive_record and isinstance(archive_record.raw, dict) else {}
         archive_source = archive_raw.get("sourceInfo") if isinstance(archive_raw.get("sourceInfo"), dict) else {}
         archive_display = archive_source.get("display") if isinstance(archive_source.get("display"), dict) else {}
@@ -250,6 +290,8 @@ class ApprovedContentNavigator:
 
     def _build_ayah_reference(self, record: AyahRecord) -> str:
         surah_name = self._pick_text(record.surah_name)
+        if record.surah_number is not None:
+            surah_name = f"({record.surah_number}) {surah_name}"
         ayah_start = record.ayah_number
         ayah_end = record.ayah_end_number
         if ayah_start is None:

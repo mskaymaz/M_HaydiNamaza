@@ -117,6 +117,8 @@ def _build_ayah_records(
     }
     output = []
     for record in local_records:
+        if not _is_approved(record):
+            continue
         key = _ayah_key(record)
         old = old_by_key.get(key) if key is not None else None
         ref = _string(record.get("ref")) or _string(record.get("id"))
@@ -139,7 +141,6 @@ def _build_ayah_records(
                 "source_note": _source_note(old, record, generated_at),
                 "topics": _topics(old),
                 "status": "approved",
-                "durum": _durum(record),
                 "priority": _int(record.get("priority"), default=1),
                 "approval": _approval(record, generated_at),
             }
@@ -160,6 +161,8 @@ def _build_hadith_records(
     }
     output = []
     for record in local_records:
+        if not _is_approved(record):
+            continue
         hadith_number = _string(record.get("hadith_number"))
         old = old_by_number.get(hadith_number)
         output.append(
@@ -183,7 +186,6 @@ def _build_hadith_records(
                 "source_note": _source_note(old, record, generated_at),
                 "topics": _topics(old, fallback="hadis_approved_pool"),
                 "status": "approved",
-                "durum": _durum(record),
                 "priority": _int(record.get("priority"), default=1),
                 "book_reference_tr": _string(record.get("book_reference_tr")),
                 "book_reference_en": _string(record.get("book_reference_en")),
@@ -220,8 +222,9 @@ def _topics(old: dict[str, Any] | None, fallback: str = "ayah_approved_pool") ->
     return [fallback]
 
 
-def _durum(record: dict[str, Any]) -> str:
-    return _string(record.get("durum")) or "yayina_hazir"
+def _is_approved(record: dict[str, Any]) -> bool:
+    return _string(record.get("status")) == "approved"
+
 
 
 def _ayah_key(record: dict[str, Any]) -> tuple[int, int] | None:

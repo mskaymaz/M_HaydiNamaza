@@ -55,6 +55,7 @@ TEXT_EDITOR_BASE_HEIGHT = 30
 def _fetch_status_label(status: str) -> str:
     mapping = {
         "local_archive": "Arşiv kaydı kullanıldı",
+        "local_approved": "Onaylı ayet kaydı kullanıldı",
         "not_found": "Kayıt bulunamadı",
         "local_seed_exact": "Yerel Tanzil havuzundan kayıt bulundu",
         "local_seed_generated": "Yerel Tanzil havuzundan yeni kayıt oluşturuldu",
@@ -327,9 +328,19 @@ class AddPanel(QWidget):
         approved_record = self.repository.find_approved_record(kind, ref)
         self._current_archive_record = archive_record
         self._current_approved_record = approved_record
-        fetch_label = "local_archive"
-        record = archive_record
-        source_info = archive_record.source_info if archive_record else SourceInfo(label="manual", fetch_status="manual")
+        if kind == "ayah" and isinstance(approved_record, AyahRecord):
+            fetch_label = "local_approved"
+            source_info = SourceInfo(
+                label="approved ayet payload",
+                source_ref=self.repository.paths.approved_ayah_path.name,
+                fetch_status=fetch_label,
+                details={"approvedPath": str(self.repository.paths.approved_ayah_path)},
+            )
+            record = self._build_approved_ayah_add_record(normalized, approved_record, source_info)
+        else:
+            fetch_label = "local_archive"
+            record = archive_record
+            source_info = archive_record.source_info if archive_record else SourceInfo(label="manual", fetch_status="manual")
 
         if record is None:
             fetch_label = "not_found"
@@ -379,6 +390,49 @@ class AddPanel(QWidget):
         self.fetch_status_label.setText(f"Veri durumu: {_fetch_status_label(fetch_label)}")
         self._load_record(record)
         self._sync_availability_ui()
+
+    def _build_approved_ayah_add_record(
+        self,
+        normalized: dict[str, object],
+        approved_record: AyahRecord,
+        source_info: SourceInfo,
+    ) -> AyahRecord:
+        now = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+        raw = dict(approved_record.raw or {})
+        raw.update(
+            {
+                "source": {
+                    "arabic": "ayahs.v1.approved.json",
+                    "trAlt": "ayahs.v1.approved.json / approved TR",
+                    "enAlt": "ayahs.v1.approved.json / approved EN",
+                },
+                "text_tr_alt": approved_record.tr,
+                "text_en_alt": approved_record.en,
+                "selected_translation": {"tr": "alt", "en": "alt"},
+            }
+        )
+        return AyahRecord(
+            id=str(normalized["id"]),
+            kind="ayah",
+            ref=str(normalized["ref"]),
+            ar=approved_record.ar,
+            tr="",
+            en="",
+            status="fetched",
+            priority=approved_record.priority,
+            notes="",
+            source_info=source_info,
+            duplicate_info=DuplicateCheckResult(),
+            review_history=[],
+            created_at=now,
+            updated_at=now,
+            approved_at="",
+            raw=raw,
+            surah_number=int(normalized["surah_number"]),
+            ayah_number=int(normalized["ayah_number"]),
+            ayah_end_number=int(normalized["ayah_end"]),
+            surah_name=str(normalized["surah_name"]),
+        )
 
     def _build_new_record(
         self,

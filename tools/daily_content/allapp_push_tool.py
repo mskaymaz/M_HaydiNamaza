@@ -355,7 +355,11 @@ def _record_count(path: Path) -> int:
     records = payload.get("records")
     if not isinstance(records, list):
         return 0
-    return len(records)
+    return sum(
+        1
+        for record in records
+        if isinstance(record, dict) and str(record.get("status") or "").strip() == "approved"
+    )
 
 
 def _read_json(path: Path, default: Any | None = None) -> Any:

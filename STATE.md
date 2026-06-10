@@ -1,6 +1,6 @@
 # STATE.md
 
-last_update: 2026-06-09
+last_update: 2026-06-10
 project: M_HaydiNamaza
 status: bulk_daily_content_esma_sifat_remote_publish_ready_pending_allapp_push
 active_phase: advanced_architecture_upgrade
@@ -14,6 +14,7 @@ next_step:
   - Keep TASK-09 and later tasks pending until explicit instruction.
 
 ## Current known risks
+- 2026-06-10 Esma/Sifat verification: local approved payload and local AllApp publish payload both contain `381` approved records (`esma=99`, `sifat=282`); AllApp remote push is still pending.
 - Existing large UI files must be split safely.
 - Prayer-time official access/release contract is still an active release gate.
 - Diyanet/AwqatSalah official API references are documented; production decision remains pending until explicit access/usage clearance.

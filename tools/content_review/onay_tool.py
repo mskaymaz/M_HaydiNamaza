@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from datetime import datetime
@@ -147,20 +148,21 @@ class ApprovedJsonEditor:
         self._logger = logger
         self._backup_manager = backup_manager
         self._onay_state = onay_state
+        self._payload_cache: dict[str, dict[str, Any]] = {}
+        self._payload_signatures: dict[str, tuple[int, int]] = {}
+        self._row_index_cache: dict[str, dict[str, dict[str, Any]]] = {}
 
     def priority(self, kind: str, record_id: str) -> int:
-        payload = self._read_payload(kind)
-        for row in payload["records"]:
-            if self._row_id(row) == record_id:
-                return self._safe_priority(row.get("priority"))
+        row = self._row_by_id(kind, record_id)
+        if row is not None:
+            return self._safe_priority(row.get("priority"))
         return 1
 
     def durum(self, kind: str, record_id: str) -> str:
-        payload = self._read_payload(kind)
-        for row in payload["records"]:
-            if self._row_id(row) == record_id:
-                return str(row.get("durum") or row.get("status") or "onayli").strip()
-        return "onayli"
+        row = self._row_by_id(kind, record_id)
+        if row is not None:
+            return str(row.get("status") or "pending_review").strip()
+        return "pending_review"
 
     def approve_review(self, kind: str, record_id: str, priority: int) -> bool:
         payload = self._read_payload(kind)
@@ -170,10 +172,12 @@ class ApprovedJsonEditor:
                 if self._safe_priority(row.get("priority")) != priority:
                     row["priority"] = priority
                     changed = True
-                if kind in {"ayah", "hadith"} and row.get("durum") != "yayina_hazir":
-                    row["durum"] = "yayina_hazir"
+                if kind in {"ayah", "hadith"} and row.get("status") != "approved":
+                    row["status"] = "approved"
                     changed = True
+                row.pop("durum", None)
                 now = datetime.now().replace(microsecond=0).isoformat()
+                row["approvedAt"] = now
                 row["onay_review"] = {
                     "action": "approved",
                     "processed_at": now,
@@ -189,39 +193,235 @@ class ApprovedJsonEditor:
         self._logger.log("approved_review_update", kind=kind, record_id=record_id, priority=priority)
         return True
 
-    def delete(self, kind: str, record_id: str) -> bool:
-        payload = self._read_payload(kind)
-        rows = payload["records"]
-        kept = [row for row in rows if self._row_id(row) != record_id]
-        if len(kept) == len(rows):
-            return False
-        for row in rows:
-            if self._row_id(row) == record_id:
-                self._onay_state.mark(kind, row, "deleted")
-                break
-        payload["records"] = kept
-        payload["root"][payload["root_key"]] = kept
-        self._write_payload(kind, payload)
-        self._logger.log("approved_delete", kind=kind, record_id=record_id)
-        return True
+    def delete(self, kind: str, record_id: str, record_ref: str = "") -> int:
+        keys = self._delete_keys(kind, record_id, record_ref)
+        deleted_count = 0
+        marked = False
+        publish_changed = False
+        for path in self._delete_candidate_paths(kind):
+            payload = self._read_any_payload(path)
+            if payload is None:
+                continue
+            rows = payload["records"]
+            removed = [row for row in rows if self._matches_delete_keys(kind, row, keys)]
+            if not removed:
+                continue
+            kept = [row for row in rows if not self._matches_delete_keys(kind, row, keys)]
+            if not marked:
+                self._onay_state.mark(kind, removed[0], "deleted")
+                marked = True
+            payload["records"] = kept
+            if payload["root_key"] == "list":
+                payload["root"] = kept
+            else:
+                payload["root"][payload["root_key"]] = kept
+            self._write_any_payload(kind, payload)
+            deleted_count += len(removed)
+            publish_changed = publish_changed or path == self._publish_path(kind)
+        sequence_changed = self._delete_from_sequence(kind, keys)
+        if publish_changed:
+            self._refresh_publish_manifest(kind)
+        if deleted_count or sequence_changed:
+            self._logger.log(
+                "approved_delete_all",
+                kind=kind,
+                record_id=record_id,
+                record_ref=record_ref,
+                deleted_count=deleted_count,
+                sequence_changed=sequence_changed,
+            )
+        return deleted_count
 
     def _read_payload(self, kind: str) -> dict[str, Any]:
         path = self._approved_path(kind)
+        signature = self._file_signature(path)
+        cached = self._payload_cache.get(kind)
+        if cached is not None and self._payload_signatures.get(kind) == signature:
+            return cached
+        with path.open("r", encoding="utf-8-sig") as handle:
+            root = json.load(handle)
+        if isinstance(root, dict) and isinstance(root.get("records"), list):
+            payload = {"path": path, "root": root, "records": root["records"], "root_key": "records"}
+            self._set_payload_cache(kind, payload, signature)
+            return payload
+        raise ValueError(f"Approved JSON yapisi okunamadi: {path}")
+
+    def _write_payload(self, kind: str, payload: dict[str, Any]) -> None:
+        self._write_any_payload(kind, payload)
+
+    def _read_any_payload(self, path: Path) -> dict[str, Any] | None:
+        if not path.exists():
+            return None
         with path.open("r", encoding="utf-8-sig") as handle:
             root = json.load(handle)
         if isinstance(root, dict) and isinstance(root.get("records"), list):
             return {"path": path, "root": root, "records": root["records"], "root_key": "records"}
-        raise ValueError(f"Approved JSON yapisi okunamadi: {path}")
+        if isinstance(root, dict) and isinstance(root.get("items"), list):
+            return {"path": path, "root": root, "records": root["items"], "root_key": "items"}
+        if isinstance(root, list):
+            return {"path": path, "root": root, "records": root, "root_key": "list"}
+        raise ValueError(f"JSON yapisi okunamadi: {path}")
 
-    def _write_payload(self, kind: str, payload: dict[str, Any]) -> None:
+    def _write_any_payload(self, kind: str, payload: dict[str, Any]) -> None:
         path = payload["path"]
         self._backup_manager.create_backup(path)
-        payload["root"]["content_version"] = f"onay-tool-{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        root = payload["root"]
+        if isinstance(root, dict):
+            root["content_version"] = f"onay-tool-{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         tmp = path.with_suffix(path.suffix + ".tmp")
         with tmp.open("w", encoding="utf-8", newline="\n") as handle:
-            json.dump(payload["root"], handle, ensure_ascii=False, indent=2)
+            json.dump(root, handle, ensure_ascii=False, indent=2)
             handle.write("\n")
         tmp.replace(path)
+        if path == self._approved_path(kind):
+            self._set_payload_cache(kind, payload, self._file_signature(path))
+
+    def _row_by_id(self, kind: str, record_id: str) -> dict[str, Any] | None:
+        self._read_payload(kind)
+        return self._row_index_cache.get(kind, {}).get(record_id)
+
+    def _set_payload_cache(
+        self,
+        kind: str,
+        payload: dict[str, Any],
+        signature: tuple[int, int],
+    ) -> None:
+        self._payload_cache[kind] = payload
+        self._payload_signatures[kind] = signature
+        self._row_index_cache[kind] = {
+            row_id: row
+            for row in payload["records"]
+            if isinstance(row, dict) and (row_id := self._row_id(row))
+        }
+
+    @staticmethod
+    def _file_signature(path: Path) -> tuple[int, int]:
+        stat = path.stat()
+        return (stat.st_mtime_ns, stat.st_size)
+
+    def _delete_candidate_paths(self, kind: str) -> list[Path]:
+        return [
+            self._archive_path(kind),
+            self._approved_path(kind),
+            self._publish_path(kind),
+        ]
+
+    def _delete_from_sequence(self, kind: str, keys: set[str]) -> bool:
+        path = self._sequence_path()
+        if not path.exists():
+            return False
+        with path.open("r", encoding="utf-8-sig") as handle:
+            root = json.load(handle)
+        if not isinstance(root, dict):
+            return False
+        fields = {
+            "ayah": ("ayah_order_ids",),
+            "hadith": ("hadith_order_ids",),
+            "esma": ("esma_order_ids", "sifat_order_ids"),
+        }[kind]
+        changed = False
+        for field in fields:
+            values = root.get(field)
+            if not isinstance(values, list):
+                continue
+            kept = [value for value in values if self._normalize_key(value) not in keys]
+            if len(kept) != len(values):
+                root[field] = kept
+                changed = True
+        if not changed:
+            return False
+        self._backup_manager.create_backup(path)
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        with tmp.open("w", encoding="utf-8", newline="\n") as handle:
+            json.dump(root, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+        tmp.replace(path)
+        return True
+
+    def _refresh_publish_manifest(self, kind: str) -> None:
+        manifest_path = self._manifest_path()
+        publish_path = self._publish_path(kind)
+        if not manifest_path.exists() or not publish_path.exists():
+            return
+        with manifest_path.open("r", encoding="utf-8-sig") as handle:
+            manifest = json.load(handle)
+        if not isinstance(manifest, dict):
+            return
+        publish_files = manifest.get("publish_files")
+        if not isinstance(publish_files, dict):
+            return
+        key = {"ayah": "ayahs", "hadith": "hadiths", "esma": "esmas"}[kind]
+        payload = self._read_any_payload(publish_path)
+        if payload is None:
+            return
+        publish_files[key] = {
+            "path": f"publish/{publish_path.name}",
+            "sha256": self._sha256(publish_path),
+            "bytes": publish_path.stat().st_size,
+            "record_count": len(payload["records"]),
+        }
+        now = datetime.now().replace(microsecond=0)
+        manifest["content_version"] = f"onay-tool-{now.strftime('%Y%m%d_%H%M%S')}"
+        manifest["generated_at_utc"] = now.isoformat()
+        self._backup_manager.create_backup(manifest_path)
+        tmp = manifest_path.with_suffix(manifest_path.suffix + ".tmp")
+        with tmp.open("w", encoding="utf-8", newline="\n") as handle:
+            json.dump(manifest, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+        tmp.replace(manifest_path)
+
+    def _delete_keys(self, kind: str, record_id: str, record_ref: str) -> set[str]:
+        keys = {self._normalize_key(record_id), self._normalize_key(record_ref)}
+        keys.discard("")
+        if kind == "hadith":
+            number = self._hadith_number_from_values(record_id, record_ref)
+            if number:
+                keys.update({number, f"riyazussalihin/{number}", f"hadith_{int(number):06d}"})
+        return keys
+
+    def _matches_delete_keys(self, kind: str, row: object, keys: set[str]) -> bool:
+        if not isinstance(row, dict):
+            return False
+        values = {
+            self._normalize_key(row.get("id")),
+            self._normalize_key(row.get("ref")),
+        }
+        if kind == "hadith":
+            number = self._normalize_key(row.get("hadith_number"))
+            if number:
+                values.update({number, f"riyazussalihin/{number}"})
+                if number.isdigit():
+                    values.add(f"hadith_{int(number):06d}")
+        values.discard("")
+        return bool(values & keys)
+
+    @staticmethod
+    def _normalize_key(value: object) -> str:
+        return str(value or "").strip()
+
+    @staticmethod
+    def _hadith_number_from_values(*values: str) -> str:
+        for value in values:
+            digits = "".join(ch for ch in str(value or "").split("/")[-1] if ch.isdigit())
+            if digits:
+                return str(int(digits))
+        return ""
+
+    @staticmethod
+    def _sha256(path: Path) -> str:
+        digest = hashlib.sha256()
+        with path.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(chunk)
+        return digest.hexdigest()
+
+    def _archive_path(self, kind: str) -> Path:
+        mapping = {
+            "ayah": self._paths.archive_ayah_path,
+            "hadith": self._paths.archive_hadith_path,
+            "esma": self._paths.archive_esma_path,
+        }
+        return mapping[kind]
 
     def _approved_path(self, kind: str) -> Path:
         mapping = {
@@ -230,6 +430,20 @@ class ApprovedJsonEditor:
             "esma": self._paths.approved_esma_path,
         }
         return mapping[kind]
+
+    def _publish_path(self, kind: str) -> Path:
+        names = {
+            "ayah": "ayahs.v1.approved.json",
+            "hadith": "hadiths.v1.approved.json",
+            "esma": "esmaul_husna.v1.approved.json",
+        }
+        return self._manifest_path().parent / "publish" / names[kind]
+
+    def _manifest_path(self) -> Path:
+        return self._paths.repo_root / "_external" / "AllAppRemote" / "data" / "daily_content" / "v1" / "manifest.json"
+
+    def _sequence_path(self) -> Path:
+        return self._paths.approved_ayah_path.parent / "sequence.v1.json"
 
     @staticmethod
     def _row_id(row: object) -> str:
@@ -260,7 +474,8 @@ class ApprovalWindow(QMainWindow):
         self.setWindowTitle("Onaylı İçerik / Mobil Önizleme")
         self.resize(scale(980), scale(1020))
         self._build_ui()
-        self.refresh()
+        self._sync_controls()
+        self._sync_view()
 
     def refresh(self) -> None:
         current_type = self._navigator.current_type
@@ -430,7 +645,9 @@ class ApprovalWindow(QMainWindow):
             return
         priority = int(self.priority_combo.currentData() or 1)
         changed = self._editor.approve_review(item.kind, item.record_id, priority)
-        self.refresh()
+        if changed:
+            self._navigator.remove_current_item()
+        self._sync_view()
         self.meta_label.setText(
             f"{item.record_id} onay/durum kaydedildi." if changed else f"{item.record_id} zaten güncel."
         )
@@ -441,17 +658,19 @@ class ApprovalWindow(QMainWindow):
             return
         reply = QMessageBox.question(
             self,
-            "Approved kaydı sil",
-            f"{item.kind_label} kaydı approved JSON'dan silinecek:\n{item.record_id}\n\nArşiv dosyalarına dokunulmayacak. Devam edilsin mi?",
+            "Kaydı tüm havuzlardan sil",
+            f"{item.kind_label} kaydı ilgili tüm JSON havuzlarından silinecek:\n{item.record_id}\n\nArşiv, approved, sequence ve varsa yerel publish dosyaları güncellenecek. Devam edilsin mi?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             QMessageBox.StandardButton.No,
         )
         if reply != QMessageBox.StandardButton.Yes:
             return
-        deleted = self._editor.delete(item.kind, item.record_id)
-        self.refresh()
+        deleted_count = self._editor.delete(item.kind, item.record_id, item.ref)
+        if deleted_count:
+            self._navigator.remove_current_item()
+        self._sync_view()
         self.meta_label.setText(
-            f"{item.record_id} approved JSON'dan silindi." if deleted else f"{item.record_id} bulunamadı."
+            f"{item.record_id} için {deleted_count} JSON kaydı silindi." if deleted_count else f"{item.record_id} bulunamadı."
         )
 
     def _sync_controls(self) -> None:

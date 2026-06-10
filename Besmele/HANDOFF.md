@@ -25,6 +25,19 @@ Continue ayah/hadith/esma-sifat manual review from approved/runtime payloads, th
 ## Important blockers
 - Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.
 
+## Esma/Sifat approved verification (2026-06-10)
+- Rebuilt local approved Esma/Sifat payload from source JSON files:
+  - `assets/data/daily_content/approved/esmaul_husna.v1.approved.json`
+  - Total approved records: `381` (`esma=99`, `sifat=282`).
+- Local AllApp publish artifact added/updated without regenerating ayah/hadith publish files:
+  - `_external/AllAppRemote/data/daily_content/v1/publish/esmaul_husna.v1.approved.json`
+  - `_external/AllAppRemote/data/daily_content/v1/manifest.json`
+- Validation:
+  - local approved payload: `records=381`, `approved=381`, `esma=99`, `sifat=282`
+  - local AllApp publish payload: `records=381`, `approved=381`, `esma=99`, `sifat=282`
+  - manifest `publish_files.esmas.record_count=381`
+- AllApp remote push was not run in this step.
+
 ## AllApp daily content publish sync (2026-06-09)
 - Target repo/branch: `https://github.com/mskaymaz/AllApp.git` / `main`.
 - Remote commit: `12399cd` (`daily-content: sync local approved publish v1`).

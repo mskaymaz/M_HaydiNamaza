@@ -655,9 +655,1492 @@
         "at": "2026-06-10T16:57:56",
         "id": "030/030",
         "ref": "030/030"
+      },
+      "031/017": {
+        "action": "approved",
+        "at": "2026-06-10T22:10:06",
+        "id": "031/017",
+        "ref": "031/017"
+      },
+      "032/024": {
+        "action": "deleted",
+        "at": "2026-06-10T22:10:52",
+        "id": "032/024",
+        "ref": "032/024"
+      },
+      "033/021": {
+        "action": "approved",
+        "at": "2026-06-10T22:11:28",
+        "id": "033/021",
+        "ref": "033/021"
+      },
+      "033/070": {
+        "action": "approved",
+        "at": "2026-06-10T22:11:36",
+        "id": "033/070",
+        "ref": "033/070"
+      },
+      "041/030": {
+        "action": "approved",
+        "at": "2026-06-10T22:11:53",
+        "id": "041/030",
+        "ref": "041/030"
+      },
+      "042/038": {
+        "action": "approved",
+        "at": "2026-06-10T22:13:30",
+        "id": "042/038",
+        "ref": "042/038"
+      },
+      "042/040": {
+        "action": "approved",
+        "at": "2026-06-10T22:13:44",
+        "id": "042/040",
+        "ref": "042/040"
+      },
+      "042/043": {
+        "action": "approved",
+        "at": "2026-06-10T22:13:51",
+        "id": "042/043",
+        "ref": "042/043"
+      },
+      "047/007": {
+        "action": "approved",
+        "at": "2026-06-10T22:16:11",
+        "id": "047/007",
+        "ref": "047/007"
+      },
+      "047/035": {
+        "action": "approved",
+        "at": "2026-06-10T22:16:40",
+        "id": "047/035",
+        "ref": "047/035"
+      },
+      "048/029": {
+        "action": "deleted",
+        "at": "2026-06-10T22:17:29",
+        "id": "048/029",
+        "ref": "048/029"
+      },
+      "059/009": {
+        "action": "deleted",
+        "at": "2026-06-10T22:18:29",
+        "id": "059/009",
+        "ref": "059/009"
+      },
+      "061/004": {
+        "action": "approved",
+        "at": "2026-06-10T22:18:38",
+        "id": "061/004",
+        "ref": "061/004"
+      },
+      "061/010": {
+        "action": "deleted",
+        "at": "2026-06-10T22:20:07",
+        "id": "061/010",
+        "ref": "061/010"
+      },
+      "061/011": {
+        "action": "approved",
+        "at": "2026-06-10T22:27:14",
+        "id": "061/011",
+        "ref": "061/011"
+      },
+      "001/004": {
+        "action": "deleted",
+        "at": "2026-06-10T22:27:17",
+        "id": "001/004",
+        "ref": "001/004"
+      },
+      "001/007": {
+        "action": "deleted",
+        "at": "2026-06-10T22:27:22",
+        "id": "001/007",
+        "ref": "001/007"
+      },
+      "002/010": {
+        "action": "deleted",
+        "at": "2026-06-10T22:51:15",
+        "id": "002/010",
+        "ref": "002/010"
+      },
+      "002/011": {
+        "action": "approved",
+        "at": "2026-06-10T22:51:22",
+        "id": "002/011",
+        "ref": "002/011"
+      },
+      "002/012": {
+        "action": "deleted",
+        "at": "2026-06-10T22:52:33",
+        "id": "002/012",
+        "ref": "002/012"
+      },
+      "002/013": {
+        "action": "approved",
+        "at": "2026-06-10T22:52:51",
+        "id": "002/013",
+        "ref": "002/013"
+      },
+      "002/014": {
+        "action": "deleted",
+        "at": "2026-06-10T22:53:55",
+        "id": "002/014",
+        "ref": "002/014"
+      },
+      "002/015": {
+        "action": "deleted",
+        "at": "2026-06-10T22:54:53",
+        "id": "002/015",
+        "ref": "002/015"
+      },
+      "002/016": {
+        "action": "deleted",
+        "at": "2026-06-10T22:55:01",
+        "id": "002/016",
+        "ref": "002/016"
+      },
+      "002/022": {
+        "action": "approved",
+        "at": "2026-06-10T22:55:15",
+        "id": "002/022",
+        "ref": "002/022"
+      },
+      "002/026": {
+        "action": "deleted",
+        "at": "2026-06-10T22:57:09",
+        "id": "002/026",
+        "ref": "002/026"
+      },
+      "002/027": {
+        "action": "approved",
+        "at": "2026-06-10T23:13:47",
+        "id": "002/027",
+        "ref": "002/027"
+      },
+      "002/030": {
+        "action": "approved",
+        "at": "2026-06-10T23:16:59",
+        "id": "002/030",
+        "ref": "002/030"
+      },
+      "002/035": {
+        "action": "approved",
+        "at": "2026-06-10T23:17:57",
+        "id": "002/035",
+        "ref": "002/035"
+      },
+      "002/040": {
+        "action": "deleted",
+        "at": "2026-06-10T23:18:25",
+        "id": "002/040",
+        "ref": "002/040"
+      },
+      "002/041": {
+        "action": "deleted",
+        "at": "2026-06-10T23:21:07",
+        "id": "002/041",
+        "ref": "002/041"
+      },
+      "002/040-041": {
+        "action": "deleted",
+        "at": "2026-06-10T23:22:01",
+        "id": "002/040-041",
+        "ref": "002/040-041"
+      },
+      "002/047": {
+        "action": "deleted",
+        "at": "2026-06-10T23:22:32",
+        "id": "002/047",
+        "ref": "002/047"
+      },
+      "002/060": {
+        "action": "approved",
+        "at": "2026-06-10T23:23:13",
+        "id": "002/060",
+        "ref": "002/060"
+      },
+      "002/062": {
+        "action": "approved",
+        "at": "2026-06-10T23:23:41",
+        "id": "002/062",
+        "ref": "002/062"
+      },
+      "002/067": {
+        "action": "deleted",
+        "at": "2026-06-10T23:23:54",
+        "id": "002/067",
+        "ref": "002/067"
+      },
+      "002/075": {
+        "action": "approved",
+        "at": "2026-06-10T23:24:33",
+        "id": "002/075",
+        "ref": "002/075"
+      },
+      "002/083": {
+        "action": "approved",
+        "at": "2026-06-10T23:24:49",
+        "id": "002/083",
+        "ref": "002/083"
+      },
+      "002/087": {
+        "action": "approved",
+        "at": "2026-06-10T23:26:11",
+        "id": "002/087",
+        "ref": "002/087"
+      },
+      "002/088": {
+        "action": "approved",
+        "at": "2026-06-10T23:26:31",
+        "id": "002/088",
+        "ref": "002/088"
       }
     },
-    "hadith": {},
+    "hadith": {
+      "hadith_000055": {
+        "action": "approved",
+        "at": "2026-06-10T23:28:52",
+        "id": "hadith_000055",
+        "ref": "riyazussalihin/55"
+      },
+      "riyazussalihin/55": {
+        "action": "approved",
+        "at": "2026-06-10T23:28:52",
+        "id": "hadith_000055",
+        "ref": "riyazussalihin/55"
+      },
+      "55": {
+        "action": "approved",
+        "at": "2026-06-10T23:28:52",
+        "id": "hadith_000055",
+        "ref": "riyazussalihin/55"
+      },
+      "hadith_000444": {
+        "action": "approved",
+        "at": "2026-06-10T23:29:10",
+        "id": "hadith_000444",
+        "ref": "riyazussalihin/444"
+      },
+      "riyazussalihin/444": {
+        "action": "approved",
+        "at": "2026-06-10T23:29:10",
+        "id": "hadith_000444",
+        "ref": "riyazussalihin/444"
+      },
+      "444": {
+        "action": "approved",
+        "at": "2026-06-10T23:29:10",
+        "id": "hadith_000444",
+        "ref": "riyazussalihin/444"
+      },
+      "hadith_001729": {
+        "action": "approved",
+        "at": "2026-06-10T23:29:21",
+        "id": "hadith_001729",
+        "ref": "riyazussalihin/1729"
+      },
+      "riyazussalihin/1729": {
+        "action": "approved",
+        "at": "2026-06-10T23:29:21",
+        "id": "hadith_001729",
+        "ref": "riyazussalihin/1729"
+      },
+      "1729": {
+        "action": "approved",
+        "at": "2026-06-10T23:29:21",
+        "id": "hadith_001729",
+        "ref": "riyazussalihin/1729"
+      },
+      "hadith_001535": {
+        "action": "approved",
+        "at": "2026-06-10T23:30:01",
+        "id": "hadith_001535",
+        "ref": "riyazussalihin/1535"
+      },
+      "riyazussalihin/1535": {
+        "action": "approved",
+        "at": "2026-06-10T23:30:01",
+        "id": "hadith_001535",
+        "ref": "riyazussalihin/1535"
+      },
+      "1535": {
+        "action": "approved",
+        "at": "2026-06-10T23:30:01",
+        "id": "hadith_001535",
+        "ref": "riyazussalihin/1535"
+      },
+      "hadith_001218": {
+        "action": "approved",
+        "at": "2026-06-10T23:30:49",
+        "id": "hadith_001218",
+        "ref": "riyazussalihin/1218"
+      },
+      "riyazussalihin/1218": {
+        "action": "approved",
+        "at": "2026-06-10T23:30:49",
+        "id": "hadith_001218",
+        "ref": "riyazussalihin/1218"
+      },
+      "1218": {
+        "action": "approved",
+        "at": "2026-06-10T23:30:49",
+        "id": "hadith_001218",
+        "ref": "riyazussalihin/1218"
+      },
+      "hadith_001075": {
+        "action": "approved",
+        "at": "2026-06-10T23:31:13",
+        "id": "hadith_001075",
+        "ref": "riyazussalihin/1075"
+      },
+      "riyazussalihin/1075": {
+        "action": "approved",
+        "at": "2026-06-10T23:31:13",
+        "id": "hadith_001075",
+        "ref": "riyazussalihin/1075"
+      },
+      "1075": {
+        "action": "approved",
+        "at": "2026-06-10T23:31:13",
+        "id": "hadith_001075",
+        "ref": "riyazussalihin/1075"
+      },
+      "hadith_000381": {
+        "action": "approved",
+        "at": "2026-06-10T23:31:43",
+        "id": "hadith_000381",
+        "ref": "riyazussalihin/381"
+      },
+      "riyazussalihin/381": {
+        "action": "approved",
+        "at": "2026-06-10T23:31:43",
+        "id": "hadith_000381",
+        "ref": "riyazussalihin/381"
+      },
+      "381": {
+        "action": "approved",
+        "at": "2026-06-10T23:31:43",
+        "id": "hadith_000381",
+        "ref": "riyazussalihin/381"
+      },
+      "hadith_000153": {
+        "action": "approved",
+        "at": "2026-06-10T23:31:56",
+        "id": "hadith_000153",
+        "ref": "riyazussalihin/153"
+      },
+      "riyazussalihin/153": {
+        "action": "approved",
+        "at": "2026-06-10T23:31:56",
+        "id": "hadith_000153",
+        "ref": "riyazussalihin/153"
+      },
+      "153": {
+        "action": "approved",
+        "at": "2026-06-10T23:31:56",
+        "id": "hadith_000153",
+        "ref": "riyazussalihin/153"
+      },
+      "hadith_000894": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:05",
+        "id": "hadith_000894",
+        "ref": "riyazussalihin/894"
+      },
+      "riyazussalihin/894": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:05",
+        "id": "hadith_000894",
+        "ref": "riyazussalihin/894"
+      },
+      "894": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:05",
+        "id": "hadith_000894",
+        "ref": "riyazussalihin/894"
+      },
+      "hadith_000333": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:12",
+        "id": "hadith_000333",
+        "ref": "riyazussalihin/333"
+      },
+      "riyazussalihin/333": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:12",
+        "id": "hadith_000333",
+        "ref": "riyazussalihin/333"
+      },
+      "333": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:12",
+        "id": "hadith_000333",
+        "ref": "riyazussalihin/333"
+      },
+      "hadith_001035": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:26",
+        "id": "hadith_001035",
+        "ref": "riyazussalihin/1035"
+      },
+      "riyazussalihin/1035": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:26",
+        "id": "hadith_001035",
+        "ref": "riyazussalihin/1035"
+      },
+      "1035": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:26",
+        "id": "hadith_001035",
+        "ref": "riyazussalihin/1035"
+      },
+      "hadith_001178": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:36",
+        "id": "hadith_001178",
+        "ref": "riyazussalihin/1178"
+      },
+      "riyazussalihin/1178": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:36",
+        "id": "hadith_001178",
+        "ref": "riyazussalihin/1178"
+      },
+      "1178": {
+        "action": "approved",
+        "at": "2026-06-10T23:32:36",
+        "id": "hadith_001178",
+        "ref": "riyazussalihin/1178"
+      },
+      "hadith_001658": {
+        "action": "approved",
+        "at": "2026-06-10T23:33:33",
+        "id": "hadith_001658",
+        "ref": "riyazussalihin/1658"
+      },
+      "riyazussalihin/1658": {
+        "action": "approved",
+        "at": "2026-06-10T23:33:33",
+        "id": "hadith_001658",
+        "ref": "riyazussalihin/1658"
+      },
+      "1658": {
+        "action": "approved",
+        "at": "2026-06-10T23:33:33",
+        "id": "hadith_001658",
+        "ref": "riyazussalihin/1658"
+      },
+      "hadith_000792": {
+        "action": "deleted",
+        "at": "2026-06-10T23:34:02",
+        "id": "hadith_000792",
+        "ref": "riyazussalihin/792"
+      },
+      "riyazussalihin/792": {
+        "action": "deleted",
+        "at": "2026-06-10T23:34:02",
+        "id": "hadith_000792",
+        "ref": "riyazussalihin/792"
+      },
+      "792": {
+        "action": "deleted",
+        "at": "2026-06-10T23:34:02",
+        "id": "hadith_000792",
+        "ref": "riyazussalihin/792"
+      },
+      "hadith_001207": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:08",
+        "id": "hadith_001207",
+        "ref": "riyazussalihin/1207"
+      },
+      "riyazussalihin/1207": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:08",
+        "id": "hadith_001207",
+        "ref": "riyazussalihin/1207"
+      },
+      "1207": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:08",
+        "id": "hadith_001207",
+        "ref": "riyazussalihin/1207"
+      },
+      "hadith_001820": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:16",
+        "id": "hadith_001820",
+        "ref": "riyazussalihin/1820"
+      },
+      "riyazussalihin/1820": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:16",
+        "id": "hadith_001820",
+        "ref": "riyazussalihin/1820"
+      },
+      "1820": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:16",
+        "id": "hadith_001820",
+        "ref": "riyazussalihin/1820"
+      },
+      "hadith_001794": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:24",
+        "id": "hadith_001794",
+        "ref": "riyazussalihin/1794"
+      },
+      "riyazussalihin/1794": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:24",
+        "id": "hadith_001794",
+        "ref": "riyazussalihin/1794"
+      },
+      "1794": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:24",
+        "id": "hadith_001794",
+        "ref": "riyazussalihin/1794"
+      },
+      "hadith_001288": {
+        "action": "deleted",
+        "at": "2026-06-10T23:34:42",
+        "id": "hadith_001288",
+        "ref": "riyazussalihin/1288"
+      },
+      "riyazussalihin/1288": {
+        "action": "deleted",
+        "at": "2026-06-10T23:34:42",
+        "id": "hadith_001288",
+        "ref": "riyazussalihin/1288"
+      },
+      "1288": {
+        "action": "deleted",
+        "at": "2026-06-10T23:34:42",
+        "id": "hadith_001288",
+        "ref": "riyazussalihin/1288"
+      },
+      "hadith_000595": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:52",
+        "id": "hadith_000595",
+        "ref": "riyazussalihin/595"
+      },
+      "riyazussalihin/595": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:52",
+        "id": "hadith_000595",
+        "ref": "riyazussalihin/595"
+      },
+      "595": {
+        "action": "approved",
+        "at": "2026-06-10T23:34:52",
+        "id": "hadith_000595",
+        "ref": "riyazussalihin/595"
+      },
+      "hadith_000968": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:10",
+        "id": "hadith_000968",
+        "ref": "riyazussalihin/968"
+      },
+      "riyazussalihin/968": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:10",
+        "id": "hadith_000968",
+        "ref": "riyazussalihin/968"
+      },
+      "968": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:10",
+        "id": "hadith_000968",
+        "ref": "riyazussalihin/968"
+      },
+      "hadith_000729": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:19",
+        "id": "hadith_000729",
+        "ref": "riyazussalihin/729"
+      },
+      "riyazussalihin/729": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:19",
+        "id": "hadith_000729",
+        "ref": "riyazussalihin/729"
+      },
+      "729": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:19",
+        "id": "hadith_000729",
+        "ref": "riyazussalihin/729"
+      },
+      "hadith_000941": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:27",
+        "id": "hadith_000941",
+        "ref": "riyazussalihin/941"
+      },
+      "riyazussalihin/941": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:27",
+        "id": "hadith_000941",
+        "ref": "riyazussalihin/941"
+      },
+      "941": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:27",
+        "id": "hadith_000941",
+        "ref": "riyazussalihin/941"
+      },
+      "hadith_001715": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:43",
+        "id": "hadith_001715",
+        "ref": "riyazussalihin/1715"
+      },
+      "riyazussalihin/1715": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:43",
+        "id": "hadith_001715",
+        "ref": "riyazussalihin/1715"
+      },
+      "1715": {
+        "action": "approved",
+        "at": "2026-06-10T23:35:43",
+        "id": "hadith_001715",
+        "ref": "riyazussalihin/1715"
+      },
+      "hadith_000121": {
+        "action": "approved",
+        "at": "2026-06-10T23:36:22",
+        "id": "hadith_000121",
+        "ref": "riyazussalihin/121"
+      },
+      "riyazussalihin/121": {
+        "action": "approved",
+        "at": "2026-06-10T23:36:22",
+        "id": "hadith_000121",
+        "ref": "riyazussalihin/121"
+      },
+      "121": {
+        "action": "approved",
+        "at": "2026-06-10T23:36:22",
+        "id": "hadith_000121",
+        "ref": "riyazussalihin/121"
+      },
+      "hadith_000071": {
+        "action": "approved",
+        "at": "2026-06-10T23:36:56",
+        "id": "hadith_000071",
+        "ref": "riyazussalihin/71"
+      },
+      "riyazussalihin/71": {
+        "action": "approved",
+        "at": "2026-06-10T23:36:56",
+        "id": "hadith_000071",
+        "ref": "riyazussalihin/71"
+      },
+      "71": {
+        "action": "approved",
+        "at": "2026-06-10T23:36:56",
+        "id": "hadith_000071",
+        "ref": "riyazussalihin/71"
+      },
+      "hadith_000793": {
+        "action": "approved",
+        "at": "2026-06-10T23:37:16",
+        "id": "hadith_000793",
+        "ref": "riyazussalihin/793"
+      },
+      "riyazussalihin/793": {
+        "action": "approved",
+        "at": "2026-06-10T23:37:16",
+        "id": "hadith_000793",
+        "ref": "riyazussalihin/793"
+      },
+      "793": {
+        "action": "approved",
+        "at": "2026-06-10T23:37:16",
+        "id": "hadith_000793",
+        "ref": "riyazussalihin/793"
+      },
+      "hadith_001805": {
+        "action": "approved",
+        "at": "2026-06-10T23:38:35",
+        "id": "hadith_001805",
+        "ref": "riyazussalihin/1805"
+      },
+      "riyazussalihin/1805": {
+        "action": "approved",
+        "at": "2026-06-10T23:38:35",
+        "id": "hadith_001805",
+        "ref": "riyazussalihin/1805"
+      },
+      "1805": {
+        "action": "approved",
+        "at": "2026-06-10T23:38:35",
+        "id": "hadith_001805",
+        "ref": "riyazussalihin/1805"
+      },
+      "hadith_001764": {
+        "action": "approved",
+        "at": "2026-06-10T23:39:38",
+        "id": "hadith_001764",
+        "ref": "riyazussalihin/1764"
+      },
+      "riyazussalihin/1764": {
+        "action": "approved",
+        "at": "2026-06-10T23:39:38",
+        "id": "hadith_001764",
+        "ref": "riyazussalihin/1764"
+      },
+      "1764": {
+        "action": "approved",
+        "at": "2026-06-10T23:39:38",
+        "id": "hadith_001764",
+        "ref": "riyazussalihin/1764"
+      },
+      "hadith_001581": {
+        "action": "approved",
+        "at": "2026-06-10T23:41:20",
+        "id": "hadith_001581",
+        "ref": "riyazussalihin/1581"
+      },
+      "riyazussalihin/1581": {
+        "action": "approved",
+        "at": "2026-06-10T23:41:20",
+        "id": "hadith_001581",
+        "ref": "riyazussalihin/1581"
+      },
+      "1581": {
+        "action": "approved",
+        "at": "2026-06-10T23:41:20",
+        "id": "hadith_001581",
+        "ref": "riyazussalihin/1581"
+      },
+      "hadith_001689": {
+        "action": "approved",
+        "at": "2026-06-10T23:42:14",
+        "id": "hadith_001689",
+        "ref": "riyazussalihin/1689"
+      },
+      "riyazussalihin/1689": {
+        "action": "approved",
+        "at": "2026-06-10T23:42:14",
+        "id": "hadith_001689",
+        "ref": "riyazussalihin/1689"
+      },
+      "1689": {
+        "action": "approved",
+        "at": "2026-06-10T23:42:14",
+        "id": "hadith_001689",
+        "ref": "riyazussalihin/1689"
+      },
+      "hadith_000340": {
+        "action": "approved",
+        "at": "2026-06-10T23:42:47",
+        "id": "hadith_000340",
+        "ref": "riyazussalihin/340"
+      },
+      "riyazussalihin/340": {
+        "action": "approved",
+        "at": "2026-06-10T23:42:47",
+        "id": "hadith_000340",
+        "ref": "riyazussalihin/340"
+      },
+      "340": {
+        "action": "approved",
+        "at": "2026-06-10T23:42:47",
+        "id": "hadith_000340",
+        "ref": "riyazussalihin/340"
+      },
+      "hadith_000439": {
+        "action": "approved",
+        "at": "2026-06-10T23:43:02",
+        "id": "hadith_000439",
+        "ref": "riyazussalihin/439"
+      },
+      "riyazussalihin/439": {
+        "action": "approved",
+        "at": "2026-06-10T23:43:02",
+        "id": "hadith_000439",
+        "ref": "riyazussalihin/439"
+      },
+      "439": {
+        "action": "approved",
+        "at": "2026-06-10T23:43:02",
+        "id": "hadith_000439",
+        "ref": "riyazussalihin/439"
+      },
+      "hadith_000667": {
+        "action": "approved",
+        "at": "2026-06-10T23:44:48",
+        "id": "hadith_000667",
+        "ref": "riyazussalihin/667"
+      },
+      "riyazussalihin/667": {
+        "action": "approved",
+        "at": "2026-06-10T23:44:48",
+        "id": "hadith_000667",
+        "ref": "riyazussalihin/667"
+      },
+      "667": {
+        "action": "approved",
+        "at": "2026-06-10T23:44:48",
+        "id": "hadith_000667",
+        "ref": "riyazussalihin/667"
+      },
+      "hadith_001339": {
+        "action": "approved",
+        "at": "2026-06-10T23:45:04",
+        "id": "hadith_001339",
+        "ref": "riyazussalihin/1339"
+      },
+      "riyazussalihin/1339": {
+        "action": "approved",
+        "at": "2026-06-10T23:45:04",
+        "id": "hadith_001339",
+        "ref": "riyazussalihin/1339"
+      },
+      "1339": {
+        "action": "approved",
+        "at": "2026-06-10T23:45:04",
+        "id": "hadith_001339",
+        "ref": "riyazussalihin/1339"
+      },
+      "hadith_001206": {
+        "action": "approved",
+        "at": "2026-06-10T23:45:18",
+        "id": "hadith_001206",
+        "ref": "riyazussalihin/1206"
+      },
+      "riyazussalihin/1206": {
+        "action": "approved",
+        "at": "2026-06-10T23:45:18",
+        "id": "hadith_001206",
+        "ref": "riyazussalihin/1206"
+      },
+      "1206": {
+        "action": "approved",
+        "at": "2026-06-10T23:45:18",
+        "id": "hadith_001206",
+        "ref": "riyazussalihin/1206"
+      },
+      "hadith_001525": {
+        "action": "approved",
+        "at": "2026-06-10T23:46:29",
+        "id": "hadith_001525",
+        "ref": "riyazussalihin/1525"
+      },
+      "riyazussalihin/1525": {
+        "action": "approved",
+        "at": "2026-06-10T23:46:29",
+        "id": "hadith_001525",
+        "ref": "riyazussalihin/1525"
+      },
+      "1525": {
+        "action": "approved",
+        "at": "2026-06-10T23:46:29",
+        "id": "hadith_001525",
+        "ref": "riyazussalihin/1525"
+      },
+      "hadith_001727": {
+        "action": "approved",
+        "at": "2026-06-10T23:47:35",
+        "id": "hadith_001727",
+        "ref": "riyazussalihin/1727"
+      },
+      "riyazussalihin/1727": {
+        "action": "approved",
+        "at": "2026-06-10T23:47:35",
+        "id": "hadith_001727",
+        "ref": "riyazussalihin/1727"
+      },
+      "1727": {
+        "action": "approved",
+        "at": "2026-06-10T23:47:35",
+        "id": "hadith_001727",
+        "ref": "riyazussalihin/1727"
+      },
+      "hadith_000192": {
+        "action": "approved",
+        "at": "2026-06-10T23:48:31",
+        "id": "hadith_000192",
+        "ref": "riyazussalihin/192"
+      },
+      "riyazussalihin/192": {
+        "action": "approved",
+        "at": "2026-06-10T23:48:31",
+        "id": "hadith_000192",
+        "ref": "riyazussalihin/192"
+      },
+      "192": {
+        "action": "approved",
+        "at": "2026-06-10T23:48:31",
+        "id": "hadith_000192",
+        "ref": "riyazussalihin/192"
+      },
+      "hadith_001042": {
+        "action": "approved",
+        "at": "2026-06-10T23:48:40",
+        "id": "hadith_001042",
+        "ref": "riyazussalihin/1042"
+      },
+      "riyazussalihin/1042": {
+        "action": "approved",
+        "at": "2026-06-10T23:48:40",
+        "id": "hadith_001042",
+        "ref": "riyazussalihin/1042"
+      },
+      "1042": {
+        "action": "approved",
+        "at": "2026-06-10T23:48:40",
+        "id": "hadith_001042",
+        "ref": "riyazussalihin/1042"
+      },
+      "hadith_000483": {
+        "action": "approved",
+        "at": "2026-06-10T23:48:52",
+        "id": "hadith_000483",
+        "ref": "riyazussalihin/483"
+      },
+      "riyazussalihin/483": {
+        "action": "approved",
+        "at": "2026-06-10T23:48:52",
+        "id": "hadith_000483",
+        "ref": "riyazussalihin/483"
+      },
+      "483": {
+        "action": "approved",
+        "at": "2026-06-10T23:48:52",
+        "id": "hadith_000483",
+        "ref": "riyazussalihin/483"
+      },
+      "hadith_000112": {
+        "action": "approved",
+        "at": "2026-06-10T23:50:13",
+        "id": "hadith_000112",
+        "ref": "riyazussalihin/112"
+      },
+      "riyazussalihin/112": {
+        "action": "approved",
+        "at": "2026-06-10T23:50:13",
+        "id": "hadith_000112",
+        "ref": "riyazussalihin/112"
+      },
+      "112": {
+        "action": "approved",
+        "at": "2026-06-10T23:50:13",
+        "id": "hadith_000112",
+        "ref": "riyazussalihin/112"
+      },
+      "hadith_001473": {
+        "action": "approved",
+        "at": "2026-06-10T23:50:34",
+        "id": "hadith_001473",
+        "ref": "riyazussalihin/1473"
+      },
+      "riyazussalihin/1473": {
+        "action": "approved",
+        "at": "2026-06-10T23:50:34",
+        "id": "hadith_001473",
+        "ref": "riyazussalihin/1473"
+      },
+      "1473": {
+        "action": "approved",
+        "at": "2026-06-10T23:50:34",
+        "id": "hadith_001473",
+        "ref": "riyazussalihin/1473"
+      },
+      "hadith_001367": {
+        "action": "approved",
+        "at": "2026-06-10T23:50:46",
+        "id": "hadith_001367",
+        "ref": "riyazussalihin/1367"
+      },
+      "riyazussalihin/1367": {
+        "action": "approved",
+        "at": "2026-06-10T23:50:46",
+        "id": "hadith_001367",
+        "ref": "riyazussalihin/1367"
+      },
+      "1367": {
+        "action": "approved",
+        "at": "2026-06-10T23:50:46",
+        "id": "hadith_001367",
+        "ref": "riyazussalihin/1367"
+      },
+      "hadith_001841": {
+        "action": "approved",
+        "at": "2026-06-10T23:51:00",
+        "id": "hadith_001841",
+        "ref": "riyazussalihin/1841"
+      },
+      "riyazussalihin/1841": {
+        "action": "approved",
+        "at": "2026-06-10T23:51:00",
+        "id": "hadith_001841",
+        "ref": "riyazussalihin/1841"
+      },
+      "1841": {
+        "action": "approved",
+        "at": "2026-06-10T23:51:00",
+        "id": "hadith_001841",
+        "ref": "riyazussalihin/1841"
+      },
+      "hadith_001691": {
+        "action": "approved",
+        "at": "2026-06-10T23:51:20",
+        "id": "hadith_001691",
+        "ref": "riyazussalihin/1691"
+      },
+      "riyazussalihin/1691": {
+        "action": "approved",
+        "at": "2026-06-10T23:51:20",
+        "id": "hadith_001691",
+        "ref": "riyazussalihin/1691"
+      },
+      "1691": {
+        "action": "approved",
+        "at": "2026-06-10T23:51:20",
+        "id": "hadith_001691",
+        "ref": "riyazussalihin/1691"
+      },
+      "hadith_001482": {
+        "action": "approved",
+        "at": "2026-06-10T23:51:42",
+        "id": "hadith_001482",
+        "ref": "riyazussalihin/1482"
+      },
+      "riyazussalihin/1482": {
+        "action": "approved",
+        "at": "2026-06-10T23:51:42",
+        "id": "hadith_001482",
+        "ref": "riyazussalihin/1482"
+      },
+      "1482": {
+        "action": "approved",
+        "at": "2026-06-10T23:51:42",
+        "id": "hadith_001482",
+        "ref": "riyazussalihin/1482"
+      },
+      "hadith_001308": {
+        "action": "approved",
+        "at": "2026-06-10T23:52:04",
+        "id": "hadith_001308",
+        "ref": "riyazussalihin/1308"
+      },
+      "riyazussalihin/1308": {
+        "action": "approved",
+        "at": "2026-06-10T23:52:04",
+        "id": "hadith_001308",
+        "ref": "riyazussalihin/1308"
+      },
+      "1308": {
+        "action": "approved",
+        "at": "2026-06-10T23:52:04",
+        "id": "hadith_001308",
+        "ref": "riyazussalihin/1308"
+      },
+      "hadith_001524": {
+        "action": "approved",
+        "at": "2026-06-10T23:52:22",
+        "id": "hadith_001524",
+        "ref": "riyazussalihin/1524"
+      },
+      "riyazussalihin/1524": {
+        "action": "approved",
+        "at": "2026-06-10T23:52:22",
+        "id": "hadith_001524",
+        "ref": "riyazussalihin/1524"
+      },
+      "1524": {
+        "action": "approved",
+        "at": "2026-06-10T23:52:22",
+        "id": "hadith_001524",
+        "ref": "riyazussalihin/1524"
+      },
+      "hadith_001821": {
+        "action": "approved",
+        "at": "2026-06-10T23:52:35",
+        "id": "hadith_001821",
+        "ref": "riyazussalihin/1821"
+      },
+      "riyazussalihin/1821": {
+        "action": "approved",
+        "at": "2026-06-10T23:52:35",
+        "id": "hadith_001821",
+        "ref": "riyazussalihin/1821"
+      },
+      "1821": {
+        "action": "approved",
+        "at": "2026-06-10T23:52:35",
+        "id": "hadith_001821",
+        "ref": "riyazussalihin/1821"
+      },
+      "hadith_000599": {
+        "action": "approved",
+        "at": "2026-06-10T23:53:11",
+        "id": "hadith_000599",
+        "ref": "riyazussalihin/599"
+      },
+      "riyazussalihin/599": {
+        "action": "approved",
+        "at": "2026-06-10T23:53:11",
+        "id": "hadith_000599",
+        "ref": "riyazussalihin/599"
+      },
+      "599": {
+        "action": "approved",
+        "at": "2026-06-10T23:53:11",
+        "id": "hadith_000599",
+        "ref": "riyazussalihin/599"
+      },
+      "hadith_000891": {
+        "action": "approved",
+        "at": "2026-06-10T23:54:00",
+        "id": "hadith_000891",
+        "ref": "riyazussalihin/891"
+      },
+      "riyazussalihin/891": {
+        "action": "approved",
+        "at": "2026-06-10T23:54:00",
+        "id": "hadith_000891",
+        "ref": "riyazussalihin/891"
+      },
+      "891": {
+        "action": "approved",
+        "at": "2026-06-10T23:54:00",
+        "id": "hadith_000891",
+        "ref": "riyazussalihin/891"
+      },
+      "hadith_001807": {
+        "action": "approved",
+        "at": "2026-06-10T23:54:29",
+        "id": "hadith_001807",
+        "ref": "riyazussalihin/1807"
+      },
+      "riyazussalihin/1807": {
+        "action": "approved",
+        "at": "2026-06-10T23:54:29",
+        "id": "hadith_001807",
+        "ref": "riyazussalihin/1807"
+      },
+      "1807": {
+        "action": "approved",
+        "at": "2026-06-10T23:54:29",
+        "id": "hadith_001807",
+        "ref": "riyazussalihin/1807"
+      },
+      "hadith_000814": {
+        "action": "approved",
+        "at": "2026-06-10T23:54:59",
+        "id": "hadith_000814",
+        "ref": "riyazussalihin/814"
+      },
+      "riyazussalihin/814": {
+        "action": "approved",
+        "at": "2026-06-10T23:54:59",
+        "id": "hadith_000814",
+        "ref": "riyazussalihin/814"
+      },
+      "814": {
+        "action": "approved",
+        "at": "2026-06-10T23:54:59",
+        "id": "hadith_000814",
+        "ref": "riyazussalihin/814"
+      },
+      "hadith_001274": {
+        "action": "approved",
+        "at": "2026-06-10T23:55:22",
+        "id": "hadith_001274",
+        "ref": "riyazussalihin/1274"
+      },
+      "riyazussalihin/1274": {
+        "action": "approved",
+        "at": "2026-06-10T23:55:22",
+        "id": "hadith_001274",
+        "ref": "riyazussalihin/1274"
+      },
+      "1274": {
+        "action": "approved",
+        "at": "2026-06-10T23:55:22",
+        "id": "hadith_001274",
+        "ref": "riyazussalihin/1274"
+      },
+      "hadith_001225": {
+        "action": "approved",
+        "at": "2026-06-10T23:55:43",
+        "id": "hadith_001225",
+        "ref": "riyazussalihin/1225"
+      },
+      "riyazussalihin/1225": {
+        "action": "approved",
+        "at": "2026-06-10T23:55:43",
+        "id": "hadith_001225",
+        "ref": "riyazussalihin/1225"
+      },
+      "1225": {
+        "action": "approved",
+        "at": "2026-06-10T23:55:43",
+        "id": "hadith_001225",
+        "ref": "riyazussalihin/1225"
+      },
+      "hadith_001819": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:02",
+        "id": "hadith_001819",
+        "ref": "riyazussalihin/1819"
+      },
+      "riyazussalihin/1819": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:02",
+        "id": "hadith_001819",
+        "ref": "riyazussalihin/1819"
+      },
+      "1819": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:02",
+        "id": "hadith_001819",
+        "ref": "riyazussalihin/1819"
+      },
+      "hadith_000317": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:17",
+        "id": "hadith_000317",
+        "ref": "riyazussalihin/317"
+      },
+      "riyazussalihin/317": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:17",
+        "id": "hadith_000317",
+        "ref": "riyazussalihin/317"
+      },
+      "317": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:17",
+        "id": "hadith_000317",
+        "ref": "riyazussalihin/317"
+      },
+      "hadith_000896": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:33",
+        "id": "hadith_000896",
+        "ref": "riyazussalihin/896"
+      },
+      "riyazussalihin/896": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:33",
+        "id": "hadith_000896",
+        "ref": "riyazussalihin/896"
+      },
+      "896": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:33",
+        "id": "hadith_000896",
+        "ref": "riyazussalihin/896"
+      },
+      "hadith_001554": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:50",
+        "id": "hadith_001554",
+        "ref": "riyazussalihin/1554"
+      },
+      "riyazussalihin/1554": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:50",
+        "id": "hadith_001554",
+        "ref": "riyazussalihin/1554"
+      },
+      "1554": {
+        "action": "approved",
+        "at": "2026-06-10T23:58:50",
+        "id": "hadith_001554",
+        "ref": "riyazussalihin/1554"
+      },
+      "hadith_001082": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:07",
+        "id": "hadith_001082",
+        "ref": "riyazussalihin/1082"
+      },
+      "riyazussalihin/1082": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:07",
+        "id": "hadith_001082",
+        "ref": "riyazussalihin/1082"
+      },
+      "1082": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:07",
+        "id": "hadith_001082",
+        "ref": "riyazussalihin/1082"
+      },
+      "hadith_000759": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:16",
+        "id": "hadith_000759",
+        "ref": "riyazussalihin/759"
+      },
+      "riyazussalihin/759": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:16",
+        "id": "hadith_000759",
+        "ref": "riyazussalihin/759"
+      },
+      "759": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:16",
+        "id": "hadith_000759",
+        "ref": "riyazussalihin/759"
+      },
+      "hadith_001667": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:29",
+        "id": "hadith_001667",
+        "ref": "riyazussalihin/1667"
+      },
+      "riyazussalihin/1667": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:29",
+        "id": "hadith_001667",
+        "ref": "riyazussalihin/1667"
+      },
+      "1667": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:29",
+        "id": "hadith_001667",
+        "ref": "riyazussalihin/1667"
+      },
+      "hadith_000453": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:54",
+        "id": "hadith_000453",
+        "ref": "riyazussalihin/453"
+      },
+      "riyazussalihin/453": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:54",
+        "id": "hadith_000453",
+        "ref": "riyazussalihin/453"
+      },
+      "453": {
+        "action": "approved",
+        "at": "2026-06-11T00:00:54",
+        "id": "hadith_000453",
+        "ref": "riyazussalihin/453"
+      },
+      "hadith_000631": {
+        "action": "approved",
+        "at": "2026-06-11T00:01:06",
+        "id": "hadith_000631",
+        "ref": "riyazussalihin/631"
+      },
+      "riyazussalihin/631": {
+        "action": "approved",
+        "at": "2026-06-11T00:01:06",
+        "id": "hadith_000631",
+        "ref": "riyazussalihin/631"
+      },
+      "631": {
+        "action": "approved",
+        "at": "2026-06-11T00:01:06",
+        "id": "hadith_000631",
+        "ref": "riyazussalihin/631"
+      },
+      "hadith_000301": {
+        "action": "approved",
+        "at": "2026-06-11T00:01:35",
+        "id": "hadith_000301",
+        "ref": "riyazussalihin/301"
+      },
+      "riyazussalihin/301": {
+        "action": "approved",
+        "at": "2026-06-11T00:01:35",
+        "id": "hadith_000301",
+        "ref": "riyazussalihin/301"
+      },
+      "301": {
+        "action": "approved",
+        "at": "2026-06-11T00:01:35",
+        "id": "hadith_000301",
+        "ref": "riyazussalihin/301"
+      },
+      "hadith_000591": {
+        "action": "approved",
+        "at": "2026-06-11T00:01:49",
+        "id": "hadith_000591",
+        "ref": "riyazussalihin/591"
+      },
+      "riyazussalihin/591": {
+        "action": "approved",
+        "at": "2026-06-11T00:01:49",
+        "id": "hadith_000591",
+        "ref": "riyazussalihin/591"
+      },
+      "591": {
+        "action": "approved",
+        "at": "2026-06-11T00:01:49",
+        "id": "hadith_000591",
+        "ref": "riyazussalihin/591"
+      },
+      "hadith_001863": {
+        "action": "approved",
+        "at": "2026-06-11T00:02:08",
+        "id": "hadith_001863",
+        "ref": "riyazussalihin/1863"
+      },
+      "riyazussalihin/1863": {
+        "action": "approved",
+        "at": "2026-06-11T00:02:08",
+        "id": "hadith_001863",
+        "ref": "riyazussalihin/1863"
+      },
+      "1863": {
+        "action": "approved",
+        "at": "2026-06-11T00:02:08",
+        "id": "hadith_001863",
+        "ref": "riyazussalihin/1863"
+      },
+      "hadith_001279": {
+        "action": "approved",
+        "at": "2026-06-11T00:02:30",
+        "id": "hadith_001279",
+        "ref": "riyazussalihin/1279"
+      },
+      "riyazussalihin/1279": {
+        "action": "approved",
+        "at": "2026-06-11T00:02:30",
+        "id": "hadith_001279",
+        "ref": "riyazussalihin/1279"
+      },
+      "1279": {
+        "action": "approved",
+        "at": "2026-06-11T00:02:30",
+        "id": "hadith_001279",
+        "ref": "riyazussalihin/1279"
+      },
+      "hadith_001292": {
+        "action": "approved",
+        "at": "2026-06-11T00:02:41",
+        "id": "hadith_001292",
+        "ref": "riyazussalihin/1292"
+      },
+      "riyazussalihin/1292": {
+        "action": "approved",
+        "at": "2026-06-11T00:02:41",
+        "id": "hadith_001292",
+        "ref": "riyazussalihin/1292"
+      },
+      "1292": {
+        "action": "approved",
+        "at": "2026-06-11T00:02:41",
+        "id": "hadith_001292",
+        "ref": "riyazussalihin/1292"
+      }
+    },
     "esma": {}
   }
 }

@@ -50,7 +50,7 @@ class MainWindow(QMainWindow):
     def __init__(self, repository: ContentRepository) -> None:
         super().__init__()
         self.setWindowTitle("İçerik Ekleme Aracı")
-        self.resize(scale(1200), 520)
+        self.resize(scale(1100), 520)
         self.setCentralWidget(self._scrollable(SimpleAddPanel(repository)))
 
     @staticmethod

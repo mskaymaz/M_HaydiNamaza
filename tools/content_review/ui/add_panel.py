@@ -601,6 +601,7 @@ class AddPanel(QWidget):
         self._current_archive_record = saved
         if saved.status == "approved":
             self._current_approved_record = saved
+            QMessageBox.information(self, "Yayin", "Yayinlanacaklara eklendi.")
         self._load_record(saved)
         self.archive_check.setChecked(True)
         if saved.status == "approved":

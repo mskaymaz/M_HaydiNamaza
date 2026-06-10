@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "content_version": "onay-tool-20260610_165756",
+  "content_version": "onay-tool-20260610_232631",
   "type": "ayah",
   "records": [
     {
@@ -1918,26 +1918,19 @@
       "ar": "يَـٰبُنَىَّ أَقِمِ ٱلصَّلَوٰةَ وَأْمُرْ بِٱلْمَعْرُوفِ وَٱنْهَ عَنِ ٱلْمُنكَرِ وَٱصْبِرْ عَلَىٰ مَآ أَصَابَكَ ۖ إِنَّ ذَٰلِكَ مِنْ عَزْمِ ٱلْأُمُورِ",
       "tr": "\"Ey oğlum, namazı dosdoğru kıl, ma'rufu emret, münkerden sakındır ve sana isabet eden (musibetler)e karşı sabret. Çünkü bunlar, azmedilmesi gereken işlerdendir.",
       "en": "O my son, establish prayer, enjoin what is right, forbid what is wrong, and be patient over what befalls you. Indeed, [all] that is of the matters [requiring] determination.",
-      "priority": 1,
+      "priority": 2,
       "surah_number": 31,
       "surah_name": "Lokman",
       "ayah_number": 17,
       "ayah_end_number": 17,
-      "status": "pending_review"
-    },
-    {
-      "id": "032/024",
-      "kind": "ayah",
-      "ref": "032/024",
-      "ar": "وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا۟ ۖ وَكَانُوا۟ بِـَٔايَـٰتِنَا يُوقِنُونَ",
-      "tr": "Ve onların içinden, sabrettikleri zaman emrimizle doğru yola iletip-yönelten önderler kıldık; onlar Bizim ayetlerimize kesin bilgiyle inanıyorlardı.",
-      "en": "And We made from among them leaders guiding by Our command when they were patient and [when] they were certain of Our signs.",
-      "priority": 1,
-      "surah_number": 32,
-      "surah_name": "Secde",
-      "ayah_number": 24,
-      "ayah_end_number": 24,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:10:06",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:10:06",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:10:06"
     },
     {
       "id": "033/021",
@@ -1946,12 +1939,19 @@
       "ar": "لَّقَدْ كَانَ لَكُمْ فِى رَسُولِ ٱللَّهِ أُسْوَةٌ حَسَنَةٌ لِّمَن كَانَ يَرْجُوا۟ ٱللَّهَ وَٱلْيَوْمَ ٱلْـَٔاخِرَ وَذَكَرَ ٱللَّهَ كَثِيرًا",
       "tr": "Andolsun, sizin için, Allah'ı ve ahiret gününü umanlar ve Allah'ı çokça zikredenler için Allah'ın Resûlü’nde güzel bir örnek vardır.",
       "en": "There has certainly been for you in the Messenger of Allah an excellent pattern for anyone whose hope is in Allah and the Last Day and [who] remembers Allah often.",
-      "priority": 1,
+      "priority": 3,
       "surah_number": 33,
       "surah_name": "Ahzab",
       "ayah_number": 21,
       "ayah_end_number": 21,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:11:28",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:11:28",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:11:28"
     },
     {
       "id": "033/070",
@@ -1960,12 +1960,19 @@
       "ar": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ ٱتَّقُوا۟ ٱللَّهَ وَقُولُوا۟ قَوْلًا سَدِيدًا",
       "tr": "Ey iman edenler, Allah'tan sakının ve sözü doğru söyleyin.",
       "en": "O you who have believed, fear Allah and speak words of appropriate justice.",
-      "priority": 1,
+      "priority": 3,
       "surah_number": 33,
       "surah_name": "Ahzab",
       "ayah_number": 70,
       "ayah_end_number": 70,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:11:36",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:11:36",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:11:36"
     },
     {
       "id": "041/030",
@@ -1979,7 +1986,14 @@
       "surah_name": "Fussilet",
       "ayah_number": 30,
       "ayah_end_number": 30,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:11:53",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:11:53",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:11:53"
     },
     {
       "id": "042/038",
@@ -1988,12 +2002,19 @@
       "ar": "وَٱلَّذِينَ ٱسْتَجَابُوا۟ لِرَبِّهِمْ وَأَقَامُوا۟ ٱلصَّلَوٰةَ وَأَمْرُهُمْ شُورَىٰ بَيْنَهُمْ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
       "tr": "Rablerine icabet edenler, namazı dosdoğru kılanlar, işleri kendi aralarında şura ile olanlar ve kendilerine rızık olarak verdiklerimizden infak edenler,",
       "en": "And those who have responded to their lord and established prayer and whose affair is [determined by] consultation among themselves, and from what We have provided them, they spend.",
-      "priority": 1,
+      "priority": 2,
       "surah_number": 42,
       "surah_name": "Sura",
       "ayah_number": 38,
       "ayah_end_number": 38,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:13:30",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:13:30",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:13:30"
     },
     {
       "id": "042/040",
@@ -2007,7 +2028,14 @@
       "surah_name": "Sura",
       "ayah_number": 40,
       "ayah_end_number": 40,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:13:44",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:13:44",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:13:44"
     },
     {
       "id": "042/043",
@@ -2021,7 +2049,14 @@
       "surah_name": "Sura",
       "ayah_number": 43,
       "ayah_end_number": 43,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:13:51",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:13:51",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:13:51"
     },
     {
       "id": "047/007",
@@ -2030,12 +2065,19 @@
       "ar": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِن تَنصُرُوا۟ ٱللَّهَ يَنصُرْكُمْ وَيُثَبِّتْ أَقْدَامَكُمْ",
       "tr": "Ey iman edenler, eğer siz Allah'a (Allah adına İslama ve Müslümanlara) yardım ederseniz, O da size yardım eder ve sizin ayaklarınızı sağlamlaştırır.",
       "en": "O you who have believed, if you support Allah, He will support you and plant firmly your feet.",
-      "priority": 1,
+      "priority": 2,
       "surah_number": 47,
       "surah_name": "Muhammed",
       "ayah_number": 7,
       "ayah_end_number": 7,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:16:11",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:16:11",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:16:11"
     },
     {
       "id": "047/035",
@@ -2044,40 +2086,19 @@
       "ar": "فَلَا تَهِنُوا۟ وَتَدْعُوٓا۟ إِلَى ٱلسَّلْمِ وَأَنتُمُ ٱلْأَعْلَوْنَ وَٱللَّهُ مَعَكُمْ وَلَن يَتِرَكُمْ أَعْمَـٰلَكُمْ",
       "tr": "Öyleyse, siz üstün (bir durumda) iken, barışa çağırmak suretiyle gevşekliğe düşmeyin. Allah, sizinle beraberdir; O, sizin amellerinizi asla eksiltmez.",
       "en": "So do not weaken and call for peace while you are superior; and Allah is with you and will never deprive you of [the reward of] your deeds.",
-      "priority": 1,
+      "priority": 2,
       "surah_number": 47,
       "surah_name": "Muhammed",
       "ayah_number": 35,
       "ayah_end_number": 35,
-      "status": "pending_review"
-    },
-    {
-      "id": "048/029",
-      "kind": "ayah",
-      "ref": "048/029",
-      "ar": "مُّحَمَّدٌ رَّسُولُ ٱللَّهِ ۚ وَٱلَّذِينَ مَعَهُۥٓ أَشِدَّآءُ عَلَى ٱلْكُفَّارِ رُحَمَآءُ بَيْنَهُمْ ۖ تَرَىٰهُمْ رُكَّعًا سُجَّدًا يَبْتَغُونَ فَضْلًا مِّنَ ٱللَّهِ وَرِضْوَٰنًا ۖ سِيمَاهُمْ فِى وُجُوهِهِم مِّنْ أَثَرِ ٱلسُّجُودِ ۚ ذَٰلِكَ مَثَلُهُمْ فِى ٱلتَّوْرَىٰةِ ۚ وَمَثَلُهُمْ فِى ٱلْإِنجِيلِ كَزَرْعٍ أَخْرَجَ شَطْـَٔهُۥ فَـَٔازَرَهُۥ فَٱسْتَغْلَظَ فَٱسْتَوَىٰ عَلَىٰ سُوقِهِۦ يُعْجِبُ ٱلزُّرَّاعَ لِيَغِيظَ بِهِمُ ٱلْكُفَّارَ ۗ وَعَدَ ٱللَّهُ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ مِنْهُم مَّغْفِرَةً وَأَجْرًا عَظِيمًۢا",
-      "tr": "Muhammed, Allah'ın elçisidir. Ve onunla birlikte olanlar da kafirlere karşı zorlu, kendi aralarında ise merhametlidirler. Onları, rüku edenler, secde edenler olarak görürsün; onlar, Allah'tan bir fazl (lütuf ve ihsan) ve hoşnutluk arayıp-isterler. Belirtileri, secde izinden yüzlerindedir. İşte onların Tevrat'taki vasıfları budur: İncil'deki vasıfları ise: Sanki bir ekin; filizini çıkarmış, derken onu kuvvetlendirmiş, derken kalınlaşmış, sonra sapları üzerinde doğrulup-boy atmış (ki bu,) ekicilerin hoşuna gider. (Bu örnek,) Onunla kafirleri öfkelendirmek içindir. Allah, içlerinden iman edip salih amellerde bulunanlara bir mağfiret ve büyük bir ecir va'detmiştir.",
-      "en": "Muhammad is the Messenger of Allah; and those with him are forceful against the disbelievers, merciful among themselves. You see them bowing and prostrating [in prayer], seeking bounty from Allah and [His] pleasure. Their mark is on their faces from the trace of prostration. That is their description in the Torah. And their description in the Gospel is as a plant which produces its offshoots and strengthens them so they grow firm and stand upon their stalks, delighting the sowers - so that Allah may enrage by them the disbelievers. Allah has promised those who believe and do righteous deeds among them forgiveness and a great reward.",
-      "priority": 1,
-      "surah_number": 48,
-      "surah_name": "Fetih",
-      "ayah_number": 29,
-      "ayah_end_number": 29,
-      "status": "pending_review"
-    },
-    {
-      "id": "059/009",
-      "kind": "ayah",
-      "ref": "059/009",
-      "ar": "وَٱلَّذِينَ تَبَوَّءُو ٱلدَّارَ وَٱلْإِيمَـٰنَ مِن قَبْلِهِمْ يُحِبُّونَ مَنْ هَاجَرَ إِلَيْهِمْ وَلَا يَجِدُونَ فِى صُدُورِهِمْ حَاجَةً مِّمَّآ أُوتُوا۟ وَيُؤْثِرُونَ عَلَىٰٓ أَنفُسِهِمْ وَلَوْ كَانَ بِهِمْ خَصَاصَةٌ ۚ وَمَن يُوقَ شُحَّ نَفْسِهِۦ فَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ",
-      "tr": "Kendilerinden önce o yurdu (Medine'yi) hazırlayıp imanı (gönüllerine) yerleştirenler ise, hicret edenleri severler ve onlara verilen şeylerden dolayı içlerinde bir ihtiyaç (arzusu) duymazlar. Kendilerinde bir açıklık (ihtiyaç) olsa bile (kardeşlerini) öz nefislerine tercih ederler. Kim nefsinin 'cimri ve bencil tutkularından' korunmuşsa, işte onlar, felah (kurtuluş) bulanlardır.",
-      "en": "And [also for] those who were settled in al-Madinah and [adopted] the faith before them. They love those who emigrated to them and find not any want in their breasts of what the emigrants were given but give [them] preference over themselves, even though they are in privation. And whoever is protected from the stinginess of his soul - it is those who will be the successful.",
-      "priority": 1,
-      "surah_number": 59,
-      "surah_name": "Hasr",
-      "ayah_number": 9,
-      "ayah_end_number": 9,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:16:40",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:16:40",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:16:40"
     },
     {
       "id": "061/004",
@@ -2086,26 +2107,19 @@
       "ar": "إِنَّ ٱللَّهَ يُحِبُّ ٱلَّذِينَ يُقَـٰتِلُونَ فِى سَبِيلِهِۦ صَفًّا كَأَنَّهُم بُنْيَـٰنٌ مَّرْصُوصٌ",
       "tr": "Şüphesiz Allah, Kendi yolunda, sanki birbirlerine kenetlenmiş bir bina gibi saf bağlayarak çarpışanları sever.",
       "en": "Indeed, Allah loves those who fight in His cause in a row as though they are a [single] structure joined firmly.",
-      "priority": 1,
+      "priority": 3,
       "surah_number": 61,
       "surah_name": "Saff",
       "ayah_number": 4,
       "ayah_end_number": 4,
-      "status": "pending_review"
-    },
-    {
-      "id": "061/010",
-      "kind": "ayah",
-      "ref": "061/010",
-      "ar": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ هَلْ أَدُلُّكُمْ عَلَىٰ تِجَـٰرَةٍ تُنجِيكُم مِّنْ عَذَابٍ أَلِيمٍ",
-      "tr": "Ey iman edenler, sizi acı bir azaptan kurtaracak bir ticareti haber vereyim mi?",
-      "en": "O you who have believed, shall I guide you to a transaction that will save you from a painful punishment?",
-      "priority": 1,
-      "surah_number": 61,
-      "surah_name": "Saff",
-      "ayah_number": 10,
-      "ayah_end_number": 10,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:18:38",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:18:38",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:18:38"
     },
     {
       "id": "061/011",
@@ -2114,54 +2128,19 @@
       "ar": "تُؤْمِنُونَ بِٱللَّهِ وَرَسُولِهِۦ وَتُجَـٰهِدُونَ فِى سَبِيلِ ٱللَّهِ بِأَمْوَٰلِكُمْ وَأَنفُسِكُمْ ۚ ذَٰلِكُمْ خَيْرٌ لَّكُمْ إِن كُنتُمْ تَعْلَمُونَ",
       "tr": "Allah'a ve O'nun Resulü’ne iman edersiniz, mallarınızla ve canlarınızla Allah yolunda mücadele edersiniz. Bu, sizin için daha hayırlıdır; eğer bilirseniz.",
       "en": "[It is that] you believe in Allah and His Messenger and strive in the cause of Allah with your wealth and your lives. That is best for you, if you should know.",
-      "priority": 1,
+      "priority": 3,
       "surah_number": 61,
       "surah_name": "Saff",
       "ayah_number": 11,
       "ayah_end_number": 11,
-      "status": "pending_review"
-    },
-    {
-      "id": "001/004",
-      "kind": "ayah",
-      "ref": "001/004",
-      "ar": "مَـٰلِكِ يَوْمِ ٱلدِّينِ",
-      "tr": "Din gününün malikidir.",
-      "en": "Sovereign of the Day of Recompense.",
-      "priority": 1,
-      "surah_number": 1,
-      "surah_name": "Fatiha",
-      "ayah_number": 4,
-      "ayah_end_number": 4,
-      "status": "pending_review"
-    },
-    {
-      "id": "001/007",
-      "kind": "ayah",
-      "ref": "001/007",
-      "ar": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
-      "tr": "Kendilerine nimet verdiklerinin yoluna gazaba uğrayanların ve sapmışlarınkine değil.",
-      "en": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
-      "priority": 1,
-      "surah_number": 1,
-      "surah_name": "Fatiha",
-      "ayah_number": 7,
-      "ayah_end_number": 7,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/010",
-      "kind": "ayah",
-      "ref": "002/010",
-      "ar": "فِى قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ ٱللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ",
-      "tr": "Kalplerinde hastalık vardır. Allah da hastalıklarını arttırmıştır. Yalan söylemekte olduklarından dolayı, onlar için acı bir azap vardır.",
-      "en": "In their hearts is disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie.",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 10,
-      "ayah_end_number": 10,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:27:14",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:27:14",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:27:14"
     },
     {
       "id": "002/011",
@@ -2175,21 +2154,14 @@
       "surah_name": "Bakara",
       "ayah_number": 11,
       "ayah_end_number": 11,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/012",
-      "kind": "ayah",
-      "ref": "002/012",
-      "ar": "أَلَآ إِنَّهُمْ هُمُ ٱلْمُفْسِدُونَ وَلَـٰكِن لَّا يَشْعُرُونَ",
-      "tr": "Bilin ki; gerçekten, asıl fesatçılar bunlardır, ama şuurunda değildirler.",
-      "en": "Unquestionably, it is they who are the corrupters, but they perceive [it] not.",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 12,
-      "ayah_end_number": 12,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:51:22",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:51:22",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:51:22"
     },
     {
       "id": "002/013",
@@ -2198,54 +2170,19 @@
       "ar": "وَإِذَا قِيلَ لَهُمْ ءَامِنُوا۟ كَمَآ ءَامَنَ ٱلنَّاسُ قَالُوٓا۟ أَنُؤْمِنُ كَمَآ ءَامَنَ ٱلسُّفَهَآءُ ۗ أَلَآ إِنَّهُمْ هُمُ ٱلسُّفَهَآءُ وَلَـٰكِن لَّا يَعْلَمُونَ",
       "tr": "Ve (yine) kendilerine: \"İnsanların iman ettiği gibi siz de iman edin\" denildiğinde: \"Düşük akıllıların iman ettiği gibi mi iman edelim?\" derler. Bilin ki, gerçekten asıl düşük-akıllılar kendileridir; ama bilmezler.",
       "en": "And when it is said to them, \"Believe as the people have believed,\" they say, \"Should we believe as the foolish have believed?\" Unquestionably, it is they who are the foolish, but they know [it] not.",
-      "priority": 1,
+      "priority": 2,
       "surah_number": 2,
       "surah_name": "Bakara",
       "ayah_number": 13,
       "ayah_end_number": 13,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/014",
-      "kind": "ayah",
-      "ref": "002/014",
-      "ar": "وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَـٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ",
-      "tr": "İman edenlerle karşılaştıkları zaman: \"İman ettik\" derler. Şeytanlarıyla başbaşa kaldıklarında ise, derler ki: “Şüphesiz, sizinle beraberiz. Biz (onlarla) yalnızca alay ediyoruz.\"",
-      "en": "And when they meet those who believe, they say, \"We believe\"; but when they are alone with their evil ones, they say, \"Indeed, we are with you; we were only mockers.\"",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 14,
-      "ayah_end_number": 14,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/015",
-      "kind": "ayah",
-      "ref": "002/015",
-      "ar": "ٱللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِى طُغْيَـٰنِهِمْ يَعْمَهُونَ",
-      "tr": "(Asıl) Allah onlarla alay eder ve taşkınlıkları içinde şaşkınca dolaşmalarına (belli bir) süre tanır.",
-      "en": "[But] Allah mocks them and prolongs them in their transgression [while] they wander blindly.",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 15,
-      "ayah_end_number": 15,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/016",
-      "kind": "ayah",
-      "ref": "002/016",
-      "ar": "أُو۟لَـٰٓئِكَ ٱلَّذِينَ ٱشْتَرَوُا۟ ٱلضَّلَـٰلَةَ بِٱلْهُدَىٰ فَمَا رَبِحَت تِّجَـٰرَتُهُمْ وَمَا كَانُوا۟ مُهْتَدِينَ",
-      "tr": "İşte bunlar, hidayete karşılık sapıklığı satın almışlardır; fakat bu alış-verişleri bir yarar sağlamamış; hidayeti de bulmamışlardır.",
-      "en": "Those are the ones who have purchased error [in exchange] for guidance, so their transaction has brought no profit, nor were they guided.",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 16,
-      "ayah_end_number": 16,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:52:51",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:52:51",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:52:51"
     },
     {
       "id": "002/022",
@@ -2254,26 +2191,19 @@
       "ar": "ٱلَّذِى جَعَلَ لَكُمُ ٱلْأَرْضَ فِرَٰشًا وَٱلسَّمَآءَ بِنَآءً وَأَنزَلَ مِنَ ٱلسَّمَآءِ مَآءً فَأَخْرَجَ بِهِۦ مِنَ ٱلثَّمَرَٰتِ رِزْقًا لَّكُمْ ۖ فَلَا تَجْعَلُوا۟ لِلَّهِ أَندَادًا وَأَنتُمْ تَعْلَمُونَ",
       "tr": "O, sizin için yeryüzünü bir döşek, gökyüzünü bir bina kıldı. Ve gökten yağmur indirerek bununla sizin için (çeşitli) ürünlerden rızık çıkardı. Öyleyse (bütün bunları) bile bile Allah'a eşler koşmayın.",
       "en": "[He] who made for you the earth a bed [spread out] and the sky a ceiling and sent down from the sky, rain and brought forth thereby fruits as provision for you. So do not attribute to Allah equals while you know [that there is nothing similar to Him].",
-      "priority": 1,
+      "priority": 2,
       "surah_number": 2,
       "surah_name": "Bakara",
       "ayah_number": 22,
       "ayah_end_number": 22,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/026",
-      "kind": "ayah",
-      "ref": "002/026",
-      "ar": "إِنَّ ٱللَّهَ لَا يَسْتَحْىِۦٓ أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا ۚ فَأَمَّا ٱلَّذِينَ ءَامَنُوا۟ فَيَعْلَمُونَ أَنَّهُ ٱلْحَقُّ مِن رَّبِّهِمْ ۖ وَأَمَّا ٱلَّذِينَ كَفَرُوا۟ فَيَقُولُونَ مَاذَآ أَرَادَ ٱللَّهُ بِهَـٰذَا مَثَلًا ۘ يُضِلُّ بِهِۦ كَثِيرًا وَيَهْدِى بِهِۦ كَثِيرًا ۚ وَمَا يُضِلُّ بِهِۦٓ إِلَّا ٱلْفَـٰسِقِينَ",
-      "tr": "Şüphesiz Allah, bir sivrisineği de, ondan üstün olanı da, (herhangi bir şeyi) örnek vermekten çekinmez. Böylece iman edenler, kuşkusuz bunun Rablerinden gelen bir gerçek olduğunu bilirler; inkar edenler ise, \"Allah, bu örnekle neyi amaçlamış?\" derler. (Oysa Allah,) Bununla birçoğunu saptırır, birçoğunu da hidayete erdirir. Ancak O, fasıklardan başkasını saptırmaz.",
-      "en": "Indeed, Allah is not timid to present an example - that of a mosquito or what is smaller than it. And those who have believed know that it is the truth from their Lord. But as for those who disbelieve, they say, \"What did Allah intend by this as an example?\" He misleads many thereby and guides many thereby. And He misleads not except the defiantly disobedient,",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 26,
-      "ayah_end_number": 26,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T22:55:15",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T22:55:15",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T22:55:15"
     },
     {
       "id": "002/027",
@@ -2287,7 +2217,14 @@
       "surah_name": "Bakara",
       "ayah_number": 27,
       "ayah_end_number": 27,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:13:47",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:13:47",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:13:47"
     },
     {
       "id": "002/030",
@@ -2301,7 +2238,14 @@
       "surah_name": "Bakara",
       "ayah_number": 30,
       "ayah_end_number": 30,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:16:59",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:16:59",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:16:59"
     },
     {
       "id": "002/035",
@@ -2315,63 +2259,14 @@
       "surah_name": "Bakara",
       "ayah_number": 35,
       "ayah_end_number": 35,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/040",
-      "kind": "ayah",
-      "ref": "002/040",
-      "ar": "يَـٰبَنِىٓ إِسْرَٰٓءِيلَ ٱذْكُرُوا۟ نِعْمَتِىَ ٱلَّتِىٓ أَنْعَمْتُ عَلَيْكُمْ وَأَوْفُوا۟ بِعَهْدِىٓ أُوفِ بِعَهْدِكُمْ وَإِيَّـٰىَ فَٱرْهَبُونِ",
-      "tr": "Ey İsrailoğulları, size bağışladığım nimetimi hatırlayın ve ahdime bağlı kalın, ki Ben de ahdinize bağlı kalayım. Ve yalnızca Benden korkun.",
-      "en": "O Children of Israel, remember My favor which I have bestowed upon you and fulfill My covenant [upon you] that I will fulfill your covenant [from Me], and be afraid of [only] Me.",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 40,
-      "ayah_end_number": 40,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/041",
-      "kind": "ayah",
-      "ref": "002/041",
-      "ar": "وَءَامِنُوا۟ بِمَآ أَنزَلْتُ مُصَدِّقًا لِّمَا مَعَكُمْ وَلَا تَكُونُوٓا۟ أَوَّلَ كَافِرٍۭ بِهِۦ ۖ وَلَا تَشْتَرُوا۟ بِـَٔايَـٰتِى ثَمَنًا قَلِيلًا وَإِيَّـٰىَ فَٱتَّقُونِ",
-      "tr": "Yanınızda olan (Tevrat)ı, doğrulayıcı olarak indirdiğime (Kur'an'a) iman edin; onu inkar edenlerin ilki siz olmayın ve ayetlerimizi az bir değer karşılığında değişmeyin. Ve yalnızca Benden korkun.",
-      "en": "And believe in what I have sent down confirming that which is [already] with you, and be not the first to disbelieve in it. And do not exchange My signs for a small price, and fear [only] Me.",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 41,
-      "ayah_end_number": 41,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/040-041",
-      "kind": "ayah",
-      "ref": "002/040-041",
-      "ar": "﴿40﴾ يَـٰبَنِىٓ إِسْرَٰٓءِيلَ ٱذْكُرُوا۟ نِعْمَتِىَ ٱلَّتِىٓ أَنْعَمْتُ عَلَيْكُمْ وَأَوْفُوا۟ بِعَهْدِىٓ أُوفِ بِعَهْدِكُمْ وَإِيَّـٰىَ فَٱرْهَبُونِ\n\n﴿41﴾ وَءَامِنُوا۟ بِمَآ أَنزَلْتُ مُصَدِّقًا لِّمَا مَعَكُمْ وَلَا تَكُونُوٓا۟ أَوَّلَ كَافِرٍۭ بِهِۦ ۖ وَلَا تَشْتَرُوا۟ بِـَٔايَـٰتِى ثَمَنًا قَلِيلًا وَإِيَّـٰىَ فَٱتَّقُونِ",
-      "tr": "[40] Ey İsrailoğulları, size bağışladığım nimetimi hatırlayın ve ahdime bağlı kalın, ki Ben de ahdinize bağlı kalayım. Ve yalnızca Benden korkun.\n\n[41] Yanınızda olan (Tevrat)ı, doğrulayıcı olarak indirdiğime (Kur'an'a) iman edin; onu inkar edenlerin ilki siz olmayın ve ayetlerimizi az bir değer karşılığında değişmeyin. Ve yalnızca Benden korkun.",
-      "en": "[40] O Children of Israel, remember My favor which I have bestowed upon you and fulfill My covenant [upon you] that I will fulfill your covenant [from Me], and be afraid of [only] Me.\n\n[41] And believe in what I have sent down confirming that which is [already] with you, and be not the first to disbelieve in it. And do not exchange My signs for a small price, and fear [only] Me.",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 40,
-      "ayah_end_number": 41,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/047",
-      "kind": "ayah",
-      "ref": "002/047",
-      "ar": "يَـٰبَنِىٓ إِسْرَٰٓءِيلَ ٱذْكُرُوا۟ نِعْمَتِىَ ٱلَّتِىٓ أَنْعَمْتُ عَلَيْكُمْ وَأَنِّى فَضَّلْتُكُمْ عَلَى ٱلْعَـٰلَمِينَ",
-      "tr": "Ey İsrailoğulları, size bağışladığım nimetimi ve sizi (bir dönem) alemlere üstün kıldığımı hatırlayın.",
-      "en": "O Children of Israel, remember My favor that I have bestowed upon you and that I preferred you over the worlds.",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 47,
-      "ayah_end_number": 47,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:17:57",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:17:57",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:17:57"
     },
     {
       "id": "002/060",
@@ -2380,12 +2275,19 @@
       "ar": "وَإِذِ ٱسْتَسْقَىٰ مُوسَىٰ لِقَوْمِهِۦ فَقُلْنَا ٱضْرِب بِّعَصَاكَ ٱلْحَجَرَ ۖ فَٱنفَجَرَتْ مِنْهُ ٱثْنَتَا عَشْرَةَ عَيْنًا ۖ قَدْ عَلِمَ كُلُّ أُنَاسٍ مَّشْرَبَهُمْ ۖ كُلُوا۟ وَٱشْرَبُوا۟ مِن رِّزْقِ ٱللَّهِ وَلَا تَعْثَوْا۟ فِى ٱلْأَرْضِ مُفْسِدِينَ",
       "tr": "(Yine) Hatırlayın; Musa kavmi için su aramıştı, o zaman Biz ona: \"Asanı taşa vur\" demiştik de ondan on iki pınar fışkırmıştı, böylece herkes içeceği yeri bilmişti. Allah'ın verdiği rızıktan yiyin, için ve yeryüzünde bozgunculuk (fesad) yaparak karışıklık çıkarmayın.",
       "en": "And [recall] when Moses prayed for water for his people, so We said, \"Strike with your staff the stone.\" And there gushed forth from it twelve springs, and every people knew its watering place. \"Eat and drink from the provision of Allah, and do not commit abuse on the earth, spreading corruption.\"",
-      "priority": 1,
+      "priority": 2,
       "surah_number": 2,
       "surah_name": "Bakara",
       "ayah_number": 60,
       "ayah_end_number": 60,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:23:13",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:23:13",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:23:13"
     },
     {
       "id": "002/062",
@@ -2399,21 +2301,14 @@
       "surah_name": "Bakara",
       "ayah_number": 62,
       "ayah_end_number": 62,
-      "status": "pending_review"
-    },
-    {
-      "id": "002/067",
-      "kind": "ayah",
-      "ref": "002/067",
-      "ar": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِۦٓ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تَذْبَحُوا۟ بَقَرَةً ۖ قَالُوٓا۟ أَتَتَّخِذُنَا هُزُوًا ۖ قَالَ أَعُوذُ بِٱللَّهِ أَنْ أَكُونَ مِنَ ٱلْجَـٰهِلِينَ",
-      "tr": "Hani Musa kavmine: \"Allah, muhakkak sizin bir sığır kesmenizi emrediyor\" demişti. \"Bizi alaya mı alıyorsun?\" dediler. (Musa) \"Cahillerden olmaktan Allah'a sığınırım\" dedi.",
-      "en": "And [recall] when Moses said to his people, \"Indeed, Allah commands you to slaughter a cow.\" They said, \"Do you take us in ridicule?\" He said, \"I seek refuge in Allah from being among the ignorant.\"",
-      "priority": 1,
-      "surah_number": 2,
-      "surah_name": "Bakara",
-      "ayah_number": 67,
-      "ayah_end_number": 67,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:23:41",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:23:41",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:23:41"
     },
     {
       "id": "002/075",
@@ -2427,7 +2322,14 @@
       "surah_name": "Bakara",
       "ayah_number": 75,
       "ayah_end_number": 75,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:24:33",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:24:33",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:24:33"
     },
     {
       "id": "002/083",
@@ -2441,7 +2343,14 @@
       "surah_name": "Bakara",
       "ayah_number": 83,
       "ayah_end_number": 83,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:24:49",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:24:49",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:24:49"
     },
     {
       "id": "002/087",
@@ -2450,12 +2359,19 @@
       "ar": "وَلَقَدْ ءَاتَيْنَا مُوسَى ٱلْكِتَـٰبَ وَقَفَّيْنَا مِنۢ بَعْدِهِۦ بِٱلرُّسُلِ ۖ وَءَاتَيْنَا عِيسَى ٱبْنَ مَرْيَمَ ٱلْبَيِّنَـٰتِ وَأَيَّدْنَـٰهُ بِرُوحِ ٱلْقُدُسِ ۗ أَفَكُلَّمَا جَآءَكُمْ رَسُولٌۢ بِمَا لَا تَهْوَىٰٓ أَنفُسُكُمُ ٱسْتَكْبَرْتُمْ فَفَرِيقًا كَذَّبْتُمْ وَفَرِيقًا تَقْتُلُونَ",
       "tr": "Andolsun, Biz Musa'ya kitabı verdik ve ardından peş peşe elçiler gönderdik. Meryem oğlu İsa'ya da apaçık belgeler verdik ve onu Ruhu'l-Kudüs'le teyid ettik. Demek, size ne zaman bir elçi nefsinizin hoşlanmayacağı bir şeyle gelse, büyüklük taslayarak bir kısmınız onu yalanlayacak, bir kısmınız da onu öldürecek misiniz?",
       "en": "And We did certainly give Moses the Torah and followed up after him with messengers. And We gave Jesus, the son of Mary, clear proofs and supported him with the Pure Spirit. But is it [not] that every time a messenger came to you, [O Children of Israel], with what your souls did not desire, you were arrogant? And a party [of messengers] you denied and another party you killed.",
-      "priority": 1,
+      "priority": 2,
       "surah_number": 2,
       "surah_name": "Bakara",
       "ayah_number": 87,
       "ayah_end_number": 87,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:26:11",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:26:11",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:26:11"
     },
     {
       "id": "002/088",
@@ -2469,7 +2385,14 @@
       "surah_name": "Bakara",
       "ayah_number": 88,
       "ayah_end_number": 88,
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:26:31",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:26:31",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:26:31"
     },
     {
       "id": "002/089",
@@ -20502,6 +20425,90 @@
       "surah_name": "Yunus",
       "ayah_number": 88,
       "ayah_end_number": null
+    },
+    {
+      "id": "061/010-011",
+      "kind": "ayah",
+      "ref": "061/010-011",
+      "ar": "﴿10﴾ يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ هَلْ أَدُلُّكُمْ عَلَىٰ تِجَـٰرَةٍ تُنجِيكُم مِّنْ عَذَابٍ أَلِيمٍ\n﴿11﴾ تُؤْمِنُونَ بِٱللَّهِ وَرَسُولِهِۦ وَتُجَـٰهِدُونَ فِى سَبِيلِ ٱللَّهِ بِأَمْوَٰلِكُمْ وَأَنفُسِكُمْ ۚ ذَٰلِكُمْ خَيْرٌ لَّكُمْ إِن كُنتُمْ تَعْلَمُونَ",
+      "tr": "[10] Ey iman edenler, sizi acı bir azaptan kurtaracak bir ticareti haber vereyim mi?\n[11] Allah'a ve O'nun Resulü’ne iman edersiniz, mallarınızla ve canlarınızla Allah yolunda mücadele edersiniz. Bu, sizin için daha hayırlıdır; eğer bilirseniz.",
+      "en": "[10] O you who have believed, shall I guide you to a transaction that will save you from a painful punishment?\n[11] [It is that] you believe in Allah and His Messenger and strive in the cause of Allah with your wealth and your lives. That is best for you, if you should know.",
+      "priority": 3,
+      "approvedAt": "2026-06-10T19:26:56+00:00",
+      "surah_number": 61,
+      "surah_name": "Saff",
+      "ayah_number": 10,
+      "ayah_end_number": null
+    },
+    {
+      "id": "002/009-010",
+      "kind": "ayah",
+      "ref": "002/009-010",
+      "ar": "﴿9﴾ يُخَـٰدِعُونَ ٱللَّهَ وَٱلَّذِينَ ءَامَنُوا۟ وَمَا يَخْدَعُونَ إِلَّآ أَنفُسَهُمْ وَمَا يَشْعُرُونَ\n﴿10﴾ فِى قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ ٱللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ",
+      "tr": "[9] (Sözde) Allah'ı ve iman edenleri aldatırlar. Oysa onlar, yalnızca kendilerini aldatıyorlar ve şuurunda değiller.\n[10] Kalplerinde hastalık vardır. Allah da hastalıklarını arttırmıştır. Yalan söylemekte olduklarından dolayı, onlar için acı bir azap vardır.",
+      "en": "[9] They [think to] deceive Allah and those who believe, but they deceive not except themselves and perceive [it] not.\n[10] In their hearts is disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie.",
+      "priority": 2,
+      "approvedAt": "2026-06-10T19:50:43+00:00",
+      "surah_number": 2,
+      "surah_name": "Bakara",
+      "ayah_number": 9,
+      "ayah_end_number": 10
+    },
+    {
+      "id": "002/011-012",
+      "kind": "ayah",
+      "ref": "002/011-012",
+      "ar": "﴿11﴾ وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا۟ فِى ٱلْأَرْضِ قَالُوٓا۟ إِنَّمَا نَحْنُ مُصْلِحُونَ\n﴿12﴾ أَلَآ إِنَّهُمْ هُمُ ٱلْمُفْسِدُونَ وَلَـٰكِن لَّا يَشْعُرُونَ",
+      "tr": "[11] Kendilerine: \"Yeryüzünde fesat çıkarmayın\" denildiğinde: \"Biz sadece ıslah edicileriz\" derler.\n[12] Bilin ki; gerçekten, asıl fesatçılar bunlardır, ama şuurunda değildirler.",
+      "en": "[11] And when it is said to them, \"Do not cause corruption on the earth,\" they say, \"We are but reformers.\"\n[12] Unquestionably, it is they who are the corrupters, but they perceive [it] not.",
+      "priority": 1,
+      "approvedAt": "2026-06-10T19:52:28+00:00",
+      "surah_number": 2,
+      "surah_name": "Bakara",
+      "ayah_number": 11,
+      "ayah_end_number": null
+    },
+    {
+      "id": "002/013-014",
+      "kind": "ayah",
+      "ref": "002/013-014",
+      "ar": "﴿13﴾ وَإِذَا قِيلَ لَهُمْ ءَامِنُوا۟ كَمَآ ءَامَنَ ٱلنَّاسُ قَالُوٓا۟ أَنُؤْمِنُ كَمَآ ءَامَنَ ٱلسُّفَهَآءُ ۗ أَلَآ إِنَّهُمْ هُمُ ٱلسُّفَهَآءُ وَلَـٰكِن لَّا يَعْلَمُونَ\n﴿14﴾ وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَـٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ",
+      "tr": "[13] Ve (yine) kendilerine: \"İnsanların iman ettiği gibi siz de iman edin\" denildiğinde: \"Düşük akıllıların iman ettiği gibi mi iman edelim?\" derler. Bilin ki, gerçekten asıl düşük-akıllılar kendileridir; ama bilmezler.\n[14] İman edenlerle karşılaştıkları zaman: \"İman ettik\" derler. Şeytanlarıyla başbaşa kaldıklarında ise, derler ki: “Şüphesiz, sizinle beraberiz. Biz (onlarla) yalnızca alay ediyoruz.\"",
+      "en": "[13] And when it is said to them, \"Believe as the people have believed,\" they say, \"Should we believe as the foolish have believed?\" Unquestionably, it is they who are the foolish, but they know [it] not.\n[14] And when they meet those who believe, they say, \"We believe\"; but when they are alone with their evil ones, they say, \"Indeed, we are with you; we were only mockers.\"",
+      "priority": 2,
+      "approvedAt": "2026-06-10T19:53:49+00:00",
+      "surah_number": 2,
+      "surah_name": "Bakara",
+      "ayah_number": 13,
+      "ayah_end_number": null
+    },
+    {
+      "id": "002/013-015",
+      "kind": "ayah",
+      "ref": "002/013-015",
+      "ar": "﴿13﴾ وَإِذَا قِيلَ لَهُمْ ءَامِنُوا۟ كَمَآ ءَامَنَ ٱلنَّاسُ قَالُوٓا۟ أَنُؤْمِنُ كَمَآ ءَامَنَ ٱلسُّفَهَآءُ ۗ أَلَآ إِنَّهُمْ هُمُ ٱلسُّفَهَآءُ وَلَـٰكِن لَّا يَعْلَمُونَ\n﴿14﴾ وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَـٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ\n﴿15﴾ ٱللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِى طُغْيَـٰنِهِمْ يَعْمَهُونَ",
+      "tr": "[13] Ve (yine) kendilerine: \"İnsanların iman ettiği gibi siz de iman edin\" denildiğinde: \"Düşük akıllıların iman ettiği gibi mi iman edelim?\" derler. Bilin ki, gerçekten asıl düşük-akıllılar kendileridir; ama bilmezler.\n\n[14] İman edenlerle karşılaştıkları zaman: \"İman ettik\" derler. Şeytanlarıyla başbaşa kaldıklarında ise, derler ki: “Şüphesiz, sizinle beraberiz. Biz (onlarla) yalnızca alay ediyoruz.\"\n[15] (Asıl) Allah onlarla alay eder ve taşkınlıkları içinde şaşkınca dolaşmalarına (belli bir) süre tanır.",
+      "en": "[13] And when it is said to them, \"Believe as the people have believed,\" they say, \"Should we believe as the foolish have believed?\" Unquestionably, it is they who are the foolish, but they know [it] not.\n\n[14] And when they meet those who believe, they say, \"We believe\"; but when they are alone with their evil ones, they say, \"Indeed, we are with you; we were only mockers.\"\n[15] [But] Allah mocks them and prolongs them in their transgression [while] they wander blindly.",
+      "priority": 2,
+      "approvedAt": "2026-06-10T19:54:48+00:00",
+      "surah_number": 2,
+      "surah_name": "Bakara",
+      "ayah_number": 13,
+      "ayah_end_number": null
+    },
+    {
+      "id": "002/026",
+      "kind": "ayah",
+      "ref": "002/026",
+      "ar": "إِنَّ ٱللَّهَ لَا يَسْتَحْىِۦٓ أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا ۚ فَأَمَّا ٱلَّذِينَ ءَامَنُوا۟ فَيَعْلَمُونَ أَنَّهُ ٱلْحَقُّ مِن رَّبِّهِمْ ۖ وَأَمَّا ٱلَّذِينَ كَفَرُوا۟ فَيَقُولُونَ مَاذَآ أَرَادَ ٱللَّهُ بِهَـٰذَا مَثَلًا ۘ يُضِلُّ بِهِۦ كَثِيرًا وَيَهْدِى بِهِۦ كَثِيرًا ۚ وَمَا يُضِلُّ بِهِۦٓ إِلَّا ٱلْفَـٰسِقِينَ",
+      "tr": "Şüphesiz Allah, bir sivrisineği de, ondan üstün olanı da, (herhangi bir şeyi) örnek vermekten çekinmez. Böylece iman edenler, kuşkusuz bunun Rablerinden gelen bir gerçek olduğunu bilirler; inkar edenler ise, \"Allah, bu örnekle neyi amaçlamış?\" derler. (Oysa Allah,) bununla birçoğunu saptırır, birçoğunu da hidayete erdirir. Ancak O, fasıklardan başkasını saptırmaz.",
+      "en": "Indeed, Allah is not timid to present an example - that of a mosquito or what is smaller than it. And those who have believed know that it is the truth from their Lord. But as for those who disbelieve, they say, \"What did Allah intend by this as an example?\" He misleads many thereby and guides many thereby. And He misleads not except the defiantly disobedient,",
+      "priority": 2,
+      "approvedAt": "2026-06-10T19:57:16+00:00",
+      "surah_number": 2,
+      "surah_name": "Bakara",
+      "ayah_number": 26,
+      "ayah_end_number": 26
     }
   ]
 }

@@ -646,6 +646,7 @@ class ApprovalWindow(QMainWindow):
         priority = int(self.priority_combo.currentData() or 1)
         changed = self._editor.approve_review(item.kind, item.record_id, priority)
         if changed:
+            QMessageBox.information(self, "Yayin", "Yayinlanacaklara eklendi.")
             self._navigator.remove_current_item()
         self._sync_view()
         self.meta_label.setText(

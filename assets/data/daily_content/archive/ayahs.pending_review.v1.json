@@ -31,114 +31,6 @@
   },
   "items": [
     {
-      "ref": "001/004",
-      "id": "001/004",
-      "surah": 1,
-      "ayahStart": 4,
-      "ayahEnd": 4,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 1,
-        "ref": "001/004",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 111,
-        "input_status": "kaynak_birleşik:001/002-004",
-        "input_source_ref_groups": "001/002-004"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "001/002-004"
-      ],
-      "ayahs": [
-        {
-          "ref": "001/004",
-          "surah": 1,
-          "ayah": 4,
-          "arabic": "مَـٰلِكِ يَوْمِ ٱلدِّينِ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "001/004",
-            "text": "Din gününün malikidir."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "001/004",
-            "text": "Din Gününün sahibidir."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "001/004",
-            "text": "Sovereign of the Day of Recompense."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "001/004",
-            "text": "The Master of the Day of Recompense."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Fatiha",
-      "ayah_number": 4,
-      "ayah_end_number": 4,
-      "text_ar": "مَـٰلِكِ يَوْمِ ٱلدِّينِ",
-      "text_tr": "Din gününün malikidir.",
-      "text_en": "Sovereign of the Day of Recompense.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "001/004",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
       "ref": "001/006",
       "id": "001/006",
       "surah": 1,
@@ -206,114 +98,6 @@
       "text_tr": "Bizi doğru yola ilet;",
       "text_ar": "ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ",
       "text_en": "Guide us to the straight path -"
-    },
-    {
-      "ref": "001/007",
-      "id": "001/007",
-      "surah": 1,
-      "ayahStart": 7,
-      "ayahEnd": 7,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 3,
-        "ref": "001/007",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 110,
-        "input_status": "kaynak_birleşik:001/006-007",
-        "input_source_ref_groups": "001/006-007"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "001/006-007"
-      ],
-      "ayahs": [
-        {
-          "ref": "001/007",
-          "surah": 1,
-          "ayah": 7,
-          "arabic": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "001/007",
-            "text": "Kendilerine nimet verdiklerinin yoluna gazaba uğrayanların ve sapmışlarınkine değil."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "001/007",
-            "text": "Nimete erdirdiğin kimselerin yoluna; gazaba uğrayanların, ya da sapıtanların yoluna değil."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "001/007",
-            "text": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "001/007",
-            "text": "The way of those whom You have favoured, who did not incur Your wrath, who are not astray."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Fatiha",
-      "ayah_number": 7,
-      "ayah_end_number": 7,
-      "text_ar": "صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ",
-      "text_tr": "Kendilerine nimet verdiklerinin yoluna gazaba uğrayanların ve sapmışlarınkine değil.",
-      "text_en": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "001/007",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
     },
     {
       "ref": "002/002",
@@ -818,114 +602,6 @@
       "text_en": "They [think to] deceive Allah and those who believe, but they deceive not except themselves and perceive [it] not."
     },
     {
-      "ref": "002/010",
-      "id": "002/010",
-      "surah": 2,
-      "ayahStart": 10,
-      "ayahEnd": 10,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 11,
-        "ref": "002/010",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 169,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/010"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/010"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/010",
-          "surah": 2,
-          "ayah": 10,
-          "arabic": "فِى قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ ٱللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/010",
-            "text": "Kalplerinde hastalık vardır. Allah da hastalıklarını arttırmıştır. Yalan söylemekte olduklarından dolayı, onlar için acı bir azap vardır."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/010",
-            "text": "Kalblerinde hastalık vardır, Allah hastalıklarını artırmıştır. Yalan söyleye geldikleri için onlara elem verici azab vardır."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/010",
-            "text": "In their hearts is disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/010",
-            "text": "In their hearts is a disease which Allah has increased all the more and a painful doom is in store for them for the lie they utter."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 10,
-      "ayah_end_number": 10,
-      "text_ar": "فِى قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ ٱللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ",
-      "text_tr": "Kalplerinde hastalık vardır. Allah da hastalıklarını arttırmıştır. Yalan söylemekte olduklarından dolayı, onlar için acı bir azap vardır.",
-      "text_en": "In their hearts is disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/010",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
       "ref": "002/011",
       "id": "002/011",
       "surah": 2,
@@ -1006,114 +682,6 @@
       "sourceInfo": {
         "label": "Tanzil yerel kaynak",
         "source_ref": "002/011",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
-      "ref": "002/012",
-      "id": "002/012",
-      "surah": 2,
-      "ayahStart": 12,
-      "ayahEnd": 12,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 13,
-        "ref": "002/012",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 78,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/012"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/012"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/012",
-          "surah": 2,
-          "ayah": 12,
-          "arabic": "أَلَآ إِنَّهُمْ هُمُ ٱلْمُفْسِدُونَ وَلَـٰكِن لَّا يَشْعُرُونَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/012",
-            "text": "Bilin ki; gerçekten, asıl fesatçılar bunlardır, ama şuurunda değildirler."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/012",
-            "text": "İyi bilin ki, asıl bozguncular kendileridir, lakin farkında değillerdir."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/012",
-            "text": "Unquestionably, it is they who are the corrupters, but they perceive [it] not."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/012",
-            "text": "Beware! they do spread disorder but they realize it not."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 12,
-      "ayah_end_number": 12,
-      "text_ar": "أَلَآ إِنَّهُمْ هُمُ ٱلْمُفْسِدُونَ وَلَـٰكِن لَّا يَشْعُرُونَ",
-      "text_tr": "Bilin ki; gerçekten, asıl fesatçılar bunlardır, ama şuurunda değildirler.",
-      "text_en": "Unquestionably, it is they who are the corrupters, but they perceive [it] not.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/012",
         "fetch_status": "local_seed_exact",
         "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
         "source": {
@@ -1250,330 +818,6 @@
       ]
     },
     {
-      "ref": "002/014",
-      "id": "002/014",
-      "surah": 2,
-      "ayahStart": 14,
-      "ayahEnd": 14,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 15,
-        "ref": "002/014",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 197,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/014"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/014"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/014",
-          "surah": 2,
-          "ayah": 14,
-          "arabic": "وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَـٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/014",
-            "text": "İman edenlerle karşılaştıkları zaman: \"İman ettik\" derler. Şeytanlarıyla başbaşa kaldıklarında ise, derler ki: “Şüphesiz, sizinle beraberiz. Biz (onlarla) yalnızca alay ediyoruz.\""
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/014",
-            "text": "İnananlara rastladıkları zaman, \"İnandık\" derler, elebaşılarıyla baş başa kaldıklarında, \"Biz şüphesiz sizinleyiz, onlarla sadece alay etmekteyiz\" derler."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/014",
-            "text": "And when they meet those who believe, they say, \"We believe\"; but when they are alone with their evil ones, they say, \"Indeed, we are with you; we were only mockers.\""
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/014",
-            "text": "When they meet those who believe, they say, \"We, too, are believers\", but when they privily meet their evil geniuses, they say, \"Indeed we are with you: we are only mocking at these people\"."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 14,
-      "ayah_end_number": 14,
-      "text_ar": "وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَـٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ",
-      "text_tr": "İman edenlerle karşılaştıkları zaman: \"İman ettik\" derler. Şeytanlarıyla başbaşa kaldıklarında ise, derler ki: “Şüphesiz, sizinle beraberiz. Biz (onlarla) yalnızca alay ediyoruz.\"",
-      "text_en": "And when they meet those who believe, they say, \"We believe\"; but when they are alone with their evil ones, they say, \"Indeed, we are with you; we were only mockers.\"",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/014",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
-      "ref": "002/015",
-      "id": "002/015",
-      "surah": 2,
-      "ayahStart": 15,
-      "ayahEnd": 15,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 16,
-        "ref": "002/015",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 138,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/015"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/015"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/015",
-          "surah": 2,
-          "ayah": 15,
-          "arabic": "ٱللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِى طُغْيَـٰنِهِمْ يَعْمَهُونَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/015",
-            "text": "(Asıl) Allah onlarla alay eder ve taşkınlıkları içinde şaşkınca dolaşmalarına (belli bir) süre tanır."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/015",
-            "text": "Onlarla Allah alay eder ve taşkınlıkları içinde bocalar durumda bırakır."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/015",
-            "text": "[But] Allah mocks them and prolongs them in their transgression [while] they wander blindly."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/015",
-            "text": "(Little do they realize that) Allah is mocking at them. He gives them rope enough, and they wander on and on blindly in their mischief and rebellion."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 15,
-      "ayah_end_number": 15,
-      "text_ar": "ٱللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِى طُغْيَـٰنِهِمْ يَعْمَهُونَ",
-      "text_tr": "(Asıl) Allah onlarla alay eder ve taşkınlıkları içinde şaşkınca dolaşmalarına (belli bir) süre tanır.",
-      "text_en": "[But] Allah mocks them and prolongs them in their transgression [while] they wander blindly.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/015",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
-      "ref": "002/016",
-      "id": "002/016",
-      "surah": 2,
-      "ayahStart": 16,
-      "ayahEnd": 16,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 17,
-        "ref": "002/016",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 151,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/016"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/016"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/016",
-          "surah": 2,
-          "ayah": 16,
-          "arabic": "أُو۟لَـٰٓئِكَ ٱلَّذِينَ ٱشْتَرَوُا۟ ٱلضَّلَـٰلَةَ بِٱلْهُدَىٰ فَمَا رَبِحَت تِّجَـٰرَتُهُمْ وَمَا كَانُوا۟ مُهْتَدِينَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/016",
-            "text": "İşte bunlar, hidayete karşılık sapıklığı satın almışlardır; fakat bu alış-verişleri bir yarar sağlamamış; hidayeti de bulmamışlardır."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/016",
-            "text": "Onlar, doğruluk yerine sapıklığı aldılar da alışverişleri kar getirmedi; doğru yolu bulamamışlardı."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/016",
-            "text": "Those are the ones who have purchased error [in exchange] for guidance, so their transaction has brought no profit, nor were they guided."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/016",
-            "text": "These are the people who have bartered away Guidance for error, but this is a profitless bargain that they have made, and they are not at all on the right way."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 16,
-      "ayah_end_number": 16,
-      "text_ar": "أُو۟لَـٰٓئِكَ ٱلَّذِينَ ٱشْتَرَوُا۟ ٱلضَّلَـٰلَةَ بِٱلْهُدَىٰ فَمَا رَبِحَت تِّجَـٰرَتُهُمْ وَمَا كَانُوا۟ مُهْتَدِينَ",
-      "text_tr": "İşte bunlar, hidayete karşılık sapıklığı satın almışlardır; fakat bu alış-verişleri bir yarar sağlamamış; hidayeti de bulmamışlardır.",
-      "text_en": "Those are the ones who have purchased error [in exchange] for guidance, so their transaction has brought no profit, nor were they guided.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/016",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
       "ref": "002/022",
       "id": "002/022",
       "surah": 2,
@@ -1654,114 +898,6 @@
       "sourceInfo": {
         "label": "Tanzil yerel kaynak",
         "source_ref": "002/022",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
-      "ref": "002/026",
-      "id": "002/026",
-      "surah": 2,
-      "ayahStart": 26,
-      "ayahEnd": 26,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 20,
-        "ref": "002/026",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 382,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/026"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/026"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/026",
-          "surah": 2,
-          "ayah": 26,
-          "arabic": "إِنَّ ٱللَّهَ لَا يَسْتَحْىِۦٓ أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا ۚ فَأَمَّا ٱلَّذِينَ ءَامَنُوا۟ فَيَعْلَمُونَ أَنَّهُ ٱلْحَقُّ مِن رَّبِّهِمْ ۖ وَأَمَّا ٱلَّذِينَ كَفَرُوا۟ فَيَقُولُونَ مَاذَآ أَرَادَ ٱللَّهُ بِهَـٰذَا مَثَلًا ۘ يُضِلُّ بِهِۦ كَثِيرًا وَيَهْدِى بِهِۦ كَثِيرًا ۚ وَمَا يُضِلُّ بِهِۦٓ إِلَّا ٱلْفَـٰسِقِينَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/026",
-            "text": "Şüphesiz Allah, bir sivrisineği de, ondan üstün olanı da, (herhangi bir şeyi) örnek vermekten çekinmez. Böylece iman edenler, kuşkusuz bunun Rablerinden gelen bir gerçek olduğunu bilirler; inkar edenler ise, \"Allah, bu örnekle neyi amaçlamış?\" derler. (Oysa Allah,) Bununla birçoğunu saptırır, birçoğunu da hidayete erdirir. Ancak O, fasıklardan başkasını saptırmaz."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/026",
-            "text": "Allah sivrisineği ve onun üstününü misal olarak vermekten çekinmez. İnananlar bunun Rablerinden bir gerçek olduğunu bilirler. İnkar edenler ise \"Allah bu misalle neyi murad etti?\" derler, O, bu misalle birçoğunu saptırır, birçoğunu da yola getirir. Onunla saptırdığı yalnız fasıklardır ki onlar Allah'la yapılan sözleşmeyi kabulden sonra bozarlar. Allah'ın birleştirilmesini buyurduğu şeyi ayırırlar ve yeryüzünde bozgunculuk yaparlar; zarara uğrayanlar işte onlardır."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/026",
-            "text": "Indeed, Allah is not timid to present an example - that of a mosquito or what is smaller than it. And those who have believed know that it is the truth from their Lord. But as for those who disbelieve, they say, \"What did Allah intend by this as an example?\" He misleads many thereby and guides many thereby. And He misleads not except the defiantly disobedient,"
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/026",
-            "text": "Well, Allah is not ashamed to cite the similitude of a gnat or of something even more insignificant than this. As for those who believe, they come to know from the same similitude that it is the Revelation from their Lord; but those who disbelieve, say, \"What does Allah mean by such similitudes?\" Allah leads astray many and guides many to the right way by the same thing. And He leads astray only those who disobey Allah;"
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 26,
-      "ayah_end_number": 26,
-      "text_ar": "إِنَّ ٱللَّهَ لَا يَسْتَحْىِۦٓ أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا ۚ فَأَمَّا ٱلَّذِينَ ءَامَنُوا۟ فَيَعْلَمُونَ أَنَّهُ ٱلْحَقُّ مِن رَّبِّهِمْ ۖ وَأَمَّا ٱلَّذِينَ كَفَرُوا۟ فَيَقُولُونَ مَاذَآ أَرَادَ ٱللَّهُ بِهَـٰذَا مَثَلًا ۘ يُضِلُّ بِهِۦ كَثِيرًا وَيَهْدِى بِهِۦ كَثِيرًا ۚ وَمَا يُضِلُّ بِهِۦٓ إِلَّا ٱلْفَـٰسِقِينَ",
-      "text_tr": "Şüphesiz Allah, bir sivrisineği de, ondan üstün olanı da, (herhangi bir şeyi) örnek vermekten çekinmez. Böylece iman edenler, kuşkusuz bunun Rablerinden gelen bir gerçek olduğunu bilirler; inkar edenler ise, \"Allah, bu örnekle neyi amaçlamış?\" derler. (Oysa Allah,) Bununla birçoğunu saptırır, birçoğunu da hidayete erdirir. Ancak O, fasıklardan başkasını saptırmaz.",
-      "text_en": "Indeed, Allah is not timid to present an example - that of a mosquito or what is smaller than it. And those who have believed know that it is the truth from their Lord. But as for those who disbelieve, they say, \"What did Allah intend by this as an example?\" He misleads many thereby and guides many thereby. And He misleads not except the defiantly disobedient,",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/026",
         "fetch_status": "local_seed_exact",
         "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
         "source": {
@@ -2114,222 +1250,6 @@
       ]
     },
     {
-      "ref": "002/040",
-      "id": "002/040",
-      "surah": 2,
-      "ayahStart": 40,
-      "ayahEnd": 40,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 25,
-        "ref": "002/040",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 156,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/040"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/040"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/040",
-          "surah": 2,
-          "ayah": 40,
-          "arabic": "يَـٰبَنِىٓ إِسْرَٰٓءِيلَ ٱذْكُرُوا۟ نِعْمَتِىَ ٱلَّتِىٓ أَنْعَمْتُ عَلَيْكُمْ وَأَوْفُوا۟ بِعَهْدِىٓ أُوفِ بِعَهْدِكُمْ وَإِيَّـٰىَ فَٱرْهَبُونِ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/040",
-            "text": "Ey İsrailoğulları, size bağışladığım nimetimi hatırlayın ve ahdime bağlı kalın, ki Ben de ahdinize bağlı kalayım. Ve yalnızca Benden korkun."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/040",
-            "text": "Ey İsrailoğulları! Size verdiğim nimeti hatırlayın ve ahdimi yerine getirin ki Ben de yerine getireyim; yoksa benden korkun."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/040",
-            "text": "O Children of Israel, remember My favor which I have bestowed upon you and fulfill My covenant [upon you] that I will fulfill your covenant [from Me], and be afraid of [only] Me."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/040",
-            "text": "O children of Israel! Just recall to mind My favour wherewith I blessed you fulfil your covenant with Me and I shall fulfil My covenant with you, and fear Me alone."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 40,
-      "ayah_end_number": 40,
-      "text_ar": "يَـٰبَنِىٓ إِسْرَٰٓءِيلَ ٱذْكُرُوا۟ نِعْمَتِىَ ٱلَّتِىٓ أَنْعَمْتُ عَلَيْكُمْ وَأَوْفُوا۟ بِعَهْدِىٓ أُوفِ بِعَهْدِكُمْ وَإِيَّـٰىَ فَٱرْهَبُونِ",
-      "text_tr": "Ey İsrailoğulları, size bağışladığım nimetimi hatırlayın ve ahdime bağlı kalın, ki Ben de ahdinize bağlı kalayım. Ve yalnızca Benden korkun.",
-      "text_en": "O Children of Israel, remember My favor which I have bestowed upon you and fulfill My covenant [upon you] that I will fulfill your covenant [from Me], and be afraid of [only] Me.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/040",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
-      "ref": "002/041",
-      "id": "002/041",
-      "surah": 2,
-      "ayahStart": 41,
-      "ayahEnd": 41,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 26,
-        "ref": "002/041",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 181,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/041"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/041"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/041",
-          "surah": 2,
-          "ayah": 41,
-          "arabic": "وَءَامِنُوا۟ بِمَآ أَنزَلْتُ مُصَدِّقًا لِّمَا مَعَكُمْ وَلَا تَكُونُوٓا۟ أَوَّلَ كَافِرٍۭ بِهِۦ ۖ وَلَا تَشْتَرُوا۟ بِـَٔايَـٰتِى ثَمَنًا قَلِيلًا وَإِيَّـٰىَ فَٱتَّقُونِ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/041",
-            "text": "Yanınızda olan (Tevrat)ı, doğrulayıcı olarak indirdiğime (Kur'an'a) iman edin; onu inkar edenlerin ilki siz olmayın ve ayetlerimizi az bir değer karşılığında değişmeyin. Ve yalnızca Benden korkun."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/041",
-            "text": "Yanınızdaki Tevrat'ı tasdik ederek indirdiğim Kuran'a, inanın; onu ilk inkar edenler siz olmayın, ayetlerimi hiçbir değere karşılık değiştirmeyin ve bile bile hakkı gizlemeyin."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/041",
-            "text": "And believe in what I have sent down confirming that which is [already] with you, and be not the first to disbelieve in it. And do not exchange My signs for a small price, and fear [only] Me."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/041",
-            "text": "And believe in the Book I have now sent down; as it confirms the Scriptures you already possess, be not the first to reject it; barter not away My Revelations for paltry worldly gain, and guard yourselves against My wrath"
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 41,
-      "ayah_end_number": 41,
-      "text_ar": "وَءَامِنُوا۟ بِمَآ أَنزَلْتُ مُصَدِّقًا لِّمَا مَعَكُمْ وَلَا تَكُونُوٓا۟ أَوَّلَ كَافِرٍۭ بِهِۦ ۖ وَلَا تَشْتَرُوا۟ بِـَٔايَـٰتِى ثَمَنًا قَلِيلًا وَإِيَّـٰىَ فَٱتَّقُونِ",
-      "text_tr": "Yanınızda olan (Tevrat)ı, doğrulayıcı olarak indirdiğime (Kur'an'a) iman edin; onu inkar edenlerin ilki siz olmayın ve ayetlerimizi az bir değer karşılığında değişmeyin. Ve yalnızca Benden korkun.",
-      "text_en": "And believe in what I have sent down confirming that which is [already] with you, and be not the first to disbelieve in it. And do not exchange My signs for a small price, and fear [only] Me.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/041",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
       "ref": "002/043",
       "id": "002/043",
       "surah": 2,
@@ -2394,249 +1314,6 @@
         "note": "",
         "updated_at": null
       }
-    },
-    {
-      "ref": "002/040-041",
-      "id": "002/040-041",
-      "surah": 2,
-      "ayahStart": 40,
-      "ayahEnd": 41,
-      "type": "range",
-      "ayahCount": 2,
-      "input": {
-        "sira": 28,
-        "ref": "002/040-041",
-        "input_type": "aralik",
-        "input_ayah_count": 2,
-        "input_char_count": 338,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/040, 002/041"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/040",
-        "002/041"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/040",
-          "surah": 2,
-          "ayah": 40,
-          "arabic": "يَـٰبَنِىٓ إِسْرَٰٓءِيلَ ٱذْكُرُوا۟ نِعْمَتِىَ ٱلَّتِىٓ أَنْعَمْتُ عَلَيْكُمْ وَأَوْفُوا۟ بِعَهْدِىٓ أُوفِ بِعَهْدِكُمْ وَإِيَّـٰىَ فَٱرْهَبُونِ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/040",
-            "text": "Ey İsrailoğulları, size bağışladığım nimetimi hatırlayın ve ahdime bağlı kalın, ki Ben de ahdinize bağlı kalayım. Ve yalnızca Benden korkun."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/040",
-            "text": "Ey İsrailoğulları! Size verdiğim nimeti hatırlayın ve ahdimi yerine getirin ki Ben de yerine getireyim; yoksa benden korkun."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/040",
-            "text": "O Children of Israel, remember My favor which I have bestowed upon you and fulfill My covenant [upon you] that I will fulfill your covenant [from Me], and be afraid of [only] Me."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/040",
-            "text": "O children of Israel! Just recall to mind My favour wherewith I blessed you fulfil your covenant with Me and I shall fulfil My covenant with you, and fear Me alone."
-          }
-        },
-        {
-          "ref": "002/041",
-          "surah": 2,
-          "ayah": 41,
-          "arabic": "وَءَامِنُوا۟ بِمَآ أَنزَلْتُ مُصَدِّقًا لِّمَا مَعَكُمْ وَلَا تَكُونُوٓا۟ أَوَّلَ كَافِرٍۭ بِهِۦ ۖ وَلَا تَشْتَرُوا۟ بِـَٔايَـٰتِى ثَمَنًا قَلِيلًا وَإِيَّـٰىَ فَٱتَّقُونِ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/041",
-            "text": "Yanınızda olan (Tevrat)ı, doğrulayıcı olarak indirdiğime (Kur'an'a) iman edin; onu inkar edenlerin ilki siz olmayın ve ayetlerimizi az bir değer karşılığında değişmeyin. Ve yalnızca Benden korkun."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/041",
-            "text": "Yanınızdaki Tevrat'ı tasdik ederek indirdiğim Kuran'a, inanın; onu ilk inkar edenler siz olmayın, ayetlerimi hiçbir değere karşılık değiştirmeyin ve bile bile hakkı gizlemeyin."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/041",
-            "text": "And believe in what I have sent down confirming that which is [already] with you, and be not the first to disbelieve in it. And do not exchange My signs for a small price, and fear [only] Me."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/041",
-            "text": "And believe in the Book I have now sent down; as it confirms the Scriptures you already possess, be not the first to reject it; barter not away My Revelations for paltry worldly gain, and guard yourselves against My wrath"
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 40,
-      "ayah_end_number": 41,
-      "text_ar": "﴿40﴾ يَـٰبَنِىٓ إِسْرَٰٓءِيلَ ٱذْكُرُوا۟ نِعْمَتِىَ ٱلَّتِىٓ أَنْعَمْتُ عَلَيْكُمْ وَأَوْفُوا۟ بِعَهْدِىٓ أُوفِ بِعَهْدِكُمْ وَإِيَّـٰىَ فَٱرْهَبُونِ\n\n﴿41﴾ وَءَامِنُوا۟ بِمَآ أَنزَلْتُ مُصَدِّقًا لِّمَا مَعَكُمْ وَلَا تَكُونُوٓا۟ أَوَّلَ كَافِرٍۭ بِهِۦ ۖ وَلَا تَشْتَرُوا۟ بِـَٔايَـٰتِى ثَمَنًا قَلِيلًا وَإِيَّـٰىَ فَٱتَّقُونِ",
-      "text_tr": "[40] Ey İsrailoğulları, size bağışladığım nimetimi hatırlayın ve ahdime bağlı kalın, ki Ben de ahdinize bağlı kalayım. Ve yalnızca Benden korkun.\n\n[41] Yanınızda olan (Tevrat)ı, doğrulayıcı olarak indirdiğime (Kur'an'a) iman edin; onu inkar edenlerin ilki siz olmayın ve ayetlerimizi az bir değer karşılığında değişmeyin. Ve yalnızca Benden korkun.",
-      "text_en": "[40] O Children of Israel, remember My favor which I have bestowed upon you and fulfill My covenant [upon you] that I will fulfill your covenant [from Me], and be afraid of [only] Me.\n\n[41] And believe in what I have sent down confirming that which is [already] with you, and be not the first to disbelieve in it. And do not exchange My signs for a small price, and fear [only] Me.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/040-041",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
-      "ref": "002/047",
-      "id": "002/047",
-      "surah": 2,
-      "ayahStart": 47,
-      "ayahEnd": 47,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 29,
-        "ref": "002/047",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 104,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/047"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/047"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/047",
-          "surah": 2,
-          "ayah": 47,
-          "arabic": "يَـٰبَنِىٓ إِسْرَٰٓءِيلَ ٱذْكُرُوا۟ نِعْمَتِىَ ٱلَّتِىٓ أَنْعَمْتُ عَلَيْكُمْ وَأَنِّى فَضَّلْتُكُمْ عَلَى ٱلْعَـٰلَمِينَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/047",
-            "text": "Ey İsrailoğulları, size bağışladığım nimetimi ve sizi (bir dönem) alemlere üstün kıldığımı hatırlayın."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/047",
-            "text": "Ey İsrailoğulları! Size verdiğim nimeti ve sizi bir zamanlar alemlere üstün kıldığımı hatırlayın."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/047",
-            "text": "O Children of Israel, remember My favor that I have bestowed upon you and that I preferred you over the worlds."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/047",
-            "text": "O Children of Israel! Just recall to mind My favour that bestowed upon you, and remember that I exalted you above all the peoples of the world."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 47,
-      "ayah_end_number": 47,
-      "text_ar": "يَـٰبَنِىٓ إِسْرَٰٓءِيلَ ٱذْكُرُوا۟ نِعْمَتِىَ ٱلَّتِىٓ أَنْعَمْتُ عَلَيْكُمْ وَأَنِّى فَضَّلْتُكُمْ عَلَى ٱلْعَـٰلَمِينَ",
-      "text_tr": "Ey İsrailoğulları, size bağışladığım nimetimi ve sizi (bir dönem) alemlere üstün kıldığımı hatırlayın.",
-      "text_en": "O Children of Israel, remember My favor that I have bestowed upon you and that I preferred you over the worlds.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/047",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
     },
     {
       "ref": "002/060",
@@ -2827,114 +1504,6 @@
       "sourceInfo": {
         "label": "Tanzil yerel kaynak",
         "source_ref": "002/062",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:52:44+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
-      "ref": "002/067",
-      "id": "002/067",
-      "surah": 2,
-      "ayahStart": 67,
-      "ayahEnd": 67,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 33,
-        "ref": "002/067",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 195,
-        "input_status": "ok",
-        "input_source_ref_groups": "002/067"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "002/067"
-      ],
-      "ayahs": [
-        {
-          "ref": "002/067",
-          "surah": 2,
-          "ayah": 67,
-          "arabic": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِۦٓ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تَذْبَحُوا۟ بَقَرَةً ۖ قَالُوٓا۟ أَتَتَّخِذُنَا هُزُوًا ۖ قَالَ أَعُوذُ بِٱللَّهِ أَنْ أَكُونَ مِنَ ٱلْجَـٰهِلِينَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "002/067",
-            "text": "Hani Musa kavmine: \"Allah, muhakkak sizin bir sığır kesmenizi emrediyor\" demişti. \"Bizi alaya mı alıyorsun?\" dediler. (Musa) \"Cahillerden olmaktan Allah'a sığınırım\" dedi."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "002/067",
-            "text": "Musa milletine: \"Allah muhakkak bir sığır boğazlamanızı buyuruyor\" demişti; \"Bizi alaya mı alıyorsun?\" dediklerinde de: \"Cahillerden olmaktan Allah'a sığınırım\" dedi."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "002/067",
-            "text": "And [recall] when Moses said to his people, \"Indeed, Allah commands you to slaughter a cow.\" They said, \"Do you take us in ridicule?\" He said, \"I seek refuge in Allah from being among the ignorant.\""
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "002/067",
-            "text": "Then call to mind the other event: when Moses said to his people, \"Allah commands you to sacrifice a cow,\" they replied, \"Do you mean to have a jest with us?\" He answered, \"I crave Allah's protection from behaving like ignorant people.\""
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:52:44+00:00"
-      },
-      "surah_name": "Bakara",
-      "ayah_number": 67,
-      "ayah_end_number": 67,
-      "text_ar": "وَإِذْ قَالَ مُوسَىٰ لِقَوْمِهِۦٓ إِنَّ ٱللَّهَ يَأْمُرُكُمْ أَن تَذْبَحُوا۟ بَقَرَةً ۖ قَالُوٓا۟ أَتَتَّخِذُنَا هُزُوًا ۖ قَالَ أَعُوذُ بِٱللَّهِ أَنْ أَكُونَ مِنَ ٱلْجَـٰهِلِينَ",
-      "text_tr": "Hani Musa kavmine: \"Allah, muhakkak sizin bir sığır kesmenizi emrediyor\" demişti. \"Bizi alaya mı alıyorsun?\" dediler. (Musa) \"Cahillerden olmaktan Allah'a sığınırım\" dedi.",
-      "text_en": "And [recall] when Moses said to his people, \"Indeed, Allah commands you to slaughter a cow.\" They said, \"Do you take us in ridicule?\" He said, \"I seek refuge in Allah from being among the ignorant.\"",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:52:44+00:00",
-      "updatedAt": "2026-06-09T08:52:44+00:00",
-      "approvedAt": "2026-06-09T08:52:44+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "002/067",
         "fetch_status": "local_seed_exact",
         "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
         "source": {
@@ -32704,149 +31273,6 @@
       ]
     },
     {
-      "ref": "032/024",
-      "id": "032/024",
-      "surah": 32,
-      "ayahStart": 24,
-      "ayahEnd": 24,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": null,
-        "ref": "032/024",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 0,
-        "input_status": "tool_ekle",
-        "input_source_ref_groups": "032/024"
-      },
-      "source": {
-        "arabic": "Tanzil Uthmani Quran Text",
-        "tr": "Tanzil tr.bulac / Ali Bulac",
-        "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
-      },
-      "sourceRefGroups": [
-        "032/024"
-      ],
-      "ayahs": [
-        {
-          "ref": "032/024",
-          "surah": 32,
-          "ayah": 24,
-          "arabic": "وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا۟ ۖ وَكَانُوا۟ بِـَٔايَـٰتِنَا يُوقِنُونَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulac",
-            "sourceRef": "032/024",
-            "text": "Ve onların içinden, sabrettikleri zaman emrimizle doğru yola iletip-yönelten önderler kıldık; onlar Bizim ayetlerimize kesin bilgiyle inanıyorlardı."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "032/024",
-            "text": "And We made from among them leaders guiding by Our command when they were patient and [when] they were certain of Our signs."
-          },
-          "alternatives": {
-            "tr_diyanet_tanzil": {
-              "source": "Tanzil tr.diyanet / Diyanet Isleri",
-              "text": "Sabredip ayetlerimize kesin olarak inanmalarından ötürü, aralarından, onları buyruğumuzla doğru yola götüren önderler yaptık."
-            },
-            "en_maududi": {
-              "source": "Tanzil en.maududi / Abul A'la Maududi",
-              "text": "and when they remained steadfast and firmly believed in Our Signs, We created among them leaders who guided people by Our command."
-            }
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:50:08+00:00"
-      },
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "032/024",
-        "fetch_status": "local_seed_generated",
-        "details": {
-          "metadata_sources": {
-            "arabic": {
-              "name": "Tanzil Quran Text / Uthmani",
-              "url": "https://tanzil.net/download/"
-            },
-            "tr": {
-              "key": "tr.bulac",
-              "name": "Ali Bulaç",
-              "url": "https://tanzil.net/trans/tr.bulac"
-            },
-            "trAlt": {
-              "key": "tr.diyanet",
-              "name": "Diyanet İşleri",
-              "url": "https://tanzil.net/trans/tr.diyanet"
-            },
-            "en": {
-              "key": "en.sahih",
-              "name": "Saheeh International",
-              "url": "https://tanzil.net/trans/en.sahih"
-            },
-            "enAlt": {
-              "key": "en.maududi",
-              "name": "Abul A‘la Maududi",
-              "url": "https://tanzil.net/trans/en.maududi"
-            }
-          },
-          "quranFiles": {
-            "ar": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\quran-uthmani.txt",
-            "tr_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.bulac.txt",
-            "tr_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.diyanet.txt",
-            "en_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.sahih.txt",
-            "en_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.maududi.txt"
-          }
-        },
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Uthmani Quran Text",
-          "tr": "Tanzil tr.bulac / Ali Bulac",
-          "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
-        }
-      },
-      "surah_name": "Secde",
-      "ayah_number": 24,
-      "ayah_end_number": 24,
-      "text_ar": "وَجَعَلْنَا مِنْهُمْ أَئِمَّةً يَهْدُونَ بِأَمْرِنَا لَمَّا صَبَرُوا۟ ۖ وَكَانُوا۟ بِـَٔايَـٰتِنَا يُوقِنُونَ",
-      "text_tr": "Ve onların içinden, sabrettikleri zaman emrimizle doğru yola iletip-yönelten önderler kıldık; onlar Bizim ayetlerimize kesin bilgiyle inanıyorlardı.",
-      "text_en": "And We made from among them leaders guiding by Our command when they were patient and [when] they were certain of Our signs.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:50:08+00:00",
-      "updatedAt": "2026-06-09T08:50:08+00:00",
-      "approvedAt": "2026-06-09T08:50:08+00:00",
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:50:08+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
       "ref": "033/021",
       "id": "033/021",
       "surah": 33,
@@ -33921,257 +32347,6 @@
       ]
     },
     {
-      "ref": "048/029",
-      "id": "048/029",
-      "surah": 48,
-      "ayahStart": 29,
-      "ayahEnd": 29,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": null,
-        "ref": "048/029",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 0,
-        "input_status": "tool_ekle",
-        "input_source_ref_groups": "048/029"
-      },
-      "source": {
-        "arabic": "Tanzil Uthmani Quran Text",
-        "tr": "Tanzil tr.bulac / Ali Bulac",
-        "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
-      },
-      "sourceRefGroups": [
-        "048/029"
-      ],
-      "ayahs": [
-        {
-          "ref": "048/029",
-          "surah": 48,
-          "ayah": 29,
-          "arabic": "مُّحَمَّدٌ رَّسُولُ ٱللَّهِ ۚ وَٱلَّذِينَ مَعَهُۥٓ أَشِدَّآءُ عَلَى ٱلْكُفَّارِ رُحَمَآءُ بَيْنَهُمْ ۖ تَرَىٰهُمْ رُكَّعًا سُجَّدًا يَبْتَغُونَ فَضْلًا مِّنَ ٱللَّهِ وَرِضْوَٰنًا ۖ سِيمَاهُمْ فِى وُجُوهِهِم مِّنْ أَثَرِ ٱلسُّجُودِ ۚ ذَٰلِكَ مَثَلُهُمْ فِى ٱلتَّوْرَىٰةِ ۚ وَمَثَلُهُمْ فِى ٱلْإِنجِيلِ كَزَرْعٍ أَخْرَجَ شَطْـَٔهُۥ فَـَٔازَرَهُۥ فَٱسْتَغْلَظَ فَٱسْتَوَىٰ عَلَىٰ سُوقِهِۦ يُعْجِبُ ٱلزُّرَّاعَ لِيَغِيظَ بِهِمُ ٱلْكُفَّارَ ۗ وَعَدَ ٱللَّهُ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ مِنْهُم مَّغْفِرَةً وَأَجْرًا عَظِيمًۢا",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulac",
-            "sourceRef": "048/029",
-            "text": "Muhammed, Allah'ın elçisidir. Ve onunla birlikte olanlar da kafirlere karşı zorlu, kendi aralarında ise merhametlidirler. Onları, rüku edenler, secde edenler olarak görürsün; onlar, Allah'tan bir fazl (lütuf ve ihsan) ve hoşnutluk arayıp-isterler. Belirtileri, secde izinden yüzlerindedir. İşte onların Tevrat'taki vasıfları budur: İncil'deki vasıfları ise: Sanki bir ekin; filizini çıkarmış, derken onu kuvvetlendirmiş, derken kalınlaşmış, sonra sapları üzerinde doğrulup-boy atmış (ki bu,) ekicilerin hoşuna gider. (Bu örnek,) Onunla kafirleri öfkelendirmek içindir. Allah, içlerinden iman edip salih amellerde bulunanlara bir mağfiret ve büyük bir ecir va'detmiştir."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "048/029",
-            "text": "Muhammad is the Messenger of Allah; and those with him are forceful against the disbelievers, merciful among themselves. You see them bowing and prostrating [in prayer], seeking bounty from Allah and [His] pleasure. Their mark is on their faces from the trace of prostration. That is their description in the Torah. And their description in the Gospel is as a plant which produces its offshoots and strengthens them so they grow firm and stand upon their stalks, delighting the sowers - so that Allah may enrage by them the disbelievers. Allah has promised those who believe and do righteous deeds among them forgiveness and a great reward."
-          },
-          "alternatives": {
-            "tr_diyanet_tanzil": {
-              "source": "Tanzil tr.diyanet / Diyanet Isleri",
-              "text": "Muhammed Allah'ın elçisidir. Onun beraberinde bulunanlar, inkarcılara karşı sert, birbirlerine merhametlidirler. Onları rükua varırken, secde ederken, Allah'tan lütuf ve hoşnudluk dilerken görürsün. Onlar, yüzlerindeki secde izi ile tanınırlar. İşte bu, onların Tevrat'ta anlatılan vasıflarıdır. İncil'de de şöyle vasıflandırılmışlardı: Filizini çıkarmış, onu kuvvetlendirmiş, kalınlaşmış, gövdesi üzerine dikilmiş, ekincilerin hoşuna giden ekin gibidirler. Allah böylece bunları çoğaltıp kuvvetlendirmekle inkarcıları öfkelendirir. Allah, inanıp yararlı işler işleyenlere, bağışlama ve büyük ecir vadetmiştir."
-            },
-            "en_maududi": {
-              "source": "Tanzil en.maududi / Abul A'la Maududi",
-              "text": "Muhammad is Allah's Messenger, and those who are with him are firm with the unbelievers but compassionate with one another. You see them occupied in bowing and prostrating and in seeking Allah's bounty and good pleasure. They are distinguished from others by the marks of prostration on their faces. Thus are they described in the Torah. And their parable in the Gospel is that of a tilth that puts forth its shoot, then strengthens it so that it becomes stout and stands firmly on its stem. This is a sight pleasing to the sowers and one by which the unbelievers will be enraged. As for those who believe and do righteous deeds, Allah has promised them forgiveness and a great reward."
-            }
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:50:08+00:00"
-      },
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "048/029",
-        "fetch_status": "local_seed_generated",
-        "details": {
-          "metadata_sources": {
-            "arabic": {
-              "name": "Tanzil Quran Text / Uthmani",
-              "url": "https://tanzil.net/download/"
-            },
-            "tr": {
-              "key": "tr.bulac",
-              "name": "Ali Bulaç",
-              "url": "https://tanzil.net/trans/tr.bulac"
-            },
-            "trAlt": {
-              "key": "tr.diyanet",
-              "name": "Diyanet İşleri",
-              "url": "https://tanzil.net/trans/tr.diyanet"
-            },
-            "en": {
-              "key": "en.sahih",
-              "name": "Saheeh International",
-              "url": "https://tanzil.net/trans/en.sahih"
-            },
-            "enAlt": {
-              "key": "en.maududi",
-              "name": "Abul A‘la Maududi",
-              "url": "https://tanzil.net/trans/en.maududi"
-            }
-          },
-          "quranFiles": {
-            "ar": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\quran-uthmani.txt",
-            "tr_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.bulac.txt",
-            "tr_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.diyanet.txt",
-            "en_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.sahih.txt",
-            "en_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.maududi.txt"
-          }
-        },
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Uthmani Quran Text",
-          "tr": "Tanzil tr.bulac / Ali Bulac",
-          "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
-        }
-      },
-      "surah_name": "Fetih",
-      "ayah_number": 29,
-      "ayah_end_number": 29,
-      "text_ar": "مُّحَمَّدٌ رَّسُولُ ٱللَّهِ ۚ وَٱلَّذِينَ مَعَهُۥٓ أَشِدَّآءُ عَلَى ٱلْكُفَّارِ رُحَمَآءُ بَيْنَهُمْ ۖ تَرَىٰهُمْ رُكَّعًا سُجَّدًا يَبْتَغُونَ فَضْلًا مِّنَ ٱللَّهِ وَرِضْوَٰنًا ۖ سِيمَاهُمْ فِى وُجُوهِهِم مِّنْ أَثَرِ ٱلسُّجُودِ ۚ ذَٰلِكَ مَثَلُهُمْ فِى ٱلتَّوْرَىٰةِ ۚ وَمَثَلُهُمْ فِى ٱلْإِنجِيلِ كَزَرْعٍ أَخْرَجَ شَطْـَٔهُۥ فَـَٔازَرَهُۥ فَٱسْتَغْلَظَ فَٱسْتَوَىٰ عَلَىٰ سُوقِهِۦ يُعْجِبُ ٱلزُّرَّاعَ لِيَغِيظَ بِهِمُ ٱلْكُفَّارَ ۗ وَعَدَ ٱللَّهُ ٱلَّذِينَ ءَامَنُوا۟ وَعَمِلُوا۟ ٱلصَّـٰلِحَـٰتِ مِنْهُم مَّغْفِرَةً وَأَجْرًا عَظِيمًۢا",
-      "text_tr": "Muhammed, Allah'ın elçisidir. Ve onunla birlikte olanlar da kafirlere karşı zorlu, kendi aralarında ise merhametlidirler. Onları, rüku edenler, secde edenler olarak görürsün; onlar, Allah'tan bir fazl (lütuf ve ihsan) ve hoşnutluk arayıp-isterler. Belirtileri, secde izinden yüzlerindedir. İşte onların Tevrat'taki vasıfları budur: İncil'deki vasıfları ise: Sanki bir ekin; filizini çıkarmış, derken onu kuvvetlendirmiş, derken kalınlaşmış, sonra sapları üzerinde doğrulup-boy atmış (ki bu,) ekicilerin hoşuna gider. (Bu örnek,) Onunla kafirleri öfkelendirmek içindir. Allah, içlerinden iman edip salih amellerde bulunanlara bir mağfiret ve büyük bir ecir va'detmiştir.",
-      "text_en": "Muhammad is the Messenger of Allah; and those with him are forceful against the disbelievers, merciful among themselves. You see them bowing and prostrating [in prayer], seeking bounty from Allah and [His] pleasure. Their mark is on their faces from the trace of prostration. That is their description in the Torah. And their description in the Gospel is as a plant which produces its offshoots and strengthens them so they grow firm and stand upon their stalks, delighting the sowers - so that Allah may enrage by them the disbelievers. Allah has promised those who believe and do righteous deeds among them forgiveness and a great reward.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:50:08+00:00",
-      "updatedAt": "2026-06-09T08:50:08+00:00",
-      "approvedAt": "2026-06-09T08:50:08+00:00",
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:50:08+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
-      "ref": "059/009",
-      "id": "059/009",
-      "surah": 59,
-      "ayahStart": 9,
-      "ayahEnd": 9,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": 1253,
-        "ref": "059/009",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 380,
-        "input_status": "ok",
-        "input_source_ref_groups": "059/009"
-      },
-      "source": {
-        "arabic": "Tanzil Quran Text / Uthmani text",
-        "tr": "Tanzil tr.bulac / Ali Bulaç",
-        "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-      },
-      "sourceRefGroups": [
-        "059/009"
-      ],
-      "ayahs": [
-        {
-          "ref": "059/009",
-          "surah": 59,
-          "ayah": 9,
-          "arabic": "وَٱلَّذِينَ تَبَوَّءُو ٱلدَّارَ وَٱلْإِيمَـٰنَ مِن قَبْلِهِمْ يُحِبُّونَ مَنْ هَاجَرَ إِلَيْهِمْ وَلَا يَجِدُونَ فِى صُدُورِهِمْ حَاجَةً مِّمَّآ أُوتُوا۟ وَيُؤْثِرُونَ عَلَىٰٓ أَنفُسِهِمْ وَلَوْ كَانَ بِهِمْ خَصَاصَةٌ ۚ وَمَن يُوقَ شُحَّ نَفْسِهِۦ فَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulaç",
-            "sourceRef": "059/009",
-            "text": "Kendilerinden önce o yurdu (Medine'yi) hazırlayıp imanı (gönüllerine) yerleştirenler ise, hicret edenleri severler ve onlara verilen şeylerden dolayı içlerinde bir ihtiyaç (arzusu) duymazlar. Kendilerinde bir açıklık (ihtiyaç) olsa bile (kardeşlerini) öz nefislerine tercih ederler. Kim nefsinin 'cimri ve bencil tutkularından' korunmuşsa, işte onlar, felah (kurtuluş) bulanlardır."
-          },
-          "trAlt": {
-            "source": "Tanzil tr.diyanet / Diyanet İşleri",
-            "sourceRef": "059/009",
-            "text": "Daha önceden Medine'yi yurt edinmiş ve gönüllerine imanı yerleştirmiş olan kimseler, kendilerine hicret edip gelenleri severler; onlara verilenler karşısında içlerinde bir çekememezlik hissetmezler; kendileri zaruret içinde bulunsalar bile onları kendilerinden önde tutarlar. Nefsinin tamahkarlığından korunabilmiş kimseler, işte onlar saadete erenlerdir."
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "059/009",
-            "text": "And [also for] those who were settled in al-Madinah and [adopted] the faith before them. They love those who emigrated to them and find not any want in their breasts of what the emigrants were given but give [them] preference over themselves, even though they are in privation. And whoever is protected from the stinginess of his soul - it is those who will be the successful."
-          },
-          "enAlt": {
-            "source": "Tanzil en.maududi / Abul A‘la Maududi",
-            "sourceRef": "059/009",
-            "text": "It also belongs to those who were already settled in this abode (of Hijrah) having come to faith before the (arrival of the) Muhajirun (Emigrants). They love those who have migrated to them and do not covet what has been given them; they even prefer them above themselves though poverty be their own lot. And whosoever are preserved from their own greed, such are the ones that will prosper."
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:50:08+00:00"
-      },
-      "surah_name": "Hasr",
-      "ayah_number": 9,
-      "ayah_end_number": 9,
-      "text_ar": "وَٱلَّذِينَ تَبَوَّءُو ٱلدَّارَ وَٱلْإِيمَـٰنَ مِن قَبْلِهِمْ يُحِبُّونَ مَنْ هَاجَرَ إِلَيْهِمْ وَلَا يَجِدُونَ فِى صُدُورِهِمْ حَاجَةً مِّمَّآ أُوتُوا۟ وَيُؤْثِرُونَ عَلَىٰٓ أَنفُسِهِمْ وَلَوْ كَانَ بِهِمْ خَصَاصَةٌ ۚ وَمَن يُوقَ شُحَّ نَفْسِهِۦ فَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ",
-      "text_tr": "Kendilerinden önce o yurdu (Medine'yi) hazırlayıp imanı (gönüllerine) yerleştirenler ise, hicret edenleri severler ve onlara verilen şeylerden dolayı içlerinde bir ihtiyaç (arzusu) duymazlar. Kendilerinde bir açıklık (ihtiyaç) olsa bile (kardeşlerini) öz nefislerine tercih ederler. Kim nefsinin 'cimri ve bencil tutkularından' korunmuşsa, işte onlar, felah (kurtuluş) bulanlardır.",
-      "text_en": "And [also for] those who were settled in al-Madinah and [adopted] the faith before them. They love those who emigrated to them and find not any want in their breasts of what the emigrants were given but give [them] preference over themselves, even though they are in privation. And whoever is protected from the stinginess of his soul - it is those who will be the successful.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:50:08+00:00",
-      "updatedAt": "2026-06-09T08:50:08+00:00",
-      "approvedAt": "2026-06-09T08:50:08+00:00",
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "059/009",
-        "fetch_status": "local_seed_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Quran Text / Uthmani text",
-          "tr": "Tanzil tr.bulac / Ali Bulaç",
-          "trAlt": "Tanzil tr.diyanet / Diyanet İşleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A‘la Maududi"
-        }
-      },
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:50:08+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
       "ref": "061/004",
       "id": "061/004",
       "surah": 61,
@@ -34292,149 +32467,6 @@
       "text_ar": "إِنَّ ٱللَّهَ يُحِبُّ ٱلَّذِينَ يُقَـٰتِلُونَ فِى سَبِيلِهِۦ صَفًّا كَأَنَّهُم بُنْيَـٰنٌ مَّرْصُوصٌ",
       "text_tr": "Şüphesiz Allah, Kendi yolunda, sanki birbirlerine kenetlenmiş bir bina gibi saf bağlayarak çarpışanları sever.",
       "text_en": "Indeed, Allah loves those who fight in His cause in a row as though they are a [single] structure joined firmly.",
-      "priority": 1,
-      "notes": "bulk approved from local Tanzil source",
-      "createdAt": "2026-06-09T08:50:08+00:00",
-      "updatedAt": "2026-06-09T08:50:08+00:00",
-      "approvedAt": "2026-06-09T08:50:08+00:00",
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:50:08+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local Tanzil source"
-        }
-      ]
-    },
-    {
-      "ref": "061/010",
-      "id": "061/010",
-      "surah": 61,
-      "ayahStart": 10,
-      "ayahEnd": 10,
-      "type": "single",
-      "ayahCount": 1,
-      "input": {
-        "sira": null,
-        "ref": "061/010",
-        "input_type": "tekil",
-        "input_ayah_count": 1,
-        "input_char_count": 0,
-        "input_status": "tool_ekle",
-        "input_source_ref_groups": "061/010"
-      },
-      "source": {
-        "arabic": "Tanzil Uthmani Quran Text",
-        "tr": "Tanzil tr.bulac / Ali Bulac",
-        "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
-        "en": "Tanzil en.sahih / Saheeh International",
-        "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
-      },
-      "sourceRefGroups": [
-        "061/010"
-      ],
-      "ayahs": [
-        {
-          "ref": "061/010",
-          "surah": 61,
-          "ayah": 10,
-          "arabic": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ هَلْ أَدُلُّكُمْ عَلَىٰ تِجَـٰرَةٍ تُنجِيكُم مِّنْ عَذَابٍ أَلِيمٍ",
-          "tr": {
-            "source": "Tanzil tr.bulac / Ali Bulac",
-            "sourceRef": "061/010",
-            "text": "Ey iman edenler, sizi acı bir azaptan kurtaracak bir ticareti haber vereyim mi?"
-          },
-          "en": {
-            "source": "Tanzil en.sahih / Saheeh International",
-            "sourceRef": "061/010",
-            "text": "O you who have believed, shall I guide you to a transaction that will save you from a painful punishment?"
-          },
-          "alternatives": {
-            "tr_diyanet_tanzil": {
-              "source": "Tanzil tr.diyanet / Diyanet Isleri",
-              "text": "Ey inananlar! Sizi can yakıcı bir azabdan kurtaracak, kazançlı bir yolu size göstereyim mi?"
-            },
-            "en_maududi": {
-              "source": "Tanzil en.maududi / Abul A'la Maududi",
-              "text": "Believers, shall I direct you to a commerce that will deliver you from a grievous chastisement?"
-            }
-          }
-        }
-      ],
-      "status": "approved",
-      "review": {
-        "status": "approved",
-        "priority_key": "normal",
-        "priority": 1,
-        "boost": {
-          "enabled": false,
-          "weight": 1
-        },
-        "note": "bulk approved from local Tanzil source",
-        "updated_at": "2026-06-09T08:50:08+00:00"
-      },
-      "sourceInfo": {
-        "label": "Tanzil yerel kaynak",
-        "source_ref": "061/010",
-        "fetch_status": "local_seed_generated",
-        "details": {
-          "metadata_sources": {
-            "arabic": {
-              "name": "Tanzil Quran Text / Uthmani",
-              "url": "https://tanzil.net/download/"
-            },
-            "tr": {
-              "key": "tr.bulac",
-              "name": "Ali Bulaç",
-              "url": "https://tanzil.net/trans/tr.bulac"
-            },
-            "trAlt": {
-              "key": "tr.diyanet",
-              "name": "Diyanet İşleri",
-              "url": "https://tanzil.net/trans/tr.diyanet"
-            },
-            "en": {
-              "key": "en.sahih",
-              "name": "Saheeh International",
-              "url": "https://tanzil.net/trans/en.sahih"
-            },
-            "enAlt": {
-              "key": "en.maududi",
-              "name": "Abul A‘la Maududi",
-              "url": "https://tanzil.net/trans/en.maududi"
-            }
-          },
-          "quranFiles": {
-            "ar": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\quran-uthmani.txt",
-            "tr_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.bulac.txt",
-            "tr_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.diyanet.txt",
-            "en_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.sahih.txt",
-            "en_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.maududi.txt"
-          }
-        },
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
-        "source": {
-          "arabic": "Tanzil Uthmani Quran Text",
-          "tr": "Tanzil tr.bulac / Ali Bulac",
-          "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
-          "en": "Tanzil en.sahih / Saheeh International",
-          "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
-        }
-      },
-      "surah_name": "Saff",
-      "ayah_number": 10,
-      "ayah_end_number": 10,
-      "text_ar": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ هَلْ أَدُلُّكُمْ عَلَىٰ تِجَـٰرَةٍ تُنجِيكُم مِّنْ عَذَابٍ أَلِيمٍ",
-      "text_tr": "Ey iman edenler, sizi acı bir azaptan kurtaracak bir ticareti haber vereyim mi?",
-      "text_en": "O you who have believed, shall I guide you to a transaction that will save you from a painful punishment?",
       "priority": 1,
       "notes": "bulk approved from local Tanzil source",
       "createdAt": "2026-06-09T08:50:08+00:00",
@@ -161248,7 +159280,895 @@
           "notes": "YOK"
         }
       ]
+    },
+    {
+      "ref": "061/010-011",
+      "id": "061/010-011",
+      "surah": 61,
+      "ayahStart": 10,
+      "ayahEnd": null,
+      "type": "range",
+      "ayahCount": 2,
+      "input": {
+        "sira": null,
+        "ref": "061/010-011",
+        "input_type": "aralik",
+        "input_ayah_count": 2,
+        "input_char_count": 0,
+        "input_status": "tool_ekle",
+        "input_source_ref_groups": "061/010-011"
+      },
+      "source": {
+        "arabic": "Tanzil Uthmani Quran Text",
+        "tr": "Tanzil tr.bulac / Ali Bulac",
+        "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+        "en": "Tanzil en.sahih / Saheeh International",
+        "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+      },
+      "sourceRefGroups": [
+        "061/010-011"
+      ],
+      "ayahs": [
+        {
+          "ref": "061/010",
+          "surah": 61,
+          "ayah": 10,
+          "arabic": "يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ هَلْ أَدُلُّكُمْ عَلَىٰ تِجَـٰرَةٍ تُنجِيكُم مِّنْ عَذَابٍ أَلِيمٍ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "061/010",
+            "text": "Ey iman edenler, sizi acı bir azaptan kurtaracak bir ticareti haber vereyim mi?"
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "061/010",
+            "text": "O you who have believed, shall I guide you to a transaction that will save you from a painful punishment?"
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "Ey inananlar! Sizi can yakıcı bir azabdan kurtaracak, kazançlı bir yolu size göstereyim mi?"
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "Believers, shall I direct you to a commerce that will deliver you from a grievous chastisement?"
+            }
+          }
+        },
+        {
+          "ref": "061/011",
+          "surah": 61,
+          "ayah": 11,
+          "arabic": "تُؤْمِنُونَ بِٱللَّهِ وَرَسُولِهِۦ وَتُجَـٰهِدُونَ فِى سَبِيلِ ٱللَّهِ بِأَمْوَٰلِكُمْ وَأَنفُسِكُمْ ۚ ذَٰلِكُمْ خَيْرٌ لَّكُمْ إِن كُنتُمْ تَعْلَمُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "061/011",
+            "text": "Allah'a ve O'nun Resulü’ne iman edersiniz, mallarınızla ve canlarınızla Allah yolunda mücadele edersiniz. Bu, sizin için daha hayırlıdır; eğer bilirseniz."
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "061/011",
+            "text": "[It is that] you believe in Allah and His Messenger and strive in the cause of Allah with your wealth and your lives. That is best for you, if you should know."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "Allah'a ve Peygamberine inanırsınız; Allah yolunda canlarınızla, mallarınızla cihat edersiniz; bilseniz, bu sizin için en iyi yoldur."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "Have faith in Allah and His Messenger and strive in the Way of Allah with your possessions and your lives. That is better for you if you only knew."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 3,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "YOK",
+        "updated_at": "2026-06-10T19:27:00+00:00"
+      },
+      "sourceInfo": {
+        "label": "Tanzil yerel kaynak",
+        "source_ref": "061/010-011",
+        "fetch_status": "local_seed_generated",
+        "details": {
+          "metadata_sources": {
+            "arabic": {
+              "name": "Tanzil Quran Text / Uthmani",
+              "url": "https://tanzil.net/download/"
+            },
+            "tr": {
+              "key": "tr.bulac",
+              "name": "Ali Bulaç",
+              "url": "https://tanzil.net/trans/tr.bulac"
+            },
+            "trAlt": {
+              "key": "tr.diyanet",
+              "name": "Diyanet İşleri",
+              "url": "https://tanzil.net/trans/tr.diyanet"
+            },
+            "en": {
+              "key": "en.sahih",
+              "name": "Saheeh International",
+              "url": "https://tanzil.net/trans/en.sahih"
+            },
+            "enAlt": {
+              "key": "en.maududi",
+              "name": "Abul A‘la Maududi",
+              "url": "https://tanzil.net/trans/en.maududi"
+            }
+          },
+          "quranFiles": {
+            "ar": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\quran-uthmani.txt",
+            "tr_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.bulac.txt",
+            "tr_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.diyanet.txt",
+            "en_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.sahih.txt",
+            "en_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.maududi.txt"
+          }
+        },
+        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
+        "source": {
+          "arabic": "Tanzil Uthmani Quran Text",
+          "tr": "Tanzil tr.bulac / Ali Bulac",
+          "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+          "en": "Tanzil en.sahih / Saheeh International",
+          "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+        }
+      },
+      "surah_name": "Saff",
+      "ayah_number": 10,
+      "ayah_end_number": 11,
+      "text_ar": "﴿10﴾ يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ هَلْ أَدُلُّكُمْ عَلَىٰ تِجَـٰرَةٍ تُنجِيكُم مِّنْ عَذَابٍ أَلِيمٍ\n﴿11﴾ تُؤْمِنُونَ بِٱللَّهِ وَرَسُولِهِۦ وَتُجَـٰهِدُونَ فِى سَبِيلِ ٱللَّهِ بِأَمْوَٰلِكُمْ وَأَنفُسِكُمْ ۚ ذَٰلِكُمْ خَيْرٌ لَّكُمْ إِن كُنتُمْ تَعْلَمُونَ",
+      "text_tr": "[10] Ey iman edenler, sizi acı bir azaptan kurtaracak bir ticareti haber vereyim mi?\n[11] Allah'a ve O'nun Resulü’ne iman edersiniz, mallarınızla ve canlarınızla Allah yolunda mücadele edersiniz. Bu, sizin için daha hayırlıdır; eğer bilirseniz.",
+      "text_en": "[10] O you who have believed, shall I guide you to a transaction that will save you from a painful punishment?\n[11] [It is that] you believe in Allah and His Messenger and strive in the cause of Allah with your wealth and your lives. That is best for you, if you should know.",
+      "text_tr_alt": "[10] Ey inananlar! Sizi can yakıcı bir azabdan kurtaracak, kazançlı bir yolu size göstereyim mi?\n\n[11] Allah'a ve Peygamberine inanırsınız; Allah yolunda canlarınızla, mallarınızla cihat edersiniz; bilseniz, bu sizin için en iyi yoldur.",
+      "text_en_alt": "[10] Believers, shall I direct you to a commerce that will deliver you from a grievous chastisement?\n\n[11] Have faith in Allah and His Messenger and strive in the Way of Allah with your possessions and your lives. That is better for you if you only knew.",
+      "selected_translation": {
+        "tr": "main",
+        "en": "main"
+      },
+      "priority": 3,
+      "notes": "YOK",
+      "createdAt": "2026-06-10T19:26:27+00:00",
+      "updatedAt": "2026-06-10T19:27:00+00:00",
+      "approvedAt": "2026-06-10T19:26:56+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-10T19:27:00+00:00",
+          "status": "approved",
+          "priority": 3,
+          "notes": "YOK"
+        }
+      ]
+    },
+    {
+      "id": "002/009-010",
+      "kind": "ayah",
+      "ref": "002/009-010",
+      "ar": "﴿9﴾ يُخَـٰدِعُونَ ٱللَّهَ وَٱلَّذِينَ ءَامَنُوا۟ وَمَا يَخْدَعُونَ إِلَّآ أَنفُسَهُمْ وَمَا يَشْعُرُونَ\n﴿10﴾ فِى قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ ٱللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ",
+      "tr": "[9] (Sözde) Allah'ı ve iman edenleri aldatırlar. Oysa onlar, yalnızca kendilerini aldatıyorlar ve şuurunda değiller.\n[10] Kalplerinde hastalık vardır. Allah da hastalıklarını arttırmıştır. Yalan söylemekte olduklarından dolayı, onlar için acı bir azap vardır.",
+      "en": "[9] They [think to] deceive Allah and those who believe, but they deceive not except themselves and perceive [it] not.\n[10] In their hearts is disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie.",
+      "priority": 2,
+      "approvedAt": "2026-06-10T19:50:43+00:00",
+      "surah_number": 2,
+      "surah_name": "Bakara",
+      "ayah_number": 9,
+      "ayah_end_number": null,
+      "source": {
+        "arabic": "ayahs.v1.approved.json",
+        "trAlt": "ayahs.v1.approved.json / approved TR",
+        "enAlt": "ayahs.v1.approved.json / approved EN"
+      },
+      "text_tr_alt": "[9] (Sözde) Allah'ı ve iman edenleri aldatırlar. Oysa onlar, yalnızca kendilerini aldatıyorlar ve şuurunda değiller.\n[10] Kalplerinde hastalık vardır. Allah da hastalıklarını arttırmıştır. Yalan söylemekte olduklarından dolayı, onlar için acı bir azap vardır.",
+      "text_en_alt": "[9] They [think to] deceive Allah and those who believe, but they deceive not except themselves and perceive [it] not.\n[10] In their hearts is disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie.",
+      "selected_translation": {
+        "tr": "alt",
+        "en": "alt"
+      },
+      "status": "approved",
+      "notes": "YOK",
+      "createdAt": "2026-06-10T19:48:51+00:00",
+      "updatedAt": "2026-06-10T19:50:44+00:00",
+      "sourceInfo": {
+        "label": "approved ayet payload",
+        "source_ref": "ayahs.v1.approved.json",
+        "fetch_status": "local_approved",
+        "approvedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\approved\\ayahs.v1.approved.json"
+      },
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": true,
+        "possibleDuplicate": true,
+        "archiveMatches": [],
+        "approvedMatches": [
+          {
+            "record_id": "002/009-010",
+            "reason": "arabic",
+            "score": 1.0,
+            "ref": "002/009-010"
+          },
+          {
+            "record_id": "002/009-010",
+            "reason": "similar_text",
+            "score": 1.0,
+            "ref": "002/009-010"
+          }
+        ]
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-10T19:49:10+00:00",
+          "status": "approved",
+          "priority": 2,
+          "notes": "YOK"
+        },
+        {
+          "at": "2026-06-10T19:50:44+00:00",
+          "status": "approved",
+          "priority": 2,
+          "notes": "YOK"
+        }
+      ],
+      "review": {
+        "status": "approved",
+        "priority": 2,
+        "note": "YOK",
+        "updated_at": "2026-06-10T19:50:44+00:00"
+      },
+      "text_ar": "﴿9﴾ يُخَـٰدِعُونَ ٱللَّهَ وَٱلَّذِينَ ءَامَنُوا۟ وَمَا يَخْدَعُونَ إِلَّآ أَنفُسَهُمْ وَمَا يَشْعُرُونَ\n﴿10﴾ فِى قُلُوبِهِم مَّرَضٌ فَزَادَهُمُ ٱللَّهُ مَرَضًا ۖ وَلَهُمْ عَذَابٌ أَلِيمٌۢ بِمَا كَانُوا۟ يَكْذِبُونَ",
+      "text_tr": "[9] (Sözde) Allah'ı ve iman edenleri aldatırlar. Oysa onlar, yalnızca kendilerini aldatıyorlar ve şuurunda değiller.\n[10] Kalplerinde hastalık vardır. Allah da hastalıklarını arttırmıştır. Yalan söylemekte olduklarından dolayı, onlar için acı bir azap vardır.",
+      "text_en": "[9] They [think to] deceive Allah and those who believe, but they deceive not except themselves and perceive [it] not.\n[10] In their hearts is disease, so Allah has increased their disease; and for them is a painful punishment because they [habitually] used to lie.",
+      "surah": 2,
+      "ayahEnd": 10
+    },
+    {
+      "ref": "002/011-012",
+      "id": "002/011-012",
+      "surah": 2,
+      "ayahStart": 11,
+      "ayahEnd": null,
+      "type": "range",
+      "ayahCount": 2,
+      "input": {
+        "sira": null,
+        "ref": "002/011-012",
+        "input_type": "aralik",
+        "input_ayah_count": 2,
+        "input_char_count": 0,
+        "input_status": "tool_ekle",
+        "input_source_ref_groups": "002/011-012"
+      },
+      "source": {
+        "arabic": "Tanzil Uthmani Quran Text",
+        "tr": "Tanzil tr.bulac / Ali Bulac",
+        "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+        "en": "Tanzil en.sahih / Saheeh International",
+        "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/011-012"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/011",
+          "surah": 2,
+          "ayah": 11,
+          "arabic": "وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا۟ فِى ٱلْأَرْضِ قَالُوٓا۟ إِنَّمَا نَحْنُ مُصْلِحُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "002/011",
+            "text": "Kendilerine: \"Yeryüzünde fesat çıkarmayın\" denildiğinde: \"Biz sadece ıslah edicileriz\" derler."
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "002/011",
+            "text": "And when it is said to them, \"Do not cause corruption on the earth,\" they say, \"We are but reformers.\""
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "Kendilerine: \"Yeryüzünde bozgunculuk yapmayın\" dendiği zaman, \"Bizler sadece ıslah edicileriz\" derler."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "Whenever it is said to them, \"Spread not disorder on the earth\", their reply is, \"We only seek to put things aright\"."
+            }
+          }
+        },
+        {
+          "ref": "002/012",
+          "surah": 2,
+          "ayah": 12,
+          "arabic": "أَلَآ إِنَّهُمْ هُمُ ٱلْمُفْسِدُونَ وَلَـٰكِن لَّا يَشْعُرُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "002/012",
+            "text": "Bilin ki; gerçekten, asıl fesatçılar bunlardır, ama şuurunda değildirler."
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "002/012",
+            "text": "Unquestionably, it is they who are the corrupters, but they perceive [it] not."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "İyi bilin ki, asıl bozguncular kendileridir, lakin farkında değillerdir."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "Beware! they do spread disorder but they realize it not."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 1,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "YOK",
+        "updated_at": "2026-06-10T19:52:28+00:00"
+      },
+      "sourceInfo": {
+        "label": "Tanzil yerel kaynak",
+        "source_ref": "002/011-012",
+        "fetch_status": "local_seed_generated",
+        "details": {
+          "metadata_sources": {
+            "arabic": {
+              "name": "Tanzil Quran Text / Uthmani",
+              "url": "https://tanzil.net/download/"
+            },
+            "tr": {
+              "key": "tr.bulac",
+              "name": "Ali Bulaç",
+              "url": "https://tanzil.net/trans/tr.bulac"
+            },
+            "trAlt": {
+              "key": "tr.diyanet",
+              "name": "Diyanet İşleri",
+              "url": "https://tanzil.net/trans/tr.diyanet"
+            },
+            "en": {
+              "key": "en.sahih",
+              "name": "Saheeh International",
+              "url": "https://tanzil.net/trans/en.sahih"
+            },
+            "enAlt": {
+              "key": "en.maududi",
+              "name": "Abul A‘la Maududi",
+              "url": "https://tanzil.net/trans/en.maududi"
+            }
+          },
+          "quranFiles": {
+            "ar": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\quran-uthmani.txt",
+            "tr_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.bulac.txt",
+            "tr_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.diyanet.txt",
+            "en_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.sahih.txt",
+            "en_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.maududi.txt"
+          }
+        },
+        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
+        "source": {
+          "arabic": "Tanzil Uthmani Quran Text",
+          "tr": "Tanzil tr.bulac / Ali Bulac",
+          "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+          "en": "Tanzil en.sahih / Saheeh International",
+          "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+        }
+      },
+      "surah_name": "Bakara",
+      "ayah_number": 11,
+      "ayah_end_number": 12,
+      "text_ar": "﴿11﴾ وَإِذَا قِيلَ لَهُمْ لَا تُفْسِدُوا۟ فِى ٱلْأَرْضِ قَالُوٓا۟ إِنَّمَا نَحْنُ مُصْلِحُونَ\n﴿12﴾ أَلَآ إِنَّهُمْ هُمُ ٱلْمُفْسِدُونَ وَلَـٰكِن لَّا يَشْعُرُونَ",
+      "text_tr": "[11] Kendilerine: \"Yeryüzünde fesat çıkarmayın\" denildiğinde: \"Biz sadece ıslah edicileriz\" derler.\n[12] Bilin ki; gerçekten, asıl fesatçılar bunlardır, ama şuurunda değildirler.",
+      "text_en": "[11] And when it is said to them, \"Do not cause corruption on the earth,\" they say, \"We are but reformers.\"\n[12] Unquestionably, it is they who are the corrupters, but they perceive [it] not.",
+      "text_tr_alt": "[11] Kendilerine: \"Yeryüzünde bozgunculuk yapmayın\" dendiği zaman, \"Bizler sadece ıslah edicileriz\" derler.\n\n[12] İyi bilin ki, asıl bozguncular kendileridir, lakin farkında değillerdir.",
+      "text_en_alt": "[11] Whenever it is said to them, \"Spread not disorder on the earth\", their reply is, \"We only seek to put things aright\".\n\n[12] Beware! they do spread disorder but they realize it not.",
+      "selected_translation": {
+        "tr": "main",
+        "en": "main"
+      },
+      "priority": 1,
+      "notes": "YOK",
+      "createdAt": "2026-06-10T19:51:59+00:00",
+      "updatedAt": "2026-06-10T19:52:28+00:00",
+      "approvedAt": "2026-06-10T19:52:28+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-10T19:52:28+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": "YOK"
+        }
+      ]
+    },
+    {
+      "ref": "002/013-014",
+      "id": "002/013-014",
+      "surah": 2,
+      "ayahStart": 13,
+      "ayahEnd": null,
+      "type": "range",
+      "ayahCount": 2,
+      "input": {
+        "sira": null,
+        "ref": "002/013-014",
+        "input_type": "aralik",
+        "input_ayah_count": 2,
+        "input_char_count": 0,
+        "input_status": "tool_ekle",
+        "input_source_ref_groups": "002/013-014"
+      },
+      "source": {
+        "arabic": "Tanzil Uthmani Quran Text",
+        "tr": "Tanzil tr.bulac / Ali Bulac",
+        "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+        "en": "Tanzil en.sahih / Saheeh International",
+        "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/013-014"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/013",
+          "surah": 2,
+          "ayah": 13,
+          "arabic": "وَإِذَا قِيلَ لَهُمْ ءَامِنُوا۟ كَمَآ ءَامَنَ ٱلنَّاسُ قَالُوٓا۟ أَنُؤْمِنُ كَمَآ ءَامَنَ ٱلسُّفَهَآءُ ۗ أَلَآ إِنَّهُمْ هُمُ ٱلسُّفَهَآءُ وَلَـٰكِن لَّا يَعْلَمُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "002/013",
+            "text": "Ve (yine) kendilerine: \"İnsanların iman ettiği gibi siz de iman edin\" denildiğinde: \"Düşük akıllıların iman ettiği gibi mi iman edelim?\" derler. Bilin ki, gerçekten asıl düşük-akıllılar kendileridir; ama bilmezler."
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "002/013",
+            "text": "And when it is said to them, \"Believe as the people have believed,\" they say, \"Should we believe as the foolish have believed?\" Unquestionably, it is they who are the foolish, but they know [it] not."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "Onlara \"Müslümanların inandığı gibi siz de inanın\" denilince de, \"Beyinsizlerin inandığı gibi mi inanalım?\" derler; iyi bilin ki asıl beyinsizler kendileridir, fakat bilmezler."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "And when it is said to them, \"Believe sincerely as the other people have believed\", they reply, \"Should we believe as fools have believed?\" Beware! they themselves are the fools, but they know it not."
+            }
+          }
+        },
+        {
+          "ref": "002/014",
+          "surah": 2,
+          "ayah": 14,
+          "arabic": "وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَـٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "002/014",
+            "text": "İman edenlerle karşılaştıkları zaman: \"İman ettik\" derler. Şeytanlarıyla başbaşa kaldıklarında ise, derler ki: “Şüphesiz, sizinle beraberiz. Biz (onlarla) yalnızca alay ediyoruz.\""
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "002/014",
+            "text": "And when they meet those who believe, they say, \"We believe\"; but when they are alone with their evil ones, they say, \"Indeed, we are with you; we were only mockers.\""
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "İnananlara rastladıkları zaman, \"İnandık\" derler, elebaşılarıyla baş başa kaldıklarında, \"Biz şüphesiz sizinleyiz, onlarla sadece alay etmekteyiz\" derler."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "When they meet those who believe, they say, \"We, too, are believers\", but when they privily meet their evil geniuses, they say, \"Indeed we are with you: we are only mocking at these people\"."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 2,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "YOK",
+        "updated_at": "2026-06-10T19:53:50+00:00"
+      },
+      "sourceInfo": {
+        "label": "Tanzil yerel kaynak",
+        "source_ref": "002/013-014",
+        "fetch_status": "local_seed_generated",
+        "details": {
+          "metadata_sources": {
+            "arabic": {
+              "name": "Tanzil Quran Text / Uthmani",
+              "url": "https://tanzil.net/download/"
+            },
+            "tr": {
+              "key": "tr.bulac",
+              "name": "Ali Bulaç",
+              "url": "https://tanzil.net/trans/tr.bulac"
+            },
+            "trAlt": {
+              "key": "tr.diyanet",
+              "name": "Diyanet İşleri",
+              "url": "https://tanzil.net/trans/tr.diyanet"
+            },
+            "en": {
+              "key": "en.sahih",
+              "name": "Saheeh International",
+              "url": "https://tanzil.net/trans/en.sahih"
+            },
+            "enAlt": {
+              "key": "en.maududi",
+              "name": "Abul A‘la Maududi",
+              "url": "https://tanzil.net/trans/en.maududi"
+            }
+          },
+          "quranFiles": {
+            "ar": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\quran-uthmani.txt",
+            "tr_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.bulac.txt",
+            "tr_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.diyanet.txt",
+            "en_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.sahih.txt",
+            "en_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.maududi.txt"
+          }
+        },
+        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
+        "source": {
+          "arabic": "Tanzil Uthmani Quran Text",
+          "tr": "Tanzil tr.bulac / Ali Bulac",
+          "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+          "en": "Tanzil en.sahih / Saheeh International",
+          "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+        }
+      },
+      "surah_name": "Bakara",
+      "ayah_number": 13,
+      "ayah_end_number": 14,
+      "text_ar": "﴿13﴾ وَإِذَا قِيلَ لَهُمْ ءَامِنُوا۟ كَمَآ ءَامَنَ ٱلنَّاسُ قَالُوٓا۟ أَنُؤْمِنُ كَمَآ ءَامَنَ ٱلسُّفَهَآءُ ۗ أَلَآ إِنَّهُمْ هُمُ ٱلسُّفَهَآءُ وَلَـٰكِن لَّا يَعْلَمُونَ\n﴿14﴾ وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَـٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ",
+      "text_tr": "[13] Ve (yine) kendilerine: \"İnsanların iman ettiği gibi siz de iman edin\" denildiğinde: \"Düşük akıllıların iman ettiği gibi mi iman edelim?\" derler. Bilin ki, gerçekten asıl düşük-akıllılar kendileridir; ama bilmezler.\n[14] İman edenlerle karşılaştıkları zaman: \"İman ettik\" derler. Şeytanlarıyla başbaşa kaldıklarında ise, derler ki: “Şüphesiz, sizinle beraberiz. Biz (onlarla) yalnızca alay ediyoruz.\"",
+      "text_en": "[13] And when it is said to them, \"Believe as the people have believed,\" they say, \"Should we believe as the foolish have believed?\" Unquestionably, it is they who are the foolish, but they know [it] not.\n[14] And when they meet those who believe, they say, \"We believe\"; but when they are alone with their evil ones, they say, \"Indeed, we are with you; we were only mockers.\"",
+      "text_tr_alt": "[13] Onlara \"Müslümanların inandığı gibi siz de inanın\" denilince de, \"Beyinsizlerin inandığı gibi mi inanalım?\" derler; iyi bilin ki asıl beyinsizler kendileridir, fakat bilmezler.\n\n[14] İnananlara rastladıkları zaman, \"İnandık\" derler, elebaşılarıyla baş başa kaldıklarında, \"Biz şüphesiz sizinleyiz, onlarla sadece alay etmekteyiz\" derler.",
+      "text_en_alt": "[13] And when it is said to them, \"Believe sincerely as the other people have believed\", they reply, \"Should we believe as fools have believed?\" Beware! they themselves are the fools, but they know it not.\n\n[14] When they meet those who believe, they say, \"We, too, are believers\", but when they privily meet their evil geniuses, they say, \"Indeed we are with you: we are only mocking at these people\".",
+      "selected_translation": {
+        "tr": "main",
+        "en": "main"
+      },
+      "priority": 2,
+      "notes": "YOK",
+      "createdAt": "2026-06-10T19:53:07+00:00",
+      "updatedAt": "2026-06-10T19:53:50+00:00",
+      "approvedAt": "2026-06-10T19:53:49+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-10T19:53:50+00:00",
+          "status": "approved",
+          "priority": 2,
+          "notes": "YOK"
+        }
+      ]
+    },
+    {
+      "ref": "002/013-015",
+      "id": "002/013-015",
+      "surah": 2,
+      "ayahStart": 13,
+      "ayahEnd": null,
+      "type": "range",
+      "ayahCount": 3,
+      "input": {
+        "sira": null,
+        "ref": "002/013-015",
+        "input_type": "aralik",
+        "input_ayah_count": 3,
+        "input_char_count": 0,
+        "input_status": "tool_ekle",
+        "input_source_ref_groups": "002/013-015"
+      },
+      "source": {
+        "arabic": "Tanzil Uthmani Quran Text",
+        "tr": "Tanzil tr.bulac / Ali Bulac",
+        "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+        "en": "Tanzil en.sahih / Saheeh International",
+        "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+      },
+      "sourceRefGroups": [
+        "002/013-015"
+      ],
+      "ayahs": [
+        {
+          "ref": "002/013",
+          "surah": 2,
+          "ayah": 13,
+          "arabic": "وَإِذَا قِيلَ لَهُمْ ءَامِنُوا۟ كَمَآ ءَامَنَ ٱلنَّاسُ قَالُوٓا۟ أَنُؤْمِنُ كَمَآ ءَامَنَ ٱلسُّفَهَآءُ ۗ أَلَآ إِنَّهُمْ هُمُ ٱلسُّفَهَآءُ وَلَـٰكِن لَّا يَعْلَمُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "002/013",
+            "text": "Ve (yine) kendilerine: \"İnsanların iman ettiği gibi siz de iman edin\" denildiğinde: \"Düşük akıllıların iman ettiği gibi mi iman edelim?\" derler. Bilin ki, gerçekten asıl düşük-akıllılar kendileridir; ama bilmezler."
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "002/013",
+            "text": "And when it is said to them, \"Believe as the people have believed,\" they say, \"Should we believe as the foolish have believed?\" Unquestionably, it is they who are the foolish, but they know [it] not."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "Onlara \"Müslümanların inandığı gibi siz de inanın\" denilince de, \"Beyinsizlerin inandığı gibi mi inanalım?\" derler; iyi bilin ki asıl beyinsizler kendileridir, fakat bilmezler."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "And when it is said to them, \"Believe sincerely as the other people have believed\", they reply, \"Should we believe as fools have believed?\" Beware! they themselves are the fools, but they know it not."
+            }
+          }
+        },
+        {
+          "ref": "002/014",
+          "surah": 2,
+          "ayah": 14,
+          "arabic": "وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَـٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "002/014",
+            "text": "İman edenlerle karşılaştıkları zaman: \"İman ettik\" derler. Şeytanlarıyla başbaşa kaldıklarında ise, derler ki: “Şüphesiz, sizinle beraberiz. Biz (onlarla) yalnızca alay ediyoruz.\""
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "002/014",
+            "text": "And when they meet those who believe, they say, \"We believe\"; but when they are alone with their evil ones, they say, \"Indeed, we are with you; we were only mockers.\""
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "İnananlara rastladıkları zaman, \"İnandık\" derler, elebaşılarıyla baş başa kaldıklarında, \"Biz şüphesiz sizinleyiz, onlarla sadece alay etmekteyiz\" derler."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "When they meet those who believe, they say, \"We, too, are believers\", but when they privily meet their evil geniuses, they say, \"Indeed we are with you: we are only mocking at these people\"."
+            }
+          }
+        },
+        {
+          "ref": "002/015",
+          "surah": 2,
+          "ayah": 15,
+          "arabic": "ٱللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِى طُغْيَـٰنِهِمْ يَعْمَهُونَ",
+          "tr": {
+            "source": "Tanzil tr.bulac / Ali Bulac",
+            "sourceRef": "002/015",
+            "text": "(Asıl) Allah onlarla alay eder ve taşkınlıkları içinde şaşkınca dolaşmalarına (belli bir) süre tanır."
+          },
+          "en": {
+            "source": "Tanzil en.sahih / Saheeh International",
+            "sourceRef": "002/015",
+            "text": "[But] Allah mocks them and prolongs them in their transgression [while] they wander blindly."
+          },
+          "alternatives": {
+            "tr_diyanet_tanzil": {
+              "source": "Tanzil tr.diyanet / Diyanet Isleri",
+              "text": "Onlarla Allah alay eder ve taşkınlıkları içinde bocalar durumda bırakır."
+            },
+            "en_maududi": {
+              "source": "Tanzil en.maududi / Abul A'la Maududi",
+              "text": "(Little do they realize that) Allah is mocking at them. He gives them rope enough, and they wander on and on blindly in their mischief and rebellion."
+            }
+          }
+        }
+      ],
+      "status": "approved",
+      "review": {
+        "status": "approved",
+        "priority_key": "normal",
+        "priority": 2,
+        "boost": {
+          "enabled": false,
+          "weight": 1
+        },
+        "note": "YOK",
+        "updated_at": "2026-06-10T19:54:48+00:00"
+      },
+      "sourceInfo": {
+        "label": "Tanzil yerel kaynak",
+        "source_ref": "002/013-015",
+        "fetch_status": "local_seed_generated",
+        "details": {
+          "metadata_sources": {
+            "arabic": {
+              "name": "Tanzil Quran Text / Uthmani",
+              "url": "https://tanzil.net/download/"
+            },
+            "tr": {
+              "key": "tr.bulac",
+              "name": "Ali Bulaç",
+              "url": "https://tanzil.net/trans/tr.bulac"
+            },
+            "trAlt": {
+              "key": "tr.diyanet",
+              "name": "Diyanet İşleri",
+              "url": "https://tanzil.net/trans/tr.diyanet"
+            },
+            "en": {
+              "key": "en.sahih",
+              "name": "Saheeh International",
+              "url": "https://tanzil.net/trans/en.sahih"
+            },
+            "enAlt": {
+              "key": "en.maududi",
+              "name": "Abul A‘la Maududi",
+              "url": "https://tanzil.net/trans/en.maududi"
+            }
+          },
+          "quranFiles": {
+            "ar": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\quran-uthmani.txt",
+            "tr_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.bulac.txt",
+            "tr_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\tr.diyanet.txt",
+            "en_main": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.sahih.txt",
+            "en_alt": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\Quran\\en.maududi.txt"
+          }
+        },
+        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\ayet1400_tanzil_ar_tr_en_pending_review.json",
+        "source": {
+          "arabic": "Tanzil Uthmani Quran Text",
+          "tr": "Tanzil tr.bulac / Ali Bulac",
+          "trAlt": "Tanzil tr.diyanet / Diyanet Isleri",
+          "en": "Tanzil en.sahih / Saheeh International",
+          "enAlt": "Tanzil en.maududi / Abul A'la Maududi"
+        }
+      },
+      "surah_name": "Bakara",
+      "ayah_number": 13,
+      "ayah_end_number": 15,
+      "text_ar": "﴿13﴾ وَإِذَا قِيلَ لَهُمْ ءَامِنُوا۟ كَمَآ ءَامَنَ ٱلنَّاسُ قَالُوٓا۟ أَنُؤْمِنُ كَمَآ ءَامَنَ ٱلسُّفَهَآءُ ۗ أَلَآ إِنَّهُمْ هُمُ ٱلسُّفَهَآءُ وَلَـٰكِن لَّا يَعْلَمُونَ\n﴿14﴾ وَإِذَا لَقُوا۟ ٱلَّذِينَ ءَامَنُوا۟ قَالُوٓا۟ ءَامَنَّا وَإِذَا خَلَوْا۟ إِلَىٰ شَيَـٰطِينِهِمْ قَالُوٓا۟ إِنَّا مَعَكُمْ إِنَّمَا نَحْنُ مُسْتَهْزِءُونَ\n﴿15﴾ ٱللَّهُ يَسْتَهْزِئُ بِهِمْ وَيَمُدُّهُمْ فِى طُغْيَـٰنِهِمْ يَعْمَهُونَ",
+      "text_tr": "[13] Ve (yine) kendilerine: \"İnsanların iman ettiği gibi siz de iman edin\" denildiğinde: \"Düşük akıllıların iman ettiği gibi mi iman edelim?\" derler. Bilin ki, gerçekten asıl düşük-akıllılar kendileridir; ama bilmezler.\n\n[14] İman edenlerle karşılaştıkları zaman: \"İman ettik\" derler. Şeytanlarıyla başbaşa kaldıklarında ise, derler ki: “Şüphesiz, sizinle beraberiz. Biz (onlarla) yalnızca alay ediyoruz.\"\n[15] (Asıl) Allah onlarla alay eder ve taşkınlıkları içinde şaşkınca dolaşmalarına (belli bir) süre tanır.",
+      "text_en": "[13] And when it is said to them, \"Believe as the people have believed,\" they say, \"Should we believe as the foolish have believed?\" Unquestionably, it is they who are the foolish, but they know [it] not.\n\n[14] And when they meet those who believe, they say, \"We believe\"; but when they are alone with their evil ones, they say, \"Indeed, we are with you; we were only mockers.\"\n[15] [But] Allah mocks them and prolongs them in their transgression [while] they wander blindly.",
+      "text_tr_alt": "[13] Onlara \"Müslümanların inandığı gibi siz de inanın\" denilince de, \"Beyinsizlerin inandığı gibi mi inanalım?\" derler; iyi bilin ki asıl beyinsizler kendileridir, fakat bilmezler.\n\n[14] İnananlara rastladıkları zaman, \"İnandık\" derler, elebaşılarıyla baş başa kaldıklarında, \"Biz şüphesiz sizinleyiz, onlarla sadece alay etmekteyiz\" derler.\n\n[15] Onlarla Allah alay eder ve taşkınlıkları içinde bocalar durumda bırakır.",
+      "text_en_alt": "[13] And when it is said to them, \"Believe sincerely as the other people have believed\", they reply, \"Should we believe as fools have believed?\" Beware! they themselves are the fools, but they know it not.\n\n[14] When they meet those who believe, they say, \"We, too, are believers\", but when they privily meet their evil geniuses, they say, \"Indeed we are with you: we are only mocking at these people\".\n\n[15] (Little do they realize that) Allah is mocking at them. He gives them rope enough, and they wander on and on blindly in their mischief and rebellion.",
+      "selected_translation": {
+        "tr": "main",
+        "en": "main"
+      },
+      "priority": 2,
+      "notes": "YOK",
+      "createdAt": "2026-06-10T19:54:19+00:00",
+      "updatedAt": "2026-06-10T19:54:48+00:00",
+      "approvedAt": "2026-06-10T19:54:48+00:00",
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": false,
+        "possibleDuplicate": false,
+        "archiveMatches": [],
+        "approvedMatches": []
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-10T19:54:48+00:00",
+          "status": "approved",
+          "priority": 2,
+          "notes": "YOK"
+        }
+      ]
+    },
+    {
+      "id": "002/026",
+      "kind": "ayah",
+      "ref": "002/026",
+      "ar": "إِنَّ ٱللَّهَ لَا يَسْتَحْىِۦٓ أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا ۚ فَأَمَّا ٱلَّذِينَ ءَامَنُوا۟ فَيَعْلَمُونَ أَنَّهُ ٱلْحَقُّ مِن رَّبِّهِمْ ۖ وَأَمَّا ٱلَّذِينَ كَفَرُوا۟ فَيَقُولُونَ مَاذَآ أَرَادَ ٱللَّهُ بِهَـٰذَا مَثَلًا ۘ يُضِلُّ بِهِۦ كَثِيرًا وَيَهْدِى بِهِۦ كَثِيرًا ۚ وَمَا يُضِلُّ بِهِۦٓ إِلَّا ٱلْفَـٰسِقِينَ",
+      "tr": "Şüphesiz Allah, bir sivrisineği de, ondan üstün olanı da, (herhangi bir şeyi) örnek vermekten çekinmez. Böylece iman edenler, kuşkusuz bunun Rablerinden gelen bir gerçek olduğunu bilirler; inkar edenler ise, \"Allah, bu örnekle neyi amaçlamış?\" derler. (Oysa Allah,) Bununla birçoğunu saptırır, birçoğunu da hidayete erdirir. Ancak O, fasıklardan başkasını saptırmaz.",
+      "en": "Indeed, Allah is not timid to present an example - that of a mosquito or what is smaller than it. And those who have believed know that it is the truth from their Lord. But as for those who disbelieve, they say, \"What did Allah intend by this as an example?\" He misleads many thereby and guides many thereby. And He misleads not except the defiantly disobedient,",
+      "priority": 2,
+      "surah_number": 2,
+      "surah_name": "Bakara",
+      "ayah_number": 26,
+      "ayah_end_number": 26,
+      "status": "approved",
+      "source": {
+        "arabic": "ayahs.v1.approved.json",
+        "trAlt": "ayahs.v1.approved.json / approved TR",
+        "enAlt": "ayahs.v1.approved.json / approved EN"
+      },
+      "text_tr_alt": "Şüphesiz Allah, bir sivrisineği de, ondan üstün olanı da, (herhangi bir şeyi) örnek vermekten çekinmez. Böylece iman edenler, kuşkusuz bunun Rablerinden gelen bir gerçek olduğunu bilirler; inkar edenler ise, \"Allah, bu örnekle neyi amaçlamış?\" derler. (Oysa Allah,) bununla birçoğunu saptırır, birçoğunu da hidayete erdirir. Ancak O, fasıklardan başkasını saptırmaz.",
+      "text_en_alt": "Indeed, Allah is not timid to present an example - that of a mosquito or what is smaller than it. And those who have believed know that it is the truth from their Lord. But as for those who disbelieve, they say, \"What did Allah intend by this as an example?\" He misleads many thereby and guides many thereby. And He misleads not except the defiantly disobedient,",
+      "selected_translation": {
+        "tr": "alt",
+        "en": "alt"
+      },
+      "notes": "YOK",
+      "createdAt": "2026-06-10T19:55:44+00:00",
+      "updatedAt": "2026-06-10T19:57:16+00:00",
+      "approvedAt": "2026-06-10T19:57:16+00:00",
+      "sourceInfo": {
+        "label": "approved ayet payload",
+        "source_ref": "ayahs.v1.approved.json",
+        "fetch_status": "local_approved",
+        "approvedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\approved\\ayahs.v1.approved.json"
+      },
+      "duplicateInfo": {
+        "existsInArchive": false,
+        "existsInApproved": false,
+        "exactDuplicate": true,
+        "possibleDuplicate": true,
+        "archiveMatches": [],
+        "approvedMatches": [
+          {
+            "record_id": "002/026",
+            "reason": "arabic",
+            "score": 1.0,
+            "ref": "002/026"
+          },
+          {
+            "record_id": "002/026",
+            "reason": "similar_text",
+            "score": 1.0,
+            "ref": "002/026"
+          }
+        ]
+      },
+      "reviewHistory": [
+        {
+          "at": "2026-06-10T19:56:31+00:00",
+          "status": "approved",
+          "priority": 2,
+          "notes": "YOK"
+        },
+        {
+          "at": "2026-06-10T19:57:16+00:00",
+          "status": "approved",
+          "priority": 2,
+          "notes": "YOK"
+        }
+      ],
+      "review": {
+        "status": "approved",
+        "priority": 2,
+        "note": "YOK",
+        "updated_at": "2026-06-10T19:57:16+00:00"
+      },
+      "text_ar": "إِنَّ ٱللَّهَ لَا يَسْتَحْىِۦٓ أَن يَضْرِبَ مَثَلًا مَّا بَعُوضَةً فَمَا فَوْقَهَا ۚ فَأَمَّا ٱلَّذِينَ ءَامَنُوا۟ فَيَعْلَمُونَ أَنَّهُ ٱلْحَقُّ مِن رَّبِّهِمْ ۖ وَأَمَّا ٱلَّذِينَ كَفَرُوا۟ فَيَقُولُونَ مَاذَآ أَرَادَ ٱللَّهُ بِهَـٰذَا مَثَلًا ۘ يُضِلُّ بِهِۦ كَثِيرًا وَيَهْدِى بِهِۦ كَثِيرًا ۚ وَمَا يُضِلُّ بِهِۦٓ إِلَّا ٱلْفَـٰسِقِينَ",
+      "text_tr": "Şüphesiz Allah, bir sivrisineği de, ondan üstün olanı da, (herhangi bir şeyi) örnek vermekten çekinmez. Böylece iman edenler, kuşkusuz bunun Rablerinden gelen bir gerçek olduğunu bilirler; inkar edenler ise, \"Allah, bu örnekle neyi amaçlamış?\" derler. (Oysa Allah,) bununla birçoğunu saptırır, birçoğunu da hidayete erdirir. Ancak O, fasıklardan başkasını saptırmaz.",
+      "text_en": "Indeed, Allah is not timid to present an example - that of a mosquito or what is smaller than it. And those who have believed know that it is the truth from their Lord. But as for those who disbelieve, they say, \"What did Allah intend by this as an example?\" He misleads many thereby and guides many thereby. And He misleads not except the defiantly disobedient,",
+      "surah": 2,
+      "ayahEnd": 26
     }
   ],
-  "content_version": "onay-tool-20260610_165728"
+  "content_version": "onay-tool-20260610_232354"
 }

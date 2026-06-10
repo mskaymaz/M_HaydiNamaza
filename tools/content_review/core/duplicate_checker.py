@@ -10,9 +10,15 @@ def _norm_text(value: str) -> str:
 
 
 def _similarity(left: str, right: str) -> float:
-    if not left.strip() or not right.strip():
+    left_norm = _norm_text(left)
+    right_norm = _norm_text(right)
+    if not left_norm or not right_norm:
         return 0.0
-    return SequenceMatcher(None, _norm_text(left), _norm_text(right)).ratio()
+    shorter = min(len(left_norm), len(right_norm))
+    longer = max(len(left_norm), len(right_norm))
+    if longer and (2 * shorter / (shorter + longer)) < 0.93:
+        return 0.0
+    return SequenceMatcher(None, left_norm, right_norm).ratio()
 
 
 def check_duplicates(

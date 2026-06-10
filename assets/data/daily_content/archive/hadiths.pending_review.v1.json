@@ -15730,8 +15730,8 @@
           "sourceText": "وعن أبي موسى الأشعري رضي الله عنه قال: احترق بيت بالمدينة على أهله من الليل، فلما حدث رسول الله صلى الله عليه وسلم بشأنهم قال: \"إن هذه النار عدو لكم، فإذا نمتم فأطفئوها\""
         },
         "tr": {
-          "clean": "Câbir’den (ra) rivayet edildiğine göre Resûlullah , kişinin nalınını/ayakkabısını ayakta giymesini yasakladı.",
-          "sourceText": "Câbir’den (ra) rivayet edildiğine göre Resûlullah , kişinin nalınını/ayakkabısını ayakta giymesini yasakladı."
+          "clean": "Câbir’den (ra) rivayet edildiğine göre Resûlullah, kişinin nalınını/ayakkabısını ayakta giymesini yasakladı.",
+          "sourceText": "Câbir’den (ra) rivayet edildiğine göre Resûlullah, kişinin nalınını/ayakkabısını ayakta giymesini yasakladı."
         },
         "en": {
           "clean": "Abu Musa Al-Ash'ari (May Allah be pleased with him) said: A house in Al-Madinah was burnt with its occupants inside it one night. When this was reported to the Messenger of Allah (ﷺ) he said, \"Fire is your enemy. So, put it out before going to bed.\".",
@@ -15739,7 +15739,7 @@
         }
       },
       "sourceInfo": {
-        "label": "Diyanet TR + Sunnah yerel seed",
+        "label": "Riyazus Salihin",
         "display": {
           "ar": "",
           "tr": "D4135 Ebû Dâvûd, Libâs, 44",
@@ -15771,7 +15771,7 @@
           "matchStatus": "sıra bazlı eşleşme",
           "matchScore": null
         },
-        "source_ref": "riyazussalihin/1658",
+        "source_ref": "https://sunnah.com/riyadussalihin:1653",
         "fetch_status": "local_hadith_exact",
         "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\1900_hadis_approve.xlsx"
       },
@@ -15817,17 +15817,30 @@
         "CPT_translation_status": "tamamlandı"
       },
       "priority": 1,
-      "notes": "bulk approved from local seed",
+      "notes": "Diyanet bölüm sayısı JSON/Sunnah bölümüyle aynı; sıra esas alınarak eşleştirildi.\ntamamlandı\nHadis no farki: -5",
       "createdAt": "2026-06-09T08:35:54+00:00",
-      "updatedAt": "2026-06-09T08:35:54+00:00",
-      "approvedAt": "2026-06-09T08:35:54+00:00",
+      "updatedAt": "2026-06-10T20:33:30+00:00",
+      "approvedAt": "2026-06-10T20:33:30+00:00",
       "duplicateInfo": {
         "existsInArchive": false,
         "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
+        "exactDuplicate": true,
+        "possibleDuplicate": true,
         "archiveMatches": [],
-        "approvedMatches": []
+        "approvedMatches": [
+          {
+            "record_id": "hadith_001658",
+            "reason": "arabic",
+            "score": 1.0,
+            "ref": "riyazussalihin/1658"
+          },
+          {
+            "record_id": "hadith_001658",
+            "reason": "similar_text",
+            "score": 1.0,
+            "ref": "riyazussalihin/1658"
+          }
+        ]
       },
       "reviewHistory": [
         {
@@ -15835,19 +15848,25 @@
           "status": "approved",
           "priority": 1,
           "notes": "bulk approved from local seed"
+        },
+        {
+          "at": "2026-06-10T20:33:30+00:00",
+          "status": "approved",
+          "priority": 1,
+          "notes": "Diyanet bölüm sayısı JSON/Sunnah bölümüyle aynı; sıra esas alınarak eşleştirildi.\ntamamlandı\nHadis no farki: -5"
         }
       ],
       "review": {
         "status": "approved",
         "priority": 1,
-        "note": "bulk approved from local seed",
-        "updated_at": "2026-06-09T08:35:54+00:00"
+        "note": "Diyanet bölüm sayısı JSON/Sunnah bölümüyle aynı; sıra esas alınarak eşleştirildi.\ntamamlandı\nHadis no farki: -5",
+        "updated_at": "2026-06-10T20:33:30+00:00"
       },
       "text_ar": "وعن أبي موسى الأشعري رضي الله عنه قال: احترق بيت بالمدينة على أهله من الليل، فلما حدث رسول الله صلى الله عليه وسلم بشأنهم قال: \"إن هذه النار عدو لكم، فإذا نمتم فأطفئوها\"",
-      "text_tr": "Câbir’den (ra) rivayet edildiğine göre Resûlullah , kişinin nalınını/ayakkabısını ayakta giymesini yasakladı.",
+      "text_tr": "Câbir’den (ra) rivayet edildiğine göre Resûlullah, kişinin nalınını/ayakkabısını ayakta giymesini yasakladı.",
       "text_en": "Abu Musa Al-Ash'ari (May Allah be pleased with him) said: A house in Al-Madinah was burnt with its occupants inside it one night. When this was reported to the Messenger of Allah (ﷺ) he said, \"Fire is your enemy. So, put it out before going to bed.\".",
       "hadith_number": 1658,
-      "book_reference_tr": "",
+      "book_reference_tr": "D4135 Ebû Dâvûd, Libâs, 44",
       "book_reference_en": ""
     },
     {
@@ -19596,145 +19615,6 @@
       "text_tr": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Alah Resûlü şöyle buyurmuştur: Allah kıyamette şu üç kişi ile ne konuşur, ne onları temize çıkarır, ne de yüzlerine bakar. Onlar için şiddetli bir azap vardır: Zina eden ihtiyar, yalancı hükümdar ve kibirli fakir.",
       "text_en": "Salamah bin Al-Akwa' (May Allah be pleased with him) reported: Messenger of Allah (ﷺ) said, \"Man continues to display haughtiness and arrogance until he is recorded among the arrogant and will be therefore afflicted with what afflicts them.\".",
       "hadith_number": 619,
-      "book_reference_tr": "",
-      "book_reference_en": ""
-    },
-    {
-      "id": "hadith_000792",
-      "ref": "riyazussalihin/792",
-      "hadithNo": 792,
-      "status": "approved",
-      "groupKey": "riyazussalihin",
-      "input": {
-        "hadithNo_diyanet": 792,
-        "source_tr": "D4025 Ebû Dâvûd, Libâs, 3; T1762 Tirmizî, Libâs, 28",
-        "source_en": "At-Tirmidhi, Abu Dawud",
-        "source_ar": "رواه أبو داود والترمذي",
-        "matchStatus": "sıra bazlı eşleşme"
-      },
-      "text": {
-        "ar": {
-          "clean": "عن أم سلمة رضى الله عنها قالت: كان أحب الثياب إلى رسول الله صلى الله عليه وسلم القميص.",
-          "sourceText": "عن أم سلمة رضى الله عنها قالت: كان أحب الثياب إلى رسول الله صلى الله عليه وسلم القميص."
-        },
-        "tr": {
-          "clean": "Ümmü Seleme’den (ra) rivayet edildiğine göre o, şöyle demiştir: Allah Resûlü’nün en sevdiği elbise gömlek idi.",
-          "sourceText": "Ümmü Seleme’den (ra) rivayet edildiğine göre o, şöyle demiştir: Allah Resûlü’nün en sevdiği elbise gömlek idi."
-        },
-        "en": {
-          "clean": "Umm Salamah (May Allah be pleased with her) reported: Out of all garments, the Messenger of Allah (ﷺ) liked the Qamees the best. Editor's note: The Qamees is a modest, traditional outfit thought to resemble what is now referred to as a thawb.",
-          "sourceText": "Umm Salamah (May Allah be pleased with her) reported: Out of all garments, the Messenger of Allah (ﷺ) liked the Qamees the best. Editor's note: The Qamees is a modest, traditional outfit thought to resemble what is now referred to as a thawb."
-        }
-      },
-      "sourceInfo": {
-        "label": "Diyanet TR + Sunnah yerel seed",
-        "display": {
-          "ar": "رواه أبو داود والترمذي",
-          "tr": "D4025 Ebû Dâvûd, Libâs, 3; T1762 Tirmizî, Libâs, 28",
-          "en": "At-Tirmidhi, Abu Dawud"
-        },
-        "sunnah": {
-          "candidateNo": 788,
-          "candidateUrl": "https://sunnah.com/riyadussalihin:788",
-          "matchStatus": "sıra bazlı eşleşme"
-        },
-        "primaryCollection": {
-          "title_tr": "Riyazus Salihin",
-          "title_en": "Riyad as-Salihin"
-        },
-        "chapter": {
-          "title_tr": "Gömlek Giymek",
-          "title_en": "Giyim Âdâbı"
-        },
-        "tr": {
-          "sourceName": "Diyanet Dijital Riyazus-Salihin",
-          "sourceType": "seed/json",
-          "reference": "D4025 Ebû Dâvûd, Libâs, 3; T1762 Tirmizî, Libâs, 28"
-        },
-        "ar_en": {
-          "sourceName": "Sunnah.com Riyad as-Salihin",
-          "sourceType": "seed/json",
-          "url": "https://sunnah.com/riyadussalihin:788",
-          "reference": "Riyad as-Salihin 788",
-          "matchStatus": "sıra bazlı eşleşme",
-          "matchScore": null
-        },
-        "source_ref": "riyazussalihin/792",
-        "fetch_status": "local_hadith_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\1900_hadis_approve.xlsx"
-      },
-      "quality": {
-        "matchConfidence": "yüksek",
-        "matchStatus": "sıra bazlı eşleşme",
-        "notes": [
-          "Diyanet bölüm sayısı JSON/Sunnah bölümüyle aynı; sıra esas alınarak eşleştirildi.",
-          "tamamlandı",
-          "Hadis no farki: -4"
-        ],
-        "numberMatch": false,
-        "semanticMatch": "low",
-        "narratorMatch": "unknown",
-        "topicMatch": "unknown",
-        "needsManualReview": false,
-        "textCleaned": true,
-        "sourceSeparated": true
-      },
-      "rawExcel": {
-        "epub_no": "792",
-        "diyanet_konu": "Gömlek Giymek",
-        "sunnah_bolum": "Giyim Âdâbı",
-        "sunnah_no": "788",
-        "sunnah_url": "https://sunnah.com/riyadussalihin:788",
-        "sunnah_bolum_ici_no": "11",
-        "json_id": "41174",
-        "json_idInBook": "109",
-        "json_chapterId": "3",
-        "eslesme_durumu": "sıra bazlı eşleşme",
-        "guven": "yüksek",
-        "notlar": "Diyanet bölüm sayısı JSON/Sunnah bölümüyle aynı; sıra esas alınarak eşleştirildi.",
-        "CPT_turkish_translation": "Ümmü Seleme (radıyallahu anhâ) şöyle dedi: Resûlullah’ın (sallallahu aleyhi ve sellem) en sevdiği elbise gömlekti.",
-        "CPT_english_translation": "Umm Salamah (may Allah be pleased with her) said: The most beloved garment to the Messenger of Allah (peace and blessings be upon him) was the shirt.",
-        "sunnah.com_arabic_full_text": "عن أم سلمة رضى الله عنها قالت: كان أحب الثياب إلى رسول الله صلى الله عليه وسلم القميص.",
-        "turkish_full_text": "Ümmü Seleme’den (ra) rivayet edildiğine göre o, şöyle demiştir: Allah Resûlü’nün en sevdiği elbise gömlek idi.",
-        "english_full_text": "Umm Salamah (May Allah be pleased with her) reported: Out of all garments, the Messenger of Allah (ﷺ) liked the Qamees the best. Editor's note: The Qamees is a modest, traditional outfit thought to resemble what is now referred to as a thawb.",
-        "kaynak_tr": "D4025 Ebû Dâvûd, Libâs, 3; T1762 Tirmizî, Libâs, 28",
-        "source_en": "At-Tirmidhi, Abu Dawud",
-        "arabic_source_raw": "رواه أبو داود والترمذي",
-        "json_english_narrator": "Umm Salamah (May Allah be pleased with her) reported:",
-        "CPT_translation_note": "",
-        "CPT_translation_status": "tamamlandı"
-      },
-      "priority": 1,
-      "notes": "bulk approved from local seed",
-      "createdAt": "2026-06-09T08:35:54+00:00",
-      "updatedAt": "2026-06-09T08:35:54+00:00",
-      "approvedAt": "2026-06-09T08:35:54+00:00",
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:35:54+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local seed"
-        }
-      ],
-      "review": {
-        "status": "approved",
-        "priority": 1,
-        "note": "bulk approved from local seed",
-        "updated_at": "2026-06-09T08:35:54+00:00"
-      },
-      "text_ar": "عن أم سلمة رضى الله عنها قالت: كان أحب الثياب إلى رسول الله صلى الله عليه وسلم القميص.",
-      "text_tr": "Ümmü Seleme’den (ra) rivayet edildiğine göre o, şöyle demiştir: Allah Resûlü’nün en sevdiği elbise gömlek idi.",
-      "text_en": "Umm Salamah (May Allah be pleased with her) reported: Out of all garments, the Messenger of Allah (ﷺ) liked the Qamees the best. Editor's note: The Qamees is a modest, traditional outfit thought to resemble what is now referred to as a thawb.",
-      "hadith_number": 792,
       "book_reference_tr": "",
       "book_reference_en": ""
     },
@@ -27373,145 +27253,6 @@
       "text_tr": "Ebû Hüreyre’nin (ra) işittiğine göre Resûlullah şöyle demiştir: Kötü söz söylemeden ve günah işlemeden hacceden kimse, annesinden doğduğu günkü (gibi günahsız) hâle döner.",
       "text_en": "Abu Hurairah (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"Whoever performs Hajj (pilgrimage) and does not have sexual relations (with his wife), nor commits sin, nor disputes unjustly (during Hajj), then he returns from Hajj as pure and free from sins as on the day on which his mother gave birth to him.\".",
       "hadith_number": 1279,
-      "book_reference_tr": "",
-      "book_reference_en": ""
-    },
-    {
-      "id": "hadith_001288",
-      "ref": "riyazussalihin/1288",
-      "hadithNo": 1288,
-      "status": "approved",
-      "groupKey": "riyazussalihin",
-      "input": {
-        "hadithNo_diyanet": 1288,
-        "source_tr": "B1517 Buhârî, Hac, 3",
-        "source_en": "Al-Bukhari",
-        "source_ar": "رواه البخاري",
-        "matchStatus": "sıra bazlı eşleşme"
-      },
-      "text": {
-        "ar": {
-          "clean": "وعن أنس رضي الله عنه، أن رسول الله صلى الله عليه وسلم حج على رحل وكانت زاملته.",
-          "sourceText": "وعن أنس رضي الله عنه، أن رسول الله صلى الله عليه وسلم حج على رحل وكانت زاملته."
-        },
-        "tr": {
-          "clean": "Enes’ten (ra) rivayet edildiğine göre Resûlullah deve üzerinde hacca gitti. Erzak ve eşyası da aynı deve üzerinde idi.",
-          "sourceText": "Enes’ten (ra) rivayet edildiğine göre Resûlullah deve üzerinde hacca gitti. Erzak ve eşyası da aynı deve üzerinde idi."
-        },
-        "en": {
-          "clean": "Anas (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) performed the pilgrimage on an unsaddled camel which also carried his provisions (i.e., his Zamilah).",
-          "sourceText": "Anas (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) performed the pilgrimage on an unsaddled camel which also carried his provisions (i.e., his Zamilah)."
-        }
-      },
-      "sourceInfo": {
-        "label": "Diyanet TR + Sunnah yerel seed",
-        "display": {
-          "ar": "رواه البخاري",
-          "tr": "B1517 Buhârî, Hac, 3",
-          "en": "Al-Bukhari"
-        },
-        "sunnah": {
-          "candidateNo": 1283,
-          "candidateUrl": "https://sunnah.com/riyadussalihin:1283",
-          "matchStatus": "sıra bazlı eşleşme"
-        },
-        "primaryCollection": {
-          "title_tr": "Riyazus Salihin",
-          "title_en": "Riyad as-Salihin"
-        },
-        "chapter": {
-          "title_tr": "HACCIN FARZİYETİ VE FAZİLETİ",
-          "title_en": "Hac"
-        },
-        "tr": {
-          "sourceName": "Diyanet Dijital Riyazus-Salihin",
-          "sourceType": "seed/json",
-          "reference": "B1517 Buhârî, Hac, 3"
-        },
-        "ar_en": {
-          "sourceName": "Sunnah.com Riyad as-Salihin",
-          "sourceType": "seed/json",
-          "url": "https://sunnah.com/riyadussalihin:1283",
-          "reference": "Riyad as-Salihin 1283",
-          "matchStatus": "sıra bazlı eşleşme",
-          "matchScore": null
-        },
-        "source_ref": "riyazussalihin/1288",
-        "fetch_status": "local_hadith_exact",
-        "seedPath": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\docs\\1900_hadis_approve.xlsx"
-      },
-      "quality": {
-        "matchConfidence": "yüksek",
-        "matchStatus": "sıra bazlı eşleşme",
-        "notes": [
-          "Diyanet bölüm sayısı JSON/Sunnah bölümüyle aynı; sıra esas alınarak eşleştirildi.",
-          "tamamlandi",
-          "Hadis no farki: -5"
-        ],
-        "numberMatch": false,
-        "semanticMatch": "low",
-        "narratorMatch": "unknown",
-        "topicMatch": "unknown",
-        "needsManualReview": false,
-        "textCleaned": true,
-        "sourceSeparated": true
-      },
-      "rawExcel": {
-        "epub_no": "1288",
-        "diyanet_konu": "HACCIN FARZİYETİ VE FAZİLETİ",
-        "sunnah_bolum": "Hac",
-        "sunnah_no": "1283",
-        "sunnah_url": "https://sunnah.com/riyadussalihin:1283",
-        "sunnah_bolum_ici_no": "13",
-        "json_id": "41669",
-        "json_idInBook": "604",
-        "json_chapterId": "10",
-        "eslesme_durumu": "sıra bazlı eşleşme",
-        "guven": "yüksek",
-        "notlar": "Diyanet bölüm sayısı JSON/Sunnah bölümüyle aynı; sıra esas alınarak eşleştirildi.",
-        "CPT_turkish_translation": "Enes radıyallahu anh’dan rivayet edildiğine göre Resûlullah sallallahu aleyhi ve sellem eski bir semer üzerinde hac yaptı; o semer aynı zamanda yük semeriydi.",
-        "CPT_english_translation": "It is narrated from Anas, may Allah be pleased with him, that the Messenger of Allah, may Allah bless him and grant him peace, performed Hajj on a saddle, and it was also his pack-saddle.",
-        "sunnah.com_arabic_full_text": "وعن أنس رضي الله عنه، أن رسول الله صلى الله عليه وسلم حج على رحل وكانت زاملته.",
-        "turkish_full_text": "Enes’ten (ra) rivayet edildiğine göre Resûlullah deve üzerinde hacca gitti. Erzak ve eşyası da aynı deve üzerinde idi.",
-        "english_full_text": "Anas (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) performed the pilgrimage on an unsaddled camel which also carried his provisions (i.e., his Zamilah).",
-        "kaynak_tr": "B1517 Buhârî, Hac, 3",
-        "source_en": "Al-Bukhari",
-        "arabic_source_raw": "رواه البخاري",
-        "json_english_narrator": "Anas (May Allah be pleased with him) reported:",
-        "CPT_translation_note": "",
-        "CPT_translation_status": "tamamlandi"
-      },
-      "priority": 1,
-      "notes": "bulk approved from local seed",
-      "createdAt": "2026-06-09T08:35:54+00:00",
-      "updatedAt": "2026-06-09T08:35:54+00:00",
-      "approvedAt": "2026-06-09T08:35:54+00:00",
-      "duplicateInfo": {
-        "existsInArchive": false,
-        "existsInApproved": false,
-        "exactDuplicate": false,
-        "possibleDuplicate": false,
-        "archiveMatches": [],
-        "approvedMatches": []
-      },
-      "reviewHistory": [
-        {
-          "at": "2026-06-09T08:35:54+00:00",
-          "status": "approved",
-          "priority": 1,
-          "notes": "bulk approved from local seed"
-        }
-      ],
-      "review": {
-        "status": "approved",
-        "priority": 1,
-        "note": "bulk approved from local seed",
-        "updated_at": "2026-06-09T08:35:54+00:00"
-      },
-      "text_ar": "وعن أنس رضي الله عنه، أن رسول الله صلى الله عليه وسلم حج على رحل وكانت زاملته.",
-      "text_tr": "Enes’ten (ra) rivayet edildiğine göre Resûlullah deve üzerinde hacca gitti. Erzak ve eşyası da aynı deve üzerinde idi.",
-      "text_en": "Anas (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) performed the pilgrimage on an unsaddled camel which also carried his provisions (i.e., his Zamilah).",
-      "hadith_number": 1288,
       "book_reference_tr": "",
       "book_reference_en": ""
     },
@@ -61334,5 +61075,6 @@
       "book_reference_tr": "",
       "book_reference_en": ""
     }
-  ]
+  ],
+  "content_version": "onay-tool-20260610_233442"
 }

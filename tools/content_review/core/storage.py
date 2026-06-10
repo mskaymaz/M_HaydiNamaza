@@ -42,11 +42,14 @@ class ContentRepository:
         self.backup_manager = backup_manager
         self._archive_payloads: dict[str, dict[str, Any]] = {}
         self._approved_payloads: dict[str, dict[str, Any]] = {}
+        self._archive_record_cache: dict[str, list[BaseRecord]] = {}
+        self._approved_record_cache: dict[str, list[BaseRecord]] = {}
         self._hashes: dict[Path, str] = {}
         self.state = self._load_state()
         self.reload()
 
     def reload(self) -> None:
+        self._clear_record_cache()
         self._archive_payloads = {
             "ayah": self._read_payload(self.paths.archive_ayah_path),
             "hadith": self._read_payload(self.paths.archive_hadith_path),
@@ -59,14 +62,24 @@ class ContentRepository:
         }
 
     def list_archive_records(self, kind: ContentKind) -> list[BaseRecord]:
+        cached = self._archive_record_cache.get(kind)
+        if cached is not None:
+            return cached
         payload = self._archive_payloads[kind]
         records = payload["records"]
-        return [self._parse_archive_record(kind, raw, payload["path"], payload["root_key"], index) for index, raw in enumerate(records)]
+        parsed = [self._parse_archive_record(kind, raw, payload["path"], payload["root_key"], index) for index, raw in enumerate(records)]
+        self._archive_record_cache[kind] = parsed
+        return parsed
 
     def list_approved_records(self, kind: ContentKind) -> list[BaseRecord]:
+        cached = self._approved_record_cache.get(kind)
+        if cached is not None:
+            return cached
         payload = self._approved_payloads[kind]
         rows = payload["records"]
-        return [self._parse_approved_record(kind, raw) for raw in rows]
+        parsed = [self._parse_approved_record(kind, raw) for raw in rows]
+        self._approved_record_cache[kind] = parsed
+        return parsed
 
     def find_archive_record(self, kind: ContentKind, ref: str) -> BaseRecord | None:
         for record in self.list_archive_records(kind):
@@ -113,6 +126,7 @@ class ContentRepository:
                 "notes": record.notes,
             }
         )
+        self._refresh_archive_payload_if_changed(record.kind)
         archive_backup = self._backup_and_assert_hash(self._archive_path(record.kind))
         payload = self._archive_payloads[record.kind]
         raw = apply_record_to_raw(record)
@@ -143,6 +157,7 @@ class ContentRepository:
         return saved
 
     def delete_archive_record(self, record: BaseRecord) -> None:
+        self._refresh_archive_payload_if_changed(record.kind)
         archive_backup = self._backup_and_assert_hash(self._archive_path(record.kind))
         payload = self._archive_payloads[record.kind]
         rows = payload["records"]
@@ -497,8 +512,13 @@ class ContentRepository:
     def _upsert_payload_record(self, payload: dict[str, Any], raw: dict[str, Any], record: BaseRecord) -> None:
         rows = payload["records"]
         if record.location and record.location.path == payload["path"] and 0 <= record.location.index < len(rows):
-            rows[record.location.index] = raw
-            return
+            current = rows[record.location.index]
+            if isinstance(current, dict) and (
+                str(current.get("id") or "").strip() == record.id
+                or str(current.get("ref") or "").strip() == record.ref
+            ):
+                rows[record.location.index] = raw
+                return
         for index, row in enumerate(rows):
             if not isinstance(row, dict):
                 continue
@@ -561,6 +581,14 @@ class ContentRepository:
         payload["root"]["records"] = rows
         self._write_payload(payload["path"], payload["root"], is_approved=True)
 
+    def _refresh_archive_payload_if_changed(self, kind: ContentKind) -> None:
+        path = self._archive_path(kind)
+        current_hash = self._file_hash(path)
+        known_hash = self._hashes.get(path, current_hash)
+        if current_hash != known_hash:
+            self._archive_payloads[kind] = self._read_payload(path)
+            self._archive_record_cache.pop(kind, None)
+
     def _remove_approved_record(self, kind: ContentKind, record_id: str) -> None:
         payload = self._approved_payloads[kind]
         rows = [row for row in payload["records"] if str(row.get("id") or "").strip() != record_id]
@@ -575,6 +603,7 @@ class ContentRepository:
         known_hash = self._hashes.get(path, current_hash)
         if current_hash != known_hash:
             self._approved_payloads[kind] = self._read_payload(path, default_type="approved")
+            self._approved_record_cache.pop(kind, None)
 
     def _load_state(self) -> ToolState:
         if not self.paths.state_path.exists():
@@ -639,9 +668,15 @@ class ContentRepository:
         self._hashes[path] = self._file_hash(path)
         kind = self._kind_from_path(path)
         if is_approved:
+            self._approved_record_cache.pop(kind, None)
             self._approved_payloads[kind] = self._read_payload(path, default_type="approved")
         else:
+            self._archive_record_cache.pop(kind, None)
             self._archive_payloads[kind] = self._read_payload(path)
+
+    def _clear_record_cache(self) -> None:
+        self._archive_record_cache.clear()
+        self._approved_record_cache.clear()
 
     @staticmethod
     def _atomic_json_write(path: Path, data: Any) -> None:

@@ -441,6 +441,8 @@ class ReviewPanel(QWidget):
         except Exception as exc:
             QMessageBox.critical(self, "Kaydetme hatası", str(exc))
             return
+        if updated.status == "approved":
+            QMessageBox.information(self, "Yayin", "Yayinlanacaklara eklendi.")
         if move_next:
             self.repository.set_cursor(self._current_kind, cursor + 1)
         self.refresh()

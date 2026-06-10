@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "content_version": "pending-review-reset-20260610_111844",
+  "content_version": "onay-tool-20260611_000241",
   "type": "hadith",
   "records": [
     {
@@ -14,7 +14,14 @@
       "hadith_number": 55,
       "book_reference_tr": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)",
       "book_reference_en": "(B6094 Buhârî, Edeb, 69; M6637 Müslim, Birr, 103)",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:28:52",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:28:52",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:28:52"
     },
     {
       "id": "hadith_000444",
@@ -27,7 +34,14 @@
       "hadith_number": 444,
       "book_reference_tr": "(B1314 Buhârî, Cenâiz, 50)",
       "book_reference_en": "(B1314 Buhârî, Cenâiz, 50)",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:29:10",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:29:10",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:29:10"
     },
     {
       "id": "hadith_001729",
@@ -40,7 +54,14 @@
       "hadith_number": 1729,
       "book_reference_tr": "(D1671 Ebû Dâvûd, Zekât, 37)",
       "book_reference_en": "(D1671 Ebû Dâvûd, Zekât, 37)",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:29:21",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:29:21",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:29:21"
     },
     {
       "id": "hadith_001535",
@@ -53,7 +74,14 @@
       "hadith_number": 1535,
       "book_reference_tr": "(B4418 Buhârî, Megâzî, 80; M7016 Müslim, Tevbe, 53)",
       "book_reference_en": "(B4418 Buhârî, Megâzî, 80; M7016 Müslim, Tevbe, 53)",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:30:01",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:30:01",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:30:01"
     },
     {
       "id": "hadith_001218",
@@ -66,7 +94,14 @@
       "hadith_number": 1218,
       "book_reference_tr": "(B57 Buhârî, Îmân, 42; M199 Müslim, Îmân, 97)",
       "book_reference_en": "(B57 Buhârî, Îmân, 42; M199 Müslim, Îmân, 97)",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:30:49",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:30:49",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:30:49"
     },
     {
       "id": "hadith_001075",
@@ -79,7 +114,14 @@
       "hadith_number": 1075,
       "book_reference_tr": "(M1491 Müslim, Mesâcid, 260); (T221 Tirmizî, Salât, 51)",
       "book_reference_en": "(M1491 Müslim, Mesâcid, 260); (T221 Tirmizî, Salât, 51)",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:31:13",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:31:13",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:31:13"
     },
     {
       "id": "hadith_000381",
@@ -92,7 +134,14 @@
       "hadith_number": 381,
       "book_reference_tr": "(M237 Müslim, Îmân, 129; B3783 Buhârî, Menâkıbü’l-ensâr, 4); (T2390 Tirmizî, Zühd, 53)",
       "book_reference_en": "(M237 Müslim, Îmân, 129; B3783 Buhârî, Menâkıbü’l-ensâr, 4); (T2390 Tirmizî, Zühd, 53)",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:31:43",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:31:43",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:31:43"
     },
     {
       "id": "hadith_000153",
@@ -105,7 +154,14 @@
       "hadith_number": 153,
       "book_reference_tr": "(M1745 Müslim, Müsâfirîn, 142)",
       "book_reference_en": "(M1745 Müslim, Müsâfirîn, 142)",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:31:56",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:31:56",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:31:56"
     },
     {
       "id": "hadith_000894",
@@ -118,7 +174,14 @@
       "hadith_number": 894,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:32:05",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:32:05",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:32:05"
     },
     {
       "id": "hadith_000333",
@@ -131,7 +194,14 @@
       "hadith_number": 333,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:32:12",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:32:12",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:32:12"
     },
     {
       "id": "hadith_001035",
@@ -144,7 +214,14 @@
       "hadith_number": 1035,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:32:26",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:32:26",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:32:26"
     },
     {
       "id": "hadith_001178",
@@ -157,33 +234,34 @@
       "hadith_number": 1178,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:32:36",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:32:36",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:32:36"
     },
     {
       "id": "hadith_001658",
       "kind": "hadith",
       "ref": "riyazussalihin/1658",
       "ar": "وعن أبي موسى الأشعري رضي الله عنه قال: احترق بيت بالمدينة على أهله من الليل، فلما حدث رسول الله صلى الله عليه وسلم بشأنهم قال: \"إن هذه النار عدو لكم، فإذا نمتم فأطفئوها\"",
-      "tr": "Câbir’den (ra) rivayet edildiğine göre Resûlullah , kişinin nalınını/ayakkabısını ayakta giymesini yasakladı.",
+      "tr": "Câbir’den (ra) rivayet edildiğine göre Resûlullah, kişinin nalınını/ayakkabısını ayakta giymesini yasakladı.",
       "en": "Abu Musa Al-Ash'ari (May Allah be pleased with him) said: A house in Al-Madinah was burnt with its occupants inside it one night. When this was reported to the Messenger of Allah (ﷺ) he said, \"Fire is your enemy. So, put it out before going to bed.\".",
       "priority": 1,
+      "approvedAt": "2026-06-10T23:33:33",
       "hadith_number": 1658,
-      "book_reference_tr": "",
+      "book_reference_tr": "D4135 Ebû Dâvûd, Libâs, 44",
       "book_reference_en": "",
-      "status": "pending_review"
-    },
-    {
-      "id": "hadith_000792",
-      "kind": "hadith",
-      "ref": "riyazussalihin/792",
-      "ar": "عن أم سلمة رضى الله عنها قالت: كان أحب الثياب إلى رسول الله صلى الله عليه وسلم القميص.",
-      "tr": "Ümmü Seleme’den (ra) rivayet edildiğine göre o, şöyle demiştir: Allah Resûlü’nün en sevdiği elbise gömlek idi.",
-      "en": "Umm Salamah (May Allah be pleased with her) reported: Out of all garments, the Messenger of Allah (ﷺ) liked the Qamees the best. Editor's note: The Qamees is a modest, traditional outfit thought to resemble what is now referred to as a thawb.",
-      "priority": 1,
-      "hadith_number": 792,
-      "book_reference_tr": "",
-      "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:33:33",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:33:33"
     },
     {
       "id": "hadith_001207",
@@ -196,7 +274,14 @@
       "hadith_number": 1207,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:34:08",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:34:08",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:34:08"
     },
     {
       "id": "hadith_001820",
@@ -209,7 +294,14 @@
       "hadith_number": 1820,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:34:16",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:34:16",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:34:16"
     },
     {
       "id": "hadith_001794",
@@ -222,20 +314,14 @@
       "hadith_number": 1794,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
-    },
-    {
-      "id": "hadith_001288",
-      "kind": "hadith",
-      "ref": "riyazussalihin/1288",
-      "ar": "وعن أنس رضي الله عنه، أن رسول الله صلى الله عليه وسلم حج على رحل وكانت زاملته.",
-      "tr": "Enes’ten (ra) rivayet edildiğine göre Resûlullah deve üzerinde hacca gitti. Erzak ve eşyası da aynı deve üzerinde idi.",
-      "en": "Anas (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) performed the pilgrimage on an unsaddled camel which also carried his provisions (i.e., his Zamilah).",
-      "priority": 1,
-      "hadith_number": 1288,
-      "book_reference_tr": "",
-      "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:34:24",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:34:24",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:34:24"
     },
     {
       "id": "hadith_000595",
@@ -248,7 +334,14 @@
       "hadith_number": 595,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:34:52",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:34:52",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:34:52"
     },
     {
       "id": "hadith_000968",
@@ -257,11 +350,18 @@
       "ar": "عن أنس، رضي الله عنه، قال: قال رسول الله صلى الله عليه وسلم : \"عليكم بالدلجة، فإن الأرض تطوي بالليل\" الدلجة : السير في الليل",
       "tr": "Enes’ten (ra) rivayet edildiğine göre Resûlulah : Gece yol almaya bakın, zira geceleyin daha hızlı mesafe kat edilir, buyurdu.",
       "en": "Anas (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"Keep to travelling by night because the earth is folded (traversed more easily) during the night.\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 968,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:35:10",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:35:10",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:35:10"
     },
     {
       "id": "hadith_000729",
@@ -270,11 +370,18 @@
       "ar": "وعن أبي هريرة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: “ إذا لبستم،وإذا توضأتم، فابدؤا بأيمانكم” حديث صحيح،",
       "tr": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Resûlullah : Giyinirken ve abdest alırken sağ tarafınızdan başlayın, buyurmuştur.",
       "en": "Abu Hurairah (May Allah be pleased with him) reported: Messenger of Allah (ﷺ) said, \"When you wear your clothes or perform your Wudu', begin with your right side.\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 729,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:35:19",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:35:19",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:35:19"
     },
     {
       "id": "hadith_000941",
@@ -287,7 +394,14 @@
       "hadith_number": 941,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:35:27",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:35:27",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:35:27"
     },
     {
       "id": "hadith_001715",
@@ -300,7 +414,14 @@
       "hadith_number": 1715,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:35:43",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:35:43",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:35:43"
     },
     {
       "id": "hadith_000121",
@@ -313,7 +434,14 @@
       "hadith_number": 121,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:36:22",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:36:22",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:36:22"
     },
     {
       "id": "hadith_000071",
@@ -322,11 +450,18 @@
       "ar": "الثالث: عن ابن مسعود رضي الله عنه أن النبي صلى الله عليه وسلم كان يقول: \"اللهم إني أسألك الهدى والتقى والعفاف والغنى\"",
       "tr": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Peygamber şöyle derdi: Allah’ım, senden hidayet, takva, iffet ve gönül zenginliği isterim.",
       "en": "'Abdullah bin Mas'ud (May Allah be pleased with him) reported that the Prophet (ﷺ) used to say: \"Allahumma inni as'alukal-huda wat- tuqa wal-'afafa wal-ghina (O Allah! I ask You for guidance, piety, chastity and self- sufficiency)\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 71,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:36:56",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:36:56",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:36:56"
     },
     {
       "id": "hadith_000793",
@@ -339,7 +474,14 @@
       "hadith_number": 793,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:37:16",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:37:16",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:37:16"
     },
     {
       "id": "hadith_001805",
@@ -352,7 +494,14 @@
       "hadith_number": 1805,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:38:35",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:38:35",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:38:35"
     },
     {
       "id": "hadith_001764",
@@ -361,11 +510,18 @@
       "ar": "عن أبي هريرة رضي الله عنه عن النبي صلى الله عليه وسلم قال: \"إذا أقيمت الصلاة، فلا صلاة إلا المكتوبة\"",
       "tr": "Ebû Mersed Kennâz b. Husayn’ın (ra) işittiğine göre Resûlullah şöyle buyurmuştur: Kabre karşı namaz kılmayın, kabir üzerine de oturmayın.",
       "en": "Abu Hurairah (May Allah be pleased with him) said: The Prophet (ﷺ) said, \"When the Iqamah is called, no prayer should be performed except the obligatory prayer.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1764,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:39:38",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:39:38",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:39:38"
     },
     {
       "id": "hadith_001581",
@@ -374,11 +530,18 @@
       "ar": "وعن جُندب بن عبد الله رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : \"قال رجل: والله لا يغفر الله لفلان، فقال الله عز وجل: من ذا الذي يتألى علي أن لا أغفر لفلان! فإني قد غفرت له، وأحبطت عملك\"",
       "tr": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur: Müslüman kardeşini küçük görmesi, kişiye kötülük olarak yeter.",
       "en": "Jundub bin 'Abdullah (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"Once someone said: 'By Allah! Allah will not forgive such and such (a person).' Thereupon Allah, the Exalted and the Glorious, said: 'Who is he who takes an oath in My Name that I will not grant pardon to so-and-so? I have granted pardon to so-and-so and rendered your good deeds fruitless.\"'.",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1581,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:41:20",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:41:20",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:41:20"
     },
     {
       "id": "hadith_001689",
@@ -387,11 +550,18 @@
       "ar": "وعن أبي طلحة رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: \"لا تدخل الملائكة بيتًا فيه كلب ولا صورة\"",
       "tr": "İbn Mes’ûd’un (ra) işittiğine göre Resûlullah şöyle buyurmuştur: Kıyamet günü en çetin azaba uğrayacak olanlar, resim/heykel yapanlardır.",
       "en": "Abu Talhah (May Allah be pleased with him) said: The Messenger of Allah (ﷺ) said, \"The angels do not enter a house in which there is a dog or a portrait.\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1689,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:42:14",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:42:14",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:42:14"
     },
     {
       "id": "hadith_000340",
@@ -400,11 +570,18 @@
       "ar": "وعن أبي عيسى المغيرة بن شعبة رضي الله عنه عن النبي صلى الله عليه وسلم قال: \"إن الله تعالى حرم عليكم عقوق الأمهات، ومنعًا وهات، ووأد البنات، وكره لكم قيل وقال، وكثرة السؤال ، وإضاعة المال\"",
       "tr": "İbn Ömer’den (ra) rivayet edildiğine göre Hz. Peygamber şöyle buyurmuştur: En güzel iyilik, bir kimsenin, baba dostunu görüp gözetmesidir.",
       "en": "Abu 'Isa Al-Mughirah bin Shu'bah (May Allah be pleased with him) reported: The Prophet (ﷺ) said, \"Allah has forbidden you: disobedience to your mothers, to withhold (what you should give), or demand (what you do not deserve), and to bury your daughters alive. And Allah dislikes idle talk, to ask too many questions (for things which will be of no benefit to one), and to waste your wealth\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 340,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:42:47",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:42:47",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:42:47"
     },
     {
       "id": "hadith_000439",
@@ -413,11 +590,18 @@
       "ar": "وعن أبي موسى الأشعري، رضي الله عنه ، عن النبي صلى الله عليه وسلم قال: \" إذا أراد الله تعالى، رحمة أمةٍ ، قبض نبيها قبلها، فجعله لها فرطاً وسلفاً بين يديها، وإذا أراد هلكة أمةٍ، عذبها ونبيها حي، فأهلكها وهو حى ينظر، فأقر عينه بهلاكها حين كذبوه وعصوا امره\"",
       "tr": "Yine Enes’ten (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur: Allah, yeyip içtikten sonra kendisine hamd eden kulundan razı olur.",
       "en": "Abu Mu sa Al-Ash'ari (May Allah be pleased with him) reported: The Prophet (ﷺ) said, \"When Allah intends to show mercy to a people, He collects their Prophet before them and makes him a herald to happiness for them in the Hereafter; and when He intends to destroy a people, He punishes them while their Prophet is alive, and destroys them while he is alive and watches them and makes him witness their destruction because they disbelieved in him and disobeyed his commands\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 439,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:43:02",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:43:02",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:43:02"
     },
     {
       "id": "hadith_000667",
@@ -426,11 +610,18 @@
       "ar": "وعن عبد الله بن عمرو رضي الله عنهما قال: كنا مع رسول الله صلى الله عليه وسلم في سفر، فنزلنا منزلاً، فمنا من يصلح خباءه، ومنا من ينتضل، ومنا من هو في جشره، إذ نادى منادي رسول الله صلى الله عليه وسلم الصلاة جامعة. فاجتمعنا إلى رسول الله صلى الله عليه وسلم فقال: “إنه لم يكن نبي قبلي إلا كان حقاً عليه أن يدل أمته على خير ما يعلمه لهم، وينذرهم شر ما يعلمه لهم، وإن أمتكم هذه جعل عاقبتها في أولها، وسيصيب آخرها بلاء وأمور تنكرونها، وتجئ فتن يرقق بعضها بعضاً، وتجئ الفتنة فيقول المؤمن : هذه مهلكتي، ثم تنكشف؛ وتجئ الفتنة فيقول المؤمن: هذه هذه، فمن أحب أن يزحزح عن النار، ويدخل الجنة، فلتأته منيته وهو يؤمن بالله واليوم الأخر، وليأت إلى الناس الذى يحب أن يؤتى إليه. ومن بايع إماماً فأعطاه صفقة يده، وثمرة قلبه، فليطعه إن استطاع، فإن جاء آخر ينازعه، فاضربوا عنق الآخر” . قوله: “ينتضل” أى : يسابق بالرمي بالنبل والنشاب. “والجشر” بفتح الجيم والشين المعجمة وبالراء: وهى الدواب التى ترعى وتبيت مكانها. وقوله: “يرقق بعضها بعضاً” أى: يصير بعضها بعضا رقيقاً، أى :خفيفاً لعظم ما بعده، فالثانى يرقق الأول. وقيل: معناه، يشوق بعضها إلى بعض بتحسينها وتسويليها، وقيل: يشبه بعضها بعضاً.",
       "tr": "İbn Ömer (ra) şöyle demiştir: Biz “dinlemek ve itaat etmek üzere” biat ettiğimizde, Resûlullah , “gücünüz yettiği kadar” kaydını ilave ederdi.",
       "en": "'Abdullah bin 'Amr (May Allah be pleased with them) reported: We accompanied Messenger of Allah (ﷺ) on a journey. We halted at a place to take a rest. Some of us began to set right their tents, others began to graze their animals while others were engaged in competing with one another in archery when an announcer of Messenger of Allah (ﷺ) announced that people should gather for Salat. We gathered around the Messenger of Allah and he ((ﷺ)) addressed us, saying, \"Every Prophet before me was under obligation to guide his followers to what he knew was good for them and to warn the evil thing which he knew. As for this Ummah, it will have sound state and in its early stage of existence; but the last phase of its existence, will be faced with trials and with things you do not recognize. There will be tremendous trials, one after the other, and to each the believer will say, 'That is it'. Whenever a trial arrives the believer will say: 'This is going to bring about my destruction.' When this passes, another calamity will approach and he will say: 'This surely is going to be my end.' Whosoever wishes to be removed from the Fire (Hell) and admitted to Jannah should die with faith in Allah and the Last Day; and he should treat others as he wishes to be treated. He who swears allegiance to an Imam, he should give him the pledge in ratification and the sincerity of his heart. He should obey him to the best of his capacity. If another man comes forward as a claimant (when one has already been installed), behead the second.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 667,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:44:48",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:44:48",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:44:48"
     },
     {
       "id": "hadith_001339",
@@ -439,11 +630,18 @@
       "ar": "وعنه أنه قال: قال رسول الله صلى الله عليه وسلم : \"من عُلم الرمي ثم تركه فليس منا أو فقد عصى\"",
       "tr": "Ebû Hammâd’dan rivayet edildiğine göre Resûlullah şöyle demiştir: Ok atmayı öğrenip de sonra terk eden bizden değildir yahut isyan etmiş olur.",
       "en": "'Uqbah bin 'Amir Al-Juhani (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"He who learnt archery and then neglected it, is not from us.\" (Or said,) \"He has been guilty of disobedience (to Messenger of Allah).\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1339,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:45:04",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:45:04",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:45:04"
     },
     {
       "id": "hadith_001206",
@@ -456,7 +654,14 @@
       "hadith_number": 1206,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:45:18",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:45:18",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:45:18"
     },
     {
       "id": "hadith_001525",
@@ -465,11 +670,18 @@
       "ar": "وعن عقبة بن عامر رضي الله عنه قال: قلت يا رسول الله ما النجاة؟ قال: \"أمسك عليك لسانك، وليسعك بيتك، وابكِ على خطيئتك\"",
       "tr": "Ukbe b. Âmir (ra) anlatıyor: –Ey Allah’ın Resûlü, kurtuluş (yolu) nedir, diye sordum: –Dilini tut, evin ile yetin ve günahlarına ağla, buyurdu.",
       "en": "'Uqbah bin 'Amir (May Allah be pleased with him) said: I asked the Messenger of Allah (ﷺ), \"How can salvation be achieved?\" He replied, \"Control your tongue, keep to your house, and weep over your sins.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1525,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:46:28",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:46:28",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:46:28"
     },
     {
       "id": "hadith_001727",
@@ -478,11 +690,18 @@
       "ar": "عن جابر رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : \"لا يسأل بوجه الله إلا الجنة\"",
       "tr": "Ebû Hüreyre’nin (ra) işittiğine göre Resûlullah şöyle buyurmuştur: (Alışverişte) yemin, malın satışını artırır, kazancın bereketini ise götürür.",
       "en": "Jabir (May Allah be pleased with him) said: The Messenger of Allah (ﷺ) said, \"No one should ask in the Face of Allah for anything except Jannah.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1727,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:47:35",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:47:35",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:47:35"
     },
     {
       "id": "hadith_000192",
@@ -491,11 +710,18 @@
       "ar": "التاسع: عن أبي سعيد الحسن البصري أن عائذ بن عمرو رضي الله عنه دخل على عبيد الله بن زياد فقال: أي بني، إني سمعت رسول الله صلى الله عليه وسلم يقول: \"إن شر الرعاء الحطمة” فإياك أن تكون منهم. فقال له : اجلس فإنما أنت من نخالة أصحاب محمد صلى الله عليه وسلم ، فقال: وهل كانت لهم نخالة، إنما كانت النخالة بعدهم وفي غيرهم !",
       "tr": "Ebû Saîd el-Hudrî’den (ra) rivayet edildiğine göre Peygamber şöyle demiştir: Cihadın en üstünü, zalim yöneticiye karşı adaleti dile getirmektir.",
       "en": "Abu Sa'id Al-Hasan Basri reported: 'Aidh bin 'Amr (the Companion) (May Allah be pleased with him) visited 'Ubaidullah bin Ziyad (the ruler) and said to him: \"Son, I heard Messenger of Allah (ﷺ) saying, 'The worst shepherds (rulers) are those who deal harshly in respect of supervision. Beware, Don't be one of them!\"' Ibn Ziyad said to him, \"Sit down, you are but husk from among the Companions of the Prophet (ﷺ).\" 'Aidh bin 'Amr (May Allah be pleased with him) retorted: \"Was there any husk among them? Surely, husk came after them and among others than them\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 192,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:48:31",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:48:31",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:48:31"
     },
     {
       "id": "hadith_001042",
@@ -504,11 +730,18 @@
       "ar": "وعن أبي سعيد الخدري رضي الله عنه أن رسول الله صلى الله عليه وسلم قال: \"إذا سمعتم النداء، فقولوا كما يقول المؤذن\"",
       "tr": "Ebû Saîd el-Hudrî’den (ra) rivayet edildiğine göre Resûlullah : Ezanı duyduğunuz zaman müezzinin söylediklerini siz de tekrar edin, buyurmuştur.",
       "en": "Abu Sa'id Al-Khudri (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"When you hear the Mu'adhdhin (pronouncing the call to Salat), repeat after him what he says.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1042,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:48:40",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:48:40",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:48:40"
     },
     {
       "id": "hadith_000483",
@@ -517,11 +750,18 @@
       "ar": "وعن عبد الله بن مغفل، رضي الله عنه، قال: قال رجل للنبي صلى الله عليه وسلم يارسول الله، والله إنى لأحبك، فقال: \" انظر ماذ تقول؟\" قال: والله إنى لأحبك، ثلاث مرات، فقال: \" إن كنت تحبنى فأعد للفقر تجفافاً، فإن الفقر أسرع إلى من يحبنى من السيل إلى منتهاه\" 'التجفاف بكسر التاء المثناه فوق وإسكان الجيم وبالفاء المكررة، وهو شىء يلبسة الفرس، ليتقي به الأذى، وقد يلبسة الإنسان.'",
       "tr": "Ka’b b. İyâz’ın (ra) Resûlullah’tan şöyle işittiği nakledilmiştir: Her ümmetin bir imtihan vesilesi vardır. Ümmetimin imtihan vesilesi de maldır.",
       "en": "'Abdullah bin Mughaffal (May Allah be pleased with him) reported: A man came to the Prophet (ﷺ) and said, \"O Messenger of Allah! By Allah, I love you.\" He (ﷺ) said, \"Think about what you are saying.\" The man repeated thrice, \"I swear by Allah that I love you.\" He (Prophet (ﷺ)) said, \"If you love me, you should be ready for acute poverty; because poverty comes to those who love me, faster than a flood flowing towards its destination.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 483,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:48:52",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:48:52",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:48:52"
     },
     {
       "id": "hadith_000112",
@@ -534,7 +774,14 @@
       "hadith_number": 112,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:50:13",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:50:13",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:50:13"
     },
     {
       "id": "hadith_001473",
@@ -543,11 +790,18 @@
       "ar": "وعن ابن مسعود، رضي الله عنه، أن النبي، صلى الله عليه وسلم، كان يقول: \"اللهم إني أسألك الهدى، والتقى، والعفاف، والغنى\"",
       "tr": "İbn Mes’ûd’dan (ra) rivayet edildiğine göre Peygamber şöyle dua ederdi: Allah’ım, senden hidayet, takva, iffet (onur) ve (gönül) zenginliği isterim.",
       "en": "'Abdullah bin Mas'ud (May Allah be pleased with him) reported: The Prophet (ﷺ) used to supplicate: \"Allahumma inni as'alukal-huda, wat-tuqa, wal-'afafa, wal-ghina (O Allah! I beseech You for guidance, piety, chastity and contentment).\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1473,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:50:34",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:50:34",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:50:34"
     },
     {
       "id": "hadith_001367",
@@ -556,11 +810,18 @@
       "ar": "عن ابن عمر رضي الله عنهما أن رسول الله صلى الله عليه وسلم قال: \"إن العبد إذا نصح لسيده، وأحسن عبادة الله، فله أجره مرتين\"",
       "tr": "İbn Ömer’den (ra) rivayet edildiğine göre Resûlullah : Efendisine karşı samimi olan ve Allah’a güzelce ibadet eden köleye iki kat ecir vardır, buyurdu.",
       "en": "Ibn 'Umar (May Allah be pleased with them) reported: I heard the Messenger of Allah (ﷺ) saying, \"When a slave is sincere to his master and worships Allah well, He will have a double reward.\" .",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1367,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:50:46",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:50:46",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:50:46"
     },
     {
       "id": "hadith_001841",
@@ -569,11 +830,18 @@
       "ar": "وعنه عن النبي صلى الله عليه وسلم قال: \" بين النفختين أربعون\" قالوا: يا أبا هريرة أربعون يوماً؟ قال: أبيت، قالوا: أربعون سنة؟ قال: أبيت، قالوا: أربعون شهراً؟ قال: أبيت\" ويبلى كل شئ من الإنسان إلا عجب ذنبه، فيه يركب الخلق، ثم ينزل الله من السماء ماء، فينبتون كما ينبت البقل\"",
       "tr": "Ebû Hüreyre’den rivayet edildiğine göre Hz. Peygamber şöyle buyurmuştur: Mümin, aynı delikten iki defa sokulmaz (yani aynı konuda iki kere aldatılmaz).",
       "en": "Abu Hurairah (May Allah be pleased with him) said: The Prophet (ﷺ) said, \"Between the two Blowing of the Trumpet there will be an interval of forty.\" The people said, \"O Abu Hurairah! Do you mean forty days?\" He said, \"I cannot say anything.\" They said, \"Do you mean forty years?\" He said, \"I cannot say anything.\" They said, \"Do you mean forty months?\" He said, \"I cannot say anything. The Prophet added: 'Everything of the human body will perish except the last coccyx bone (end part of the spinal cord), and from that bone Allah will reconstruct the whole body. Then Allah will send down water from the sky and people will grow like green vegetables'.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1841,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:51:00",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:51:00",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:51:00"
     },
     {
       "id": "hadith_001691",
@@ -582,11 +850,18 @@
       "ar": "وعن عائشة رضي الله عنها قالت: واعد رسول الله صلى الله عليه وسلم جبريل عليه السلام في ساعة أن يأتيه، فجاءت تلك الساعة ولم يأته! قالت: وكان بيده عصًا، فطرحها من يده وهو يقول: \"ما يخلف الله وعده ولا رسله\" ثم التفت، فإذا جرو كلب تحت سريره. فقال: \"متى دخل هذا الكلب؟\" فقلت: والله ما دريت به، فأمر به فأخرج، فجاءه جبريل عليه السلام: فقال رسول الله صلى الله عليه وسلم : \"وعدتني، فجلست لك ولم تأتني\" فقال: منعني الكلب الذي كان في بيتك، إنا لا ندخل بيتًا فيه كلب ولا صورة\"",
       "tr": "Ebû Talhâ’dan (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur: İçinde köpek ve canlı resmi/heykeli bulunan bir eve (rahmet) melekler(i) girmez.",
       "en": "'Aishah (May Allah be pleased with her) said: Jibril (Gabriel) (ﷺ) made a promise with the Messenger of Allah (ﷺ) to come at a definite hour; that hour came but he did not visit him. There was a staff in the hand of the Messenger of Allah (ﷺ). He threw it from his hand and said, \"Never does Allah back out of His Promise, nor do His messengers.\" Then he noticed a puppy under his bed and said, \"O 'Aishah, when did this dog enter?\" She said: \"By Allah, I don't know.\" He then commanded that it should be turned out. No sooner than had they expelled it, Jibril came and the Messenger of Allah (ﷺ) said to him, \"You promised to visit me. I waited for you but you did not come.\" Whereupon he said: \"The dog kept me from coming. We do not enter a house in which there is a dog or a picture.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1691,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:51:20",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:51:20",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:51:20"
     },
     {
       "id": "hadith_001482",
@@ -595,11 +870,18 @@
       "ar": "وعن عائشة، رضي الله عنها، أن النبي صلى الله عليه وسلم، كان يقول في دعائه: \"اللهم إني أعوذ بك من شر ما عملت ومن شر ما لم أعمل\"",
       "tr": "Âişe’den (ra) rivayet edildiğine göre Peygamber şöyle dua ederdi: Allah’ım, şimdiye kadar yaptıklarımın ve henüz yapmadıklarımın şerrinden sana sığınırım.",
       "en": "'Aishah (May Allah be pleased with her) reported: The Prophet (ﷺ) used to supplicate (in these words): \"Allahumma inni audhu bika min sharri ma 'amiltu, wa min sharri ma lam a'mal (O Allah! I seek refuge in You from the evil of that which I have done and the evil of that which I have not done).\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1482,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:51:42",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:51:42",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:51:42"
     },
     {
       "id": "hadith_001308",
@@ -608,11 +890,18 @@
       "ar": "وعن أبي عبس عبد الرحمن بن جبير، رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: \"ما اغبرت قدما عبد في سبيل الله فتمسه النار\"",
       "tr": "Ebû Abs Abdurrahman b. Cübeyr’den (ra) rivayet edildiğine göre Resûlullah şöyle demiştir: Allah yolunda ayakları tozlanan kimseye cehennem ateşi dokunmaz.",
       "en": "Abu 'Abs 'Abdur-Rahman bin Jabr (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"It will not happen that the feet soiled with dust while (doing Jihad) in the way of Allah, will be touched by the fire (of Hell).\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1308,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:52:04",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:52:04",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:52:04"
     },
     {
       "id": "hadith_001524",
@@ -621,11 +910,18 @@
       "ar": "وعن أبي هريرة رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم: \"ومن وقاه الله شر ما بين لحييه، وشر ما بين رجليه دخل الجنة\".",
       "tr": "Ebû Hüreyre’den (ra) nakledildiğine göre, Resûlullah şöyle buyurmuştur: Ağzının ve cinsel organının kötülüklerinden Allah’ın koruduğu kimse, cennete girer.",
       "en": "Abu Hurairah (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"He whom Allah saves from the evil of that which is between his jaws and the evil of that which is between his legs will enter Jannah.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1524,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:52:22",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:52:22",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:52:22"
     },
     {
       "id": "hadith_001821",
@@ -634,11 +930,18 @@
       "ar": "وعن المغيرة بن شعبة رضي الله عنه قال: ما سأل أحد رسول الله صلى الله عليه وسلم عن الدجال أكثر مما سألته؛ وإنه قال لي: \"مايضرك؟ \"قلت: إنهم يقولون: إن معه جبل خبز ونهر ماء! قال: \"هو أهون على الله من ذلك\"",
       "tr": "İmrân b. Husayn (ra), Resûlullah’ın şöyle söylediğini işittim demiştir: Âdem’in yaratıldığı zamandan kıyamete kadar, Deccal’dan daha büyük bir olay yoktur.",
       "en": "Al-Mughirah bin Shu'bah (May Allah be pleased with him) said: No one asked the Messenger of Allah (ﷺ) more about Dajjal than I asked him. He said to me, \"He will not harm you.\" I said: \"O Messenger of Allah, it is reported that he will have with him a mountain of bread and a river full of water.\" Thereupon he said, \"He (Dajjal) is far too worthless and insignificant near Allah (to let him deceive the believers).\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1821,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:52:35",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:52:35",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:52:35"
     },
     {
       "id": "hadith_000599",
@@ -647,11 +950,18 @@
       "ar": "وعن أبي هريرة رضي الله عنه عن النبي صلى الله عليه وسلم قال: \"ما بعث الله نبياً إلا رعى الغنم” فقال أصحابه: أنت؟ قال: كنت أرعاها على قراريط لأهل مكة”.",
       "tr": "Sa’d b. Ebû Vakkâs’ın (ra) işittiğine göre Allah Resûlü şöyle demiştir: Allah, muttaki, (gönlü) zengin, kendi işiyle ve ibadetiyle meşgul olan kulunu sever.",
       "en": "Abu Hurairah (May Allah be pleased with him) reported: Messenger of Allah (ﷺ) said, \"Every Prophet has tended sheep\". He was asked: \"And did you?\" He replied, \"Yes, I tended them for a few carats for the Makkans.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 599,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:53:11",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:53:11",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:53:11"
     },
     {
       "id": "hadith_000891",
@@ -660,11 +970,18 @@
       "ar": "وعن البراء رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : \"ما من مسلمين يلتقيان فيتصافحان إلا غفر لهما قبل أن يفترقا\"",
       "tr": "Berâ’dan (ra) rivayet edildiğine göre Resûlullah : İki Müslüman birbiriyle karşılaşıp da el sıkışırlarsa, ayrılmadan evvel günahları bağışlanır, buyurmuştur.",
       "en": "Al-Bara' (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"Two Muslims will not meet and shake hands without having their sins forgiven (by Allah ) before they depart.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 891,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:54:00",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:54:00",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:54:00"
     },
     {
       "id": "hadith_001807",
@@ -673,11 +990,18 @@
       "ar": "عن سعد بن أبي وقاص رضي الله عنه أن النبي صلى الله عليه وسلم قال: \"من ادعى إلى غير أبيه وهو يعلم أنه غير أبيه، فالجنة عليه حرام\"",
       "tr": "Hz. Ali’nin (ra) işittiğine göre Resûlullah şöyle buyurmuştur: Ergenlik çağından sonra yetimlik söz konusu değildir. Bütün gün geceye kadar da susmak yoktur.",
       "en": "Sa'd bin Abu Waqqas (May Allah be pleased with him) said: The Prophet (ﷺ) said, \"He who (falsely) attributes his fatherhood to anyone besides his real father, knowing that he is not his father, will be forbidden to enter Jannah.\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1807,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:54:29",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:54:29",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:54:29"
     },
     {
       "id": "hadith_000814",
@@ -686,11 +1010,18 @@
       "ar": "عن معاوية رضى الله عنه قال: قال رسول الله صلى الله عليه وسلم : \"لا تركبوا الخز ولا النمار\".",
       "tr": "Muâviye’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur: (Kibirden kaçınmak için) atlasla veya kaplan derisi ile kaplanmış eyer üzerine binmeyin.",
       "en": "Mu`awiyah (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"Do not ride on saddles made from silk or leopard's skin.\" .",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 814,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:54:59",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:54:59",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:54:59"
     },
     {
       "id": "hadith_001274",
@@ -699,11 +1030,18 @@
       "ar": "وعن عائشة رضي الله عنها أن النبي صلى الله عليه وسلم كان يعتكف العشر الأواخر من رمضان، حتى توفاه الله، تعالى ثم اعتكف أزواجه من بعده.",
       "tr": "Hz. Âişe’den (ra) rivayet edildiğine göre Hz. Peygamber , vefatına kadar, ramazanın son on gününde itikaf ederdi. Vefatından sonra da eşleri itikafa devam etti.",
       "en": "'Aishah (May Allah be pleased with her) reported: The Prophet (ﷺ) used to engage himself in I'tikaf (seclusion for prayers) in the mosque during the last ten nights of Ramadan till he passed away; thereafter, his wives followed this practice after him.",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1274,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:55:22",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:55:22",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:55:22"
     },
     {
       "id": "hadith_001225",
@@ -712,11 +1050,18 @@
       "ar": "وعنه أن رسول الله صلى الله عليه وسلم قال: \"صوموا لرؤيته، وأفطروا لرؤيته، فإن غَبِيَ عليكم فأكملوا عدة شعبان ثلاثين\" وفي رواية مسلم: \"فإن غم عليكم فصوموا ثلاثين يومًا\".",
       "tr": "Ebû Hüreyre’den (ra) rivayet edildiğine göre Resûlullah : Ramazan geldiğinde cennet kapıları açılır, cehennem kapıları kapanır. Şeytanlar da bağlanır, demiştir.",
       "en": "Abu Hurairah (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"Observe Saum (fast) on sighting the crescent and terminate it on sighting it (the new moon), but if the sky is cloudy before you, then complete the number (thirty days) of the month.\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1225,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:55:43",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:55:43",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:55:43"
     },
     {
       "id": "hadith_001819",
@@ -729,7 +1074,14 @@
       "hadith_number": 1819,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:58:02",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:58:02",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:58:02"
     },
     {
       "id": "hadith_000317",
@@ -738,11 +1090,18 @@
       "ar": "وعنه عن النبي صلى الله عليه وسلم قال: \" رغم أنف، ثم رغم أنف، ثم رغم أنف من أدرك أبويه عند الكبر، أحدهما أو كليهما، فلم يدخل الجنة\"",
       "tr": "Enes’ten (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur: Rızkının bol olmasını ve ömrünün uzun olmasını isteyen kimse, akrabalık ilişkilerini gözetsin.",
       "en": "Abu Hurairah (May Allah be pleased with him) reported: The Prophet (ﷺ) said, \"May he be disgraced! May he be disgraced! May he be disgraced, whose parents, one or both, attain old age during his life time, and he does not enter Jannah (by rendering being dutiful to them)\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 317,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:58:17",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:58:17",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:58:17"
     },
     {
       "id": "hadith_000896",
@@ -751,11 +1110,18 @@
       "ar": "وعن أبي ذر، رضي الله عنه، قال: قال لي رسول الله صلى الله عليه وسلم : \"لا تحقرن من المعروف شيئاً، ولو أن تلقي أخاك بوجه طلق\"",
       "tr": "Ebû Zer’den (ra) rivayet edildiğine göre o şöyle demiştir: Resûlullah , bana “Kardeşini güler yüzle karşılamak dahi olsa yapacağın hiçbir iyiliği küçümseme.” dedi.",
       "en": "Abu Dharr (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said to me, \"Do not belittle any good deed, even your meeting with your brother (Muslim) with a cheerful face.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 896,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:58:33",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:58:33",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:58:33"
     },
     {
       "id": "hadith_001554",
@@ -764,11 +1130,18 @@
       "ar": "وعن أسماء رضي الله عنها أن امرأة قالت: يا رسول الله إن لي ضَّرة فهل علي جناح إن تشبعت من زوجي غير الذي يعطيني؟ فقال النبي صلى الله عليه وسلم : \"المتشبع بما لم يعطَ كلابس ثوبي زور\" المتشبع: هو الذي يظهر الشبع وليس بشبعان، ومعناها هنا أنه يظهر أنه حصل له فضيلة وليست حاصلة ولابس ثوبي زور أي: ذي زور وهو الذي يزور على الناس بأن يتزي بزي أهل الزهد أو العلم أو الثروة ليغتر به الناس وليس هو بتلك الصفة وقيل غير ذلك والله أعلم",
       "tr": "Semure’den (ra) gelen rivayete göre Resûlullah şöyle buyurmuştur: Yalan olduğunu bildiği bir sözü benden nakleden de, yalancılardan biridir.",
       "en": "Asma' (May Allah be pleased with her) reported: A woman came to the Messenger of Allah (ﷺ) and said: \"I have a co-wife. \"Is there any harm for me if I give her the false impression of getting something from my husband which he has not in fact given me?\" The Messenger of Allah (ﷺ) said, \"The one who creates a false impression of receiving what one has not been given is like one who wears two garments of falsehood.\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1554,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-10T23:58:50",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-10T23:58:50",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-10T23:58:50"
     },
     {
       "id": "hadith_001082",
@@ -777,11 +1150,18 @@
       "ar": "وعن جابر رضي الله عنه قال: سمعت رسول الله صلى الله عليه وسلم يقول: \"إن بين الرجل وبين الشرك والكفر ترك الصلاة\"",
       "tr": "Câbir’in (ra) işittiğine göre Resûlullah şöyle demiştir: Kişi ile şirk ve küfür arasında (engel olarak) namaz vardır (ve namazın terk edilmesiyle bu engel kalkar).",
       "en": "Jabir (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"Between a man and disbelief and paganism is the abandonment of Salat (prayer).\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1082,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:00:07",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:00:07",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:00:07"
     },
     {
       "id": "hadith_000759",
@@ -790,11 +1170,18 @@
       "ar": "وعن جابر رضى الله عنه قال: سمعت رسول الله صلى الله عليه وسلم يقول: \"طعام الواحد يكفى الاثنين، وطعام الاثنين يكفى الأربعة، وطعام الأربعة يكفى الثمانية\".",
       "tr": "Câbir (ra) şöyle demiştir: Resûlullah’ın , “Bir kişilik yemek iki kişiye, iki kişilik yemek dört kişiye, dört kişilik yemek de sekiz kişiye yeter.” dediğini işittim.",
       "en": "Jabir bin 'Abdullah (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"The food of one person suffices for two, the food of two persons suffices for four persons, and the food of four persons suffices for eight persons.\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 759,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:00:16",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:00:16",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:00:16"
     },
     {
       "id": "hadith_001667",
@@ -803,11 +1190,18 @@
       "ar": "وعن النعمان بن بشير رضي الله عنه قال: أغمي على عبد الله بن رواحة رضي الله عنه فجعلت أخته تبكي، وتقول: واجبلاه، وا كذا وا كذا: تعدد عليه فقال حين أفاق: ما قلت شيئًا ألا قيل لي :أنت كذلك؟!",
       "tr": "Muğîre b. Şu’be’nin (ra) işittiğine göre Resûlullah şöyle buyurmuştur: Ardından feryat edilerek ağlanan ölüye, bu feryat sebebiyle kıyamet günü azap edilir, buyurdu.",
       "en": "An-Nu'man bin Bashir (May Allah be pleased with them) said: When 'Abdullah bin Rawahah (May Allah be pleased with him) became unconscious, his sister began to weep and shout: \"Alas! For the mountain among men. Alas! for such and such (mentioning his virtuous qualities).\" When he recovered his consciousness, he said: \"I was asked (disapprovingly, by the angels) about everything you said concerning me whether I am as you said.\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1667,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:00:29",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:00:29",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:00:29"
     },
     {
       "id": "hadith_000453",
@@ -820,7 +1214,14 @@
       "hadith_number": 453,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:00:53",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:00:53",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:00:53"
     },
     {
       "id": "hadith_000631",
@@ -829,11 +1230,18 @@
       "ar": "وعن ابن عباس رضي الله عنهما قال: قال رسول الله صلى الله عليه وسلم لأشج عبد القيس: “إن فيك خصلتين يحبهما الله: الحلم والأناة”.",
       "tr": "Hz. Âişe’nin (ra) Resûlullah’tan şöyle işittiği bildirilmiştir: Mümin güzel ahlâkı sayesinde, gündüzlerini oruçla, gecelerini namazla geçiren kişinin derecesine ulaşır.",
       "en": "Ibn 'Abbas (May Allah be pleased with them) reported: Messenger of Allah (ﷺ) said to Ashaj Abdul-Qais (May Allah be pleased with him), \"You possess two qualities that Allah loves. These are clemency and tolerance.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 631,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:01:06",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:01:06",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:01:06"
     },
     {
       "id": "hadith_000301",
@@ -842,11 +1250,18 @@
       "ar": "وعن عمرو بن شعيب، عن أبيه، عن جده رضي الله عنه قال: قال رسول الله صلى الله عليه وسلم : \" مروا أولادكم بالصلاة وهم أبناء سبع سنين، واضربوهم عليها، وهم أبناء عشر، وفرقوا بينهم في المضاجع\"",
       "tr": "İbn Ömer ve Hz. Âişe’den (ra) rivayet edildiğine göre Resûlullah şöyle buyurmuştur: Cebrail bana komşu hakkında o kadar tavsiyede bulundu ki, onu mirasçı kılacak sandım.",
       "en": "'Amr bin Shu'aib reported on his father's authority that his grandfather (May Allah be pleased with him) said: Messenger of Allah (ﷺ) said, \"Command your children to perform Salat (prayer) when they are seven years old, and beat them for (not offering) it when they are ten, and do not let (boys and girls) sleep together\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 301,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:01:35",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:01:35",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:01:35"
     },
     {
       "id": "hadith_000591",
@@ -855,11 +1270,18 @@
       "ar": "وعن أبي سروعة -كسر السين المهملة ونصبها- عقبة بن الحارث رضي الله عنه أنه تزوج ابنة لأبي إهاب بن عزيز، فأتته امرأة فقالت: إنى قد أرضعت عقبة والتى قد تزوج بها، فقال لها عقبة: ما أعلم أنك أرضعتني ولا أخبرتني فركب إلى رسول الله صلى الله عليه وسلم بالمدينة فسأله فقال رسول الله صلى الله عليه وسلم: “كيف، وقد قيل؟!” ففارقها عقبة ونكحت زوجاً غيره”.",
       "tr": "Enes’ten (ra) rivayet edildiğine göre, Hz. Peygamber yolda (terk edilmiş) bir hurma (salkımı) gördü ve: Sadaka olma ihtimalinden çekinmeseydim, onu alır yerdim, buyurdu.",
       "en": "'Uqbah bin Al-Harith (May Allah be pleased with him) reported that he had married a daughter of Abu Ihab bin 'Aziz and a woman came to him and said she had suckled both 'Uqbah and the woman whom he had married, to which he replied: \"I am not aware that you suckled me, and you did not inform me.\" So he ('Uqbah) rode to Messenger of Allah (ﷺ) in Al-Madinah and put the matter before him. The Messenger of Allah (ﷺ) said, \"How can you continue (to be her husband) after what you have been told?\" 'Uqbah (May Allah be pleased with him) therefore divorced her and she married another man.",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 591,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:01:48",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:01:48",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:01:48"
     },
     {
       "id": "hadith_001863",
@@ -868,11 +1290,18 @@
       "ar": "وعنها رضي الله عنها عن النبي صلى الله عليه وسلم قال: \"من مات وعليه صوم، صام عنه وليه\"",
       "tr": "Amr b. Âs (ra), Resûlullah’ın şöyle buyurduğunu işittim, demiştir: Hâkim, içtihat eder de doğru hüküm verirse iki sevap; hata ederse (içtihadından dolayı) bir sevap alır.",
       "en": "'Aishah (May Allah be pleased with her) said: The Prophet (ﷺ) said, \"If a person dies without observing Saum (fasts), his Wali should make it up on his behalf.\".",
-      "priority": 1,
+      "priority": 2,
       "hadith_number": 1863,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:02:08",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:02:08",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:02:08"
     },
     {
       "id": "hadith_001279",
@@ -881,11 +1310,18 @@
       "ar": "وعنه قال سمعت رسول الله صلى الله عليه وسلم يقول: \"من حج، فلم يرفث ولم يفسق، رجع كيوم ولدته أمه\"",
       "tr": "Ebû Hüreyre’nin (ra) işittiğine göre Resûlullah şöyle demiştir: Kötü söz söylemeden ve günah işlemeden hacceden kimse, annesinden doğduğu günkü (gibi günahsız) hâle döner.",
       "en": "Abu Hurairah (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) said, \"Whoever performs Hajj (pilgrimage) and does not have sexual relations (with his wife), nor commits sin, nor disputes unjustly (during Hajj), then he returns from Hajj as pure and free from sins as on the day on which his mother gave birth to him.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1279,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:02:30",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:02:30",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:02:30"
     },
     {
       "id": "hadith_001292",
@@ -894,11 +1330,18 @@
       "ar": "وعن أبي ذر رضي الله عنه قال: قلت يا رسول الله أي العمل أفضل؟ قال: \"الإيمان بالله والجهاد في سبيله\"",
       "tr": "Ebû Zer’den (ra) rivayet edildiğine göre o, şöyle demiştir: –Yâ Resûlallah, hangi amel daha faziletlidir, dedim. –Allah’a iman etmek ve O’nun yolunda cihad etmek, buyurdu.",
       "en": "Abu Dharr (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) was asked: \"Which deed is the best?\" He (ﷺ) replied, \"Faith in Allah and Jihad (fighting, struggle) in the Cause of Allah.\".",
-      "priority": 1,
+      "priority": 3,
       "hadith_number": 1292,
       "book_reference_tr": "",
       "book_reference_en": "",
-      "status": "pending_review"
+      "status": "approved",
+      "approvedAt": "2026-06-11T00:02:41",
+      "onay_review": {
+        "action": "approved",
+        "processed_at": "2026-06-11T00:02:41",
+        "tool": "onay.py"
+      },
+      "onay_reviewed_at": "2026-06-11T00:02:41"
     },
     {
       "id": "hadith_001782",

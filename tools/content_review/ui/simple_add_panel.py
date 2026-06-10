@@ -4,7 +4,6 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QCheckBox,
     QComboBox,
-    QFormLayout,
     QGroupBox,
     QHBoxLayout,
     QLabel,
@@ -170,18 +169,19 @@ class SimpleAddPanel(AddPanel):
             self.en_alt_edit,
         )
 
-        text_form = QFormLayout()
-        text_form.setContentsMargins(0, 0, 0, 0)
-        text_form.setVerticalSpacing(0)
-        text_form.setHorizontalSpacing(0)
-        text_form.addRow("Ayet kaynak", self.ayah_source_row)
-        text_form.addRow("Hadis özeti", self.hadith_summary_row)
-        self.ayah_source_label = text_form.labelForField(self.ayah_source_row)
-        self.hadith_summary_label = text_form.labelForField(self.hadith_summary_row)
-        text_form.addRow("Arapça metin", self._editor_with_font_row(self.ar_font_spin, self.ar_edit))
-        text_form.addRow("Türkçe metin", self.tr_translation_row)
-        text_form.addRow("İngilizce metin", self.en_translation_row)
-        layout.addLayout(text_form, 1)
+        text_layout = QVBoxLayout()
+        text_layout.setContentsMargins(0, 0, 0, 0)
+        text_layout.setSpacing(2)
+        self.ayah_source_label = self._section_label("Ayet kaynak")
+        self.hadith_summary_label = self._section_label("Hadis özeti")
+        text_layout.addWidget(self.ayah_source_label)
+        text_layout.addWidget(self.ayah_source_row)
+        text_layout.addWidget(self.hadith_summary_label)
+        text_layout.addWidget(self.hadith_summary_row)
+        text_layout.addWidget(self._labeled_section("Arapça metin", self._editor_with_font_row(self.ar_font_spin, self.ar_edit)), 1)
+        text_layout.addWidget(self._labeled_section("Türkçe metin", self.tr_translation_row), 1)
+        text_layout.addWidget(self._labeled_section("İngilizce metin", self.en_translation_row), 1)
+        layout.addLayout(text_layout, 1)
 
         self.notes_edit = QTextEdit()
         self.notes_edit.setReadOnly(True)
@@ -236,8 +236,8 @@ class SimpleAddPanel(AddPanel):
         label = QLabel("YOK")
         label.setWordWrap(False)
         label.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
-        label.setMinimumWidth(scale(260))
-        label.setMaximumWidth(scale(520))
+        label.setMinimumWidth(scale(120))
+        label.setMaximumWidth(scale(240))
         label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         label.setTextInteractionFlags(Qt.TextSelectableByMouse)
         self._set_source_label_font(label, font_size)
@@ -249,6 +249,22 @@ class SimpleAddPanel(AddPanel):
             "background:#f7f7f7; border:1px solid #dddddd; border-radius:5px; "
             f"padding:0 8px; font-size:{value}pt;"
         )
+
+    @staticmethod
+    def _section_label(text: str) -> QLabel:
+        label = QLabel(text)
+        label.setStyleSheet("font-weight: 600; padding-top: 2px;")
+        return label
+
+    def _labeled_section(self, title: str, field: QWidget) -> QWidget:
+        section = QWidget()
+        section.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        section_layout = QVBoxLayout(section)
+        section_layout.setContentsMargins(0, 0, 0, 0)
+        section_layout.setSpacing(2)
+        section_layout.addWidget(self._section_label(title))
+        section_layout.addWidget(field, 1)
+        return section
 
     def _build_hidden_compat_fields(self) -> None:
         self.status_combo = QComboBox()

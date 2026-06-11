@@ -1,16 +1,15 @@
 part of 'home_screen.dart';
 
 const double _kHomeDrawerPanelOverlap = 15.0;
-const double _kHomeDrawerHandleAreaHeight = 30.0;
 const double _kHomeDrawerMinCollapsedHeight = 22.0;
-const double _kHomeDrawerMaxHeightLimit = 320.0;
+const double _kHomeDrawerMaxHeightLimit = 260.0;
 const double _kHomeDrawerLocationPaddingCompensation = 8.0;
-const double _kHomeDrawerTopPanelExtraSpacing = 15.0; // 4 + 1 + 10
+const double _kHomeDrawerLocationSettingsMinTapSize = 44.0;
+const double _kHomeDrawerTopPanelExtraSpacing = 0.0;
 const double _kHomeDrawerLowerSectionExtraSpacing = 20.0;
 
 class _HomeDrawerLayoutMetrics {
   final double panelOverlap;
-  final double handleAreaHeight;
   final double minDrawerHeight;
   final double maxDrawerHeight;
   final double topPanelHeight;
@@ -19,7 +18,6 @@ class _HomeDrawerLayoutMetrics {
 
   const _HomeDrawerLayoutMetrics({
     required this.panelOverlap,
-    required this.handleAreaHeight,
     required this.minDrawerHeight,
     required this.maxDrawerHeight,
     required this.topPanelHeight,
@@ -29,7 +27,6 @@ class _HomeDrawerLayoutMetrics {
 }
 
 _HomeDrawerLayoutMetrics _computeDrawerLayout({
-  required double settingsIconBoxSize,
   required double locationTextSize,
   required double nextTimeTextSize,
   required double nextLabelTextSize,
@@ -39,7 +36,7 @@ _HomeDrawerLayoutMetrics _computeDrawerLayout({
 }) {
   final minDrawerHeight = _kHomeDrawerMinCollapsedHeight;
   final topRowHeight = math.max(
-    settingsIconBoxSize,
+    _kHomeDrawerLocationSettingsMinTapSize,
     locationTextSize + _kHomeDrawerLocationPaddingCompensation,
   );
   final lowerSectionHeight =
@@ -60,7 +57,6 @@ _HomeDrawerLayoutMetrics _computeDrawerLayout({
 
   return _HomeDrawerLayoutMetrics(
     panelOverlap: _kHomeDrawerPanelOverlap,
-    handleAreaHeight: _kHomeDrawerHandleAreaHeight,
     minDrawerHeight: minDrawerHeight,
     maxDrawerHeight: maxDrawerHeight,
     topPanelHeight: topPanelHeight,

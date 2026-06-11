@@ -173,35 +173,3 @@ class HomeActiveReminderPanel extends StatelessWidget {
     );
   }
 }
-
-class HomeDrawerHandlePainter extends CustomPainter {
-  final Color color;
-  final bool pointUp;
-
-  const HomeDrawerHandlePainter({
-    required this.color,
-    required this.pointUp,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill
-      ..isAntiAlias = true;
-
-    final path = Path()
-      ..moveTo(0, pointUp ? size.height : 0)
-      ..lineTo(size.width * 0.5, size.height * 0.5)
-      ..lineTo(size.width, pointUp ? size.height : 0)
-      ..lineTo(size.width * 0.5, pointUp ? 0 : size.height)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant HomeDrawerHandlePainter oldDelegate) {
-    return oldDelegate.color != color || oldDelegate.pointUp != pointUp;
-  }
-}

@@ -80,10 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Timer? _vibrationRepeatTimer;
   DateTime _now = DateTime.now();
   DateTime _lastRefreshDay = DateTime.now();
-  double _drawerProgress = 0;
-  double _infoPanelDragDy = 0;
+  double _prayerPanelDragDx = 0;
   bool _isLandscapePanelsExpanded = false;
   bool _showPanelAddButton = false;
+  bool _showPrayerControlPanel = false;
   bool _showHijriDate = false;
   bool _reminderCheckInProgress = false;
   int _customPrayerSeed = 0;
@@ -516,62 +516,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: LayoutBuilder(
                         builder: (context, constraints) {
                           final drawerLayout = _computeDrawerLayout(
-                            settingsIconBoxSize: ui.settingsIconBoxSize,
                             locationTextSize: ui.typography.locationSize,
                             nextTimeTextSize: ui.typography.nextTimeSize,
                             nextLabelTextSize: ui.typography.nextLabelSize,
                             topPanelVerticalPadding:
                                 ui.topPanelPadding.vertical,
                             constraintsMaxHeight: constraints.maxHeight,
-                            drawerProgress: _drawerProgress,
+                            drawerProgress: 1.0,
                           );
-                          final bandColor = Color.lerp(
-                            ui.listPanel.color,
-                            palette.zeminColor,
-                            0.16,
-                          )!;
-
-                          void updateDrawerProgress(DragUpdateDetails details) {
-                            final travel =
-                                (drawerLayout.maxDrawerHeight -
-                                        drawerLayout.minDrawerHeight)
-                                    .clamp(1.0, double.infinity);
-                            setState(() {
-                              _drawerProgress =
-                                  (_drawerProgress +
-                                          (details.delta.dy / travel))
-                                      .clamp(0.0, 1.0)
-                                      .toDouble();
-                            });
-                          }
-
-                          void settleDrawerProgress(DragEndDetails details) {
-                            final velocity = details.primaryVelocity ?? 0;
-                            setState(() {
-                              if (velocity > 250) {
-                                _drawerProgress = 1;
-                              } else if (velocity < -250) {
-                                _drawerProgress = 0;
-                              } else {
-                                _drawerProgress = _drawerProgress >= 0.35
-                                    ? 1
-                                    : 0;
-                              }
-                            });
-                          }
-
                           const infoPanelGap = 3.0;
                           const infoPanelBottomPadding = 8.0;
-                          final closedHandleBottom =
-                              drawerLayout.topPanelHeight -
-                              1 +
-                              drawerLayout.handleAreaHeight;
                           final drawerBottom =
                               drawerLayout.drawerTop +
                               drawerLayout.drawerHeight;
-                          final infoPanelTop =
-                              math.max(drawerBottom, closedHandleBottom) +
-                              infoPanelGap;
+                          final infoPanelTop = drawerBottom + infoPanelGap;
                           final infoPanelMaxHeight = math.max(
                             140.0,
                             constraints.maxHeight -
@@ -584,64 +542,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           final panelWidthFactor = isLandscape
                               ? (_isLandscapePanelsExpanded ? 0.9 : 0.72)
                               : 1.0;
-
-                          Widget buildHandleBand({
-                            required bool pointUp,
-                            Border? border,
-                          }) {
-                            return GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onTap: _toggleDrawer,
-                              onVerticalDragUpdate: updateDrawerProgress,
-                              onVerticalDragEnd: settleDrawerProgress,
-                              child: Container(
-                                height: drawerLayout.handleAreaHeight,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      bandColor.withValues(alpha: 0.98),
-                                      ui.listPanel.color,
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(999),
-                                  border: border,
-                                ),
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 18,
-                                      ),
-                                      child: Container(
-                                        height: 2,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white.withValues(
-                                            alpha: 0.18,
-                                          ),
-                                          borderRadius: BorderRadius.circular(
-                                            999,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    CustomPaint(
-                                      size: const Size(78, 12),
-                                      painter: HomeDrawerHandlePainter(
-                                        color: palette.cizgiColor.withValues(
-                                          alpha: 0.8,
-                                        ),
-                                        pointUp: pointUp,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }
 
                           return Stack(
                             clipBehavior: Clip.none,
@@ -659,9 +559,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         milliseconds: 220,
                                       ),
                                       curve: Curves.easeOutCubic,
-                                      height: _drawerProgress <= 0.02
-                                          ? 0
-                                          : drawerLayout.drawerHeight,
+                                      height: drawerLayout.drawerHeight,
                                       decoration: BoxDecoration(
                                         color: ui.listPanel.color,
                                         borderRadius: const BorderRadius.only(
@@ -679,23 +577,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                       clipBehavior: Clip.antiAlias,
                                       child: Column(
                                         children: [
-                                          if (_drawerProgress > 0.02)
-                                            SizedBox(
-                                              height:
-                                                  drawerLayout.panelOverlap +
-                                                  12,
-                                            ),
-                                          if (_drawerProgress > 0.02)
-                                            Expanded(
-                                              child: GestureDetector(
+                                          SizedBox(
+                                            height:
+                                                drawerLayout.panelOverlap + 12,
+                                          ),
+                                          Expanded(
+                                            child: GestureDetector(
                                                 behavior:
                                                     HitTestBehavior.translucent,
                                                 onTap: () {
+                                                  if (!_showPrayerControlPanel) {
+                                                    return;
+                                                  }
                                                   setState(
                                                     () => _showPanelAddButton =
                                                         !_showPanelAddButton,
                                                   );
                                                 },
+                                                onHorizontalDragEnd:
+                                                    _onPrayerPanelHorizontalDragEnd,
+                                                onHorizontalDragStart:
+                                                    _onPrayerPanelHorizontalDragStart,
+                                                onHorizontalDragUpdate:
+                                                    _onPrayerPanelHorizontalDragUpdate,
                                                 onDoubleTap: () {
                                                   if (!isLandscape) return;
                                                   setState(() {
@@ -705,37 +609,93 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 },
                                                 child: Stack(
                                                   children: [
-                                                    HomePrayerList(
-                                                      controller:
-                                                          _prayerListScrollController,
-                                                      items: items,
-                                                      active: active,
-                                                      style: ui.listPanel,
-                                                      listPadding:
-                                                          ui.listPadding,
-                                                      rowGap: ui.rowGap,
-                                                      iconStyle: ui.iconToggle,
-                                                      chipStyle:
-                                                          ui.reminderChip,
-                                                      typography: ui.typography,
-                                                      cizgiColor:
-                                                          palette.cizgiColor,
-                                                      activeColor:
-                                                          palette.zeminColor,
-                                                      showVoiceIcon:
-                                                          _reminderSettings
-                                                              .showVoiceIcon,
-                                                      showVisualIcon:
-                                                          _reminderSettings
-                                                              .showVisualIcon,
-                                                      showAzanIcon:
-                                                          _reminderSettings
-                                                              .showAzanIcon,
-                                                      showVibrationIcon:
-                                                          _reminderSettings
-                                                              .showVibrationIcon,
+                                                    Positioned.fill(
+                                                      child: AnimatedSwitcher(
+                                                        duration:
+                                                            const Duration(
+                                                          milliseconds: 220,
+                                                        ),
+                                                        transitionBuilder:
+                                                            (child, animation) {
+                                                          return SlideTransition(
+                                                            position:
+                                                                Tween<Offset>(
+                                                              begin:
+                                                                  const Offset(
+                                                                0.12,
+                                                                0,
+                                                              ),
+                                                              end: Offset.zero,
+                                                            ).animate(
+                                                              animation,
+                                                            ),
+                                                            child: child,
+                                                          );
+                                                        },
+                                                        child:
+                                                            _showPrayerControlPanel
+                                                            ? HomePrayerList(
+                                                                key: const ValueKey(
+                                                                  'prayer_controls',
+                                                                ),
+                                                                controller:
+                                                                    _prayerListScrollController,
+                                                                items: items,
+                                                                active: active,
+                                                                style: ui
+                                                                    .listPanel,
+                                                                listPadding:
+                                                                    ui.listPadding,
+                                                                rowGap:
+                                                                    ui.rowGap,
+                                                                iconStyle:
+                                                                    ui.iconToggle,
+                                                                chipStyle: ui
+                                                                    .reminderChip,
+                                                                typography: ui
+                                                                    .typography,
+                                                                cizgiColor:
+                                                                    palette
+                                                                        .cizgiColor,
+                                                                activeColor:
+                                                                    palette
+                                                                        .zeminColor,
+                                                                showVoiceIcon:
+                                                                    _reminderSettings
+                                                                        .showVoiceIcon,
+                                                                showVisualIcon:
+                                                                    _reminderSettings
+                                                                        .showVisualIcon,
+                                                                showAzanIcon:
+                                                                    _reminderSettings
+                                                                        .showAzanIcon,
+                                                                showVibrationIcon:
+                                                                    _reminderSettings
+                                                                        .showVibrationIcon,
+                                                              )
+                                                            : HomePrayerSummaryList(
+                                                                key: const ValueKey(
+                                                                  'prayer_summary',
+                                                                ),
+                                                                controller:
+                                                                    _prayerListScrollController,
+                                                                items: items,
+                                                                active: active,
+                                                                listPadding:
+                                                                    ui.listPadding,
+                                                                cizgiColor:
+                                                                    palette
+                                                                        .cizgiColor,
+                                                                activeColor:
+                                                                    palette
+                                                                        .zeminColor,
+                                                                onOpenControls:
+                                                                    _showPrayerControls,
+                                                              ),
+                                                      ),
                                                     ),
-                                                    if (_showPanelAddButton)
+                                                    if (_showPrayerControlPanel &&
+                                                        _showPanelAddButton)
                                                       Positioned(
                                                         left: 12,
                                                         bottom: 12,
@@ -777,75 +737,41 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       ),
                                                   ],
                                                 ),
-                                              ),
                                             ),
-                                          if (_drawerProgress > 0.02)
-                                            buildHandleBand(
-                                              pointUp: true,
-                                              border: Border(
-                                                top: BorderSide(
-                                                  color: palette.cizgiColor
-                                                      .withValues(alpha: 0.12),
-                                                ),
-                                              ),
-                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                              if (_drawerProgress <= 0.02)
-                                Positioned(
-                                  top: drawerLayout.topPanelHeight - 1,
-                                  left: 0,
-                                  right: 0,
-                                  child: Align(
-                                    alignment: Alignment.topCenter,
-                                    child: FractionallySizedBox(
-                                      widthFactor: panelWidthFactor,
-                                      child: buildHandleBand(
-                                        pointUp: false,
-                                        border: Border(
-                                          top: BorderSide(
-                                            color: palette.cizgiColor
-                                                .withValues(alpha: 0.12),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
                               Positioned(
                                 top: 0,
                                 left: 0,
                                 right: 0,
-                                child: GestureDetector(
-                                  onDoubleTap: _toggleDrawer,
-                                  child: HomeTopPanel(
-                                    provinceLabel: provinceLabel,
-                                    districtLabel: districtLabel,
-                                    nextLabel: next.label,
-                                    nextTime: nextTime,
-                                    countdown: countdown,
-                                    dateYearLabel: dateYearLabel,
-                                    dateDayMonthLabel: dateDayMonthLabel,
-                                    timeLabel: timeLabel,
-                                    onToggleDate: () => setState(
-                                      () => _showHijriDate = !_showHijriDate,
-                                    ),
-                                    onLocationTap: () =>
-                                        _openLocationSettings(location),
-                                    onQibla: () => _openQibla(location),
-                                    onSettings: _openSettings,
-                                    style: ui.topPanel,
-                                    padding: ui.topPanelPadding,
-                                    settingsIconSize: ui.settingsIconSize,
-                                    settingsIconBoxSize: ui.settingsIconBoxSize,
-                                    settingsIconOpacity: ui.settingsIconOpacity,
-                                    typography: ui.typography,
-                                    cizgiColor: palette.cizgiColor,
+                                child: HomeTopPanel(
+                                  provinceLabel: provinceLabel,
+                                  districtLabel: districtLabel,
+                                  nextLabel: next.label,
+                                  nextTime: nextTime,
+                                  countdown: countdown,
+                                  dateYearLabel: dateYearLabel,
+                                  dateDayMonthLabel: dateDayMonthLabel,
+                                  timeLabel: timeLabel,
+                                  onToggleDate: () => setState(
+                                    () => _showHijriDate = !_showHijriDate,
                                   ),
+                                  onLocationTap: () =>
+                                      _openLocationSettings(location),
+                                  onQibla: () => _openQibla(location),
+                                  onSettings: _openSettings,
+                                  style: ui.topPanel,
+                                  padding: ui.topPanelPadding,
+                                  settingsIconSize: ui.settingsIconSize,
+                                  settingsIconBoxSize: ui.settingsIconBoxSize,
+                                  settingsIconOpacity: ui.settingsIconOpacity,
+                                  typography: ui.typography,
+                                  cizgiColor: palette.cizgiColor,
                                 ),
                               ),
                               Positioned(
@@ -861,10 +787,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   child: GestureDetector(
                                     behavior: HitTestBehavior.opaque,
-                                    onVerticalDragStart: _onInfoPanelDragStart,
-                                    onVerticalDragUpdate:
-                                        _onInfoPanelDragUpdate,
-                                    onVerticalDragEnd: _onInfoPanelDragEnd,
                                     onDoubleTap: () {
                                       if (!isLandscape) return;
                                       setState(() {
@@ -1374,37 +1296,32 @@ class _HomeScreenState extends State<HomeScreen> {
     unawaited(_persistPrayerRowSettings());
   }
 
-  void _toggleDrawer() {
+  void _onPrayerPanelHorizontalDragEnd(DragEndDetails details) {
+    final velocity = details.primaryVelocity ?? 0;
+    final draggedDistance = _prayerPanelDragDx;
+    _prayerPanelDragDx = 0;
+    if (velocity.abs() < 220.0 && draggedDistance.abs() < 24.0) return;
+
     setState(() {
-      _drawerProgress = _drawerProgress > 0.35 ? 0 : 1;
+      _showPrayerControlPanel = !_showPrayerControlPanel;
+      if (!_showPrayerControlPanel) {
+        _showPanelAddButton = false;
+      }
     });
   }
 
-  void _onInfoPanelDragStart(DragStartDetails details) {
-    _infoPanelDragDy = 0;
+  void _onPrayerPanelHorizontalDragStart(DragStartDetails details) {
+    _prayerPanelDragDx = 0;
   }
 
-  void _onInfoPanelDragUpdate(DragUpdateDetails details) {
-    _infoPanelDragDy += details.primaryDelta ?? details.delta.dy;
+  void _onPrayerPanelHorizontalDragUpdate(DragUpdateDetails details) {
+    _prayerPanelDragDx += details.primaryDelta ?? details.delta.dx;
   }
 
-  void _onInfoPanelDragEnd(DragEndDetails details) {
-    final velocity = details.primaryVelocity ?? 0;
-    final draggedDistance = _infoPanelDragDy;
-    _infoPanelDragDy = 0;
-
-    const velocityThreshold = 220.0;
-    const distanceThreshold = 24.0;
-
+  void _showPrayerControls() {
+    if (_showPrayerControlPanel) return;
     setState(() {
-      if (velocity > velocityThreshold || draggedDistance > distanceThreshold) {
-        _drawerProgress = 1;
-      } else if (velocity < -velocityThreshold ||
-          draggedDistance < -distanceThreshold) {
-        _drawerProgress = 0;
-      } else {
-        _drawerProgress = _drawerProgress >= 0.35 ? 1 : 0;
-      }
+      _showPrayerControlPanel = true;
     });
   }
 
@@ -1422,7 +1339,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
     setState(() {
       _customPrayerRows.add(row);
-      _drawerProgress = 1;
     });
     _scrollPrayerListToBottom();
     unawaited(_persistCustomPrayerRows());

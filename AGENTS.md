@@ -23,6 +23,7 @@ This file is the only bootstrap file for AI coding assistants.
 - Preserve working behavior before improving it.
 - Keep files preferably under 400 lines; 600 lines only if unavoidable.
 - UI renders state and sends actions; business logic belongs to services/domain.
+- When a requested UI size/spacing change is given as a ratio or percent, calculate the final value first and commit the nearest clear literal value. Do not leave request-derived size expressions such as `base * 1.30`, `value + value * 0.30`, or temporary percentage math in code.
 - Do not hardcode app-specific text inside reusable shared modules.
 - Never commit secrets, service-account files, local build folders, generated zip files, or private credentials.
 

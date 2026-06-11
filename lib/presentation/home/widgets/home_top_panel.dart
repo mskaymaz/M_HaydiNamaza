@@ -5,6 +5,10 @@ import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../../core/config/config_registry.dart';
 
+const double _locationSettingsIconSize = 27.0;
+const double _locationSettingsTapSize = 44.0;
+const double _locationSettingsOffsetX = 3.0;
+
 class HomeTopPanel extends StatelessWidget {
   final String provinceLabel;
   final String districtLabel;
@@ -54,8 +58,8 @@ class HomeTopPanel extends StatelessWidget {
     final theme = Theme.of(context);
     final lowerSectionHeight =
         typography.nextTimeSize + typography.nextLabelSize + 20;
-    final topRowHeight = settingsIconBoxSize > typography.locationSize + 8
-        ? settingsIconBoxSize
+    final topRowHeight = _locationSettingsTapSize > typography.locationSize + 8
+        ? _locationSettingsTapSize
         : typography.locationSize + 8;
     final locationTextStyle = theme.textTheme.titleMedium?.copyWith(
       color: cizgiColor,
@@ -91,7 +95,7 @@ class HomeTopPanel extends StatelessWidget {
             child: Stack(
               children: [
                 Align(
-                  alignment: Alignment.center,
+                  alignment: Alignment.centerLeft,
                   child: GestureDetector(
                     onTap: onLocationTap,
                     child: Row(
@@ -129,7 +133,7 @@ class HomeTopPanel extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Transform.translate(
-                    offset: const Offset(13, 0),
+                    offset: const Offset(_locationSettingsOffsetX, 0),
                     child: IconButton(
                       onPressed: onSettings,
                       icon: Icon(
@@ -137,13 +141,13 @@ class HomeTopPanel extends StatelessWidget {
                         color: cizgiColor.withValues(
                           alpha: settingsIconOpacity,
                         ),
-                        size: settingsIconSize * 1.3,
+                        size: _locationSettingsIconSize,
                       ),
                       tooltip: AppLocalizations.of(context)!.settingsTitle,
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(
-                        minWidth: settingsIconBoxSize,
-                        minHeight: settingsIconBoxSize,
+                        minWidth: _locationSettingsTapSize,
+                        minHeight: _locationSettingsTapSize,
                       ),
                     ),
                   ),
@@ -151,9 +155,6 @@ class HomeTopPanel extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 4),
-          Container(height: 1, color: cizgiColor.withValues(alpha: 0.18)),
-          const SizedBox(height: 10),
           SizedBox(
             height: lowerSectionHeight,
             child: LayoutBuilder(

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ikon Onizleme</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f3efe2;
+      --panel: #fbf8ef;
+      --ink: #1d2a1f;
+      --muted: #627062;
+      --primary: #1f7a3e;
+      --border: rgba(29, 42, 31, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, sans-serif;
+      padding: 18px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tile {
+      width: 108px;
+      min-height: 78px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 7px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.62);
+      padding: 8px 6px 7px;
+    }
+
+    .tile.active {
+      border-color: rgba(31, 122, 62, 0.8);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .name {
+      width: 100%;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.08;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .azan-box {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: rgba(31, 122, 62, 0.08);
+    }
+
+    .azan-box .material-icons,
+    .azan-box .material-icons-outlined,
+    .azan-box .material-icons-round,
+    .azan-box .material-icons-sharp {
+      color: var(--primary);
+      font-size: 18.5px;
+    }
+
+    .summary-box {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+    }
+
+    .summary-box .material-icons,
+    .summary-box .material-icons-outlined,
+    .summary-box .material-icons-round,
+    .summary-box .material-icons-sharp {
+      color: var(--primary);
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>M_HaydiNamaza ikon önizleme</h1>
+
+  <section>
+    <h2>Ezan ikon adayları - vakit satırı gerçek ölçü</h2>
+    <div class="grid">
+      <div class="tile active"><div class="azan-box"><span class="material-icons-sharp">mosque</span></div><div class="name">mosque_sharp</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-round">mosque</span></div><div class="name">mosque_rounded</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-outlined">mosque</span></div><div class="name">mosque_outlined</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-outlined">record_voice_over</span></div><div class="name">record_voice_over_outlined</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-round">record_voice_over</span></div><div class="name">record_voice_over_rounded</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-sharp">record_voice_over</span></div><div class="name">record_voice_over_sharp</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-outlined">campaign</span></div><div class="name">campaign_outlined</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-round">campaign</span></div><div class="name">campaign_rounded</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-outlined">settings_voice</span></div><div class="name">settings_voice_outlined</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-outlined">keyboard_voice</span></div><div class="name">keyboard_voice_outlined</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-outlined">spatial_audio</span></div><div class="name">spatial_audio_outlined</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-outlined">ring_volume</span></div><div class="name">ring_volume_outlined</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-outlined">speaker_phone</span></div><div class="name">speaker_phone_outlined</div></div>
+      <div class="tile"><div class="azan-box"><span class="material-icons-outlined">graphic_eq</span></div><div class="name">graphic_eq_outlined</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ana panel hatırlatma adayları - yayın ölçüsü</h2>
+    <div class="grid">
+      <div class="tile active"><div class="summary-box"><span class="material-icons-outlined">notifications_active</span></div><div class="name">notifications_active_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">notifications_none</span></div><div class="name">notifications_none_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">notifications</span></div><div class="name">notifications_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">notification_important</span></div><div class="name">notification_important_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">add_alert</span></div><div class="name">add_alert_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">alarm</span></div><div class="name">alarm_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">alarm_on</span></div><div class="name">alarm_on_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">access_alarm</span></div><div class="name">access_alarm_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">schedule</span></div><div class="name">schedule_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">watch_later</span></div><div class="name">watch_later_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">event_available</span></div><div class="name">event_available_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">pending_actions</span></div><div class="name">pending_actions_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">more_time</span></div><div class="name">more_time_outlined</div></div>
+      <div class="tile"><div class="summary-box"><span class="material-icons-outlined">timer</span></div><div class="name">timer_outlined</div></div>
+    </div>
+  </section>
+</body>
+</html>

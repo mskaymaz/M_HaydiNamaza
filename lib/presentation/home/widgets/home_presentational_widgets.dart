@@ -23,33 +23,34 @@ class HomeReminderChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const chipHeight = 30.0;
     return SizedBox(
       width: style.width,
+      height: chipHeight,
       child: InkWell(
         borderRadius: style.borderRadius,
         onTap: onTap,
-        child: InputDecorator(
-          decoration: InputDecoration(
-            isDense: true,
-            filled: true,
-            fillColor: backgroundColor,
-            contentPadding: EdgeInsets.symmetric(vertical: style.verticalPadding),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: style.borderRadius,
-              borderSide: BorderSide(color: borderColor),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: style.borderRadius,
-              borderSide: BorderSide(color: cizgiColor),
-            ),
+        child: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: style.borderRadius,
+            border: Border.all(color: borderColor),
           ),
-          child: Text(
-            controller.text,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: cizgiColor,
-              fontWeight: FontWeight.w700,
-              fontSize: style.fontSize,
+          child: Transform.scale(
+            scaleX: 0.9,
+            child: Text(
+              controller.text,
+              maxLines: 1,
+              overflow: TextOverflow.visible,
+              softWrap: false,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: cizgiColor,
+                fontWeight: FontWeight.w500,
+                fontSize: style.fontSize,
+                height: 1.0,
+              ),
             ),
           ),
         ),

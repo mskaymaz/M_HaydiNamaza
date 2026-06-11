@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/config/config_registry.dart';
+import 'settings_azan_icon_preview_grid.dart';
 import 'settings_reminder_fields.dart';
 import 'settings_reminder_options_section.dart';
 import 'settings_section_header.dart';
@@ -71,6 +72,14 @@ class SettingsReminderOptionsGroup extends StatelessWidget {
         label: 'Ezan',
         value: showAzanIcon,
         onChanged: onAzanToggleChanged,
+      ),
+      iconPreviewContent: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SettingsAzanIconPreviewGrid(),
+          SizedBox(height: 14),
+          SettingsSummaryReminderIconPreviewGrid(),
+        ],
       ),
       vibrationToggle: SettingsReminderOptionToggle(
         label: 'Titreşim',

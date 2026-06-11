@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 import '../../../core/config/config_registry.dart';
@@ -13,11 +11,13 @@ const double _summaryPrayerTextGap = 25.0;
 const double _summaryPrayerBellGap = 12.0;
 const double _summaryPrayerBellBoxSize = 30.0;
 const double _summaryPrayerBellIconSize = 20.0;
+const double _controlPrayerLabelWidth = 118.0;
 const double _controlPrayerTextSize = 20.0;
 const double _controlPrayerIconSize = 18.5;
 const double _controlPrayerIconBoxSize = 22.0;
-const double _controlPrayerChipVerticalPadding = 4.25;
-const double _controlPrayerChipFontSize = 10.2;
+const double _controlPrayerChipWidth = 44.0;
+const double _controlPrayerChipVerticalPadding = 0.0;
+const double _controlPrayerChipFontSize = 16.0;
 
 class HomePrayerListItem {
   final String id;
@@ -108,7 +108,7 @@ class HomePrayerList extends StatelessWidget {
     const rowScale = 0.85;
     const rowTextSize = _controlPrayerTextSize;
     final scaledChipStyle = InlineChipStyle(
-      width: chipStyle.width,
+      width: _controlPrayerChipWidth,
       verticalPadding: _controlPrayerChipVerticalPadding,
       fontSize: _controlPrayerChipFontSize,
       backgroundColor: chipStyle.backgroundColor,
@@ -121,22 +121,7 @@ class HomePrayerList extends StatelessWidget {
       backgroundColor: iconStyle.backgroundColor,
       borderRadius: iconStyle.borderRadius,
     );
-    final baseLabelStyle = Theme.of(
-      context,
-    ).textTheme.titleSmall?.copyWith(fontSize: rowTextSize);
-    final maxLabelWidth = items.fold<double>(
-      0,
-      (currentMax, item) => math.max(
-        currentMax,
-        _measureTextWidth(
-          item.labelController?.text.trim().isNotEmpty == true
-              ? item.labelController!.text.trim()
-              : item.label,
-          baseLabelStyle,
-        ),
-      ),
-    );
-    final labelSlotWidth = math.max(maxLabelWidth, 88.0);
+    const labelSlotWidth = _controlPrayerLabelWidth;
     final timeSlotWidth = typography.nextLabelSize * 2.8;
     final iconSlotWidth = iconStyle.size * 1.3;
     final activeIndex = items.indexWhere((entry) => entry.prayer == active);
@@ -149,6 +134,7 @@ class HomePrayerList extends StatelessWidget {
             padding: listPadding,
             itemBuilder: (context, index) {
               final item = items[index];
+              final isCustomPrayer = item.prayer == null;
               final isPast =
                   item.prayer != null &&
                   activeIndex != -1 &&
@@ -183,6 +169,9 @@ class HomePrayerList extends StatelessWidget {
                   child: item.labelController == null
                       ? Text(
                           item.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.clip,
+                          softWrap: false,
                           textAlign: TextAlign.right,
                           style: labelStyle,
                         )
@@ -197,9 +186,10 @@ class HomePrayerList extends StatelessWidget {
                             item.onLabelEditingComplete?.call();
                           },
                           textAlign: TextAlign.right,
+                          maxLines: 1,
                           textInputAction: TextInputAction.done,
                           style: labelStyle?.copyWith(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w300,
                           ),
                           decoration: const InputDecoration(
                             isDense: true,
@@ -243,7 +233,7 @@ class HomePrayerList extends StatelessWidget {
                         ),
                 ),
                 SizedBox(
-                  width: chipStyle.width,
+                  width: scaledChipStyle.width,
                   child: HomeReminderChip(
                     controller: item.reminderController,
                     style: scaledChipStyle,
@@ -279,7 +269,7 @@ class HomePrayerList extends StatelessWidget {
                   SizedBox(
                     width: iconSlotWidth,
                     child: HomeIconToggle(
-                      icon: Icons.mosque_outlined,
+                      icon: Icons.mosque_sharp,
                       style: scaledIconStyle,
                       isEnabled: item.azanEnabled,
                       cizgiColor: controlColor,
@@ -322,6 +312,8 @@ class HomePrayerList extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isActive
                       ? Colors.white.withValues(alpha: 0.12)
+                      : isCustomPrayer
+                      ? Color.lerp(style.color, Colors.white, 0.30)
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(14),
                   border: isActive
@@ -402,6 +394,7 @@ class HomePrayerSummaryList extends StatelessWidget {
       padding: listPadding,
       itemBuilder: (context, index) {
         final item = items[index];
+        final isCustomPrayer = item.prayer == null;
         final isPast =
             item.prayer != null && activeIndex != -1 && index < activeIndex;
         final isActive = item.prayer == active;
@@ -433,6 +426,8 @@ class HomePrayerSummaryList extends StatelessWidget {
           decoration: BoxDecoration(
             color: isActive
                 ? activeColor.withValues(alpha: 0.14)
+                : isCustomPrayer
+                ? Color.lerp(activeColor, Colors.white, 0.30)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(14),
             border: isActive
@@ -508,13 +503,4 @@ class HomePrayerSummaryList extends StatelessWidget {
       itemCount: items.length,
     );
   }
-}
-
-double _measureTextWidth(String text, TextStyle? style) {
-  final painter = TextPainter(
-    text: TextSpan(text: text, style: style),
-    maxLines: 1,
-    textDirection: TextDirection.ltr,
-  )..layout(minWidth: 0, maxWidth: double.infinity);
-  return painter.width;
 }

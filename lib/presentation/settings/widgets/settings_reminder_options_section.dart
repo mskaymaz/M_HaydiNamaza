@@ -11,6 +11,7 @@ class SettingsReminderOptionsSection extends StatelessWidget {
   final Widget voiceToggle;
   final Widget visualToggle;
   final Widget azanToggle;
+  final Widget iconPreviewContent;
   final Widget vibrationToggle;
   final bool sortCustomPrayersByTime;
   final ValueChanged<bool?> onSortChanged;
@@ -26,6 +27,7 @@ class SettingsReminderOptionsSection extends StatelessWidget {
     required this.voiceToggle,
     required this.visualToggle,
     required this.azanToggle,
+    required this.iconPreviewContent,
     required this.vibrationToggle,
     required this.sortCustomPrayersByTime,
     required this.onSortChanged,
@@ -52,6 +54,8 @@ class SettingsReminderOptionsSection extends StatelessWidget {
                 Expanded(child: vibrationToggle),
               ],
             ),
+            const SizedBox(height: 8),
+            iconPreviewContent,
             const SizedBox(height: 8),
             Divider(
               color: Colors.white.withValues(alpha: 0.9),

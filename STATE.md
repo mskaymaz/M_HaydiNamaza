@@ -1,24 +1,23 @@
 # STATE.md
 
-last_update: 2026-06-10
+last_update: 2026-06-11
 project: M_HaydiNamaza
-status: bulk_daily_content_esma_sifat_remote_publish_ready_pending_allapp_push
+status: ui_engine_stabilization_checkpoint_ready_for_home_continuation
 active_phase: advanced_architecture_upgrade
 active_task: TASK-09-ui-ux-professionalization-in-progress
 blockers:
-  - Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.
+  - Official Diyanet/AwqatSalah access remains unresolved; current release direction is calculation-based stabilization with honest source labeling.
 next_step:
-  - Continue ayah and hadith review from `assets/data/daily_content/archive/`.
+  - Continue UI and prayer-time engine stabilization from the main screen, settings, qibla, and daily content flows.
   - Keep approved runtime payloads under `assets/data/daily_content/approved/`.
-  - Sync/push AllApp publish artifacts after local approved ayah/hadith/esma-sifat changes.
-  - Keep TASK-09 and later tasks pending until explicit instruction.
+  - Keep AllApp publish artifacts synced after future approved content changes.
 
 ## Current known risks
-- 2026-06-10 Esma/Sifat verification: local approved payload and local AllApp publish payload both contain `381` approved records (`esma=99`, `sifat=282`); AllApp remote push is still pending.
+- 2026-06-11 AllApp remote push completed for approved ayah/hadith/esma-sifat publish artifacts; remote commit is `39fe32b`.
 - Existing large UI files must be split safely.
-- Prayer-time official access/release contract is still an active release gate.
-- Diyanet/AwqatSalah official API references are documented; production decision remains pending until explicit access/usage clearance.
+- Prayer-time official access/release contract is still unresolved; do not claim official Diyanet equivalence unless access/usage is cleared.
+- Diyanet/AwqatSalah official API references are documented; production direction is calculation-based stabilization unless a new official data decision is made.
 - Qibla direction must distinguish mathematical bearing from sensor accuracy.
 - Daily content archive/approved roots were unified on 2026-06-04 and the Python review tool now depends on those fixed paths.
-- AllApp public content sync target is `https://github.com/mskaymaz/AllApp.git` branch `main`; latest daily content publish sync commit is `12399cd`.
-- Local approved counts after 2026-06-09 Esma/Sıfat import: `ayah=1438`, `hadith=438`, `esma/sifat=381` (`esma=99`, `sifat=282`); AllApp local publish artifacts are generated and remote push is still pending.
+- AllApp public content sync target is `https://github.com/mskaymaz/AllApp.git` branch `main`; latest daily content publish sync commit is `39fe32b`.
+- Local approved counts after 2026-06-09 Esma/Sifat import: `ayah=1438`, `hadith=438`, `esma/sifat=381` (`esma=99`, `sifat=282`); AllApp publish artifacts were pushed on 2026-06-11.

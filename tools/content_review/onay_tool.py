@@ -26,7 +26,6 @@ try:
         QLabel,
         QLineEdit,
         QMainWindow,
-        QMessageBox,
         QPushButton,
         QSizePolicy,
         QVBoxLayout,
@@ -41,8 +40,10 @@ from core.approved_preview import ApprovedContentNavigator, MobilePreviewItem
 from core.backup import BackupManager
 from core.logger import ActionLogger
 from core.models import AppPaths
+from core.publish_sync import sync_approved_publish
 from core.storage import ContentRepository
 from ui.mobile_preview import MobilePreviewCard
+from ui.quiet_message_box import quiet_confirm, quiet_critical, quiet_information
 from ui.scale import pt, scale
 
 
@@ -190,6 +191,7 @@ class ApprovedJsonEditor:
         if not changed:
             return False
         self._write_payload(kind, payload)
+        self._sync_publish_files()
         self._logger.log("approved_review_update", kind=kind, record_id=record_id, priority=priority)
         return True
 
@@ -222,6 +224,8 @@ class ApprovedJsonEditor:
         if publish_changed:
             self._refresh_publish_manifest(kind)
         if deleted_count or sequence_changed:
+            self._sync_publish_files()
+        if deleted_count or sequence_changed:
             self._logger.log(
                 "approved_delete_all",
                 kind=kind,
@@ -231,6 +235,9 @@ class ApprovedJsonEditor:
                 sequence_changed=sequence_changed,
             )
         return deleted_count
+
+    def _sync_publish_files(self) -> None:
+        sync_approved_publish(self._paths.repo_root)
 
     def _read_payload(self, kind: str) -> dict[str, Any]:
         path = self._approved_path(kind)
@@ -644,9 +651,13 @@ class ApprovalWindow(QMainWindow):
         if item is None:
             return
         priority = int(self.priority_combo.currentData() or 1)
-        changed = self._editor.approve_review(item.kind, item.record_id, priority)
+        try:
+            changed = self._editor.approve_review(item.kind, item.record_id, priority)
+        except Exception as exc:
+            quiet_critical(self, "Publish sync hatası", str(exc))
+            return
         if changed:
-            QMessageBox.information(self, "Yayin", "Yayinlanacaklara eklendi.")
+            quiet_information(self, "Yayin", "Yayinlanacaklara eklendi.")
             self._navigator.remove_current_item()
         self._sync_view()
         self.meta_label.setText(
@@ -657,16 +668,17 @@ class ApprovalWindow(QMainWindow):
         item = self._navigator.current_item()
         if item is None:
             return
-        reply = QMessageBox.question(
+        if not quiet_confirm(
             self,
             "Kaydı tüm havuzlardan sil",
             f"{item.kind_label} kaydı ilgili tüm JSON havuzlarından silinecek:\n{item.record_id}\n\nArşiv, approved, sequence ve varsa yerel publish dosyaları güncellenecek. Devam edilsin mi?",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            QMessageBox.StandardButton.No,
-        )
-        if reply != QMessageBox.StandardButton.Yes:
+        ):
             return
-        deleted_count = self._editor.delete(item.kind, item.record_id, item.ref)
+        try:
+            deleted_count = self._editor.delete(item.kind, item.record_id, item.ref)
+        except Exception as exc:
+            quiet_critical(self, "Publish sync hatası", str(exc))
+            return
         if deleted_count:
             self._navigator.remove_current_item()
         self._sync_view()

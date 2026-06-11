@@ -307,7 +307,7 @@ abstract class AppLocalizations {
   /// No description provided for @methodTurkey.
   ///
   /// In en, this message translates to:
-  /// **'Turkey (Diyanet)'**
+  /// **'Turkey calculation method'**
   String get methodTurkey;
 
   /// No description provided for @methodAladhan.

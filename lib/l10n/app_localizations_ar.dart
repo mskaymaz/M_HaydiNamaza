@@ -48,7 +48,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get locationEditTitle => 'الموقع';
 
   @override
-  String get locationCountryLabel => '?????';
+  String get locationCountryLabel => 'الدولة';
 
   @override
   String get locationCityLabel => 'المحافظة';
@@ -111,7 +111,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get methodSave => 'حفظ';
 
   @override
-  String get methodTurkey => 'تركيا (ديانت)';
+  String get methodTurkey => 'طريقة حساب تركيا';
 
   @override
   String get methodAladhan => 'Aladhan';

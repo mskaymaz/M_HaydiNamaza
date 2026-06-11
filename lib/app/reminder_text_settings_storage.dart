@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-const kDefaultVoiceReminderText = 'Namaz vakti yaklaşıyor.. Haydı hazırlan...';
+const kDefaultVoiceReminderText = 'Namaz vakti yaklaşıyor.. Haydi hazırlan...';
 
 enum ReminderAudioMode { textToSpeech, deviceAudio, mp3File }
 
@@ -102,19 +102,20 @@ class ReminderTextSettingsStorage {
   static const String _selectedVoiceNameKey = 'reminder_selected_voice_name';
   static const String _selectedVoiceLocaleKey =
       'reminder_selected_voice_locale';
-    static const String _selectedEnglishVoiceNameKey =
+  static const String _selectedEnglishVoiceNameKey =
       'reminder_selected_english_voice_name';
-    static const String _selectedEnglishVoiceLocaleKey =
+  static const String _selectedEnglishVoiceLocaleKey =
       'reminder_selected_english_voice_locale';
-    static const String _selectedArabicVoiceNameKey =
+  static const String _selectedArabicVoiceNameKey =
       'reminder_selected_arabic_voice_name';
-    static const String _selectedArabicVoiceLocaleKey =
+  static const String _selectedArabicVoiceLocaleKey =
       'reminder_selected_arabic_voice_locale';
   static const String _selectedAudioPathKey = 'reminder_selected_audio_path';
   static const String _selectedAudioLabelKey = 'reminder_selected_audio_label';
   static const _legacyDefaultVoiceTexts = <String>{
     '',
     'Namaz vakti',
+    'Namaz vakti yaklaşıyor.. Haydi hazırlan...',
     'Namaz vakti yaklaşıyor.. Haydi hazırlan..',
     'Namaz vakti yaklasiyor.. Haydi hazirlan..',
     'Namaz vakti yaklaÅŸÄ±yor.. Haydi hazÄ±rlan..',
@@ -160,11 +161,11 @@ class ReminderTextSettingsStorage {
       ),
       selectedVoiceName: prefs.getString(_selectedVoiceNameKey),
       selectedVoiceLocale: prefs.getString(_selectedVoiceLocaleKey),
-        selectedEnglishVoiceName: prefs.getString(_selectedEnglishVoiceNameKey),
-        selectedEnglishVoiceLocale:
+      selectedEnglishVoiceName: prefs.getString(_selectedEnglishVoiceNameKey),
+      selectedEnglishVoiceLocale:
           prefs.getString(_selectedEnglishVoiceLocaleKey),
-        selectedArabicVoiceName: prefs.getString(_selectedArabicVoiceNameKey),
-        selectedArabicVoiceLocale:
+      selectedArabicVoiceName: prefs.getString(_selectedArabicVoiceNameKey),
+      selectedArabicVoiceLocale:
           prefs.getString(_selectedArabicVoiceLocaleKey),
       selectedAudioPath: prefs.getString(_selectedAudioPathKey),
       selectedAudioLabel: prefs.getString(_selectedAudioLabelKey),

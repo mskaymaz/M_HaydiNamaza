@@ -112,7 +112,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get methodSave => 'Kaydet';
 
   @override
-  String get methodTurkey => 'Türkiye (Diyanet)';
+  String get methodTurkey => 'Türkiye hesaplama yöntemi';
 
   @override
   String get methodAladhan => 'Aladhan';

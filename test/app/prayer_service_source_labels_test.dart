@@ -99,6 +99,53 @@ void main() {
         debugPrint = original;
       }
     });
+
+    test('uses Aladhan directly when Aladhan method is selected', () async {
+      final logs = <String>[];
+      final original = debugPrint;
+      debugPrint = (String? message, {int? wrapWidth}) {
+        if (message != null) logs.add(message);
+      };
+
+      try {
+        final service = PrayerService(
+          advancedSettingsStorage: _FakeAdvancedSettingsStorage(),
+          dailyCacheRepository: _NoopCacheRepository(),
+          diyanetLocationIdResolver: _FakeDiyanetLocationIdResolver(),
+          diyanetPrayerTimesClient: _FakeDiyanetPrayerTimesClient(
+            shouldReturnData: true,
+          ),
+          aladhanPrayerTimesClient: _FakeAladhanPrayerTimesClient(
+            shouldReturnData: true,
+          ),
+        );
+
+        await service.calculateToday(
+          location: const LocationData(
+            countryId: '2',
+            countryName: 'Turkiye',
+            province: 'Bursa',
+            district: 'Osmangazi',
+            latitude: '40.1828',
+            longitude: '29.0667',
+            timeZoneName: 'Europe/Istanbul',
+            timeZoneOffset: '+03:00',
+          ),
+          latitude: 40.1828,
+          longitude: 29.0667,
+          timeZone: 'Europe/Istanbul',
+          methodCode: 'aladhan',
+        );
+
+        expect(
+          logs.any((line) => line.contains('[Aladhan:explicit]')),
+          isTrue,
+        );
+        expect(logs.any((line) => line.contains('[Diyanet] ids')), isFalse);
+      } finally {
+        debugPrint = original;
+      }
+    });
   });
 }
 

@@ -178,8 +178,6 @@ class ApprovedContentNavigator:
     @staticmethod
     def _is_onay_processed(record: BaseRecord) -> bool:
         raw = record.raw if isinstance(record.raw, dict) else {}
-        if str(raw.get("status") or "").strip() == "approved":
-            return True
         onay_review = raw.get("onay_review")
         if isinstance(onay_review, dict) and str(onay_review.get("processed_at") or "").strip():
             return True

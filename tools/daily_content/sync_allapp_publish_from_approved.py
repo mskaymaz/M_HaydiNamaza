@@ -24,7 +24,16 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    target_root = Path(args.target_root).resolve()
+    result = sync_publish_from_approved(Path(args.target_root).resolve())
+    print("allapp publish synced")
+    print(f"ayah records: {result['ayah_count']}")
+    print(f"hadith records: {result['hadith_count']}")
+    print(f"esma records: {result['esma_count']}")
+    print(f"target: {result['target_root']}")
+
+
+def sync_publish_from_approved(target_root: Path = DEFAULT_ALLAPP_ROOT) -> dict[str, Any]:
+    target_root = target_root.resolve()
     publish_root = target_root / "publish"
     publish_root.mkdir(parents=True, exist_ok=True)
 
@@ -97,11 +106,12 @@ def main() -> None:
     }
     _write_json(target_root / "manifest.json", manifest)
 
-    print("allapp publish synced")
-    print(f"ayah records: {len(ayah_records)}")
-    print(f"hadith records: {len(hadith_records)}")
-    print(f"esma records: {len(esma_payload['records'])}")
-    print(f"target: {target_root}")
+    return {
+        "target_root": str(target_root),
+        "ayah_count": len(ayah_records),
+        "hadith_count": len(hadith_records),
+        "esma_count": len(esma_payload["records"]),
+    }
 
 
 def _build_ayah_records(

@@ -13,7 +13,6 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
     QLineEdit,
-    QMessageBox,
     QProgressBar,
     QPushButton,
     QSizePolicy,
@@ -32,8 +31,10 @@ from core.models import (
     SourceInfo,
     STATUS_VALUES,
 )
+from core.publish_sync import sync_approved_publish
 from core.reference_parser import normalize_reference
 from core.storage import ContentRepository, StorageConflictError
+from ui.quiet_message_box import quiet_confirm, quiet_critical, quiet_information, quiet_warning
 from ui.scale import pt, scale
 
 
@@ -320,7 +321,7 @@ class AddPanel(QWidget):
         try:
             normalized = normalize_reference(kind, self.reference_edit.text())
         except ValueError as exc:
-            QMessageBox.warning(self, "Referans hatası", str(exc))
+            quiet_warning(self, "Referans hatası", str(exc))
             return
 
         ref = str(normalized["ref"])
@@ -527,22 +528,19 @@ class AddPanel(QWidget):
 
     def _replace_approved_and_save(self) -> None:
         if self._current_approved_record is None:
-            QMessageBox.information(self, "Yayinda kayit yok", "Degistirilecek yayin kaydi bulunamadi.")
+            quiet_information(self, "Yayinda kayit yok", "Degistirilecek yayin kaydi bulunamadi.")
             return
-        reply = QMessageBox.question(
+        if not quiet_confirm(
             self,
             "Yayindaki kaydi degistir",
             "Yayindaki mevcut kayit, ekrandaki yeni metinlerle guncellenecek. Devam edilsin mi?",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            QMessageBox.StandardButton.No,
-        )
-        if reply != QMessageBox.StandardButton.Yes:
+        ):
             return
         self._save("approved", replace_existing_approved=True)
 
     def _save(self, forced_status: str, replace_existing_approved: bool = False) -> None:
         if self._current_record is None:
-            QMessageBox.information(self, "Kayıt yok", "Önce referans kontrolü yapin.")
+            quiet_information(self, "Kayıt yok", "Önce referans kontrolü yapin.")
             return
         record = replace(
             self._current_record,
@@ -572,7 +570,7 @@ class AddPanel(QWidget):
             )
         if record.status == "approved" and self._current_approved_record is not None:
             if not replace_existing_approved:
-                QMessageBox.warning(
+                quiet_warning(
                     self,
                     "Yayinda mevcut",
                     "Bu referans yayindaki onayli kayitlarda var. Yeni ekleme kapatildi; guncellemek icin Degistir'i kullanin.",
@@ -592,16 +590,18 @@ class AddPanel(QWidget):
         try:
             saved = self.repository.save_record(record)
         except StorageConflictError as exc:
-            QMessageBox.critical(self, "Hash catismasi", str(exc))
+            quiet_critical(self, "Hash catismasi", str(exc))
             return
         except Exception as exc:
-            QMessageBox.critical(self, "Kaydetme hatası", str(exc))
+            quiet_critical(self, "Kaydetme hatası", str(exc))
+            return
+        if not self._sync_publish_files():
             return
         self._current_record = saved
         self._current_archive_record = saved
         if saved.status == "approved":
             self._current_approved_record = saved
-            QMessageBox.information(self, "Yayin", "Yayinlanacaklara eklendi.")
+            quiet_information(self, "Yayin", "Yayinlanacaklara eklendi.")
         self._load_record(saved)
         self.archive_check.setChecked(True)
         if saved.status == "approved":
@@ -611,9 +611,19 @@ class AddPanel(QWidget):
 
     def _undo_last(self) -> None:
         if not self.repository.undo_last_write():
-            QMessageBox.information(self, "Undo", "Geri alinacak yazım yok.")
+            quiet_information(self, "Undo", "Geri alinacak yazım yok.")
             return
-        QMessageBox.information(self, "Undo", "Son yazım geri alındı.")
+        if not self._sync_publish_files():
+            return
+        quiet_information(self, "Undo", "Son yazım geri alındı.")
+
+    def _sync_publish_files(self) -> bool:
+        try:
+            sync_approved_publish(self.repository.paths.repo_root)
+        except Exception as exc:
+            quiet_critical(self, "Publish sync hatası", str(exc))
+            return False
+        return True
 
     def _build_font_spin(self) -> QSpinBox:
         spin = QSpinBox()

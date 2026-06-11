@@ -125,7 +125,26 @@ class PrayerService {
     required DateTime date,
     required CalculationParameters params,
   }) async {
-    if (methodCode == 'turkey' || methodCode == 'diyanet_tabanli') {
+    if (methodCode == 'aladhan') {
+      final aladhanTurkey = await _tryAladhan(
+        date: date,
+        latitude: latitude,
+        longitude: longitude,
+        methodCode: 'aladhan',
+        school: 1,
+        fallbackParams: params,
+      );
+      if (aladhanTurkey != null) {
+        _log('[Aladhan:explicit] '
+            'Fajr ${formatPrayerTimeHourMinute(aladhanTurkey.fajr)} '
+            'Sunrise ${formatPrayerTimeHourMinute(aladhanTurkey.sunrise)} '
+            'Dhuhr ${formatPrayerTimeHourMinute(aladhanTurkey.dhuhr)} '
+            'Asr ${formatPrayerTimeHourMinute(aladhanTurkey.asr)} '
+            'Maghrib ${formatPrayerTimeHourMinute(aladhanTurkey.maghrib)} '
+            'Isha ${formatPrayerTimeHourMinute(aladhanTurkey.isha)}');
+        return aladhanTurkey;
+      }
+    } else if (methodCode == 'turkey' || methodCode == 'diyanet_tabanli') {
       final diyanetTimes = await _tryDiyanet(
         location: location,
         date: date,

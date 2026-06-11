@@ -111,7 +111,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get methodSave => 'Save';
 
   @override
-  String get methodTurkey => 'Turkey (Diyanet)';
+  String get methodTurkey => 'Turkey calculation method';
 
   @override
   String get methodAladhan => 'Aladhan';

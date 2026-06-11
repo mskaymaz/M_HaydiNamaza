@@ -356,6 +356,7 @@ class ConfigRegistry {
     aladhan: AladhanDataSourceConfig(
       baseUrl: 'https://api.aladhan.com/v1',
       methodIds: <String, int>{
+        'aladhan': 13,
         'karachi': 1,
         'north_america': 2,
         'muslim_world_league': 3,

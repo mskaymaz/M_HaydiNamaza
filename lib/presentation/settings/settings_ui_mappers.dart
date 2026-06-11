@@ -7,9 +7,9 @@ import 'settings_audio_mode_texts.dart';
 String methodSubtitleForCode(String? methodCode, AppLocalizations l10n) {
   switch (methodCode) {
     case 'turkey':
-      return 'Türkiye (Diyanet)';
+      return 'Türkiye hesaplama yöntemi';
     case 'diyanet_tabanli':
-      return 'Diyanet tabanlı';
+      return 'Diyanet tabanlı (deneysel)';
     case 'aladhan':
       return l10n.methodAladhan;
     case 'muslim_world_league':

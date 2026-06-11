@@ -1,6 +1,13 @@
 ﻿# HANDOFF.md
 
 ## Current status
+2026-06-11 checkpoint: UI/prayer-time engine stabilization started. Diyanet/AwqatSalah access remains unresolved, so the current direction is calculation-based release stabilization with honest source labels instead of blocking all work on official access.
+Aladhan method selection now routes directly through the Aladhan fetch path; Türkiye method labels no longer imply official Diyanet data. Default voice reminder Turkish text and Arabic country label were cleaned.
+AllApp approved daily content publish artifacts were committed and pushed to `https://github.com/mskaymaz/AllApp.git` branch `main` at commit `39fe32b`.
+Validation reported by user:
+- `flutter test test/app/prayer_service_source_labels_test.dart`: `00:08 +3: All tests passed!`
+- `flutter analyze`: `No issues found! (ran in 40.7s)`
+
 R260609_1528 commit hazırlığı: Python arayüzü üzerinden ayet ve hadis eklemeleri yapılacak; yerel approved JSON yapısı, `onay.py`, `incele.py`, bulk ekleme araçları ve AllApp publish/push yardımcıları bu akışı destekleyecek şekilde güncellendi.
 Daily content review tool now has approved-only mobile preview for ayah/hadith/esma, unified archive root `assets/data/daily_content/archive/`, and unified approved root `assets/data/daily_content/approved/`.
 Current approved counts are `ayah=1438`, `hadith=438`, `esma/sifat=381` (`esma=99`, `sifat=282`).
@@ -20,10 +27,46 @@ TASK-12 release-readiness documentation/checklist outputs are completed.
 Ayah/hadith data reset was executed on 2026-06-02; old lists, publish payloads, archives, and source folders were removed, and a new clean seed structure was created.
 
 ## Next action
-Continue ayah/hadith/esma-sifat manual review from approved/runtime payloads, then push AllApp publish artifacts.
+Continue main screen UI, settings, qibla, daily content, and prayer-time engine cleanup from this checkpoint.
+Continue ayah/hadith/esma-sifat manual review from approved/runtime payloads when content work resumes.
 
 ## Important blockers
-- Production release remains blocked until official Diyanet/AwqatSalah access contract (auth/token + usage/release decision) is explicitly cleared.
+- Official Diyanet/AwqatSalah access contract remains unresolved; current release path should use calculation-based source labeling unless a new official data decision is made.
+
+## UI / engine stabilization checkpoint (2026-06-11)
+- Scope:
+  - Bound explicit `aladhan` calculation method to the Aladhan API path.
+  - Kept `turkey` on Turkey calculation parameters while removing official-Diyanet wording from visible labels.
+  - Marked `diyanet_tabanli` as experimental in settings labels.
+  - Fixed default voice reminder Turkish text.
+  - Fixed Arabic `locationCountryLabel`.
+- Changed files:
+  - `lib/app/prayer_service.dart`
+  - `lib/app/prayer_calculation_parameters_factory.dart`
+  - `lib/core/config/config_registry.dart`
+  - `lib/app/reminder_text_settings_storage.dart`
+  - `lib/presentation/settings/calculation_method_screen.dart`
+  - `lib/presentation/settings/settings_ui_mappers.dart`
+  - `lib/l10n/app_tr.arb`
+  - `lib/l10n/app_en.arb`
+  - `lib/l10n/app_ar.arb`
+  - `lib/l10n/app_localizations.dart`
+  - `lib/l10n/app_localizations_tr.dart`
+  - `lib/l10n/app_localizations_en.dart`
+  - `lib/l10n/app_localizations_ar.dart`
+  - `test/app/prayer_service_source_labels_test.dart`
+- Validation:
+  - User ran `flutter test test/app/prayer_service_source_labels_test.dart`: `00:08 +3: All tests passed!`
+  - User ran `flutter analyze`: `No issues found! (ran in 40.7s)`
+
+## AllApp publish push (2026-06-11)
+- Target repo/branch: `https://github.com/mskaymaz/AllApp.git` / `main`.
+- Remote commit: `39fe32b` (`daily-content: sync approved publish payloads`).
+- Published files:
+  - `data/daily_content/v1/manifest.json`
+  - `data/daily_content/v1/publish/ayahs.v1.approved.json`
+  - `data/daily_content/v1/publish/hadiths.v1.approved.json`
+  - `data/daily_content/v1/publish/esmaul_husna.v1.approved.json`
 
 ## Esma/Sifat approved verification (2026-06-10)
 - Rebuilt local approved Esma/Sifat payload from source JSON files:

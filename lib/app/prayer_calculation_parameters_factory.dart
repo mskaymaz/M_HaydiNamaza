@@ -19,6 +19,7 @@ class PrayerCalculationParametersFactory {
     switch (code) {
       case 'turkey':
       case 'diyanet_tabanli':
+      case 'aladhan':
         return CalculationMethod.turkey();
       case 'muslim_world_league':
         return CalculationMethod.muslimWorldLeague();

@@ -286,7 +286,7 @@ class ConfigRegistry {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       typography: const HomeTypography(
-        locationSize: 16,
+        locationSize: 19,
         methodSize: 12,
         nextLabelSize: 20,
         nextTimeSize: 29,

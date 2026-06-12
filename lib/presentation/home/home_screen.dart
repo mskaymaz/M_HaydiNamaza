@@ -84,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLandscapePanelsExpanded = false;
   bool _showPanelAddButton = false;
   bool _showPrayerControlPanel = false;
+  bool _showHijriDate = true;
   bool _reminderCheckInProgress = false;
   int _customPrayerSeed = 0;
   DateTime? _voiceLoopUntil;
@@ -472,16 +473,15 @@ class _HomeScreenState extends State<HomeScreen> {
             location.district,
             l10n.localeName,
           );
-          final hijriDayMonthLabel = homeFormatHijriDayMonth(_now, l10n);
-          final hijriYearLabel = homeFormatHijriYear(_now);
-          final gregorianDayMonthLabel = homeFormatGregorianDayMonth(
-            _now,
-            l10n,
-          );
-          final gregorianYearLabel = homeFormatGregorianYear(_now, l10n);
-          final dateLabel =
-              '$hijriDayMonthLabel $hijriYearLabel / '
-              '$gregorianDayMonthLabel $gregorianYearLabel';
+          final hijriDateLabel =
+              '${homeFormatHijriDayMonth(_now, l10n)} '
+              '${homeFormatHijriYear(_now)}';
+          final gregorianDateLabel =
+              '${homeFormatGregorianDayMonth(_now, l10n)} '
+              '${homeFormatGregorianYear(_now, l10n)}';
+          final dateLabel = _showHijriDate
+              ? hijriDateLabel
+              : gregorianDateLabel;
           final palette = widget.uiPaletteController.value;
           final ui = ConfigRegistry.mainUiFor(palette);
           final statusBarColor =
@@ -764,6 +764,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   nextTime: nextTime,
                                   countdown: countdown,
                                   dateLabel: dateLabel,
+                                  onToggleDate: () => setState(
+                                    () => _showHijriDate = !_showHijriDate,
+                                  ),
                                   onLocationTap: () =>
                                       _openLocationSettings(location),
                                   onQibla: () => _openQibla(location),

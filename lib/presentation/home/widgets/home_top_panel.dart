@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../../core/config/config_registry.dart';
 
 const double _locationSettingsIconSize = 27.0;
 const double _locationSettingsTapSize = 50.0;
+const double _locationIconSize = 20.0;
+const double _qiblaCompassSizeFactor = 2.5;
+const String _qiblaCompassAsset = 'assets/icons/qibla_compass.svg';
 const double _locationSettingsOffsetX = 3.0;
 const double _topActionIconGap = 12.0;
 const double _topActionReservedWidth = 118.0;
 const double _lowerSectionHeight = 110.0;
-const double _dateTextSize = 16.0;
+const double _dateTextSize = 22.0;
 const double _lowerContentOffsetY = -2.0;
+const double _dateToTimeGap = 10.0;
 const double _lowerContentHorizontalInset = 32.0;
-const double _lowerContentColumnGap = 16.0;
-const double _nextInfoOffsetX = -8.0;
+const double _lowerContentColumnGap = 0.0;
+const int _nextInfoFlex = 1;
+const int _countdownFlex = 2;
+const double _nextInfoOffsetX = 4.0;
+const double _countdownOffsetX = -10.0;
 const double _countdownHorizontalScale = 0.9;
-const double _nextTimeGap = 6.0;
-const String _nextSuffixText = 'vaktine';
 
 class HomeTopPanel extends StatelessWidget {
   final String provinceLabel;
@@ -25,6 +31,7 @@ class HomeTopPanel extends StatelessWidget {
   final String nextTime;
   final String countdown;
   final String dateLabel;
+  final VoidCallback onToggleDate;
   final VoidCallback onLocationTap;
   final VoidCallback onQibla;
   final VoidCallback onSettings;
@@ -44,6 +51,7 @@ class HomeTopPanel extends StatelessWidget {
     required this.nextTime,
     required this.countdown,
     required this.dateLabel,
+    required this.onToggleDate,
     required this.onLocationTap,
     required this.onQibla,
     required this.onSettings,
@@ -69,7 +77,7 @@ class HomeTopPanel extends StatelessWidget {
     );
     final dateTextStyle = theme.textTheme.titleSmall?.copyWith(
       color: cizgiColor,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w400,
       fontSize: _dateTextSize,
       letterSpacing: 0,
     );
@@ -77,14 +85,13 @@ class HomeTopPanel extends StatelessWidget {
       color: cizgiColor,
       fontWeight: FontWeight.w600,
       fontSize: typography.nextLabelSize + 2,
+      letterSpacing: 1.0,
     );
     final nextTimeTextStyle = theme.textTheme.titleSmall?.copyWith(
       color: cizgiColor.withValues(alpha: 0.85),
       fontWeight: FontWeight.w300,
-      fontSize: typography.nextLabelSize + 2,
-    );
-    final nextSuffixTextStyle = nextLabelTextStyle?.copyWith(
-      fontWeight: FontWeight.w300,
+      fontSize: typography.nextLabelSize + 4,
+      letterSpacing: 1.0,
     );
 
     return Container(
@@ -115,7 +122,7 @@ class HomeTopPanel extends StatelessWidget {
                           Icon(
                             Icons.location_on_outlined,
                             color: cizgiColor,
-                            size: typography.locationSize + 1,
+                            size: _locationIconSize,
                           ),
                           const SizedBox(width: 4),
                           Expanded(
@@ -157,10 +164,10 @@ class HomeTopPanel extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: onQibla,
-                          icon: Icon(
-                            Icons.explore_outlined,
-                            color: cizgiColor.withValues(alpha: 0.92),
-                            size: settingsIconSize * 2.16,
+                          icon: SvgPicture.asset(
+                            _qiblaCompassAsset,
+                            width: settingsIconSize * _qiblaCompassSizeFactor,
+                            height: settingsIconSize * _qiblaCompassSizeFactor,
                           ),
                           tooltip: 'Kible Yonu',
                           padding: EdgeInsets.zero,
@@ -206,16 +213,19 @@ class HomeTopPanel extends StatelessWidget {
                       children: [
                         SizedBox(
                           width: constraints.maxWidth,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              dateLabel,
-                              textAlign: TextAlign.center,
-                              style: dateTextStyle,
+                          child: GestureDetector(
+                            onTap: onToggleDate,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                dateLabel,
+                                textAlign: TextAlign.center,
+                                style: dateTextStyle,
+                              ),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: _dateToTimeGap),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: _lowerContentHorizontalInset,
@@ -223,6 +233,7 @@ class HomeTopPanel extends StatelessWidget {
                           child: Row(
                             children: [
                               Expanded(
+                                flex: _nextInfoFlex,
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Transform.translate(
@@ -232,23 +243,13 @@ class HomeTopPanel extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              nextLabel,
-                                              style: nextLabelTextStyle,
-                                            ),
-                                            const SizedBox(width: _nextTimeGap),
-                                            Text(
-                                              nextTime,
-                                              style: nextTimeTextStyle,
-                                            ),
-                                          ],
+                                        Text(
+                                          nextLabel,
+                                          style: nextLabelTextStyle,
                                         ),
                                         Text(
-                                          _nextSuffixText,
-                                          style: nextSuffixTextStyle,
+                                          nextTime,
+                                          style: nextTimeTextStyle,
                                         ),
                                       ],
                                     ),
@@ -257,21 +258,25 @@ class HomeTopPanel extends StatelessWidget {
                               ),
                               const SizedBox(width: _lowerContentColumnGap),
                               Expanded(
+                                flex: _countdownFlex,
                                 child: Align(
                                   alignment: Alignment.centerRight,
-                                  child: Transform.scale(
-                                    scaleX: _countdownHorizontalScale,
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      countdown,
-                                      style: theme.textTheme.headlineSmall
-                                          ?.copyWith(
-                                            color: cizgiColor,
-                                            fontWeight: FontWeight.w500,
-                                            letterSpacing: 0.5,
-                                            fontSize:
-                                                typography.nextTimeSize + 5,
-                                          ),
+                                  child: Transform.translate(
+                                    offset: const Offset(_countdownOffsetX, 0),
+                                    child: Transform.scale(
+                                      scaleX: _countdownHorizontalScale,
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        countdown,
+                                        style: theme.textTheme.headlineSmall
+                                            ?.copyWith(
+                                              color: cizgiColor,
+                                              fontWeight: FontWeight.w400,
+                                              letterSpacing: 0.5,
+                                              fontSize:
+                                                  typography.nextTimeSize + 10,
+                                            ),
+                                      ),
                                     ),
                                   ),
                                 ),

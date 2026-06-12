@@ -150,34 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<_HomeData> _loadData() async {
     final useCurrent = await _locationStorage.readUseCurrentLocation();
     if (useCurrent) {
-      try {
-        final position = await Geolocator.getCurrentPosition().timeout(const Duration(seconds: 6));
-        // compare with stored location; if differs significantly, update stored
-        try {
-          final stored = await _locationStorage.read();
-          if (stored != null) {
-            final storedLat = double.tryParse(stored.latitude) ?? 0.0;
-            final storedLon = double.tryParse(stored.longitude) ?? 0.0;
-            final dLat = (storedLat - position.latitude).abs();
-            final dLon = (storedLon - position.longitude).abs();
-            if (dLat > 0.01 || dLon > 0.01) {
-              // significant change, update stored location
-              final placemarks = await placemarkFromCoordinates(position.latitude, position.longitude).timeout(const Duration(seconds: 3), onTimeout: () => <Placemark>[]);
-              final placemark = placemarks.isEmpty ? null : placemarks.first;
-              final province = (placemark?.administrativeArea ?? '').trim();
-              final district = placemark == null ? '' : (placemark.subAdministrativeArea ?? '') ;
-              await _locationStorage.write(LocationData(
-                countryId: null,
-                countryName: placemark?.country ?? '',
-                province: province.isEmpty ? stored.province : province,
-                district: district.isEmpty ? stored.district : district,
-                latitude: position.latitude.toString(),
-                longitude: position.longitude.toString(),
-              ));
-            }
-          }
-        } catch (_) {}
-      } catch (_) {}
+      await _refreshStoredCurrentLocation();
     }
     final location = await _locationStorage.read();
     var methodCode = await _methodStorage.readCode();
@@ -208,6 +181,60 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     return _HomeData(location: location, methodCode: methodCode, times: times);
+  }
+
+  Future<void> _refreshStoredCurrentLocation() async {
+    try {
+      final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) return;
+      final permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        return;
+      }
+      final position = await _readFastCurrentPosition();
+      if (position == null) return;
+      final stored = await _locationStorage.read();
+      if (stored == null) return;
+      final storedLat = double.tryParse(stored.latitude) ?? 0.0;
+      final storedLon = double.tryParse(stored.longitude) ?? 0.0;
+      final dLat = (storedLat - position.latitude).abs();
+      final dLon = (storedLon - position.longitude).abs();
+      if (dLat <= 0.01 && dLon <= 0.01) return;
+      final placemarks = await placemarkFromCoordinates(
+        position.latitude,
+        position.longitude,
+      ).timeout(const Duration(seconds: 3), onTimeout: () => <Placemark>[]);
+      final placemark = placemarks.isEmpty ? null : placemarks.first;
+      final province = (placemark?.administrativeArea ?? '').trim();
+      final district = (placemark?.subAdministrativeArea ?? '').trim();
+      await _locationStorage.write(
+        LocationData(
+          countryId: null,
+          countryName: placemark?.country ?? '',
+          province: province.isEmpty ? stored.province : province,
+          district: district.isEmpty ? stored.district : district,
+          latitude: position.latitude.toString(),
+          longitude: position.longitude.toString(),
+        ),
+      );
+    } catch (_) {}
+  }
+
+  Future<Position?> _readFastCurrentPosition() async {
+    try {
+      final lastKnown = await Geolocator.getLastKnownPosition().timeout(
+        const Duration(milliseconds: 1200),
+      );
+      if (lastKnown != null) return lastKnown;
+    } catch (_) {}
+    try {
+      return await Geolocator.getCurrentPosition().timeout(
+        const Duration(seconds: 4),
+      );
+    } catch (_) {
+      return null;
+    }
   }
 
   Future<void> _loadReminderSettings() async {
@@ -544,47 +571,61 @@ class _HomeScreenState extends State<HomeScreen> {
                           final panelWidthFactor = isLandscape
                               ? (_isLandscapePanelsExpanded ? 0.9 : 0.72)
                               : 1.0;
+                          final scrollContentHeight = math.max(
+                            constraints.maxHeight,
+                            infoPanelTop +
+                                infoPanelMaxHeight +
+                                infoPanelBottomPadding,
+                          );
 
-                          return Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Positioned(
-                                top: drawerLayout.drawerTop,
-                                left: 0,
-                                right: 0,
-                                child: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: FractionallySizedBox(
-                                    widthFactor: panelWidthFactor,
-                                    child: AnimatedContainer(
-                                      duration: const Duration(
-                                        milliseconds: 220,
-                                      ),
-                                      curve: Curves.easeOutCubic,
-                                      height: drawerLayout.drawerHeight,
-                                      decoration: BoxDecoration(
-                                        color: ui.listPanel.color,
-                                        borderRadius: const BorderRadius.only(
-                                          bottomLeft: Radius.circular(20),
-                                          bottomRight: Radius.circular(20),
-                                        ),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            color: Color(0x22000000),
-                                            blurRadius: 12,
-                                            offset: Offset(0, 8),
+                          return SingleChildScrollView(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            child: SizedBox(
+                              height: scrollContentHeight,
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  Positioned(
+                                    top: drawerLayout.drawerTop,
+                                    left: 0,
+                                    right: 0,
+                                    child: Align(
+                                      alignment: Alignment.topCenter,
+                                      child: FractionallySizedBox(
+                                        widthFactor: panelWidthFactor,
+                                        child: AnimatedContainer(
+                                          duration: const Duration(
+                                            milliseconds: 220,
                                           ),
-                                        ],
-                                      ),
-                                      clipBehavior: Clip.antiAlias,
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height:
-                                                drawerLayout.panelOverlap + 12,
+                                          curve: Curves.easeOutCubic,
+                                          height: drawerLayout.drawerHeight,
+                                          decoration: BoxDecoration(
+                                            color: ui.listPanel.color,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(20),
+                                                  bottomRight:
+                                                      Radius.circular(20),
+                                                ),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Color(0x22000000),
+                                                blurRadius: 12,
+                                                offset: Offset(0, 8),
+                                              ),
+                                            ],
                                           ),
-                                          Expanded(
-                                            child: GestureDetector(
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height:
+                                                    drawerLayout.panelOverlap +
+                                                    12,
+                                              ),
+                                              Expanded(
+                                                child: GestureDetector(
                                                 behavior:
                                                     HitTestBehavior.translucent,
                                                 onTap: () {
@@ -832,7 +873,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               ),
-                            ],
+                                ],
+                              ),
+                            ),
                           );
                         },
                       ),
@@ -865,7 +908,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _openLocationSettings(LocationData? location) async {
-    final changed = await Navigator.of(context).push<bool>(
+    await Navigator.of(context).push<bool>(
       MaterialPageRoute(
         builder: (_) => LocationScreen(
           initial: location,
@@ -873,11 +916,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-    if (changed == true) {
-      setState(() {
-        _future = _loadData();
-      });
-    }
+    if (!mounted) return;
+    setState(() {
+      _future = _loadData();
+    });
   }
 
   Future<void> _checkAndTriggerReminders(

@@ -81,6 +81,7 @@ class _LocationScreenState extends State<LocationScreen> {
       _lonController.text = initial.longitude;
     }
     _selectedCountryId ??= ConfigRegistry.dataSources.diyanet.countryId;
+    unawaited(_loadUseCurrentLocation());
     _loadFavorites();
     _loadCountries();
   }
@@ -108,6 +109,14 @@ class _LocationScreenState extends State<LocationScreen> {
     setState(() {
       _favorites = favorites;
       _selectedFavorite = selected;
+    });
+  }
+
+  Future<void> _loadUseCurrentLocation() async {
+    final useCurrentLocation = await _storage.readUseCurrentLocation();
+    if (!_isMounted) return;
+    setState(() {
+      _useCurrentLocation = useCurrentLocation;
     });
   }
 
@@ -259,6 +268,8 @@ class _LocationScreenState extends State<LocationScreen> {
         setState(() {
           _useCurrentLocation = false;
         });
+        await _storage.writeUseCurrentLocation(false);
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Konum servisi kapali. Elle konum secimi ile devam edebilirsiniz.')),
         );
@@ -274,6 +285,8 @@ class _LocationScreenState extends State<LocationScreen> {
         setState(() {
           _useCurrentLocation = false;
         });
+        await _storage.writeUseCurrentLocation(false);
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Konum izni verilmedi. Elle konum secimi ile devam edebilirsiniz.')),
         );
@@ -327,6 +340,8 @@ class _LocationScreenState extends State<LocationScreen> {
       setState(() {
         _useCurrentLocation = false;
       });
+      await _storage.writeUseCurrentLocation(false);
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Mevcut konum alinamadi.')));
     } finally {
       if (mounted) {
@@ -449,6 +464,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
   void _applyFavorite(LocationFavorite favorite) {
     setState(() {
+      _useCurrentLocation = false;
       _selectedFavorite = favorite;
       _selectedCountryId = favorite.countryId ?? _selectedCountryId;
       _selectedCountryName = favorite.countryName ?? _selectedCountryName;
@@ -459,7 +475,32 @@ class _LocationScreenState extends State<LocationScreen> {
       _provinceController.text = favorite.province;
       _districtController.text = favorite.district;
     });
+    unawaited(_storage.writeUseCurrentLocation(false));
     if (_selectedCountryId != null) _loadStates(_selectedCountryId!);
+  }
+
+  Future<void> _persistManualSelection() async {
+    final countryId = _selectedCountryId;
+    final countryName = _selectedCountryName.trim();
+    final province = _provinceController.text.trim();
+    final district = _districtController.text.trim();
+    if (countryId == null ||
+        countryName.isEmpty ||
+        province.isEmpty ||
+        district.isEmpty) {
+      return;
+    }
+    await _storage.writeUseCurrentLocation(false);
+    await _storage.write(
+      LocationData(
+        countryId: countryId,
+        countryName: countryName,
+        province: province,
+        district: district,
+        latitude: _latController.text.trim(),
+        longitude: _lonController.text.trim(),
+      ),
+    );
   }
 
   Future<void> _applySelectedFavorite() async {
@@ -482,35 +523,6 @@ class _LocationScreenState extends State<LocationScreen> {
     Navigator.of(context).pop(true);
   }
 
-  Future<void> _save() async {
-    final l10n = AppLocalizations.of(context)!;
-    final countryId = _selectedCountryId;
-    final countryName = _selectedCountryName.trim();
-    final province = _provinceController.text.trim();
-    final district = _districtController.text.trim();
-    final lat = _latController.text.trim();
-    final lon = _lonController.text.trim();
-    if (countryId == null ||
-        countryName.isEmpty ||
-        province.isEmpty ||
-        district.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.locationFillAll)));
-      return;
-    }
-    await _storage.write(
-      LocationData(
-        countryId: countryId,
-        countryName: countryName,
-        province: province,
-        district: district,
-        latitude: lat,
-        longitude: lon,
-      ),
-    );
-    if (!mounted) return;
-    Navigator.of(context).pop(true);
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -525,12 +537,6 @@ class _LocationScreenState extends State<LocationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.locationEditTitle),
-        actions: [
-          TextButton(
-            onPressed: _save,
-            child: Text(l10n.locationSave),
-          ),
-        ],
       ),
       body: ListView(
         padding: ui.screenPadding,
@@ -572,6 +578,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     if (value == null) return;
                     final selected = _countries.firstWhere((item) => item.id == value);
                     setState(() {
+                      _useCurrentLocation = false;
                       _selectedFavorite = null;
                       _selectedCountryId = value;
                       _selectedCountryName = selected.name;
@@ -582,6 +589,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       _provinceController.text = '';
                       _districtController.text = '';
                     });
+                    await _storage.writeUseCurrentLocation(false);
                     await _loadStates(value);
                   },
             onStateChanged: _loadingStates
@@ -590,6 +598,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     if (value == null) return;
                     final selected = _states.firstWhere((item) => item.id == value);
                     setState(() {
+                      _useCurrentLocation = false;
                       _selectedFavorite = null;
                       _selectedStateId = value;
                       _selectedDistrictId = null;
@@ -597,6 +606,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       _provinceController.text = selected.name;
                       _districtController.text = '';
                     });
+                    await _storage.writeUseCurrentLocation(false);
                     await _loadDistricts(value);
                   },
             onDistrictChanged: _loadingDistricts
@@ -605,10 +615,12 @@ class _LocationScreenState extends State<LocationScreen> {
                     if (value == null) return;
                     final selected = _districts.firstWhere((item) => item.id == value);
                     setState(() {
+                      _useCurrentLocation = false;
                       _selectedFavorite = null;
                       _selectedDistrictId = value;
                       _districtController.text = selected.name;
                     });
+                    unawaited(_persistManualSelection());
                   },
             listLoadError: _listLoadError,
             onRetry: _retryLocationLoad,
@@ -621,7 +633,7 @@ class _LocationScreenState extends State<LocationScreen> {
             longitudeLabel: l10n.locationLongitudeLabel,
             latitudeController: _latController,
             longitudeController: _lonController,
-            onSave: _save,
+            onSave: () => unawaited(_persistManualSelection()),
           ),
           SizedBox(height: ui.sectionGap),
           LocationAddFavoriteButton(

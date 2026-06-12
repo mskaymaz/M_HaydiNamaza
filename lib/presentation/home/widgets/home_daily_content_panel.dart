@@ -1,12 +1,15 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../app/reminder_audio_service.dart';
 import '../../../features/daily_content/daily_content_models.dart';
 import '../../../features/daily_content/daily_content_selection_models.dart';
 
 const _dailyContentArabicLocale = Locale('ar');
+const _dailyContentBasmalaAsset = 'img/Besmele.svg';
+const _dailyContentTtsBasmala = 'Bismill\u00E2 hirrahm\u00E2 nirrah\u00EEm';
 
 class HomeDailyContentPanel extends StatefulWidget {
   final DailyContentSelectionResult? result;
@@ -35,8 +38,8 @@ class HomeDailyContentPanel extends StatefulWidget {
 class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
   static const String _headingAyah = 'G\u00FCn\u00FCn Ayeti';
   static const String _headingHadith = 'G\u00FCn\u00FCn Hadisi';
-  static const String _headingEsma = 'G\u00FCn\u00FCn Esmas\u0131';
-  static const String _headingSifat = 'G\u00FCn\u00FCn S\u0131fat\u0131';
+  static const String _headingEsma = 'Esm\u00E2\u00FCl H\u00FCsna';
+  static const String _headingSifat = 'Allah\'\u0131n S\u0131fatlar\u0131';
   static const String _labelArabic = '\u0639\u0631\u0628\u064A';
   static const String _noteLoading =
       'G\u00FCnl\u00FCk i\u00E7erik y\u00FCkleniyor...';
@@ -95,17 +98,18 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     final frameColor =
         Color.lerp(widget.panelColor, Colors.white, 0.52) ?? widget.panelColor;
     final contentColor = widget.panelColor;
-    const panelVerticalPadding = 20.0;
+    const panelVerticalPadding = 16.0;
     const defaultPageHeight = 270.0;
     final effectiveMaxHeight = widget.maxHeight == null
         ? null
         : math.max(140.0, widget.maxHeight!);
     final pageHeight = effectiveMaxHeight == null
         ? defaultPageHeight
-        : (effectiveMaxHeight - panelVerticalPadding).clamp(140.0, 270.0);
+        : math.max(124.0, effectiveMaxHeight - panelVerticalPadding);
 
     return Container(
       width: double.infinity,
+      height: effectiveMaxHeight,
       constraints: effectiveMaxHeight == null
           ? null
           : BoxConstraints(maxHeight: effectiveMaxHeight),
@@ -333,8 +337,9 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       cizgiColor: widget.cizgiColor,
       contentColor: contentColor,
       referenceColor: const Color(0xFFF9A825),
+      showBasmala: true,
       onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
-          ? () => _readTurkishText(activeText)
+          ? () => _readTurkishAyahText(activeText)
           : null,
     );
   }
@@ -470,6 +475,10 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     } catch (_) {}
   }
 
+  Future<void> _readTurkishAyahText(String text) {
+    return _readTurkishText('$_dailyContentTtsBasmala. $text');
+  }
+
   Widget _buildNote({
     required BuildContext context,
     required String text,
@@ -514,6 +523,7 @@ class _DailyContentSection extends StatelessWidget {
   final Color cizgiColor;
   final Color contentColor;
   final Color referenceColor;
+  final bool showBasmala;
   final VoidCallback? onReadTap;
 
   const _DailyContentSection({
@@ -525,6 +535,7 @@ class _DailyContentSection extends StatelessWidget {
     required this.cizgiColor,
     required this.contentColor,
     required this.referenceColor,
+    this.showBasmala = false,
     this.onReadTap,
   });
 
@@ -543,15 +554,16 @@ class _DailyContentSection extends StatelessWidget {
     final TextStyle displayStyle;
     if (isRtl) {
       displayStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
+        color: cizgiColor.withValues(alpha: 0.9),
         fontFamily: 'Mirza',
         fontFamilyFallback: const <String>[
           'Lateef', 'NotoNaskhArabic', 'Amiri', 'Arial',
         ],
-        fontSize: 22,
+        fontSize: 26,
         height: 1.45,
         fontWeight: FontWeight.w500,
         letterSpacing: 0,
-      ) ?? const TextStyle(fontSize: 22);
+      ) ?? TextStyle(color: cizgiColor.withValues(alpha: 0.9), fontSize: 26);
     } else {
       displayStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
         color: cizgiColor.withValues(alpha: 0.85),
@@ -569,10 +581,16 @@ class _DailyContentSection extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: cizgiColor.withValues(alpha: 0.12)),
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+      child: Stack(
+        fit: StackFit.expand,
+        clipBehavior: Clip.none,
+        children: [
+          Positioned.fill(
+            child: SingleChildScrollView(
+              clipBehavior: Clip.hardEdge,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
             if (title.trim().isNotEmpty) ...[
               SizedBox(
                 width: double.infinity,
@@ -588,49 +606,20 @@ class _DailyContentSection extends StatelessWidget {
               const SizedBox(height: 4),
             ],
             if (textTrimmed.isNotEmpty) ...[
-              Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: hasReadAction ? 24 : 0,
-                      right: hasReadAction ? 30 : 0,
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Text(
-                        textTrimmed,
-                        locale: isRtl ? _dailyContentArabicLocale : null,
-                        style: displayStyle,
-                        textAlign: TextAlign.center,
-                        textDirection: isArabic
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
-                        softWrap: true,
-                      ),
-                    ),
-                  ),
-                  if (hasReadAction)
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: Material(
-                        color: Colors.black.withValues(alpha: 0.14),
-                        borderRadius: BorderRadius.circular(14),
-                        child: InkWell(
-                          onTap: onReadTap,
-                          borderRadius: BorderRadius.circular(14),
-                          child: const Padding(
-                            padding: EdgeInsets.all(6),
-                            child: Icon(
-                              Icons.volume_up_rounded,
-                              size: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
+              if (showBasmala) ...[
+                const _BasmalaMark(),
+                const SizedBox(height: 8),
+              ],
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  textTrimmed,
+                  locale: isRtl ? _dailyContentArabicLocale : null,
+                  style: displayStyle,
+                  textAlign: TextAlign.center,
+                  textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+                  softWrap: true,
+                ),
               ),
             ],
             const SizedBox(height: 20),
@@ -655,8 +644,32 @@ class _DailyContentSection extends StatelessWidget {
                 ],
               ),
             ),
-          ],
-        ),
+                ],
+              ),
+            ),
+          ),
+          if (hasReadAction)
+            Positioned(
+              top: 0,
+              right: -8,
+              child: Material(
+                color: Colors.black.withValues(alpha: 0.14),
+                borderRadius: BorderRadius.circular(14),
+                child: InkWell(
+                  onTap: onReadTap,
+                  borderRadius: BorderRadius.circular(14),
+                  child: const Padding(
+                    padding: EdgeInsets.all(6),
+                    child: Icon(
+                      Icons.volume_up_rounded,
+                      size: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -665,5 +678,23 @@ class _DailyContentSection extends StatelessWidget {
     return RegExp(
       r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]',
     ).hasMatch(value);
+  }
+}
+
+class _BasmalaMark extends StatelessWidget {
+  const _BasmalaMark();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 33,
+      child: SvgPicture.asset(
+        _dailyContentBasmalaAsset,
+        fit: BoxFit.contain,
+        alignment: Alignment.center,
+        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+      ),
+    );
   }
 }

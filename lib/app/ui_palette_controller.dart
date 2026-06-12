@@ -27,6 +27,10 @@ class UiPaletteController extends ValueNotifier<UiPaletteConfig> {
     await setPalette(value.copyWith(cizgiColor: color));
   }
 
+  Future<void> setCustomPrayerLabelColor(Color color) async {
+    await setPalette(value.copyWith(customPrayerLabelColor: color));
+  }
+
   Future<void> setBackgroundZeminColor(Color color) async {
     await setPalette(value.copyWith(backgroundZeminColor: color));
   }

@@ -79,6 +79,7 @@ class HomePrayerList extends StatelessWidget {
   final HomeTypography typography;
   final Color cizgiColor;
   final Color activeColor;
+  final Color customPrayerLabelColor;
   final bool showVoiceIcon;
   final bool showVisualIcon;
   final bool showAzanIcon;
@@ -97,6 +98,7 @@ class HomePrayerList extends StatelessWidget {
     required this.typography,
     required this.cizgiColor,
     required this.activeColor,
+    required this.customPrayerLabelColor,
     required this.showVoiceIcon,
     required this.showVisualIcon,
     required this.showAzanIcon,
@@ -140,11 +142,16 @@ class HomePrayerList extends StatelessWidget {
                   activeIndex != -1 &&
                   index < activeIndex;
               final isActive = item.prayer == active;
-              final labelColor = isActive
-                  ? cizgiColor
-                  : isPast
-                  ? cizgiColor.withValues(alpha: 0.45)
-                  : cizgiColor;
+              final Color labelColor;
+              if (isActive) {
+                labelColor = cizgiColor;
+              } else if (isPast) {
+                labelColor = cizgiColor.withValues(alpha: 0.45);
+              } else if (isCustomPrayer) {
+                labelColor = customPrayerLabelColor;
+              } else {
+                labelColor = cizgiColor;
+              }
               final timeColor = isActive
                   ? cizgiColor.withValues(alpha: 0.9)
                   : isPast
@@ -312,8 +319,6 @@ class HomePrayerList extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isActive
                       ? Colors.white.withValues(alpha: 0.12)
-                      : isCustomPrayer
-                      ? Color.lerp(style.color, Colors.white, 0.30)
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(14),
                   border: isActive
@@ -372,6 +377,7 @@ class HomePrayerSummaryList extends StatelessWidget {
   final EdgeInsets listPadding;
   final Color cizgiColor;
   final Color activeColor;
+  final Color customPrayerLabelColor;
   final VoidCallback onOpenControls;
 
   const HomePrayerSummaryList({
@@ -382,6 +388,7 @@ class HomePrayerSummaryList extends StatelessWidget {
     required this.listPadding,
     required this.cizgiColor,
     required this.activeColor,
+    required this.customPrayerLabelColor,
     required this.onOpenControls,
   });
 
@@ -398,11 +405,16 @@ class HomePrayerSummaryList extends StatelessWidget {
         final isPast =
             item.prayer != null && activeIndex != -1 && index < activeIndex;
         final isActive = item.prayer == active;
-        final labelColor = isActive
-            ? cizgiColor
-            : isPast
-            ? cizgiColor.withValues(alpha: 0.48)
-            : cizgiColor;
+        final Color labelColor;
+        if (isActive) {
+          labelColor = cizgiColor;
+        } else if (isPast) {
+          labelColor = cizgiColor.withValues(alpha: 0.48);
+        } else if (isCustomPrayer) {
+          labelColor = customPrayerLabelColor;
+        } else {
+          labelColor = cizgiColor;
+        }
         final timeColor = isActive
             ? cizgiColor
             : isPast
@@ -426,8 +438,6 @@ class HomePrayerSummaryList extends StatelessWidget {
           decoration: BoxDecoration(
             color: isActive
                 ? activeColor.withValues(alpha: 0.14)
-                : isCustomPrayer
-                ? Color.lerp(activeColor, Colors.white, 0.30)
                 : Colors.transparent,
             borderRadius: BorderRadius.circular(14),
             border: isActive

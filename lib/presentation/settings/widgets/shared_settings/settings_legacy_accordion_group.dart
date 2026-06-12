@@ -44,6 +44,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final VoidCallback onShowPreview;
   final Color panelColor;
   final Color textColor;
+  final Color customPrayerLabelColor;
   final Color backgroundColor;
   final Color backgroundLineColor;
   final String selectedBackgroundPatternAssetPath;
@@ -52,6 +53,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final bool hasPendingBackgroundChanges;
   final VoidCallback onEditPanelColor;
   final VoidCallback onEditTextColor;
+  final VoidCallback onEditCustomPrayerLabelColor;
   final VoidCallback onEditBackgroundColor;
   final VoidCallback onEditBackgroundLineColor;
   final Future<void> Function() onResetInterfaceColors;
@@ -98,6 +100,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.onShowPreview,
     required this.panelColor,
     required this.textColor,
+    required this.customPrayerLabelColor,
     required this.backgroundColor,
     required this.backgroundLineColor,
     required this.selectedBackgroundPatternAssetPath,
@@ -106,6 +109,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.hasPendingBackgroundChanges,
     required this.onEditPanelColor,
     required this.onEditTextColor,
+    required this.onEditCustomPrayerLabelColor,
     required this.onEditBackgroundColor,
     required this.onEditBackgroundLineColor,
     required this.onResetInterfaceColors,
@@ -342,6 +346,12 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                     title: 'Yazi Rengi',
                     color: textColor,
                     onTap: onEditTextColor,
+                  ),
+                  const SizedBox(height: 8),
+                  SettingsColorActionTile(
+                    title: 'Nafile Vakit Rengi',
+                    color: customPrayerLabelColor,
+                    onTap: onEditCustomPrayerLabelColor,
                   ),
                   const SizedBox(height: 8),
                   Align(

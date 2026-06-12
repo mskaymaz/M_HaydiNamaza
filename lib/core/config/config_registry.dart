@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class UiPaletteConfig {
   final Color zeminColor;
   final Color cizgiColor;
+  final Color customPrayerLabelColor;
   final Color backgroundZeminColor;
   final Color backgroundCizgiColor;
   final String backgroundPatternAssetPath;
@@ -13,6 +14,7 @@ class UiPaletteConfig {
   const UiPaletteConfig({
     required this.zeminColor,
     required this.cizgiColor,
+    required this.customPrayerLabelColor,
     required this.backgroundZeminColor,
     required this.backgroundCizgiColor,
     required this.backgroundPatternAssetPath,
@@ -23,6 +25,7 @@ class UiPaletteConfig {
   UiPaletteConfig copyWith({
     Color? zeminColor,
     Color? cizgiColor,
+    Color? customPrayerLabelColor,
     Color? backgroundZeminColor,
     Color? backgroundCizgiColor,
     String? backgroundPatternAssetPath,
@@ -32,6 +35,8 @@ class UiPaletteConfig {
     return UiPaletteConfig(
       zeminColor: zeminColor ?? this.zeminColor,
       cizgiColor: cizgiColor ?? this.cizgiColor,
+      customPrayerLabelColor:
+          customPrayerLabelColor ?? this.customPrayerLabelColor,
       backgroundZeminColor: backgroundZeminColor ?? this.backgroundZeminColor,
       backgroundCizgiColor: backgroundCizgiColor ?? this.backgroundCizgiColor,
       backgroundPatternAssetPath:
@@ -226,6 +231,7 @@ class ConfigRegistry {
   static const UiPaletteConfig defaultPalette = UiPaletteConfig(
     zeminColor: Color(0xFF1F7A3E),
     cizgiColor: Color(0xFFFFFFFF),
+    customPrayerLabelColor: Color(0xFFF57C00),
     backgroundZeminColor: Color(0xFFF3EFE2),
     backgroundCizgiColor: Color(0xFF7A8F6A),
     backgroundPatternAssetPath: 'img/Desen/DesM01.svg',

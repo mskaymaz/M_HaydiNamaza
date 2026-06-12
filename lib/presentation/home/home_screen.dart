@@ -660,6 +660,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 activeColor:
                                                                     palette
                                                                         .zeminColor,
+                                                                customPrayerLabelColor:
+                                                                    palette
+                                                                        .customPrayerLabelColor,
                                                                 showVoiceIcon:
                                                                     _reminderSettings
                                                                         .showVoiceIcon,
@@ -689,6 +692,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 activeColor:
                                                                     palette
                                                                         .zeminColor,
+                                                                customPrayerLabelColor:
+                                                                    palette
+                                                                        .customPrayerLabelColor,
                                                                 onOpenControls:
                                                                     _showPrayerControls,
                                                               ),

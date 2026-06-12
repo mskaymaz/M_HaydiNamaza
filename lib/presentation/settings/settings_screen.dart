@@ -280,6 +280,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onShowPreview: () => _showVisualReminderPreview(context, l10n),
             panelColor: palette.zeminColor,
             textColor: palette.cizgiColor,
+            customPrayerLabelColor: palette.customPrayerLabelColor,
             backgroundColor: draftBackgroundColor,
             backgroundLineColor: draftBackgroundLineColor,
             selectedBackgroundPatternAssetPath: draftBackgroundPatternAssetPath,
@@ -297,6 +298,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               title: 'Yazi Rengi',
               initialColor: palette.cizgiColor,
               onApply: widget.uiPaletteController.setCizgiColor,
+            ),
+            onEditCustomPrayerLabelColor: () => _editColor(
+              context: context,
+              title: 'Nafile Vakit',
+              initialColor: palette.customPrayerLabelColor,
+              onApply: widget.uiPaletteController.setCustomPrayerLabelColor,
             ),
             onEditBackgroundColor: () => _editColor(
               context: context,
@@ -348,6 +355,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               );
               await widget.uiPaletteController.setCizgiColor(
                 ConfigRegistry.defaultPalette.cizgiColor,
+              );
+              await widget.uiPaletteController.setCustomPrayerLabelColor(
+                ConfigRegistry.defaultPalette.customPrayerLabelColor,
               );
               if (!context.mounted) return;
               setState(() {});

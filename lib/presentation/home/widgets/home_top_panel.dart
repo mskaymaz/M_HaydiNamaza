@@ -1,13 +1,20 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../../core/config/config_registry.dart';
 
 const double _locationSettingsIconSize = 27.0;
-const double _locationSettingsTapSize = 44.0;
+const double _locationSettingsTapSize = 50.0;
 const double _locationSettingsOffsetX = 3.0;
+const double _topActionIconGap = 12.0;
+const double _topActionReservedWidth = 118.0;
+const double _lowerSectionHeight = 110.0;
+const double _dateTextSize = 16.0;
+const double _lowerContentOffsetY = -2.0;
+const double _lowerContentHorizontalInset = 32.0;
+const double _lowerContentColumnGap = 16.0;
+const double _nextTimeGap = 6.0;
+const String _nextSuffixText = 'vaktine';
 
 class HomeTopPanel extends StatelessWidget {
   final String provinceLabel;
@@ -15,10 +22,7 @@ class HomeTopPanel extends StatelessWidget {
   final String nextLabel;
   final String nextTime;
   final String countdown;
-  final String dateYearLabel;
-  final String dateDayMonthLabel;
-  final String timeLabel;
-  final VoidCallback onToggleDate;
+  final String dateLabel;
   final VoidCallback onLocationTap;
   final VoidCallback onQibla;
   final VoidCallback onSettings;
@@ -37,10 +41,7 @@ class HomeTopPanel extends StatelessWidget {
     required this.nextLabel,
     required this.nextTime,
     required this.countdown,
-    required this.dateYearLabel,
-    required this.dateDayMonthLabel,
-    required this.timeLabel,
-    required this.onToggleDate,
+    required this.dateLabel,
     required this.onLocationTap,
     required this.onQibla,
     required this.onSettings,
@@ -56,8 +57,6 @@ class HomeTopPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final lowerSectionHeight =
-        typography.nextTimeSize + typography.nextLabelSize + 20;
     final topRowHeight = _locationSettingsTapSize > typography.locationSize + 8
         ? _locationSettingsTapSize
         : typography.locationSize + 8;
@@ -69,14 +68,21 @@ class HomeTopPanel extends StatelessWidget {
     final dateTextStyle = theme.textTheme.titleSmall?.copyWith(
       color: cizgiColor,
       fontWeight: FontWeight.w600,
-      fontSize: (typography.methodSize + 1) * 1.2,
-      letterSpacing: -0.2,
+      fontSize: _dateTextSize,
+      letterSpacing: 0,
     );
-    final clockTextStyle = theme.textTheme.titleSmall?.copyWith(
+    final nextLabelTextStyle = theme.textTheme.titleSmall?.copyWith(
+      color: cizgiColor,
+      fontWeight: FontWeight.w600,
+      fontSize: typography.nextLabelSize + 5,
+    );
+    final nextTimeTextStyle = theme.textTheme.titleSmall?.copyWith(
       color: cizgiColor.withValues(alpha: 0.85),
       fontWeight: FontWeight.w300,
-      fontSize: typography.nextLabelSize * 1.2,
-      letterSpacing: -0.6,
+      fontSize: typography.nextLabelSize + 5,
+    );
+    final nextSuffixTextStyle = nextLabelTextStyle?.copyWith(
+      fontWeight: FontWeight.w300,
     );
 
     return Container(
@@ -96,37 +102,47 @@ class HomeTopPanel extends StatelessWidget {
               children: [
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: GestureDetector(
-                    onTap: onLocationTap,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.location_on_outlined,
-                          color: cizgiColor,
-                          size: typography.locationSize + 1,
-                        ),
-                        const SizedBox(width: 4),
-                        Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: provinceLabel,
-                                style: locationTextStyle,
-                              ),
-                              if (districtLabel.trim().isNotEmpty) ...[
-                                TextSpan(text: ' / ', style: locationTextStyle),
-                                TextSpan(
-                                  text: districtLabel,
-                                  style: locationTextStyle?.copyWith(
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                ),
-                              ],
-                            ],
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      right: _topActionReservedWidth,
+                    ),
+                    child: GestureDetector(
+                      onTap: onLocationTap,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.location_on_outlined,
+                            color: cizgiColor,
+                            size: typography.locationSize + 1,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 4),
+                          Expanded(
+                            child: Text.rich(
+                              TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: provinceLabel,
+                                    style: locationTextStyle,
+                                  ),
+                                  if (districtLabel.trim().isNotEmpty) ...[
+                                    TextSpan(
+                                      text: ' / ',
+                                      style: locationTextStyle,
+                                    ),
+                                    TextSpan(
+                                      text: districtLabel,
+                                      style: locationTextStyle?.copyWith(
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -134,21 +150,41 @@ class HomeTopPanel extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Transform.translate(
                     offset: const Offset(_locationSettingsOffsetX, 0),
-                    child: IconButton(
-                      onPressed: onSettings,
-                      icon: Icon(
-                        Icons.settings_outlined,
-                        color: cizgiColor.withValues(
-                          alpha: settingsIconOpacity,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: onQibla,
+                          icon: Icon(
+                            Icons.explore_outlined,
+                            color: cizgiColor.withValues(alpha: 0.92),
+                            size: settingsIconSize * 2.16,
+                          ),
+                          tooltip: 'Kible Yonu',
+                          padding: EdgeInsets.zero,
+                          constraints: BoxConstraints(
+                            minWidth: _locationSettingsTapSize,
+                            minHeight: _locationSettingsTapSize,
+                          ),
                         ),
-                        size: _locationSettingsIconSize,
-                      ),
-                      tooltip: AppLocalizations.of(context)!.settingsTitle,
-                      padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(
-                        minWidth: _locationSettingsTapSize,
-                        minHeight: _locationSettingsTapSize,
-                      ),
+                        const SizedBox(width: _topActionIconGap),
+                        IconButton(
+                          onPressed: onSettings,
+                          icon: Icon(
+                            Icons.settings_outlined,
+                            color: cizgiColor.withValues(
+                              alpha: settingsIconOpacity,
+                            ),
+                            size: _locationSettingsIconSize,
+                          ),
+                          tooltip: AppLocalizations.of(context)!.settingsTitle,
+                          padding: EdgeInsets.zero,
+                          constraints: BoxConstraints(
+                            minWidth: _locationSettingsTapSize,
+                            minHeight: _locationSettingsTapSize,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -156,118 +192,86 @@ class HomeTopPanel extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: lowerSectionHeight,
+            height: _lowerSectionHeight,
             child: LayoutBuilder(
               builder: (context, constraints) {
-                final isCompactWidth = constraints.maxWidth < 420;
-                final leftSlotWidth = isCompactWidth
-                    ? 88.0
-                    : math.min(
-                        math.max(constraints.maxWidth * 0.27, 108.0),
-                        160.0,
-                      );
-                final rightSlotWidth = isCompactWidth
-                    ? 64.0
-                    : leftSlotWidth;
-                final qiblaOffsetX = isCompactWidth ? 4.0 : 13.0;
-
-                return Row(
-                  children: [
-                    SizedBox(
-                      width: leftSlotWidth,
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: leftSlotWidth,
-                              child: GestureDetector(
-                                onTap: onToggleDate,
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    '$dateDayMonthLabel $dateYearLabel',
-                                    style: dateTextStyle,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              timeLabel,
-                              style: clockTextStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  nextLabel,
-                                  style: theme.textTheme.titleSmall?.copyWith(
-                                    color: cizgiColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: typography.nextLabelSize,
-                                  ),
-                                ),
-                                const SizedBox(width: 6),
-                                Text(
-                                  nextTime,
-                                  style: theme.textTheme.titleSmall?.copyWith(
-                                    color: cizgiColor.withValues(alpha: 0.85),
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: typography.nextLabelSize,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              countdown,
-                              style: theme.textTheme.headlineSmall?.copyWith(
-                                color: cizgiColor,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 0.5,
-                                fontSize: typography.nextTimeSize,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: rightSlotWidth,
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Transform.translate(
-                          offset: Offset(qiblaOffsetX, 0),
-                          child: IconButton(
-                            onPressed: onQibla,
-                            icon: Icon(
-                              Icons.explore_outlined,
-                              color: cizgiColor.withValues(alpha: 0.92),
-                              size: settingsIconSize * 2.16,
-                            ),
-                            tooltip: 'Kıble Yönü',
-                            padding: EdgeInsets.zero,
-                            constraints: BoxConstraints(
-                              minWidth: settingsIconBoxSize * 1.5,
-                              minHeight: settingsIconBoxSize * 1.5,
+                return Center(
+                  child: Transform.translate(
+                    offset: const Offset(0, _lowerContentOffsetY),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: constraints.maxWidth,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              dateLabel,
+                              textAlign: TextAlign.center,
+                              style: dateTextStyle,
                             ),
                           ),
                         ),
-                      ),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: _lowerContentHorizontalInset,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            nextLabel,
+                                            style: nextLabelTextStyle,
+                                          ),
+                                          const SizedBox(width: _nextTimeGap),
+                                          Text(
+                                            nextTime,
+                                            style: nextTimeTextStyle,
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        _nextSuffixText,
+                                        style: nextSuffixTextStyle,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: _lowerContentColumnGap),
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    countdown,
+                                    style: theme.textTheme.headlineSmall
+                                        ?.copyWith(
+                                          color: cizgiColor,
+                                          fontWeight: FontWeight.w500,
+                                          letterSpacing: 0.5,
+                                          fontSize: typography.nextTimeSize + 15,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 );
               },
             ),

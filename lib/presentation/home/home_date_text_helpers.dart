@@ -7,13 +7,6 @@ String homeFormatTime(DateTime dt) {
   return '$h:$m';
 }
 
-String homeFormatClock(DateTime dt) {
-  final h = dt.hour.toString().padLeft(2, '0');
-  final m = dt.minute.toString().padLeft(2, '0');
-  final s = dt.second.toString().padLeft(2, '0');
-  return '$h:$m:$s';
-}
-
 String homeFormatGregorianYear(DateTime dt, AppLocalizations l10n) {
   return DateFormat.y(l10n.localeName).format(dt);
 }

@@ -84,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLandscapePanelsExpanded = false;
   bool _showPanelAddButton = false;
   bool _showPrayerControlPanel = false;
-  bool _showHijriDate = false;
   bool _reminderCheckInProgress = false;
   int _customPrayerSeed = 0;
   DateTime? _voiceLoopUntil;
@@ -473,13 +472,16 @@ class _HomeScreenState extends State<HomeScreen> {
             location.district,
             l10n.localeName,
           );
-          final dateYearLabel = _showHijriDate
-              ? homeFormatHijriYear(_now)
-              : homeFormatGregorianYear(_now, l10n);
-          final dateDayMonthLabel = _showHijriDate
-              ? homeFormatHijriDayMonth(_now, l10n)
-              : homeFormatGregorianDayMonth(_now, l10n);
-          final timeLabel = homeFormatClock(_now);
+          final hijriDayMonthLabel = homeFormatHijriDayMonth(_now, l10n);
+          final hijriYearLabel = homeFormatHijriYear(_now);
+          final gregorianDayMonthLabel = homeFormatGregorianDayMonth(
+            _now,
+            l10n,
+          );
+          final gregorianYearLabel = homeFormatGregorianYear(_now, l10n);
+          final dateLabel =
+              '$hijriDayMonthLabel $hijriYearLabel / '
+              '$gregorianDayMonthLabel $gregorianYearLabel';
           final palette = widget.uiPaletteController.value;
           final ui = ConfigRegistry.mainUiFor(palette);
           final statusBarColor =
@@ -761,12 +763,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   nextLabel: next.label,
                                   nextTime: nextTime,
                                   countdown: countdown,
-                                  dateYearLabel: dateYearLabel,
-                                  dateDayMonthLabel: dateDayMonthLabel,
-                                  timeLabel: timeLabel,
-                                  onToggleDate: () => setState(
-                                    () => _showHijriDate = !_showHijriDate,
-                                  ),
+                                  dateLabel: dateLabel,
                                   onLocationTap: () =>
                                       _openLocationSettings(location),
                                   onQibla: () => _openQibla(location),

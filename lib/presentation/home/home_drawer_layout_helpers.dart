@@ -4,9 +4,9 @@ const double _kHomeDrawerPanelOverlap = 15.0;
 const double _kHomeDrawerMinCollapsedHeight = 22.0;
 const double _kHomeDrawerMaxHeightLimit = 260.0;
 const double _kHomeDrawerLocationPaddingCompensation = 8.0;
-const double _kHomeDrawerLocationSettingsMinTapSize = 44.0;
+const double _kHomeDrawerLocationSettingsMinTapSize = 50.0;
 const double _kHomeDrawerTopPanelExtraSpacing = 0.0;
-const double _kHomeDrawerLowerSectionExtraSpacing = 20.0;
+const double _kHomeDrawerLowerSectionExtraSpacing = 61.0;
 
 class _HomeDrawerLayoutMetrics {
   final double panelOverlap;

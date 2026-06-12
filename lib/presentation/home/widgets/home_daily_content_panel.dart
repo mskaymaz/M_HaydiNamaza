@@ -109,7 +109,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       constraints: effectiveMaxHeight == null
           ? null
           : BoxConstraints(maxHeight: effectiveMaxHeight),
-      padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+      padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
       decoration: BoxDecoration(
         color: frameColor,
         borderRadius: BorderRadius.circular(14),
@@ -119,28 +119,6 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.onCycleContentTap != null) ...[
-            Align(
-              alignment: Alignment.centerRight,
-              child: Material(
-                color: Colors.black.withValues(alpha: 0.14),
-                borderRadius: BorderRadius.circular(14),
-                child: InkWell(
-                  onTap: widget.onCycleContentTap,
-                  borderRadius: BorderRadius.circular(14),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Icon(
-                      Icons.shuffle_rounded,
-                      size: 18,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-          ],
           SizedBox(
             height: pageHeight.toDouble(),
             child: PageView.builder(
@@ -201,6 +179,8 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       children: [
         Row(
           children: [
+            _buildCycleButton(),
+            const SizedBox(width: 8),
             Expanded(
               child: Text(
                 heading,
@@ -235,6 +215,34 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
         const SizedBox(height: 10),
         Expanded(child: child),
       ],
+    );
+  }
+
+  Widget _buildCycleButton() {
+    final onTap = widget.onCycleContentTap;
+    return SizedBox(
+      width: 36,
+      height: 36,
+      child: onTap == null
+          ? const SizedBox.shrink()
+          : Material(
+              color: Colors.white,
+              shape: CircleBorder(
+                side: BorderSide(
+                  color: Colors.black.withValues(alpha: 0.28),
+                  width: 1.5,
+                ),
+              ),
+              child: InkWell(
+                onTap: onTap,
+                customBorder: const CircleBorder(),
+                child: Icon(
+                  Icons.refresh_rounded,
+                  size: 20,
+                  color: const Color(0xFF111111),
+                ),
+              ),
+            ),
     );
   }
 

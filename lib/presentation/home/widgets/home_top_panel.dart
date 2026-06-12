@@ -13,6 +13,8 @@ const double _dateTextSize = 16.0;
 const double _lowerContentOffsetY = -2.0;
 const double _lowerContentHorizontalInset = 32.0;
 const double _lowerContentColumnGap = 16.0;
+const double _nextInfoOffsetX = -8.0;
+const double _countdownHorizontalScale = 0.9;
 const double _nextTimeGap = 6.0;
 const String _nextSuffixText = 'vaktine';
 
@@ -74,12 +76,12 @@ class HomeTopPanel extends StatelessWidget {
     final nextLabelTextStyle = theme.textTheme.titleSmall?.copyWith(
       color: cizgiColor,
       fontWeight: FontWeight.w600,
-      fontSize: typography.nextLabelSize + 5,
+      fontSize: typography.nextLabelSize + 2,
     );
     final nextTimeTextStyle = theme.textTheme.titleSmall?.copyWith(
       color: cizgiColor.withValues(alpha: 0.85),
       fontWeight: FontWeight.w300,
-      fontSize: typography.nextLabelSize + 5,
+      fontSize: typography.nextLabelSize + 2,
     );
     final nextSuffixTextStyle = nextLabelTextStyle?.copyWith(
       fontWeight: FontWeight.w300,
@@ -223,30 +225,33 @@ class HomeTopPanel extends StatelessWidget {
                               Expanded(
                                 child: Align(
                                   alignment: Alignment.centerLeft,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            nextLabel,
-                                            style: nextLabelTextStyle,
-                                          ),
-                                          const SizedBox(width: _nextTimeGap),
-                                          Text(
-                                            nextTime,
-                                            style: nextTimeTextStyle,
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        _nextSuffixText,
-                                        style: nextSuffixTextStyle,
-                                      ),
-                                    ],
+                                  child: Transform.translate(
+                                    offset: const Offset(_nextInfoOffsetX, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              nextLabel,
+                                              style: nextLabelTextStyle,
+                                            ),
+                                            const SizedBox(width: _nextTimeGap),
+                                            Text(
+                                              nextTime,
+                                              style: nextTimeTextStyle,
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          _nextSuffixText,
+                                          style: nextSuffixTextStyle,
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -254,15 +259,20 @@ class HomeTopPanel extends StatelessWidget {
                               Expanded(
                                 child: Align(
                                   alignment: Alignment.centerRight,
-                                  child: Text(
-                                    countdown,
-                                    style: theme.textTheme.headlineSmall
-                                        ?.copyWith(
-                                          color: cizgiColor,
-                                          fontWeight: FontWeight.w500,
-                                          letterSpacing: 0.5,
-                                          fontSize: typography.nextTimeSize + 15,
-                                        ),
+                                  child: Transform.scale(
+                                    scaleX: _countdownHorizontalScale,
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      countdown,
+                                      style: theme.textTheme.headlineSmall
+                                          ?.copyWith(
+                                            color: cizgiColor,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5,
+                                            fontSize:
+                                                typography.nextTimeSize + 5,
+                                          ),
+                                    ),
                                   ),
                                 ),
                               ),

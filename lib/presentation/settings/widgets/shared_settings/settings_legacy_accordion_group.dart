@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../app/background/patterned_background.dart';
 import '../../../../app/reminder_text_settings_storage.dart';
 import '../../../../core/config/config_registry.dart';
 import '../../settings_audio_mode_texts.dart';
@@ -46,22 +45,14 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final Color textColor;
   final Color customPrayerLabelColor;
   final Color backgroundColor;
-  final Color backgroundLineColor;
-  final String selectedBackgroundPatternAssetPath;
-  final double backgroundPatternScale;
-  final double backgroundPatternOpacity;
   final bool hasPendingBackgroundChanges;
   final VoidCallback onEditPanelColor;
   final VoidCallback onEditTextColor;
   final VoidCallback onEditCustomPrayerLabelColor;
   final VoidCallback onEditBackgroundColor;
-  final VoidCallback onEditBackgroundLineColor;
   final Future<void> Function() onResetInterfaceColors;
   final Future<void> Function() onResetBackgroundColors;
   final Future<void> Function() onApplyBackgroundStyle;
-  final ValueChanged<String> onBackgroundPatternChanged;
-  final ValueChanged<double> onBackgroundPatternScaleChanged;
-  final ValueChanged<double> onBackgroundPatternOpacityChanged;
 
   const SettingsLegacyAccordionGroup({
     super.key,
@@ -102,22 +93,14 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.textColor,
     required this.customPrayerLabelColor,
     required this.backgroundColor,
-    required this.backgroundLineColor,
-    required this.selectedBackgroundPatternAssetPath,
-    required this.backgroundPatternScale,
-    required this.backgroundPatternOpacity,
     required this.hasPendingBackgroundChanges,
     required this.onEditPanelColor,
     required this.onEditTextColor,
     required this.onEditCustomPrayerLabelColor,
     required this.onEditBackgroundColor,
-    required this.onEditBackgroundLineColor,
     required this.onResetInterfaceColors,
     required this.onResetBackgroundColors,
     required this.onApplyBackgroundStyle,
-    required this.onBackgroundPatternChanged,
-    required this.onBackgroundPatternScaleChanged,
-    required this.onBackgroundPatternOpacityChanged,
   });
 
   @override
@@ -367,7 +350,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   const Text(
-                    'Arkaplan Renkleri',
+                    'Arkaplan Rengi',
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 8),
@@ -377,83 +360,11 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                     onTap: onEditBackgroundColor,
                   ),
                   const SizedBox(height: 8),
-                  SettingsColorActionTile(
-                    title: 'Cizgi Rengi',
-                    color: backgroundLineColor,
-                    onTap: onEditBackgroundLineColor,
-                  ),
-                  const SizedBox(height: 8),
                   Align(
                     alignment: Alignment.centerRight,
                     child: SettingsResetIconButton(
                       onTap: onResetBackgroundColors,
                     ),
-                  ),
-                  const SizedBox(height: 12),
-                  Divider(
-                    color: Colors.white.withValues(alpha: 0.9),
-                    height: 1,
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Arkaplan Deseni',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(height: 8),
-                  SizedBox(
-                    height: 132,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.zero,
-                      itemCount: BackgroundPatternRegistry.patterns.length,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(width: 8),
-                      itemBuilder: (context, index) {
-                        final pattern =
-                            BackgroundPatternRegistry.patterns[index];
-                        final isSelected =
-                            pattern.assetPath ==
-                            selectedBackgroundPatternAssetPath;
-                        return SizedBox(
-                          width: 108,
-                          child: _PatternChoiceCard(
-                            pattern: pattern,
-                            backgroundColor: backgroundColor,
-                            backgroundLineColor: backgroundLineColor,
-                            backgroundPatternOpacity: backgroundPatternOpacity,
-                            isSelected: isSelected,
-                            onTap: () =>
-                                onBackgroundPatternChanged(pattern.assetPath),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Olcek: ${backgroundPatternScale.toStringAsFixed(2)}x',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  Slider(
-                    value: backgroundPatternScale.clamp(0.6, 1.8),
-                    min: 0.6,
-                    max: 1.8,
-                    divisions: 12,
-                    label: backgroundPatternScale.toStringAsFixed(2),
-                    onChanged: onBackgroundPatternScaleChanged,
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    'Desen Seffafligi: ${(backgroundPatternOpacity * 100).round()}%',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  Slider(
-                    value: backgroundPatternOpacity.clamp(0.0, 1.0),
-                    min: 0.0,
-                    max: 1.0,
-                    divisions: 20,
-                    label: '${(backgroundPatternOpacity * 100).round()}%',
-                    onChanged: onBackgroundPatternOpacityChanged,
                   ),
                   const SizedBox(height: 6),
                   Text(
@@ -491,108 +402,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
       child: child,
-    );
-  }
-}
-
-class _PatternChoiceCard extends StatelessWidget {
-  final BackgroundPatternDefinition pattern;
-  final Color backgroundColor;
-  final Color backgroundLineColor;
-  final double backgroundPatternOpacity;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _PatternChoiceCard({
-    required this.pattern,
-    required this.backgroundColor,
-    required this.backgroundLineColor,
-    required this.backgroundPatternOpacity,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: Ink(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isSelected
-                  ? backgroundLineColor.withValues(alpha: 0.95)
-                  : Colors.black.withValues(alpha: 0.08),
-              width: isSelected ? 2 : 1,
-            ),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x0A000000),
-                blurRadius: 8,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: PatternedBackground(
-                    backgroundColor: backgroundColor,
-                    patternColor: backgroundLineColor,
-                    patternAssetPath: pattern.assetPath,
-                    patternScale: 0.72,
-                    patternOpacity: backgroundPatternOpacity,
-                    child: const SizedBox.shrink(),
-                  ),
-                ),
-                Positioned(
-                  left: 8,
-                  right: 8,
-                  bottom: 6,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.22),
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            pattern.label,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                        if (isSelected)
-                          const Icon(
-                            Icons.check_circle,
-                            size: 14,
-                            color: Colors.white,
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

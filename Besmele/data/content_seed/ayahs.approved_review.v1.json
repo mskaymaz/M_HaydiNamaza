@@ -450,14 +450,14 @@
           "ref": "002/002",
           "surah": 2,
           "ayah": 2,
-          "arabic": "ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ",
+          "arabic": "(2) ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ",
           "tr": {
             "source": "Tanzil tr.bulac - Ali Bulaç",
-            "text": "Bu, kendisinde şüphe olmayan, muttakiler için yol gösterici olan bir Kitap'tır."
+            "text": "(2) Bu, kendisinde şüphe olmayan, muttakiler için yol gösterici olan bir Kitap'tır."
           },
           "en": {
             "source": "Tanzil en.sahih - Saheeh International",
-            "text": "This is the Book about which there is no doubt, a guidance for those conscious of Allah -"
+            "text": "(2) This is the Book about which there is no doubt, a guidance for those conscious of Allah -"
           },
           "alternatives": {
             "tr_diyanet_tanzil": {
@@ -474,14 +474,14 @@
           "ref": "002/003",
           "surah": 2,
           "ayah": 3,
-          "arabic": "ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
+          "arabic": "(3) ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
           "tr": {
             "source": "Tanzil tr.bulac - Ali Bulaç",
-            "text": "Onlar, gaybe inanırlar, namazı dosdoğru kılarlar ve kendilerine rızık olarak verdiklerimizden infak ederler."
+            "text": "(3) Onlar, gaybe inanırlar, namazı dosdoğru kılarlar ve kendilerine rızık olarak verdiklerimizden infak ederler."
           },
           "en": {
             "source": "Tanzil en.sahih - Saheeh International",
-            "text": "Who believe in the unseen, establish prayer, and spend out of what We have provided for them,"
+            "text": "(3) Who believe in the unseen, establish prayer, and spend out of what We have provided for them,"
           },
           "alternatives": {
             "tr_diyanet_tanzil": {
@@ -507,9 +507,9 @@
         "note": "",
         "updated_at": "2026-06-02T10:43:57+00:00"
       },
-      "text_tr": "Bu, kendisinde şüphe olmayan, muttakiler için yol gösterici olan bir Kitap'tır.\nOnlar, gaybe inanırlar, namazı dosdoğru kılarlar ve kendilerine rızık olarak verdiklerimizden infak ederler.",
-      "text_ar": "ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ\n\nٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
-      "text_en": "This is the Book about which there is no doubt, a guidance for those conscious of Allah -\nWho believe in the unseen, establish prayer, and spend out of what We have provided for them,"
+      "text_tr": "(2) Bu, kendisinde şüphe olmayan, muttakiler için yol gösterici olan bir Kitap'tır.\n(3) Onlar, gaybe inanırlar, namazı dosdoğru kılarlar ve kendilerine rızık olarak verdiklerimizden infak ederler.",
+      "text_ar": "(2) ذَٰلِكَ ٱلْكِتَـٰبُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ\n(3) ٱلَّذِينَ يُؤْمِنُونَ بِٱلْغَيْبِ وَيُقِيمُونَ ٱلصَّلَوٰةَ وَمِمَّا رَزَقْنَـٰهُمْ يُنفِقُونَ",
+      "text_en": "(2) This is the Book about which there is no doubt, a guidance for those conscious of Allah -\n(3) Who believe in the unseen, establish prayer, and spend out of what We have provided for them,"
     },
     {
       "ref": "002/007",

@@ -34,20 +34,4 @@ class UiPaletteController extends ValueNotifier<UiPaletteConfig> {
   Future<void> setBackgroundZeminColor(Color color) async {
     await setPalette(value.copyWith(backgroundZeminColor: color));
   }
-
-  Future<void> setBackgroundCizgiColor(Color color) async {
-    await setPalette(value.copyWith(backgroundCizgiColor: color));
-  }
-
-  Future<void> setBackgroundPatternAssetPath(String assetPath) async {
-    await setPalette(value.copyWith(backgroundPatternAssetPath: assetPath));
-  }
-
-  Future<void> setBackgroundPatternScale(double scale) async {
-    await setPalette(value.copyWith(backgroundPatternScale: scale));
-  }
-
-  Future<void> setBackgroundPatternOpacity(double opacity) async {
-    await setPalette(value.copyWith(backgroundPatternOpacity: opacity));
-  }
 }

@@ -77,10 +77,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _showVibrationIcon = true;
   bool _sortCustomPrayersByTime = true;
   Color? _draftBackgroundColor;
-  Color? _draftBackgroundLineColor;
-  String? _draftBackgroundPatternAssetPath;
-  double? _draftBackgroundPatternScale;
-  double? _draftBackgroundPatternOpacity;
 
   @override
   void initState() {
@@ -169,14 +165,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _syncBackgroundDraftWithPalette(palette);
     final draftBackgroundColor =
         _draftBackgroundColor ?? palette.backgroundZeminColor;
-    final draftBackgroundLineColor =
-        _draftBackgroundLineColor ?? palette.backgroundCizgiColor;
-    final draftBackgroundPatternAssetPath =
-        _draftBackgroundPatternAssetPath ?? palette.backgroundPatternAssetPath;
-    final draftBackgroundPatternScale =
-        _draftBackgroundPatternScale ?? palette.backgroundPatternScale;
-    final draftBackgroundPatternOpacity =
-        _draftBackgroundPatternOpacity ?? palette.backgroundPatternOpacity;
     final hasPendingBackgroundChanges = _hasPendingBackgroundChanges(palette);
     final ui = ConfigRegistry.settingsPanelsFor(palette);
 
@@ -282,10 +270,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             textColor: palette.cizgiColor,
             customPrayerLabelColor: palette.customPrayerLabelColor,
             backgroundColor: draftBackgroundColor,
-            backgroundLineColor: draftBackgroundLineColor,
-            selectedBackgroundPatternAssetPath: draftBackgroundPatternAssetPath,
-            backgroundPatternScale: draftBackgroundPatternScale,
-            backgroundPatternOpacity: draftBackgroundPatternOpacity,
             hasPendingBackgroundChanges: hasPendingBackgroundChanges,
             onEditPanelColor: () => _editColor(
               context: context,
@@ -315,31 +299,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 });
               },
             ),
-            onEditBackgroundLineColor: () => _editColor(
-              context: context,
-              title: 'Arka Plan Cizgi Rengi',
-              initialColor: draftBackgroundLineColor,
-              onApply: (color) async {
-                setState(() {
-                  _draftBackgroundLineColor = color;
-                });
-              },
-            ),
-            onBackgroundPatternChanged: (value) {
-              setState(() {
-                _draftBackgroundPatternAssetPath = value;
-              });
-            },
-            onBackgroundPatternScaleChanged: (value) {
-              setState(() {
-                _draftBackgroundPatternScale = value;
-              });
-            },
-            onBackgroundPatternOpacityChanged: (value) {
-              setState(() {
-                _draftBackgroundPatternOpacity = value;
-              });
-            },
             onApplyBackgroundStyle: () async {
               await _applyBackgroundDraft();
               if (!context.mounted) return;
@@ -392,12 +351,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _syncBackgroundDraftWithPalette(UiPaletteConfig palette) {
-    final hasDraft =
-        _draftBackgroundColor != null &&
-        _draftBackgroundLineColor != null &&
-        _draftBackgroundPatternAssetPath != null &&
-        _draftBackgroundPatternScale != null &&
-        _draftBackgroundPatternOpacity != null;
+    final hasDraft = _draftBackgroundColor != null;
     if (!hasDraft || !_hasPendingBackgroundChanges(palette)) {
       _setBackgroundDraftFromPalette(palette);
     }
@@ -406,28 +360,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _hasPendingBackgroundChanges(UiPaletteConfig palette) {
     final draftBackgroundColor =
         _draftBackgroundColor ?? palette.backgroundZeminColor;
-    final draftBackgroundLineColor =
-        _draftBackgroundLineColor ?? palette.backgroundCizgiColor;
-    final draftPatternAssetPath =
-        _draftBackgroundPatternAssetPath ?? palette.backgroundPatternAssetPath;
-    final draftPatternScale =
-        _draftBackgroundPatternScale ?? palette.backgroundPatternScale;
-    final draftPatternOpacity =
-        _draftBackgroundPatternOpacity ?? palette.backgroundPatternOpacity;
 
-    return draftBackgroundColor != palette.backgroundZeminColor ||
-        draftBackgroundLineColor != palette.backgroundCizgiColor ||
-        draftPatternAssetPath != palette.backgroundPatternAssetPath ||
-        draftPatternScale != palette.backgroundPatternScale ||
-        draftPatternOpacity != palette.backgroundPatternOpacity;
+    return draftBackgroundColor != palette.backgroundZeminColor;
   }
 
   void _setBackgroundDraftFromPalette(UiPaletteConfig palette) {
     _draftBackgroundColor = palette.backgroundZeminColor;
-    _draftBackgroundLineColor = palette.backgroundCizgiColor;
-    _draftBackgroundPatternAssetPath = palette.backgroundPatternAssetPath;
-    _draftBackgroundPatternScale = palette.backgroundPatternScale;
-    _draftBackgroundPatternOpacity = palette.backgroundPatternOpacity;
   }
 
   Future<void> _applyBackgroundDraft() async {
@@ -435,15 +373,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final updated = palette.copyWith(
       backgroundZeminColor:
           _draftBackgroundColor ?? palette.backgroundZeminColor,
-      backgroundCizgiColor:
-          _draftBackgroundLineColor ?? palette.backgroundCizgiColor,
-      backgroundPatternAssetPath:
-          _draftBackgroundPatternAssetPath ??
-          palette.backgroundPatternAssetPath,
-      backgroundPatternScale:
-          _draftBackgroundPatternScale ?? palette.backgroundPatternScale,
-      backgroundPatternOpacity:
-          _draftBackgroundPatternOpacity ?? palette.backgroundPatternOpacity,
     );
     await widget.uiPaletteController.setPalette(updated);
     if (!mounted) return;

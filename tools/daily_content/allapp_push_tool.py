@@ -341,8 +341,17 @@ def read_remote_counts() -> dict[str, int]:
 
 
 def _remote_record_count(path: str) -> int:
-    url = f"{REMOTE_BASE_URL}/{path}"
-    with urllib.request.urlopen(url, timeout=10) as response:
+    cache_buster = datetime.now().strftime("%Y%m%d%H%M%S%f")
+    url = f"{REMOTE_BASE_URL}/{path}?cb={cache_buster}"
+    request = urllib.request.Request(
+        url,
+        headers={
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+            "User-Agent": "M_HaydiNamaza-AllAppPush/1.0",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=10) as response:
         payload = json.loads(response.read().decode("utf-8"))
     records = payload.get("records")
     if not isinstance(records, list):

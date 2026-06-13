@@ -7,8 +7,6 @@ import 'package:mhaydinamaza/l10n/app_localizations.dart';
 import 'package:vibration/vibration.dart';
 import 'package:geocoding/geocoding.dart';
 
-import '../../app/background/patterned_background.dart';
-
 import '../../app/calculation_method_storage.dart';
 import '../../app/custom_prayer_storage.dart';
 import '../../app/locale_controller.dart';
@@ -517,12 +515,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
           return AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle.dark,
-            child: PatternedBackground(
-              backgroundColor: palette.backgroundZeminColor,
-              patternColor: palette.backgroundCizgiColor,
-              patternAssetPath: palette.backgroundPatternAssetPath,
-              patternScale: palette.backgroundPatternScale,
-              patternOpacity: palette.backgroundPatternOpacity,
+            child: ColoredBox(
+              color: palette.backgroundZeminColor,
               child: Stack(
                 children: [
                   const Positioned(

@@ -21,19 +21,33 @@ class DailyContentSelectionEngine {
        _clock = clock ?? SystemDailyContentClock();
 
   Future<DailyContentSelectionResult> selectToday() async {
-    return _selectInternal(ayahOffset: 0, hadithOffset: 0);
+    return _selectInternal(
+      ayahOffset: 0,
+      hadithOffset: 0,
+      esmaOffset: 0,
+      sifatOffset: 0,
+    );
   }
 
   Future<DailyContentSelectionResult> selectPreview({
     int ayahOffset = 0,
     int hadithOffset = 0,
+    int esmaOffset = 0,
+    int sifatOffset = 0,
   }) async {
-    return _selectInternal(ayahOffset: ayahOffset, hadithOffset: hadithOffset);
+    return _selectInternal(
+      ayahOffset: ayahOffset,
+      hadithOffset: hadithOffset,
+      esmaOffset: esmaOffset,
+      sifatOffset: sifatOffset,
+    );
   }
 
   Future<DailyContentSelectionResult> _selectInternal({
     required int ayahOffset,
     required int hadithOffset,
+    required int esmaOffset,
+    required int sifatOffset,
   }) async {
     final warnings = <String>[];
     final now = _clock.now();
@@ -50,12 +64,12 @@ class DailyContentSelectionEngine {
     final dayIndex = _dayIndex(startDate, now);
     final ayahId = _idAt(loadResult.ayahOrderIds, dayIndex + ayahOffset);
     final hadithId = _idAt(loadResult.hadithOrderIds, dayIndex + hadithOffset);
-    final esmaId = _idAt(loadResult.esmaOrderIds, dayIndex);
-    final sifatId = _idAt(loadResult.sifatOrderIds, dayIndex);
+    final esmaId = _idAt(loadResult.esmaOrderIds, dayIndex + esmaOffset);
+    final sifatId = _idAt(loadResult.sifatOrderIds, dayIndex + sifatOffset);
     final ayahCycleId = _cycleId(loadResult.ayahOrderIds, dayIndex + ayahOffset);
     final hadithCycleId = _cycleId(loadResult.hadithOrderIds, dayIndex + hadithOffset);
-    final esmaCycleId = _cycleId(loadResult.esmaOrderIds, dayIndex);
-    final sifatCycleId = _cycleId(loadResult.sifatOrderIds, dayIndex);
+    final esmaCycleId = _cycleId(loadResult.esmaOrderIds, dayIndex + esmaOffset);
+    final sifatCycleId = _cycleId(loadResult.sifatOrderIds, dayIndex + sifatOffset);
 
     final currentState = await _stateRepository.read(warnings: warnings);
     final nextState = currentState.copyWith(

@@ -71,7 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late Future<_HomeData> _future;
   late Future<DailyContentSelectionResult> _dailyContentFuture;
-  int _dailyContentPreviewOffset = 0;
+  int _dailyContentAyahOffset = 0;
+  int _dailyContentHadithOffset = 0;
+  int _dailyContentEsmaOffset = 0;
+  int _dailyContentSifatOffset = 0;
   Timer? _ticker;
   Timer? _voiceRepeatTimer;
   Timer? _visualCycleTimer;
@@ -120,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (dayChanged) {
           _lastRefreshDay = DateTime(now.year, now.month, now.day);
           _future = _loadData();
-          _dailyContentPreviewOffset = 0;
+          _resetDailyContentPreviewOffsets();
           _dailyContentFuture = _dailyContentService.loadToday();
         }
       });
@@ -246,12 +249,34 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> _cycleDailyContent() async {
+  void _resetDailyContentPreviewOffsets() {
+    _dailyContentAyahOffset = 0;
+    _dailyContentHadithOffset = 0;
+    _dailyContentEsmaOffset = 0;
+    _dailyContentSifatOffset = 0;
+  }
+
+  Future<void> _cycleDailyContent(DailyContentPanelKind kind) async {
     setState(() {
-      _dailyContentPreviewOffset += 1;
+      switch (kind) {
+        case DailyContentPanelKind.ayah:
+          _dailyContentAyahOffset += 1;
+          break;
+        case DailyContentPanelKind.hadith:
+          _dailyContentHadithOffset += 1;
+          break;
+        case DailyContentPanelKind.esma:
+          _dailyContentEsmaOffset += 1;
+          break;
+        case DailyContentPanelKind.sifat:
+          _dailyContentSifatOffset += 1;
+          break;
+      }
       _dailyContentFuture = _dailyContentService.loadPreview(
-        ayahOffset: _dailyContentPreviewOffset,
-        hadithOffset: _dailyContentPreviewOffset,
+        ayahOffset: _dailyContentAyahOffset,
+        hadithOffset: _dailyContentHadithOffset,
+        esmaOffset: _dailyContentEsmaOffset,
+        sifatOffset: _dailyContentSifatOffset,
       );
     });
   }
@@ -549,6 +574,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                           const infoPanelGap = 3.0;
                           const infoPanelBottomPadding = 8.0;
+                          const infoPanelBottomOverflow = 30.0;
+                          const prayerTimesPanelGap = 8.0;
+                          const prayerTimesPanelHeight = 82.0;
                           final drawerBottom =
                               drawerLayout.drawerTop +
                               drawerLayout.drawerHeight;
@@ -557,7 +585,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             140.0,
                             constraints.maxHeight -
                                 infoPanelTop -
-                                infoPanelBottomPadding,
+                                infoPanelBottomPadding +
+                                infoPanelBottomOverflow,
                           );
                           final isLandscape =
                               MediaQuery.of(context).orientation ==
@@ -569,6 +598,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             constraints.maxHeight,
                             infoPanelTop +
                                 infoPanelMaxHeight +
+                                prayerTimesPanelGap +
+                                prayerTimesPanelHeight +
                                 infoPanelBottomPadding,
                           );
 
@@ -597,10 +628,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             color: ui.listPanel.color,
                                             borderRadius:
                                                 const BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(20),
-                                                  bottomRight:
-                                                      Radius.circular(20),
+                                                  bottomLeft: Radius.circular(
+                                                    20,
+                                                  ),
+                                                  bottomRight: Radius.circular(
+                                                    20,
+                                                  ),
                                                 ),
                                             boxShadow: const [
                                               BoxShadow(
@@ -620,253 +653,280 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                               Expanded(
                                                 child: GestureDetector(
-                                                behavior:
-                                                    HitTestBehavior.translucent,
-                                                onTap: () {
-                                                  if (!_showPrayerControlPanel) {
-                                                    return;
-                                                  }
-                                                  setState(
-                                                    () => _showPanelAddButton =
-                                                        !_showPanelAddButton,
-                                                  );
-                                                },
-                                                onHorizontalDragEnd:
-                                                    _onPrayerPanelHorizontalDragEnd,
-                                                onHorizontalDragStart:
-                                                    _onPrayerPanelHorizontalDragStart,
-                                                onHorizontalDragUpdate:
-                                                    _onPrayerPanelHorizontalDragUpdate,
-                                                onDoubleTap: () {
-                                                  if (!isLandscape) return;
-                                                  setState(() {
-                                                    _isLandscapePanelsExpanded =
-                                                        !_isLandscapePanelsExpanded;
-                                                  });
-                                                },
-                                                child: Stack(
-                                                  children: [
-                                                    Positioned.fill(
-                                                      child: AnimatedSwitcher(
-                                                        duration:
-                                                            const Duration(
-                                                          milliseconds: 220,
-                                                        ),
-                                                        transitionBuilder:
-                                                            (child, animation) {
-                                                          return SlideTransition(
-                                                            position:
-                                                                Tween<Offset>(
-                                                              begin:
-                                                                  const Offset(
-                                                                0.12,
-                                                                0,
+                                                  behavior: HitTestBehavior
+                                                      .translucent,
+                                                  onTap: () {
+                                                    if (!_showPrayerControlPanel) {
+                                                      return;
+                                                    }
+                                                    setState(
+                                                      () => _showPanelAddButton =
+                                                          !_showPanelAddButton,
+                                                    );
+                                                  },
+                                                  onHorizontalDragEnd:
+                                                      _onPrayerPanelHorizontalDragEnd,
+                                                  onHorizontalDragStart:
+                                                      _onPrayerPanelHorizontalDragStart,
+                                                  onHorizontalDragUpdate:
+                                                      _onPrayerPanelHorizontalDragUpdate,
+                                                  onDoubleTap: () {
+                                                    if (!isLandscape) return;
+                                                    setState(() {
+                                                      _isLandscapePanelsExpanded =
+                                                          !_isLandscapePanelsExpanded;
+                                                    });
+                                                  },
+                                                  child: Stack(
+                                                    children: [
+                                                      Positioned.fill(
+                                                        child: AnimatedSwitcher(
+                                                          duration:
+                                                              const Duration(
+                                                                milliseconds:
+                                                                    220,
                                                               ),
-                                                              end: Offset.zero,
-                                                            ).animate(
-                                                              animation,
-                                                            ),
-                                                            child: child,
-                                                          );
-                                                        },
-                                                        child:
-                                                            _showPrayerControlPanel
-                                                            ? HomePrayerList(
-                                                                key: const ValueKey(
-                                                                  'prayer_controls',
-                                                                ),
-                                                                controller:
-                                                                    _prayerListScrollController,
-                                                                items: items,
-                                                                active: active,
-                                                                style: ui
-                                                                    .listPanel,
-                                                                listPadding:
-                                                                    ui.listPadding,
-                                                                rowGap:
-                                                                    ui.rowGap,
-                                                                iconStyle:
-                                                                    ui.iconToggle,
-                                                                chipStyle: ui
-                                                                    .reminderChip,
-                                                                typography: ui
-                                                                    .typography,
-                                                                cizgiColor:
-                                                                    palette
-                                                                        .cizgiColor,
-                                                                activeColor:
-                                                                    palette
-                                                                        .zeminColor,
-                                                                customPrayerLabelColor:
-                                                                    palette
-                                                                        .customPrayerLabelColor,
-                                                                showVoiceIcon:
-                                                                    _reminderSettings
-                                                                        .showVoiceIcon,
-                                                                showVisualIcon:
-                                                                    _reminderSettings
-                                                                        .showVisualIcon,
-                                                                showAzanIcon:
-                                                                    _reminderSettings
-                                                                        .showAzanIcon,
-                                                                showVibrationIcon:
-                                                                    _reminderSettings
-                                                                        .showVibrationIcon,
-                                                              )
-                                                            : HomePrayerSummaryList(
-                                                                key: const ValueKey(
-                                                                  'prayer_summary',
-                                                                ),
-                                                                controller:
-                                                                    _prayerListScrollController,
-                                                                items: items,
-                                                                active: active,
-                                                                listPadding:
-                                                                    ui.listPadding,
-                                                                cizgiColor:
-                                                                    palette
-                                                                        .cizgiColor,
-                                                                activeColor:
-                                                                    palette
-                                                                        .zeminColor,
-                                                                customPrayerLabelColor:
-                                                                    palette
-                                                                        .customPrayerLabelColor,
-                                                                onOpenControls:
-                                                                    _showPrayerControls,
-                                                              ),
-                                                      ),
-                                                    ),
-                                                    if (_showPrayerControlPanel &&
-                                                        _showPanelAddButton)
-                                                      Positioned(
-                                                        left: 12,
-                                                        bottom: 12,
-                                                        child: InkWell(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                999,
-                                                              ),
-                                                          onTap:
-                                                              _addCustomPrayerRow,
-                                                          child: Container(
-                                                            width: 36,
-                                                            height: 36,
-                                                            decoration: BoxDecoration(
-                                                              color:
-                                                                  const Color(
-                                                                    0xFFFFEB3B,
+                                                          transitionBuilder: (child, animation) {
+                                                            return SlideTransition(
+                                                              position:
+                                                                  Tween<Offset>(
+                                                                    begin:
+                                                                        const Offset(
+                                                                          0.12,
+                                                                          0,
+                                                                        ),
+                                                                    end: Offset
+                                                                        .zero,
+                                                                  ).animate(
+                                                                    animation,
                                                                   ),
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              border: Border.all(
-                                                                color: palette
-                                                                    .cizgiColor
-                                                                    .withValues(
-                                                                      alpha:
-                                                                          0.25,
+                                                              child: child,
+                                                            );
+                                                          },
+                                                          child:
+                                                              _showPrayerControlPanel
+                                                              ? HomePrayerList(
+                                                                  key: const ValueKey(
+                                                                    'prayer_controls',
+                                                                  ),
+                                                                  controller:
+                                                                      _prayerListScrollController,
+                                                                  items: items,
+                                                                  active:
+                                                                      active,
+                                                                  style: ui
+                                                                      .listPanel,
+                                                                  listPadding: ui
+                                                                      .listPadding,
+                                                                  rowGap:
+                                                                      ui.rowGap,
+                                                                  iconStyle: ui
+                                                                      .iconToggle,
+                                                                  chipStyle: ui
+                                                                      .reminderChip,
+                                                                  typography: ui
+                                                                      .typography,
+                                                                  cizgiColor:
+                                                                      palette
+                                                                          .cizgiColor,
+                                                                  activeColor:
+                                                                      palette
+                                                                          .zeminColor,
+                                                                  customPrayerLabelColor:
+                                                                      palette
+                                                                          .customPrayerLabelColor,
+                                                                  showVoiceIcon:
+                                                                      _reminderSettings
+                                                                          .showVoiceIcon,
+                                                                  showVisualIcon:
+                                                                      _reminderSettings
+                                                                          .showVisualIcon,
+                                                                  showAzanIcon:
+                                                                      _reminderSettings
+                                                                          .showAzanIcon,
+                                                                  showVibrationIcon:
+                                                                      _reminderSettings
+                                                                          .showVibrationIcon,
+                                                                )
+                                                              : HomePrayerSummaryList(
+                                                                  key: const ValueKey(
+                                                                    'prayer_summary',
+                                                                  ),
+                                                                  controller:
+                                                                      _prayerListScrollController,
+                                                                  items: items,
+                                                                  active:
+                                                                      active,
+                                                                  listPadding: ui
+                                                                      .listPadding,
+                                                                  cizgiColor:
+                                                                      palette
+                                                                          .cizgiColor,
+                                                                  activeColor:
+                                                                      palette
+                                                                          .zeminColor,
+                                                                  customPrayerLabelColor:
+                                                                      palette
+                                                                          .customPrayerLabelColor,
+                                                                  onOpenControls:
+                                                                      _showPrayerControls,
+                                                                ),
+                                                        ),
+                                                      ),
+                                                      if (_showPrayerControlPanel &&
+                                                          _showPanelAddButton)
+                                                        Positioned(
+                                                          left: 12,
+                                                          bottom: 12,
+                                                          child: InkWell(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  999,
+                                                                ),
+                                                            onTap:
+                                                                _addCustomPrayerRow,
+                                                            child: Container(
+                                                              width: 36,
+                                                              height: 36,
+                                                              decoration: BoxDecoration(
+                                                                color:
+                                                                    const Color(
+                                                                      0xFFFFEB3B,
                                                                     ),
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                border: Border.all(
+                                                                  color: palette
+                                                                      .cizgiColor
+                                                                      .withValues(
+                                                                        alpha:
+                                                                            0.25,
+                                                                      ),
+                                                                ),
                                                               ),
-                                                            ),
-                                                            child: const Icon(
-                                                              Icons.add,
-                                                              color: Color(
-                                                                0xFF1B5E20,
+                                                              child: const Icon(
+                                                                Icons.add,
+                                                                color: Color(
+                                                                  0xFF1B5E20,
+                                                                ),
+                                                                size: 19.5,
                                                               ),
-                                                              size: 19.5,
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              Positioned(
-                                top: 0,
-                                left: 0,
-                                right: 0,
-                                child: HomeTopPanel(
-                                  provinceLabel: provinceLabel,
-                                  districtLabel: districtLabel,
-                                  nextLabel: next.label,
-                                  nextTime: nextTime,
-                                  countdown: countdown,
-                                  dateLabel: dateLabel,
-                                  onToggleDate: () => setState(
-                                    () => _showHijriDate = !_showHijriDate,
+                                  Positioned(
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    child: HomeTopPanel(
+                                      provinceLabel: provinceLabel,
+                                      districtLabel: districtLabel,
+                                      nextLabel: next.label,
+                                      nextTime: nextTime,
+                                      countdown: countdown,
+                                      dateLabel: dateLabel,
+                                      onToggleDate: () => setState(
+                                        () => _showHijriDate = !_showHijriDate,
+                                      ),
+                                      onLocationTap: () =>
+                                          _openLocationSettings(location),
+                                      onQibla: () => _openQibla(location),
+                                      onSettings: _openSettings,
+                                      style: ui.topPanel,
+                                      padding: ui.topPanelPadding,
+                                      settingsIconSize: ui.settingsIconSize,
+                                      settingsIconBoxSize:
+                                          ui.settingsIconBoxSize,
+                                      settingsIconOpacity:
+                                          ui.settingsIconOpacity,
+                                      typography: ui.typography,
+                                      cizgiColor: palette.cizgiColor,
+                                    ),
                                   ),
-                                  onLocationTap: () =>
-                                      _openLocationSettings(location),
-                                  onQibla: () => _openQibla(location),
-                                  onSettings: _openSettings,
-                                  style: ui.topPanel,
-                                  padding: ui.topPanelPadding,
-                                  settingsIconSize: ui.settingsIconSize,
-                                  settingsIconBoxSize: ui.settingsIconBoxSize,
-                                  settingsIconOpacity: ui.settingsIconOpacity,
-                                  typography: ui.typography,
-                                  cizgiColor: palette.cizgiColor,
-                                ),
-                              ),
-                              Positioned(
-                                top: infoPanelTop,
-                                left: 0,
-                                right: 0,
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                    0,
-                                    0,
-                                    0,
-                                    infoPanelBottomPadding,
+                                  Positioned(
+                                    top: infoPanelTop,
+                                    left: 0,
+                                    right: 0,
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                        0,
+                                        0,
+                                        0,
+                                        infoPanelBottomPadding,
+                                      ),
+                                      child: GestureDetector(
+                                        behavior: HitTestBehavior.opaque,
+                                        onDoubleTap: () {
+                                          if (!isLandscape) return;
+                                          setState(() {
+                                            _isLandscapePanelsExpanded =
+                                                !_isLandscapePanelsExpanded;
+                                          });
+                                        },
+                                        child: Align(
+                                          alignment: Alignment.topCenter,
+                                          child: FractionallySizedBox(
+                                            widthFactor: panelWidthFactor,
+                                            child:
+                                                FutureBuilder<
+                                                  DailyContentSelectionResult
+                                                >(
+                                                  future: _dailyContentFuture,
+                                                  builder: (context, snapshot) {
+                                                    return HomeDailyContentPanel(
+                                                      result: snapshot.data,
+                                                      isLoading:
+                                                          snapshot
+                                                              .connectionState ==
+                                                          ConnectionState
+                                                              .waiting,
+                                                      hasError:
+                                                          snapshot.hasError,
+                                                      cizgiColor:
+                                                          palette.cizgiColor,
+                                                      panelColor:
+                                                          palette.zeminColor,
+                                                      maxHeight:
+                                                          infoPanelMaxHeight,
+                                                      onCycleContentTap:
+                                                          _cycleDailyContent,
+                                                    );
+                                                  },
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                  child: GestureDetector(
-                                    behavior: HitTestBehavior.opaque,
-                                    onDoubleTap: () {
-                                      if (!isLandscape) return;
-                                      setState(() {
-                                        _isLandscapePanelsExpanded =
-                                            !_isLandscapePanelsExpanded;
-                                      });
-                                    },
+                                  Positioned(
+                                    top:
+                                        infoPanelTop +
+                                        infoPanelMaxHeight +
+                                        prayerTimesPanelGap,
+                                    left: 0,
+                                    right: 0,
                                     child: Align(
                                       alignment: Alignment.topCenter,
                                       child: FractionallySizedBox(
                                         widthFactor: panelWidthFactor,
-                                        child:
-                                            FutureBuilder<
-                                              DailyContentSelectionResult
-                                            >(
-                                              future: _dailyContentFuture,
-                                              builder: (context, snapshot) {
-                                                return HomeDailyContentPanel(
-                                                  result: snapshot.data,
-                                                  isLoading:
-                                                      snapshot
-                                                          .connectionState ==
-                                                      ConnectionState.waiting,
-                                                  hasError: snapshot.hasError,
-                                                  cizgiColor:
-                                                      palette.cizgiColor,
-                                                  panelColor:
-                                                      palette.zeminColor,
-                                                  maxHeight: infoPanelMaxHeight,
-                                                  onCycleContentTap:
-                                                    _cycleDailyContent,
-                                                );
-                                              },
-                                            ),
+                                        child: _buildPrayerTimesFetchPanel(
+                                          panelColor: palette.zeminColor,
+                                          cizgiColor: palette.cizgiColor,
+                                          data: data,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
                                 ],
                               ),
                             ),
@@ -914,6 +974,397 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _future = _loadData();
     });
+  }
+
+  Widget _buildPrayerTimesFetchPanel({
+    required Color panelColor,
+    required Color cizgiColor,
+    required _HomeData data,
+  }) {
+    final frameColor = Color.lerp(panelColor, Colors.white, 0.52) ?? panelColor;
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10, 8, 10, 9),
+      decoration: BoxDecoration(
+        color: frameColor,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: panelColor.withValues(alpha: 0.35)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text(
+            'Namaz Vakitlerini Getir',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Color(0xFF111111),
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: _buildPrayerTimesFetchButton(
+                  label: 'Haftal\u0131k',
+                  cizgiColor: cizgiColor,
+                  onTap: () => _openPrayerTimesRangePanel(
+                    _PrayerTimesRangeMode.weekly,
+                    data,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _buildPrayerTimesFetchButton(
+                  label: 'Ayl\u0131k',
+                  cizgiColor: cizgiColor,
+                  onTap: () => _openPrayerTimesRangePanel(
+                    _PrayerTimesRangeMode.monthly,
+                    data,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _buildPrayerTimesFetchButton(
+                  label: 'Tarih Se\u00E7',
+                  cizgiColor: cizgiColor,
+                  onTap: () => _openPrayerTimesRangePanel(
+                    _PrayerTimesRangeMode.custom,
+                    data,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPrayerTimesFetchButton({
+    required String label,
+    required Color cizgiColor,
+    required VoidCallback onTap,
+  }) {
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(8),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          height: 32,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: cizgiColor.withValues(alpha: 0.22)),
+          ),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              label,
+              style: const TextStyle(
+                color: Color(0xFF111111),
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _openPrayerTimesRangePanel(
+    _PrayerTimesRangeMode mode,
+    _HomeData data,
+  ) async {
+    final location = data.location;
+    final methodCode = data.methodCode;
+    if (location == null || methodCode == null) return;
+    final latitude = double.tryParse(location.latitude);
+    final longitude = double.tryParse(location.longitude);
+    if (latitude == null || longitude == null) {
+      _showSnackBar('Konum koordinat\u0131 olmadan vakit listesi getirilemez.');
+      return;
+    }
+
+    final today = _startOfDay(DateTime.now());
+    DateTime start = today;
+    DateTime end = today;
+    String title = 'Namaz Vakitleri';
+    switch (mode) {
+      case _PrayerTimesRangeMode.weekly:
+        end = today.add(const Duration(days: 6));
+        title = 'Haftal\u0131k Namaz Vakitleri';
+        break;
+      case _PrayerTimesRangeMode.monthly:
+        end = today.add(const Duration(days: 29));
+        title = 'Ayl\u0131k Namaz Vakitleri';
+        break;
+      case _PrayerTimesRangeMode.custom:
+        final picked = await showDateRangePicker(
+          context: context,
+          firstDate: today,
+          lastDate: today.add(const Duration(days: 365)),
+          initialDateRange: DateTimeRange(
+            start: today,
+            end: today.add(const Duration(days: 6)),
+          ),
+          helpText: 'Tarih Se\u00E7',
+          cancelText: 'Vazge\u00E7',
+          confirmText: 'Getir',
+        );
+        if (picked == null) return;
+        start = _startOfDay(picked.start);
+        end = _startOfDay(picked.end);
+        final dayCount = end.difference(start).inDays + 1;
+        if (dayCount > 60) {
+          _showSnackBar(
+            'En fazla 2 ayl\u0131k tarih aral\u0131\u011F\u0131 se\u00E7ilebilir.',
+          );
+          return;
+        }
+        title = 'Se\u00E7ilen Tarih Namaz Vakitleri';
+        break;
+    }
+
+    unawaited(_showBlockingProgress('Namaz vakitleri getiriliyor...'));
+    await Future<void>.delayed(Duration.zero);
+    try {
+      final entries = <_PrayerTimesRangeEntry>[];
+      var cursor = start;
+      while (!cursor.isAfter(end)) {
+        final times = await _prayerService.calculateForDate(
+          location: location,
+          latitude: latitude,
+          longitude: longitude,
+          timeZone: location.timeZoneOffset,
+          methodCode: methodCode,
+          date: cursor,
+          allowDiyanet: false,
+        );
+        entries.add(_PrayerTimesRangeEntry(date: cursor, times: times));
+        cursor = cursor.add(const Duration(days: 1));
+      }
+      if (mounted) {
+        Navigator.of(context, rootNavigator: true).pop();
+        await _showPrayerTimesTopPanel(
+          title: title,
+          locationLabel:
+              '${homeTitleCase(location.province, 'tr')} / '
+              '${homeTitleCase(location.district, 'tr')}',
+          entries: entries,
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        Navigator.of(context, rootNavigator: true).pop();
+        _showSnackBar('Namaz vakitleri getirilemedi.');
+      }
+    }
+  }
+
+  Future<void> _showBlockingProgress(String message) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return Center(
+          child: Material(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(
+                    width: 22,
+                    height: 22,
+                    child: CircularProgressIndicator(strokeWidth: 2.4),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(message),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _showPrayerTimesTopPanel({
+    required String title,
+    required String locationLabel,
+    required List<_PrayerTimesRangeEntry> entries,
+  }) {
+    return showGeneralDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'Kapat',
+      barrierColor: Colors.black.withValues(alpha: 0.24),
+      transitionDuration: const Duration(milliseconds: 180),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return SafeArea(
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+              child: Material(
+                color: Colors.white,
+                elevation: 10,
+                borderRadius: BorderRadius.circular(12),
+                clipBehavior: Clip.antiAlias,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.sizeOf(context).height * 0.72,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 10, 8, 8),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    title,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w700,
+                                          color: const Color(0xFF111111),
+                                        ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    locationLabel,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(color: Colors.black54),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              icon: const Icon(Icons.close_rounded),
+                              tooltip: 'Kapat',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Divider(height: 1),
+                      Flexible(
+                        child: ListView.separated(
+                          padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+                          itemCount: entries.length,
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 8),
+                          itemBuilder: (context, index) {
+                            final entry = entries[index];
+                            return _buildPrayerTimesRangeRow(entry);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0, -0.08),
+            end: Offset.zero,
+          ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOut)),
+          child: FadeTransition(opacity: animation, child: child),
+        );
+      },
+    );
+  }
+
+  Widget _buildPrayerTimesRangeRow(_PrayerTimesRangeEntry entry) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(10, 9, 10, 9),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF6F6F6),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.08)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _formatRangeDate(entry.date),
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF111111),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 6,
+            children: [
+              _buildPrayerTimeChip('\u0130msak', entry.times.fajr),
+              _buildPrayerTimeChip('G\u00FCne\u015F', entry.times.sunrise),
+              _buildPrayerTimeChip('\u00D6\u011Fle', entry.times.dhuhr),
+              _buildPrayerTimeChip('\u0130kindi', entry.times.asr),
+              _buildPrayerTimeChip('Ak\u015Fam', entry.times.maghrib),
+              _buildPrayerTimeChip('Yats\u0131', entry.times.isha),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPrayerTimeChip(String label, DateTime time) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.08)),
+      ),
+      child: Text(
+        '$label ${homeFormatTime(time)}',
+        style: const TextStyle(fontSize: 12, color: Color(0xFF222222)),
+      ),
+    );
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), duration: const Duration(seconds: 3)),
+    );
+  }
+
+  DateTime _startOfDay(DateTime value) {
+    return DateTime(value.year, value.month, value.day);
+  }
+
+  String _formatRangeDate(DateTime value) {
+    final day = value.day.toString().padLeft(2, '0');
+    final month = value.month.toString().padLeft(2, '0');
+    final year = value.year.toString().padLeft(4, '0');
+    return '$day.$month.$year';
   }
 
   Future<void> _checkAndTriggerReminders(

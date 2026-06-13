@@ -116,6 +116,64 @@ class PrayerService {
     });
   }
 
+  Future<PrayerTimes> calculateForDate({
+    required LocationData location,
+    required double latitude,
+    required double longitude,
+    required String timeZone,
+    required String methodCode,
+    required DateTime date,
+    bool allowDiyanet = true,
+  }) async {
+    final today = DateTime.now();
+    if (allowDiyanet && _isSameLocalDay(date, today)) {
+      return calculateToday(
+        location: location,
+        latitude: latitude,
+        longitude: longitude,
+        timeZone: timeZone,
+        methodCode: methodCode,
+      );
+    }
+
+    final advancedSettings = await _advancedSettingsStorage.read();
+    final params = PrayerCalculationParametersFactory.build(
+      methodCode: methodCode,
+      advancedSettings: advancedSettings,
+    );
+    final fingerprint = PrayerCacheFingerprintBuilder.build(
+      location: location,
+      methodCode: methodCode,
+      latitude: latitude,
+      longitude: longitude,
+      timeZone: timeZone,
+      date: date,
+      advancedSettings: advancedSettings,
+    );
+    final cached = await _dailyCacheRepository.read(
+      fingerprint: fingerprint,
+      coordinates: Coordinates(latitude, longitude),
+      date: date,
+      calculationParameters: params,
+    );
+    if (cached != null) {
+      return cached;
+    }
+
+    final fresh = await _calculateFresh(
+      location: location,
+      latitude: latitude,
+      longitude: longitude,
+      timeZone: timeZone,
+      methodCode: methodCode,
+      date: date,
+      params: params,
+      allowDiyanet: allowDiyanet,
+    );
+    await _dailyCacheRepository.write(fingerprint: fingerprint, times: fresh);
+    return fresh;
+  }
+
   Future<PrayerTimes> _calculateFresh({
     required LocationData location,
     required double latitude,
@@ -124,6 +182,7 @@ class PrayerService {
     required String methodCode,
     required DateTime date,
     required CalculationParameters params,
+    bool allowDiyanet = true,
   }) async {
     if (methodCode == 'aladhan') {
       final aladhanTurkey = await _tryAladhan(
@@ -145,20 +204,22 @@ class PrayerService {
         return aladhanTurkey;
       }
     } else if (methodCode == 'turkey' || methodCode == 'diyanet_tabanli') {
-      final diyanetTimes = await _tryDiyanet(
-        location: location,
-        date: date,
-        fallbackParams: params,
-      );
-      if (diyanetTimes != null) {
-        _log('[Diyanet] ${location.province}/${location.district} '
-            'Fajr ${formatPrayerTimeHourMinute(diyanetTimes.fajr)} '
-            'Sunrise ${formatPrayerTimeHourMinute(diyanetTimes.sunrise)} '
-            'Dhuhr ${formatPrayerTimeHourMinute(diyanetTimes.dhuhr)} '
-            'Asr ${formatPrayerTimeHourMinute(diyanetTimes.asr)} '
-            'Maghrib ${formatPrayerTimeHourMinute(diyanetTimes.maghrib)} '
-            'Isha ${formatPrayerTimeHourMinute(diyanetTimes.isha)}');
-        return diyanetTimes;
+      if (allowDiyanet && _isSameLocalDay(date, DateTime.now())) {
+        final diyanetTimes = await _tryDiyanet(
+          location: location,
+          date: date,
+          fallbackParams: params,
+        );
+        if (diyanetTimes != null) {
+          _log('[Diyanet] ${location.province}/${location.district} '
+              'Fajr ${formatPrayerTimeHourMinute(diyanetTimes.fajr)} '
+              'Sunrise ${formatPrayerTimeHourMinute(diyanetTimes.sunrise)} '
+              'Dhuhr ${formatPrayerTimeHourMinute(diyanetTimes.dhuhr)} '
+              'Asr ${formatPrayerTimeHourMinute(diyanetTimes.asr)} '
+              'Maghrib ${formatPrayerTimeHourMinute(diyanetTimes.maghrib)} '
+              'Isha ${formatPrayerTimeHourMinute(diyanetTimes.isha)}');
+          return diyanetTimes;
+        }
       }
 
       final aladhanTurkey = await _tryAladhan(
@@ -207,6 +268,12 @@ class PrayerService {
       timeZone: timeZone,
       params: params,
     );
+  }
+
+  bool _isSameLocalDay(DateTime left, DateTime right) {
+    return left.year == right.year &&
+        left.month == right.month &&
+        left.day == right.day;
   }
 
   Future<PrayerTimes?> _tryAladhan({
@@ -290,4 +357,3 @@ class PrayerService {
   }
 
 }
-

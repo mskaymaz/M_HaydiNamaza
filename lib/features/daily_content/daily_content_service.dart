@@ -90,10 +90,14 @@ class DailyContentService {
   Future<DailyContentSelectionResult> loadPreview({
     int ayahOffset = 0,
     int hadithOffset = 0,
+    int esmaOffset = 0,
+    int sifatOffset = 0,
   }) async {
     return _selectionEngine.selectPreview(
       ayahOffset: ayahOffset,
       hadithOffset: hadithOffset,
+      esmaOffset: esmaOffset,
+      sifatOffset: sifatOffset,
     );
   }
 }

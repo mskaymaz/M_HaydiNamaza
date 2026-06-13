@@ -11,6 +11,8 @@ const _dailyContentArabicLocale = Locale('ar');
 const _dailyContentBasmalaAsset = 'img/Besmele.svg';
 const _dailyContentTtsBasmala = 'Bismill\u00E2 hirrahm\u00E2 nirrah\u00EEm';
 
+enum DailyContentPanelKind { ayah, hadith, esma, sifat }
+
 class HomeDailyContentPanel extends StatefulWidget {
   final DailyContentSelectionResult? result;
   final bool isLoading;
@@ -18,7 +20,7 @@ class HomeDailyContentPanel extends StatefulWidget {
   final Color cizgiColor;
   final Color panelColor;
   final double? maxHeight;
-  final VoidCallback? onCycleContentTap;
+  final ValueChanged<DailyContentPanelKind>? onCycleContentTap;
 
   const HomeDailyContentPanel({
     super.key,
@@ -133,6 +135,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                   return _buildPage(
                     context: context,
                     heading: _headingAyah,
+                    kind: DailyContentPanelKind.ayah,
                     child: _buildAyahTab(context, ayah, contentColor),
                   );
                 }
@@ -140,6 +143,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                   return _buildPage(
                     context: context,
                     heading: _headingHadith,
+                    kind: DailyContentPanelKind.hadith,
                     child: _buildHadithTab(context, hadith, contentColor),
                   );
                 }
@@ -147,6 +151,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                   return _buildPage(
                     context: context,
                     heading: _headingEsma,
+                    kind: DailyContentPanelKind.esma,
                     child: _buildEsmaTab(
                       context,
                       esma,
@@ -158,6 +163,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                 return _buildPage(
                   context: context,
                   heading: _headingSifat,
+                  kind: DailyContentPanelKind.sifat,
                   child: _buildEsmaTab(
                     context,
                     sifat,
@@ -176,6 +182,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
   Widget _buildPage({
     required BuildContext context,
     required String heading,
+    required DailyContentPanelKind kind,
     required Widget child,
   }) {
     return Column(
@@ -183,12 +190,14 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       children: [
         Row(
           children: [
-            _buildCycleButton(),
+            _buildCycleButton(kind),
             const SizedBox(width: 8),
             Expanded(
               child: Text(
                 heading,
                 textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
@@ -196,23 +205,31 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                 ),
               ),
             ),
-            _buildLanguageToggle(
-              label: 'TR',
-              selected: _activeLanguage == 'tr',
-              onTap: () => _toggleLanguage('tr'),
-            ),
-            const SizedBox(width: 6),
-            _buildLanguageToggle(
-              label: 'EN',
-              selected: _activeLanguage == 'en',
-              onTap: () => _toggleLanguage('en'),
-            ),
-            const SizedBox(width: 6),
-            _buildLanguageToggle(
-              label: _labelArabic,
-              selected: _activeLanguage == 'ar',
-              onTap: () => _toggleLanguage('ar'),
-              fontSize: 13,
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildLanguageToggle(
+                    label: 'TR',
+                    selected: _activeLanguage == 'tr',
+                    onTap: () => _toggleLanguage('tr'),
+                  ),
+                  const SizedBox(width: 6),
+                  _buildLanguageToggle(
+                    label: 'EN',
+                    selected: _activeLanguage == 'en',
+                    onTap: () => _toggleLanguage('en'),
+                  ),
+                  const SizedBox(width: 6),
+                  _buildLanguageToggle(
+                    label: _labelArabic,
+                    selected: _activeLanguage == 'ar',
+                    onTap: () => _toggleLanguage('ar'),
+                    fontSize: 13,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -222,7 +239,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     );
   }
 
-  Widget _buildCycleButton() {
+  Widget _buildCycleButton(DailyContentPanelKind kind) {
     final onTap = widget.onCycleContentTap;
     return SizedBox(
       width: 36,
@@ -238,7 +255,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                 ),
               ),
               child: InkWell(
-                onTap: onTap,
+                onTap: () => onTap(kind),
                 customBorder: const CircleBorder(),
                 child: Icon(
                   Icons.refresh_rounded,
@@ -419,11 +436,12 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     final isRtl = _activeLanguage == 'ar';
     return _DailyContentSection(
       title: title,
+      arabicTitle: record.nameArabic,
+      latinTitle: isRtl ? '' : title,
       displayText: activeText,
       isRtl: isRtl,
-      reference: record.kind == 'sifat'
-          ? '${record.category} ${record.sourceId}'
-          : 'Esm\u00E2-i H\u00FCsn\u00E2 ${record.sourceId}',
+      reference: _esmaReference(record),
+      topContentInset: 5,
       cizgiColor: widget.cizgiColor,
       contentColor: contentColor,
       referenceColor: const Color(0xFFF9A825),
@@ -431,6 +449,15 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
           ? () => _readTurkishText('$title. $activeText')
           : null,
     );
+  }
+
+  String _esmaReference(DailyEsmaRecord record) {
+    if (record.kind != 'sifat') return '';
+    final category = record.category.trim();
+    if (category.endsWith('lar') || category.endsWith('ler')) {
+      return category.substring(0, category.length - 3);
+    }
+    return category;
   }
 
   String _languageText(covariant dynamic record, String language) {
@@ -487,6 +514,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: contentColor,
         borderRadius: BorderRadius.circular(10),
@@ -516,6 +544,8 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
 
 class _DailyContentSection extends StatelessWidget {
   final String title;
+  final String arabicTitle;
+  final String latinTitle;
   final String displayText;
   final bool isRtl;
   final String reference;
@@ -524,10 +554,13 @@ class _DailyContentSection extends StatelessWidget {
   final Color contentColor;
   final Color referenceColor;
   final bool showBasmala;
+  final double topContentInset;
   final VoidCallback? onReadTap;
 
   const _DailyContentSection({
     required this.title,
+    this.arabicTitle = '',
+    this.latinTitle = '',
     required this.displayText,
     required this.isRtl,
     required this.reference,
@@ -536,6 +569,7 @@ class _DailyContentSection extends StatelessWidget {
     required this.contentColor,
     required this.referenceColor,
     this.showBasmala = false,
+    this.topContentInset = 0,
     this.onReadTap,
   });
 
@@ -550,27 +584,41 @@ class _DailyContentSection extends StatelessWidget {
     final hasReadAction = onReadTap != null;
     final textTrimmed = displayText.trim();
     final isArabic = isRtl && _hasArabic(textTrimmed);
+    final titleTrimmed = title.trim();
+    final arabicTitleTrimmed = arabicTitle.trim();
+    final latinTitleTrimmed = latinTitle.trim();
+    final referenceTrimmed = reference.trim();
+    final bookReferenceTrimmed = bookReference.trim();
+    final hasReference =
+        referenceTrimmed.isNotEmpty || bookReferenceTrimmed.isNotEmpty;
 
     final TextStyle displayStyle;
     if (isRtl) {
-      displayStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: cizgiColor.withValues(alpha: 0.9),
-        fontFamily: 'Mirza',
-        fontFamilyFallback: const <String>[
-          'Lateef', 'NotoNaskhArabic', 'Amiri', 'Arial',
-        ],
-        fontSize: 26,
-        height: 1.45,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 0,
-      ) ?? TextStyle(color: cizgiColor.withValues(alpha: 0.9), fontSize: 26);
+      displayStyle =
+          Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: cizgiColor.withValues(alpha: 0.9),
+            fontFamily: 'Mirza',
+            fontFamilyFallback: const <String>[
+              'Lateef',
+              'NotoNaskhArabic',
+              'Amiri',
+              'Arial',
+            ],
+            fontSize: 22,
+            height: 1.45,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0,
+          ) ??
+          TextStyle(color: cizgiColor.withValues(alpha: 0.9), fontSize: 22);
     } else {
-      displayStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: cizgiColor.withValues(alpha: 0.85),
-        height: 1.4,
-        fontSize: 18,
-        fontStyle: FontStyle.normal,
-      ) ?? const TextStyle(fontSize: 18);
+      displayStyle =
+          Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: cizgiColor.withValues(alpha: 0.85),
+            height: 1.4,
+            fontSize: 18,
+            fontStyle: FontStyle.normal,
+          ) ??
+          const TextStyle(fontSize: 18);
     }
 
     return Container(
@@ -583,7 +631,7 @@ class _DailyContentSection extends StatelessWidget {
       ),
       child: Stack(
         fit: StackFit.expand,
-        clipBehavior: Clip.none,
+        clipBehavior: Clip.hardEdge,
         children: [
           Positioned.fill(
             child: SingleChildScrollView(
@@ -591,59 +639,119 @@ class _DailyContentSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-            if (title.trim().isNotEmpty) ...[
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: cizgiColor.withValues(alpha: 0.85),
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 4),
-            ],
-            if (textTrimmed.isNotEmpty) ...[
-              if (showBasmala) ...[
-                const _BasmalaMark(),
-                const SizedBox(height: 8),
-              ],
-              SizedBox(
-                width: double.infinity,
-                child: Text(
-                  textTrimmed,
-                  locale: isRtl ? _dailyContentArabicLocale : null,
-                  style: displayStyle,
-                  textAlign: TextAlign.center,
-                  textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
-                  softWrap: true,
-                ),
-              ),
-            ],
-            const SizedBox(height: 20),
-            Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(reference, style: refStyle),
-                  if (bookReference.trim().isNotEmpty) ...[
-                    const SizedBox(height: 6),
-                    Text(
-                      bookReference,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: (refFontSize - 2),
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w500,
+                  if (topContentInset > 0) SizedBox(height: topContentInset),
+                  if (arabicTitleTrimmed.isNotEmpty) ...[
+                    SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        arabicTitleTrimmed,
+                        locale: _dailyContentArabicLocale,
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
+                        style:
+                            Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: cizgiColor.withValues(alpha: 0.9),
+                              fontFamily: 'Amiri',
+                              fontFamilyFallback: const <String>[
+                                'NotoNaskhArabic',
+                                'Lateef',
+                                'Mirza',
+                                'Arial',
+                              ],
+                              fontSize: 32,
+                              height: 1.1,
+                              fontWeight: FontWeight.normal,
+                              letterSpacing: 0,
+                            ) ??
+                            TextStyle(
+                              color: cizgiColor.withValues(alpha: 0.9),
+                              fontFamily: 'Amiri',
+                              fontSize: 32,
+                              height: 1.1,
+                              fontWeight: FontWeight.normal,
+                            ),
                       ),
-                      textAlign: TextAlign.center,
+                    ),
+                    if (latinTitleTrimmed.isNotEmpty) ...[
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          latinTitleTrimmed,
+                          textAlign: TextAlign.center,
+                          style:
+                              Theme.of(context).textTheme.labelLarge?.copyWith(
+                                color: cizgiColor.withValues(alpha: 0.85),
+                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                              ) ??
+                              TextStyle(
+                                color: cizgiColor.withValues(alpha: 0.85),
+                                fontSize: 20,
+                                fontWeight: FontWeight.normal,
+                              ),
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: 6),
+                  ] else if (titleTrimmed.isNotEmpty) ...[
+                    SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        titleTrimmed,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          color: cizgiColor.withValues(alpha: 0.85),
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                  ],
+                  if (textTrimmed.isNotEmpty) ...[
+                    if (showBasmala) ...[
+                      const _BasmalaMark(),
+                      const SizedBox(height: 8),
+                    ],
+                    SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        textTrimmed,
+                        locale: isRtl ? _dailyContentArabicLocale : null,
+                        style: displayStyle,
+                        textAlign: TextAlign.center,
+                        textDirection: isArabic
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
+                        softWrap: true,
+                      ),
                     ),
                   ],
-                ],
-              ),
-            ),
+                  if (hasReference) ...[
+                    const SizedBox(height: 20),
+                    Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (referenceTrimmed.isNotEmpty)
+                            Text(referenceTrimmed, style: refStyle),
+                          if (bookReferenceTrimmed.isNotEmpty) ...[
+                            const SizedBox(height: 6),
+                            Text(
+                              bookReferenceTrimmed,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: (refFontSize - 2),
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -651,7 +759,7 @@ class _DailyContentSection extends StatelessWidget {
           if (hasReadAction)
             Positioned(
               top: 0,
-              right: -8,
+              right: 0,
               child: Material(
                 color: Colors.black.withValues(alpha: 0.14),
                 borderRadius: BorderRadius.circular(14),

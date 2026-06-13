@@ -100,3 +100,12 @@ class _PrayerNext {
 
   _PrayerNext({required this.label, required this.time});
 }
+
+enum _PrayerTimesRangeMode { weekly, monthly, custom }
+
+class _PrayerTimesRangeEntry {
+  final DateTime date;
+  final PrayerTimes times;
+
+  const _PrayerTimesRangeEntry({required this.date, required this.times});
+}

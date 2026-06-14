@@ -103,9 +103,21 @@ class _PrayerNext {
 
 enum _PrayerTimesRangeMode { weekly, monthly, custom }
 
+enum _PrayerTimesRangeLayout { table, cards }
+
 class _PrayerTimesRangeEntry {
   final DateTime date;
   final PrayerTimes times;
 
   const _PrayerTimesRangeEntry({required this.date, required this.times});
+}
+
+class _NativeReminderSchedule {
+  final List<NativePrayerNotificationEvent> notifications;
+  final List<NativePrayerWidgetEvent> widgetEvents;
+
+  const _NativeReminderSchedule({
+    required this.notifications,
+    required this.widgetEvents,
+  });
 }

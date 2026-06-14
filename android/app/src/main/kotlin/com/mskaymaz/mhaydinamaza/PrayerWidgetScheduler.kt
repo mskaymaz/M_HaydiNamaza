@@ -1,0 +1,131 @@
+package com.mskaymaz.mhaydinamaza
+
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.os.Build
+import org.json.JSONArray
+import org.json.JSONObject
+
+object PrayerWidgetScheduler {
+    private const val PREFS_NAME = "prayer_widget_schedule"
+    private const val EVENTS_KEY = "events"
+    const val ACTION_REFRESH = "com.mskaymaz.mhaydinamaza.PRAYER_WIDGET_REFRESH"
+
+    data class WidgetEvent(
+        val triggerAtMillis: Long,
+        val prayerLabel: String,
+        val timeLabel: String
+    )
+
+    fun configure(context: Context, events: List<Map<String, Any?>>) {
+        val normalized = events
+            .mapNotNull { normalizeEvent(it) }
+            .sortedBy { it.triggerAtMillis }
+        val json = JSONArray()
+        for (event in normalized) {
+            json.put(
+                JSONObject().apply {
+                    put("triggerAtMillis", event.triggerAtMillis)
+                    put("prayerLabel", event.prayerLabel)
+                    put("timeLabel", event.timeLabel)
+                }
+            )
+        }
+        prefs(context).edit().putString(EVENTS_KEY, json.toString()).apply()
+        updateWidgets(context)
+    }
+
+    fun updateWidgets(context: Context) {
+        val manager = AppWidgetManager.getInstance(context)
+        val component = ComponentName(context, PrayerTimeWidgetProvider::class.java)
+        val ids = manager.getAppWidgetIds(component)
+        if (ids.isNotEmpty()) {
+            PrayerTimeWidgetProvider.updateAll(context, manager, ids)
+        }
+        scheduleNextRefresh(context)
+    }
+
+    fun nextEvent(context: Context): WidgetEvent? {
+        val now = System.currentTimeMillis()
+        return readEvents(context).firstOrNull { it.triggerAtMillis > now }
+    }
+
+    private fun scheduleNextRefresh(context: Context) {
+        val next = nextEvent(context) ?: return
+        val triggerAt = next.triggerAtMillis + 1000L
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, PrayerTimeWidgetProvider::class.java).apply {
+            action = ACTION_REFRESH
+        }
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            9911,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    triggerAt,
+                    pendingIntent
+                )
+            } else {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            }
+        } catch (_: SecurityException) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+        }
+    }
+
+    private fun readEvents(context: Context): List<WidgetEvent> {
+        val raw = prefs(context).getString(EVENTS_KEY, null) ?: return emptyList()
+        return try {
+            val array = JSONArray(raw)
+            val result = mutableListOf<WidgetEvent>()
+            for (index in 0 until array.length()) {
+                val item = array.optJSONObject(index) ?: continue
+                result.add(
+                    WidgetEvent(
+                        triggerAtMillis = item.optLong("triggerAtMillis", 0L),
+                        prayerLabel = item.optString("prayerLabel", "Vakit"),
+                        timeLabel = item.optString("timeLabel", "--:--")
+                    )
+                )
+            }
+            result.sortedBy { it.triggerAtMillis }
+        } catch (_: Exception) {
+            emptyList()
+        }
+    }
+
+    private fun normalizeEvent(input: Map<String, Any?>): WidgetEvent? {
+        val triggerAtMillis = numberToLong(input["triggerAtMillis"]) ?: return null
+        val prayerLabel = input["prayerLabel"]?.toString()?.trim().orEmpty()
+        val timeLabel = input["timeLabel"]?.toString()?.trim().orEmpty()
+        if (prayerLabel.isEmpty() || timeLabel.isEmpty()) return null
+        return WidgetEvent(
+            triggerAtMillis = triggerAtMillis,
+            prayerLabel = prayerLabel,
+            timeLabel = timeLabel
+        )
+    }
+
+    private fun numberToLong(value: Any?): Long? {
+        return when (value) {
+            is Long -> value
+            is Int -> value.toLong()
+            is Double -> value.toLong()
+            is Float -> value.toLong()
+            is Number -> value.toLong()
+            else -> value?.toString()?.toLongOrNull()
+        }
+    }
+
+    private fun prefs(context: Context) =
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+}

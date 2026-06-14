@@ -5,14 +5,22 @@ extension _HomeCustomTimeHelpers on _HomeScreenState {
     _CustomPrayerTimeRule rule,
     PrayerTimes times,
   ) {
+    return _resolveCustomPrayerTimeForDate(rule, times, _now);
+  }
+
+  DateTime? _resolveCustomPrayerTimeForDate(
+    _CustomPrayerTimeRule rule,
+    PrayerTimes times,
+    DateTime date,
+  ) {
     switch (rule.mode) {
       case _CustomPrayerTimeMode.manual:
         final manualTime = rule.manualTime;
         if (manualTime == null) return null;
         return DateTime(
-          _now.year,
-          _now.month,
-          _now.day,
+          date.year,
+          date.month,
+          date.day,
           manualTime.hour,
           manualTime.minute,
         );

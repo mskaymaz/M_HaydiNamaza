@@ -66,6 +66,7 @@ class HomeTopPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     final theme = Theme.of(context);
     final topRowHeight = _locationSettingsTapSize > typography.locationSize + 8
         ? _locationSettingsTapSize
@@ -94,204 +95,223 @@ class HomeTopPanel extends StatelessWidget {
       letterSpacing: 1.0,
     );
 
-    return Container(
-      padding: padding,
-      decoration: BoxDecoration(
-        color: style.color,
-        borderRadius: style.borderRadius,
-        boxShadow: style.shadows,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: topRowHeight,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: _topActionReservedWidth,
-                    ),
-                    child: GestureDetector(
-                      onTap: onLocationTap,
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.location_on_outlined,
-                            color: cizgiColor,
-                            size: _locationIconSize,
-                          ),
-                          const SizedBox(width: 4),
-                          Expanded(
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: provinceLabel,
-                                    style: locationTextStyle,
-                                  ),
-                                  if (districtLabel.trim().isNotEmpty) ...[
+    return MediaQuery(
+      data: mediaQuery.copyWith(textScaler: TextScaler.noScaling),
+      child: Container(
+        padding: padding,
+        decoration: BoxDecoration(
+          color: style.color,
+          borderRadius: style.borderRadius,
+          boxShadow: style.shadows,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: topRowHeight,
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        right: _topActionReservedWidth,
+                      ),
+                      child: GestureDetector(
+                        onTap: onLocationTap,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.location_on_outlined,
+                              color: cizgiColor,
+                              size: _locationIconSize,
+                            ),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text.rich(
+                                TextSpan(
+                                  children: [
                                     TextSpan(
-                                      text: ' / ',
+                                      text: provinceLabel,
                                       style: locationTextStyle,
                                     ),
-                                    TextSpan(
-                                      text: districtLabel,
-                                      style: locationTextStyle?.copyWith(
-                                        fontWeight: FontWeight.w300,
+                                    if (districtLabel.trim().isNotEmpty) ...[
+                                      TextSpan(
+                                        text: ' / ',
+                                        style: locationTextStyle,
                                       ),
-                                    ),
+                                      TextSpan(
+                                        text: districtLabel,
+                                        style: locationTextStyle?.copyWith(
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      ),
+                                    ],
                                   ],
-                                ],
+                                ),
+                                maxLines: 1,
+                                softWrap: false,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Transform.translate(
+                      offset: const Offset(_locationSettingsOffsetX, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: onQibla,
+                            icon: SvgPicture.asset(
+                              _qiblaCompassAsset,
+                              width: settingsIconSize * _qiblaCompassSizeFactor,
+                              height:
+                                  settingsIconSize * _qiblaCompassSizeFactor,
+                            ),
+                            tooltip: 'Kible Yonu',
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(
+                              minWidth: _locationSettingsTapSize,
+                              minHeight: _locationSettingsTapSize,
+                            ),
+                          ),
+                          const SizedBox(width: _topActionIconGap),
+                          IconButton(
+                            onPressed: onSettings,
+                            icon: Icon(
+                              Icons.settings_outlined,
+                              color: cizgiColor.withValues(
+                                alpha: settingsIconOpacity,
+                              ),
+                              size: _locationSettingsIconSize,
+                            ),
+                            tooltip: AppLocalizations.of(
+                              context,
+                            )!.settingsTitle,
+                            padding: EdgeInsets.zero,
+                            constraints: BoxConstraints(
+                              minWidth: _locationSettingsTapSize,
+                              minHeight: _locationSettingsTapSize,
                             ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Transform.translate(
-                    offset: const Offset(_locationSettingsOffsetX, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: onQibla,
-                          icon: SvgPicture.asset(
-                            _qiblaCompassAsset,
-                            width: settingsIconSize * _qiblaCompassSizeFactor,
-                            height: settingsIconSize * _qiblaCompassSizeFactor,
-                          ),
-                          tooltip: 'Kible Yonu',
-                          padding: EdgeInsets.zero,
-                          constraints: BoxConstraints(
-                            minWidth: _locationSettingsTapSize,
-                            minHeight: _locationSettingsTapSize,
-                          ),
-                        ),
-                        const SizedBox(width: _topActionIconGap),
-                        IconButton(
-                          onPressed: onSettings,
-                          icon: Icon(
-                            Icons.settings_outlined,
-                            color: cizgiColor.withValues(
-                              alpha: settingsIconOpacity,
-                            ),
-                            size: _locationSettingsIconSize,
-                          ),
-                          tooltip: AppLocalizations.of(context)!.settingsTitle,
-                          padding: EdgeInsets.zero,
-                          constraints: BoxConstraints(
-                            minWidth: _locationSettingsTapSize,
-                            minHeight: _locationSettingsTapSize,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: _lowerSectionHeight,
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return Center(
-                  child: Transform.translate(
-                    offset: const Offset(0, _lowerContentOffsetY),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: constraints.maxWidth,
-                          child: GestureDetector(
-                            onTap: onToggleDate,
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: Text(
-                                dateLabel,
-                                textAlign: TextAlign.center,
-                                style: dateTextStyle,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: _dateToTimeGap),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: _lowerContentHorizontalInset,
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: _nextInfoFlex,
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Transform.translate(
-                                    offset: const Offset(_nextInfoOffsetX, 0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          nextLabel,
-                                          style: nextLabelTextStyle,
-                                        ),
-                                        Text(
-                                          nextTime,
-                                          style: nextTimeTextStyle,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+            SizedBox(
+              height: _lowerSectionHeight,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Center(
+                    child: Transform.translate(
+                      offset: const Offset(0, _lowerContentOffsetY),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: constraints.maxWidth,
+                            child: GestureDetector(
+                              onTap: onToggleDate,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  dateLabel,
+                                  textAlign: TextAlign.center,
+                                  style: dateTextStyle,
                                 ),
                               ),
-                              const SizedBox(width: _lowerContentColumnGap),
-                              Expanded(
-                                flex: _countdownFlex,
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Transform.translate(
-                                    offset: const Offset(_countdownOffsetX, 0),
-                                    child: Transform.scale(
-                                      scaleX: _countdownHorizontalScale,
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                        countdown,
-                                        style: theme.textTheme.headlineSmall
-                                            ?.copyWith(
-                                              color: cizgiColor,
-                                              fontWeight: FontWeight.w400,
-                                              letterSpacing: 0.5,
-                                              fontSize:
-                                                  typography.nextTimeSize + 10,
-                                            ),
+                            ),
+                          ),
+                          const SizedBox(height: _dateToTimeGap),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: _lowerContentHorizontalInset,
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: _nextInfoFlex,
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Transform.translate(
+                                      offset: const Offset(_nextInfoOffsetX, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            nextLabel,
+                                            maxLines: 1,
+                                            softWrap: false,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: nextLabelTextStyle,
+                                          ),
+                                          Text(
+                                            nextTime,
+                                            maxLines: 1,
+                                            softWrap: false,
+                                            style: nextTimeTextStyle,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(width: _lowerContentColumnGap),
+                                Expanded(
+                                  flex: _countdownFlex,
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Transform.translate(
+                                      offset: const Offset(
+                                        _countdownOffsetX,
+                                        0,
+                                      ),
+                                      child: Transform.scale(
+                                        scaleX: _countdownHorizontalScale,
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                          countdown,
+                                          maxLines: 1,
+                                          softWrap: false,
+                                          style: theme.textTheme.headlineSmall
+                                              ?.copyWith(
+                                                color: cizgiColor,
+                                                fontWeight: FontWeight.w400,
+                                                letterSpacing: 0.5,
+                                                fontSize:
+                                                    typography.nextTimeSize +
+                                                    10,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -109,72 +109,71 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
         ? defaultPageHeight
         : math.max(124.0, effectiveMaxHeight - panelVerticalPadding);
 
-    return Container(
-      width: double.infinity,
-      height: effectiveMaxHeight,
-      constraints: effectiveMaxHeight == null
-          ? null
-          : BoxConstraints(maxHeight: effectiveMaxHeight),
-      padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
-      decoration: BoxDecoration(
-        color: frameColor,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: widget.panelColor.withValues(alpha: 0.35)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: pageHeight.toDouble(),
-            child: PageView.builder(
-              controller: _pageController,
-              itemBuilder: (context, index) {
-                final page = index % 4;
-                if (page == 0) {
-                  return _buildPage(
-                    context: context,
-                    heading: _headingAyah,
-                    kind: DailyContentPanelKind.ayah,
-                    child: _buildAyahTab(context, ayah, contentColor),
-                  );
-                }
-                if (page == 1) {
-                  return _buildPage(
-                    context: context,
-                    heading: _headingHadith,
-                    kind: DailyContentPanelKind.hadith,
-                    child: _buildHadithTab(context, hadith, contentColor),
-                  );
-                }
-                if (page == 2) {
-                  return _buildPage(
-                    context: context,
-                    heading: _headingEsma,
-                    kind: DailyContentPanelKind.esma,
-                    child: _buildEsmaTab(
-                      context,
-                      esma,
-                      contentColor,
-                      missingText: _noteEsmaMissing,
-                    ),
-                  );
-                }
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: Container(
+        width: double.infinity,
+        height: effectiveMaxHeight,
+        constraints: effectiveMaxHeight == null
+            ? null
+            : BoxConstraints(maxHeight: effectiveMaxHeight),
+        padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
+        decoration: BoxDecoration(
+          color: frameColor,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: widget.panelColor.withValues(alpha: 0.35)),
+        ),
+        clipBehavior: Clip.hardEdge,
+        child: SizedBox(
+          height: pageHeight.toDouble(),
+          child: PageView.builder(
+            clipBehavior: Clip.hardEdge,
+            controller: _pageController,
+            itemBuilder: (context, index) {
+              final page = index % 4;
+              if (page == 0) {
                 return _buildPage(
                   context: context,
-                  heading: _headingSifat,
-                  kind: DailyContentPanelKind.sifat,
+                  heading: _headingAyah,
+                  kind: DailyContentPanelKind.ayah,
+                  child: _buildAyahTab(context, ayah, contentColor),
+                );
+              }
+              if (page == 1) {
+                return _buildPage(
+                  context: context,
+                  heading: _headingHadith,
+                  kind: DailyContentPanelKind.hadith,
+                  child: _buildHadithTab(context, hadith, contentColor),
+                );
+              }
+              if (page == 2) {
+                return _buildPage(
+                  context: context,
+                  heading: _headingEsma,
+                  kind: DailyContentPanelKind.esma,
                   child: _buildEsmaTab(
                     context,
-                    sifat,
+                    esma,
                     contentColor,
-                    missingText: _noteSifatMissing,
+                    missingText: _noteEsmaMissing,
                   ),
                 );
-              },
-            ),
+              }
+              return _buildPage(
+                context: context,
+                heading: _headingSifat,
+                kind: DailyContentPanelKind.sifat,
+                child: _buildEsmaTab(
+                  context,
+                  sifat,
+                  contentColor,
+                  missingText: _noteSifatMissing,
+                ),
+              );
+            },
           ),
-        ],
+        ),
       ),
     );
   }
@@ -185,57 +184,67 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     required DailyContentPanelKind kind,
     required Widget child,
   }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Row(
-          children: [
-            _buildCycleButton(kind),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                heading,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
+    return ClipRect(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: 36,
+            child: Row(
+              children: [
+                _buildCycleButton(kind),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    heading,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20,
+                    ),
+                  ),
                 ),
-              ),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildLanguageToggle(
+                        label: 'TR',
+                        selected: _activeLanguage == 'tr',
+                        onTap: () => _toggleLanguage('tr'),
+                      ),
+                      const SizedBox(width: 6),
+                      _buildLanguageToggle(
+                        label: 'EN',
+                        selected: _activeLanguage == 'en',
+                        onTap: () => _toggleLanguage('en'),
+                      ),
+                      const SizedBox(width: 6),
+                      _buildLanguageToggle(
+                        label: _labelArabic,
+                        selected: _activeLanguage == 'ar',
+                        onTap: () => _toggleLanguage('ar'),
+                        fontSize: 13,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _buildLanguageToggle(
-                    label: 'TR',
-                    selected: _activeLanguage == 'tr',
-                    onTap: () => _toggleLanguage('tr'),
-                  ),
-                  const SizedBox(width: 6),
-                  _buildLanguageToggle(
-                    label: 'EN',
-                    selected: _activeLanguage == 'en',
-                    onTap: () => _toggleLanguage('en'),
-                  ),
-                  const SizedBox(width: 6),
-                  _buildLanguageToggle(
-                    label: _labelArabic,
-                    selected: _activeLanguage == 'ar',
-                    onTap: () => _toggleLanguage('ar'),
-                    fontSize: 13,
-                  ),
-                ],
-              ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: child,
             ),
-          ],
-        ),
-        const SizedBox(height: 10),
-        Expanded(child: child),
-      ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -624,6 +633,7 @@ class _DailyContentSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: contentColor,
         borderRadius: BorderRadius.circular(10),

@@ -11,6 +11,7 @@ import '../../app/calculation_method_storage.dart';
 import '../../app/custom_prayer_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_storage.dart';
+import '../../app/native_prayer_notification_scheduler.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../app/reminder_audio_service.dart';
 import '../../app/prayer_row_settings_storage.dart';
@@ -61,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _reminderTextStorage = ReminderTextSettingsStorage();
   final _reminderTriggerStorage = ReminderTriggerStorage();
   final _reminderAudioService = ReminderAudioService();
+  final _nativeNotificationScheduler = NativePrayerNotificationScheduler();
   final _prayerService = PrayerService();
   final _dailyContentService = DailyContentService();
   final Map<Prayer, _PrayerRowSettings> _rowSettings = {};
@@ -87,6 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _showPrayerControlPanel = false;
   bool _showHijriDate = true;
   bool _reminderCheckInProgress = false;
+  bool _nativeScheduleRefreshInProgress = false;
+  bool _nativeScheduleRefreshPending = false;
   int _customPrayerSeed = 0;
   DateTime? _voiceLoopUntil;
   String? _voiceLoopPrayerLabel;
@@ -247,6 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _reminderSettings = settings;
     });
+    unawaited(_refreshNativeReminderSchedule());
   }
 
   void _resetDailyContentPreviewOffsets() {
@@ -464,6 +469,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       _future = _loadData();
     });
+    unawaited(_refreshNativeReminderSchedule());
   }
 
   Future<void> _openQibla(LocationData? location) async {
@@ -1203,6 +1209,7 @@ class _HomeScreenState extends State<HomeScreen> {
     required String locationLabel,
     required List<_PrayerTimesRangeEntry> entries,
   }) {
+    var layout = _PrayerTimesRangeLayout.table;
     return showGeneralDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -1210,80 +1217,108 @@ class _HomeScreenState extends State<HomeScreen> {
       barrierColor: Colors.black.withValues(alpha: 0.24),
       transitionDuration: const Duration(milliseconds: 180),
       pageBuilder: (context, animation, secondaryAnimation) {
-        return SafeArea(
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
-              child: Material(
-                color: Colors.white,
-                elevation: 10,
-                borderRadius: BorderRadius.circular(12),
-                clipBehavior: Clip.antiAlias,
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxHeight: MediaQuery.sizeOf(context).height * 0.72,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(14, 10, 8, 8),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    title,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall
-                                        ?.copyWith(
-                                          fontWeight: FontWeight.w700,
-                                          color: const Color(0xFF111111),
-                                        ),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    locationLabel,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelMedium
-                                        ?.copyWith(color: Colors.black54),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () => Navigator.of(context).pop(),
-                              icon: const Icon(Icons.close_rounded),
-                              tooltip: 'Kapat',
-                            ),
-                          ],
-                        ),
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return SafeArea(
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 10, 12, 0),
+                  child: Material(
+                    color: const Color(0xFFFAFAFA),
+                    elevation: 10,
+                    borderRadius: BorderRadius.circular(12),
+                    clipBehavior: Clip.antiAlias,
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: MediaQuery.sizeOf(context).height * 0.78,
                       ),
-                      const Divider(height: 1),
-                      Flexible(
-                        child: ListView.separated(
-                          padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
-                          itemCount: entries.length,
-                          separatorBuilder: (_, __) =>
-                              const SizedBox(height: 8),
-                          itemBuilder: (context, index) {
-                            final entry = entries[index];
-                            return _buildPrayerTimesRangeRow(entry);
-                          },
-                        ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(14, 10, 8, 8),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        title,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.w800,
+                                              color: const Color(0xFF111111),
+                                            ),
+                                      ),
+                                      const SizedBox(height: 2),
+                                      Text(
+                                        locationLabel,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelMedium
+                                            ?.copyWith(color: Colors.black54),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  icon: const Icon(Icons.close_rounded),
+                                  tooltip: 'Kapat',
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: _buildRangeLayoutCheck(
+                                    label: 'Yatay tablo',
+                                    selected:
+                                        layout == _PrayerTimesRangeLayout.table,
+                                    onChanged: () => setDialogState(() {
+                                      layout = _PrayerTimesRangeLayout.table;
+                                    }),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: _buildRangeLayoutCheck(
+                                    label: 'Dikey kart',
+                                    selected:
+                                        layout == _PrayerTimesRangeLayout.cards,
+                                    onChanged: () => setDialogState(() {
+                                      layout = _PrayerTimesRangeLayout.cards;
+                                    }),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Divider(height: 1),
+                          Flexible(
+                            child: layout == _PrayerTimesRangeLayout.table
+                                ? _buildPrayerTimesRangeTable(entries)
+                                : _buildPrayerTimesRangeCards(entries),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
       transitionBuilder: (context, animation, secondaryAnimation, child) {
@@ -1296,6 +1331,242 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       },
     );
+  }
+
+  Widget _buildRangeLayoutCheck({
+    required String label,
+    required bool selected,
+    required VoidCallback onChanged,
+  }) {
+    return InkWell(
+      onTap: onChanged,
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        height: 36,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+          color: selected ? const Color(0xFFE8F5E9) : Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: selected
+                ? const Color(0xFF2E7D32)
+                : Colors.black.withValues(alpha: 0.12),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Checkbox(
+              value: selected,
+              onChanged: (_) => onChanged(),
+              visualDensity: VisualDensity.compact,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              activeColor: const Color(0xFF2E7D32),
+            ),
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Color(0xFF111111),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPrayerTimesRangeTable(List<_PrayerTimesRangeEntry> entries) {
+    return Scrollbar(
+      thumbVisibility: true,
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minWidth: 700),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildPrayerTimesTableHeader(),
+                for (var index = 0; index < entries.length; index++) ...[
+                  if (index == 0 ||
+                      entries[index - 1].date.month !=
+                          entries[index].date.month)
+                    _buildPrayerTimesMonthRow(entries[index].date),
+                  _buildPrayerTimesTableRow(entries[index]),
+                ],
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPrayerTimesRangeCards(List<_PrayerTimesRangeEntry> entries) {
+    return ListView.separated(
+      padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+      itemCount: entries.length,
+      separatorBuilder: (_, _) => const SizedBox(height: 8),
+      itemBuilder: (context, index) {
+        final entry = entries[index];
+        return _buildPrayerTimesRangeRow(entry);
+      },
+    );
+  }
+
+  Widget _buildPrayerTimesTableHeader() {
+    const labels = [
+      '\u0130msak',
+      'G\u00fcne\u015f',
+      '\u00d6\u011fle',
+      '\u0130kindi',
+      'Ak\u015fam',
+      'Yats\u0131',
+    ];
+    return Container(
+      height: 42,
+      color: const Color(0xFFEAF4EC),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: [
+          const SizedBox(width: 78),
+          for (final label in labels)
+            SizedBox(
+              width: 96,
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                style: const TextStyle(
+                  color: Color(0xFF2E7D32),
+                  fontWeight: FontWeight.w800,
+                  fontSize: 13,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPrayerTimesMonthRow(DateTime date) {
+    return Container(
+      height: 40,
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.symmetric(horizontal: 18),
+      decoration: const BoxDecoration(
+        color: Color(0xFFFFFFFF),
+        border: Border(bottom: BorderSide(color: Color(0x1F2E7D32))),
+      ),
+      child: Text(
+        _rangeMonthLabel(date),
+        style: const TextStyle(
+          color: Color(0xFF111111),
+          fontSize: 16,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPrayerTimesTableRow(_PrayerTimesRangeEntry entry) {
+    final isToday =
+        _startOfDay(
+          entry.date,
+        ).difference(_startOfDay(DateTime.now())).inDays ==
+        0;
+    final times = [
+      entry.times.fajr,
+      entry.times.sunrise,
+      entry.times.dhuhr,
+      entry.times.asr,
+      entry.times.maghrib,
+      entry.times.isha,
+    ];
+    return Container(
+      height: 54,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        color: isToday ? const Color(0xFFE4F3E8) : Colors.white,
+        border: const Border(bottom: BorderSide(color: Color(0x11000000))),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 78,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  entry.date.day.toString().padLeft(2, '0'),
+                  style: TextStyle(
+                    color: const Color(0xFF111111),
+                    fontSize: 16,
+                    fontWeight: isToday ? FontWeight.w800 : FontWeight.w700,
+                  ),
+                ),
+                Text(
+                  _rangeWeekdayShort(entry.date),
+                  style: const TextStyle(
+                    color: Color(0xFF333333),
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          for (var i = 0; i < times.length; i++)
+            SizedBox(
+              width: 96,
+              child: Text(
+                homeFormatTime(times[i]),
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                style: TextStyle(
+                  color: isToday && i == 0
+                      ? const Color(0xFF2E7D32)
+                      : const Color(0xFF111111),
+                  fontSize: 18,
+                  fontWeight: isToday && i == 0
+                      ? FontWeight.w800
+                      : FontWeight.w600,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  String _rangeMonthLabel(DateTime date) {
+    const months = [
+      'Ocak',
+      '\u015eubat',
+      'Mart',
+      'Nisan',
+      'May\u0131s',
+      'Haziran',
+      'Temmuz',
+      'A\u011fustos',
+      'Eyl\u00fcl',
+      'Ekim',
+      'Kas\u0131m',
+      'Aral\u0131k',
+    ];
+    return months[date.month - 1];
+  }
+
+  String _rangeWeekdayShort(DateTime date) {
+    const days = ['Pzt', 'Sal', '\u00c7ar', 'Per', 'Cum', 'Cts', 'Paz'];
+    return days[date.weekday - 1];
   }
 
   Widget _buildPrayerTimesRangeRow(_PrayerTimesRangeEntry entry) {
@@ -1440,6 +1711,239 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<void> _refreshNativeReminderSchedule() async {
+    if (_nativeScheduleRefreshInProgress) {
+      _nativeScheduleRefreshPending = true;
+      return;
+    }
+    _nativeScheduleRefreshInProgress = true;
+    try {
+      final schedule = await _buildNativeReminderSchedule();
+      await _nativeNotificationScheduler.ensurePermissions();
+      await _nativeNotificationScheduler.configure(schedule.notifications);
+      await _nativeNotificationScheduler.configureWidget(schedule.widgetEvents);
+    } catch (_) {
+      try {
+        await _nativeNotificationScheduler.cancelAll();
+      } catch (_) {}
+    } finally {
+      _nativeScheduleRefreshInProgress = false;
+      if (_nativeScheduleRefreshPending) {
+        _nativeScheduleRefreshPending = false;
+        unawaited(_refreshNativeReminderSchedule());
+      }
+    }
+  }
+
+  Future<_NativeReminderSchedule> _buildNativeReminderSchedule() async {
+    final location = await _locationStorage.read();
+    if (location == null) {
+      return const _NativeReminderSchedule(notifications: [], widgetEvents: []);
+    }
+
+    var methodCode = await _methodStorage.readCode();
+    methodCode ??= 'turkey';
+    final latitude = double.tryParse(location.latitude);
+    final longitude = double.tryParse(location.longitude);
+    if ((methodCode != 'turkey' && methodCode != 'diyanet_tabanli') &&
+        (latitude == null || longitude == null)) {
+      return const _NativeReminderSchedule(notifications: [], widgetEvents: []);
+    }
+
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final notifications = <NativePrayerNotificationEvent>[];
+    final widgetEvents = <NativePrayerWidgetEvent>[];
+    for (var dayOffset = 0; dayOffset < 7; dayOffset++) {
+      final date = today.add(Duration(days: dayOffset));
+      final times = await _prayerService.calculateForDate(
+        location: location,
+        latitude: latitude ?? 0,
+        longitude: longitude ?? 0,
+        timeZone: location.timeZoneOffset,
+        methodCode: methodCode,
+        date: date,
+        allowDiyanet: dayOffset == 0,
+      );
+      _appendNativeStandardPrayerEvents(
+        notifications: notifications,
+        widgetEvents: widgetEvents,
+        times: times,
+        now: now,
+      );
+      _appendNativeCustomPrayerEvents(notifications, times, now);
+    }
+    return _NativeReminderSchedule(
+      notifications: notifications,
+      widgetEvents: widgetEvents,
+    );
+  }
+
+  void _appendNativeStandardPrayerEvents({
+    required List<NativePrayerNotificationEvent> notifications,
+    required List<NativePrayerWidgetEvent> widgetEvents,
+    required PrayerTimes times,
+    required DateTime now,
+  }) {
+    final prayerTimes = <Prayer, DateTime>{
+      Prayer.fajr: times.fajr,
+      Prayer.sunrise: times.sunrise,
+      Prayer.dhuhr: times.dhuhr,
+      Prayer.asr: times.asr,
+      Prayer.maghrib: times.maghrib,
+      Prayer.isha: times.isha,
+    };
+    for (final entry in prayerTimes.entries) {
+      final settings = _settingsFor(entry.key);
+      final label = _turkishPrayerLabel(entry.key);
+      widgetEvents.add(
+        NativePrayerWidgetEvent(triggerAt: entry.value, prayerLabel: label),
+      );
+      _appendNativeEventsForRow(
+        events: notifications,
+        now: now,
+        baseId: entry.key.index + 1,
+        label: label,
+        prayerTime: entry.value,
+        settings: settings,
+      );
+    }
+  }
+
+  void _appendNativeCustomPrayerEvents(
+    List<NativePrayerNotificationEvent> events,
+    PrayerTimes times,
+    DateTime now,
+  ) {
+    for (var index = 0; index < _customPrayerRows.length; index++) {
+      final row = _customPrayerRows[index];
+      final prayerTime = _resolveCustomPrayerTimeForDate(
+        row.timeRule,
+        times,
+        times.fajr,
+      );
+      if (prayerTime == null) continue;
+      final label = row.labelController.text.trim().isEmpty
+          ? 'Nafile'
+          : row.labelController.text.trim();
+      _appendNativeEventsForRow(
+        events: events,
+        now: now,
+        baseId: 100 + index,
+        label: label,
+        prayerTime: prayerTime,
+        settings: row.settings,
+      );
+    }
+  }
+
+  void _appendNativeEventsForRow({
+    required List<NativePrayerNotificationEvent> events,
+    required DateTime now,
+    required int baseId,
+    required String label,
+    required DateTime prayerTime,
+    required _PrayerRowSettings settings,
+  }) {
+    if (settings.voiceEnabled ||
+        settings.visualEnabled ||
+        settings.vibrationEnabled) {
+      final reminderTime = prayerTime.subtract(
+        Duration(minutes: settings.reminderMinutes.clamp(0, 1440)),
+      );
+      if (reminderTime.isAfter(now)) {
+        events.add(
+          _nativeEvent(
+            baseId: baseId,
+            triggerAt: reminderTime,
+            prayerLabel: label,
+            stage: 'reminder',
+            voiceEnabled: settings.voiceEnabled,
+            visualEnabled: settings.visualEnabled,
+            azanEnabled: false,
+            vibrationEnabled: settings.vibrationEnabled,
+          ),
+        );
+      }
+    }
+    if (settings.azanEnabled || settings.vibrationEnabled) {
+      if (prayerTime.isAfter(now)) {
+        events.add(
+          _nativeEvent(
+            baseId: baseId,
+            triggerAt: prayerTime,
+            prayerLabel: label,
+            stage: 'prayer',
+            voiceEnabled: false,
+            visualEnabled: settings.azanEnabled,
+            azanEnabled: settings.azanEnabled,
+            vibrationEnabled: settings.vibrationEnabled,
+          ),
+        );
+      }
+    }
+  }
+
+  NativePrayerNotificationEvent _nativeEvent({
+    required int baseId,
+    required DateTime triggerAt,
+    required String prayerLabel,
+    required String stage,
+    required bool voiceEnabled,
+    required bool visualEnabled,
+    required bool azanEnabled,
+    required bool vibrationEnabled,
+  }) {
+    final stageOffset = stage == 'prayer' ? 5000 : 0;
+    final dayId =
+        DateTime(
+          triggerAt.year,
+          triggerAt.month,
+          triggerAt.day,
+        ).millisecondsSinceEpoch ~/
+        Duration.millisecondsPerDay;
+    final id = (dayId * 10000) + stageOffset + baseId;
+    final isPrayerStage = stage == 'prayer';
+    final title = isPrayerStage
+        ? '$prayerLabel vakti'
+        : '$prayerLabel vakti yakla\u015f\u0131yor';
+    final fallbackMessage = isPrayerStage
+        ? '$prayerLabel vakti girdi.'
+        : _effectiveVisualReminderText(prayerLabel);
+    return NativePrayerNotificationEvent(
+      id: id,
+      triggerAt: triggerAt,
+      prayerLabel: prayerLabel,
+      stage: stage,
+      title: title,
+      message: fallbackMessage,
+      voiceEnabled: voiceEnabled,
+      visualEnabled: visualEnabled,
+      azanEnabled: azanEnabled,
+      vibrationEnabled: vibrationEnabled,
+      vibrationDurationMs: _reminderSettings.vibrationDurationSeconds * 1000,
+    );
+  }
+
+  String _turkishPrayerLabel(Prayer prayer) {
+    switch (prayer) {
+      case Prayer.fajr:
+        return '\u0130msak';
+      case Prayer.sunrise:
+        return 'G\u00fcne\u015f';
+      case Prayer.dhuhr:
+        return '\u00d6\u011fle';
+      case Prayer.asr:
+        return '\u0130kindi';
+      case Prayer.maghrib:
+        return 'Ak\u015fam';
+      case Prayer.isha:
+        return 'Yats\u0131';
+      case Prayer.none:
+        return 'Vakit';
+    }
+  }
+
   Future<void> _triggerReminder({
     required Prayer prayer,
     required _PrayerRowSettings rowSettings,
@@ -1555,6 +2059,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       }
     });
+    unawaited(_refreshNativeReminderSchedule());
   }
 
   Future<void> _loadCustomPrayerRows() async {
@@ -1602,9 +2107,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ..addAll(loadedRows);
       _customPrayerSeed = maxSeed;
     });
+    unawaited(_refreshNativeReminderSchedule());
   }
 
-  Future<void> _persistCustomPrayerRows() {
+  Future<void> _persistCustomPrayerRows() async {
     final payload = _customPrayerRows.map((row) {
       return CustomPrayerRecord(
         id: row.id,
@@ -1622,10 +2128,11 @@ class _HomeScreenState extends State<HomeScreen> {
         manualMinute: row.timeRule.manualTime?.minute,
       );
     }).toList();
-    return _customPrayerStorage.write(payload);
+    await _customPrayerStorage.write(payload);
+    unawaited(_refreshNativeReminderSchedule());
   }
 
-  Future<void> _persistPrayerRowSettings() {
+  Future<void> _persistPrayerRowSettings() async {
     final payload = <Prayer, PrayerRowSettingsRecord>{};
     for (final entry in _rowSettings.entries) {
       payload[entry.key] = PrayerRowSettingsRecord(
@@ -1636,7 +2143,8 @@ class _HomeScreenState extends State<HomeScreen> {
         vibrationEnabled: entry.value.vibrationEnabled,
       );
     }
-    return _rowSettingsStorage.write(payload);
+    await _rowSettingsStorage.write(payload);
+    unawaited(_refreshNativeReminderSchedule());
   }
 
   int _defaultReminderMinutes(Prayer prayer) {

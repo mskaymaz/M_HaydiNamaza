@@ -11,6 +11,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[2]
 LOCAL_APPROVED_ROOT = REPO_ROOT / "assets" / "data" / "daily_content" / "approved"
 DEFAULT_ALLAPP_ROOT = REPO_ROOT / "_external" / "AllAppRemote" / "data" / "daily_content" / "v1"
+PUBLISH_HADITH_LIMIT = 150
 
 
 def main() -> None:
@@ -173,36 +174,49 @@ def _build_hadith_records(
     for record in local_records:
         if not _is_approved(record):
             continue
-        hadith_number = _string(record.get("hadith_number"))
+        hadith_number = _string(_first(record, "hadith_number", "hadithNo", "epubNo"))
         old = old_by_number.get(hadith_number)
+        source_info = record.get("sourceInfo") if isinstance(record.get("sourceInfo"), dict) else {}
+        display = source_info.get("display") if isinstance(source_info.get("display"), dict) else {}
+        primary = source_info.get("primaryCollection") if isinstance(source_info.get("primaryCollection"), dict) else {}
+        chapter = source_info.get("chapter") if isinstance(source_info.get("chapter"), dict) else {}
         output.append(
             {
                 "id": _string(record.get("id")) or f"hadith_{hadith_number}",
                 "type": "hadith",
-                "collection": _string((old or {}).get("collection")) or "Riyazu's-Salihin",
-                "book": _string((old or {}).get("book")) or f"Riyad as-Salihin {hadith_number}",
+                "collection": _string((old or {}).get("collection"))
+                or _string(primary.get("title_en"))
+                or _string(primary.get("title_tr"))
+                or "Riyazu's-Salihin",
+                "book": _string((old or {}).get("book"))
+                or _string(chapter.get("sunnah"))
+                or _string(chapter.get("diyanet_tr"))
+                or f"Riyad as-Salihin {hadith_number}",
                 "hadith_number": hadith_number,
                 "narrator": _string((old or {}).get("narrator")) or "requires verification",
-                "text_ar": _string(record.get("ar")),
-                "text_tr": _string(record.get("tr")),
-                "text_en": _string(record.get("en")),
+                "text_ar": _text(record, "ar"),
+                "text_tr": _text(record, "tr"),
+                "text_en": _text(record, "en"),
                 "source_ar": _string((old or {}).get("source_ar"))
+                or _string(display.get("ar"))
                 or f"local_approved:riyazussalihin/{hadith_number}:ar",
                 "source_tr": _string((old or {}).get("source_tr"))
+                or _string(display.get("tr"))
                 or f"local_approved:riyazussalihin/{hadith_number}:tr",
                 "source_en": _string((old or {}).get("source_en"))
+                or _string(display.get("en"))
                 or f"local_approved:riyazussalihin/{hadith_number}:en",
                 "grade": _string((old or {}).get("grade")) or "riyad_as_salihin_selection",
                 "source_note": _source_note(old, record, generated_at),
                 "topics": _topics(old, fallback="hadis_approved_pool"),
                 "status": "approved",
                 "priority": _int(record.get("priority"), default=1),
-                "book_reference_tr": _string(record.get("book_reference_tr")),
-                "book_reference_en": _string(record.get("book_reference_en")),
+                "book_reference_tr": _string(record.get("book_reference_tr")) or _string(display.get("tr")),
+                "book_reference_en": _string(record.get("book_reference_en")) or _string(display.get("en")),
                 "approval": _approval(record, generated_at),
             }
         )
-    return output
+    return output[:PUBLISH_HADITH_LIMIT]
 
 
 def _source_note(old: dict[str, Any] | None, record: dict[str, Any], generated_at: str) -> str:
@@ -233,7 +247,8 @@ def _topics(old: dict[str, Any] | None, fallback: str = "ayah_approved_pool") ->
 
 
 def _is_approved(record: dict[str, Any]) -> bool:
-    return _string(record.get("status")) == "approved"
+    status = _string(record.get("status"))
+    return status == "" or status == "approved"
 
 
 
@@ -250,8 +265,32 @@ def _records(payload: Any) -> list[dict[str, Any]]:
         return []
     records = payload.get("records")
     if not isinstance(records, list):
+        records = payload.get("items")
+    if not isinstance(records, list):
         return []
     return [dict(record) for record in records if isinstance(record, dict)]
+
+
+def _first(record: dict[str, Any], *keys: str) -> Any:
+    for key in keys:
+        value = record.get(key)
+        if _string(value):
+            return value
+    return None
+
+
+def _text(record: dict[str, Any], language: str) -> str:
+    for key in (f"text_{language}", language):
+        value = _string(record.get(key))
+        if value:
+            return value
+    text = record.get("text")
+    if isinstance(text, dict):
+        language_block = text.get(language)
+        if isinstance(language_block, dict):
+            return _string(language_block.get("clean") or language_block.get("sourceText"))
+        return _string(language_block)
+    return ""
 
 
 def _manifest_file(path: str, file_path: Path, record_count: int) -> dict[str, Any]:

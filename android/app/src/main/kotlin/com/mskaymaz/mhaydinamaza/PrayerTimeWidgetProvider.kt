@@ -58,14 +58,13 @@ class PrayerTimeWidgetProvider : AppWidgetProvider() {
             if (next == null) {
                 views.setTextViewText(R.id.prayer_widget_label, "Vakit")
                 views.setTextViewText(R.id.prayer_widget_time, "--:--")
-                views.setViewVisibility(R.id.prayer_widget_countdown, View.GONE)
-                views.setTextViewText(R.id.prayer_widget_remaining_label, "Uygulamayi acin")
+                views.setViewVisibility(R.id.prayer_widget_countdown, View.VISIBLE)
+                views.setTextViewText(R.id.prayer_widget_countdown, "--:--:--")
                 return views
             }
 
             views.setTextViewText(R.id.prayer_widget_label, next.prayerLabel)
             views.setTextViewText(R.id.prayer_widget_time, next.timeLabel)
-            views.setTextViewText(R.id.prayer_widget_remaining_label, "Kalan:")
             views.setViewVisibility(R.id.prayer_widget_countdown, View.VISIBLE)
 
             val remaining = next.triggerAtMillis - System.currentTimeMillis()
@@ -86,7 +85,10 @@ class PrayerTimeWidgetProvider : AppWidgetProvider() {
             val totalSeconds = (remainingMillis.coerceAtLeast(0L) / 1000L)
             val hours = totalSeconds / 3600L
             val minutes = (totalSeconds % 3600L) / 60L
-            return "$hours:${minutes.toString().padStart(2, '0')}"
+            val seconds = totalSeconds % 60L
+            return "${hours.toString().padStart(2, '0')}:${
+                minutes.toString().padStart(2, '0')
+            }:${seconds.toString().padStart(2, '0')}"
         }
     }
 }

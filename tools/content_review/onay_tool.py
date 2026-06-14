@@ -80,7 +80,7 @@ class OnayStateStore:
             str(row.get("ref") or "").strip(),
         ]
         if kind == "hadith":
-            number = str(row.get("hadith_number") or "").strip()
+            number = str(row.get("hadith_number") or row.get("hadithNo") or row.get("epubNo") or "").strip()
             if number:
                 keys.extend([number, f"riyazussalihin/{number}"])
         return [key for index, key in enumerate(keys) if key and key not in keys[:index]]
@@ -162,8 +162,8 @@ class ApprovedJsonEditor:
     def durum(self, kind: str, record_id: str) -> str:
         row = self._row_by_id(kind, record_id)
         if row is not None:
-            return str(row.get("status") or "pending_review").strip()
-        return "pending_review"
+            return str(row.get("status") or "approved").strip()
+        return "approved"
 
     def approve_review(self, kind: str, record_id: str, priority: int) -> bool:
         payload = self._read_payload(kind)
@@ -251,6 +251,10 @@ class ApprovedJsonEditor:
             payload = {"path": path, "root": root, "records": root["records"], "root_key": "records"}
             self._set_payload_cache(kind, payload, signature)
             return payload
+        if isinstance(root, dict) and isinstance(root.get("items"), list):
+            payload = {"path": path, "root": root, "records": root["items"], "root_key": "items"}
+            self._set_payload_cache(kind, payload, signature)
+            return payload
         raise ValueError(f"Approved JSON yapisi okunamadi: {path}")
 
     def _write_payload(self, kind: str, payload: dict[str, Any]) -> None:
@@ -274,7 +278,13 @@ class ApprovedJsonEditor:
         self._backup_manager.create_backup(path)
         root = payload["root"]
         if isinstance(root, dict):
-            root["content_version"] = f"onay-tool-{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            root_key = str(payload.get("root_key") or "records")
+            root[root_key] = payload["records"]
+            if root_key == "items" and isinstance(root.get("metadata"), dict):
+                root["metadata"]["updatedAt"] = datetime.now().replace(microsecond=0).isoformat()
+                root["metadata"]["totalItems"] = len(payload["records"])
+            else:
+                root["content_version"] = f"onay-tool-{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         tmp = path.with_suffix(path.suffix + ".tmp")
         with tmp.open("w", encoding="utf-8", newline="\n") as handle:
             json.dump(root, handle, ensure_ascii=False, indent=2)
@@ -395,6 +405,8 @@ class ApprovedJsonEditor:
         }
         if kind == "hadith":
             number = self._normalize_key(row.get("hadith_number"))
+            if not number:
+                number = self._normalize_key(row.get("hadithNo") or row.get("epubNo"))
             if number:
                 values.update({number, f"riyazussalihin/{number}"})
                 if number.isdigit():

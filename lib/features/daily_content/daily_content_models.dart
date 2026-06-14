@@ -16,6 +16,7 @@ class DailyAyahRecord {
   final String surahName;
   final int surahNumber;
   final int ayahNumber;
+  final int? ayahEndNumber;
   final String textAr;
   final String textTr;
   final String textEn;
@@ -34,6 +35,7 @@ class DailyAyahRecord {
     required this.surahName,
     required this.surahNumber,
     required this.ayahNumber,
+    this.ayahEndNumber,
     required this.textAr,
     required this.textTr,
     required this.textEn,

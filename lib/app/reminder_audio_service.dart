@@ -179,6 +179,7 @@ class ReminderAudioService {
             selectedLocale: selectedLocale,
           ),
           selectedLocale: selectedLocale,
+          requireMaleVoice: true,
         );
         return;
       case ReminderAudioMode.deviceAudio:
@@ -327,12 +328,34 @@ class ReminderAudioService {
     _ttsInProgress = false;
   }
 
-  Future<void> _applyPreferredVoice({required Locale? selectedLocale}) async {
+  Future<bool> _applyPreferredVoice({
+    required Locale? selectedLocale,
+    bool requireMaleVoice = false,
+  }) async {
     final deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
     final locale = _normalizeLocale(selectedLocale ?? deviceLocale);
     final localeKey = locale.countryCode == null || locale.countryCode!.isEmpty
         ? locale.languageCode
         : '${locale.languageCode}-${locale.countryCode}';
+    if (requireMaleVoice) {
+      final maleVoice = await _findRequiredMaleVoice(locale);
+      if (maleVoice == null) {
+        debugPrint('[TTS] Male voice not found; voice reminder skipped.');
+        return false;
+      }
+      try {
+        final appliedLocale = (maleVoice['locale'] ?? localeKey).toString();
+        await _flutterTts.setLanguage(appliedLocale);
+        await _flutterTts.setVoice({
+          'name': (maleVoice['name'] ?? '').toString(),
+          'locale': appliedLocale,
+        });
+        return true;
+      } catch (e) {
+        debugPrint('[TTS] Failed to apply male voice: $e');
+        return false;
+      }
+    }
     try {
       await _flutterTts.setLanguage(localeKey);
     } catch (_) {
@@ -350,7 +373,7 @@ class ReminderAudioService {
           'name': defaultTurkishVoiceName,
           'locale': defaultTurkishVoiceLocale,
         });
-        return;
+        return true;
       } catch (_) {}
     }
 
@@ -375,7 +398,7 @@ class ReminderAudioService {
               'name': stored.selectedEnglishVoiceName!,
               'locale': stored.selectedEnglishVoiceLocale!,
             });
-            return;
+            return true;
           } catch (e) {
             debugPrint('[TTS] Failed to set stored English voice: $e');
           }
@@ -398,7 +421,7 @@ class ReminderAudioService {
               'name': stored.selectedArabicVoiceName!,
               'locale': stored.selectedArabicVoiceLocale!,
             });
-            return;
+            return true;
           } catch (e) {
             debugPrint('[TTS] Failed to set stored Arabic voice: $e');
           }
@@ -411,11 +434,11 @@ class ReminderAudioService {
     try {
       voices = await _flutterTts.getVoices;
     } catch (_) {
-      return;
+      return true;
     }
-    if (voices is! List) return;
+    if (voices is! List) return true;
     final matchedVoice = _pickBestFallbackVoice(voices: voices, locale: locale);
-    if (matchedVoice == null) return;
+    if (matchedVoice == null) return true;
     try {
       final appliedName = (matchedVoice['name'] ?? '').toString();
       final appliedLocale = (matchedVoice['locale'] ?? localeKey).toString();
@@ -424,12 +447,16 @@ class ReminderAudioService {
         'name': (matchedVoice['name'] ?? '').toString(),
         'locale': (matchedVoice['locale'] ?? localeKey).toString(),
       });
-    } catch (_) {}
+      return true;
+    } catch (_) {
+      return true;
+    }
   }
 
   Future<void> _speakWithFallback(
     String spokenText, {
     required Locale? selectedLocale,
+    bool requireMaleVoice = false,
   }) async {
     final now = DateTime.now();
     final last = _lastTtsStartAt;
@@ -447,9 +474,16 @@ class ReminderAudioService {
       try {
         await _flutterTts.setQueueMode(0);
       } catch (_) {}
+      var voiceApplied = false;
       try {
-        await _applyPreferredVoice(selectedLocale: selectedLocale);
+        voiceApplied = await _applyPreferredVoice(
+          selectedLocale: selectedLocale,
+          requireMaleVoice: requireMaleVoice,
+        );
       } catch (_) {}
+      if (requireMaleVoice && !voiceApplied) {
+        return;
+      }
       try {
         await _flutterTts.setVolume(_stableTtsVolume);
       } catch (_) {}
@@ -462,6 +496,9 @@ class ReminderAudioService {
       final result = await _flutterTts.speak(spokenText);
       if (result == 1 || result == null) {
         return;
+      }
+      if (requireMaleVoice) {
+        throw Exception('male_tts_voice_missing');
       }
       await _flutterTts.setVoice(const <String, String>{});
       final retry = await _flutterTts.speak(spokenText);
@@ -477,6 +514,7 @@ class ReminderAudioService {
   Map<String, dynamic>? _pickBestFallbackVoice({
     required List voices,
     required Locale locale,
+    bool requireMaleVoice = false,
   }) {
     final localeCode = locale.languageCode.toLowerCase();
     final localeTag = _localeTag(locale).toLowerCase();
@@ -516,7 +554,23 @@ class ReminderAudioService {
         return voice;
       }
     }
+    if (requireMaleVoice) return null;
     return localeVoices.first;
+  }
+
+  Future<Map<String, dynamic>?> _findRequiredMaleVoice(Locale locale) async {
+    dynamic voices;
+    try {
+      voices = await _flutterTts.getVoices;
+    } catch (_) {
+      return null;
+    }
+    if (voices is! List) return null;
+    return _pickBestFallbackVoice(
+      voices: voices,
+      locale: locale,
+      requireMaleVoice: true,
+    );
   }
 
   String _localeTag(Locale locale) {
@@ -560,8 +614,10 @@ class ReminderAudioService {
   bool _voiceLooksMale(Map<String, dynamic> voice) {
     final key = _voiceCompositeKey(voice);
     final gender = (voice['gender'] ?? '').toString().toLowerCase();
-    return key.contains('male') ||
+    return key.contains(defaultTurkishVoiceName.toLowerCase()) ||
+        key.contains('male') ||
         key.contains('erkek') ||
+        key.contains('ahmet') ||
         key.contains('man') ||
         gender == 'male';
   }

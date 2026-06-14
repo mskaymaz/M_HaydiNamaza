@@ -124,9 +124,10 @@ class PrayerService {
     required String methodCode,
     required DateTime date,
     bool allowDiyanet = true,
+    bool allowRemote = true,
   }) async {
     final today = DateTime.now();
-    if (allowDiyanet && _isSameLocalDay(date, today)) {
+    if (allowRemote && allowDiyanet && _isSameLocalDay(date, today)) {
       return calculateToday(
         location: location,
         latitude: latitude,
@@ -169,6 +170,7 @@ class PrayerService {
       date: date,
       params: params,
       allowDiyanet: allowDiyanet,
+      allowRemote: allowRemote,
     );
     await _dailyCacheRepository.write(fingerprint: fingerprint, times: fresh);
     return fresh;
@@ -183,7 +185,18 @@ class PrayerService {
     required DateTime date,
     required CalculationParameters params,
     bool allowDiyanet = true,
+    bool allowRemote = true,
   }) async {
+    if (!allowRemote) {
+      _log('[Calc] local engine remote disabled');
+      return _engine.calculate(
+        date: date,
+        coordinates: Coordinates(latitude, longitude),
+        timeZone: timeZone,
+        params: params,
+      );
+    }
+
     if (methodCode == 'aladhan') {
       final aladhanTurkey = await _tryAladhan(
         date: date,
@@ -220,44 +233,6 @@ class PrayerService {
               'Isha ${formatPrayerTimeHourMinute(diyanetTimes.isha)}');
           return diyanetTimes;
         }
-      }
-
-      final aladhanTurkey = await _tryAladhan(
-        date: date,
-        latitude: latitude,
-        longitude: longitude,
-        methodCode: 'turkey',
-        school: 1,
-        fallbackParams: params,
-      );
-      if (aladhanTurkey != null) {
-        _log('[Aladhan:turkey] '
-            'Fajr ${formatPrayerTimeHourMinute(aladhanTurkey.fajr)} '
-            'Sunrise ${formatPrayerTimeHourMinute(aladhanTurkey.sunrise)} '
-            'Dhuhr ${formatPrayerTimeHourMinute(aladhanTurkey.dhuhr)} '
-            'Asr ${formatPrayerTimeHourMinute(aladhanTurkey.asr)} '
-            'Maghrib ${formatPrayerTimeHourMinute(aladhanTurkey.maghrib)} '
-            'Isha ${formatPrayerTimeHourMinute(aladhanTurkey.isha)}');
-        return aladhanTurkey;
-      }
-
-      final aladhanShafii = await _tryAladhan(
-        date: date,
-        latitude: latitude,
-        longitude: longitude,
-        methodCode: 'turkey',
-        school: 0,
-        fallbackParams: params,
-      );
-      if (aladhanShafii != null) {
-        _log('[Aladhan:shafii] '
-            'Fajr ${formatPrayerTimeHourMinute(aladhanShafii.fajr)} '
-            'Sunrise ${formatPrayerTimeHourMinute(aladhanShafii.sunrise)} '
-            'Dhuhr ${formatPrayerTimeHourMinute(aladhanShafii.dhuhr)} '
-            'Asr ${formatPrayerTimeHourMinute(aladhanShafii.asr)} '
-            'Maghrib ${formatPrayerTimeHourMinute(aladhanShafii.maghrib)} '
-            'Isha ${formatPrayerTimeHourMinute(aladhanShafii.isha)}');
-        return aladhanShafii;
       }
     }
 

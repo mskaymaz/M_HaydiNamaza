@@ -60,6 +60,7 @@ void main() {
         surahName: 'Fatiha',
         surahNumber: 1,
         ayahNumber: 1,
+        ayahEndNumber: 3,
         textAr: 'Bismillah',
         textTr: 'Rahman ve Rahim',
         textEn: 'In the name of Allah',
@@ -114,12 +115,27 @@ void main() {
     );
 
     expect(find.text('Rahman ve Rahim'), findsOneWidget);
-    expect(find.text('Fatiha 1'), findsOneWidget);
+    expect(find.text('01 Fatiha / 01-03'), findsOneWidget);
+
+    await tester.tap(find.text('EN'));
+    await tester.pumpAndSettle();
+    expect(find.text('01 Al-Fatihah / 01-03'), findsOneWidget);
+
+    await tester.tap(find.text('\u0639\u0631\u0628\u064A'));
+    await tester.pumpAndSettle();
+    expect(
+      find.text('\u0660\u0661 \u0627\u0644\u0641\u0627\u062a\u062d\u0629 / '
+          '\u0660\u0661-\u0660\u0663'),
+      findsOneWidget,
+    );
+
+    await tester.tap(find.text('TR'));
+    await tester.pumpAndSettle();
 
     await tester.drag(find.byType(PageView), const Offset(-500, 0));
     await tester.pumpAndSettle();
 
     expect(find.text('Ameller niyetlere gore deger kazanir'), findsOneWidget);
-    expect(find.text('Buhari 1'), findsOneWidget);
+    expect(find.text('Riyazüs-Salihîn 1'), findsOneWidget);
   });
 }

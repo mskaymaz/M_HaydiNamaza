@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../app/reminder_audio_service.dart';
 import '../../../features/daily_content/daily_content_models.dart';
 import '../../../features/daily_content/daily_content_selection_models.dart';
+import '../../../features/daily_content/quran_surah_names.dart';
 
 const _dailyContentArabicLocale = Locale('ar');
 const _dailyContentBasmalaAsset = 'img/Besmele.svg';
@@ -359,11 +360,12 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       title: '',
       displayText: activeText,
       isRtl: isRtl,
-      reference: '${ayah.surahName} ${ayah.ayahNumber}',
+      reference: _ayahReference(ayah, _activeLanguage),
       cizgiColor: widget.cizgiColor,
       contentColor: contentColor,
       referenceColor: const Color(0xFFF9A825),
       showBasmala: true,
+      infoText: _infoNoteForLanguage(_activeLanguage),
       onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
           ? () => _readTurkishAyahText(activeText)
           : null,
@@ -402,15 +404,74 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       title: '',
       displayText: activeText,
       isRtl: isRtl,
-      reference: '${hadith.collection} ${hadith.hadithNumber}',
+      reference: _hadithReference(hadith, _activeLanguage),
       bookReference: hadith.bookReferenceTr,
       cizgiColor: widget.cizgiColor,
       contentColor: contentColor,
       referenceColor: const Color(0xFFF9A825),
+      infoText: _infoNoteForLanguage(_activeLanguage),
       onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
           ? () => _readTurkishText(activeText)
           : null,
     );
+  }
+
+  String _ayahReference(DailyAyahRecord ayah, String language) {
+    final surah = _formatReferenceNumber(ayah.surahNumber, language);
+    final surahName = _surahNameForLanguage(ayah, language);
+    final start = _formatReferenceNumber(ayah.ayahNumber, language);
+    final endNumber = ayah.ayahEndNumber;
+    final prefix = surahName.isEmpty ? surah : '$surah $surahName';
+    if (endNumber == null || endNumber <= ayah.ayahNumber) {
+      return '$prefix / $start';
+    }
+    final end = _formatReferenceNumber(endNumber, language);
+    return '$prefix / $start-$end';
+  }
+
+  String _surahNameForLanguage(DailyAyahRecord ayah, String language) {
+    final fallback = ayah.surahName.trim();
+    if (language == 'ar') {
+      return QuranSurahNames.arabicName(ayah.surahNumber, fallback);
+    }
+    if (language == 'en') {
+      return QuranSurahNames.englishName(ayah.surahNumber, fallback);
+    }
+    return fallback;
+  }
+
+  String _formatReferenceNumber(int value, String language) {
+    final formatted = value.toString().padLeft(2, '0');
+    if (language == 'ar') {
+      return _toArabicDigits(formatted);
+    }
+    return formatted;
+  }
+
+  String _hadithReference(DailyHadithRecord hadith, String language) {
+    if (language == 'ar') {
+      return 'رياض الصالحين ${_toArabicDigits(hadith.hadithNumber)}';
+    }
+    if (language == 'en') {
+      return 'Riyad as-Salihin ${hadith.hadithNumber}';
+    }
+    return 'Riyazüs-Salihîn ${hadith.hadithNumber}';
+  }
+
+  String _toArabicDigits(String value) {
+    const digits = {
+      '0': '٠',
+      '1': '١',
+      '2': '٢',
+      '3': '٣',
+      '4': '٤',
+      '5': '٥',
+      '6': '٦',
+      '7': '٧',
+      '8': '٨',
+      '9': '٩',
+    };
+    return value.split('').map((char) => digits[char] ?? char).join();
   }
 
   Widget _buildEsmaTab(
@@ -454,6 +515,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       cizgiColor: widget.cizgiColor,
       contentColor: contentColor,
       referenceColor: const Color(0xFFF9A825),
+      infoText: _infoNoteForLanguage(_activeLanguage),
       onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
           ? () => _readTurkishText('$title. $activeText')
           : null,
@@ -500,6 +562,12 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
     if (first.isEmpty) return second;
     if (second.isEmpty || second == first) return first;
     return '$first\n\n$second';
+  }
+
+  String _infoNoteForLanguage(String language) {
+    if (language == 'ar') return 'ستضاف المعلومات';
+    if (language == 'en') return 'Information will be added';
+    return 'Bilgi eklenecek';
   }
 
   Future<void> _readTurkishText(String text) async {
@@ -551,7 +619,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
   }
 }
 
-class _DailyContentSection extends StatelessWidget {
+class _DailyContentSection extends StatefulWidget {
   final String title;
   final String arabicTitle;
   final String latinTitle;
@@ -564,6 +632,7 @@ class _DailyContentSection extends StatelessWidget {
   final Color referenceColor;
   final bool showBasmala;
   final double topContentInset;
+  final String infoText;
   final VoidCallback? onReadTap;
 
   const _DailyContentSection({
@@ -579,33 +648,44 @@ class _DailyContentSection extends StatelessWidget {
     required this.referenceColor,
     this.showBasmala = false,
     this.topContentInset = 0,
+    this.infoText = '',
     this.onReadTap,
   });
 
   @override
+  State<_DailyContentSection> createState() => _DailyContentSectionState();
+}
+
+class _DailyContentSectionState extends State<_DailyContentSection> {
+  bool _isInfoOpen = false;
+
+  @override
   Widget build(BuildContext context) {
     final refStyle = Theme.of(context).textTheme.labelSmall?.copyWith(
-      color: referenceColor,
+      color: widget.referenceColor,
       fontWeight: FontWeight.w600,
       fontSize: 17,
     );
     final double refFontSize = refStyle?.fontSize ?? 17;
-    final hasReadAction = onReadTap != null;
-    final textTrimmed = displayText.trim();
-    final isArabic = isRtl && _hasArabic(textTrimmed);
-    final titleTrimmed = title.trim();
-    final arabicTitleTrimmed = arabicTitle.trim();
-    final latinTitleTrimmed = latinTitle.trim();
-    final referenceTrimmed = reference.trim();
-    final bookReferenceTrimmed = bookReference.trim();
+    final hasReadAction = widget.onReadTap != null;
+    final infoTextTrimmed = widget.infoText.trim();
+    final hasInfoAction = infoTextTrimmed.isNotEmpty;
+    final textTrimmed = widget.displayText.trim();
+    final isArabic = widget.isRtl && _hasArabic(textTrimmed);
+    final titleTrimmed = widget.title.trim();
+    final arabicTitleTrimmed = widget.arabicTitle.trim();
+    final latinTitleTrimmed = widget.latinTitle.trim();
+    final referenceTrimmed = widget.reference.trim();
+    final bookReferenceTrimmed = widget.bookReference.trim();
     final hasReference =
         referenceTrimmed.isNotEmpty || bookReferenceTrimmed.isNotEmpty;
+    final hasActions = hasInfoAction || hasReadAction;
 
     final TextStyle displayStyle;
-    if (isRtl) {
+    if (widget.isRtl) {
       displayStyle =
           Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: cizgiColor.withValues(alpha: 0.9),
+            color: widget.cizgiColor.withValues(alpha: 0.9),
             fontFamily: 'Mirza',
             fontFamilyFallback: const <String>[
               'Lateef',
@@ -618,11 +698,14 @@ class _DailyContentSection extends StatelessWidget {
             fontWeight: FontWeight.w500,
             letterSpacing: 0,
           ) ??
-          TextStyle(color: cizgiColor.withValues(alpha: 0.9), fontSize: 22);
+          TextStyle(
+            color: widget.cizgiColor.withValues(alpha: 0.9),
+            fontSize: 22,
+          );
     } else {
       displayStyle =
           Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: cizgiColor.withValues(alpha: 0.85),
+            color: widget.cizgiColor.withValues(alpha: 0.85),
             height: 1.4,
             fontSize: 18,
             fontStyle: FontStyle.normal,
@@ -635,21 +718,22 @@ class _DailyContentSection extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: contentColor,
+        color: widget.contentColor,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: cizgiColor.withValues(alpha: 0.12)),
+        border: Border.all(
+          color: widget.cizgiColor.withValues(alpha: 0.12),
+        ),
       ),
-      child: Stack(
-        fit: StackFit.expand,
-        clipBehavior: Clip.hardEdge,
-        children: [
-          Positioned.fill(
-            child: SingleChildScrollView(
-              clipBehavior: Clip.hardEdge,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (topContentInset > 0) SizedBox(height: topContentInset),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: _isInfoOpen ? () => setState(() => _isInfoOpen = false) : null,
+        child: SingleChildScrollView(
+          clipBehavior: Clip.hardEdge,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+                  if (widget.topContentInset > 0)
+                    SizedBox(height: widget.topContentInset),
                   if (arabicTitleTrimmed.isNotEmpty) ...[
                     SizedBox(
                       width: double.infinity,
@@ -660,7 +744,7 @@ class _DailyContentSection extends StatelessWidget {
                         textDirection: TextDirection.rtl,
                         style:
                             Theme.of(context).textTheme.titleLarge?.copyWith(
-                              color: cizgiColor.withValues(alpha: 0.9),
+                              color: widget.cizgiColor.withValues(alpha: 0.9),
                               fontFamily: 'Amiri',
                               fontFamilyFallback: const <String>[
                                 'NotoNaskhArabic',
@@ -674,7 +758,7 @@ class _DailyContentSection extends StatelessWidget {
                               letterSpacing: 0,
                             ) ??
                             TextStyle(
-                              color: cizgiColor.withValues(alpha: 0.9),
+                              color: widget.cizgiColor.withValues(alpha: 0.9),
                               fontFamily: 'Amiri',
                               fontSize: 32,
                               height: 1.1,
@@ -691,12 +775,12 @@ class _DailyContentSection extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style:
                               Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: cizgiColor.withValues(alpha: 0.85),
+                                color: widget.cizgiColor.withValues(alpha: 0.85),
                                 fontSize: 20,
                                 fontWeight: FontWeight.normal,
                               ) ??
                               TextStyle(
-                                color: cizgiColor.withValues(alpha: 0.85),
+                                color: widget.cizgiColor.withValues(alpha: 0.85),
                                 fontSize: 20,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -711,7 +795,7 @@ class _DailyContentSection extends StatelessWidget {
                         titleTrimmed,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          color: cizgiColor.withValues(alpha: 0.85),
+                          color: widget.cizgiColor.withValues(alpha: 0.85),
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -719,7 +803,7 @@ class _DailyContentSection extends StatelessWidget {
                     const SizedBox(height: 4),
                   ],
                   if (textTrimmed.isNotEmpty) ...[
-                    if (showBasmala) ...[
+                    if (widget.showBasmala) ...[
                       const _BasmalaMark(),
                       const SizedBox(height: 8),
                     ],
@@ -727,7 +811,7 @@ class _DailyContentSection extends StatelessWidget {
                       width: double.infinity,
                       child: Text(
                         textTrimmed,
-                        locale: isRtl ? _dailyContentArabicLocale : null,
+                        locale: widget.isRtl ? _dailyContentArabicLocale : null,
                         style: displayStyle,
                         textAlign: TextAlign.center,
                         textDirection: isArabic
@@ -744,7 +828,14 @@ class _DailyContentSection extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           if (referenceTrimmed.isNotEmpty)
-                            Text(referenceTrimmed, style: refStyle),
+                            Text(
+                              referenceTrimmed,
+                              style: refStyle,
+                              textAlign: TextAlign.center,
+                              textDirection: widget.isRtl
+                                  ? TextDirection.rtl
+                                  : TextDirection.ltr,
+                            ),
                           if (bookReferenceTrimmed.isNotEmpty) ...[
                             const SizedBox(height: 6),
                             Text(
@@ -756,38 +847,59 @@ class _DailyContentSection extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                               ),
                               textAlign: TextAlign.center,
+                              textDirection: widget.isRtl
+                                  ? TextDirection.rtl
+                                  : TextDirection.ltr,
                             ),
                           ],
                         ],
                       ),
                     ),
                   ],
+                  if (hasActions) ...[
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 34,
+                          height: 34,
+                          child: hasInfoAction
+                              ? _OverlayIconButton(
+                                  icon: Icons.info_outline_rounded,
+                                  tooltip: 'Bilgi',
+                                  onTap: () => setState(() {
+                                    _isInfoOpen = !_isInfoOpen;
+                                  }),
+                                )
+                              : const SizedBox.shrink(),
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          width: 34,
+                          height: 34,
+                          child: hasReadAction
+                              ? _OverlayIconButton(
+                                  icon: Icons.volume_up_rounded,
+                                  tooltip: 'Oku',
+                                  onTap: widget.onReadTap!,
+                                )
+                              : const SizedBox.shrink(),
+                        ),
+                      ],
+                    ),
+                  ],
+                  if (_isInfoOpen && hasInfoAction) ...[
+                    const SizedBox(height: 8),
+                    _InlineInfoPanel(
+                      message: infoTextTrimmed,
+                      isRtl: widget.isRtl,
+                      cizgiColor: widget.cizgiColor,
+                    ),
+                  ],
                 ],
               ),
             ),
           ),
-          if (hasReadAction)
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Material(
-                color: Colors.black.withValues(alpha: 0.14),
-                borderRadius: BorderRadius.circular(14),
-                child: InkWell(
-                  onTap: onReadTap,
-                  borderRadius: BorderRadius.circular(14),
-                  child: const Padding(
-                    padding: EdgeInsets.all(6),
-                    child: Icon(
-                      Icons.volume_up_rounded,
-                      size: 22,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-        ],
       ),
     );
   }
@@ -796,6 +908,77 @@ class _DailyContentSection extends StatelessWidget {
     return RegExp(
       r'[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]',
     ).hasMatch(value);
+  }
+}
+
+class _InlineInfoPanel extends StatelessWidget {
+  final String message;
+  final bool isRtl;
+  final Color cizgiColor;
+
+  const _InlineInfoPanel({
+    required this.message,
+    required this.isRtl,
+    required this.cizgiColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.16),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: cizgiColor.withValues(alpha: 0.18)),
+      ),
+      child: Directionality(
+        textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+        child: Text(
+          message,
+          textAlign: isRtl ? TextAlign.right : TextAlign.left,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: Colors.white,
+            fontSize: 13,
+            height: 1.25,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _OverlayIconButton extends StatelessWidget {
+  final IconData icon;
+  final String tooltip;
+  final VoidCallback onTap;
+
+  const _OverlayIconButton({
+    required this.icon,
+    required this.tooltip,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: tooltip,
+      child: Material(
+        color: Colors.black.withValues(alpha: 0.14),
+        shape: const CircleBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          customBorder: const CircleBorder(),
+          child: SizedBox(
+            width: 34,
+            height: 34,
+            child: Icon(icon, size: 22, color: Colors.white),
+          ),
+        ),
+      ),
+    );
   }
 }
 

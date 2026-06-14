@@ -190,7 +190,10 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
                 return@TextToSpeech
             }
             try {
-                engine.language = Locale("tr", "TR")
+                if (!applyMaleTurkishVoice(engine)) {
+                    finish()
+                    return@TextToSpeech
+                }
                 engine.setSpeechRate(0.52f)
                 engine.setPitch(1.0f)
                 engine.setOnUtteranceProgressListener(
@@ -227,8 +230,59 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
         }
     }
 
+    private fun applyMaleTurkishVoice(engine: TextToSpeech): Boolean {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return false
+        val voices = try {
+            engine.voices
+        } catch (_: Exception) {
+            null
+        } ?: return false
+        val selectedVoice = voices.firstOrNull { voice ->
+            val name = voice.name.lowercase(Locale.US)
+            isTurkishVoice(name, voice.locale) &&
+                name == DEFAULT_TURKISH_MALE_VOICE_NAME
+        } ?: voices.firstOrNull { voice ->
+            isTurkishVoice(voice.name, voice.locale) &&
+                voiceLooksMale(voice.name, voice.features)
+        } ?: return false
+        return try {
+            val languageResult = engine.setLanguage(selectedVoice.locale)
+            if (
+                languageResult == TextToSpeech.LANG_MISSING_DATA ||
+                languageResult == TextToSpeech.LANG_NOT_SUPPORTED
+            ) {
+                return false
+            }
+            engine.setVoice(selectedVoice) == TextToSpeech.SUCCESS
+        } catch (_: Exception) {
+            false
+        }
+    }
+
+    private fun isTurkishVoice(name: String, locale: Locale): Boolean {
+        val normalizedName = name.lowercase(Locale.US)
+        return locale.language.equals("tr", ignoreCase = true) ||
+            normalizedName.startsWith("tr-")
+    }
+
+    private fun voiceLooksMale(name: String, features: Set<String>?): Boolean {
+        val searchText = buildString {
+            append(name.lowercase(Locale.US))
+            features.orEmpty().forEach { feature ->
+                append('|')
+                append(feature.lowercase(Locale.US))
+            }
+        }
+        return searchText.contains(DEFAULT_TURKISH_MALE_VOICE_NAME) ||
+            searchText.contains("male") ||
+            searchText.contains("erkek") ||
+            searchText.contains("ahmet") ||
+            searchText.contains("man")
+    }
+
     companion object {
         private const val CHANNEL_ID = "prayer_reminders"
         private const val UTTERANCE_ID = "prayer_reminder_voice"
+        private const val DEFAULT_TURKISH_MALE_VOICE_NAME = "tr-tr-x-tmc-network"
     }
 }

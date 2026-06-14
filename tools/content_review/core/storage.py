@@ -9,7 +9,12 @@ from typing import Any
 
 from .backup import BackupManager
 from .duplicate_checker import check_duplicates
-from .exporters import apply_record_to_raw, to_approved_record
+from .exporters import (
+    _merge_hadith_text,
+    _merge_source_info,
+    apply_record_to_raw,
+    to_approved_record,
+)
 from .logger import ActionLogger
 from .models import (
     AppPaths,
@@ -272,7 +277,7 @@ class ContentRepository:
                 surah_name=surah_name,
             )
         if kind == "hadith":
-            hadith_number = self._safe_int(raw.get("hadith_number") or raw.get("hadithNo"))
+            hadith_number = self._safe_int(raw.get("hadith_number") or raw.get("hadithNo") or raw.get("epubNo"))
             return HadithRecord(
                 **base_kwargs,
                 hadith_number=hadith_number,
@@ -290,20 +295,24 @@ class ContentRepository:
         )
 
     def _parse_approved_record(self, kind: ContentKind, raw: dict[str, Any]) -> BaseRecord:
+        ref = str(raw.get("ref") or "").strip()
+        hadith_number = self._safe_int(raw.get("hadith_number") or raw.get("hadithNo") or raw.get("epubNo"))
+        if kind == "hadith" and not ref and hadith_number is not None:
+            ref = f"riyazussalihin/{hadith_number}"
         approved = ApprovedRecord(
-            id=str(raw.get("id") or "").strip(),
+            id=str(raw.get("id") or (f"hadith_{hadith_number:06d}" if kind == "hadith" and hadith_number is not None else "")).strip(),
             kind=kind,
-            ref=str(raw.get("ref") or "").strip(),
-            ar=str(raw.get("ar") or "").strip(),
-            tr=str(raw.get("tr") or "").strip(),
-            en=str(raw.get("en") or "").strip(),
+            ref=ref,
+            ar=str(raw.get("ar") or self._extract_text(raw, kind, "ar")).strip(),
+            tr=str(raw.get("tr") or self._extract_text(raw, kind, "tr")).strip(),
+            en=str(raw.get("en") or self._extract_text(raw, kind, "en")).strip(),
             priority=self._normalize_priority(raw.get("priority")),
             approved_at=str(raw.get("approvedAt") or "").strip(),
             surah_number=self._safe_int(raw.get("surah_number")),
             surah_name=str(raw.get("surah_name") or "").strip(),
             ayah_number=self._safe_int(raw.get("ayah_number")),
             ayah_end_number=self._safe_int(raw.get("ayah_end_number") or raw.get("ayahEnd")),
-            hadith_number=self._safe_int(raw.get("hadith_number")),
+            hadith_number=hadith_number,
             book_reference_tr=str(raw.get("book_reference_tr") or "").strip(),
             book_reference_en=str(raw.get("book_reference_en") or "").strip(),
             esma_number=self._safe_int(raw.get("esma_number") or raw.get("id")),
@@ -355,8 +364,8 @@ class ContentRepository:
                 approved_at=approved.approved_at,
                 raw=dict(raw),
                 hadith_number=approved.hadith_number or self._safe_int(approved.ref.split("/")[-1]),
-                book_reference_tr=approved.book_reference_tr,
-                book_reference_en=approved.book_reference_en,
+                book_reference_tr=approved.book_reference_tr or self._extract_book_reference(raw, "tr"),
+                book_reference_en=approved.book_reference_en or self._extract_book_reference(raw, "en"),
             )
         return EsmaRecord(
             id=approved.id,
@@ -551,9 +560,26 @@ class ContentRepository:
             raw["ayah_number"] = approved.ayah_number
             raw["ayah_end_number"] = approved.ayah_end_number
         if approved.kind == "hadith":
-            raw["hadith_number"] = approved.hadith_number
-            raw["book_reference_tr"] = approved.book_reference_tr
-            raw["book_reference_en"] = approved.book_reference_en
+            if payload.get("root_key") == "items":
+                raw = dict(record.raw or {})
+                raw["id"] = approved.id
+                raw["ref"] = approved.ref
+                raw["hadithNo"] = approved.hadith_number
+                raw["epubNo"] = raw.get("epubNo") or approved.hadith_number
+                raw["groupKey"] = raw.get("groupKey") or "riyazussalihin"
+                raw["text"] = _merge_hadith_text(raw.get("text"), record)
+                raw["sourceInfo"] = _merge_source_info(raw.get("sourceInfo"), record)
+                raw["status"] = "approved"
+                raw["priority"] = approved.priority
+                raw["approvedAt"] = approved.approved_at
+                if approved.book_reference_tr:
+                    raw["book_reference_tr"] = approved.book_reference_tr
+                if approved.book_reference_en:
+                    raw["book_reference_en"] = approved.book_reference_en
+            else:
+                raw["hadith_number"] = approved.hadith_number
+                raw["book_reference_tr"] = approved.book_reference_tr
+                raw["book_reference_en"] = approved.book_reference_en
         if approved.kind == "esma":
             raw["esma_number"] = approved.esma_number
             raw["slug"] = approved.slug
@@ -577,8 +603,7 @@ class ContentRepository:
                 break
         if not replaced:
             rows.append(raw)
-        payload["root"]["content_version"] = f"tool-{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        payload["root"]["records"] = rows
+        self._touch_payload_root(payload, rows)
         self._write_payload(payload["path"], payload["root"], is_approved=True)
 
     def _refresh_archive_payload_if_changed(self, kind: ContentKind) -> None:
@@ -593,9 +618,21 @@ class ContentRepository:
         payload = self._approved_payloads[kind]
         rows = [row for row in payload["records"] if str(row.get("id") or "").strip() != record_id]
         payload["records"] = rows
-        payload["root"]["records"] = rows
-        payload["root"]["content_version"] = f"tool-{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        self._touch_payload_root(payload, rows)
         self._write_payload(payload["path"], payload["root"], is_approved=True)
+
+    @staticmethod
+    def _touch_payload_root(payload: dict[str, Any], rows: list[dict[str, Any]]) -> None:
+        root = payload["root"]
+        root_key = payload.get("root_key") or "records"
+        if isinstance(root, dict):
+            root[root_key] = rows
+            now = datetime.now().strftime("%Y%m%d_%H%M%S")
+            if root_key == "items" and isinstance(root.get("metadata"), dict):
+                root["metadata"]["updatedAt"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+                root["metadata"]["totalItems"] = len(rows)
+            else:
+                root["content_version"] = f"tool-{now}"
 
     def _refresh_approved_payload_if_changed(self, kind: ContentKind) -> None:
         path = self._approved_path(kind)

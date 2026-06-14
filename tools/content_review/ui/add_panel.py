@@ -951,7 +951,7 @@ class AddPanel(QWidget):
             number_line = f"Hedef {target_no} / aday {candidate_no} / fark {candidate_no - target_no:+d}"
         parts = [
             f"Koleksiyon: {source_info.get('label') or primary.get('title_tr') or '-'}",
-            f"Bolum: {chapter.get('title_tr') or '-'}",
+            f"Bolum: {chapter.get('title_tr') or chapter.get('diyanet_tr') or chapter.get('sunnah') or '-'}",
             f"No karsilastirma: {number_line}",
             f"TR kaynak: {display.get('tr') or '-'}",
             f"EN kaynak: {display.get('en') or '-'}",

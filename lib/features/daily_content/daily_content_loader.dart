@@ -183,10 +183,19 @@ class DailyContentLoader {
     final validRecords = <T>[];
     var skippedCount = 0;
 
-    final schemaVersion = _readRequiredString(payload, 'schema_version');
-    final contentVersion = _readRequiredString(payload, 'content_version');
-    final type = _readRequiredString(payload, 'type');
-    final records = payload['records'];
+    final records = _readRecords(payload);
+    final schemaVersion =
+        _readRequiredString(payload, 'schema_version') ??
+        (records == null ? null : '1.0.0');
+    final contentVersion =
+        _readRequiredString(payload, 'content_version') ??
+        _readMetadataString(payload, 'updatedAt') ??
+        _readMetadataString(payload, 'exportedAt') ??
+        (records == null ? null : 'local-items');
+    final type =
+        _readRequiredString(payload, 'type') ??
+        _readTypeFromMetadata(payload) ??
+        (records == null ? null : expectedType);
 
     if (schemaVersion == null) {
       warnings.add('$sourceLabel: schema_version zorunlu.');
@@ -307,10 +316,19 @@ class DailyContentLoader {
     }
 
     final payload = Map<String, dynamic>.from(decoded);
-    final schemaVersion = _readRequiredString(payload, 'schema_version');
-    final contentVersion = _readRequiredString(payload, 'content_version');
-    final type = _readRequiredString(payload, 'type');
-    final records = payload['records'];
+    final records = _readRecords(payload);
+    final schemaVersion =
+        _readRequiredString(payload, 'schema_version') ??
+        (records == null ? null : '1.0.0');
+    final contentVersion =
+        _readRequiredString(payload, 'content_version') ??
+        _readMetadataString(payload, 'updatedAt') ??
+        _readMetadataString(payload, 'exportedAt') ??
+        (records == null ? null : 'local-items');
+    final type =
+        _readRequiredString(payload, 'type') ??
+        _readTypeFromMetadata(payload) ??
+        (records == null ? null : expectedType);
 
     if (schemaVersion == null) {
       warnings.add('$path: schema_version zorunlu.');
@@ -392,34 +410,45 @@ class DailyContentLoader {
     List<String> warnings,
   ) {
     final id = _readRequiredString(json, 'id');
-    final type = _readRequiredString(json, 'type');
+    final type =
+        _readRequiredString(json, 'type') ??
+        _readRequiredString(json, 'kind') ??
+        'ayah';
     final surahName = _readRequiredString(json, 'surah_name');
     final surahNumber = _readRequiredInt(json, 'surah_number');
     final ayahNumber = _readRequiredInt(json, 'ayah_number');
-    final textAr = _readRequiredString(json, 'text_ar') ?? _readRequiredString(json, 'text');
-    final textTr = _readRequiredString(json, 'text_tr') ?? _readRequiredString(json, 'translation');
-    final textEn = _readRequiredString(json, 'text_en');
-    final sourceAr = _readRequiredString(json, 'source_ar');
-    final sourceTr = _readRequiredString(json, 'source_tr');
-    final sourceEn = _readRequiredString(json, 'source_en');
+    final rawAyahEndNumber = _readRequiredInt(json, 'ayah_end_number');
+    final textAr =
+        _readRequiredString(json, 'text_ar') ??
+        _readRequiredString(json, 'ar') ??
+        _readRequiredString(json, 'text');
+    final textTr =
+        _readRequiredString(json, 'text_tr') ??
+        _readRequiredString(json, 'tr') ??
+        _readRequiredString(json, 'translation');
+    final textEn =
+        _readRequiredString(json, 'text_en') ??
+        _readRequiredString(json, 'en');
+    final sourceAr =
+        _readRequiredString(json, 'source_ar') ?? 'local approved payload';
+    final sourceTr =
+        _readRequiredString(json, 'source_tr') ?? 'local approved payload';
+    final sourceEn =
+        _readRequiredString(json, 'source_en') ?? 'local approved payload';
     final mealSource = _readRequiredString(json, 'meal_source') ?? 'source_based';
     final sourceNote = _readRequiredString(json, 'source_note') ?? '';
-    final topics = _readRequiredStringList(json, 'topics');
+    final topics =
+        _readRequiredStringList(json, 'topics') ?? const ['ayah_approved_pool'];
     final status = _readOptionalString(json, 'status') ?? 'approved';
     final approval = _parseApprovalOrDefault(json);
 
     if (id == null ||
-        type == null ||
         surahName == null ||
         surahNumber == null ||
         ayahNumber == null ||
         textAr == null ||
         textTr == null ||
-        textEn == null ||
-        sourceAr == null ||
-        sourceTr == null ||
-        sourceEn == null ||
-        topics == null) {
+        textEn == null) {
       warnings.add('$path[$index]: ayah kaydi zorunlu alanlari eksik.');
       return null;
     }
@@ -433,12 +462,24 @@ class DailyContentLoader {
       return null;
     }
 
+    final ayahEndNumber =
+        rawAyahEndNumber ??
+        _readAyahEndNumberFromReference(
+          _readOptionalString(json, 'ref') ?? id,
+          ayahNumber,
+        ) ??
+        _readAyahEndNumberFromText(
+          [textAr, textTr, textEn],
+          ayahNumber,
+        );
+
     return DailyAyahRecord(
       id: id,
       type: type,
       surahName: surahName,
       surahNumber: surahNumber,
       ayahNumber: ayahNumber,
+      ayahEndNumber: ayahEndNumber,
       textAr: textAr,
       textTr: textTr,
       textEn: textEn,
@@ -460,38 +501,75 @@ class DailyContentLoader {
     List<String> warnings,
   ) {
     final id = _readRequiredString(json, 'id');
-    final type = _readRequiredString(json, 'type');
-    final collection = _readRequiredString(json, 'collection');
-    final book = _readRequiredString(json, 'book');
-    final hadithNumber = _readRequiredString(json, 'hadith_number');
-    final narrator = _readRequiredString(json, 'narrator');
-    final textAr = _readRequiredString(json, 'text_ar') ?? _readRequiredString(json, 'text');
-    final rawTextTr = _readRequiredString(json, 'text_tr') ?? _readRequiredString(json, 'text');
-    final textEn = _readRequiredString(json, 'text_en') ?? _readRequiredString(json, 'translation');
-    final sourceAr = _readRequiredString(json, 'source_ar');
-    final sourceTr = _readRequiredString(json, 'source_tr');
-    final sourceEn = _readRequiredString(json, 'source_en');
-    final grade = _readRequiredString(json, 'grade');
-    final bookReferenceTr = _readOptionalString(json, 'book_reference_tr') ?? '';
+    final sourceInfo = _readMap(json, 'sourceInfo');
+    final display = _readNestedMap(sourceInfo, 'display');
+    final primaryCollection = _readNestedMap(sourceInfo, 'primaryCollection');
+    final chapter = _readNestedMap(sourceInfo, 'chapter');
+    final type =
+        _readRequiredString(json, 'type') ??
+        _readRequiredString(json, 'kind') ??
+        'hadith';
+    final collection =
+        _readRequiredString(json, 'collection') ??
+        _readStringFromMap(primaryCollection, 'title_tr') ??
+        _readStringFromMap(primaryCollection, 'title_en') ??
+        _readRequiredString(json, 'groupKey') ??
+        'Riyazus Salihin';
+    final book =
+        _readRequiredString(json, 'book') ??
+        _readStringFromMap(chapter, 'diyanet_tr') ??
+        _readStringFromMap(chapter, 'sunnah') ??
+        '';
+    final hadithNumber =
+        _readRequiredString(json, 'hadith_number') ??
+        _readRequiredString(json, 'hadithNo') ??
+        _readRequiredString(json, 'epubNo');
+    final narrator =
+        _readRequiredString(json, 'narrator') ?? 'requires verification';
+    final textAr =
+        _readRequiredString(json, 'text_ar') ??
+        _readRequiredString(json, 'ar') ??
+        _readNestedText(json, 'ar') ??
+        _readRequiredString(json, 'text');
+    final rawTextTr =
+        _readRequiredString(json, 'text_tr') ??
+        _readRequiredString(json, 'tr') ??
+        _readNestedText(json, 'tr') ??
+        _readRequiredString(json, 'text');
+    final textEn =
+        _readRequiredString(json, 'text_en') ??
+        _readRequiredString(json, 'en') ??
+        _readNestedText(json, 'en') ??
+        _readRequiredString(json, 'translation');
+    final sourceAr =
+        _readRequiredString(json, 'source_ar') ??
+        _readStringFromMap(display, 'ar') ??
+        'local approved payload';
+    final sourceTr =
+        _readRequiredString(json, 'source_tr') ??
+        _readStringFromMap(display, 'tr') ??
+        'local approved payload';
+    final sourceEn =
+        _readRequiredString(json, 'source_en') ??
+        _readStringFromMap(display, 'en') ??
+        'local approved payload';
+    final grade =
+        _readRequiredString(json, 'grade') ?? 'riyad_as_salihin_selection';
+    final bookReferenceTr =
+        _readOptionalString(json, 'book_reference_tr') ??
+        _readStringFromMap(display, 'tr') ??
+        '';
     final sourceNote = _readRequiredString(json, 'source_note') ?? '';
-    final topics = _readRequiredStringList(json, 'topics');
+    final topics =
+        _readRequiredStringList(json, 'topics') ?? const ['hadis_approved_pool'];
     final status = _readOptionalString(json, 'status') ?? 'approved';
     final approval = _parseApprovalOrDefault(json);
 
     if (id == null ||
-        type == null ||
-        collection == null ||
-        book == null ||
         hadithNumber == null ||
-        narrator == null ||
         textAr == null ||
         rawTextTr == null ||
-        textEn == null ||
-        sourceAr == null ||
-        sourceTr == null ||
-        sourceEn == null ||
-        grade == null ||
-        topics == null) {
+        textEn == null) {
       warnings.add('$path[$index]: hadith kaydi zorunlu alanlari eksik.');
       return null;
     }
@@ -885,6 +963,7 @@ class DailyContentLoader {
 
   String? _readOptionalString(Map<String, dynamic> json, String key) {
     final value = json[key];
+    if (value is num) return value.toString();
     if (value is! String) return null;
     final trimmed = value.trim();
     if (trimmed.isEmpty) return null;
@@ -893,10 +972,106 @@ class DailyContentLoader {
 
   String? _readRequiredString(Map<String, dynamic> json, String key) {
     final value = json[key];
+    if (value is num) return value.toString();
     if (value is! String) return null;
     final trimmed = value.trim();
     if (trimmed.isEmpty) return null;
     return trimmed;
+  }
+
+  List<dynamic>? _readRecords(Map<String, dynamic> json) {
+    final records = json['records'];
+    if (records is List) return records;
+    final items = json['items'];
+    if (items is List) return items;
+    return null;
+  }
+
+  String? _readMetadataString(Map<String, dynamic> json, String key) {
+    final metadata = json['metadata'];
+    if (metadata is! Map) return null;
+    return _readStringFromMap(Map<String, dynamic>.from(metadata), key);
+  }
+
+  String? _readTypeFromMetadata(Map<String, dynamic> json) {
+    final metadata = json['metadata'];
+    if (metadata is! Map) return null;
+    final dataset = _readStringFromMap(
+      Map<String, dynamic>.from(metadata),
+      'dataset',
+    );
+    if (dataset == 'hadiths') return 'hadith';
+    if (dataset == 'ayahs') return 'ayah';
+    if (dataset == 'esma') return 'esma';
+    return null;
+  }
+
+  Map<String, dynamic> _readMap(Map<String, dynamic> json, String key) {
+    final value = json[key];
+    if (value is Map) return Map<String, dynamic>.from(value);
+    return const <String, dynamic>{};
+  }
+
+  Map<String, dynamic> _readNestedMap(
+    Map<String, dynamic> json,
+    String key,
+  ) {
+    final value = json[key];
+    if (value is Map) return Map<String, dynamic>.from(value);
+    return const <String, dynamic>{};
+  }
+
+  String? _readStringFromMap(Map<String, dynamic> json, String key) {
+    final value = json[key];
+    if (value is num) return value.toString();
+    if (value is! String) return null;
+    final trimmed = value.trim();
+    return trimmed.isEmpty ? null : trimmed;
+  }
+
+  String? _readNestedText(Map<String, dynamic> json, String language) {
+    final text = json['text'];
+    if (text is! Map) return null;
+    final languageBlock = text[language];
+    if (languageBlock is String) {
+      final trimmed = languageBlock.trim();
+      return trimmed.isEmpty ? null : trimmed;
+    }
+    if (languageBlock is! Map) return null;
+    final map = Map<String, dynamic>.from(languageBlock);
+    return _readStringFromMap(map, 'clean') ??
+        _readStringFromMap(map, 'sourceText');
+  }
+
+  int? _readAyahEndNumberFromReference(String? reference, int ayahNumber) {
+    final value = reference?.trim();
+    if (value == null || value.isEmpty) return null;
+    final match = RegExp(
+      r'[/:-](\d{1,3})(?:\s*-\s*(\d{1,3}))?',
+    ).firstMatch(value);
+    if (match == null) return null;
+    final start = int.tryParse(match.group(1) ?? '');
+    final end = int.tryParse(match.group(2) ?? '');
+    if (start != ayahNumber || end == null || end <= ayahNumber) {
+      return null;
+    }
+    return end;
+  }
+
+  int? _readAyahEndNumberFromText(List<String> texts, int ayahNumber) {
+    var maxNumber = ayahNumber;
+    final markerPattern = RegExp(r'\((\d{1,3})\)');
+    for (final text in texts) {
+      for (final match in markerPattern.allMatches(text)) {
+        final number = int.tryParse(match.group(1) ?? '');
+        if (number == null) continue;
+        if (number < ayahNumber || number > ayahNumber + 20) continue;
+        if (number > maxNumber) {
+          maxNumber = number;
+        }
+      }
+    }
+    return maxNumber > ayahNumber ? maxNumber : null;
   }
 
   int? _readRequiredInt(Map<String, dynamic> json, String key) {

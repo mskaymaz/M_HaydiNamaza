@@ -57,7 +57,7 @@ void main() {
       }
     });
 
-    test('logs Aladhan source label when Diyanet fails and Aladhan is used', () async {
+    test('uses local calculation when Diyanet fails for Turkey method', () async {
       final logs = <String>[];
       final original = debugPrint;
       debugPrint = (String? message, {int? wrapWidth}) {
@@ -94,7 +94,12 @@ void main() {
           methodCode: 'turkey',
         );
 
-        expect(logs.any((line) => line.contains('[Aladhan:turkey]')), isTrue);
+        expect(logs.any((line) => line.contains('[Aladhan:turkey]')), isFalse);
+        expect(logs.any((line) => line.contains('[Aladhan:shafii]')), isFalse);
+        expect(
+          logs.any((line) => line.contains('[Calc] fallback local engine')),
+          isTrue,
+        );
       } finally {
         debugPrint = original;
       }

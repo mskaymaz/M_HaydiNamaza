@@ -34,6 +34,7 @@ APPROVED_ROOT = REPO_ROOT / "assets" / "data" / "daily_content" / "approved"
 ALLAPP_ROOT = REPO_ROOT / "_external" / "AllAppRemote"
 ALLAPP_DATA_ROOT = ALLAPP_ROOT / "data" / "daily_content" / "v1"
 REMOTE_BASE_URL = "https://raw.githubusercontent.com/mskaymaz/AllApp/main/data/daily_content/v1"
+PUBLISH_HADITH_LIMIT = 150
 SYNC_SCRIPT = Path(__file__).resolve().with_name(
     "sync_allapp_publish_from_approved.py"
 )
@@ -70,12 +71,19 @@ class PublishWorker(QThread):
         self._validate_generated_counts(counts)
 
         self._run_command(
-            ["git", "add", "data/daily_content/v1"],
+            [
+                "git",
+                "add",
+                "data/daily_content/v1/manifest.json",
+                "data/daily_content/v1/publish/ayahs.v1.approved.json",
+                "data/daily_content/v1/publish/hadiths.v1.approved.json",
+                "data/daily_content/v1/publish/esmaul_husna.v1.approved.json",
+            ],
             cwd=ALLAPP_ROOT,
             label="AllApp publish dosyalari stage",
         )
         status = self._run_command(
-            ["git", "status", "--porcelain"],
+            ["git", "diff", "--cached", "--name-only"],
             cwd=ALLAPP_ROOT,
             label="AllApp degisiklik kontrolu",
             echo_output=False,
@@ -363,12 +371,18 @@ def _record_count(path: Path) -> int:
     payload = _read_json(path)
     records = payload.get("records")
     if not isinstance(records, list):
+        records = payload.get("items")
+    if not isinstance(records, list):
         return 0
-    return sum(
+    count = sum(
         1
         for record in records
-        if isinstance(record, dict) and str(record.get("status") or "").strip() == "approved"
+        if isinstance(record, dict)
+        and str(record.get("status") or "approved").strip() == "approved"
     )
+    if path.name == "hadiths.v1.approved.json":
+        return min(count, PUBLISH_HADITH_LIMIT)
+    return count
 
 
 def _read_json(path: Path, default: Any | None = None) -> Any:

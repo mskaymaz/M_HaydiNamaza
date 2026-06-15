@@ -45,8 +45,9 @@ class ReminderTtsVoicePolicy {
 
   static Locale localeFromTag(String tag) {
     final trimmed = tag.trim();
-    if (trimmed.isEmpty)
+    if (trimmed.isEmpty) {
       return WidgetsBinding.instance.platformDispatcher.locale;
+    }
     final parts = trimmed.split(RegExp('[-_]'));
     if (parts.length == 1) return Locale(parts[0]);
     return Locale(parts[0], parts[1]);

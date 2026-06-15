@@ -175,6 +175,7 @@ class PrayerScrollOverflowIndicator extends StatefulWidget {
   final Widget child;
 
   const PrayerScrollOverflowIndicator({
+    super.key,
     required this.controller,
     required this.cizgiColor,
     required this.child,

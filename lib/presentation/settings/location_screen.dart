@@ -6,7 +6,6 @@ import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
-import 'location_label_helpers.dart';
 import 'location_current_location_resolver.dart';
 import 'location_data_parsers.dart';
 import 'location_items_client.dart';
@@ -73,7 +72,7 @@ class _LocationScreenState extends State<LocationScreen> {
     }
     _selectedCountryId ??= ConfigRegistry.dataSources.diyanet.countryId;
     unawaited(_loadUseCurrentLocation());
-    this._loadFavorites();
+    _loadFavorites();
     _loadCountries();
   }
 
@@ -450,15 +449,19 @@ class _LocationScreenState extends State<LocationScreen> {
         onDistrictChanged: _onDistrictChanged,
         onRetry: _retryLocationLoad,
         onSaveCoordinates: () => unawaited(_persistManualSelection()),
-        onAddFavorite: this._addFavorite,
-        onFavoriteChanged: this._onFavoriteChanged,
+        onAddFavorite: _addFavorite,
+        onFavoriteChanged: _onFavoriteChanged,
         onApplyFavorite: _selectedFavorite == null
             ? null
-            : this._applySelectedFavorite,
+            : _applySelectedFavorite,
         onRemoveFavorite: _selectedFavorite == null
             ? null
-            : () => this._removeFavorite(_selectedFavorite!),
+            : () => _removeFavorite(_selectedFavorite!),
       ),
     );
+  }
+
+  void _updateFavoriteState(VoidCallback update) {
+    setState(update);
   }
 }

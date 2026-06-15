@@ -22,6 +22,7 @@ This file is the only bootstrap file for AI coding assistants.
 - Do not rewrite the full app in one step.
 - Preserve working behavior before improving it.
 - Keep files preferably under 400 lines; 600 lines only if unavoidable.
+- Before starting and before finishing any code-file edit, silently check the line count of each touched code file. Do not report this check to the user unless a touched code file exceeds or would exceed 600 lines. If a touched code file would exceed 600 lines, split it into appropriate smaller files instead of leaving it above 600 lines.
 - UI renders state and sends actions; business logic belongs to services/domain.
 - When a requested UI size/spacing change is given as a ratio or percent, calculate the final value first and commit the nearest clear literal value. Do not leave request-derived size expressions such as `base * 1.30`, `value + value * 0.30`, or temporary percentage math in code.
 - Do not hardcode app-specific text inside reusable shared modules.

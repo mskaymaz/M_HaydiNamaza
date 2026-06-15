@@ -16,10 +16,12 @@ String dailyContentAyahReference(DailyAyahRecord ayah, String language) {
 
 String dailyContentSurahNameForLanguage(DailyAyahRecord ayah, String language) {
   final fallback = ayah.surahName.trim();
-  if (language == 'ar')
+  if (language == 'ar') {
     return QuranSurahNames.arabicName(ayah.surahNumber, fallback);
-  if (language == 'en')
+  }
+  if (language == 'en') {
     return QuranSurahNames.englishName(ayah.surahNumber, fallback);
+  }
   return fallback;
 }
 
@@ -95,9 +97,11 @@ String dailyContentJoinMeaningAndText(String meaning, String text) {
 }
 
 String dailyContentInfoNoteForLanguage(String language) {
-  if (language == 'ar') return 'ستضاف المعلومات';
-  if (language == 'en') return 'Information will be added';
-  return 'Bilgi eklenecek';
+  if (language == 'ar') {
+    return '\u0633\u064a\u0636\u0627\u0641 \u0627\u0644\u0645\u062d\u062a\u0648\u0649';
+  }
+  if (language == 'en') return 'Content will be added';
+  return '\u0130\u00e7erik Eklenecek';
 }
 
 bool dailyContentHasArabic(String value) {

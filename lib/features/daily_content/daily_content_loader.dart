@@ -35,34 +35,34 @@ class DailyContentLoader {
           payload: bundle.esmaPayload,
           sourceLabel: 'remote:publish/esmaul_husna.v1.approved.json',
           expectedType: 'esma',
-          recordParser: this._parseEsmaRecord,
+          recordParser: _parseEsmaRecord,
         );
         final ayahResult = _loadApprovedPayload<DailyAyahRecord>(
           payload: bundle.ayahPayload,
           sourceLabel: 'remote:publish/ayahs.v1.approved.json',
           expectedType: 'ayah',
-          recordParser: this._parseAyahRecord,
+          recordParser: _parseAyahRecord,
         );
         final hadithResult = _loadApprovedPayload<DailyHadithRecord>(
           payload: bundle.hadithPayload,
           sourceLabel: 'remote:publish/hadiths.v1.approved.json',
           expectedType: 'hadith',
-          recordParser: this._parseHadithRecord,
+          recordParser: _parseHadithRecord,
         );
-        final orderedAyahs = this._orderAyahs(
+        final orderedAyahs = _orderAyahs(
           records: ayahResult.records,
           orderedIds: bundle.ayahOrderIds,
         );
-        final orderedHadiths = this._orderHadiths(
+        final orderedHadiths = _orderHadiths(
           records: hadithResult.records,
           orderedIds: bundle.hadithOrderIds,
         );
-        final esmaGroups = this._groupEsmaRecords(esmaResult.records);
-        final orderedEsmas = this._orderEsmas(
+        final esmaGroups = _groupEsmaRecords(esmaResult.records);
+        final orderedEsmas = _orderEsmas(
           records: esmaGroups.esmas,
           orderedIds: bundle.esmaOrderIds,
         );
-        final orderedSifats = this._orderEsmas(
+        final orderedSifats = _orderEsmas(
           records: esmaGroups.sifats,
           orderedIds: bundle.sifatOrderIds,
         );
@@ -77,10 +77,10 @@ class DailyContentLoader {
           hadiths: orderedHadiths,
           esmas: orderedEsmas,
           sifats: orderedSifats,
-          ayahOrderIds: this._extractAyahIds(orderedAyahs),
-          hadithOrderIds: this._extractHadithIds(orderedHadiths),
-          esmaOrderIds: this._extractEsmaIds(orderedEsmas),
-          sifatOrderIds: this._extractEsmaIds(orderedSifats),
+          ayahOrderIds: _extractAyahIds(orderedAyahs),
+          hadithOrderIds: _extractHadithIds(orderedHadiths),
+          esmaOrderIds: _extractEsmaIds(orderedEsmas),
+          sifatOrderIds: _extractEsmaIds(orderedSifats),
           sequenceStartDate: bundle.sequenceStartDate,
           skippedCount:
               ayahResult.skippedCount +
@@ -99,44 +99,44 @@ class DailyContentLoader {
     final ayahResult = await _loadApprovedFile<DailyAyahRecord>(
       path: DailyContentPaths.approvedAyahsSample,
       expectedType: 'ayah',
-      recordParser: this._parseAyahRecord,
+      recordParser: _parseAyahRecord,
     );
     final hadithResult = await _loadApprovedFile<DailyHadithRecord>(
       path: DailyContentPaths.approvedHadithsSample,
       expectedType: 'hadith',
-      recordParser: this._parseHadithRecord,
+      recordParser: _parseHadithRecord,
     );
     final esmaResult = await _loadApprovedFile<DailyEsmaRecord>(
       path: DailyContentPaths.approvedEsmaSample,
       expectedType: 'esma',
-      recordParser: this._parseEsmaRecord,
+      recordParser: _parseEsmaRecord,
     );
 
-    final localAyahIds = this._extractAyahIds(ayahResult.records);
-    final localHadithIds = this._extractHadithIds(hadithResult.records);
-    final esmaGroups = this._groupEsmaRecords(esmaResult.records);
-    final localEsmaIds = this._extractEsmaIds(esmaGroups.esmas);
-    final localSifatIds = this._extractEsmaIds(esmaGroups.sifats);
-    final sequenceAsset = await this._loadLocalSequence(
+    final localAyahIds = _extractAyahIds(ayahResult.records);
+    final localHadithIds = _extractHadithIds(hadithResult.records);
+    final esmaGroups = _groupEsmaRecords(esmaResult.records);
+    final localEsmaIds = _extractEsmaIds(esmaGroups.esmas);
+    final localSifatIds = _extractEsmaIds(esmaGroups.sifats);
+    final sequenceAsset = await _loadLocalSequence(
       warnings: remoteWarnings,
       fallbackAyahIds: localAyahIds,
       fallbackHadithIds: localHadithIds,
       fallbackEsmaIds: localEsmaIds,
       fallbackSifatIds: localSifatIds,
     );
-    final orderedAyahs = this._orderAyahs(
+    final orderedAyahs = _orderAyahs(
       records: ayahResult.records,
       orderedIds: sequenceAsset.ayahOrderIds,
     );
-    final orderedHadiths = this._orderHadiths(
+    final orderedHadiths = _orderHadiths(
       records: hadithResult.records,
       orderedIds: sequenceAsset.hadithOrderIds,
     );
-    final orderedEsmas = this._orderEsmas(
+    final orderedEsmas = _orderEsmas(
       records: esmaGroups.esmas,
       orderedIds: sequenceAsset.esmaOrderIds,
     );
-    final orderedSifats = this._orderEsmas(
+    final orderedSifats = _orderEsmas(
       records: esmaGroups.sifats,
       orderedIds: sequenceAsset.sifatOrderIds,
     );
@@ -152,10 +152,10 @@ class DailyContentLoader {
       hadiths: orderedHadiths,
       esmas: orderedEsmas,
       sifats: orderedSifats,
-      ayahOrderIds: this._extractAyahIds(orderedAyahs),
-      hadithOrderIds: this._extractHadithIds(orderedHadiths),
-      esmaOrderIds: this._extractEsmaIds(orderedEsmas),
-      sifatOrderIds: this._extractEsmaIds(orderedSifats),
+      ayahOrderIds: _extractAyahIds(orderedAyahs),
+      hadithOrderIds: _extractHadithIds(orderedHadiths),
+      esmaOrderIds: _extractEsmaIds(orderedEsmas),
+      sifatOrderIds: _extractEsmaIds(orderedSifats),
       sequenceStartDate: sequenceAsset.startDate,
       skippedCount:
           ayahResult.skippedCount +
@@ -186,18 +186,18 @@ class DailyContentLoader {
     final validRecords = <T>[];
     var skippedCount = 0;
 
-    final records = this._readRecords(payload);
+    final records = _readRecords(payload);
     final schemaVersion =
-        this._readRequiredString(payload, 'schema_version') ??
+        _readRequiredString(payload, 'schema_version') ??
         (records == null ? null : '1.0.0');
     final contentVersion =
-        this._readRequiredString(payload, 'content_version') ??
-        this._readMetadataString(payload, 'updatedAt') ??
-        this._readMetadataString(payload, 'exportedAt') ??
+        _readRequiredString(payload, 'content_version') ??
+        _readMetadataString(payload, 'updatedAt') ??
+        _readMetadataString(payload, 'exportedAt') ??
         (records == null ? null : 'local-items');
     final type =
-        this._readRequiredString(payload, 'type') ??
-        this._readTypeFromMetadata(payload) ??
+        _readRequiredString(payload, 'type') ??
+        _readTypeFromMetadata(payload) ??
         (records == null ? null : expectedType);
 
     if (schemaVersion == null) {
@@ -319,18 +319,18 @@ class DailyContentLoader {
     }
 
     final payload = Map<String, dynamic>.from(decoded);
-    final records = this._readRecords(payload);
+    final records = _readRecords(payload);
     final schemaVersion =
-        this._readRequiredString(payload, 'schema_version') ??
+        _readRequiredString(payload, 'schema_version') ??
         (records == null ? null : '1.0.0');
     final contentVersion =
-        this._readRequiredString(payload, 'content_version') ??
-        this._readMetadataString(payload, 'updatedAt') ??
-        this._readMetadataString(payload, 'exportedAt') ??
+        _readRequiredString(payload, 'content_version') ??
+        _readMetadataString(payload, 'updatedAt') ??
+        _readMetadataString(payload, 'exportedAt') ??
         (records == null ? null : 'local-items');
     final type =
-        this._readRequiredString(payload, 'type') ??
-        this._readTypeFromMetadata(payload) ??
+        _readRequiredString(payload, 'type') ??
+        _readTypeFromMetadata(payload) ??
         (records == null ? null : expectedType);
 
     if (schemaVersion == null) {

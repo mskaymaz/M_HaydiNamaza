@@ -11,7 +11,7 @@ extension _LocationScreenFavorites on _LocationScreenState {
         _selectedFavorite != null && favorites.contains(_selectedFavorite)
         ? _selectedFavorite
         : null;
-    setState(() {
+    _updateFavoriteState(() {
       _favorites = favorites;
       _selectedFavorite = selected;
     });
@@ -39,7 +39,7 @@ extension _LocationScreenFavorites on _LocationScreenState {
         longitude: longitude,
       ),
     );
-    await this._loadFavorites();
+    await _loadFavorites();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -55,11 +55,11 @@ extension _LocationScreenFavorites on _LocationScreenState {
     final removed = await _favoritesStorage.remove(favorite);
     if (!mounted) return;
     if (isSelected) {
-      setState(() {
+      _updateFavoriteState(() {
         _selectedFavorite = null;
       });
     }
-    await this._loadFavorites();
+    await _loadFavorites();
     if (!mounted || !removed) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -69,7 +69,7 @@ extension _LocationScreenFavorites on _LocationScreenState {
   }
 
   void _applyFavorite(LocationFavorite favorite) {
-    setState(() {
+    _updateFavoriteState(() {
       _useCurrentLocation = false;
       _selectedFavorite = favorite;
       _selectedCountryId = favorite.countryId ?? _selectedCountryId;
@@ -88,7 +88,7 @@ extension _LocationScreenFavorites on _LocationScreenState {
   Future<void> _applySelectedFavorite() async {
     final favorite = _selectedFavorite;
     if (favorite == null) return;
-    this._applyFavorite(favorite);
+    _applyFavorite(favorite);
     _latController.text = favorite.latitude;
     _lonController.text = favorite.longitude;
     await _storage.write(
@@ -106,7 +106,7 @@ extension _LocationScreenFavorites on _LocationScreenState {
   }
 
   void _onFavoriteChanged(LocationFavorite favorite) {
-    setState(() {
+    _updateFavoriteState(() {
       _selectedFavorite = favorite;
     });
   }

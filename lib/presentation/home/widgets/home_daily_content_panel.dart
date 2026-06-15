@@ -414,6 +414,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       cizgiColor: widget.cizgiColor,
       contentColor: contentColor,
       referenceColor: const Color(0xFFF9A825),
+      showBasmala: true,
       infoText: dailyContentInfoNoteForLanguage(_activeLanguage),
       onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
           ? () => _readTurkishText(activeText)
@@ -462,6 +463,7 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
       cizgiColor: widget.cizgiColor,
       contentColor: contentColor,
       referenceColor: const Color(0xFFF9A825),
+      showBasmala: true,
       infoText: dailyContentInfoNoteForLanguage(_activeLanguage),
       onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
           ? () => _readTurkishText('$title. $activeText')

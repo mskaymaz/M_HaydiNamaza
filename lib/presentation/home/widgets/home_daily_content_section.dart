@@ -21,6 +21,7 @@ class DailyContentSection extends StatefulWidget {
   final VoidCallback? onReadTap;
 
   const DailyContentSection({
+    super.key,
     required this.title,
     this.arabicTitle = '',
     this.latinTitle = '',
@@ -43,6 +44,14 @@ class DailyContentSection extends StatefulWidget {
 
 class _DailyContentSectionState extends State<DailyContentSection> {
   bool _isInfoOpen = false;
+  final GlobalKey _sectionKey = GlobalKey();
+  OverlayEntry? _infoOverlayEntry;
+
+  @override
+  void dispose() {
+    _removeInfoOverlay();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +74,8 @@ class _DailyContentSectionState extends State<DailyContentSection> {
     final hasReference =
         referenceTrimmed.isNotEmpty || bookReferenceTrimmed.isNotEmpty;
     final hasActions = hasInfoAction || hasReadAction;
+    final showBasmalaHeader = widget.showBasmala && textTrimmed.isNotEmpty;
+    final basmalaAfterGap = arabicTitleTrimmed.isNotEmpty ? 20.0 : 12.0;
 
     final TextStyle displayStyle;
     if (widget.isRtl) {
@@ -99,193 +110,241 @@ class _DailyContentSectionState extends State<DailyContentSection> {
     }
 
     return Container(
+      key: _sectionKey,
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+      padding: const EdgeInsets.fromLTRB(10, 1, 10, 8),
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: widget.contentColor,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: widget.cizgiColor.withValues(alpha: 0.12)),
       ),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: _isInfoOpen ? () => setState(() => _isInfoOpen = false) : null,
-        child: SingleChildScrollView(
-          clipBehavior: Clip.hardEdge,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              if (widget.topContentInset > 0)
-                SizedBox(height: widget.topContentInset),
-              if (arabicTitleTrimmed.isNotEmpty) ...[
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    arabicTitleTrimmed,
-                    locale: _dailyContentSectionArabicLocale,
-                    textAlign: TextAlign.center,
-                    textDirection: TextDirection.rtl,
-                    style:
-                        Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: widget.cizgiColor.withValues(alpha: 0.9),
-                          fontFamily: 'Amiri',
-                          fontFamilyFallback: const <String>[
-                            'NotoNaskhArabic',
-                            'Lateef',
-                            'Mirza',
-                            'Arial',
-                          ],
-                          fontSize: 32,
-                          height: 1.1,
-                          fontWeight: FontWeight.normal,
-                          letterSpacing: 0,
-                        ) ??
-                        TextStyle(
-                          color: widget.cizgiColor.withValues(alpha: 0.9),
-                          fontFamily: 'Amiri',
-                          fontSize: 32,
-                          height: 1.1,
-                          fontWeight: FontWeight.normal,
-                        ),
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            clipBehavior: Clip.hardEdge,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (widget.topContentInset > 0 && !showBasmalaHeader)
+                  SizedBox(height: widget.topContentInset),
+                if (showBasmalaHeader) ...[
+                  _BasmalaHeader(
+                    hasInfoAction: hasInfoAction,
+                    hasReadAction: hasReadAction,
+                    onInfoTap: () => _openInfoPanel(infoTextTrimmed),
+                    onReadTap: widget.onReadTap,
                   ),
-                ),
-                if (latinTitleTrimmed.isNotEmpty) ...[
-                  const SizedBox(height: 10),
+                  SizedBox(height: basmalaAfterGap),
+                ],
+                if (arabicTitleTrimmed.isNotEmpty) ...[
                   SizedBox(
                     width: double.infinity,
                     child: Text(
-                      latinTitleTrimmed,
+                      arabicTitleTrimmed,
+                      locale: _dailyContentSectionArabicLocale,
                       textAlign: TextAlign.center,
+                      textDirection: TextDirection.rtl,
                       style:
-                          Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: widget.cizgiColor.withValues(alpha: 0.85),
-                            fontSize: 20,
+                          Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: widget.cizgiColor.withValues(alpha: 0.9),
+                            fontFamily: 'Amiri',
+                            fontFamilyFallback: const <String>[
+                              'NotoNaskhArabic',
+                              'Lateef',
+                              'Mirza',
+                              'Arial',
+                            ],
+                            fontSize: 32,
+                            height: 1.1,
                             fontWeight: FontWeight.normal,
+                            letterSpacing: 0,
                           ) ??
                           TextStyle(
-                            color: widget.cizgiColor.withValues(alpha: 0.85),
-                            fontSize: 20,
+                            color: widget.cizgiColor.withValues(alpha: 0.9),
+                            fontFamily: 'Amiri',
+                            fontSize: 32,
+                            height: 1.1,
                             fontWeight: FontWeight.normal,
                           ),
                     ),
                   ),
-                ],
-                const SizedBox(height: 6),
-              ] else if (titleTrimmed.isNotEmpty) ...[
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    titleTrimmed,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: widget.cizgiColor.withValues(alpha: 0.85),
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 4),
-              ],
-              if (textTrimmed.isNotEmpty) ...[
-                if (widget.showBasmala) ...[
-                  const _BasmalaMark(),
-                  const SizedBox(height: 8),
-                ],
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    textTrimmed,
-                    locale: widget.isRtl
-                        ? _dailyContentSectionArabicLocale
-                        : null,
-                    style: displayStyle,
-                    textAlign: TextAlign.center,
-                    textDirection: isArabic
-                        ? TextDirection.rtl
-                        : TextDirection.ltr,
-                    softWrap: true,
-                  ),
-                ),
-              ],
-              if (hasReference) ...[
-                const SizedBox(height: 20),
-                Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (referenceTrimmed.isNotEmpty)
-                        Text(
-                          referenceTrimmed,
-                          style: refStyle,
-                          textAlign: TextAlign.center,
-                          textDirection: widget.isRtl
-                              ? TextDirection.rtl
-                              : TextDirection.ltr,
-                        ),
-                      if (bookReferenceTrimmed.isNotEmpty) ...[
-                        const SizedBox(height: 6),
-                        Text(
-                          bookReferenceTrimmed,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: (refFontSize - 2),
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.center,
-                          textDirection: widget.isRtl
-                              ? TextDirection.rtl
-                              : TextDirection.ltr,
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-              ],
-              if (hasActions) ...[
-                const SizedBox(height: 8),
-                Row(
-                  children: [
+                  if (latinTitleTrimmed.isNotEmpty) ...[
+                    const SizedBox(height: 10),
                     SizedBox(
-                      width: 34,
-                      height: 34,
-                      child: hasInfoAction
-                          ? _OverlayIconButton(
-                              icon: Icons.info_outline_rounded,
-                              tooltip: 'Bilgi',
-                              onTap: () => setState(() {
-                                _isInfoOpen = !_isInfoOpen;
-                              }),
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                    const Spacer(),
-                    SizedBox(
-                      width: 34,
-                      height: 34,
-                      child: hasReadAction
-                          ? _OverlayIconButton(
-                              icon: Icons.volume_up_rounded,
-                              tooltip: 'Oku',
-                              onTap: widget.onReadTap!,
-                            )
-                          : const SizedBox.shrink(),
+                      width: double.infinity,
+                      child: Text(
+                        latinTitleTrimmed,
+                        textAlign: TextAlign.center,
+                        style:
+                            Theme.of(context).textTheme.labelLarge?.copyWith(
+                              color: widget.cizgiColor.withValues(alpha: 0.85),
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal,
+                            ) ??
+                            TextStyle(
+                              color: widget.cizgiColor.withValues(alpha: 0.85),
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal,
+                            ),
+                      ),
                     ),
                   ],
-                ),
+                  const SizedBox(height: 6),
+                ] else if (titleTrimmed.isNotEmpty) ...[
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      titleTrimmed,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        color: widget.cizgiColor.withValues(alpha: 0.85),
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                ],
+                if (textTrimmed.isNotEmpty) ...[
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      textTrimmed,
+                      locale: widget.isRtl
+                          ? _dailyContentSectionArabicLocale
+                          : null,
+                      style: displayStyle,
+                      textAlign: TextAlign.center,
+                      textDirection: isArabic
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      softWrap: true,
+                    ),
+                  ),
+                ],
+                if (hasReference) ...[
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (referenceTrimmed.isNotEmpty)
+                          Text(
+                            referenceTrimmed,
+                            style: refStyle,
+                            textAlign: TextAlign.center,
+                            textDirection: widget.isRtl
+                                ? TextDirection.rtl
+                                : TextDirection.ltr,
+                          ),
+                        if (bookReferenceTrimmed.isNotEmpty) ...[
+                          const SizedBox(height: 6),
+                          Text(
+                            bookReferenceTrimmed,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: (refFontSize - 2),
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.center,
+                            textDirection: widget.isRtl
+                                ? TextDirection.rtl
+                                : TextDirection.ltr,
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
+                if (hasActions && !showBasmalaHeader) ...[
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 34,
+                        height: 34,
+                        child: hasInfoAction
+                            ? _OverlayIconButton(
+                                icon: Icons.info_outline_rounded,
+                                tooltip: 'Bilgi',
+                                onTap: () => _openInfoPanel(infoTextTrimmed),
+                              )
+                            : const SizedBox.shrink(),
+                      ),
+                      const Spacer(),
+                      SizedBox(
+                        width: 34,
+                        height: 34,
+                        child: hasReadAction
+                            ? _OverlayIconButton(
+                                icon: Icons.volume_up_rounded,
+                                tooltip: 'Oku',
+                                onTap: widget.onReadTap!,
+                              )
+                            : const SizedBox.shrink(),
+                      ),
+                    ],
+                  ),
+                ],
               ],
-              if (_isInfoOpen && hasInfoAction) ...[
-                const SizedBox(height: 8),
-                _InlineInfoPanel(
-                  message: infoTextTrimmed,
-                  isRtl: widget.isRtl,
-                  cizgiColor: widget.cizgiColor,
-                ),
-              ],
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
+  }
+
+  void _openInfoPanel(String message) {
+    final trimmedMessage = message.trim();
+    if (trimmedMessage.isEmpty) return;
+    if (_isInfoOpen) return;
+    _removeInfoOverlay();
+    final renderObject = _sectionKey.currentContext?.findRenderObject();
+    if (renderObject is! RenderBox || !renderObject.hasSize) return;
+    final overlay = Overlay.of(context);
+    final offset = renderObject.localToGlobal(Offset.zero);
+    final size = renderObject.size;
+
+    _infoOverlayEntry = OverlayEntry(
+      builder: (context) {
+        return Stack(
+          children: [
+            Positioned.fill(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: _closeInfoPanel,
+                child: const SizedBox.expand(),
+              ),
+            ),
+            Positioned(
+              left: offset.dx,
+              top: offset.dy,
+              width: size.width,
+              height: size.height,
+              child: _InfoOverlayPanel(
+                message: trimmedMessage,
+                isRtl: widget.isRtl,
+                cizgiColor: widget.cizgiColor,
+                contentColor: widget.contentColor,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+    overlay.insert(_infoOverlayEntry!);
+    if (mounted) setState(() => _isInfoOpen = true);
+  }
+
+  void _closeInfoPanel() {
+    _removeInfoOverlay();
+    if (mounted) setState(() => _isInfoOpen = false);
+  }
+
+  void _removeInfoOverlay() {
+    _infoOverlayEntry?.remove();
+    _infoOverlayEntry = null;
   }
 
   bool _hasArabic(String value) {
@@ -295,40 +354,133 @@ class _DailyContentSectionState extends State<DailyContentSection> {
   }
 }
 
-class _InlineInfoPanel extends StatelessWidget {
+class _InfoOverlayPanel extends StatelessWidget {
   final String message;
   final bool isRtl;
   final Color cizgiColor;
+  final Color contentColor;
 
-  const _InlineInfoPanel({
+  const _InfoOverlayPanel({
     required this.message,
     required this.isRtl,
     required this.cizgiColor,
+    required this.contentColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.16),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: cizgiColor.withValues(alpha: 0.18)),
-      ),
-      child: Directionality(
-        textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
-        child: Text(
-          message,
-          textAlign: isRtl ? TextAlign.right : TextAlign.left,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Colors.white,
-            fontSize: 13,
-            height: 1.25,
-            fontWeight: FontWeight.w600,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxHeight = constraints.maxHeight;
+        final panelHeight = maxHeight <= 0
+            ? 120.0
+            : (maxHeight * 0.5).clamp(120.0, 200.0).toDouble();
+        return Align(
+          alignment: Alignment.center,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {},
+            child: SizedBox(
+              width: double.infinity,
+              height: panelHeight,
+              child: Material(
+                color: Color.lerp(contentColor, Colors.black, 0.12) ??
+                    contentColor,
+                borderRadius: BorderRadius.circular(10),
+                elevation: 0,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: cizgiColor.withValues(alpha: 0.28),
+                    ),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0x33000000),
+                        blurRadius: 12,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  alignment: Alignment.center,
+                  child: Directionality(
+                    textDirection: isRtl
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
+                    child: Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontSize: 18,
+                        height: 1.3,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _BasmalaHeader extends StatelessWidget {
+  final bool hasInfoAction;
+  final bool hasReadAction;
+  final VoidCallback onInfoTap;
+  final VoidCallback? onReadTap;
+
+  const _BasmalaHeader({
+    required this.hasInfoAction,
+    required this.hasReadAction,
+    required this.onInfoTap,
+    required this.onReadTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 34,
+          height: 34,
+          child: hasInfoAction
+              ? _OverlayIconButton(
+                  icon: Icons.info_outline_rounded,
+                  tooltip: 'Bilgi',
+                  onTap: onInfoTap,
+                )
+              : const SizedBox.shrink(),
+        ),
+        const SizedBox(width: 8),
+        const Expanded(
+          child: Padding(
+            padding: EdgeInsets.only(top: 4),
+            child: _BasmalaMark(),
           ),
         ),
-      ),
+        const SizedBox(width: 8),
+        SizedBox(
+          width: 34,
+          height: 34,
+          child: hasReadAction && onReadTap != null
+              ? _OverlayIconButton(
+                  icon: Icons.volume_up_rounded,
+                  tooltip: 'Oku',
+                  onTap: onReadTap!,
+                )
+              : const SizedBox.shrink(),
+        ),
+      ],
     );
   }
 }
@@ -373,7 +525,7 @@ class _BasmalaMark extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 33,
+      height: 30,
       child: SvgPicture.asset(
         _dailyContentSectionBasmalaAsset,
         fit: BoxFit.contain,

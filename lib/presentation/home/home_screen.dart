@@ -1107,12 +1107,10 @@ class _HomeScreenState extends State<HomeScreen> {
       Prayer.maghrib: times.maghrib,
       Prayer.isha: times.isha,
     };
+    _appendNativeWidgetEvents(widgetEvents, prayerTimes, now);
     for (final entry in prayerTimes.entries) {
       final settings = _settingsFor(entry.key);
       final label = _turkishPrayerLabel(entry.key);
-      widgetEvents.add(
-        NativePrayerWidgetEvent(triggerAt: entry.value, prayerLabel: label),
-      );
       _appendNativeEventsForRow(
         events: notifications,
         now: now,
@@ -1122,6 +1120,29 @@ class _HomeScreenState extends State<HomeScreen> {
         settings: settings,
       );
     }
+  }
+
+  void _appendNativeWidgetEvents(
+    List<NativePrayerWidgetEvent> widgetEvents,
+    Map<Prayer, DateTime> prayerTimes,
+    DateTime now,
+  ) {
+    for (final entry in prayerTimes.entries) {
+      if (!entry.value.isAfter(now)) continue;
+      widgetEvents.add(
+        NativePrayerWidgetEvent(
+          triggerAt: entry.value,
+          prayerLabel: _turkishPrayerLabel(entry.key),
+        ),
+      );
+    }
+    if (widgetEvents.isNotEmpty) return;
+    widgetEvents.add(
+      NativePrayerWidgetEvent(
+        triggerAt: prayerTimes[Prayer.fajr]!.add(const Duration(days: 1)),
+        prayerLabel: _turkishPrayerLabel(Prayer.fajr),
+      ),
+    );
   }
 
   void _appendNativeCustomPrayerEvents(

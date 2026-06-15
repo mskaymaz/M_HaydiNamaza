@@ -38,10 +38,6 @@ class HomeDailyContentPanel extends StatefulWidget {
 }
 
 class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
-  static const String _headingAyah = 'G\u00FCn\u00FCn Ayeti';
-  static const String _headingHadith = 'G\u00FCn\u00FCn Hadisi';
-  static const String _headingEsma = 'Esm\u00E2\u00FCl H\u00FCsna';
-  static const String _headingSifat = 'Allah\'\u0131n S\u0131fatlar\u0131';
   static const String _labelArabic = '\u0639\u0631\u0628\u064A';
   static const String _noteLoading =
       'G\u00FCnl\u00FCk i\u00E7erik y\u00FCkleniyor...';
@@ -138,7 +134,6 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                   if (page == 0) {
                     return _buildPage(
                       context: context,
-                      heading: _headingAyah,
                       kind: DailyContentPanelKind.ayah,
                       child: _buildAyahTab(context, ayah, contentColor),
                     );
@@ -146,7 +141,6 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                   if (page == 1) {
                     return _buildPage(
                       context: context,
-                      heading: _headingHadith,
                       kind: DailyContentPanelKind.hadith,
                       child: _buildHadithTab(context, hadith, contentColor),
                     );
@@ -154,7 +148,6 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                   if (page == 2) {
                     return _buildPage(
                       context: context,
-                      heading: _headingEsma,
                       kind: DailyContentPanelKind.esma,
                       child: _buildEsmaTab(
                         context,
@@ -166,7 +159,6 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                   }
                   return _buildPage(
                     context: context,
-                    heading: _headingSifat,
                     kind: DailyContentPanelKind.sifat,
                     child: _buildEsmaTab(
                       context,
@@ -186,10 +178,10 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
 
   Widget _buildPage({
     required BuildContext context,
-    required String heading,
     required DailyContentPanelKind kind,
     required Widget child,
   }) {
+    final heading = _headingFor(kind);
     return ClipRect(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -198,18 +190,17 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
             height: 36,
             child: Row(
               children: [
-                _buildCycleButton(kind),
-                const SizedBox(width: 8),
+                const SizedBox(width: 25),
                 Expanded(
                   child: Text(
                     heading,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
-                      fontSize: 20,
+                      fontSize: _activeLanguage == 'ar' ? 23 : 20,
                     ),
                   ),
                 ),
@@ -218,6 +209,8 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      _buildCycleButton(kind),
+                      const SizedBox(width: 6),
                       _buildLanguageToggle(
                         label: 'TR',
                         selected: _activeLanguage == 'tr',
@@ -324,6 +317,32 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
         ),
       ),
     );
+  }
+
+  String _headingFor(DailyContentPanelKind kind) {
+    switch (_activeLanguage) {
+      case 'en':
+        return switch (kind) {
+          DailyContentPanelKind.ayah => 'Daily Ayah',
+          DailyContentPanelKind.hadith => 'Daily Hadith',
+          DailyContentPanelKind.esma => 'Asma al-Husna',
+          DailyContentPanelKind.sifat => 'Attributes of Allah',
+        };
+      case 'ar':
+        return switch (kind) {
+          DailyContentPanelKind.ayah => 'آية اليوم',
+          DailyContentPanelKind.hadith => 'حديث اليوم',
+          DailyContentPanelKind.esma => 'أسماء الله الحسنى',
+          DailyContentPanelKind.sifat => 'صفات الله',
+        };
+      default:
+        return switch (kind) {
+          DailyContentPanelKind.ayah => 'Günün Ayeti',
+          DailyContentPanelKind.hadith => 'Günün Hadisi',
+          DailyContentPanelKind.esma => 'Esmâül Hüsnâ',
+          DailyContentPanelKind.sifat => 'Allah\'ın Sıfatları',
+        };
+    }
   }
 
   void _toggleLanguage(String code) {

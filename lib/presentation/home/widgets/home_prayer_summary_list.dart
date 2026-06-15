@@ -10,6 +10,7 @@ const double _summaryPrayerTextGap = 25.0;
 const double _summaryPrayerBellGap = 12.0;
 const double _summaryPrayerBellBoxSize = 30.0;
 const double _summaryPrayerBellIconSize = 20.0;
+const double _summaryPrayerLongLabelMaxWidth = 180.0;
 
 class HomePrayerSummaryList extends StatelessWidget {
   final ScrollController controller;
@@ -78,6 +79,12 @@ class HomePrayerSummaryList extends StatelessWidget {
             final bellColor = hasReminder
                 ? cizgiColor.withValues(alpha: 0.95)
                 : cizgiColor.withValues(alpha: 0.34);
+            final labelStyle = Theme.of(context).textTheme.titleMedium
+                ?.copyWith(
+                  color: labelColor,
+                  fontWeight: isActive ? FontWeight.w500 : FontWeight.w300,
+                  fontSize: 22.0,
+                );
 
             return AnimatedContainer(
               duration: const Duration(milliseconds: 200),
@@ -102,20 +109,10 @@ class HomePrayerSummaryList extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: _summaryPrayerLabelColumnWidth,
-                        child: Text(
-                          label,
-                          maxLines: 1,
-                          softWrap: false,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(
-                                color: labelColor,
-                                fontWeight: isActive
-                                    ? FontWeight.w500
-                                    : FontWeight.w300,
-                                fontSize: 22.0,
-                              ),
+                        child: _SummaryPrayerLabel(
+                          label: label,
+                          style: labelStyle,
+                          isCustomPrayer: isCustomPrayer,
                         ),
                       ),
                       const SizedBox(width: _summaryPrayerTextGap),
@@ -169,6 +166,53 @@ class HomePrayerSummaryList extends StatelessWidget {
   }
 }
 
+class _SummaryPrayerLabel extends StatelessWidget {
+  final String label;
+  final TextStyle? style;
+  final bool isCustomPrayer;
+
+  const _SummaryPrayerLabel({
+    required this.label,
+    required this.style,
+    required this.isCustomPrayer,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final width = _measureTextWidth(context, label, style);
+    if (!isCustomPrayer || width <= _summaryPrayerLabelColumnWidth) {
+      return Text(
+        label,
+        maxLines: 1,
+        softWrap: false,
+        overflow: TextOverflow.clip,
+        textAlign: TextAlign.left,
+        style: style,
+      );
+    }
+
+    return OverflowBox(
+      minWidth: _summaryPrayerLabelColumnWidth,
+      maxWidth: _summaryPrayerLongLabelMaxWidth,
+      alignment: Alignment.centerRight,
+      child: SizedBox(
+        width: width.clamp(
+          _summaryPrayerLabelColumnWidth,
+          _summaryPrayerLongLabelMaxWidth,
+        ),
+        child: Text(
+          label,
+          maxLines: 1,
+          softWrap: false,
+          overflow: TextOverflow.clip,
+          textAlign: TextAlign.right,
+          style: style,
+        ),
+      ),
+    );
+  }
+}
+
 class PrayerScrollOverflowIndicator extends StatefulWidget {
   final ScrollController controller;
   final Color cizgiColor;
@@ -184,6 +228,19 @@ class PrayerScrollOverflowIndicator extends StatefulWidget {
   @override
   State<PrayerScrollOverflowIndicator> createState() =>
       _PrayerScrollOverflowIndicatorState();
+}
+
+double _measureTextWidth(
+  BuildContext context,
+  String text,
+  TextStyle? style,
+) {
+  final textPainter = TextPainter(
+    text: TextSpan(text: text, style: style),
+    maxLines: 1,
+    textDirection: Directionality.of(context),
+  )..layout();
+  return textPainter.width;
 }
 
 class _PrayerScrollOverflowIndicatorState

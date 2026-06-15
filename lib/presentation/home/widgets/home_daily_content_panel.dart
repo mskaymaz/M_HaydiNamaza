@@ -481,7 +481,17 @@ class _HomeDailyContentPanelState extends State<HomeDailyContentPanel> {
   }
 
   Future<void> _readTurkishAyahText(String text) {
-    return _readTurkishText('$_dailyContentTtsBasmala. $text');
+    final cleanedText = _stripAyahNumberMarkersForTts(text);
+    return _readTurkishText('$_dailyContentTtsBasmala. $cleanedText');
+  }
+
+  String _stripAyahNumberMarkersForTts(String text) {
+    return text
+        .replaceAllMapped(
+          RegExp(r'(^|\n)\s*\([0-9٠-٩۰-۹]+\)\s*'),
+          (match) => match.group(1) ?? '',
+        )
+        .trim();
   }
 
   Widget _buildNote({

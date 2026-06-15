@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+
 import '../../app/reminder_audio_service.dart';
 import '../../app/reminder_text_settings_storage.dart';
 
 class VoiceTestScreen extends StatefulWidget {
   final List<DropdownMenuItem<String?>> voiceItems;
 
-  const VoiceTestScreen({super.key, required this.voiceItems});
+  const VoiceTestScreen({super.key, this.voiceItems = const []});
 
   @override
   State<VoiceTestScreen> createState() => _VoiceTestScreenState();
@@ -13,12 +14,24 @@ class VoiceTestScreen extends StatefulWidget {
 
 class _VoiceTestScreenState extends State<VoiceTestScreen> {
   final ReminderAudioService _audioService = ReminderAudioService();
+  final TextEditingController _arabicController = TextEditingController(
+    text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',
+  );
+  final TextEditingController _englishController = TextEditingController(
+    text: 'This is a short test sentence for English voice detection.',
+  );
+
+  List<DropdownMenuItem<String?>> _englishVoiceItems = const [];
+  List<DropdownMenuItem<String?>> _arabicVoiceItems = const [];
   String? _selectedEnglishKey;
   String? _selectedArabicKey;
-  final TextEditingController _arabicController = TextEditingController(
-      text: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ');
-  final TextEditingController _englishController = TextEditingController(
-      text: 'This is a short test sentence for English voice detection.');
+  bool _loadingVoices = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadVoiceOptions();
+  }
 
   @override
   void dispose() {
@@ -28,66 +41,101 @@ class _VoiceTestScreenState extends State<VoiceTestScreen> {
     super.dispose();
   }
 
-  Future<void> _saveDefaults() async {
+  Future<void> _loadVoiceOptions() async {
     final storage = ReminderTextSettingsStorage();
     final current = await storage.read();
-    final partsEn = _selectedEnglishKey?.split('|');
-    final enLocale = partsEn != null && partsEn.length >= 2 ? partsEn[0] : null;
-    final enName = partsEn != null && partsEn.length >= 2 ? partsEn[1] : null;
-    final partsAr = _selectedArabicKey?.split('|');
-    final arLocale = partsAr != null && partsAr.length >= 2 ? partsAr[0] : null;
-    final arName = partsAr != null && partsAr.length >= 2 ? partsAr[1] : null;
-    final updated = ReminderTextSettings(
-      voiceText: current.voiceText,
-      visualText: current.visualText,
-      audioMode: current.audioMode,
-      showVoiceIcon: current.showVoiceIcon,
-      showVisualIcon: current.showVisualIcon,
-      showAzanIcon: current.showAzanIcon,
-      showVibrationIcon: current.showVibrationIcon,
-      sortCustomPrayersByTime: current.sortCustomPrayersByTime,
-      voiceRepeatSeconds: current.voiceRepeatSeconds,
-      vibrationDurationSeconds: current.vibrationDurationSeconds,
-      vibrationPauseSeconds: current.vibrationPauseSeconds,
-      visualDisplaySeconds: current.visualDisplaySeconds,
-      visualReopenSeconds: current.visualReopenSeconds,
-      selectedVoiceName: current.selectedVoiceName,
-      selectedVoiceLocale: current.selectedVoiceLocale,
-      selectedEnglishVoiceName: enName,
-      selectedEnglishVoiceLocale: enLocale,
-      selectedArabicVoiceName: arName,
-      selectedArabicVoiceLocale: arLocale,
-      selectedAudioPath: current.selectedAudioPath,
-      selectedAudioLabel: current.selectedAudioLabel,
+    final englishVoices = await _audioService.loadVoiceOptions(
+      languageCode: 'en',
     );
-    await storage.write(updated);
+    final arabicVoices = await _audioService.loadVoiceOptions(
+      languageCode: 'ar',
+    );
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Ses tercihleri kaydedildi.')),
+
+    final englishItems = _buildVoiceItems(englishVoices);
+    final arabicItems = _buildVoiceItems(arabicVoices);
+    final storedEnglishKey = _voiceKey(
+      current.selectedEnglishVoiceLocale,
+      current.selectedEnglishVoiceName,
     );
+    final storedArabicKey = _voiceKey(
+      current.selectedArabicVoiceLocale,
+      current.selectedArabicVoiceName,
+    );
+
+    setState(() {
+      _englishVoiceItems = englishItems;
+      _arabicVoiceItems = arabicItems;
+      _selectedEnglishKey = _containsKey(englishItems, storedEnglishKey)
+          ? storedEnglishKey
+          : null;
+      _selectedArabicKey = _containsKey(arabicItems, storedArabicKey)
+          ? storedArabicKey
+          : null;
+      _loadingVoices = false;
+    });
+  }
+
+  List<DropdownMenuItem<String?>> _buildVoiceItems(
+    List<ReminderVoiceOption> voices,
+  ) {
+    return voices
+        .map(
+          (voice) => DropdownMenuItem<String?>(
+            value: voice.key,
+            child: Text(voice.label),
+          ),
+        )
+        .toList(growable: false);
+  }
+
+  bool _containsKey(List<DropdownMenuItem<String?>> items, String? key) {
+    return key != null && items.any((item) => item.value == key);
+  }
+
+  String? _voiceKey(String? locale, String? name) {
+    if (locale == null || name == null) return null;
+    return '$locale|$name';
+  }
+
+  _SelectedVoice _voiceFromKey(String? key) {
+    final parts = key?.split('|');
+    if (parts == null || parts.length < 2) return const _SelectedVoice();
+    return _SelectedVoice(locale: parts[0], name: parts[1]);
+  }
+
+  Future<void> _saveDefaults() async {
+    final english = _voiceFromKey(_selectedEnglishKey);
+    final arabic = _voiceFromKey(_selectedArabicKey);
+    await _audioService.saveSelectedLanguageVoices(
+      englishVoiceName: english.name,
+      englishVoiceLocale: english.locale,
+      arabicVoiceName: arabic.name,
+      arabicVoiceLocale: arabic.locale,
+    );
+    if (!mounted) return;
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Ses tercihleri kaydedildi.')));
   }
 
   Future<void> _playArabic() async {
-    final parts = _selectedArabicKey?.split('|');
-    final voiceLocale = parts != null && parts.length >= 2 ? parts[0] : null;
-    final voiceName = parts != null && parts.length >= 2 ? parts[1] : null;
+    final voice = _voiceFromKey(_selectedArabicKey);
     await _audioService.speakTextWithVoice(
       text: _arabicController.text,
-      voiceName: voiceName,
-      voiceLocale: voiceLocale,
-      selectedLocale: voiceLocale == null ? const Locale('ar') : null,
+      voiceName: voice.name,
+      voiceLocale: voice.locale,
+      selectedLocale: voice.locale == null ? const Locale('ar') : null,
     );
   }
 
   Future<void> _playEnglish() async {
-    final parts = _selectedEnglishKey?.split('|');
-    final voiceLocale = parts != null && parts.length >= 2 ? parts[0] : null;
-    final voiceName = parts != null && parts.length >= 2 ? parts[1] : null;
+    final voice = _voiceFromKey(_selectedEnglishKey);
     await _audioService.speakTextWithVoice(
       text: _englishController.text,
-      voiceName: voiceName,
-      voiceLocale: voiceLocale,
-      selectedLocale: voiceLocale == null ? const Locale('en') : null,
+      voiceName: voice.name,
+      voiceLocale: voice.locale,
+      selectedLocale: voice.locale == null ? const Locale('en') : null,
     );
   }
 
@@ -101,12 +149,14 @@ class _VoiceTestScreenState extends State<VoiceTestScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text('English voice (choose then press Play):'),
+              const Text('İngilizce erkek ses seçimi:'),
               const SizedBox(height: 6),
               DropdownButtonFormField<String?>(
                 initialValue: _selectedEnglishKey,
-                items: widget.voiceItems,
-                onChanged: (v) => setState(() => _selectedEnglishKey = v),
+                items: _englishVoiceItems,
+                onChanged: _loadingVoices
+                    ? null
+                    : (v) => setState(() => _selectedEnglishKey = v),
                 decoration: const InputDecoration(border: OutlineInputBorder()),
               ),
               const SizedBox(height: 8),
@@ -114,7 +164,7 @@ class _VoiceTestScreenState extends State<VoiceTestScreen> {
                 controller: _englishController,
                 maxLines: 3,
                 decoration: const InputDecoration(
-                  labelText: 'English text to test',
+                  labelText: 'Test edilecek İngilizce metin',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -122,21 +172,23 @@ class _VoiceTestScreenState extends State<VoiceTestScreen> {
               ElevatedButton.icon(
                 onPressed: _playEnglish,
                 icon: const Icon(Icons.volume_up_rounded),
-                label: const Text('Play English'),
+                label: const Text('İngilizce oku'),
               ),
               const SizedBox(height: 8),
               OutlinedButton.icon(
-                onPressed: _saveDefaults,
+                onPressed: _loadingVoices ? null : _saveDefaults,
                 icon: const Icon(Icons.save_outlined),
-                label: const Text('Save as default'),
+                label: const Text('Varsayılan olarak kaydet'),
               ),
               const Divider(height: 24),
-              const Text('Arabic voice (choose then press Play):'),
+              const Text('Arapça erkek ses seçimi:'),
               const SizedBox(height: 6),
               DropdownButtonFormField<String?>(
                 initialValue: _selectedArabicKey,
-                items: widget.voiceItems,
-                onChanged: (v) => setState(() => _selectedArabicKey = v),
+                items: _arabicVoiceItems,
+                onChanged: _loadingVoices
+                    ? null
+                    : (v) => setState(() => _selectedArabicKey = v),
                 decoration: const InputDecoration(border: OutlineInputBorder()),
               ),
               const SizedBox(height: 8),
@@ -144,7 +196,7 @@ class _VoiceTestScreenState extends State<VoiceTestScreen> {
                 controller: _arabicController,
                 maxLines: 3,
                 decoration: const InputDecoration(
-                  labelText: 'Arabic text to test',
+                  labelText: 'Test edilecek Arapça metin',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -152,17 +204,17 @@ class _VoiceTestScreenState extends State<VoiceTestScreen> {
               ElevatedButton.icon(
                 onPressed: _playArabic,
                 icon: const Icon(Icons.volume_up_rounded),
-                label: const Text('Play Arabic'),
+                label: const Text('Arapça oku'),
               ),
               const SizedBox(height: 8),
               OutlinedButton.icon(
-                onPressed: _saveDefaults,
+                onPressed: _loadingVoices ? null : _saveDefaults,
                 icon: const Icon(Icons.save_outlined),
-                label: const Text('Save as default'),
+                label: const Text('Varsayılan olarak kaydet'),
               ),
               const SizedBox(height: 20),
               const Text(
-                'Kullanım: Cihazdan farklı sesler dene. Eğer Arapça harf harf okunuyorsa, farklı "Arabic Voice" seçin veya cihazdan bölgesel Arapça ses verisini yükleyin.',
+                'Bu listelerde yalnızca dili uygun ve erkek olduğu güvenle tespit edilen sesler gösterilir. Uygun erkek ses yoksa okuma yapılmaz.',
               ),
             ],
           ),
@@ -170,4 +222,11 @@ class _VoiceTestScreenState extends State<VoiceTestScreen> {
       ),
     );
   }
+}
+
+class _SelectedVoice {
+  final String? locale;
+  final String? name;
+
+  const _SelectedVoice({this.locale, this.name});
 }

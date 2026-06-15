@@ -51,13 +51,19 @@ class DailyContentSelectionEngine {
   }) async {
     final warnings = <String>[];
     final now = _clock.now();
-    final loadResult = await _loader.loadApprovedSampleContent(referenceDate: now);
+    final loadResult = await _loader.loadApprovedSampleContent(
+      referenceDate: now,
+    );
     warnings.addAll(loadResult.warnings);
 
     final ayahs = _dedupeAyahRecords(loadResult.ayahs, warnings);
     final hadiths = _dedupeHadithRecords(loadResult.hadiths, warnings);
     final esmas = _dedupeEsmaRecords(loadResult.esmas, warnings, label: 'esma');
-    final sifats = _dedupeEsmaRecords(loadResult.sifats, warnings, label: 'sifat');
+    final sifats = _dedupeEsmaRecords(
+      loadResult.sifats,
+      warnings,
+      label: 'sifat',
+    );
     final todayKey = _clock.dayKey();
 
     final startDate = _parseStartDate(loadResult.sequenceStartDate);
@@ -66,10 +72,22 @@ class DailyContentSelectionEngine {
     final hadithId = _idAt(loadResult.hadithOrderIds, dayIndex + hadithOffset);
     final esmaId = _idAt(loadResult.esmaOrderIds, dayIndex + esmaOffset);
     final sifatId = _idAt(loadResult.sifatOrderIds, dayIndex + sifatOffset);
-    final ayahCycleId = _cycleId(loadResult.ayahOrderIds, dayIndex + ayahOffset);
-    final hadithCycleId = _cycleId(loadResult.hadithOrderIds, dayIndex + hadithOffset);
-    final esmaCycleId = _cycleId(loadResult.esmaOrderIds, dayIndex + esmaOffset);
-    final sifatCycleId = _cycleId(loadResult.sifatOrderIds, dayIndex + sifatOffset);
+    final ayahCycleId = _cycleId(
+      loadResult.ayahOrderIds,
+      dayIndex + ayahOffset,
+    );
+    final hadithCycleId = _cycleId(
+      loadResult.hadithOrderIds,
+      dayIndex + hadithOffset,
+    );
+    final esmaCycleId = _cycleId(
+      loadResult.esmaOrderIds,
+      dayIndex + esmaOffset,
+    );
+    final sifatCycleId = _cycleId(
+      loadResult.sifatOrderIds,
+      dayIndex + sifatOffset,
+    );
 
     final currentState = await _stateRepository.read(warnings: warnings);
     final nextState = currentState.copyWith(
@@ -130,10 +148,13 @@ class DailyContentSelectionEngine {
   }
 
   int _dayIndex(DateTime startDateUtc, DateTime now) {
-    // compute the number of 6-hour periods since startDateUtc
-    final nowUtc = DateTime.utc(now.year, now.month, now.day, now.hour);
-    final diffHours = nowUtc.difference(startDateUtc).inHours;
-    return diffHours ~/ 6;
+    final startDay = DateTime.utc(
+      startDateUtc.year,
+      startDateUtc.month,
+      startDateUtc.day,
+    );
+    final currentDay = DateTime.utc(now.year, now.month, now.day);
+    return currentDay.difference(startDay).inDays;
   }
 
   String? _idAt(List<String> orderedIds, int dayIndex) {

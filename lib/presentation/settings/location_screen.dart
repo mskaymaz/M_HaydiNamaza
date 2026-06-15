@@ -1,25 +1,19 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
-import '../../app/runtime_monitor.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
-import 'location_data_parsers.dart';
 import 'location_label_helpers.dart';
+import 'location_current_location_resolver.dart';
+import 'location_data_parsers.dart';
+import 'location_items_client.dart';
 import 'location_models.dart';
-import 'location_name_formatters.dart';
-import 'location_selection_item_builders.dart';
-import 'widgets/location_coordinates_section.dart';
-import 'widgets/location_current_location_tile.dart';
-import 'widgets/location_favorites_section.dart';
-import 'widgets/location_add_favorite_button.dart';
-import 'widgets/location_selection_composer.dart';
+import 'widgets/location_screen_content.dart';
+
+part 'location_screen_favorites.dart';
 
 class LocationScreen extends StatefulWidget {
   final LocationData? initial;
@@ -36,11 +30,6 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  static const Duration _diyanetTimeout = Duration(seconds: 12);
-  static const Map<String, String> _diyanetHeaders = <String, String>{
-    'Accept': 'application/json',
-    'User-Agent': 'HaydiNamaza/1.0',
-  };
   static const String _listLoadErrorMessage =
       'Konum listesi yuklenemedi. Lutfen tekrar deneyin.';
 
@@ -50,6 +39,8 @@ class _LocationScreenState extends State<LocationScreen> {
   final _lonController = TextEditingController();
   final _storage = LocationStorage();
   final _favoritesStorage = LocationFavoritesStorage();
+  final _itemsClient = DiyanetLocationItemsClient();
+  final _currentLocationResolver = CurrentLocationResolver();
 
   bool _loadingCountries = false;
   bool _loadingStates = false;
@@ -82,7 +73,7 @@ class _LocationScreenState extends State<LocationScreen> {
     }
     _selectedCountryId ??= ConfigRegistry.dataSources.diyanet.countryId;
     unawaited(_loadUseCurrentLocation());
-    _loadFavorites();
+    this._loadFavorites();
     _loadCountries();
   }
 
@@ -94,22 +85,6 @@ class _LocationScreenState extends State<LocationScreen> {
     _latController.dispose();
     _lonController.dispose();
     super.dispose();
-  }
-
-  Future<void> _loadFavorites() async {
-    final favorites = await _favoritesStorage.read();
-    favorites.sort(
-      (a, b) => normalizeName(a.label).compareTo(normalizeName(b.label)),
-    );
-    if (!_isMounted) return;
-    final selected =
-        _selectedFavorite != null && favorites.contains(_selectedFavorite)
-            ? _selectedFavorite
-            : null;
-    setState(() {
-      _favorites = favorites;
-      _selectedFavorite = selected;
-    });
   }
 
   Future<void> _loadUseCurrentLocation() async {
@@ -152,9 +127,9 @@ class _LocationScreenState extends State<LocationScreen> {
     });
     try {
       final config = ConfigRegistry.dataSources.diyanet;
-      final uri = Uri.parse('${config.baseUrl}/api/locations/states').replace(
-        queryParameters: <String, String>{'countryId': countryId},
-      );
+      final uri = Uri.parse(
+        '${config.baseUrl}/api/locations/states',
+      ).replace(queryParameters: <String, String>{'countryId': countryId});
       final items = await _fetchItems(uri);
       if (!_isMounted) return;
       setState(() {
@@ -178,10 +153,9 @@ class _LocationScreenState extends State<LocationScreen> {
     });
     try {
       final config = ConfigRegistry.dataSources.diyanet;
-      final uri =
-          Uri.parse('${config.baseUrl}/api/locations/districts').replace(
-        queryParameters: <String, String>{'stateId': stateId},
-      );
+      final uri = Uri.parse(
+        '${config.baseUrl}/api/locations/districts',
+      ).replace(queryParameters: <String, String>{'stateId': stateId});
       final items = await _fetchItems(uri);
       if (!_isMounted) return;
       setState(() {
@@ -198,28 +172,9 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   Future<List<DiyanetItem>> _fetchItems(Uri uri) async {
-    try {
-      final response =
-          await http.get(uri, headers: _diyanetHeaders).timeout(_diyanetTimeout);
-      if (response.statusCode != 200) {
-        _setListLoadError(_listLoadErrorMessage);
-        return const <DiyanetItem>[];
-      }
-      final items = parseItems(response.body);
-      if (items.isEmpty) {
-        _setListLoadError(_listLoadErrorMessage);
-        return const <DiyanetItem>[];
-      }
-      _setListLoadError(null);
-      return items;
-    } catch (error) {
-      RuntimeMonitor.instance.reportNonFatalCode(
-        source: 'location_list_fetch',
-        code: 'network_or_parse_failed',
-      );
-      _setListLoadError(_listLoadErrorMessage);
-      return const <DiyanetItem>[];
-    }
+    final items = await _itemsClient.fetchItems(uri);
+    _setListLoadError(items.isEmpty ? _listLoadErrorMessage : null);
+    return items;
   }
 
   void _setListLoadError(String? message) {
@@ -248,9 +203,7 @@ class _LocationScreenState extends State<LocationScreen> {
   Future<void> _setUseCurrentLocation(bool value) async {
     if (!value) {
       if (!mounted) return;
-      setState(() {
-        _useCurrentLocation = false;
-      });
+      setState(() => _useCurrentLocation = false);
       try {
         await _storage.writeUseCurrentLocation(false);
       } catch (_) {}
@@ -262,94 +215,72 @@ class _LocationScreenState extends State<LocationScreen> {
       _locating = true;
     });
     try {
-      final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
-        if (!mounted) return;
-        setState(() {
-          _useCurrentLocation = false;
-        });
-        await _storage.writeUseCurrentLocation(false);
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Konum servisi kapali. Elle konum secimi ile devam edebilirsiniz.')),
-        );
+      final result = await _currentLocationResolver.resolve();
+      if (!mounted) return;
+      if (result.status != CurrentLocationStatus.success) {
+        await _handleCurrentLocationFailure(result.status);
         return;
       }
-      var permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-      }
-      if (permission == LocationPermission.denied ||
-          permission == LocationPermission.deniedForever) {
-        if (!mounted) return;
-        setState(() {
-          _useCurrentLocation = false;
-        });
-        await _storage.writeUseCurrentLocation(false);
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Konum izni verilmedi. Elle konum secimi ile devam edebilirsiniz.')),
-        );
-        return;
-      }
-      final position = await Geolocator.getCurrentPosition();
-      final placemarks = await placemarkFromCoordinates(
-        position.latitude,
-        position.longitude,
-      ).timeout(const Duration(seconds: 3), onTimeout: () => <Placemark>[]);
-      final placemark = placemarks.isEmpty ? null : placemarks.first;
-      final province = (placemark?.administrativeArea ?? '').trim();
-      final district = pickDistrictName(placemark);
-      setState(() {
-        _selectedFavorite = null;
-        _selectedCountryId = ConfigRegistry.dataSources.diyanet.countryId;
-        _selectedCountryName = placemark?.country ?? 'Turkiye';
-        _selectedStateId = null;
-        _selectedDistrictId = null;
-        _states = [];
-        _districts = [];
-        _provinceController.text = province;
-        _districtController.text = district;
-        _latController.text = position.latitude.toString();
-        _lonController.text = position.longitude.toString();
-      });
-      // Persist the automatic location selection and location data.
-      try {
-        final data = LocationData(
+      _applyCurrentLocationResult(result);
+      await _storage.write(
+        LocationData(
           countryId: null,
           countryName: _selectedCountryName,
-          province: province,
-          district: district,
-          latitude: position.latitude.toString(),
-          longitude: position.longitude.toString(),
-        );
-        await _storage.write(data);
-        await _storage.writeUseCurrentLocation(true);
-      } catch (_) {}
-      await _loadStates(_selectedCountryId!);
-      if (province.isEmpty || district.isEmpty) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Koordinatlar alindi, il / ilce cozulemedi.')));
-      }
-    } catch (_) {
-      RuntimeMonitor.instance.reportNonFatalCode(
-        source: 'location_current_position',
-        code: 'current_location_failed',
+          province: result.province,
+          district: result.district,
+          latitude: result.latitude,
+          longitude: result.longitude,
+        ),
       );
-      if (!mounted) return;
-      setState(() {
-        _useCurrentLocation = false;
-      });
-      await _storage.writeUseCurrentLocation(false);
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Mevcut konum alinamadi.')));
-    } finally {
-      if (mounted) {
-        setState(() {
-          _locating = false;
-        });
+      await _storage.writeUseCurrentLocation(true);
+      await _loadStates(_selectedCountryId!);
+      if (!result.hasResolvedNames && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Koordinatlar alindi, il / ilce cozulemedi.'),
+          ),
+        );
       }
+    } finally {
+      if (mounted) setState(() => _locating = false);
     }
+  }
+
+  Future<void> _handleCurrentLocationFailure(
+    CurrentLocationStatus status,
+  ) async {
+    if (!mounted) return;
+    setState(() => _useCurrentLocation = false);
+    await _storage.writeUseCurrentLocation(false);
+    if (!mounted) return;
+    final message = switch (status) {
+      CurrentLocationStatus.serviceDisabled =>
+        'Konum servisi kapali. Elle konum secimi ile devam edebilirsiniz.',
+      CurrentLocationStatus.permissionDenied =>
+        'Konum izni verilmedi. Elle konum secimi ile devam edebilirsiniz.',
+      _ => 'Mevcut konum alinamadi.',
+    };
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void _applyCurrentLocationResult(CurrentLocationResult result) {
+    setState(() {
+      _selectedFavorite = null;
+      _selectedCountryId = ConfigRegistry.dataSources.diyanet.countryId;
+      _selectedCountryName = result.countryName.isEmpty
+          ? 'Turkiye'
+          : result.countryName;
+      _selectedStateId = null;
+      _selectedDistrictId = null;
+      _states = [];
+      _districts = [];
+      _provinceController.text = result.province;
+      _districtController.text = result.district;
+      _latController.text = result.latitude;
+      _lonController.text = result.longitude;
+    });
   }
 
   void _syncCountrySelection() {
@@ -417,68 +348,6 @@ class _LocationScreenState extends State<LocationScreen> {
     }
   }
 
-  Future<void> _addFavorite() async {
-    final l10n = AppLocalizations.of(context)!;
-    final province = _provinceController.text.trim();
-    final district = _districtController.text.trim();
-    final latitude = _latController.text.trim();
-    final longitude = _lonController.text.trim();
-    if (_selectedCountryId == null || province.isEmpty || district.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l10n.locationFillAll)));
-      return;
-    }
-    final added = await _favoritesStorage.add(
-      LocationFavorite(
-        countryId: _selectedCountryId,
-        countryName: _selectedCountryName,
-        province: province,
-        district: district,
-        latitude: latitude,
-        longitude: longitude,
-      ),
-    );
-    await _loadFavorites();
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          added ? l10n.locationFavoriteAdded : l10n.locationFavoriteExists,
-        ),
-      ),
-    );
-  }
-
-  Future<void> _removeFavorite(LocationFavorite favorite) async {
-    final isSelected = favorite == _selectedFavorite;
-    final removed = await _favoritesStorage.remove(favorite);
-    if (!mounted) return;
-    if (isSelected) {
-      setState(() {
-        _selectedFavorite = null;
-      });
-    }
-    await _loadFavorites();
-    if (!mounted || !removed) return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.locationFavoriteRemoved)));
-  }
-
-  void _applyFavorite(LocationFavorite favorite) {
-    setState(() {
-      _useCurrentLocation = false;
-      _selectedFavorite = favorite;
-      _selectedCountryId = favorite.countryId ?? _selectedCountryId;
-      _selectedCountryName = favorite.countryName ?? _selectedCountryName;
-      _selectedStateId = null;
-      _selectedDistrictId = null;
-      _states = [];
-      _districts = [];
-      _provinceController.text = favorite.province;
-      _districtController.text = favorite.district;
-    });
-    unawaited(_storage.writeUseCurrentLocation(false));
-    if (_selectedCountryId != null) _loadStates(_selectedCountryId!);
-  }
-
   Future<void> _persistManualSelection() async {
     final countryId = _selectedCountryId;
     final countryName = _selectedCountryName.trim();
@@ -503,24 +372,48 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 
-  Future<void> _applySelectedFavorite() async {
-    final favorite = _selectedFavorite;
-    if (favorite == null) return;
-    _applyFavorite(favorite);
-    _latController.text = favorite.latitude;
-    _lonController.text = favorite.longitude;
-    await _storage.write(
-      LocationData(
-        countryId: _selectedCountryId,
-        countryName: _selectedCountryName,
-        province: _provinceController.text.trim(),
-        district: _districtController.text.trim(),
-        latitude: _latController.text.trim(),
-        longitude: _lonController.text.trim(),
-      ),
-    );
-    if (!mounted) return;
-    Navigator.of(context).pop(true);
+  Future<void> _onCountryChanged(String value) async {
+    final selected = _countries.firstWhere((item) => item.id == value);
+    setState(() {
+      _useCurrentLocation = false;
+      _selectedFavorite = null;
+      _selectedCountryId = value;
+      _selectedCountryName = selected.name;
+      _selectedStateId = null;
+      _selectedDistrictId = null;
+      _states = [];
+      _districts = [];
+      _provinceController.text = '';
+      _districtController.text = '';
+    });
+    await _storage.writeUseCurrentLocation(false);
+    await _loadStates(value);
+  }
+
+  Future<void> _onStateChanged(String value) async {
+    final selected = _states.firstWhere((item) => item.id == value);
+    setState(() {
+      _useCurrentLocation = false;
+      _selectedFavorite = null;
+      _selectedStateId = value;
+      _selectedDistrictId = null;
+      _districts = [];
+      _provinceController.text = selected.name;
+      _districtController.text = '';
+    });
+    await _storage.writeUseCurrentLocation(false);
+    await _loadDistricts(value);
+  }
+
+  void _onDistrictChanged(String value) {
+    final selected = _districts.firstWhere((item) => item.id == value);
+    setState(() {
+      _useCurrentLocation = false;
+      _selectedFavorite = null;
+      _selectedDistrictId = value;
+      _districtController.text = selected.name;
+    });
+    unawaited(_persistManualSelection());
   }
 
   @override
@@ -528,146 +421,43 @@ class _LocationScreenState extends State<LocationScreen> {
     final l10n = AppLocalizations.of(context)!;
     final palette = widget.uiPaletteController.value;
     final ui = ConfigRegistry.settingsPanelsFor(palette);
-    final countryValue =
-        _countries.any((item) => item.id == _selectedCountryId) ? _selectedCountryId : null;
-    final stateValue =
-        _states.any((item) => item.id == _selectedStateId) ? _selectedStateId : null;
-    final districtValue =
-        _districts.any((item) => item.id == _selectedDistrictId) ? _selectedDistrictId : null;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.locationEditTitle),
-      ),
-      body: ListView(
-        padding: ui.screenPadding,
-        children: [
-          LocationCurrentLocationTile(
-            useCurrentLocation: _useCurrentLocation,
-            locating: _locating,
-            onChanged: (value) => _setUseCurrentLocation(value ?? false),
-          ),
-          SizedBox(height: ui.sectionGap),
-          LocationSelectionComposer(
-            ui: ui,
-            palette: palette,
-            title: l10n.locationSelectLabel,
-            countryLabel: l10n.locationCountryLabel,
-            cityLabel: l10n.locationCityLabel,
-            districtLabel: l10n.locationDistrictLabel,
-            selectedCountryId: countryValue,
-            selectedStateId: stateValue,
-            selectedDistrictId: districtValue,
-            countryItems: buildStringDropdownItems<DiyanetItem>(
-              items: _countries,
-              valueOf: (item) => item.id,
-              labelOf: (item) => formatLocationDisplayName(item.name),
-            ),
-            stateItems: buildStringDropdownItems<DiyanetItem>(
-              items: _states,
-              valueOf: (item) => item.id,
-              labelOf: (item) => formatLocationDisplayName(item.name),
-            ),
-            districtItems: buildStringDropdownItems<DiyanetItem>(
-              items: _districts,
-              valueOf: (item) => item.id,
-              labelOf: (item) => formatLocationDisplayName(item.name),
-            ),
-            onCountryChanged: _loadingCountries
-                ? null
-                : (value) async {
-                    if (value == null) return;
-                    final selected = _countries.firstWhere((item) => item.id == value);
-                    setState(() {
-                      _useCurrentLocation = false;
-                      _selectedFavorite = null;
-                      _selectedCountryId = value;
-                      _selectedCountryName = selected.name;
-                      _selectedStateId = null;
-                      _selectedDistrictId = null;
-                      _states = [];
-                      _districts = [];
-                      _provinceController.text = '';
-                      _districtController.text = '';
-                    });
-                    await _storage.writeUseCurrentLocation(false);
-                    await _loadStates(value);
-                  },
-            onStateChanged: _loadingStates
-                ? null
-                : (value) async {
-                    if (value == null) return;
-                    final selected = _states.firstWhere((item) => item.id == value);
-                    setState(() {
-                      _useCurrentLocation = false;
-                      _selectedFavorite = null;
-                      _selectedStateId = value;
-                      _selectedDistrictId = null;
-                      _districts = [];
-                      _provinceController.text = selected.name;
-                      _districtController.text = '';
-                    });
-                    await _storage.writeUseCurrentLocation(false);
-                    await _loadDistricts(value);
-                  },
-            onDistrictChanged: _loadingDistricts
-                ? null
-                : (value) {
-                    if (value == null) return;
-                    final selected = _districts.firstWhere((item) => item.id == value);
-                    setState(() {
-                      _useCurrentLocation = false;
-                      _selectedFavorite = null;
-                      _selectedDistrictId = value;
-                      _districtController.text = selected.name;
-                    });
-                    unawaited(_persistManualSelection());
-                  },
-            listLoadError: _listLoadError,
-            onRetry: _retryLocationLoad,
-          ),
-          SizedBox(height: ui.sectionGap),
-          LocationCoordinatesSection(
-            ui: ui,
-            palette: palette,
-            latitudeLabel: l10n.locationLatitudeLabel,
-            longitudeLabel: l10n.locationLongitudeLabel,
-            latitudeController: _latController,
-            longitudeController: _lonController,
-            onSave: () => unawaited(_persistManualSelection()),
-          ),
-          SizedBox(height: ui.sectionGap),
-          LocationAddFavoriteButton(
-            onPressed: _addFavorite,
-            label: l10n.locationAddFavorite,
-          ),
-          SizedBox(height: ui.sectionGap),
-          LocationFavoritesSection(
-            ui: ui,
-            palette: palette,
-            title: l10n.locationFavoritesLabel,
-            emptyText: l10n.locationNotSet,
-            closedLabel: currentFavoriteClosedLabel(
-              favoritesLabel: l10n.locationFavoritesLabel,
-              provinceText: _provinceController.text,
-              districtText: _districtController.text,
-            ),
-            applyLabel: l10n.locationFavoriteApplyLabel,
-            removeTooltip: l10n.locationFavoriteRemoveLabel,
-            favorites: _favorites,
-            selectedFavorite: _selectedFavorite,
-            labelBuilder: favoriteLabel,
-            onChanged: (favorite) {
-              if (favorite == null) return;
-              setState(() {
-                _selectedFavorite = favorite;
-              });
-            },
-            onApply: _selectedFavorite == null ? null : _applySelectedFavorite,
-            onRemove: _selectedFavorite == null
-                ? null
-                : () => _removeFavorite(_selectedFavorite!),
-          ),
-        ],
+      appBar: AppBar(title: Text(l10n.locationEditTitle)),
+      body: LocationScreenContent(
+        palette: palette,
+        ui: ui,
+        useCurrentLocation: _useCurrentLocation,
+        locating: _locating,
+        loadingCountries: _loadingCountries,
+        loadingStates: _loadingStates,
+        loadingDistricts: _loadingDistricts,
+        countries: _countries,
+        states: _states,
+        districts: _districts,
+        selectedCountryId: _selectedCountryId,
+        selectedStateId: _selectedStateId,
+        selectedDistrictId: _selectedDistrictId,
+        favorites: _favorites,
+        selectedFavorite: _selectedFavorite,
+        listLoadError: _listLoadError,
+        provinceController: _provinceController,
+        districtController: _districtController,
+        latController: _latController,
+        lonController: _lonController,
+        onUseCurrentLocationChanged: _setUseCurrentLocation,
+        onCountryChanged: (value) => unawaited(_onCountryChanged(value)),
+        onStateChanged: (value) => unawaited(_onStateChanged(value)),
+        onDistrictChanged: _onDistrictChanged,
+        onRetry: _retryLocationLoad,
+        onSaveCoordinates: () => unawaited(_persistManualSelection()),
+        onAddFavorite: this._addFavorite,
+        onFavoriteChanged: this._onFavoriteChanged,
+        onApplyFavorite: _selectedFavorite == null
+            ? null
+            : this._applySelectedFavorite,
+        onRemoveFavorite: _selectedFavorite == null
+            ? null
+            : () => this._removeFavorite(_selectedFavorite!),
       ),
     );
   }

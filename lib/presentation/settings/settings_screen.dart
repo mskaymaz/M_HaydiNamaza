@@ -10,25 +10,19 @@ import '../../app/reminder_audio_service.dart';
 import '../../app/reminder_text_settings_storage.dart';
 import '../../app/ui_palette_controller.dart';
 import '../../core/config/config_registry.dart';
-import '../../features/shared_settings/shared_settings_remote_client.dart';
-import '../reminders/flashing_reminder_card.dart';
 import 'calculation_method_screen.dart';
 import 'location_screen.dart';
 import 'settings_audio_mode_texts.dart';
-import 'settings_color_formatters.dart';
+import 'settings_dialog_helpers.dart';
+import 'settings_dropdown_decoration.dart';
 import 'settings_favorite_matcher.dart';
 import 'settings_reminder_runtime_helpers.dart';
 import 'settings_reminder_snapshot.dart';
 import 'settings_text_formatters.dart';
 import 'settings_ui_mappers.dart';
-import 'widgets/settings_color_picker_widgets.dart';
 import 'widgets/settings_top_settings_section.dart';
 import 'widgets/shared_settings/settings_legacy_accordion_group.dart';
-import 'widgets/shared_settings/settings_shared_about_section.dart';
-import 'widgets/shared_settings/settings_shared_contact_section.dart';
-import 'widgets/shared_settings/settings_shared_other_apps_section.dart';
-import 'widgets/shared_settings/settings_shared_support_section.dart';
-import 'widgets/shared_settings/settings_shared_update_section.dart';
+import 'widgets/settings_shared_sections_list.dart';
 
 class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -71,6 +65,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   ReminderAudioMode _selectedAudioMode = ReminderAudioMode.textToSpeech;
   String? _selectedAudioPath;
   String? _selectedAudioLabel;
+  String? _selectedVoiceName;
+  String? _selectedVoiceLocale;
+  String? _selectedEnglishVoiceName;
+  String? _selectedEnglishVoiceLocale;
+  String? _selectedArabicVoiceName;
+  String? _selectedArabicVoiceLocale;
   bool _showVoiceIcon = true;
   bool _showVisualIcon = true;
   bool _showAzanIcon = true;
@@ -135,6 +135,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _selectedAudioMode = settings.audioMode;
     _selectedAudioPath = settings.selectedAudioPath;
     _selectedAudioLabel = settings.selectedAudioLabel;
+    _selectedVoiceName = settings.selectedVoiceName;
+    _selectedVoiceLocale = settings.selectedVoiceLocale;
+    _selectedEnglishVoiceName = settings.selectedEnglishVoiceName;
+    _selectedEnglishVoiceLocale = settings.selectedEnglishVoiceLocale;
+    _selectedArabicVoiceName = settings.selectedArabicVoiceName;
+    _selectedArabicVoiceLocale = settings.selectedArabicVoiceLocale;
     _showVoiceIcon = settings.showVoiceIcon;
     _showVisualIcon = settings.showVisualIcon;
     _showAzanIcon = settings.showAzanIcon;
@@ -174,7 +180,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           SettingsTopSettingsSection(
             initialLanguageCode: codeForLocale(current),
-            languageDecoration: _dropdownDecoration('Uygulama Dili'),
+            languageDecoration: settingsDropdownDecoration(
+              palette: palette,
+              label: 'Uygulama Dili',
+            ),
             languageSystemLabel: l10n.languageSystem,
             languageTurkishLabel: l10n.languageTurkish,
             languageEnglishLabel: l10n.languageEnglish,
@@ -329,21 +338,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Padding(
             padding: ui.screenPadding.copyWith(top: 0),
-            child: Column(
-              children: const [
-                SettingsSharedContactSection(),
-                SizedBox(height: 10),
-                SettingsSharedUpdateSection(),
-                SizedBox(height: 10),
-                SettingsSharedOtherAppsSection(
-                  remoteClient: SharedSettingsRemoteClient(),
-                ),
-                SizedBox(height: 10),
-                SettingsSharedSupportSection(),
-                SizedBox(height: 10),
-                SettingsSharedAboutSection(),
-              ],
-            ),
+            child: const SettingsSharedSectionsList(),
           ),
         ],
       ),
@@ -426,12 +421,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
       vibrationPauseSecondsText: _vibrationPauseController.text,
       visualDisplaySecondsText: _visualDisplayController.text,
       visualReopenSecondsText: _visualReopenController.text,
-        selectedVoiceName: ReminderAudioService.defaultTurkishVoiceName,
-        selectedVoiceLocale: ReminderAudioService.defaultTurkishVoiceLocale,
-      selectedEnglishVoiceName: null,
-      selectedEnglishVoiceLocale: null,
-      selectedArabicVoiceName: null,
-      selectedArabicVoiceLocale: null,
+      selectedVoiceName:
+          _selectedVoiceName ?? ReminderAudioService.defaultTurkishVoiceName,
+      selectedVoiceLocale:
+          _selectedVoiceLocale ??
+          ReminderAudioService.defaultTurkishVoiceLocale,
+      selectedEnglishVoiceName: _selectedEnglishVoiceName,
+      selectedEnglishVoiceLocale: _selectedEnglishVoiceLocale,
+      selectedArabicVoiceName: _selectedArabicVoiceName,
+      selectedArabicVoiceLocale: _selectedArabicVoiceLocale,
       selectedAudioPath: _selectedAudioPath,
       selectedAudioLabel: _selectedAudioLabel,
     );
@@ -451,23 +449,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       );
       return;
     }
-    await showDialog<void>(
+    await showSettingsVisualReminderPreviewDialog(
       context: context,
-      builder: (context) {
-        return AlertDialog(
-          contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-          content: FlashingReminderCard(
-            prayerLabel: '${toTurkishUpper(l10n.prayerDhuhr)} VAKTI',
-            message: effectiveText,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Kapat'),
-            ),
-          ],
-        );
-      },
+      prayerLabel: '${toTurkishUpper(l10n.prayerDhuhr)} VAKTI',
+      message: effectiveText,
     );
   }
 
@@ -492,120 +477,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     await _persistReminderTexts();
   }
 
-  InputDecoration _dropdownDecoration(String label) {
-    final palette = widget.uiPaletteController.value;
-    final ui = ConfigRegistry.settingsPanelsFor(palette);
-    return InputDecoration(
-      labelText: label,
-      isDense: true,
-      filled: true,
-      fillColor: ui.itemPanel.color,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      border: OutlineInputBorder(
-        borderRadius: ui.itemPanel.borderRadius,
-        borderSide: BorderSide.none,
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: ui.itemPanel.borderRadius,
-        borderSide: BorderSide.none,
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: ui.itemPanel.borderRadius,
-        borderSide: BorderSide(color: palette.zeminColor),
-      ),
-    );
-  }
-
   Future<void> _editColor({
     required BuildContext context,
     required String title,
     required Color initialColor,
     required Future<void> Function(Color color) onApply,
-  }) async {
-    var draft = HSVColor.fromColor(initialColor);
-    await showDialog<void>(
+  }) {
+    return showSettingsColorPickerDialog(
       context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (context, setState) {
-            return AlertDialog(
-              title: Text('$title Rengi'),
-              content: SizedBox(
-                width: 320,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 52,
-                      decoration: BoxDecoration(
-                        color: draft.toColor(),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.black12),
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        hexColor(draft.toColor()),
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: draft.value > 0.6
-                              ? Colors.black87
-                              : Colors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 14),
-                    SizedBox(
-                      height: 220,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ColorSpectrum(
-                              hsv: draft,
-                              onChanged: (saturation, value) {
-                                setState(() {
-                                  draft = draft
-                                      .withSaturation(saturation)
-                                      .withValue(value);
-                                });
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          HueStrip(
-                            hue: draft.hue,
-                            onChanged: (hue) {
-                              setState(() {
-                                draft = draft.withHue(hue);
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Iptal'),
-                ),
-                FilledButton(
-                  onPressed: () async {
-                    await onApply(draft.toColor());
-                    if (mounted) {
-                      setState(() {});
-                    }
-                    if (!context.mounted) return;
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Uygula'),
-                ),
-              ],
-            );
-          },
-        );
+      title: title,
+      initialColor: initialColor,
+      onApply: onApply,
+      onApplied: () {
+        if (mounted) setState(() {});
       },
     );
   }

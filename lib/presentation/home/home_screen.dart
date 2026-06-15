@@ -540,6 +540,9 @@ class _HomeScreenState extends State<HomeScreen> {
               : gregorianDateLabel;
           final palette = widget.uiPaletteController.value;
           final ui = ConfigRegistry.mainUiFor(palette);
+          final mediaPadding = MediaQuery.of(context).padding;
+          final statusBarHeight = mediaPadding.top;
+          final bottomSafePadding = mediaPadding.bottom;
           final statusBarColor =
               Color.lerp(palette.zeminColor, Colors.white, 0.5) ??
               palette.zeminColor;
@@ -550,20 +553,14 @@ class _HomeScreenState extends State<HomeScreen> {
               color: palette.backgroundZeminColor,
               child: Stack(
                 children: [
-                  const Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 30,
-                    child: SizedBox.shrink(),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 30,
-                    child: ColoredBox(color: statusBarColor),
-                  ),
+                  if (statusBarHeight > 0)
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      height: statusBarHeight,
+                      child: ColoredBox(color: statusBarColor),
+                    ),
                   SafeArea(
                     child: Padding(
                       padding: ui.screenPadding,
@@ -580,7 +577,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                           const infoPanelGap = 3.0;
                           const infoPanelBottomPadding = 8.0;
-                          const infoPanelBottomOverflow = 30.0;
+                          final infoPanelBottomOverflow = bottomSafePadding;
                           final drawerBottom =
                               drawerLayout.drawerTop +
                               drawerLayout.drawerHeight;

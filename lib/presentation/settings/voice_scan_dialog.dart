@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+
 import '../../app/reminder_audio_service.dart';
-import '../../app/reminder_text_settings_storage.dart';
 
 class VoiceScanDialog extends StatefulWidget {
   final ReminderAudioService reminderAudioService;
@@ -31,9 +31,7 @@ class _VoiceScanDialogState extends State<VoiceScanDialog> {
   }
 
   Future<void> _playIndex(int idx) async {
-    final v = widget.arabicVoices[idx];
-    final name = (v.name ?? v['name']).toString();
-    final locale = (v.locale ?? v['locale']).toString();
+    final voice = _voiceAt(idx);
     setState(() {
       _current = idx;
       _isPlaying = true;
@@ -41,11 +39,12 @@ class _VoiceScanDialogState extends State<VoiceScanDialog> {
     try {
       await widget.reminderAudioService.speakTextWithVoice(
         text: widget.sampleText,
-        voiceName: name,
-        voiceLocale: locale,
+        voiceName: voice.name,
+        voiceLocale: voice.locale,
         selectedLocale: const Locale('ar'),
       );
     } catch (_) {}
+    if (!mounted) return;
     setState(() {
       _isPlaying = false;
     });
@@ -67,22 +66,34 @@ class _VoiceScanDialogState extends State<VoiceScanDialog> {
 
   Future<void> _selectCurrent() async {
     if (_current < 0) return;
-    final v = widget.arabicVoices[_current];
-    final name = (v.name ?? v['name']).toString();
-    final locale = (v.locale ?? v['locale']).toString();
+    final voice = _voiceAt(_current);
     try {
-      final storage = ReminderTextSettingsStorage();
-      await storage.writeSelectedLanguageVoices(
-        arabicVoiceName: name,
-        arabicVoiceLocale: locale,
-      );
       await widget.reminderAudioService.saveSelectedLanguageVoices(
-        arabicVoiceLocale: locale,
-        arabicVoiceName: name,
+        arabicVoiceLocale: voice.locale,
+        arabicVoiceName: voice.name,
       );
     } catch (_) {}
     if (!mounted) return;
     Navigator.of(context).pop();
+  }
+
+  _ScannedVoice _voiceAt(int index) {
+    final raw = widget.arabicVoices[index];
+    if (raw is ReminderVoiceOption) {
+      return _ScannedVoice(
+        name: raw.name,
+        locale: raw.locale,
+        label: raw.label,
+      );
+    }
+    if (raw is Map) {
+      final name = (raw['name'] ?? '').toString();
+      final locale = (raw['locale'] ?? '').toString();
+      final label = (raw['label'] ?? '$name ($locale)').toString();
+      return _ScannedVoice(name: name, locale: locale, label: label);
+    }
+    final label = raw.toString();
+    return _ScannedVoice(name: label, locale: '', label: label);
   }
 
   @override
@@ -105,14 +116,18 @@ class _VoiceScanDialogState extends State<VoiceScanDialog> {
                 shrinkWrap: true,
                 itemCount: widget.arabicVoices.length,
                 itemBuilder: (context, index) {
-                  final v = widget.arabicVoices[index];
-                  final label = (v.label ?? '${v['name']} (${v['locale']})').toString();
+                  final voice = _voiceAt(index);
                   return ListTile(
-                    title: Text(label),
+                    title: Text(voice.label),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        if (_current == index && _isPlaying) const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)),
+                        if (_current == index && _isPlaying)
+                          const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
                         IconButton(
                           icon: const Icon(Icons.play_arrow_rounded),
                           onPressed: () => _playIndex(index),
@@ -135,8 +150,23 @@ class _VoiceScanDialogState extends State<VoiceScanDialog> {
         ),
       ),
       actions: [
-        TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Kapat')),
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Kapat'),
+        ),
       ],
     );
   }
+}
+
+class _ScannedVoice {
+  final String name;
+  final String locale;
+  final String label;
+
+  const _ScannedVoice({
+    required this.name,
+    required this.locale,
+    required this.label,
+  });
 }

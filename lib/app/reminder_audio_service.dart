@@ -425,21 +425,24 @@ class ReminderAudioService {
     final replacements = <MapEntry<Pattern, String>>[
       MapEntry(
         RegExp(r'\(\s*r\.?\s*a\.?\s*\)', caseSensitive: false),
-        'radiyallahu anhu',
+        'radiyallahû anhû',
       ),
       MapEntry(
         RegExp(r'\(\s*a\.?\s*s\.?\s*\)', caseSensitive: false),
-        'aleyhisselam',
+        'âleyhisselâm',
       ),
       MapEntry(
         RegExp(
           r'\(\s*(?:s\.?\s*a\.?\s*v\.?|s\.?\s*a\.?)\s*\)',
           caseSensitive: false,
         ),
-        'Sallallahu aleyhi vesselam',
+        'Sallallahu aleyhi ve sellem',
       ),
       MapEntry(RegExp(r'\bHz\.', caseSensitive: false), 'Hazreti'),
       MapEntry(RegExp(r'\bb\.(?=\s|$)', caseSensitive: true), 'Bin'),
+      MapEntry(RegExp(r"\bKa['’`]be\b", caseSensitive: false), 'Kâbe'),
+      MapEntry(RegExp(r'\bAvf\b', caseSensitive: false), 'Avuf'),
+      MapEntry(RegExp(r'\bAmr\b', caseSensitive: false), 'Amır'),
     ];
     for (final replacement in replacements) {
       normalized = normalized.replaceAll(replacement.key, replacement.value);

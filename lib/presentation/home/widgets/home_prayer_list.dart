@@ -299,125 +299,34 @@ class HomePrayerList extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: isCustomPrayer
-                              ? LayoutBuilder(
-                                  builder: (context, constraints) {
-                                    final customTailWidth =
-                                        timeSlotWidth +
-                                        10 +
-                                        scaledChipStyle.width +
-                                        8 +
-                                        (showVoiceIcon ? iconSlotWidth : 0) +
-                                        (showVisualIcon ? iconSlotWidth : 0) +
-                                        (showAzanIcon ? iconSlotWidth : 0) +
-                                        (showVibrationIcon ? iconSlotWidth : 0) +
-                                        (iconStyle.iconSize * rowScale + 2);
-                                    final customRowWidth =
-                                        labelSlotWidth + 10 + customTailWidth;
-
-                                    if (constraints.maxWidth < customRowWidth) {
-                                      return Center(
-                                        child: FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          alignment: Alignment.center,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              for (
-                                                var i = 0;
-                                                i < rowWidgets.length;
-                                                i++
-                                              ) ...[
-                                                if (i > 0)
-                                                  SizedBox(
-                                                    width: i == 3
-                                                        ? 8
-                                                        : i <= 2
-                                                        ? 10
-                                                        : 0,
-                                                  ),
-                                                rowWidgets[i],
-                                              ],
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }
-
-                                    final sideSpace =
-                                        (constraints.maxWidth - customRowWidth) /
-                                        2;
-
-                                    return Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          width: sideSpace + labelSlotWidth,
-                                          child: labelChild,
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            for (
-                                              var i = 1;
-                                              i < rowWidgets.length;
-                                              i++
-                                            ) ...[
-                                              if (i > 1)
-                                                SizedBox(
-                                                  width: i == 3
-                                                      ? 8
-                                                      : i <= 2
-                                                      ? 10
-                                                      : 0,
-                                                ),
-                                              rowWidgets[i],
-                                            ],
-                                          ],
-                                        ),
-                                        SizedBox(width: sideSpace),
-                                      ],
-                                    );
-                                  },
-                                )
-                              : Center(
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    alignment: Alignment.center,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        for (
-                                          var i = 0;
-                                          i < rowWidgets.length;
-                                          i++
-                                        ) ...[
-                                          if (i > 0)
-                                            SizedBox(
-                                              width: i == 3
-                                                  ? 8
-                                                  : i <= 2
-                                                  ? 10
-                                                  : 0,
-                                            ),
-                                          rowWidgets[i],
-                                        ],
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                          child: Center(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              alignment: Alignment.center,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  for (
+                                    var i = 0;
+                                    i < rowWidgets.length;
+                                    i++
+                                  ) ...[
+                                    if (i > 0)
+                                      SizedBox(
+                                        width: i == 3
+                                            ? 8
+                                            : i <= 2
+                                            ? 10
+                                            : 0,
+                                      ),
+                                    rowWidgets[i],
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),

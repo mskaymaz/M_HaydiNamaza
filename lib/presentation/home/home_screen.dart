@@ -626,14 +626,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           decoration: BoxDecoration(
                                             color: ui.listPanel.color,
                                             borderRadius:
-                                                const BorderRadius.only(
-                                                  bottomLeft: Radius.circular(
-                                                    20,
-                                                  ),
-                                                  bottomRight: Radius.circular(
-                                                    20,
-                                                  ),
-                                                ),
+                                                BorderRadius.circular(20),
                                             boxShadow: const [
                                               BoxShadow(
                                                 color: Color(0x22000000),

@@ -218,7 +218,7 @@ class ConfigRegistry {
 
   static MainUiConfig mainUiFor(UiPaletteConfig palette) {
     return MainUiConfig(
-      screenPadding: const EdgeInsets.fromLTRB(5, 14, 5, 18),
+      screenPadding: const EdgeInsets.fromLTRB(5, 0, 5, 18),
       topPanelPadding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
       sectionGap: 12,
       settingsIconSize: 16,

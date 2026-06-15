@@ -1,6 +1,7 @@
 part of 'home_screen.dart';
 
-const double _kHomeDrawerPanelOverlap = 15.0;
+const double _kHomeDrawerPanelOverlap = 0.0;
+const double _kHomeDrawerPanelGap = 3.0;
 const double _kHomeDrawerMinCollapsedHeight = 22.0;
 const double _kHomeDrawerMaxHeightLimit = 260.0;
 const double _kHomeDrawerLocationPaddingCompensation = 8.0;
@@ -46,7 +47,7 @@ _HomeDrawerLayoutMetrics _computeDrawerLayout({
       topRowHeight +
       _kHomeDrawerTopPanelExtraSpacing +
       lowerSectionHeight;
-  final drawerTop = topPanelHeight - _kHomeDrawerPanelOverlap;
+  final drawerTop = topPanelHeight + _kHomeDrawerPanelGap;
   final availableDrawerSpace = constraintsMaxHeight - drawerTop;
   final maxDrawerHeight = math.max(
     minDrawerHeight,

@@ -10,7 +10,6 @@ const double _summaryPrayerTextGap = 25.0;
 const double _summaryPrayerBellGap = 12.0;
 const double _summaryPrayerBellBoxSize = 30.0;
 const double _summaryPrayerBellIconSize = 20.0;
-const double _summaryPrayerLongLabelMaxWidth = 180.0;
 
 class HomePrayerSummaryList extends StatelessWidget {
   final ScrollController controller;
@@ -102,58 +101,72 @@ class HomePrayerSummaryList extends StatelessWidget {
                     : null,
               ),
               child: Center(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(
-                        width: _summaryPrayerLabelColumnWidth,
-                        child: _SummaryPrayerLabel(
-                          label: label,
-                          style: labelStyle,
-                          isCustomPrayer: isCustomPrayer,
-                        ),
-                      ),
-                      const SizedBox(width: _summaryPrayerTextGap),
-                      SizedBox(
-                        width: _summaryPrayerTimeColumnWidth,
-                        child: Text(
-                          item.timeLabel,
-                          maxLines: 1,
-                          softWrap: false,
-                          textAlign: TextAlign.right,
-                          style: Theme.of(context).textTheme.titleLarge
-                              ?.copyWith(
-                                color: timeColor,
-                                fontWeight: isActive
-                                    ? FontWeight.w800
-                                    : FontWeight.w600,
-                                fontSize: 24.0,
+                child: isCustomPrayer
+                    ? _CustomPrayerSummaryRow(
+                        label: label,
+                        labelStyle: labelStyle,
+                        isActive: isActive,
+                        timeLabel: item.timeLabel,
+                        timeColor: timeColor,
+                        hasReminder: hasReminder,
+                        bellColor: bellColor,
+                        onOpenControls: onOpenControls,
+                      )
+                    : FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              width: _summaryPrayerLabelColumnWidth,
+                              child: Text(
+                                label,
+                                maxLines: 1,
+                                softWrap: false,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.left,
+                                style: labelStyle,
                               ),
-                        ),
-                      ),
-                      const SizedBox(width: _summaryPrayerBellGap),
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: onOpenControls,
-                        child: SizedBox(
-                          width: _summaryPrayerBellBoxSize,
-                          height: _summaryPrayerBellBoxSize,
-                          child: Center(
-                            child: Icon(
-                              hasReminder
-                                  ? Icons.notifications_active_outlined
-                                  : Icons.notifications_none_outlined,
-                              color: bellColor,
-                              size: _summaryPrayerBellIconSize,
                             ),
-                          ),
+                            const SizedBox(width: _summaryPrayerTextGap),
+                            SizedBox(
+                              width: _summaryPrayerTimeColumnWidth,
+                              child: Text(
+                                item.timeLabel,
+                                maxLines: 1,
+                                softWrap: false,
+                                textAlign: TextAlign.right,
+                                style: Theme.of(context).textTheme.titleLarge
+                                    ?.copyWith(
+                                      color: timeColor,
+                                      fontWeight: isActive
+                                          ? FontWeight.w800
+                                          : FontWeight.w600,
+                                      fontSize: 24.0,
+                                    ),
+                              ),
+                            ),
+                            const SizedBox(width: _summaryPrayerBellGap),
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: onOpenControls,
+                              child: SizedBox(
+                                width: _summaryPrayerBellBoxSize,
+                                height: _summaryPrayerBellBoxSize,
+                                child: Center(
+                                  child: Icon(
+                                    hasReminder
+                                        ? Icons.notifications_active_outlined
+                                        : Icons.notifications_none_outlined,
+                                    color: bellColor,
+                                    size: _summaryPrayerBellIconSize,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
               ),
             );
           },
@@ -166,49 +179,156 @@ class HomePrayerSummaryList extends StatelessWidget {
   }
 }
 
-class _SummaryPrayerLabel extends StatelessWidget {
+class _CustomPrayerSummaryRow extends StatelessWidget {
   final String label;
-  final TextStyle? style;
-  final bool isCustomPrayer;
+  final TextStyle? labelStyle;
+  final bool isActive;
+  final String timeLabel;
+  final Color timeColor;
+  final bool hasReminder;
+  final Color bellColor;
+  final VoidCallback onOpenControls;
 
-  const _SummaryPrayerLabel({
+  const _CustomPrayerSummaryRow({
     required this.label,
-    required this.style,
-    required this.isCustomPrayer,
+    required this.labelStyle,
+    required this.isActive,
+    required this.timeLabel,
+    required this.timeColor,
+    required this.hasReminder,
+    required this.bellColor,
+    required this.onOpenControls,
   });
 
   @override
   Widget build(BuildContext context) {
-    final width = _measureTextWidth(context, label, style);
-    if (!isCustomPrayer || width <= _summaryPrayerLabelColumnWidth) {
-      return Text(
-        label,
-        maxLines: 1,
-        softWrap: false,
-        overflow: TextOverflow.clip,
-        textAlign: TextAlign.left,
-        style: style,
-      );
-    }
+    const tailWidth =
+        _summaryPrayerTimeColumnWidth +
+        _summaryPrayerBellGap +
+        _summaryPrayerBellBoxSize;
+    const rowWidth =
+        _summaryPrayerLabelColumnWidth + _summaryPrayerTextGap + tailWidth;
 
-    return OverflowBox(
-      minWidth: _summaryPrayerLabelColumnWidth,
-      maxWidth: _summaryPrayerLongLabelMaxWidth,
-      alignment: Alignment.centerRight,
-      child: SizedBox(
-        width: width.clamp(
-          _summaryPrayerLabelColumnWidth,
-          _summaryPrayerLongLabelMaxWidth,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < rowWidth) {
+          return FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  width: _summaryPrayerLabelColumnWidth,
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: labelStyle,
+                  ),
+                ),
+                const SizedBox(width: _summaryPrayerTextGap),
+                _SummaryTail(
+                  timeLabel: timeLabel,
+                  timeColor: timeColor,
+                  isActive: isActive,
+                  hasReminder: hasReminder,
+                  bellColor: bellColor,
+                  onOpenControls: onOpenControls,
+                ),
+              ],
+            ),
+          );
+        }
+
+        final sideSpace = (constraints.maxWidth - rowWidth) / 2;
+
+        return Row(
+          children: [
+            SizedBox(
+              width: sideSpace + _summaryPrayerLabelColumnWidth,
+              child: Text(
+                label,
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.right,
+                style: labelStyle,
+              ),
+            ),
+            const SizedBox(width: _summaryPrayerTextGap),
+            _SummaryTail(
+              timeLabel: timeLabel,
+              timeColor: timeColor,
+              isActive: isActive,
+              hasReminder: hasReminder,
+              bellColor: bellColor,
+              onOpenControls: onOpenControls,
+            ),
+            SizedBox(width: sideSpace),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _SummaryTail extends StatelessWidget {
+  final String timeLabel;
+  final Color timeColor;
+  final bool isActive;
+  final bool hasReminder;
+  final Color bellColor;
+  final VoidCallback onOpenControls;
+
+  const _SummaryTail({
+    required this.timeLabel,
+    required this.timeColor,
+    required this.isActive,
+    required this.hasReminder,
+    required this.bellColor,
+    required this.onOpenControls,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: _summaryPrayerTimeColumnWidth,
+          child: Text(
+            timeLabel,
+            maxLines: 1,
+            softWrap: false,
+            textAlign: TextAlign.right,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: timeColor,
+              fontWeight: isActive ? FontWeight.w800 : FontWeight.w600,
+              fontSize: 24.0,
+            ),
+          ),
         ),
-        child: Text(
-          label,
-          maxLines: 1,
-          softWrap: false,
-          overflow: TextOverflow.clip,
-          textAlign: TextAlign.right,
-          style: style,
+        const SizedBox(width: _summaryPrayerBellGap),
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: onOpenControls,
+          child: SizedBox(
+            width: _summaryPrayerBellBoxSize,
+            height: _summaryPrayerBellBoxSize,
+            child: Center(
+              child: Icon(
+                hasReminder
+                    ? Icons.notifications_active_outlined
+                    : Icons.notifications_none_outlined,
+                color: bellColor,
+                size: _summaryPrayerBellIconSize,
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }
@@ -228,19 +348,6 @@ class PrayerScrollOverflowIndicator extends StatefulWidget {
   @override
   State<PrayerScrollOverflowIndicator> createState() =>
       _PrayerScrollOverflowIndicatorState();
-}
-
-double _measureTextWidth(
-  BuildContext context,
-  String text,
-  TextStyle? style,
-) {
-  final textPainter = TextPainter(
-    text: TextSpan(text: text, style: style),
-    maxLines: 1,
-    textDirection: Directionality.of(context),
-  )..layout();
-  return textPainter.width;
 }
 
 class _PrayerScrollOverflowIndicatorState

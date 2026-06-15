@@ -127,40 +127,41 @@ class HomePrayerList extends StatelessWidget {
                             : FontWeight.w300,
                         fontSize: rowTextSize,
                       );
+                  final labelChild = item.labelController == null
+                      ? Text(
+                          item.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.clip,
+                          softWrap: false,
+                          textAlign: TextAlign.right,
+                          style: labelStyle,
+                        )
+                      : TextField(
+                          controller: item.labelController,
+                          onChanged: item.onLabelChanged,
+                          onEditingComplete: () {
+                            item.onLabelEditingComplete?.call();
+                            FocusScope.of(context).unfocus();
+                          },
+                          onSubmitted: (_) {
+                            item.onLabelEditingComplete?.call();
+                          },
+                          textAlign: TextAlign.right,
+                          maxLines: 1,
+                          textInputAction: TextInputAction.done,
+                          style: labelStyle?.copyWith(
+                            fontWeight: FontWeight.w300,
+                          ),
+                          decoration: const InputDecoration(
+                            isDense: true,
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.zero,
+                          ),
+                        );
                   final rowWidgets = <Widget>[
                     SizedBox(
                       width: labelSlotWidth,
-                      child: item.labelController == null
-                          ? Text(
-                              item.label,
-                              maxLines: 1,
-                              overflow: TextOverflow.clip,
-                              softWrap: false,
-                              textAlign: TextAlign.right,
-                              style: labelStyle,
-                            )
-                          : TextField(
-                              controller: item.labelController,
-                              onChanged: item.onLabelChanged,
-                              onEditingComplete: () {
-                                item.onLabelEditingComplete?.call();
-                                FocusScope.of(context).unfocus();
-                              },
-                              onSubmitted: (_) {
-                                item.onLabelEditingComplete?.call();
-                              },
-                              textAlign: TextAlign.right,
-                              maxLines: 1,
-                              textInputAction: TextInputAction.done,
-                              style: labelStyle?.copyWith(
-                                fontWeight: FontWeight.w300,
-                              ),
-                              decoration: const InputDecoration(
-                                isDense: true,
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                            ),
+                      child: labelChild,
                     ),
                     SizedBox(
                       width: timeSlotWidth,
@@ -298,34 +299,125 @@ class HomePrayerList extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: Center(
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              alignment: Alignment.center,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  for (
-                                    var i = 0;
-                                    i < rowWidgets.length;
-                                    i++
-                                  ) ...[
-                                    if (i > 0)
-                                      SizedBox(
-                                        width: i == 3
-                                            ? 8
-                                            : i <= 2
-                                            ? 10
-                                            : 0,
-                                      ),
-                                    rowWidgets[i],
-                                  ],
-                                ],
-                              ),
-                            ),
-                          ),
+                          child: isCustomPrayer
+                              ? LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    final customTailWidth =
+                                        timeSlotWidth +
+                                        10 +
+                                        scaledChipStyle.width +
+                                        8 +
+                                        (showVoiceIcon ? iconSlotWidth : 0) +
+                                        (showVisualIcon ? iconSlotWidth : 0) +
+                                        (showAzanIcon ? iconSlotWidth : 0) +
+                                        (showVibrationIcon ? iconSlotWidth : 0) +
+                                        (iconStyle.iconSize * rowScale + 2);
+                                    final customRowWidth =
+                                        labelSlotWidth + 10 + customTailWidth;
+
+                                    if (constraints.maxWidth < customRowWidth) {
+                                      return Center(
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          alignment: Alignment.center,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              for (
+                                                var i = 0;
+                                                i < rowWidgets.length;
+                                                i++
+                                              ) ...[
+                                                if (i > 0)
+                                                  SizedBox(
+                                                    width: i == 3
+                                                        ? 8
+                                                        : i <= 2
+                                                        ? 10
+                                                        : 0,
+                                                  ),
+                                                rowWidgets[i],
+                                              ],
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    }
+
+                                    final sideSpace =
+                                        (constraints.maxWidth - customRowWidth) /
+                                        2;
+
+                                    return Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: sideSpace + labelSlotWidth,
+                                          child: labelChild,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            for (
+                                              var i = 1;
+                                              i < rowWidgets.length;
+                                              i++
+                                            ) ...[
+                                              if (i > 1)
+                                                SizedBox(
+                                                  width: i == 3
+                                                      ? 8
+                                                      : i <= 2
+                                                      ? 10
+                                                      : 0,
+                                                ),
+                                              rowWidgets[i],
+                                            ],
+                                          ],
+                                        ),
+                                        SizedBox(width: sideSpace),
+                                      ],
+                                    );
+                                  },
+                                )
+                              : Center(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        for (
+                                          var i = 0;
+                                          i < rowWidgets.length;
+                                          i++
+                                        ) ...[
+                                          if (i > 0)
+                                            SizedBox(
+                                              width: i == 3
+                                                  ? 8
+                                                  : i <= 2
+                                                  ? 10
+                                                  : 0,
+                                            ),
+                                          rowWidgets[i],
+                                        ],
+                                      ],
+                                    ),
+                                  ),
+                                ),
                         ),
                       ],
                     ),

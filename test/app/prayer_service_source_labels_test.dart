@@ -113,6 +113,9 @@ void main() {
       };
 
       try {
+        final aladhanClient = _FakeAladhanPrayerTimesClient(
+          shouldReturnData: true,
+        );
         final service = PrayerService(
           advancedSettingsStorage: _FakeAdvancedSettingsStorage(),
           dailyCacheRepository: _NoopCacheRepository(),
@@ -120,9 +123,7 @@ void main() {
           diyanetPrayerTimesClient: _FakeDiyanetPrayerTimesClient(
             shouldReturnData: true,
           ),
-          aladhanPrayerTimesClient: _FakeAladhanPrayerTimesClient(
-            shouldReturnData: true,
-          ),
+          aladhanPrayerTimesClient: aladhanClient,
         );
 
         await service.calculateToday(
@@ -146,6 +147,7 @@ void main() {
           logs.any((line) => line.contains('[Aladhan:explicit]')),
           isTrue,
         );
+        expect(aladhanClient.lastSchool, 0);
         expect(logs.any((line) => line.contains('[Diyanet] ids')), isFalse);
       } finally {
         debugPrint = original;
@@ -223,6 +225,7 @@ class _FakeDiyanetPrayerTimesClient extends DiyanetPrayerTimesClient {
 
 class _FakeAladhanPrayerTimesClient extends AladhanPrayerTimesClient {
   final bool shouldReturnData;
+  int? lastSchool;
 
   _FakeAladhanPrayerTimesClient({required this.shouldReturnData});
 
@@ -236,6 +239,7 @@ class _FakeAladhanPrayerTimesClient extends AladhanPrayerTimesClient {
     required Duration timeout,
     required Map<String, String> headers,
   }) async {
+    lastSchool = school;
     if (!shouldReturnData) return null;
     return AladhanDailyTimings(
       fajr: DateTime(date.year, date.month, date.day, 4, 32),

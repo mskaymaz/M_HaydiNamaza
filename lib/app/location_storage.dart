@@ -97,7 +97,7 @@ class LocationStorage {
 
   Future<bool> readUseCurrentLocation() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_useCurrentLocationKey) ?? false;
+    return prefs.getBool(_useCurrentLocationKey) ?? true;
   }
 
   Future<void> writeUseCurrentLocation(bool value) async {

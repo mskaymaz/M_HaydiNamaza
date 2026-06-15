@@ -305,6 +305,24 @@ class _DailyContentSectionState extends State<DailyContentSection> {
     final overlay = Overlay.of(context);
     final offset = renderObject.localToGlobal(Offset.zero);
     final size = renderObject.size;
+    const screenEdgeGap = 12.0;
+    const minInfoPanelBoundsHeight = 260.0;
+    final overlayObject = overlay.context.findRenderObject();
+    final overlayHeight = overlayObject is RenderBox && overlayObject.hasSize
+        ? overlayObject.size.height
+        : MediaQuery.sizeOf(context).height;
+    final maxBoundsHeight = overlayHeight - (screenEdgeGap * 2);
+    final targetHeight = maxBoundsHeight <= 0
+        ? size.height
+        : _minDouble(
+            _maxDouble(size.height, minInfoPanelBoundsHeight),
+            maxBoundsHeight,
+          );
+    final maxTop = _maxDouble(
+      screenEdgeGap,
+      overlayHeight - targetHeight - screenEdgeGap,
+    );
+    final targetTop = offset.dy.clamp(screenEdgeGap, maxTop).toDouble();
 
     _infoOverlayEntry = OverlayEntry(
       builder: (context) {
@@ -319,9 +337,9 @@ class _DailyContentSectionState extends State<DailyContentSection> {
             ),
             Positioned(
               left: offset.dx,
-              top: offset.dy,
+              top: targetTop,
               width: size.width,
-              height: size.height,
+              height: targetHeight,
               child: _InfoOverlayPanel(
                 message: trimmedMessage,
                 isRtl: widget.isRtl,
@@ -373,8 +391,8 @@ class _InfoOverlayPanel extends StatelessWidget {
       builder: (context, constraints) {
         final maxHeight = constraints.maxHeight;
         final panelHeight = maxHeight <= 0
-            ? 120.0
-            : (maxHeight * 0.5).clamp(120.0, 200.0).toDouble();
+            ? 260.0
+            : maxHeight.clamp(0.0, 320.0).toDouble();
         return Align(
           alignment: Alignment.center,
           child: GestureDetector(
@@ -413,12 +431,13 @@ class _InfoOverlayPanel extends StatelessWidget {
                         : TextDirection.ltr,
                     child: Text(
                       message,
+                      locale: isRtl ? _dailyContentSectionArabicLocale : null,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: isRtl ? 20 : 18,
                         height: 1.3,
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
@@ -430,6 +449,14 @@ class _InfoOverlayPanel extends StatelessWidget {
       },
     );
   }
+}
+
+double _maxDouble(double first, double second) {
+  return first > second ? first : second;
+}
+
+double _minDouble(double first, double second) {
+  return first < second ? first : second;
 }
 
 class _BasmalaHeader extends StatelessWidget {

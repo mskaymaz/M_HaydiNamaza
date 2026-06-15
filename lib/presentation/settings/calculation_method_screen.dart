@@ -35,7 +35,7 @@ class _CalculationMethodScreenState extends State<CalculationMethodScreen> {
   @override
   void initState() {
     super.initState();
-    _selected = widget.initialCode ?? 'turkey';
+    _selected = widget.initialCode ?? CalculationMethodStorage.defaultCode;
     _loadAdvancedSettings();
   }
 

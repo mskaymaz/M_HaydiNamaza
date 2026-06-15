@@ -192,9 +192,13 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) return;
-      final permission = await Geolocator.checkPermission();
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
+        await _locationStorage.writeUseCurrentLocation(false);
         return;
       }
       final position = await _readFastCurrentPosition();
@@ -223,6 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
           longitude: position.longitude.toString(),
         ),
       );
+      await _locationStorage.writeUseCurrentLocation(true);
     } catch (_) {}
   }
 

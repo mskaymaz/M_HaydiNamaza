@@ -98,10 +98,12 @@ String dailyContentJoinMeaningAndText(String meaning, String text) {
 
 String dailyContentInfoNoteForLanguage(String language) {
   if (language == 'ar') {
-    return '\u0633\u064a\u0636\u0627\u0641 \u0627\u0644\u0645\u062d\u062a\u0648\u0649';
+    return 'المعلومات الموجزة الواردة في هذا القسم قُدِّمت للتذكير وتوجيه المستخدم إلى المصادر الأصلية. وللوصول إلى المعنى الصحيح والشروح التفصيلية، يجب الرجوع إلى المصادر الموثوقة.';
   }
-  if (language == 'en') return 'Content will be added';
-  return '\u0130\u00e7erik Eklenecek';
+  if (language == 'en') {
+    return 'The summary information provided in this section is presented to remind the user and guide them to the primary sources. For the correct meaning and detailed explanations, reliable sources must always be consulted.';
+  }
+  return 'Bu bölümde verilen özet bilgiler, kullanıcıya hatırlatma yapmak ve onu asıl kaynaklara yönlendirmek amacıyla sunulmuştur. Doğru anlam ve detaylı açıklamalar için mutlaka güvenilir kaynaklara başvurulması gerekir.';
 }
 
 bool dailyContentHasArabic(String value) {

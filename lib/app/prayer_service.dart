@@ -10,6 +10,7 @@ import 'prayer_daily_cache_repository.dart';
 import 'prayer_times_mapper.dart';
 import '../core/prayer_engine/calculation_parameters.dart';
 import '../core/prayer_engine/coordinates.dart';
+import '../core/prayer_engine/madhab.dart';
 import '../core/prayer_engine/prayer_engine.dart';
 import '../core/prayer_engine/prayer_times.dart';
 import 'location_storage.dart';
@@ -203,7 +204,7 @@ class PrayerService {
         latitude: latitude,
         longitude: longitude,
         methodCode: 'aladhan',
-        school: 1,
+        school: _aladhanSchoolFor(params),
         fallbackParams: params,
       );
       if (aladhanTurkey != null) {
@@ -249,6 +250,10 @@ class PrayerService {
     return left.year == right.year &&
         left.month == right.month &&
         left.day == right.day;
+  }
+
+  int _aladhanSchoolFor(CalculationParameters params) {
+    return params.madhab == Madhab.hanafi ? 1 : 0;
   }
 
   Future<PrayerTimes?> _tryAladhan({

@@ -306,23 +306,15 @@ class _DailyContentSectionState extends State<DailyContentSection> {
     final offset = renderObject.localToGlobal(Offset.zero);
     final size = renderObject.size;
     const screenEdgeGap = 12.0;
-    const minInfoPanelBoundsHeight = 260.0;
+    const horizontalPanelInset = 20.0;
     final overlayObject = overlay.context.findRenderObject();
     final overlayHeight = overlayObject is RenderBox && overlayObject.hasSize
         ? overlayObject.size.height
         : MediaQuery.sizeOf(context).height;
-    final maxBoundsHeight = overlayHeight - (screenEdgeGap * 2);
-    final targetHeight = maxBoundsHeight <= 0
-        ? size.height
-        : _minDouble(
-            _maxDouble(size.height, minInfoPanelBoundsHeight),
-            maxBoundsHeight,
-          );
-    final maxTop = _maxDouble(
-      screenEdgeGap,
-      overlayHeight - targetHeight - screenEdgeGap,
-    );
-    final targetTop = offset.dy.clamp(screenEdgeGap, maxTop).toDouble();
+    final maxPanelHeight = _maxDouble(0, overlayHeight - (screenEdgeGap * 2));
+    final targetTop = offset.dy.clamp(screenEdgeGap, overlayHeight).toDouble();
+    final targetLeft = offset.dx + horizontalPanelInset;
+    final targetWidth = _maxDouble(0, size.width - (horizontalPanelInset * 2));
 
     _infoOverlayEntry = OverlayEntry(
       builder: (context) {
@@ -336,15 +328,15 @@ class _DailyContentSectionState extends State<DailyContentSection> {
               ),
             ),
             Positioned(
-              left: offset.dx,
+              left: targetLeft,
               top: targetTop,
-              width: size.width,
-              height: targetHeight,
+              width: targetWidth,
               child: _InfoOverlayPanel(
                 message: trimmedMessage,
                 isRtl: widget.isRtl,
                 cizgiColor: widget.cizgiColor,
                 contentColor: widget.contentColor,
+                maxHeight: maxPanelHeight,
               ),
             ),
           ],
@@ -377,86 +369,74 @@ class _InfoOverlayPanel extends StatelessWidget {
   final bool isRtl;
   final Color cizgiColor;
   final Color contentColor;
+  final double maxHeight;
 
   const _InfoOverlayPanel({
     required this.message,
     required this.isRtl,
     required this.cizgiColor,
     required this.contentColor,
+    required this.maxHeight,
   });
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final maxHeight = constraints.maxHeight;
-        final panelHeight = maxHeight <= 0
-            ? 260.0
-            : maxHeight.clamp(0.0, 320.0).toDouble();
-        return Align(
-          alignment: Alignment.center,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {},
-            child: SizedBox(
-              width: double.infinity,
-              height: panelHeight,
-              child: Material(
-                color: Color.lerp(contentColor, Colors.black, 0.12) ??
-                    contentColor,
-                borderRadius: BorderRadius.circular(10),
-                elevation: 0,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 12,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: cizgiColor.withValues(alpha: 0.28),
-                    ),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x33000000),
-                        blurRadius: 12,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  alignment: Alignment.center,
-                  child: Directionality(
-                    textDirection: isRtl
-                        ? TextDirection.rtl
-                        : TextDirection.ltr,
-                    child: Text(
-                      message,
-                      locale: isRtl ? _dailyContentSectionArabicLocale : null,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Colors.white,
-                        fontSize: isRtl ? 20 : 18,
-                        height: 1.3,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {},
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: maxHeight),
+        child: Material(
+          color: Color.lerp(contentColor, Colors.black, 0.12) ?? contentColor,
+          borderRadius: BorderRadius.circular(10),
+          elevation: 0,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(14, 12, 14, 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: cizgiColor.withValues(alpha: 0.28)),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x33000000),
+                  blurRadius: 12,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: SingleChildScrollView(
+              child: Directionality(
+                textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+                child: Text(
+                  _formatInfoMessage(message),
+                  locale: isRtl ? _dailyContentSectionArabicLocale : null,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Colors.white,
+                    fontSize: isRtl ? 20 : 18,
+                    height: 1.3,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
 
-double _maxDouble(double first, double second) {
-  return first > second ? first : second;
+String _formatInfoMessage(String message) {
+  if (message.contains('\n')) return message;
+  final splitIndex = message.indexOf('. ');
+  if (splitIndex == -1) return message;
+  return '${message.substring(0, splitIndex + 1)}\n\n'
+      '${message.substring(splitIndex + 2)}';
 }
 
-double _minDouble(double first, double second) {
-  return first < second ? first : second;
+double _maxDouble(double first, double second) {
+  return first > second ? first : second;
 }
 
 class _BasmalaHeader extends StatelessWidget {

@@ -50,6 +50,13 @@
             android:layout_height="15dp"
             android:background="@drawable/prayer_widget_remaining_band">
 
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="15dp"
+                android:layout_gravity="left|center_vertical"
+                android:contentDescription="@null"
+                android:src="@drawable/prayer_widget_small_arrow_head" />
+
             <TextView
                 android:id="@+id/prayer_widget_remaining_label"
                 android:layout_width="match_parent"
@@ -62,14 +69,6 @@
                 android:text="Kalan Süre"
                 android:textColor="#000000"
                 android:textSize="12sp" />
-
-            <ImageView
-                android:layout_width="14dp"
-                android:layout_height="15dp"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="10dp"
-                android:contentDescription="@null"
-                android:src="@drawable/prayer_widget_small_arrow_head" />
         </FrameLayout>
 
         <Chronometer

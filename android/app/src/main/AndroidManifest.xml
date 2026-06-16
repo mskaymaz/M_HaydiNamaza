@@ -17,7 +17,6 @@
             android:name=".PrayerVisualReminderActivity"
             android:excludeFromRecents="true"
             android:exported="false"
-            android:noHistory="true"
             android:showWhenLocked="true"
             android:theme="@style/PrayerVisualReminderTheme"
             android:turnScreenOn="true" />

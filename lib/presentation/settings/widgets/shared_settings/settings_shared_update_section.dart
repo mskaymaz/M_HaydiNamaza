@@ -31,7 +31,7 @@ class _SettingsSharedUpdateSectionState
   Widget build(BuildContext context) {
     final config = kSharedSettingsAppConfig;
     return SharedSettingsSectionCard(
-      title: 'Uygulama Bilgileri ve Guncelleme',
+      title: 'Uygulama Bilgileri ve Güncelleme',
       headerColor: sharedSettingsUpdateHeader,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -53,7 +53,7 @@ class _SettingsSharedUpdateSectionState
                 _infoRow('Uygulama', config.appName),
                 _infoRow('App ID', config.appId),
                 _infoRow('Package', config.packageName),
-                _infoRow('Surum', versionText),
+                _infoRow('Sürüm', versionText),
                 _infoRow('Kanal', config.updateChannel),
                 const SizedBox(height: 12),
                 FractionallySizedBox(
@@ -72,7 +72,7 @@ class _SettingsSharedUpdateSectionState
                     label: Text(
                       _checkingUpdate
                           ? 'Kontrol Ediliyor...'
-                          : 'Guncellemeleri Kontrol Et',
+                          : 'Güncellemeleri Kontrol Et',
                     ),
                   ),
                 ),
@@ -109,12 +109,12 @@ class _SettingsSharedUpdateSectionState
     setState(() => _checkingUpdate = false);
 
     if (manifest == null) {
-      _showSnack('Guncelleme bilgisi alinamadi.');
+      _showSnack('Güncelleme bilgisi alınamadı.');
       return;
     }
 
     if (manifest.buildNumber <= localBuild) {
-      _showSnack('Yeni surum bulunamadi.');
+      _showSnack('Yeni sürüm bulunamadı.');
       return;
     }
 
@@ -122,9 +122,9 @@ class _SettingsSharedUpdateSectionState
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Yeni Surum Hazir'),
+          title: const Text('Yeni Sürüm Hazır'),
           content: Text(
-            'Yeni surum: ${manifest.version} (${manifest.buildNumber})\n\n${manifest.notes.isEmpty ? 'Guncelleme mevcut.' : manifest.notes}',
+            'Yeni sürüm: ${manifest.version} (${manifest.buildNumber})\n\n${manifest.notes.isEmpty ? 'Güncelleme mevcut.' : manifest.notes}',
           ),
           actions: [
             TextButton(
@@ -133,7 +133,7 @@ class _SettingsSharedUpdateSectionState
             ),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Guncelle'),
+              child: const Text('Güncelle'),
             ),
           ],
         );
@@ -145,7 +145,7 @@ class _SettingsSharedUpdateSectionState
     final link = manifest.url.trim().isNotEmpty
         ? manifest.url
         : kSharedSettingsAppConfig.updateFallbackReleaseUrl;
-    await _openUrl(link, failMessage: 'Guncelleme baglantisi acilamadi.');
+    await _openUrl(link, failMessage: 'Güncelleme bağlantısı açılamadı.');
   }
 
   Future<void> _openUrl(String rawUrl, {required String failMessage}) async {

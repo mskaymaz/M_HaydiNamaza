@@ -262,7 +262,7 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                     Text(
                       hasLocation
                           ? 'Telefonu duz tutup yesil oku takip edin.'
-                          : 'Konum yokken sadece sensor referansi gosterilir.',
+                          : 'Konum yokken sadece sensör referansı gösterilir.',
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -286,7 +286,7 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                     if (_locationPermissionUnavailable && !hasLocation) ...[
                       const SizedBox(height: 8),
                       Text(
-                        'Konum izni kapali oldugu icin yaklasik sensor modu kullaniliyor.',
+                        'Konum izni kapalı olduğu için yaklaşık sensör modu kullanılıyor.',
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       ),

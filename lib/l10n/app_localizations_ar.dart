@@ -9,7 +9,7 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get appTitle => 'MHaydiNamaza';
+  String get appTitle => 'Let\'s Pray';
 
   @override
   String get homePlaceholder => 'ستظهر أوقات الصلاة هنا قريبًا.';
@@ -123,34 +123,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get methodUmmAlQura => 'أم القرى';
 
   @override
-  String get methodDubai => 'دبي';
-
-  @override
-  String get methodKuwait => 'الكويت';
-
-  @override
-  String get methodQatar => 'قطر';
-
-  @override
-  String get methodSingapore => 'سنغافورة';
-
-  @override
-  String get methodTehran => 'طهران';
-
-  @override
   String get methodMoonsighting => 'لجنة تحري الهلال';
 
   @override
   String get methodNorthAmerica => 'أمريكا الشمالية (ISNA)';
-
-  @override
-  String get methodEgyptian => 'الهيئة المصرية';
-
-  @override
-  String get methodKarachi => 'كراتشي';
-
-  @override
-  String get methodOther => 'أخرى';
 
   @override
   String get prayerFajr => 'الفجر';

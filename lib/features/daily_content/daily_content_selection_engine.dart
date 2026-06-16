@@ -178,7 +178,7 @@ class DailyContentSelectionEngine {
     final unique = <DailyAyahRecord>[];
     for (final record in records) {
       if (seenIds.contains(record.id)) {
-        warnings.add('ayah duplicate id atlandi: ${record.id}');
+        warnings.add('ayah duplicate id atlandı: ${record.id}');
         continue;
       }
       seenIds.add(record.id);
@@ -195,7 +195,7 @@ class DailyContentSelectionEngine {
     final unique = <DailyHadithRecord>[];
     for (final record in records) {
       if (seenIds.contains(record.id)) {
-        warnings.add('hadith duplicate id atlandi: ${record.id}');
+        warnings.add('hadith duplicate id atlandı: ${record.id}');
         continue;
       }
       seenIds.add(record.id);
@@ -213,7 +213,7 @@ class DailyContentSelectionEngine {
     final unique = <DailyEsmaRecord>[];
     for (final record in records) {
       if (seenIds.contains(record.id)) {
-        warnings.add('$label duplicate id atlandi: ${record.id}');
+        warnings.add('$label duplicate id atlandı: ${record.id}');
         continue;
       }
       seenIds.add(record.id);

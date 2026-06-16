@@ -146,31 +146,31 @@ class LocationFavoritesStorage {
     final buffer = StringBuffer();
     for (final rune in upper.runes) {
       switch (rune) {
-        case 0x00C7: // Ã‡
+        case 0x00C7: // Ç
           buffer.write('C');
           break;
-        case 0x011E: // Ä
+        case 0x011E: // Ğ
           buffer.write('G');
           break;
-        case 0x0130: // Ä°
+        case 0x0130: // İ
           buffer.write('I');
           break;
-        case 0x00D6: // Ã–
+        case 0x00D6: // Ö
           buffer.write('O');
           break;
-        case 0x015E: // Åž
+        case 0x015E: // Ş
           buffer.write('S');
           break;
-        case 0x00DC: // Ãœ
+        case 0x00DC: // Ü
           buffer.write('U');
           break;
-        case 0x00C2: // Ã‚
+        case 0x00C2: // Â
           buffer.write('A');
           break;
-        case 0x00CE: // ÃŽ
+        case 0x00CE: // Î
           buffer.write('I');
           break;
-        case 0x00DB: // Ã›
+        case 0x00DB: // Û
           buffer.write('U');
           break;
         default:

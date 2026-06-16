@@ -6,7 +6,7 @@ import '../../../../features/shared_settings/shared_settings_models.dart';
 import '../../../../features/shared_settings/shared_settings_remote_client.dart';
 import 'shared_settings_section_styles.dart';
 
-class SettingsSharedOtherAppsSection extends StatelessWidget {
+class SettingsSharedOtherAppsSection extends StatefulWidget {
   final SharedSettingsRemoteClient remoteClient;
 
   const SettingsSharedOtherAppsSection({
@@ -15,121 +15,183 @@ class SettingsSharedOtherAppsSection extends StatelessWidget {
   });
 
   @override
+  State<SettingsSharedOtherAppsSection> createState() =>
+      _SettingsSharedOtherAppsSectionState();
+}
+
+class _SettingsSharedOtherAppsSectionState
+    extends State<SettingsSharedOtherAppsSection> {
+  late final Future<List<OtherAppItem>> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = widget.remoteClient.loadOtherApps(
+      remoteUrl: kSharedSettingsAppConfig.otherAppsRemoteCatalogUrl,
+      localAssetPath: kSharedSettingsAppConfig.localCatalogAssetPath,
+      currentAppId: kSharedSettingsAppConfig.appId,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SharedSettingsSectionCard(
-      title: 'Diger Uygulamalarimiz',
+      title: 'Diğer Uygulamalarımız',
       headerColor: sharedSettingsOtherAppsHeader,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 4),
-            FractionallySizedBox(
-              widthFactor: 0.7,
-              child: OutlinedButton.icon(
-                onPressed: () => _showOtherAppsDialog(context),
-                icon: const Icon(Icons.apps_rounded),
-                label: const Text('Listeyi Gor'),
+        padding: const EdgeInsets.fromLTRB(18, 15, 18, 15),
+        child: FutureBuilder<List<OtherAppItem>>(
+          future: _future,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const SizedBox(
+                height: 120,
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+
+            final items = snapshot.data ?? const <OtherAppItem>[];
+            if (items.isEmpty) {
+              return const SizedBox(
+                height: 90,
+                child: Center(
+                  child: Text(
+                    'Henüz listelenecek uygulama bulunmuyor.',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            }
+
+            return SizedBox(
+              height: 250,
+              child: GridView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: items.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: 0.78,
+                ),
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return _OtherAppTile(
+                    item: item,
+                    onTap: () => _openUrl(
+                      item.url,
+                      failMessage: 'Bağlantı açılamadı.',
+                    ),
+                  );
+                },
               ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<void> _openUrl(String rawUrl, {required String failMessage}) async {
+    final uri = Uri.tryParse(rawUrl.trim());
+    if (uri == null) {
+      _showSnack(failMessage);
+      return;
+    }
+    final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
+    if (!ok && mounted) {
+      _showSnack(failMessage);
+    }
+  }
+
+  void _showSnack(String message) {
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    messenger?.hideCurrentSnackBar();
+    messenger?.showSnackBar(SnackBar(content: Text(message)));
+  }
+}
+
+class _OtherAppTile extends StatelessWidget {
+  final OtherAppItem item;
+  final VoidCallback onTap;
+
+  const _OtherAppTile({required this.item, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(14),
+      onTap: onTap,
+      child: Ink(
+        padding: const EdgeInsets.fromLTRB(8, 10, 8, 8),
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.78),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.black12),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _AppIcon(item: item),
+            const SizedBox(height: 8),
+            Text(
+              item.name,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
           ],
         ),
       ),
     );
   }
+}
 
-  Future<void> _showOtherAppsDialog(BuildContext context) async {
-    await showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Diger Uygulamalarimiz'),
-          content: SizedBox(
-            width: 420,
-            child: FutureBuilder<List<OtherAppItem>>(
-              future: remoteClient.loadOtherApps(
-                remoteUrl: kSharedSettingsAppConfig.otherAppsRemoteCatalogUrl,
-                localAssetPath: kSharedSettingsAppConfig.localCatalogAssetPath,
-                currentAppId: kSharedSettingsAppConfig.appId,
-              ),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SizedBox(
-                    height: 140,
-                    child: Center(child: CircularProgressIndicator()),
-                  );
-                }
+class _AppIcon extends StatelessWidget {
+  final OtherAppItem item;
 
-                final items = snapshot.data ?? const <OtherAppItem>[];
-                if (items.isEmpty) {
-                  return const Text(
-                    'Henuz listelenecek uygulama bulunmuyor.',
-                    textAlign: TextAlign.center,
-                  );
-                }
+  const _AppIcon({required this.item});
 
-                return SizedBox(
-                  height: 320,
-                  child: ListView.separated(
-                    itemCount: items.length,
-                    separatorBuilder: (context, index) =>
-                        const Divider(height: 1),
-                    itemBuilder: (context, index) {
-                      final item = items[index];
-                      return ListTile(
-                        dense: true,
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(item.name),
-                        subtitle: item.description.isEmpty
-                            ? null
-                            : Text(item.description),
-                        trailing: const Icon(
-                          Icons.open_in_new_rounded,
-                          size: 18,
-                        ),
-                        onTap: () => _openUrl(
-                          context,
-                          item.url,
-                          failMessage: 'Baglanti acilamadi.',
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Kapat'),
-            ),
-          ],
-        );
-      },
+  @override
+  Widget build(BuildContext context) {
+    final asset = item.iconAsset.trim();
+    if (asset.isNotEmpty) {
+      return Image.asset(
+        asset,
+        width: 52,
+        height: 52,
+        fit: BoxFit.contain,
+        errorBuilder: (_, _, _) => const _FallbackIcon(),
+      );
+    }
+
+    final iconUrl = item.iconUrl.trim();
+    if (iconUrl.isNotEmpty) {
+      return Image.network(
+        iconUrl,
+        width: 52,
+        height: 52,
+        fit: BoxFit.contain,
+        errorBuilder: (_, _, _) => const _FallbackIcon(),
+      );
+    }
+
+    return const _FallbackIcon();
+  }
+}
+
+class _FallbackIcon extends StatelessWidget {
+  const _FallbackIcon();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      width: 52,
+      height: 52,
+      child: Icon(Icons.apps_rounded, size: 42),
     );
-  }
-
-  Future<void> _openUrl(
-    BuildContext context,
-    String rawUrl, {
-    required String failMessage,
-  }) async {
-    final uri = Uri.tryParse(rawUrl.trim());
-    if (uri == null) {
-      _showSnack(context, failMessage);
-      return;
-    }
-    final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
-    if (!ok && context.mounted) {
-      _showSnack(context, failMessage);
-    }
-  }
-
-  void _showSnack(BuildContext context, String message) {
-    final messenger = ScaffoldMessenger.maybeOf(context);
-    messenger?.hideCurrentSnackBar();
-    messenger?.showSnackBar(SnackBar(content: Text(message)));
   }
 }

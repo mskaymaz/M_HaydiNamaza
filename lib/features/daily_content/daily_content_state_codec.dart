@@ -15,7 +15,7 @@ class DailyContentStateCodec {
     try {
       final decoded = jsonDecode(raw);
       if (decoded is! Map) {
-        warnings?.add('daily_content_state_v1: state object formatinda degil.');
+        warnings?.add('daily_content_state_v1: state object formatında değil.');
         return DailyContentSelectionState.empty();
       }
       final map = Map<String, dynamic>.from(decoded);

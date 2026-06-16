@@ -6,11 +6,21 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <application
         android:label="Haydi Namaza"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <activity
+            android:name=".PrayerVisualReminderActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:showWhenLocked="true"
+            android:theme="@style/PrayerVisualReminderTheme"
+            android:turnScreenOn="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -63,6 +73,21 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/prayer_time_widget_info" />
+        </receiver>
+        <receiver
+            android:name=".PrayerTimesWideWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.mskaymaz.mhaydinamaza.PRAYER_WIDGET_REFRESH" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/prayer_times_wide_widget_info" />
         </receiver>
     </application>
     <!-- Required to query activities that can process text, see:

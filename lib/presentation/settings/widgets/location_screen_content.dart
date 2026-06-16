@@ -13,6 +13,7 @@ import 'location_add_favorite_button.dart';
 import 'location_coordinates_section.dart';
 import 'location_current_location_tile.dart';
 import 'location_favorites_section.dart';
+import 'location_section_card.dart';
 import 'location_selection_composer.dart';
 
 class LocationScreenContent extends StatelessWidget {
@@ -96,10 +97,14 @@ class LocationScreenContent extends StatelessWidget {
     return ListView(
       padding: ui.screenPadding,
       children: [
-        LocationCurrentLocationTile(
-          useCurrentLocation: useCurrentLocation,
-          locating: locating,
-          onChanged: (value) => onUseCurrentLocationChanged(value ?? false),
+        LocationSectionCard(
+          style: ui.panel,
+          padding: ui.sectionPadding,
+          child: LocationCurrentLocationTile(
+            useCurrentLocation: useCurrentLocation,
+            locating: locating,
+            onChanged: (value) => onUseCurrentLocationChanged(value ?? false),
+          ),
         ),
         SizedBox(height: ui.sectionGap),
         LocationSelectionComposer(

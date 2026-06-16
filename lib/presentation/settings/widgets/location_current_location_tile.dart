@@ -17,7 +17,13 @@ class LocationCurrentLocationTile extends StatelessWidget {
     return CheckboxListTile(
       value: useCurrentLocation,
       onChanged: locating ? null : onChanged,
-      title: const Text('Mevcut Konumu Al'),
+      title: const Text(
+        'Mevcut Konumu Al',
+        style: TextStyle(fontWeight: FontWeight.w600),
+      ),
+      subtitle: const Text(
+        'Açık olduğunda vakitler telefonun güncel konumuna göre hesaplanır.',
+      ),
       controlAffinity: ListTileControlAffinity.leading,
       secondary: locating
           ? const SizedBox(

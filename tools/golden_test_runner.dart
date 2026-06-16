@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:mhaydinamaza/core/prayer_engine/calculation_method.dart';
@@ -12,30 +12,17 @@ CalculationParameters _methodToParams(String method) {
   switch (method) {
     case 'Turkey':
       return CalculationMethod.turkey();
-    case 'Qatar':
-      return CalculationMethod.qatar();
-    case 'Dubai':
-      return CalculationMethod.dubai();
-    case 'Kuwait':
-      return CalculationMethod.kuwait();
     case 'MoonsightingCommittee':
       return CalculationMethod.moonsightingCommittee();
-    case 'Singapore':
-      return CalculationMethod.singapore();
-    case 'Tehran':
-      return CalculationMethod.tehran();
     case 'UmmAlQura':
       return CalculationMethod.ummAlQura();
     case 'MuslimWorldLeague':
+    case 'Aladhan':
       return CalculationMethod.muslimWorldLeague();
-    case 'Egyptian':
-      return CalculationMethod.egyptian();
-    case 'Karachi':
-      return CalculationMethod.karachi();
     case 'NorthAmerica':
       return CalculationMethod.northAmerica();
     default:
-      return CalculationMethod.other();
+      return CalculationMethod.muslimWorldLeague();
   }
 }
 
@@ -100,7 +87,13 @@ void main(List<String> args) {
         exit(3);
       }
 
-      for (final key in ['date', 'times', 'method', 'madhab', 'high_latitude_rule']) {
+      for (final key in [
+        'date',
+        'times',
+        'method',
+        'madhab',
+        'high_latitude_rule',
+      ]) {
         if (!item.containsKey(key)) {
           stderr.writeln('Missing $key in ${f.path}');
           exit(4);
@@ -124,7 +117,9 @@ void main(List<String> args) {
       final params = _methodToParams(item['method'] as String);
       final madhab = (item['madhab'] as String).toLowerCase();
       params.madhab = madhab == 'hanafi' ? Madhab.hanafi : Madhab.shafi;
-      params.highLatitudeRule = _ruleFromString(item['high_latitude_rule'] as String);
+      params.highLatitudeRule = _ruleFromString(
+        item['high_latitude_rule'] as String,
+      );
 
       final adjustments = item['adjustments'];
       if (adjustments is Map) {
@@ -169,7 +164,9 @@ void main(List<String> args) {
         final diff = (_toMinutes(actualStr) - _toMinutes(expectedStr)).abs();
         if (diff > variance) {
           failed++;
-          stderr.writeln('Mismatch ${f.path} ${item['date']} $key exp=$expectedStr got=$actualStr diff=$diff');
+          stderr.writeln(
+            'Mismatch ${f.path} ${item['date']} $key exp=$expectedStr got=$actualStr diff=$diff',
+          );
         }
       }
 
@@ -177,7 +174,9 @@ void main(List<String> args) {
     }
   }
 
-  stdout.writeln('Golden data checked. total=$total tested=$tested skipped=$skipped failed=$failed');
+  stdout.writeln(
+    'Golden data checked. total=$total tested=$tested skipped=$skipped failed=$failed',
+  );
   if (failed > 0) {
     exit(5);
   }

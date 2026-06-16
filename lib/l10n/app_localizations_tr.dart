@@ -9,7 +9,7 @@ class AppLocalizationsTr extends AppLocalizations {
   AppLocalizationsTr([String locale = 'tr']) : super(locale);
 
   @override
-  String get appTitle => 'MHaydiNamaza';
+  String get appTitle => 'Haydi Namaza';
 
   @override
   String get homePlaceholder => 'Namaz vakitleri yakında burada.';
@@ -36,7 +36,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get locationLabel => 'Konum';
 
   @override
-  String get calculationMethodLabel => 'Hesaplama Yöntemi';
+  String get calculationMethodLabel => 'Vakit Hesabı';
 
   @override
   String get comingSoon => 'Yakında';
@@ -48,7 +48,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get locationEditTitle => 'Konum';
 
   @override
-  String get locationCountryLabel => 'Ulke';
+  String get locationCountryLabel => 'Ülke';
 
   @override
   String get locationCityLabel => 'İl';
@@ -106,7 +106,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get methodNotSet => 'Seçilmedi';
 
   @override
-  String get methodEditTitle => 'Hesaplama yöntemi';
+  String get methodEditTitle => 'Vakit hesabı';
 
   @override
   String get methodSave => 'Kaydet';
@@ -124,34 +124,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get methodUmmAlQura => 'Umm Al-Qura';
 
   @override
-  String get methodDubai => 'Dubai';
-
-  @override
-  String get methodKuwait => 'Kuveyt';
-
-  @override
-  String get methodQatar => 'Katar';
-
-  @override
-  String get methodSingapore => 'Singapur';
-
-  @override
-  String get methodTehran => 'Tahran';
-
-  @override
   String get methodMoonsighting => 'Hilal Komitesi';
 
   @override
   String get methodNorthAmerica => 'Kuzey Amerika (ISNA)';
-
-  @override
-  String get methodEgyptian => 'Mısır';
-
-  @override
-  String get methodKarachi => 'Karachi';
-
-  @override
-  String get methodOther => 'Diğer';
 
   @override
   String get prayerFajr => 'İmsak';

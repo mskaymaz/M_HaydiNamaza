@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'MHaydiNamaza';
+  String get appTitle => 'Let\'s Pray';
 
   @override
   String get homePlaceholder => 'Prayer times will appear here soon.';
@@ -36,7 +36,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locationLabel => 'Location';
 
   @override
-  String get calculationMethodLabel => 'Calculation method';
+  String get calculationMethodLabel => 'Prayer time method';
 
   @override
   String get comingSoon => 'Coming soon';
@@ -105,7 +105,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get methodNotSet => 'Not set';
 
   @override
-  String get methodEditTitle => 'Calculation method';
+  String get methodEditTitle => 'Prayer time method';
 
   @override
   String get methodSave => 'Save';
@@ -123,34 +123,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get methodUmmAlQura => 'Umm Al-Qura';
 
   @override
-  String get methodDubai => 'Dubai';
-
-  @override
-  String get methodKuwait => 'Kuwait';
-
-  @override
-  String get methodQatar => 'Qatar';
-
-  @override
-  String get methodSingapore => 'Singapore';
-
-  @override
-  String get methodTehran => 'Tehran';
-
-  @override
   String get methodMoonsighting => 'Moonsighting Committee';
 
   @override
   String get methodNorthAmerica => 'North America (ISNA)';
-
-  @override
-  String get methodEgyptian => 'Egyptian';
-
-  @override
-  String get methodKarachi => 'Karachi';
-
-  @override
-  String get methodOther => 'Other';
 
   @override
   String get prayerFajr => 'Fajr';

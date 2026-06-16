@@ -288,7 +288,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onEditTextColor: () => _editColor(
               context: context,
-              title: 'Yazi Rengi',
+              title: 'Yazı Rengi',
               initialColor: palette.cizgiColor,
               onApply: widget.uiPaletteController.setCizgiColor,
             ),
@@ -300,7 +300,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onEditBackgroundColor: () => _editColor(
               context: context,
-              title: 'Arka Plan Zemin',
+              title: 'Arka Plan Zemini',
               initialColor: draftBackgroundColor,
               onApply: (color) async {
                 setState(() {
@@ -313,7 +313,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               if (!context.mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Arkaplan secimleri ana sayfaya uygulandi.'),
+                  content: Text('Arka plan seçimleri ana sayfaya uygulandı.'),
                 ),
               );
             },
@@ -388,7 +388,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (settings.audioMode != ReminderAudioMode.textToSpeech &&
         (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Test icin once bir ses dosyasi secin.')),
+        const SnackBar(content: Text('Test için önce bir ses dosyası seçin.')),
       );
       return;
     }
@@ -401,7 +401,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sesli test baslatilamadi.')),
+        const SnackBar(content: Text('Sesli test başlatılamadı.')),
       );
     }
   }
@@ -445,7 +445,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ).trim();
     if (effectiveText.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Onizleme icin once metin girin.')),
+        const SnackBar(content: Text('Önizleme için önce metin girin.')),
       );
       return;
     }

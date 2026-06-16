@@ -135,7 +135,7 @@ class _SettingsSharedSupportSectionState
 
   void _onPrayerSupport() {
     _showSnack(
-      'Allah (cc) razi olsun.\nDuaniz bizim icin kiymetli.',
+      'Allah (cc) razı olsun.\nDuanız bizim için kıymetli.',
       duration: const Duration(seconds: 5),
       background: const Color(0xFF2E7D32),
       largeText: true,

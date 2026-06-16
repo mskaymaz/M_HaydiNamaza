@@ -26,7 +26,7 @@ class DailyContentStateRepository {
       }
       return state;
     } catch (_) {
-      warnings?.add('daily_content_state_v1: state okunamadi, varsayilan kullanildi.');
+      warnings?.add('daily_content_state_v1: state okunamadı, varsayılan kullanıldı.');
       RuntimeMonitor.instance.reportNonFatalCode(
         source: 'daily_content_state_read',
         code: 'state_read_failed',

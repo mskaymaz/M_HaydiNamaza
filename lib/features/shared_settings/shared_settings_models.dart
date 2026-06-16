@@ -1,19 +1,7 @@
 class SharedSettingsContactConfig {
   final String email;
-  final String supportFormUrl;
-  final String supportFormTopic;
-  final String supportFormMessage;
-  final String responsePolicyText;
-  final List<String> topics;
 
-  const SharedSettingsContactConfig({
-    required this.email,
-    required this.supportFormUrl,
-    required this.supportFormTopic,
-    required this.supportFormMessage,
-    required this.responsePolicyText,
-    this.topics = const <String>[],
-  });
+  const SharedSettingsContactConfig({required this.email});
 }
 
 class SharedSettingsSupportConfig {
@@ -85,6 +73,8 @@ class OtherAppItem {
   final String name;
   final String description;
   final String url;
+  final String iconAsset;
+  final String iconUrl;
   final bool active;
   final int order;
   final List<String> targetApps;
@@ -94,6 +84,8 @@ class OtherAppItem {
     required this.name,
     required this.description,
     required this.url,
+    required this.iconAsset,
+    required this.iconUrl,
     required this.active,
     required this.order,
     required this.targetApps,
@@ -120,35 +112,5 @@ class UpdateManifest {
     required this.url,
     required this.forceUpdate,
     required this.notes,
-  });
-}
-
-class SharedSettingsSendMessageResult {
-  final bool success;
-  final String? errorMessage;
-
-  const SharedSettingsSendMessageResult({
-    required this.success,
-    this.errorMessage,
-  });
-}
-
-class SharedSettingsUserMessage {
-  final String topic;
-  final String message;
-  final String status;
-  final bool adminSeen;
-  final bool awaitingReply;
-  final DateTime? createdAt;
-  final String? adminReply;
-
-  const SharedSettingsUserMessage({
-    required this.topic,
-    required this.message,
-    required this.status,
-    required this.adminSeen,
-    required this.awaitingReply,
-    required this.createdAt,
-    required this.adminReply,
   });
 }

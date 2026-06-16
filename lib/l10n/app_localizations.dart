@@ -103,7 +103,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'MHaydiNamaza'**
+  /// **'Let\'s Pray'**
   String get appTitle;
 
   /// No description provided for @homePlaceholder.
@@ -157,7 +157,7 @@ abstract class AppLocalizations {
   /// No description provided for @calculationMethodLabel.
   ///
   /// In en, this message translates to:
-  /// **'Calculation method'**
+  /// **'Prayer time method'**
   String get calculationMethodLabel;
 
   /// No description provided for @comingSoon.
@@ -295,7 +295,7 @@ abstract class AppLocalizations {
   /// No description provided for @methodEditTitle.
   ///
   /// In en, this message translates to:
-  /// **'Calculation method'**
+  /// **'Prayer time method'**
   String get methodEditTitle;
 
   /// No description provided for @methodSave.
@@ -328,36 +328,6 @@ abstract class AppLocalizations {
   /// **'Umm Al-Qura'**
   String get methodUmmAlQura;
 
-  /// No description provided for @methodDubai.
-  ///
-  /// In en, this message translates to:
-  /// **'Dubai'**
-  String get methodDubai;
-
-  /// No description provided for @methodKuwait.
-  ///
-  /// In en, this message translates to:
-  /// **'Kuwait'**
-  String get methodKuwait;
-
-  /// No description provided for @methodQatar.
-  ///
-  /// In en, this message translates to:
-  /// **'Qatar'**
-  String get methodQatar;
-
-  /// No description provided for @methodSingapore.
-  ///
-  /// In en, this message translates to:
-  /// **'Singapore'**
-  String get methodSingapore;
-
-  /// No description provided for @methodTehran.
-  ///
-  /// In en, this message translates to:
-  /// **'Tehran'**
-  String get methodTehran;
-
   /// No description provided for @methodMoonsighting.
   ///
   /// In en, this message translates to:
@@ -369,24 +339,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'North America (ISNA)'**
   String get methodNorthAmerica;
-
-  /// No description provided for @methodEgyptian.
-  ///
-  /// In en, this message translates to:
-  /// **'Egyptian'**
-  String get methodEgyptian;
-
-  /// No description provided for @methodKarachi.
-  ///
-  /// In en, this message translates to:
-  /// **'Karachi'**
-  String get methodKarachi;
-
-  /// No description provided for @methodOther.
-  ///
-  /// In en, this message translates to:
-  /// **'Other'**
-  String get methodOther;
 
   /// No description provided for @prayerFajr.
   ///

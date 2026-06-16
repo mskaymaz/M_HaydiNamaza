@@ -7,8 +7,6 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.media.AudioAttributes
-import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -49,10 +47,12 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
             vibrate(context, vibrationDurationMs)
         }
         if (visualEnabled || voiceEnabled || azanEnabled || vibrationEnabled) {
-            showNotification(context, intent, title, message)
+            showNotification(context, intent, title, message, visualEnabled)
         }
         if (voiceEnabled) {
             speak(context, "$prayerLabel vakti. $message")
+        } else if (azanEnabled) {
+            speak(context, "Ezan okunuyor", repeatCount = 3, pauseMillis = 5000L)
         }
     }
 
@@ -60,7 +60,8 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
         context: Context,
         sourceIntent: Intent,
         title: String,
-        message: String
+        message: String,
+        visualEnabled: Boolean
     ) {
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         ensureChannel(manager)
@@ -73,8 +74,18 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
             launchIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-            ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val visualIntent = Intent(context, PrayerVisualReminderActivity::class.java).apply {
+            putExtra("title", title)
+            putExtra("message", message)
+            putExtra("prayerLabel", sourceIntent.getStringExtra("prayerLabel") ?: "Vakit")
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+        val visualPendingIntent = PendingIntent.getActivity(
+            context,
+            sourceIntent.getIntExtra("id", 0) + 700000,
+            visualIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
         val builder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Notification.Builder(context, CHANNEL_ID)
         } else {
@@ -88,20 +99,23 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
             .setContentText(message)
             .setStyle(Notification.BigTextStyle().bigText(message))
             .setAutoCancel(true)
-            .setContentIntent(contentIntent)
+            .setContentIntent(if (visualEnabled) visualPendingIntent else contentIntent)
             .setCategory(Notification.CATEGORY_ALARM)
             .setVisibility(Notification.VISIBILITY_PUBLIC)
             .setWhen(sourceIntent.getLongExtra("triggerAtMillis", System.currentTimeMillis()))
             .setShowWhen(true)
 
+        if (visualEnabled) {
+            builder.setFullScreenIntent(visualPendingIntent, true)
+        }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             @Suppress("DEPRECATION")
             builder.setPriority(Notification.PRIORITY_HIGH)
-            @Suppress("DEPRECATION")
-            builder.setSound(soundUri)
-            @Suppress("DEPRECATION")
-            builder.setDefaults(Notification.DEFAULT_LIGHTS)
         }
+        @Suppress("DEPRECATION")
+        builder.setSound(null)
+        @Suppress("DEPRECATION")
+        builder.setDefaults(0)
 
         try {
             manager.notify(sourceIntent.getIntExtra("id", 0), builder.build())
@@ -111,23 +125,23 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
 
     private fun ensureChannel(manager: NotificationManager) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
+        for (oldChannelId in OLD_CHANNEL_IDS) {
+            try {
+                manager.deleteNotificationChannel(oldChannelId)
+            } catch (_: Exception) {
+            }
+        }
         val existing = manager.getNotificationChannel(CHANNEL_ID)
         if (existing != null) return
 
-        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-            ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val attributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_ALARM)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build()
         val channel = NotificationChannel(
             CHANNEL_ID,
-            "Namaz vakti uyarilari",
+            "Namaz vakti uyarıları",
             NotificationManager.IMPORTANCE_HIGH
         ).apply {
-            description = "Namaz vakti hatirlatma, ezan ve titresim uyarilari"
-            enableVibration(true)
-            setSound(soundUri, attributes)
+            description = "Namaz vakti hatırlatma, ezan ve titreşim uyarıları"
+            enableVibration(false)
+            setSound(null, null)
             lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         }
         manager.createNotificationChannel(channel)
@@ -159,10 +173,17 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun speak(context: Context, text: String) {
+    private fun speak(
+        context: Context,
+        text: String,
+        repeatCount: Int = 1,
+        pauseMillis: Long = 0L
+    ) {
         val pendingResult = goAsync()
         val handler = Handler(Looper.getMainLooper())
+        val safeRepeatCount = repeatCount.coerceIn(1, 3)
         var finished = false
+        var spokenCount = 0
         var tts: TextToSpeech? = null
 
         fun finish() {
@@ -179,7 +200,24 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
             }
         }
 
-        handler.postDelayed({ finish() }, 15_000L)
+        fun speakOnce(engine: TextToSpeech) {
+            val utteranceId = "${UTTERANCE_ID}_$spokenCount"
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                val params = Bundle().apply {
+                    putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceId)
+                }
+                engine.speak(text, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
+            } else {
+                @Suppress("DEPRECATION")
+                engine.speak(
+                    text,
+                    TextToSpeech.QUEUE_FLUSH,
+                    hashMapOf(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID to utteranceId)
+                )
+            }
+        }
+
+        handler.postDelayed({ finish() }, 32_000L)
         tts = TextToSpeech(context.applicationContext) { status ->
             if (status != TextToSpeech.SUCCESS) {
                 finish()
@@ -200,7 +238,14 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
                     object : UtteranceProgressListener() {
                         override fun onStart(utteranceId: String?) = Unit
                         override fun onDone(utteranceId: String?) {
-                            finish()
+                            spokenCount += 1
+                            if (spokenCount >= safeRepeatCount) {
+                                finish()
+                                return
+                            }
+                            handler.postDelayed({
+                                if (!finished) speakOnce(engine)
+                            }, pauseMillis.coerceIn(0L, 5000L))
                         }
                         @Deprecated("Deprecated in Java")
                         override fun onError(utteranceId: String?) {
@@ -211,19 +256,7 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
                         }
                     }
                 )
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    val params = Bundle().apply {
-                        putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, UTTERANCE_ID)
-                    }
-                    engine.speak(text, TextToSpeech.QUEUE_FLUSH, params, UTTERANCE_ID)
-                } else {
-                    @Suppress("DEPRECATION")
-                    engine.speak(
-                        text,
-                        TextToSpeech.QUEUE_FLUSH,
-                        hashMapOf(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID to UTTERANCE_ID)
-                    )
-                }
+                speakOnce(engine)
             } catch (_: Exception) {
                 finish()
             }
@@ -273,15 +306,24 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
                 append(feature.lowercase(Locale.US))
             }
         }
+        if (searchText.contains("female") ||
+            searchText.contains("woman") ||
+            searchText.contains("kadın") ||
+            searchText.contains("kadin")
+        ) {
+            return false
+        }
         return searchText.contains(DEFAULT_TURKISH_MALE_VOICE_NAME) ||
-            searchText.contains("male") ||
+            searchText.contains(" male") ||
+            searchText.contains("_male") ||
+            searchText.contains("-male") ||
             searchText.contains("erkek") ||
-            searchText.contains("ahmet") ||
-            searchText.contains("man")
+            searchText.contains("ahmet")
     }
 
     companion object {
-        private const val CHANNEL_ID = "prayer_reminders"
+        private const val CHANNEL_ID = "prayer_reminders_silent_v3"
+        private val OLD_CHANNEL_IDS = arrayOf("prayer_reminders")
         private const val UTTERANCE_ID = "prayer_reminder_voice"
         private const val DEFAULT_TURKISH_MALE_VOICE_NAME = "tr-tr-x-tmc-network"
     }

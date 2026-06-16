@@ -213,7 +213,7 @@ class ConfigRegistry {
     zeminColor: Color(0xFF1F7A3E),
     cizgiColor: Color(0xFFFFFFFF),
     customPrayerLabelColor: Color(0xFFF57C00),
-    backgroundZeminColor: Color(0xFFF3EFE2),
+    backgroundZeminColor: Color(0xFFDDEEFF),
   );
 
   static MainUiConfig mainUiFor(UiPaletteConfig palette) {
@@ -340,17 +340,9 @@ class ConfigRegistry {
       baseUrl: 'https://api.aladhan.com/v1',
       methodIds: <String, int>{
         'aladhan': 13,
-        'karachi': 1,
         'north_america': 2,
         'muslim_world_league': 3,
         'umm_al_qura': 4,
-        'egyptian': 5,
-        'tehran': 7,
-        'dubai': 16,
-        'kuwait': 9,
-        'qatar': 10,
-        'singapore': 11,
-        'turkey': 13,
         'moonsighting': 15,
       },
       school: 0,

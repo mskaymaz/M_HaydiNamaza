@@ -155,10 +155,9 @@ class SettingsReminderSectionsGroup extends StatelessWidget {
                 'Görsel hatırlatma ayrı tutulur. Bu alan boşsa sesli hatırlatma metni kullanılır.',
           ),
           visualTextField: SettingsReminderTextField(
-            label: 'Görsel Hatırlatma Metni',
+            label: 'Buraya metin girilmezse, sesli hatırlatma metni kullanılacaktır.',
             controller: visualReminderController,
-            hintText:
-                'Buraya herhangi bir metin girilmediğinde sesli hatırlatmadaki metin kullanılacaktır.',
+            hintText: '',
             onChanged: onVisualTextChanged,
             maxLines: 3,
           ),

@@ -8,6 +8,7 @@ import 'prayer_cache_fingerprint_builder.dart';
 import 'prayer_calculation_parameters_factory.dart';
 import 'prayer_daily_cache_repository.dart';
 import 'prayer_times_mapper.dart';
+import '../core/config/config_registry.dart';
 import '../core/prayer_engine/calculation_parameters.dart';
 import '../core/prayer_engine/coordinates.dart';
 import '../core/prayer_engine/madhab.dart';
@@ -198,26 +199,7 @@ class PrayerService {
       );
     }
 
-    if (methodCode == 'aladhan') {
-      final aladhanTurkey = await _tryAladhan(
-        date: date,
-        latitude: latitude,
-        longitude: longitude,
-        methodCode: 'aladhan',
-        school: _aladhanSchoolFor(params),
-        fallbackParams: params,
-      );
-      if (aladhanTurkey != null) {
-        _log('[Aladhan:explicit] '
-            'Fajr ${formatPrayerTimeHourMinute(aladhanTurkey.fajr)} '
-            'Sunrise ${formatPrayerTimeHourMinute(aladhanTurkey.sunrise)} '
-            'Dhuhr ${formatPrayerTimeHourMinute(aladhanTurkey.dhuhr)} '
-            'Asr ${formatPrayerTimeHourMinute(aladhanTurkey.asr)} '
-            'Maghrib ${formatPrayerTimeHourMinute(aladhanTurkey.maghrib)} '
-            'Isha ${formatPrayerTimeHourMinute(aladhanTurkey.isha)}');
-        return aladhanTurkey;
-      }
-    } else if (methodCode == 'turkey' || methodCode == 'diyanet_tabanli') {
+    if (_isDiyanetMethod(methodCode)) {
       if (allowDiyanet && _isSameLocalDay(date, DateTime.now())) {
         final diyanetTimes = await _tryDiyanet(
           location: location,
@@ -235,6 +217,25 @@ class PrayerService {
           return diyanetTimes;
         }
       }
+    } else if (_isAladhanBackedMethod(methodCode)) {
+      final remoteTimes = await _tryAladhan(
+        date: date,
+        latitude: latitude,
+        longitude: longitude,
+        methodCode: methodCode,
+        school: _aladhanSchoolFor(params),
+        fallbackParams: params,
+      );
+      if (remoteTimes != null) {
+        _log('[Aladhan:$methodCode] '
+            'Fajr ${formatPrayerTimeHourMinute(remoteTimes.fajr)} '
+            'Sunrise ${formatPrayerTimeHourMinute(remoteTimes.sunrise)} '
+            'Dhuhr ${formatPrayerTimeHourMinute(remoteTimes.dhuhr)} '
+            'Asr ${formatPrayerTimeHourMinute(remoteTimes.asr)} '
+            'Maghrib ${formatPrayerTimeHourMinute(remoteTimes.maghrib)} '
+            'Isha ${formatPrayerTimeHourMinute(remoteTimes.isha)}');
+        return remoteTimes;
+      }
     }
 
     _log('[Calc] fallback local engine');
@@ -244,6 +245,14 @@ class PrayerService {
       timeZone: timeZone,
       params: params,
     );
+  }
+
+  bool _isDiyanetMethod(String methodCode) {
+    return methodCode == 'diyanet' || methodCode == 'diyanet_tabanli';
+  }
+
+  bool _isAladhanBackedMethod(String methodCode) {
+    return ConfigRegistry.dataSources.aladhan.methodIds.containsKey(methodCode);
   }
 
   bool _isSameLocalDay(DateTime left, DateTime right) {

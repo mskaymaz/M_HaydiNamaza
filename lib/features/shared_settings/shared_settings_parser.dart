@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 
 import 'shared_settings_models.dart';
 
@@ -16,6 +16,8 @@ class SharedSettingsParser {
       final name = (map['name'] as String?)?.trim() ?? '';
       final description = (map['description'] as String?)?.trim() ?? '';
       final url = (map['url'] as String?)?.trim() ?? '';
+      final iconAsset = _readString(map, 'icon_asset', 'iconAsset');
+      final iconUrl = _readString(map, 'icon_url', 'iconUrl');
       final active = map['active'] is bool ? map['active'] as bool : true;
       final order = map['order'] is num ? (map['order'] as num).toInt() : 9999;
       final targets = (map['target_apps'] as List<dynamic>? ?? const <dynamic>[])
@@ -33,6 +35,8 @@ class SharedSettingsParser {
           name: name,
           description: description,
           url: url,
+          iconAsset: iconAsset,
+          iconUrl: iconUrl,
           active: active,
           order: order,
           targetApps: targets,
@@ -41,6 +45,10 @@ class SharedSettingsParser {
     }
     items.sort((left, right) => left.order.compareTo(right.order));
     return items;
+  }
+
+  static String _readString(Map<String, dynamic> map, String first, String second) {
+    return ((map[first] ?? map[second]) as String?)?.trim() ?? '';
   }
 
   static UpdateManifest? parseUpdatePayload(String payload) {

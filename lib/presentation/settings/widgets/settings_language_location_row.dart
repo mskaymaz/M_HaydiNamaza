@@ -45,17 +45,20 @@ class SettingsLanguageLocationRow extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(width: 35),
+          const SizedBox(width: 24),
           SizedBox(
-            width: 160,
-            child: OutlinedButton.icon(
+            width: 142,
+            child: OutlinedButton(
               onPressed: onOpenLocation,
-              icon: const Icon(Icons.settings),
-              label: const Text('Konum'),
               style: OutlinedButton.styleFrom(
                 backgroundColor: const Color(0xFFE4F3E6),
-                minimumSize: const Size(160, 50),
+                minimumSize: const Size(142, 42),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
               ),
+              child: const Text('Konum Seç'),
             ),
           ),
         ],

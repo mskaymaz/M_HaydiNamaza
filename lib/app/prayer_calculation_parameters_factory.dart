@@ -18,6 +18,7 @@ class PrayerCalculationParametersFactory {
   static CalculationParameters _paramsFor(String code) {
     switch (code) {
       case 'turkey':
+      case 'diyanet':
       case 'diyanet_tabanli':
       case 'aladhan':
         return CalculationMethod.turkey();
@@ -25,27 +26,12 @@ class PrayerCalculationParametersFactory {
         return CalculationMethod.muslimWorldLeague();
       case 'umm_al_qura':
         return CalculationMethod.ummAlQura();
-      case 'dubai':
-        return CalculationMethod.dubai();
-      case 'kuwait':
-        return CalculationMethod.kuwait();
-      case 'qatar':
-        return CalculationMethod.qatar();
-      case 'singapore':
-        return CalculationMethod.singapore();
-      case 'tehran':
-        return CalculationMethod.tehran();
       case 'moonsighting':
         return CalculationMethod.moonsightingCommittee();
       case 'north_america':
         return CalculationMethod.northAmerica();
-      case 'egyptian':
-        return CalculationMethod.egyptian();
-      case 'karachi':
-        return CalculationMethod.karachi();
-      case 'other':
       default:
-        return CalculationMethod.other();
+        return CalculationMethod.turkey();
     }
   }
 

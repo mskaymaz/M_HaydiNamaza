@@ -18,13 +18,18 @@ object PrayerWidgetScheduler {
     data class WidgetEvent(
         val triggerAtMillis: Long,
         val prayerLabel: String,
-        val timeLabel: String
+        val timeLabel: String,
+        val dateLabel: String,
+        val fajrTime: String,
+        val sunriseTime: String,
+        val dhuhrTime: String,
+        val asrTime: String,
+        val maghribTime: String,
+        val ishaTime: String
     )
 
     fun configure(context: Context, events: List<Map<String, Any?>>) {
-        val normalized = events
-            .mapNotNull { normalizeEvent(it) }
-            .sortedBy { it.triggerAtMillis }
+        val normalized = events.mapNotNull { normalizeEvent(it) }.sortedBy { it.triggerAtMillis }
         val json = JSONArray()
         for (event in normalized) {
             json.put(
@@ -32,6 +37,13 @@ object PrayerWidgetScheduler {
                     put("triggerAtMillis", event.triggerAtMillis)
                     put("prayerLabel", event.prayerLabel)
                     put("timeLabel", event.timeLabel)
+                    put("dateLabel", event.dateLabel)
+                    put("fajrTime", event.fajrTime)
+                    put("sunriseTime", event.sunriseTime)
+                    put("dhuhrTime", event.dhuhrTime)
+                    put("asrTime", event.asrTime)
+                    put("maghribTime", event.maghribTime)
+                    put("ishaTime", event.ishaTime)
                 }
             )
         }
@@ -41,21 +53,38 @@ object PrayerWidgetScheduler {
 
     fun updateWidgets(context: Context) {
         val manager = AppWidgetManager.getInstance(context)
-        val component = ComponentName(context, PrayerTimeWidgetProvider::class.java)
-        val ids = manager.getAppWidgetIds(component)
-        if (ids.isNotEmpty()) {
-            PrayerTimeWidgetProvider.updateAll(context, manager, ids)
+        val compact = ComponentName(context, PrayerTimeWidgetProvider::class.java)
+        val compactIds = manager.getAppWidgetIds(compact)
+        if (compactIds.isNotEmpty()) {
+            PrayerTimeWidgetProvider.updateAll(context, manager, compactIds)
+        }
+        val wide = ComponentName(context, PrayerTimesWideWidgetProvider::class.java)
+        val wideIds = manager.getAppWidgetIds(wide)
+        if (wideIds.isNotEmpty()) {
+            PrayerTimesWideWidgetProvider.updateAll(context, manager, wideIds)
         }
         scheduleNextRefresh(context)
     }
 
     fun nextEvent(context: Context): WidgetEvent? {
         val now = System.currentTimeMillis()
+        return readEvents(context).firstOrNull {
+            it.triggerAtMillis > now && !isSunriseLabel(it.prayerLabel)
+        }
+    }
+
+    private fun isSunriseLabel(label: String): Boolean {
+        val normalized = label.trim().lowercase()
+        return normalized == "güneş" || normalized == "gunes" || normalized == "sunrise"
+    }
+
+    private fun nextRefreshEvent(context: Context): WidgetEvent? {
+        val now = System.currentTimeMillis()
         return readEvents(context).firstOrNull { it.triggerAtMillis > now }
     }
 
     private fun scheduleNextRefresh(context: Context) {
-        val next = nextEvent(context) ?: return
+        val next = nextRefreshEvent(context) ?: return
         val triggerAt = next.triggerAtMillis + 1000L
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, PrayerTimeWidgetProvider::class.java).apply {
@@ -93,7 +122,14 @@ object PrayerWidgetScheduler {
                     WidgetEvent(
                         triggerAtMillis = item.optLong("triggerAtMillis", 0L),
                         prayerLabel = item.optString("prayerLabel", "Vakit"),
-                        timeLabel = item.optString("timeLabel", "--:--")
+                        timeLabel = item.optString("timeLabel", "--:--"),
+                        dateLabel = item.optString("dateLabel", ""),
+                        fajrTime = item.optString("fajrTime", "--:--"),
+                        sunriseTime = item.optString("sunriseTime", "--:--"),
+                        dhuhrTime = item.optString("dhuhrTime", "--:--"),
+                        asrTime = item.optString("asrTime", "--:--"),
+                        maghribTime = item.optString("maghribTime", "--:--"),
+                        ishaTime = item.optString("ishaTime", "--:--")
                     )
                 )
             }
@@ -111,7 +147,14 @@ object PrayerWidgetScheduler {
         return WidgetEvent(
             triggerAtMillis = triggerAtMillis,
             prayerLabel = prayerLabel,
-            timeLabel = timeLabel
+            timeLabel = timeLabel,
+            dateLabel = input["dateLabel"]?.toString()?.trim().orEmpty(),
+            fajrTime = input["fajrTime"]?.toString()?.trim().orEmpty().ifEmpty { "--:--" },
+            sunriseTime = input["sunriseTime"]?.toString()?.trim().orEmpty().ifEmpty { "--:--" },
+            dhuhrTime = input["dhuhrTime"]?.toString()?.trim().orEmpty().ifEmpty { "--:--" },
+            asrTime = input["asrTime"]?.toString()?.trim().orEmpty().ifEmpty { "--:--" },
+            maghribTime = input["maghribTime"]?.toString()?.trim().orEmpty().ifEmpty { "--:--" },
+            ishaTime = input["ishaTime"]?.toString()?.trim().orEmpty().ifEmpty { "--:--" }
         )
     }
 

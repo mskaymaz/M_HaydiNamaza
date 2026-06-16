@@ -30,7 +30,7 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   static const String _listLoadErrorMessage =
-      'Konum listesi yuklenemedi. Lutfen tekrar deneyin.';
+      'Konum listesi yüklenemedi. Lütfen tekrar deneyin.';
 
   final _provinceController = TextEditingController();
   final _districtController = TextEditingController();
@@ -254,9 +254,9 @@ class _LocationScreenState extends State<LocationScreen> {
     if (!mounted) return;
     final message = switch (status) {
       CurrentLocationStatus.serviceDisabled =>
-        'Konum servisi kapali. Elle konum secimi ile devam edebilirsiniz.',
+        'Konum servisi kapalı. Elle konum seçimi ile devam edebilirsiniz.',
       CurrentLocationStatus.permissionDenied =>
-        'Konum izni verilmedi. Elle konum secimi ile devam edebilirsiniz.',
+        'Konum izni verilmedi. Elle konum seçimi ile devam edebilirsiniz.',
       _ => 'Mevcut konum alinamadi.',
     };
     ScaffoldMessenger.of(

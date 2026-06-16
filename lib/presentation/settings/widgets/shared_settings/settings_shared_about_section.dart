@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../features/shared_settings/shared_settings_app_config.dart';
@@ -9,7 +10,10 @@ class SettingsSharedAboutSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final about = kSharedSettingsAppConfig.about;
+    final config = kSharedSettingsAppConfig;
+    final about = config.about;
+    final contactEmail = config.contact.email;
+
     return SharedSettingsSectionCard(
       title: about.title,
       headerColor: sharedSettingsAboutHeader,
@@ -21,34 +25,13 @@ class SettingsSharedAboutSection extends StatelessWidget {
             if (about.imageAsset.trim().isNotEmpty)
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Stack(
-                  children: [
-                    Image.asset(
-                      about.imageAsset,
-                      width: double.infinity,
-                      fit: BoxFit.fitWidth,
-                      alignment: Alignment.topCenter,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const SizedBox.shrink(),
-                    ),
-                    Positioned.fill(
-                      child: Align(
-                        alignment: const Alignment(0, 0.84),
-                        child: FractionallySizedBox(
-                          widthFactor: 0.90,
-                          heightFactor: 0.05,
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () => _openBlog(context),
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                child: Image.asset(
+                  about.imageAsset,
+                  width: double.infinity,
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const SizedBox.shrink(),
                 ),
               ),
             const SizedBox(height: 12),
@@ -61,13 +44,63 @@ class SettingsSharedAboutSection extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Text(about.details),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 14),
+            Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minWidth: 180),
+                child: FilledButton.icon(
+                  onPressed: () => _openBlog(context),
+                  icon: const Icon(Icons.open_in_new_rounded),
+                  label: Text(about.linkLabel),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: OutlinedButton.icon(
-                onPressed: () => _openBlog(context),
-                icon: const Icon(Icons.open_in_new_rounded),
-                label: Text(about.linkLabel),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.72),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.black12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Bize ulaşın',
+                        style: Theme.of(context).textTheme.titleSmall
+                            ?.copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 6),
+                      const Text(
+                        'Bilgi verme, talep ve geri bildirimleriniz için iletişim adresimiz:',
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          const Icon(Icons.email_outlined, size: 18),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: SelectableText(
+                              contactEmail,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            tooltip: 'E-posta adresini kopyala',
+                            onPressed: () => _copyEmail(context, contactEmail),
+                            icon: const Icon(Icons.copy_rounded, size: 19),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
@@ -80,7 +113,7 @@ class SettingsSharedAboutSection extends StatelessWidget {
     final url = kSharedSettingsAppConfig.about.linkUrl;
     final uri = Uri.tryParse(url);
     if (uri == null) {
-      _showSnack(context, 'Baglanti acilamadi.');
+      _showSnack(context, 'Bağlantı açılamadı.');
       return;
     }
 
@@ -89,7 +122,14 @@ class SettingsSharedAboutSection extends StatelessWidget {
 
     final fallback = await launchUrl(uri, mode: LaunchMode.platformDefault);
     if (!fallback && context.mounted) {
-      _showSnack(context, 'Baglanti acilamadi.');
+      _showSnack(context, 'Bağlantı açılamadı.');
+    }
+  }
+
+  Future<void> _copyEmail(BuildContext context, String email) async {
+    await Clipboard.setData(ClipboardData(text: email));
+    if (context.mounted) {
+      _showSnack(context, 'E-posta adresi kopyalandı.');
     }
   }
 

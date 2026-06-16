@@ -1,5 +1,19 @@
 import 'package:flutter/services.dart';
 
+int _wallClockMillis(DateTime value) {
+  final local = DateTime(
+    value.year,
+    value.month,
+    value.day,
+    value.hour,
+    value.minute,
+    value.second,
+    value.millisecond,
+    value.microsecond,
+  );
+  return local.millisecondsSinceEpoch;
+}
+
 class NativePrayerNotificationEvent {
   final int id;
   final DateTime triggerAt;
@@ -30,7 +44,7 @@ class NativePrayerNotificationEvent {
   Map<String, Object?> toJson() {
     return <String, Object?>{
       'id': id,
-      'triggerAtMillis': triggerAt.millisecondsSinceEpoch,
+      'triggerAtMillis': _wallClockMillis(triggerAt),
       'prayerLabel': prayerLabel,
       'stage': stage,
       'title': title,
@@ -47,19 +61,40 @@ class NativePrayerNotificationEvent {
 class NativePrayerWidgetEvent {
   final DateTime triggerAt;
   final String prayerLabel;
+  final String dateLabel;
+  final String fajrTime;
+  final String sunriseTime;
+  final String dhuhrTime;
+  final String asrTime;
+  final String maghribTime;
+  final String ishaTime;
 
   const NativePrayerWidgetEvent({
     required this.triggerAt,
     required this.prayerLabel,
+    required this.dateLabel,
+    required this.fajrTime,
+    required this.sunriseTime,
+    required this.dhuhrTime,
+    required this.asrTime,
+    required this.maghribTime,
+    required this.ishaTime,
   });
 
   Map<String, Object?> toJson() {
     return <String, Object?>{
-      'triggerAtMillis': triggerAt.millisecondsSinceEpoch,
+      'triggerAtMillis': _wallClockMillis(triggerAt),
       'prayerLabel': prayerLabel,
       'timeLabel':
           '${triggerAt.hour.toString().padLeft(2, '0')}:'
           '${triggerAt.minute.toString().padLeft(2, '0')}',
+      'dateLabel': dateLabel,
+      'fajrTime': fajrTime,
+      'sunriseTime': sunriseTime,
+      'dhuhrTime': dhuhrTime,
+      'asrTime': asrTime,
+      'maghribTime': maghribTime,
+      'ishaTime': ishaTime,
     };
   }
 }

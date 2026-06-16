@@ -1,4 +1,4 @@
-﻿import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import 'shared_settings_models.dart';
@@ -20,8 +20,12 @@ class SharedSettingsRemoteClient {
       localAssetPath: localAssetPath,
     );
     if (payload == null) return const <OtherAppItem>[];
+    final current = currentAppId.trim().toLowerCase();
     final items = SharedSettingsParser.parseCatalogPayload(payload);
-    return items.where((item) => item.isTargetFor(currentAppId)).toList();
+    return items
+        .where((item) => item.appId.trim().toLowerCase() != current)
+        .where((item) => item.isTargetFor(currentAppId))
+        .toList(growable: false);
   }
 
   Future<UpdateManifest?> loadUpdateManifest({

@@ -39,7 +39,7 @@ class DailyContentRemoteClient {
     required List<String> warnings,
   }) async {
     if (_baseUrl.isEmpty) {
-      warnings.add('daily_content_remote: base url bos, remote atlandi.');
+      warnings.add('daily_content_remote: base url boş, remote atlandı.');
       return null;
     }
 
@@ -139,7 +139,7 @@ class DailyContentRemoteClient {
     final ids = _extractIds(obj['ids']);
     if (ids.isEmpty) {
       warnings.add(
-        'daily_content_remote: $payloadType sirasi bos, payload sirasi kullanildi.',
+        'daily_content_remote: $payloadType sırası boş, payload sırası kullanıldı.',
       );
       return fallback;
     }
@@ -229,7 +229,7 @@ class DailyContentRemoteClient {
       }
       final decoded = jsonDecode(response.body);
       if (decoded is! Map) {
-        warnings.add('daily_content_remote: $label json object degil.');
+        warnings.add('daily_content_remote: $label json object değil.');
         return null;
       }
       return Map<String, dynamic>.from(decoded);

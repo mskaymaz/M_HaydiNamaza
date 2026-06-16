@@ -117,8 +117,6 @@ class ReminderTextSettingsStorage {
     'Namaz vakti',
     'Namaz vakti yaklaşıyor.. Haydi hazırlan...',
     'Namaz vakti yaklaşıyor.. Haydi hazırlan..',
-    'Namaz vakti yaklasiyor.. Haydi hazirlan..',
-    'Namaz vakti yaklaÅŸÄ±yor.. Haydi hazÄ±rlan..',
   };
 
   Future<ReminderTextSettings> read() async {

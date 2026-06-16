@@ -4,12 +4,16 @@ class _HomeData {
   final LocationData? location;
   final String? methodCode;
   final PrayerTimes? times;
+  final PrayerTimes? displayTimes;
+  final DateTime? displayDate;
   final String? error;
 
   _HomeData({
     required this.location,
     required this.methodCode,
     this.times,
+    this.displayTimes,
+    this.displayDate,
     this.error,
   });
 }

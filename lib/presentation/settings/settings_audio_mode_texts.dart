@@ -7,18 +7,18 @@ String audioModeLabel(ReminderAudioMode mode) {
     case ReminderAudioMode.deviceAudio:
       return 'Telefon Melodisi';
     case ReminderAudioMode.mp3File:
-      return 'MP3 Dosyasi';
+      return 'MP3 Dosyası';
   }
 }
 
 String audioPickerButtonLabel(ReminderAudioMode mode) {
   switch (mode) {
     case ReminderAudioMode.textToSpeech:
-      return 'Ses Dosyasi Sec';
+      return 'Ses Dosyası Seç';
     case ReminderAudioMode.deviceAudio:
-      return 'Telefon Melodisi Sec';
+      return 'Telefon Melodisi Seç';
     case ReminderAudioMode.mp3File:
-      return 'MP3 Dosyasi Sec';
+      return 'MP3 Dosyası Seç';
   }
 }
 
@@ -27,8 +27,8 @@ String audioPickerHelpText(ReminderAudioMode mode) {
     case ReminderAudioMode.textToSpeech:
       return '';
     case ReminderAudioMode.deviceAudio:
-      return 'Telefonunuzdaki ses dosyalarindan bir melodi secin.';
+      return 'Telefonunuzdaki ses dosyalarından bir melodi seçin.';
     case ReminderAudioMode.mp3File:
-      return 'Yalniz mp3 dosyasi secilir.';
+      return 'Yalnız mp3 dosyası seçilir.';
   }
 }

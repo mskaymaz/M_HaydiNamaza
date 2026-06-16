@@ -70,18 +70,18 @@ bool _isWordChar(String ch) {
 List<String> _hijriMonths(String locale) {
   if (locale.startsWith('ar')) {
     return const [
-      'Ù…Ø­Ø±Ù…',
-      'ØµÙØ±',
-      'Ø±Ø¨ÙŠØ¹ Ø§Ù„Ø£ÙˆÙ„',
-      'Ø±Ø¨ÙŠØ¹ Ø§Ù„Ø¢Ø®Ø±',
-      'Ø¬Ù…Ø§Ø¯Ù‰ Ø§Ù„Ø£ÙˆÙ„Ù‰',
-      'Ø¬Ù…Ø§Ø¯Ù‰ Ø§Ù„Ø¢Ø®Ø±Ø©',
-      'Ø±Ø¬Ø¨',
-      'Ø´Ø¹Ø¨Ø§Ù†',
-      'Ø±Ù…Ø¶Ø§Ù†',
-      'Ø´ÙˆØ§Ù„',
-      'Ø°Ùˆ Ø§Ù„Ù‚Ø¹Ø¯Ø©',
-      'Ø°Ùˆ Ø§Ù„Ø­Ø¬Ø©',
+      'محرم',
+      'صفر',
+      'ربيع الأول',
+      'ربيع الآخر',
+      'جمادى الأولى',
+      'جمادى الآخرة',
+      'رجب',
+      'شعبان',
+      'رمضان',
+      'شوال',
+      'ذو القعدة',
+      'ذو الحجة',
     ];
   }
   if (locale.startsWith('tr')) {
@@ -103,12 +103,12 @@ List<String> _hijriMonths(String locale) {
   return const [
     'Muharram',
     'Safar',
-    'RabiÊ» al-awwal',
-    'RabiÊ» al-thani',
+    'Rabiʿ al-awwal',
+    'Rabiʿ al-thani',
     'Jumada al-awwal',
     'Jumada al-thani',
     'Rajab',
-    'ShaÊ»ban',
+    'Shaʿban',
     'Ramadan',
     'Shawwal',
     'Dhu al-Qadah',
@@ -116,10 +116,15 @@ List<String> _hijriMonths(String locale) {
   ];
 }
 
+const int _diyanetHijriCorrectionDays = 1;
+
 _HijriDate _toHijri(DateTime date) {
-  final y = date.year;
-  final m = date.month;
-  final d = date.day;
+  final correctedDate = date.add(
+    const Duration(days: _diyanetHijriCorrectionDays),
+  );
+  final y = correctedDate.year;
+  final m = correctedDate.month;
+  final d = correctedDate.day;
   final a = ((14 - m) / 12).floor();
   final y2 = y + 4800 - a;
   final m2 = m + 12 * a - 3;

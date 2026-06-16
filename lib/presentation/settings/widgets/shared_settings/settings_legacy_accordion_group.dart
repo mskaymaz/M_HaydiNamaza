@@ -109,298 +109,266 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
       padding: outerPadding,
       child: Column(
         children: [
-          SharedSettingsSectionCard(
-            title: 'Hatirlatma Secenekleri',
-            headerColor: sharedSettingsReminderOptionsHeader,
-            child: _sectionChild(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SettingsReminderOptionToggle(
-                          label: 'Sesli',
-                          value: showVoiceIcon,
-                          onChanged: onVoiceToggleChanged,
-                        ),
-                      ),
-                      Expanded(
-                        child: SettingsReminderOptionToggle(
-                          label: 'Gorsel',
-                          value: showVisualIcon,
-                          onChanged: onVisualToggleChanged,
-                        ),
-                      ),
-                      Expanded(
-                        child: SettingsReminderOptionToggle(
-                          label: 'Ezan',
-                          value: showAzanIcon,
-                          onChanged: onAzanToggleChanged,
-                        ),
-                      ),
-                      Expanded(
-                        child: SettingsReminderOptionToggle(
-                          label: 'Titresim',
-                          value: showVibrationIcon,
-                          onChanged: onVibrationToggleChanged,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Divider(
-                    color: Colors.white.withValues(alpha: 0.9),
-                    height: 1,
-                  ),
-                  const SizedBox(height: 10),
-                  CheckboxListTile(
-                    value: sortCustomPrayersByTime,
-                    contentPadding: EdgeInsets.zero,
-                    controlAffinity: ListTileControlAffinity.leading,
-                    title: const Text('Nafileler vakitlere gore siralansin'),
-                    subtitle: const Text(
-                      'Kapaliysa nafileler listenin en altinda kalir.',
-                    ),
-                    onChanged: onSortChanged,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          SharedSettingsSectionCard(
-            title: 'Titresimle Uyari Ayarlari',
-            headerColor: sharedSettingsVibrationHeader,
-            child: _sectionChild(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: SettingsReminderNumberField(
-                      label: 'Titresim Suresi (sn)',
-                      controller: vibrationDurationController,
-                      onChanged: onVibrationDurationChanged,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: SettingsReminderNumberField(
-                      label: 'Titresim Araligi (sn)',
-                      controller: vibrationPauseController,
-                      onChanged: onVibrationPauseChanged,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          SharedSettingsSectionCard(
-            title: 'Sesli Hatirlatma',
-            headerColor: sharedSettingsVoiceHeader,
-            child: _sectionChild(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DropdownButtonFormField<ReminderAudioMode>(
-                    initialValue: selectedAudioMode,
-                    decoration: const InputDecoration(
-                      labelText: 'Ses Kaynagi',
-                      border: OutlineInputBorder(),
-                    ),
-                    items: ReminderAudioMode.values
-                        .map(
-                          (mode) => DropdownMenuItem<ReminderAudioMode>(
-                            value: mode,
-                            child: Text(audioModeLabel(mode)),
-                          ),
-                        )
-                        .toList(growable: false),
-                    onChanged: onAudioModeChanged,
-                  ),
-                  if (selectedAudioMode == ReminderAudioMode.textToSpeech) ...[
-                    const SizedBox(height: 10),
-                    SettingsReminderTextField(
-                      label: 'Sesli Hatirlatma Metni',
-                      controller: voiceReminderController,
-                      hintText: 'Sesli hatirlatmada okunacak metni girin.',
-                      onChanged: onVoiceTextChanged,
-                    ),
-                    const SizedBox(height: 8),
-                    SettingsReminderNumberField(
-                      label: 'Sesli Hatirlatma Periyodu (sn)',
-                      controller: voiceRepeatController,
-                      onChanged: onVoiceRepeatChanged,
-                    ),
-                  ] else ...[
-                    const SizedBox(height: 10),
-                    OutlinedButton.icon(
-                      onPressed: onPickAudio,
-                      icon: const Icon(Icons.library_music_outlined),
-                      label: Text(audioPickerButtonLabel),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      audioInfoText,
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: OutlinedButton.icon(
-                      onPressed: onVoiceTest,
-                      icon: const Icon(Icons.play_arrow_rounded),
-                      label: const Text('Sesli Test'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          SharedSettingsSectionCard(
-            title: 'Gorsel Hatirlatma',
-            headerColor: sharedSettingsVisualHeader,
-            child: _sectionChild(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SettingsReminderTextField(
-                    label: 'Gorsel Hatirlatma Metni',
-                    controller: visualReminderController,
-                    hintText:
-                        'Buraya metin girilmezse sesli hatirlatma metni kullanilir.',
-                    onChanged: onVisualTextChanged,
-                    maxLines: 3,
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SettingsReminderNumberField(
-                          label: 'Ekranda Kalma (sn)',
-                          controller: visualDisplayController,
-                          onChanged: onVisualDisplayChanged,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: SettingsReminderNumberField(
-                          label: 'Kapanip Acilma (sn)',
-                          controller: visualReopenController,
-                          onChanged: onVisualReopenChanged,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: OutlinedButton.icon(
-                      onPressed: onShowPreview,
-                      icon: const Icon(Icons.visibility_outlined),
-                      label: const Text('Gorsel Uyariyi Goster'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          SharedSettingsSectionCard(
-            title: 'Arayuz ve Arkaplan Renkleri',
-            headerColor: sharedSettingsMergedColorsHeader,
-            child: _sectionChild(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Arayuz Renkleri',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(height: 8),
-                  SettingsColorActionTile(
-                    title: 'Panel Rengi',
-                    color: panelColor,
-                    onTap: onEditPanelColor,
-                  ),
-                  const SizedBox(height: 8),
-                  SettingsColorActionTile(
-                    title: 'Yazi Rengi',
-                    color: textColor,
-                    onTap: onEditTextColor,
-                  ),
-                  const SizedBox(height: 8),
-                  SettingsColorActionTile(
-                    title: 'Nafile Vakit Rengi',
-                    color: customPrayerLabelColor,
-                    onTap: onEditCustomPrayerLabelColor,
-                  ),
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: SettingsResetIconButton(
-                      onTap: onResetInterfaceColors,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Divider(
-                    color: Colors.white.withValues(alpha: 0.9),
-                    height: 1,
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Arkaplan Rengi',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(height: 8),
-                  SettingsColorActionTile(
-                    title: 'Zemin Rengi',
-                    color: backgroundColor,
-                    onTap: onEditBackgroundColor,
-                  ),
-                  const SizedBox(height: 8),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: SettingsResetIconButton(
-                      onTap: onResetBackgroundColors,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Not: Secimler ana sayfaya sadece Uygula butonuyla yansir.',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      OutlinedButton.icon(
-                        onPressed: () => onResetBackgroundColors(),
-                        icon: const Icon(Icons.restart_alt_rounded),
-                        label: const Text('Varsayilan'),
-                      ),
-                      const Spacer(),
-                      FilledButton.icon(
-                        onPressed: hasPendingBackgroundChanges
-                            ? () => onApplyBackgroundStyle()
-                            : null,
-                        icon: const Icon(Icons.check_rounded),
-                        label: const Text('Uygula'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          _warningSettingsCard(context),
+          const SizedBox(height: 20),
+          _colorsCard(context),
         ],
+      ),
+    );
+  }
+
+  Widget _warningSettingsCard(BuildContext context) {
+    return SharedSettingsSectionCard(
+      title: 'Uyarı Ayarları',
+      headerColor: sharedSettingsReminderOptionsHeader,
+      child: _sectionChild(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _subHeader('Hatırlatma Seçenekleri', sharedSettingsReminderOptionsHeader),
+            Row(
+              children: [
+                Expanded(child: _toggle('Sesli', showVoiceIcon, onVoiceToggleChanged)),
+                Expanded(child: _toggle('Görsel', showVisualIcon, onVisualToggleChanged)),
+                Expanded(child: _toggle('Ezan', showAzanIcon, onAzanToggleChanged)),
+                Expanded(child: _toggle('Titreşim', showVibrationIcon, onVibrationToggleChanged)),
+              ],
+            ),
+            const SizedBox(height: 10),
+            CheckboxListTile(
+              value: sortCustomPrayersByTime,
+              contentPadding: EdgeInsets.zero,
+              controlAffinity: ListTileControlAffinity.leading,
+              title: const Text('Nafileler vakitlere göre sıralansın'),
+              subtitle: const Text('Kapalıysa nafileler listenin en altında kalır.'),
+              onChanged: onSortChanged,
+            ),
+            const SizedBox(height: 18),
+            _subHeader('Titreşimle Uyarı Ayarları', sharedSettingsVibrationHeader),
+            Row(
+              children: [
+                Expanded(
+                  child: SettingsReminderNumberField(
+                    label: 'Titreşim Süresi (sn)',
+                    controller: vibrationDurationController,
+                    onChanged: onVibrationDurationChanged,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: SettingsReminderNumberField(
+                    label: 'Titreşim Aralığı (sn)',
+                    controller: vibrationPauseController,
+                    onChanged: onVibrationPauseChanged,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 18),
+            _subHeader('Sesli Hatırlatma', sharedSettingsVoiceHeader),
+            _voiceSettings(context),
+            const SizedBox(height: 18),
+            _subHeader('Görsel Hatırlatma', sharedSettingsVisualHeader),
+            _visualSettings(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _voiceSettings(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DropdownButtonFormField<ReminderAudioMode>(
+          initialValue: selectedAudioMode,
+          decoration: const InputDecoration(
+            labelText: 'Ses Kaynağı',
+            border: OutlineInputBorder(),
+          ),
+          items: ReminderAudioMode.values
+              .map(
+                (mode) => DropdownMenuItem<ReminderAudioMode>(
+                  value: mode,
+                  child: Text(audioModeLabel(mode)),
+                ),
+              )
+              .toList(growable: false),
+          onChanged: onAudioModeChanged,
+        ),
+        if (selectedAudioMode == ReminderAudioMode.textToSpeech) ...[
+          const SizedBox(height: 10),
+          SettingsReminderTextField(
+            label: 'Sesli Hatırlatma Metni',
+            controller: voiceReminderController,
+            hintText: 'Sesli hatırlatmada okunacak metni girin.',
+            onChanged: onVoiceTextChanged,
+          ),
+          const SizedBox(height: 8),
+          SettingsReminderNumberField(
+            label: 'Sesli Hatırlatma Periyodu (sn)',
+            controller: voiceRepeatController,
+            onChanged: onVoiceRepeatChanged,
+          ),
+        ] else ...[
+          const SizedBox(height: 10),
+          OutlinedButton.icon(
+            onPressed: onPickAudio,
+            icon: const Icon(Icons.library_music_outlined),
+            label: Text(audioPickerButtonLabel),
+          ),
+          const SizedBox(height: 8),
+          Text(audioInfoText, style: Theme.of(context).textTheme.bodySmall),
+        ],
+        const SizedBox(height: 8),
+        Align(
+          alignment: Alignment.centerRight,
+          child: OutlinedButton.icon(
+            onPressed: onVoiceTest,
+            icon: const Icon(Icons.play_arrow_rounded),
+            label: const Text('Sesli Test'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _visualSettings() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SettingsReminderTextField(
+          label: 'Buraya metin girilmezse, sesli hatırlatma metni kullanılacaktır.',
+          controller: visualReminderController,
+          hintText: '',
+          onChanged: onVisualTextChanged,
+          maxLines: 3,
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            Expanded(
+              child: SettingsReminderNumberField(
+                label: 'Ekranda Kalma (sn)',
+                controller: visualDisplayController,
+                onChanged: onVisualDisplayChanged,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: SettingsReminderNumberField(
+                label: 'Kapanıp Açılma (sn)',
+                controller: visualReopenController,
+                onChanged: onVisualReopenChanged,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Align(
+          alignment: Alignment.centerRight,
+          child: OutlinedButton.icon(
+            onPressed: onShowPreview,
+            icon: const Icon(Icons.visibility_outlined),
+            label: const Text('Görsel Uyarıyı Göster'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _colorsCard(BuildContext context) {
+    return SharedSettingsSectionCard(
+      title: 'Arayüz ve Arka Plan Renkleri',
+      headerColor: sharedSettingsMergedColorsHeader,
+      child: _sectionChild(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(child: SettingsColorActionTile(title: 'Panel Rengi', color: panelColor, onTap: onEditPanelColor)),
+                const SizedBox(width: 10),
+                Expanded(child: SettingsColorActionTile(title: 'Yazı Rengi', color: textColor, onTap: onEditTextColor)),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(child: SettingsColorActionTile(title: 'Nafile Vakit Rengi', color: customPrayerLabelColor, onTap: onEditCustomPrayerLabelColor)),
+                const SizedBox(width: 10),
+                Expanded(child: SettingsColorActionTile(title: 'Zemin Rengi', color: backgroundColor, onTap: onEditBackgroundColor)),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Not: Seçimler ana sayfaya sadece Uygula butonuyla yansır.',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                OutlinedButton.icon(
+                  onPressed: () => onResetInterfaceColors(),
+                  icon: const Icon(Icons.restart_alt_rounded),
+                  label: const Text('Arayüz Varsayılan'),
+                ),
+                const SizedBox(width: 8),
+                OutlinedButton.icon(
+                  onPressed: () => onResetBackgroundColors(),
+                  icon: const Icon(Icons.wallpaper_rounded),
+                  label: const Text('Zemin Varsayılan'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerRight,
+              child: FilledButton.icon(
+                onPressed: hasPendingBackgroundChanges
+                    ? () => onApplyBackgroundStyle()
+                    : null,
+                icon: const Icon(Icons.check_rounded),
+                label: const Text('Uygula'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SettingsReminderOptionToggle _toggle(
+    String label,
+    bool value,
+    ValueChanged<bool> onChanged,
+  ) {
+    return SettingsReminderOptionToggle(
+      label: label,
+      value: value,
+      onChanged: onChanged,
+    );
+  }
+
+  Widget _subHeader(String title, Color color) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.7),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        title,
+        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
       ),
     );
   }
 
   Widget _sectionChild({required Widget child}) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 18),
       child: child,
     );
   }

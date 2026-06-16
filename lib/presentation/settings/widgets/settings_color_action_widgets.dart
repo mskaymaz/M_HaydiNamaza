@@ -18,7 +18,7 @@ class SettingsColorActionTile extends StatelessWidget {
       borderRadius: BorderRadius.circular(14),
       onTap: onTap,
       child: Ink(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.14),
           borderRadius: BorderRadius.circular(14),
@@ -27,14 +27,14 @@ class SettingsColorActionTile extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 22,
-              height: 22,
+              width: 33,
+              height: 33,
               decoration: BoxDecoration(
                 color: color,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 8),
             Expanded(child: Text(title)),
           ],
         ),

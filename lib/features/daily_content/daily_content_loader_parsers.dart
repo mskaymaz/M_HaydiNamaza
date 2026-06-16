@@ -56,7 +56,7 @@ extension DailyContentLoaderRecordParsers on DailyContentLoader {
       return null;
     }
     if (status != 'approved') {
-      warnings.add('$path[$index]: status approved olmadigi icin atlandi.');
+      warnings.add('$path[$index]: status approved olmadığı için atlandı.');
       return null;
     }
 
@@ -175,7 +175,7 @@ extension DailyContentLoaderRecordParsers on DailyContentLoader {
       return null;
     }
     if (status != 'approved') {
-      warnings.add('$path[$index]: status approved olmadigi icin atlandi.');
+      warnings.add('$path[$index]: status approved olmadığı için atlandı.');
       return null;
     }
 
@@ -274,7 +274,7 @@ extension DailyContentLoaderRecordParsers on DailyContentLoader {
       return null;
     }
     if (status != 'approved') {
-      warnings.add('$path[$index]: status approved olmadigi icin atlandi.');
+      warnings.add('$path[$index]: status approved olmadığı için atlandı.');
       return null;
     }
 

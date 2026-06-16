@@ -8,8 +8,8 @@ const double _summaryPrayerLabelColumnWidth = 96.0;
 const double _summaryPrayerTimeColumnWidth = 72.0;
 const double _summaryPrayerTextGap = 25.0;
 const double _summaryPrayerBellGap = 12.0;
-const double _summaryPrayerBellBoxSize = 30.0;
-const double _summaryPrayerBellIconSize = 20.0;
+const double _summaryPrayerBellBoxSize = 36.0;
+const double _summaryPrayerBellIconSize = 24.0;
 
 class HomePrayerSummaryList extends StatelessWidget {
   final ScrollController controller;

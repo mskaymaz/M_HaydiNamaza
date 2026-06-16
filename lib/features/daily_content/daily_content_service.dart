@@ -40,22 +40,22 @@ class DailyContentService {
 
       if (result.ayah == null) {
         warnings.add(
-          'daily_content_service: ayah secilemedi (bos veya gecersiz icerik).',
+          'daily_content_service: ayah seçilemedi (boş veya geçersiz içerik).',
         );
       }
       if (result.hadith == null) {
         warnings.add(
-          'daily_content_service: hadith secilemedi (bos veya gecersiz icerik).',
+          'daily_content_service: hadith seçilemedi (boş veya geçersiz içerik).',
         );
       }
       if (result.esma == null) {
         warnings.add(
-          'daily_content_service: esma secilemedi (bos veya gecersiz icerik).',
+          'daily_content_service: esma seçilemedi (boş veya geçersiz içerik).',
         );
       }
       if (result.sifat == null) {
         warnings.add(
-          'daily_content_service: sifat secilemedi (bos veya gecersiz icerik).',
+          'daily_content_service: sifat seçilemedi (boş veya geçersiz içerik).',
         );
       }
 
@@ -74,7 +74,7 @@ class DailyContentService {
       );
     } catch (_) {
       final warnings = <String>[
-        'daily_content_service: gunluk icerik secimi basarisiz, fallback state kullanildi.',
+        'daily_content_service: günlük içerik seçimi başarısız, fallback state kullanıldı.',
       ];
       final fallbackState = await _stateRepository.read(warnings: warnings);
       return DailyContentSelectionResult(

@@ -152,7 +152,7 @@ extension DailyContentLoaderHelpers on DailyContentLoader {
       );
       final decoded = jsonDecode(raw);
       if (decoded is! Map) {
-        warnings.add('local sequence: json object degil, fallback kullanildi.');
+        warnings.add('local sequence: json object değil, fallback kullanıldı.');
         return _LocalSequenceAsset(
           startDate: DailyContentPaths.defaultSequenceStartDate,
           ayahOrderIds: fallbackAyahIds,

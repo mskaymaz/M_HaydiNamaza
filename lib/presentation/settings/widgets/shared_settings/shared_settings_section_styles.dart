@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 const Color sharedSettingsContentSurface = Color(0xFFF4F4F4);
-const Color sharedSettingsContactHeader = Color(0xFFD7F0D1);
 const Color sharedSettingsUpdateHeader = Color(0xFFE6D5F0);
 const Color sharedSettingsOtherAppsHeader = Color(0xFFF2D9E8);
 const Color sharedSettingsSupportHeader = Color(0xFFD6E5F5);

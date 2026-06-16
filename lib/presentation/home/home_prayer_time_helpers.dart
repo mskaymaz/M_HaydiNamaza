@@ -35,16 +35,12 @@ extension _HomePrayerTimeHelpers on _HomeScreenState {
     AppLocalizations l10n,
   ) {
     final fajr = _atToday(times.fajr, now);
-    final sunrise = _atToday(times.sunrise, now);
     final dhuhr = _atToday(times.dhuhr, now);
     final asr = _atToday(times.asr, now);
     final maghrib = _atToday(times.maghrib, now);
     final isha = _atToday(times.isha, now);
     if (now.isBefore(fajr)) {
       return _PrayerNext(label: l10n.prayerFajr, time: fajr);
-    }
-    if (now.isBefore(sunrise)) {
-      return _PrayerNext(label: l10n.prayerSunrise, time: sunrise);
     }
     if (now.isBefore(dhuhr)) {
       return _PrayerNext(label: l10n.prayerDhuhr, time: dhuhr);

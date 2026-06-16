@@ -59,12 +59,14 @@ class PrayerTimeWidgetProvider : AppWidgetProvider() {
                 views.setTextViewText(R.id.prayer_widget_label, "Vakit")
                 views.setTextViewText(R.id.prayer_widget_time, "--:--")
                 views.setViewVisibility(R.id.prayer_widget_countdown, View.VISIBLE)
+                views.setTextViewText(R.id.prayer_widget_remaining_label, "Kalan Süre")
                 views.setTextViewText(R.id.prayer_widget_countdown, "--:--:--")
                 return views
             }
 
             views.setTextViewText(R.id.prayer_widget_label, next.prayerLabel)
             views.setTextViewText(R.id.prayer_widget_time, next.timeLabel)
+            views.setTextViewText(R.id.prayer_widget_remaining_label, "Kalan Süre")
             views.setViewVisibility(R.id.prayer_widget_countdown, View.VISIBLE)
 
             val remaining = next.triggerAtMillis - System.currentTimeMillis()

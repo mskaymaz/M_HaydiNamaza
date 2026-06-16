@@ -1,12 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-
 import 'reminder_text_settings_storage.dart';
 import 'reminder_tts_voice_policy.dart';
 export 'reminder_tts_voice_policy.dart' show ReminderVoiceOption;
-
 class ReminderAudioService {
   final FlutterTts _flutterTts = FlutterTts();
   final AudioPlayer _audioPlayer = AudioPlayer();
@@ -15,6 +12,7 @@ class ReminderAudioService {
   static const String defaultTurkishVoiceLocale =
       ReminderTtsVoicePolicy.defaultTurkishVoiceLocale;
   static const double _stableTtsPitch = 1.0;
+  static const double _turkishTtsRate = 0.42;
   static const double _stableTtsRate = 0.52;
   static const double _arabicTtsRate = 0.45;
   static const double _stableTtsVolume = 1.0;
@@ -22,7 +20,6 @@ class ReminderAudioService {
   static const Duration _ttsDebounce = Duration(milliseconds: 400);
   bool _ttsInProgress = false;
   DateTime? _lastTtsStartAt;
-
   Future<List<ReminderVoiceOption>> loadVoiceOptions({
     bool onlyTurkishMale = false,
     String? languageCode,
@@ -42,7 +39,6 @@ class ReminderAudioService {
     options.sort((a, b) => a.label.compareTo(b.label));
     return options;
   }
-
   Future<List<String>> availableVoiceKeys() async {
     final voices = await _readDeviceVoices();
     if (voices == null) return const [];
@@ -54,7 +50,6 @@ class ReminderAudioService {
     keys.sort();
     return keys;
   }
-
   Future<bool> voiceKeyExists(String compositeKey) async {
     final parsed = _parseVoiceKey(compositeKey);
     if (parsed == null) return false;
@@ -67,7 +62,6 @@ class ReminderAudioService {
         ) !=
         null;
   }
-
   Future<void> saveSelectedLanguageVoices({
     String? englishVoiceLocale,
     String? englishVoiceName,
@@ -144,7 +138,7 @@ class ReminderAudioService {
   }
 
   Future<void> playAlert() async {
-    await SystemSound.play(SystemSoundType.alert);
+    // Prayer-time adhan alerts must not play the phone's default system sound.
   }
 
   Future<void> speakText({required String text, Locale? selectedLocale}) async {
@@ -452,7 +446,9 @@ class ReminderAudioService {
 
   double _speechRateForLocale(Locale? locale, {String? voiceLocale}) {
     final languageCode = _languageCodeForSpeech(locale, voiceLocale);
-    return languageCode == 'ar' ? _arabicTtsRate : _stableTtsRate;
+    if (languageCode == 'ar') return _arabicTtsRate;
+    if (languageCode == 'tr') return _turkishTtsRate;
+    return _stableTtsRate;
   }
 
   String _languageCodeForSpeech(Locale? locale, String? voiceLocale) {

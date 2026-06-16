@@ -12,10 +12,8 @@ const String _qiblaCompassAsset = 'assets/icons/qibla_compass.svg';
 const double _locationSettingsOffsetX = 3.0;
 const double _topActionIconGap = 12.0;
 const double _topActionReservedWidth = 118.0;
-const double _lowerSectionHeight = 110.0;
-const double _dateTextSize = 22.0;
-const double _lowerContentOffsetY = -2.0;
-const double _dateToTimeGap = 10.0;
+const double _lowerSectionHeight = 66.0;
+const double _lowerContentOffsetY = -1.0;
 const double _lowerContentHorizontalInset = 32.0;
 const double _lowerContentColumnGap = 0.0;
 const int _nextInfoFlex = 1;
@@ -30,8 +28,6 @@ class HomeTopPanel extends StatelessWidget {
   final String nextLabel;
   final String nextTime;
   final String countdown;
-  final String dateLabel;
-  final VoidCallback onToggleDate;
   final VoidCallback onLocationTap;
   final VoidCallback onQibla;
   final VoidCallback onSettings;
@@ -50,8 +46,6 @@ class HomeTopPanel extends StatelessWidget {
     required this.nextLabel,
     required this.nextTime,
     required this.countdown,
-    required this.dateLabel,
-    required this.onToggleDate,
     required this.onLocationTap,
     required this.onQibla,
     required this.onSettings,
@@ -75,12 +69,6 @@ class HomeTopPanel extends StatelessWidget {
       color: cizgiColor,
       fontWeight: FontWeight.w500,
       fontSize: typography.locationSize,
-    );
-    final dateTextStyle = theme.textTheme.titleSmall?.copyWith(
-      color: cizgiColor,
-      fontWeight: FontWeight.w400,
-      fontSize: _dateTextSize,
-      letterSpacing: 0,
     );
     final nextLabelTextStyle = theme.textTheme.titleSmall?.copyWith(
       color: cizgiColor,
@@ -219,21 +207,6 @@ class HomeTopPanel extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            width: constraints.maxWidth,
-                            child: GestureDetector(
-                              onTap: onToggleDate,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
-                                  dateLabel,
-                                  textAlign: TextAlign.center,
-                                  style: dateTextStyle,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: _dateToTimeGap),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: _lowerContentHorizontalInset,

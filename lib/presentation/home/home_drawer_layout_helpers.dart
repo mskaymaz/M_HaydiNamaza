@@ -3,11 +3,11 @@ part of 'home_screen.dart';
 const double _kHomeDrawerPanelOverlap = 0.0;
 const double _kHomeDrawerPanelGap = 3.0;
 const double _kHomeDrawerMinCollapsedHeight = 22.0;
-const double _kHomeDrawerMaxHeightLimit = 260.0;
+const double _kHomeDrawerMaxHeightLimit = 294.0;
 const double _kHomeDrawerLocationPaddingCompensation = 8.0;
 const double _kHomeDrawerLocationSettingsMinTapSize = 50.0;
 const double _kHomeDrawerTopPanelExtraSpacing = 0.0;
-const double _kHomeDrawerLowerSectionExtraSpacing = 61.0;
+const double _kHomeDrawerLowerSectionExtraSpacing = 18.0;
 
 class _HomeDrawerLayoutMetrics {
   final double panelOverlap;

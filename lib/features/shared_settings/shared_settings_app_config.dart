@@ -6,9 +6,9 @@ const SharedSettingsAppConfig kSharedSettingsAppConfig = SharedSettingsAppConfig
   packageName: 'com.msklabs.haydi_namaza',
   adminName: 'HaydiNamazaAdmin',
   updateRemoteManifestUrl:
-      'https://raw.githubusercontent.com/mskaymaz/M_HaydiNamaza/main/update.json',
+      'https://raw.githubusercontent.com/mskaymaz/AllApp/main/HaydiNamaza/update.json',
   updateFallbackReleaseUrl:
-      'https://github.com/mskaymaz/M_HaydiNamaza/releases',
+      'https://github.com/mskaymaz/AllApp/releases',
   updateChannel: 'public',
   otherAppsRemoteCatalogUrl:
       'https://raw.githubusercontent.com/mskaymaz/AllApp/main/app_catalog.json',
@@ -19,7 +19,7 @@ const SharedSettingsAppConfig kSharedSettingsAppConfig = SharedSettingsAppConfig
     title: 'Destek Olabilirsiniz',
     body:
         'Uygulamayı faydalı bulduysanız paylaşarak ve geri bildirim vererek destek olabilirsiniz.',
-    actionUrl: 'https://github.com/mskaymaz/M_HaydiNamaza',
+    actionUrl: 'https://github.com/mskaymaz/AllApp/tree/main/HaydiNamaza',
     actionLabel: 'Projeyi Aç',
   ),
   about: SharedSettingsAboutConfig(

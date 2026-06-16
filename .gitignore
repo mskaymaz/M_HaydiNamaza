@@ -57,3 +57,6 @@ _external/AllAppRef/
 tools/content_review/review_state.json
 tools/content_review/backups/
 Besmele/data/daily_panel/publish/*.bak.*
+
+# Local release outputs
+dist/

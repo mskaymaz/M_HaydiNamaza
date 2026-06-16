@@ -194,28 +194,28 @@ extension _HomeBuildController on _HomeScreenState {
                                                                     220,
                                                               ),
                                                           transitionBuilder: (child, animation) {
-                                                            return SlideTransition(
-                                                              position:
-                                                                  Tween<Offset>(
-                                                                    begin:
-                                                                        const Offset(
-                                                                          0.12,
-                                                                          0,
-                                                                        ),
-                                                                    end: Offset
-                                                                        .zero,
-                                                                  ).animate(
-                                                                    animation,
+                                                            final curved = CurvedAnimation(
+                                                              parent: animation,
+                                                              curve: Curves.easeOutCubic,
+                                                            );
+                                                            return FadeTransition(
+                                                              opacity: curved,
+                                                              child: SlideTransition(
+                                                                position: Tween<Offset>(
+                                                                  begin: Offset(
+                                                                    0.28 * _prayerPanelTransitionDirection,
+                                                                    0,
                                                                   ),
-                                                              child: child,
+                                                                  end: Offset.zero,
+                                                                ).animate(curved),
+                                                                child: child,
+                                                              ),
                                                             );
                                                           },
                                                           child:
                                                               _showPrayerControlPanel
                                                               ? HomePrayerList(
-                                                                  key: const ValueKey(
-                                                                    'prayer_controls',
-                                                                  ),
+                                                                  key: ValueKey('prayer_controls_$_prayerDayOffset'),
                                                                   controller:
                                                                       _prayerListScrollController,
                                                                   items: items,
@@ -256,9 +256,7 @@ extension _HomeBuildController on _HomeScreenState {
                                                                           .showVibrationIcon,
                                                                 )
                                                               : HomePrayerSummaryList(
-                                                                  key: const ValueKey(
-                                                                    'prayer_summary',
-                                                                  ),
+                                                                  key: ValueKey('prayer_summary_$_prayerDayOffset'),
                                                                   controller:
                                                                       _prayerListScrollController,
                                                                   items: items,

@@ -100,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime _now = DateTime.now();
   DateTime _lastRefreshDay = DateTime.now();
   double _prayerPanelDragDx = 0;
+  int _prayerPanelTransitionDirection = 1;
   bool _isLandscapePanelsExpanded = false;
   bool _showPanelAddButton = false;
   bool _showPrayerControlPanel = false;

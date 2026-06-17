@@ -45,23 +45,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final LocationStorage _locationStorage = LocationStorage();
   final LocationFavoritesStorage _favoritesStorage = LocationFavoritesStorage();
   final CalculationMethodStorage _methodStorage = CalculationMethodStorage();
-  final ReminderTextSettingsStorage _reminderTextStorage =
-      ReminderTextSettingsStorage();
+  final ReminderTextSettingsStorage _reminderTextStorage = ReminderTextSettingsStorage();
   final ReminderAudioService _reminderAudioService = ReminderAudioService();
-  final AdhanSelectionStorage _adhanSelectionStorage =
-      AdhanSelectionStorage();
+  final AdhanSelectionStorage _adhanSelectionStorage = AdhanSelectionStorage();
   final NativeAdhanDownloader _adhanDownloader = NativeAdhanDownloader();
-  final TextEditingController _voiceReminderController =
-      TextEditingController();
-  final TextEditingController _visualReminderController =
-      TextEditingController();
+  final TextEditingController _voiceReminderController = TextEditingController();
+  final TextEditingController _visualReminderController = TextEditingController();
   final TextEditingController _voiceRepeatController = TextEditingController();
-  final TextEditingController _vibrationDurationController =
-      TextEditingController();
-  final TextEditingController _vibrationPauseController =
-      TextEditingController();
-  final TextEditingController _visualDisplayController =
-      TextEditingController();
+  final TextEditingController _vibrationDurationController = TextEditingController();
+  final TextEditingController _vibrationPauseController = TextEditingController();
+  final TextEditingController _visualDisplayController = TextEditingController();
   final TextEditingController _visualReopenController = TextEditingController();
 
   LocationData? _location;
@@ -74,6 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Map<String, AdhanSelection> _adhanSelections = defaultAdhanSelections();
   Map<String, String> _downloadedAdhanPaths = <String, String>{};
   final Set<String> _downloadingAdhanPrayerKeys = <String>{};
+  String? _activeAdhanPreviewKey;
   String? _selectedVoiceName;
   String? _selectedVoiceLocale;
   String? _selectedEnglishVoiceName;
@@ -132,7 +126,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _methodCode = code;
     });
   }
-
 
   Future<void> _loadReminderTexts() async {
     final settings = await _reminderTextStorage.read();
@@ -257,6 +250,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onDownloadAdhan: _downloadAdhan,
             onSelectDownloadedAdhan: _selectDownloadedAdhan,
             onPickLocalAdhan: _pickLocalAdhan,
+            activeAdhanPreviewKey: _activeAdhanPreviewKey,
+            onPreviewDefaultAdhan: _previewDefaultAdhan,
+            onPreviewDownloadedAdhan: _previewDownloadedAdhan,
+            onPreviewLocalAdhan: _previewLocalAdhan,
+            onStopAdhanPreview: _stopAdhanPreview,
+            onDeleteDownloadedAdhan: _deleteDownloadedAdhan,
+            onClearLocalAdhan: _clearLocalAdhan,
             onHelpToggleChanged: (value) {
               setState(() => _showHelpBalloons = value ?? true);
               _persistReminderTexts();
@@ -398,7 +398,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       _setBackgroundDraftFromPalette(updated);
     });
   }
-
   Future<void> _editColor({
     required BuildContext context,
     required String title,
@@ -416,7 +415,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       },
     );
   }
-
 
   Future<void> _pickReminderAudio(BuildContext context) async {
     final result = await FilePicker.platform.pickFiles(
@@ -498,5 +496,4 @@ class _SettingsScreenState extends State<SettingsScreen> {
       selectedAudioLabel: _selectedAudioLabel,
     );
   }
-
 }

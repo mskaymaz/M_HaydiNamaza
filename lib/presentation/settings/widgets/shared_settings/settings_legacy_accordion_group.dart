@@ -20,6 +20,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final Map<String, AdhanSelection> adhanSelections;
   final Map<String, String> downloadedAdhanPaths;
   final Set<String> downloadingAdhanPrayerKeys;
+  final String? activeAdhanPreviewKey;
   final TextEditingController vibrationDurationController;
   final TextEditingController vibrationPauseController;
   final ValueChanged<String> onUseDefaultAdhan;
@@ -28,6 +29,12 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final Future<void> Function(String prayerKey, AdhanCatalogOption option)
       onSelectDownloadedAdhan;
   final Future<void> Function(String prayerKey) onPickLocalAdhan;
+  final Future<void> Function() onPreviewDefaultAdhan;
+  final Future<void> Function(AdhanCatalogOption option) onPreviewDownloadedAdhan;
+  final Future<void> Function(String prayerKey) onPreviewLocalAdhan;
+  final Future<void> Function() onStopAdhanPreview;
+  final Future<void> Function(AdhanCatalogOption option) onDeleteDownloadedAdhan;
+  final Future<void> Function(String prayerKey) onClearLocalAdhan;
   final ValueChanged<bool> onVoiceToggleChanged;
   final ValueChanged<bool> onAzanToggleChanged;
   final ValueChanged<bool> onVibrationToggleChanged;
@@ -70,12 +77,19 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.adhanSelections,
     required this.downloadedAdhanPaths,
     required this.downloadingAdhanPrayerKeys,
+    required this.activeAdhanPreviewKey,
     required this.vibrationDurationController,
     required this.vibrationPauseController,
     required this.onUseDefaultAdhan,
     required this.onDownloadAdhan,
     required this.onSelectDownloadedAdhan,
     required this.onPickLocalAdhan,
+    required this.onPreviewDefaultAdhan,
+    required this.onPreviewDownloadedAdhan,
+    required this.onPreviewLocalAdhan,
+    required this.onStopAdhanPreview,
+    required this.onDeleteDownloadedAdhan,
+    required this.onClearLocalAdhan,
     required this.onVoiceToggleChanged,
     required this.onAzanToggleChanged,
     required this.onVibrationToggleChanged,
@@ -169,10 +183,17 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
               selections: adhanSelections,
               downloadedAdhanPaths: downloadedAdhanPaths,
               downloadingPrayerKeys: downloadingAdhanPrayerKeys,
+              activePreviewKey: activeAdhanPreviewKey,
               onUseDefault: onUseDefaultAdhan,
               onDownloadOption: onDownloadAdhan,
               onSelectDownloaded: onSelectDownloadedAdhan,
               onPickLocalFile: onPickLocalAdhan,
+              onPreviewDefault: onPreviewDefaultAdhan,
+              onPreviewDownloaded: onPreviewDownloadedAdhan,
+              onPreviewLocalFile: onPreviewLocalAdhan,
+              onStopPreview: onStopAdhanPreview,
+              onDeleteDownloaded: onDeleteDownloadedAdhan,
+              onClearLocalFile: onClearLocalAdhan,
             ),
           ],
         ),

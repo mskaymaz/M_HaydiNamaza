@@ -1,12 +1,15 @@
 package com.mskaymaz.mhaydinamaza
 
 import android.content.Context
+import android.media.MediaPlayer
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.URL
 
 object AdhanDownloader {
+    private var previewPlayer: MediaPlayer? = null
+
     fun download(
         context: Context,
         id: String?,
@@ -45,6 +48,64 @@ object AdhanDownloader {
                 }
             }
         }.start()
+    }
+
+    fun previewBundled(context: Context, result: MethodChannel.Result) {
+        try {
+            stopPreview()
+            previewPlayer = MediaPlayer.create(context, R.raw.default_azan)
+            previewPlayer?.setOnCompletionListener { stopPreview() }
+            previewPlayer?.start()
+            result.success(null)
+        } catch (error: Exception) {
+            result.error("adhan_preview_failed", error.message, null)
+        }
+    }
+
+    fun previewFile(path: String?, result: MethodChannel.Result) {
+        val safePath = path?.trim().orEmpty()
+        if (safePath.isEmpty()) {
+            result.error("adhan_preview_file_missing", "Adhan file path is empty.", null)
+            return
+        }
+        try {
+            stopPreview()
+            previewPlayer = MediaPlayer().apply {
+                setDataSource(safePath)
+                setOnCompletionListener { stopPreview() }
+                prepare()
+                start()
+            }
+            result.success(null)
+        } catch (error: Exception) {
+            stopPreview()
+            result.error("adhan_preview_failed", error.message, null)
+        }
+    }
+
+    fun stopPreview(result: MethodChannel.Result? = null) {
+        try {
+            previewPlayer?.stop()
+        } catch (_: Exception) {}
+        try {
+            previewPlayer?.release()
+        } catch (_: Exception) {}
+        previewPlayer = null
+        result?.success(null)
+    }
+
+    fun deleteFile(path: String?, result: MethodChannel.Result) {
+        val safePath = path?.trim().orEmpty()
+        if (safePath.isEmpty()) {
+            result.success(false)
+            return
+        }
+        try {
+            stopPreview()
+            result.success(File(safePath).delete())
+        } catch (error: Exception) {
+            result.error("adhan_delete_failed", error.message, null)
+        }
     }
 
     private fun runResult(

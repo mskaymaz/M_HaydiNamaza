@@ -42,6 +42,16 @@ class MainActivity : FlutterActivity() {
                         result
                     )
                 }
+                "previewBundledAdhan" -> AdhanDownloader.previewBundled(this, result)
+                "previewAdhanFile" -> AdhanDownloader.previewFile(
+                    call.argument<String>("path"),
+                    result
+                )
+                "stopAdhanPreview" -> AdhanDownloader.stopPreview(result)
+                "deleteAdhanFile" -> AdhanDownloader.deleteFile(
+                    call.argument<String>("path"),
+                    result
+                )
                 else -> result.notImplemented()
             }
         }

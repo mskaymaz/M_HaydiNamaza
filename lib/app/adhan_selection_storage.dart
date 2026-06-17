@@ -88,5 +88,11 @@ class AdhanSelectionStorage {
     current[optionId] = localPath;
     await writeDownloadedLocalPaths(current);
   }
+
+  Future<void> removeDownloadedOption(String optionId) async {
+    final current = await readDownloadedLocalPaths();
+    current.remove(optionId);
+    await writeDownloadedLocalPaths(current);
+  }
 }
 

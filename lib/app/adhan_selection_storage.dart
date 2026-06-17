@@ -6,6 +6,7 @@ import 'adhan_catalog.dart';
 
 class AdhanSelectionStorage {
   static const String _key = 'adhan_selections_by_prayer';
+  static const String _downloadsKey = 'downloaded_adhan_options';
 
   Future<Map<String, AdhanSelection>> read() async {
     final defaults = defaultAdhanSelections();
@@ -50,4 +51,42 @@ class AdhanSelectionStorage {
     current[prayerKey] = selection;
     await write(current);
   }
+
+  Future<Map<String, String>> readDownloadedLocalPaths() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_downloadsKey);
+    if (raw == null || raw.trim().isEmpty) return <String, String>{};
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map<String, dynamic>) return <String, String>{};
+      final result = <String, String>{};
+      decoded.forEach((key, value) {
+        final optionId = key.trim();
+        final localPath = value?.toString().trim() ?? '';
+        if (optionId.isNotEmpty && localPath.isNotEmpty) {
+          result[optionId] = localPath;
+        }
+      });
+      return result;
+    } catch (_) {
+      return <String, String>{};
+    }
+  }
+
+  Future<void> writeDownloadedLocalPaths(
+    Map<String, String> downloadedLocalPaths,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_downloadsKey, jsonEncode(downloadedLocalPaths));
+  }
+
+  Future<void> writeDownloadedOption({
+    required String optionId,
+    required String localPath,
+  }) async {
+    final current = await readDownloadedLocalPaths();
+    current[optionId] = localPath;
+    await writeDownloadedLocalPaths(current);
+  }
 }
+

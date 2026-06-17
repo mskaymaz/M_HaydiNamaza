@@ -72,6 +72,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String? _selectedAudioPath;
   String? _selectedAudioLabel;
   Map<String, AdhanSelection> _adhanSelections = defaultAdhanSelections();
+  Map<String, String> _downloadedAdhanPaths = <String, String>{};
   final Set<String> _downloadingAdhanPrayerKeys = <String>{};
   String? _selectedVoiceName;
   String? _selectedVoiceLocale;
@@ -250,9 +251,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             sortCustomPrayersByTime: _sortCustomPrayersByTime,
             showHelpBalloons: _showHelpBalloons,
             adhanSelections: _adhanSelections,
+            downloadedAdhanPaths: _downloadedAdhanPaths,
             downloadingAdhanPrayerKeys: _downloadingAdhanPrayerKeys,
             onUseDefaultAdhan: _useDefaultAdhan,
             onDownloadAdhan: _downloadAdhan,
+            onSelectDownloadedAdhan: _selectDownloadedAdhan,
             onPickLocalAdhan: _pickLocalAdhan,
             onHelpToggleChanged: (value) {
               setState(() => _showHelpBalloons = value ?? true);

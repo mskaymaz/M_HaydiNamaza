@@ -18,12 +18,15 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final bool sortCustomPrayersByTime;
   final bool showHelpBalloons;
   final Map<String, AdhanSelection> adhanSelections;
+  final Map<String, String> downloadedAdhanPaths;
   final Set<String> downloadingAdhanPrayerKeys;
   final TextEditingController vibrationDurationController;
   final TextEditingController vibrationPauseController;
   final ValueChanged<String> onUseDefaultAdhan;
   final Future<void> Function(String prayerKey, AdhanCatalogOption option)
       onDownloadAdhan;
+  final Future<void> Function(String prayerKey, AdhanCatalogOption option)
+      onSelectDownloadedAdhan;
   final Future<void> Function(String prayerKey) onPickLocalAdhan;
   final ValueChanged<bool> onVoiceToggleChanged;
   final ValueChanged<bool> onAzanToggleChanged;
@@ -65,11 +68,13 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.sortCustomPrayersByTime,
     required this.showHelpBalloons,
     required this.adhanSelections,
+    required this.downloadedAdhanPaths,
     required this.downloadingAdhanPrayerKeys,
     required this.vibrationDurationController,
     required this.vibrationPauseController,
     required this.onUseDefaultAdhan,
     required this.onDownloadAdhan,
+    required this.onSelectDownloadedAdhan,
     required this.onPickLocalAdhan,
     required this.onVoiceToggleChanged,
     required this.onAzanToggleChanged,
@@ -162,9 +167,11 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
             _subHeader('Ezan Okuma', sharedSettingsVisualHeader),
             SettingsAdhanSelectionSection(
               selections: adhanSelections,
+              downloadedAdhanPaths: downloadedAdhanPaths,
               downloadingPrayerKeys: downloadingAdhanPrayerKeys,
               onUseDefault: onUseDefaultAdhan,
               onDownloadOption: onDownloadAdhan,
+              onSelectDownloaded: onSelectDownloadedAdhan,
               onPickLocalFile: onPickLocalAdhan,
             ),
           ],

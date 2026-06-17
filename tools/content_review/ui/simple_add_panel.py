@@ -93,6 +93,10 @@ class SimpleAddPanel(AddPanel):
         self.en_edit = self._new_text_editor()
         self.tr_alt_edit = self._new_text_editor()
         self.en_alt_edit = self._new_text_editor()
+        self.tr_main_count_label = QLabel("0 karakter")
+        self.tr_alt_count_label = QLabel("0 karakter")
+        self.tr_edit.textChanged.connect(self._update_tr_character_counts)
+        self.tr_alt_edit.textChanged.connect(self._update_tr_character_counts)
         self._expanding_text_edits = [
             self.ar_edit,
             self.tr_edit,
@@ -347,6 +351,10 @@ class SimpleAddPanel(AddPanel):
         title_row.addWidget(label)
         title_row.addWidget(QLabel("Yazi boyutu"))
         title_row.addWidget(spin)
+        if editor is self.tr_edit:
+            title_row.addWidget(self.tr_main_count_label)
+        elif editor is self.tr_alt_edit:
+            title_row.addWidget(self.tr_alt_count_label)
         title_row.addStretch(1)
         title_row.addWidget(self._source_label_for_editor(editor))
         panel_layout.addLayout(title_row)
@@ -377,6 +385,10 @@ class SimpleAddPanel(AddPanel):
         row_layout.addWidget(left_panel, 1)
         row_layout.addWidget(right_panel, 1)
         return row
+
+    def _update_tr_character_counts(self) -> None:
+        self.tr_main_count_label.setText(f"{len(self.tr_edit.toPlainText())} karakter")
+        self.tr_alt_count_label.setText(f"{len(self.tr_alt_edit.toPlainText())} karakter")
 
     def resizeEvent(self, event) -> None:
         QWidget.resizeEvent(self, event)
@@ -419,6 +431,7 @@ class SimpleAddPanel(AddPanel):
     def _load_record(self, record) -> None:
         super()._load_record(record)
         self._refresh_readonly_metadata(record)
+        self._update_tr_character_counts()
 
     def _refresh_readonly_metadata(self, record) -> None:
         raw = record.raw if isinstance(record.raw, dict) else {}

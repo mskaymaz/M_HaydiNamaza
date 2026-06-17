@@ -246,8 +246,7 @@ extension _HomeBuildController on _HomeScreenState {
                                                                       _reminderSettings
                                                                           .showVoiceIcon,
                                                                   showVisualIcon:
-                                                                      _reminderSettings
-                                                                          .showVisualIcon,
+                                                                      false,
                                                                   showAzanIcon:
                                                                       _reminderSettings
                                                                           .showAzanIcon,
@@ -452,7 +451,7 @@ extension _HomeBuildController on _HomeScreenState {
                       ),
                     ),
                   ),
-                  if (_voiceLoopUntil != null || _visualLoopUntil != null)
+                  if (_voiceLoopUntil != null)
                     Positioned(
                       left: 16,
                       right: 16,
@@ -461,11 +460,7 @@ extension _HomeBuildController on _HomeScreenState {
                         top: false,
                         child: HomeActiveReminderPanel(
                           voicePrayerLabel: _voiceLoopPrayerLabel,
-                          visualPrayerLabel: _visualLoopPrayerLabel,
-                          visualMessage: _visualLoopMessage,
-                          showVisualCard: _showVisualOverlay,
                           onCloseVoice: _dismissVoiceReminder,
-                          onCloseVisual: _dismissVisualReminder,
                         ),
                       ),
                     ),

@@ -32,6 +32,14 @@ class SettingsColorActionTile extends StatelessWidget {
               decoration: BoxDecoration(
                 color: color,
                 borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black, width: 0.8),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x55000000),
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ],
               ),
             ),
             const SizedBox(width: 8),

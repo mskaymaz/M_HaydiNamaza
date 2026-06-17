@@ -11,6 +11,8 @@ class LocationSelectionSection extends StatelessWidget {
   final String countryLabel;
   final String cityLabel;
   final String districtLabel;
+  final TextEditingController searchController;
+  final String searchHint;
   final String? selectedCountryId;
   final String? selectedStateId;
   final String? selectedDistrictId;
@@ -18,6 +20,7 @@ class LocationSelectionSection extends StatelessWidget {
   final List<DropdownMenuItem<String>> stateItems;
   final List<DropdownMenuItem<String>> districtItems;
   final ValueChanged<String?>? onCountryChanged;
+  final ValueChanged<String> onSearchChanged;
   final ValueChanged<String?>? onStateChanged;
   final ValueChanged<String?>? onDistrictChanged;
   final String? listLoadError;
@@ -31,6 +34,8 @@ class LocationSelectionSection extends StatelessWidget {
     required this.countryLabel,
     required this.cityLabel,
     required this.districtLabel,
+    required this.searchController,
+    required this.searchHint,
     required this.selectedCountryId,
     required this.selectedStateId,
     required this.selectedDistrictId,
@@ -38,6 +43,7 @@ class LocationSelectionSection extends StatelessWidget {
     required this.stateItems,
     required this.districtItems,
     required this.onCountryChanged,
+    required this.onSearchChanged,
     required this.onStateChanged,
     required this.onDistrictChanged,
     required this.listLoadError,
@@ -58,6 +64,17 @@ class LocationSelectionSection extends StatelessWidget {
                   fontSize: ui.sectionTitleSize,
                   fontWeight: FontWeight.w600,
                 ),
+          ),
+          SizedBox(height: ui.fieldGap),
+          TextField(
+            controller: searchController,
+            decoration: InputDecoration(
+              labelText: searchHint,
+              prefixIcon: const Icon(Icons.search_rounded),
+              border: const OutlineInputBorder(),
+              isDense: true,
+            ),
+            onChanged: onSearchChanged,
           ),
           SizedBox(height: ui.fieldGap),
           LocationCompactDropdown<String>(

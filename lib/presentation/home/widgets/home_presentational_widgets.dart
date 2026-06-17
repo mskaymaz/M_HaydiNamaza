@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/config/config_registry.dart';
-import '../../reminders/flashing_reminder_card.dart';
 
 class HomeReminderChip extends StatelessWidget {
   final TextEditingController controller;
@@ -97,80 +96,37 @@ class HomeIconToggle extends StatelessWidget {
 
 class HomeActiveReminderPanel extends StatelessWidget {
   final String? voicePrayerLabel;
-  final String? visualPrayerLabel;
-  final String? visualMessage;
-  final bool showVisualCard;
   final VoidCallback onCloseVoice;
-  final VoidCallback onCloseVisual;
 
   const HomeActiveReminderPanel({
     super.key,
     required this.voicePrayerLabel,
-    required this.visualPrayerLabel,
-    required this.visualMessage,
-    required this.showVisualCard,
     required this.onCloseVoice,
-    required this.onCloseVisual,
   });
-
-  String _toTurkishUpper(String value) {
-    return value.replaceAll('i', 'İ').replaceAll('ı', 'I').toUpperCase();
-  }
 
   @override
   Widget build(BuildContext context) {
     final hasVoice = (voicePrayerLabel ?? '').trim().isNotEmpty;
-    final hasVisual = (visualPrayerLabel ?? '').trim().isNotEmpty;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (hasVisual && showVisualCard) ...[
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onCloseVisual,
-            child: FlashingReminderCard(
-              prayerLabel: '${_toTurkishUpper(visualPrayerLabel!)} VAKTİ',
-              message: visualMessage ?? '',
-            ),
+    if (!hasVoice) return const SizedBox.shrink();
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.96),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x22000000),
+            blurRadius: 14,
+            offset: Offset(0, 6),
           ),
-          const SizedBox(height: 8),
         ],
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.96),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x22000000),
-                blurRadius: 14,
-                offset: Offset(0, 6),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              if (hasVoice)
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: onCloseVoice,
-                    icon: const Icon(Icons.volume_off_outlined),
-                    label: Text('${voicePrayerLabel!} Sesli Kapat'),
-                  ),
-                ),
-              if (hasVoice && hasVisual) const SizedBox(width: 8),
-              if (hasVisual)
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: onCloseVisual,
-                    icon: const Icon(Icons.close_fullscreen_outlined),
-                    label: Text('${visualPrayerLabel!} Görsel Kapat'),
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ],
+      ),
+      child: OutlinedButton.icon(
+        onPressed: onCloseVoice,
+        icon: const Icon(Icons.volume_off_outlined),
+        label: Text('${voicePrayerLabel!} Sesli Kapat'),
+      ),
     );
   }
 }
+

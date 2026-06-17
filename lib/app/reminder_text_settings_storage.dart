@@ -38,6 +38,7 @@ class ReminderTextSettings {
   final bool showAzanIcon;
   final bool showVibrationIcon;
   final bool sortCustomPrayersByTime;
+  final bool showHelpBalloons;
   final int voiceRepeatSeconds;
   final int vibrationDurationSeconds;
   final int vibrationPauseSeconds;
@@ -57,10 +58,11 @@ class ReminderTextSettings {
     required this.visualText,
     this.audioMode = ReminderAudioMode.textToSpeech,
     this.showVoiceIcon = true,
-    this.showVisualIcon = true,
+    this.showVisualIcon = false,
     this.showAzanIcon = true,
     this.showVibrationIcon = true,
     this.sortCustomPrayersByTime = true,
+    this.showHelpBalloons = true,
     this.voiceRepeatSeconds = 15,
     this.vibrationDurationSeconds = 3,
     this.vibrationPauseSeconds = 5,
@@ -90,6 +92,7 @@ class ReminderTextSettingsStorage {
   static const String _showVibrationIconKey = 'reminder_show_vibration_icon';
   static const String _sortCustomPrayersByTimeKey =
       'sort_custom_prayers_by_time';
+  static const String _showHelpBalloonsKey = 'show_help_balloons';
   static const String _voiceRepeatSecondsKey = 'reminder_voice_repeat_seconds';
   static const String _vibrationDurationSecondsKey =
       'reminder_vibration_duration_seconds';
@@ -136,11 +139,12 @@ class ReminderTextSettingsStorage {
                 : ReminderAudioMode.deviceAudio)
           : reminderAudioModeFromKey(storedAudioMode),
       showVoiceIcon: prefs.getBool(_showVoiceIconKey) ?? true,
-      showVisualIcon: prefs.getBool(_showVisualIconKey) ?? true,
+      showVisualIcon: false,
       showAzanIcon: prefs.getBool(_showAzanIconKey) ?? true,
       showVibrationIcon: prefs.getBool(_showVibrationIconKey) ?? true,
       sortCustomPrayersByTime:
           prefs.getBool(_sortCustomPrayersByTimeKey) ?? true,
+      showHelpBalloons: prefs.getBool(_showHelpBalloonsKey) ?? true,
       voiceRepeatSeconds:
           (storedVoiceRepeatSeconds == null || storedVoiceRepeatSeconds <= 0)
           ? 15
@@ -177,13 +181,14 @@ class ReminderTextSettingsStorage {
     await prefs.setBool(_voiceTextEnabledKey, settings.voiceTextEnabled);
     await prefs.setString(_audioModeKey, settings.audioMode.key);
     await prefs.setBool(_showVoiceIconKey, settings.showVoiceIcon);
-    await prefs.setBool(_showVisualIconKey, settings.showVisualIcon);
+    await prefs.setBool(_showVisualIconKey, false);
     await prefs.setBool(_showAzanIconKey, settings.showAzanIcon);
     await prefs.setBool(_showVibrationIconKey, settings.showVibrationIcon);
     await prefs.setBool(
       _sortCustomPrayersByTimeKey,
       settings.sortCustomPrayersByTime,
     );
+    await prefs.setBool(_showHelpBalloonsKey, settings.showHelpBalloons);
     await prefs.setInt(_voiceRepeatSecondsKey, settings.voiceRepeatSeconds);
     await prefs.setInt(
       _vibrationDurationSecondsKey,

@@ -37,7 +37,9 @@ class LocationScreenContent extends StatelessWidget {
   final TextEditingController districtController;
   final TextEditingController latController;
   final TextEditingController lonController;
+  final TextEditingController locationSearchController;
   final ValueChanged<bool> onUseCurrentLocationChanged;
+  final ValueChanged<String> onLocationSearchChanged;
   final ValueChanged<String> onCountryChanged;
   final ValueChanged<String> onStateChanged;
   final ValueChanged<String> onDistrictChanged;
@@ -70,7 +72,9 @@ class LocationScreenContent extends StatelessWidget {
     required this.districtController,
     required this.latController,
     required this.lonController,
+    required this.locationSearchController,
     required this.onUseCurrentLocationChanged,
+    required this.onLocationSearchChanged,
     required this.onCountryChanged,
     required this.onStateChanged,
     required this.onDistrictChanged,
@@ -114,6 +118,9 @@ class LocationScreenContent extends StatelessWidget {
           countryLabel: l10n.locationCountryLabel,
           cityLabel: l10n.locationCityLabel,
           districtLabel: l10n.locationDistrictLabel,
+          searchController: locationSearchController,
+          searchHint: 'İl veya ilçe ara',
+          onSearchChanged: onLocationSearchChanged,
           selectedCountryId: countryValue,
           selectedStateId: stateValue,
           selectedDistrictId: districtValue,

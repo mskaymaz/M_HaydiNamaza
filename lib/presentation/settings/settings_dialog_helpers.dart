@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../reminders/flashing_reminder_card.dart';
 import 'settings_color_formatters.dart';
 import 'widgets/settings_color_picker_widgets.dart';
 
@@ -72,31 +71,6 @@ Future<void> showSettingsColorPickerDialog({
             ],
           );
         },
-      );
-    },
-  );
-}
-
-Future<void> showSettingsVisualReminderPreviewDialog({
-  required BuildContext context,
-  required String prayerLabel,
-  required String message,
-}) async {
-  await showDialog<void>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        contentPadding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-        content: FlashingReminderCard(
-          prayerLabel: prayerLabel,
-          message: message,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Kapat'),
-          ),
-        ],
       );
     },
   );

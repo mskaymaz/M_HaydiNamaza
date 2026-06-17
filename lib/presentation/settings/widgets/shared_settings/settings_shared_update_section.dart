@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../features/shared_settings/shared_settings_app_config.dart';
@@ -20,11 +21,17 @@ class _SettingsSharedUpdateSectionState
       const SharedSettingsRemoteClient();
   late final Future<PackageInfo> _packageInfoFuture;
   bool _checkingUpdate = false;
+  bool _updateAvailable = false;
+
+  static const String _lastUpdateCheckKey =
+      'shared_settings_last_update_check_ms';
+  static const Duration _automaticUpdateCheckInterval = Duration(days: 10);
 
   @override
   void initState() {
     super.initState();
     _packageInfoFuture = PackageInfo.fromPlatform();
+    _packageInfoFuture.then(_checkForUpdateIfDue);
   }
 
   @override
@@ -56,12 +63,12 @@ class _SettingsSharedUpdateSectionState
                 _infoRow('Sürüm', versionText),
                 _infoRow('Kanal', config.updateChannel),
                 const SizedBox(height: 12),
-                FractionallySizedBox(
-                  widthFactor: 0.7,
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: FilledButton.icon(
                     onPressed: _checkingUpdate
                         ? null
-                        : () => _checkForUpdate(package),
+                        : () => _checkForUpdate(package, automatic: false),
                     icon: _checkingUpdate
                         ? const SizedBox(
                             width: 16,
@@ -72,7 +79,9 @@ class _SettingsSharedUpdateSectionState
                     label: Text(
                       _checkingUpdate
                           ? 'Kontrol Ediliyor...'
-                          : 'Güncellemeleri Kontrol Et',
+                          : (_updateAvailable
+                              ? 'Güncelleme var'
+                              : 'Güncellemeleri Kontrol Et'),
                     ),
                   ),
                 ),
@@ -96,7 +105,21 @@ class _SettingsSharedUpdateSectionState
     );
   }
 
-  Future<void> _checkForUpdate(PackageInfo? packageInfo) async {
+  Future<void> _checkForUpdateIfDue(PackageInfo packageInfo) async {
+    final prefs = await SharedPreferences.getInstance();
+    final lastMs = prefs.getInt(_lastUpdateCheckKey);
+    final now = DateTime.now();
+    final due = lastMs == null ||
+        now.difference(DateTime.fromMillisecondsSinceEpoch(lastMs)) >=
+            _automaticUpdateCheckInterval;
+    if (!due) return;
+    await _checkForUpdate(packageInfo, automatic: true);
+  }
+
+  Future<void> _checkForUpdate(
+    PackageInfo? packageInfo, {
+    required bool automatic,
+  }) async {
     final localBuild = int.tryParse(packageInfo?.buildNumber ?? '') ?? 0;
     setState(() => _checkingUpdate = true);
 
@@ -108,15 +131,31 @@ class _SettingsSharedUpdateSectionState
     if (!mounted) return;
     setState(() => _checkingUpdate = false);
 
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(
+      _lastUpdateCheckKey,
+      DateTime.now().millisecondsSinceEpoch,
+    );
+
     if (manifest == null) {
-      _showSnack('Güncelleme bilgisi alınamadı.');
+      if (!automatic) _showSnack('Güncelleme bilgisi alınamadı.');
       return;
     }
 
     if (manifest.buildNumber <= localBuild) {
-      _showSnack('Yeni sürüm bulunamadı.');
+      setState(() {
+        _updateAvailable = false;
+      });
+      if (!automatic) _showSnack('Yeni sürüm bulunamadı.');
       return;
     }
+
+    setState(() {
+      _updateAvailable = true;
+    });
+
+    if (automatic) return;
+    if (!mounted) return;
 
     final open = await showDialog<bool>(
       context: context,

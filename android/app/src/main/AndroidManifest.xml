@@ -14,13 +14,6 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-        <activity
-            android:name=".PrayerVisualReminderActivity"
-            android:excludeFromRecents="true"
-            android:exported="false"
-            android:showWhenLocked="true"
-            android:theme="@style/PrayerVisualReminderTheme"
-            android:turnScreenOn="true" />
 
         <service
             android:name=".PrayerActiveReminderService"

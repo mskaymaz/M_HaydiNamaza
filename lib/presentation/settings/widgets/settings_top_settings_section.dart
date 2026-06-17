@@ -17,6 +17,8 @@ class SettingsTopSettingsSection extends StatelessWidget {
   final String calculationTitle;
   final String calculationSubtitle;
   final Future<void> Function() onOpenCalculationMethod;
+  final bool sortCustomPrayersByTime;
+  final ValueChanged<bool?> onSortChanged;
 
   const SettingsTopSettingsSection({
     super.key,
@@ -32,6 +34,8 @@ class SettingsTopSettingsSection extends StatelessWidget {
     required this.calculationTitle,
     required this.calculationSubtitle,
     required this.onOpenCalculationMethod,
+    required this.sortCustomPrayersByTime,
+    required this.onSortChanged,
   });
 
   @override
@@ -53,6 +57,21 @@ class SettingsTopSettingsSection extends StatelessWidget {
           title: calculationTitle,
           subtitle: calculationSubtitle,
           onTap: onOpenCalculationMethod,
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
+          child: CheckboxListTile(
+            value: sortCustomPrayersByTime,
+            contentPadding: EdgeInsets.zero,
+            controlAffinity: ListTileControlAffinity.leading,
+            visualDensity: VisualDensity.compact,
+            title: const Text(
+              'Nafileler vakitlere göre sıralansın',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            ),
+            subtitle: const Text('Kapalıysa nafileler listenin en altında kalır.'),
+            onChanged: onSortChanged,
+          ),
         ),
         const Divider(height: 32),
       ],

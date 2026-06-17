@@ -10,8 +10,8 @@ export 'home_prayer_summary_list.dart';
 
 const double _controlPrayerLabelWidth = 118.0;
 const double _controlPrayerTextSize = 20.0;
-const double _controlPrayerIconSize = 18.5;
-const double _controlPrayerIconBoxSize = 22.0;
+const double _controlPrayerIconSize = 22.2;
+const double _controlPrayerIconBoxSize = 26.4;
 const double _controlPrayerChipWidth = 44.0;
 const double _controlPrayerChipVerticalPadding = 0.0;
 const double _controlPrayerChipFontSize = 16.0;
@@ -75,7 +75,7 @@ class HomePrayerList extends StatelessWidget {
     );
     const labelSlotWidth = _controlPrayerLabelWidth;
     final timeSlotWidth = typography.nextLabelSize * 2.8;
-    final iconSlotWidth = iconStyle.size * 1.3;
+    final iconSlotWidth = iconStyle.size * 1.5;
     final activeIndex = items.indexWhere((entry) => entry.prayer == active);
 
     return MediaQuery(

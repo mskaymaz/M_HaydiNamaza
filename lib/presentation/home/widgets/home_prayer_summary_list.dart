@@ -71,10 +71,7 @@ class HomePrayerSummaryList extends StatelessWidget {
                 ? item.labelController!.text.trim()
                 : item.label;
             final hasReminder =
-                item.voiceEnabled ||
-                item.visualEnabled ||
-                item.azanEnabled ||
-                item.vibrationEnabled;
+                item.voiceEnabled || item.azanEnabled || item.vibrationEnabled;
             final bellColor = hasReminder
                 ? cizgiColor.withValues(alpha: 0.95)
                 : cizgiColor.withValues(alpha: 0.34);

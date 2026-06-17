@@ -19,22 +19,6 @@ extension _HomeReminderRuntimeController on _HomeScreenState {
     }
   }
 
-  void _stopVisualLoop() {
-    _visualCycleTimer?.cancel();
-    _visualCycleTimer = null;
-    if (_visualLoopUntil != null ||
-        _visualLoopPrayerLabel != null ||
-        _visualLoopMessage != null ||
-        _showVisualOverlay) {
-      _setHomeState(() {
-        _visualLoopUntil = null;
-        _visualLoopPrayerLabel = null;
-        _visualLoopMessage = null;
-        _showVisualOverlay = false;
-      });
-    }
-  }
-
   void _stopVibrationLoop() {
     _vibrationRepeatTimer?.cancel();
     _vibrationRepeatTimer = null;
@@ -48,11 +32,6 @@ extension _HomeReminderRuntimeController on _HomeScreenState {
 
   void _dismissVoiceReminder() {
     _stopVoiceLoop();
-    _stopVibrationLoop();
-  }
-
-  void _dismissVisualReminder() {
-    _stopVisualLoop();
     _stopVibrationLoop();
   }
 
@@ -85,21 +64,6 @@ extension _HomeReminderRuntimeController on _HomeScreenState {
         );
       } catch (_) {}
     });
-  }
-
-  void _startVisualLoop({
-    required String prayerLabel,
-    required String message,
-    required DateTime prayerTime,
-  }) {
-    _stopVisualLoop();
-    _setHomeState(() {
-      _visualLoopUntil = prayerTime;
-      _visualLoopPrayerLabel = prayerLabel;
-      _visualLoopMessage = message;
-      _showVisualOverlay = true;
-    });
-    _scheduleVisualPhase(isVisible: true);
   }
 
   void _startVibrationLoop({
@@ -138,36 +102,5 @@ extension _HomeReminderRuntimeController on _HomeScreenState {
       }
     } catch (_) {}
     await HapticFeedback.mediumImpact();
-  }
-
-  void _scheduleVisualPhase({required bool isVisible}) {
-    _visualCycleTimer?.cancel();
-    final until = _visualLoopUntil;
-    if (!mounted || until == null || DateTime.now().isAfter(until)) {
-      _stopVisualLoop();
-      return;
-    }
-    final seconds = isVisible
-        ? _reminderSettings.visualDisplaySeconds
-        : _reminderSettings.visualReopenSeconds;
-    if (!isVisible && seconds <= 0) {
-      _setHomeState(() {
-        _showVisualOverlay = true;
-      });
-      _scheduleVisualPhase(isVisible: true);
-      return;
-    }
-    _visualCycleTimer = Timer(Duration(seconds: seconds), () {
-      if (!mounted ||
-          _visualLoopUntil == null ||
-          DateTime.now().isAfter(_visualLoopUntil!)) {
-        _stopVisualLoop();
-        return;
-      }
-      _setHomeState(() {
-        _showVisualOverlay = !isVisible;
-      });
-      _scheduleVisualPhase(isVisible: !isVisible);
-    });
   }
 }

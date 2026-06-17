@@ -3,12 +3,12 @@ import 'shared_settings_models.dart';
 const SharedSettingsAppConfig kSharedSettingsAppConfig = SharedSettingsAppConfig(
   appName: 'Let\'s Pray',
   appId: 'haydi_namaza',
-  packageName: 'com.msklabs.haydi_namaza',
+  packageName: 'com.mskaymaz.mhaydinamaza',
   adminName: 'HaydiNamazaAdmin',
   updateRemoteManifestUrl:
       'https://raw.githubusercontent.com/mskaymaz/AllApp/main/HaydiNamaza/update.json',
   updateFallbackReleaseUrl:
-      'https://github.com/mskaymaz/AllApp/releases',
+      'https://github.com/mskaymaz/AllApp/tree/main/HaydiNamaza',
   updateChannel: 'public',
   otherAppsRemoteCatalogUrl:
       'https://raw.githubusercontent.com/mskaymaz/AllApp/main/app_catalog.json',

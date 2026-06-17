@@ -20,18 +20,11 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
         val title = intent.getStringExtra("title") ?: "Namaz vakti"
         val message = intent.getStringExtra("message") ?: "Namaz vakti"
         val voiceEnabled = intent.getBooleanExtra("voiceEnabled", false)
-        val visualEnabled = intent.getBooleanExtra("visualEnabled", false)
         val azanEnabled = intent.getBooleanExtra("azanEnabled", false)
         val vibrationEnabled = intent.getBooleanExtra("vibrationEnabled", false)
-        if (!voiceEnabled && !visualEnabled && !azanEnabled && !vibrationEnabled) return
+        if (!voiceEnabled && !azanEnabled && !vibrationEnabled) return
 
         startActiveReminderService(context, intent)
-        if (visualEnabled) {
-            try {
-                context.startActivity(activeReminderIntent(context, intent, title, message))
-            } catch (_: Exception) {
-            }
-        }
     }
 
     private fun startActiveReminderService(context: Context, intent: Intent) {
@@ -46,30 +39,4 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    companion object {
-        fun activeReminderIntent(
-            context: Context,
-            sourceIntent: Intent,
-            title: String,
-            message: String
-        ): Intent {
-            return Intent(context, PrayerVisualReminderActivity::class.java).apply {
-                putExtra("notificationId", sourceIntent.getIntExtra("id", 0))
-                putExtra("title", title)
-                putExtra("message", message)
-                putExtra("prayerLabel", sourceIntent.getStringExtra("prayerLabel") ?: "Vakit")
-                putExtra("stage", sourceIntent.getStringExtra("stage") ?: "reminder")
-                putExtra("voiceEnabled", sourceIntent.getBooleanExtra("voiceEnabled", false))
-                putExtra("visualEnabled", sourceIntent.getBooleanExtra("visualEnabled", false))
-                putExtra("azanEnabled", sourceIntent.getBooleanExtra("azanEnabled", false))
-                putExtra("vibrationEnabled", sourceIntent.getBooleanExtra("vibrationEnabled", false))
-                putExtra("vibrationDurationMs", sourceIntent.getIntExtra("vibrationDurationMs", 3000))
-                addFlags(
-                    Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP
-                )
-            }
-        }
-    }
 }

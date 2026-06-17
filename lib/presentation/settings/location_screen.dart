@@ -36,6 +36,7 @@ class _LocationScreenState extends State<LocationScreen> {
   final _districtController = TextEditingController();
   final _latController = TextEditingController();
   final _lonController = TextEditingController();
+  final _locationSearchController = TextEditingController();
   final _storage = LocationStorage();
   final _favoritesStorage = LocationFavoritesStorage();
   final _itemsClient = DiyanetLocationItemsClient();
@@ -56,6 +57,7 @@ class _LocationScreenState extends State<LocationScreen> {
   String? _listLoadError;
   bool _useCurrentLocation = false;
   bool _locating = false;
+  String _locationSearchQuery = '';
   bool _isMounted = true;
 
   @override
@@ -83,6 +85,7 @@ class _LocationScreenState extends State<LocationScreen> {
     _districtController.dispose();
     _latController.dispose();
     _lonController.dispose();
+    _locationSearchController.dispose();
     super.dispose();
   }
 
@@ -92,6 +95,9 @@ class _LocationScreenState extends State<LocationScreen> {
     setState(() {
       _useCurrentLocation = useCurrentLocation;
     });
+    if (useCurrentLocation) {
+      unawaited(_setUseCurrentLocation(true));
+    }
   }
 
   Future<void> _loadCountries() async {
@@ -415,11 +421,27 @@ class _LocationScreenState extends State<LocationScreen> {
     unawaited(_persistManualSelection());
   }
 
+  void _onLocationSearchChanged(String value) {
+    setState(() {
+      _locationSearchQuery = value.trim();
+    });
+  }
+
+  List<DiyanetItem> _filteredLocationItems(List<DiyanetItem> items) {
+    final query = normalizeName(_locationSearchQuery);
+    if (query.isEmpty) return items;
+    return items
+        .where((item) => normalizeName(item.name).contains(query))
+        .toList(growable: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final palette = widget.uiPaletteController.value;
     final ui = ConfigRegistry.settingsPanelsFor(palette);
+    final filteredStates = _filteredLocationItems(_states);
+    final filteredDistricts = _filteredLocationItems(_districts);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.locationEditTitle)),
       body: LocationScreenContent(
@@ -431,8 +453,8 @@ class _LocationScreenState extends State<LocationScreen> {
         loadingStates: _loadingStates,
         loadingDistricts: _loadingDistricts,
         countries: _countries,
-        states: _states,
-        districts: _districts,
+        states: filteredStates,
+        districts: filteredDistricts,
         selectedCountryId: _selectedCountryId,
         selectedStateId: _selectedStateId,
         selectedDistrictId: _selectedDistrictId,
@@ -443,6 +465,8 @@ class _LocationScreenState extends State<LocationScreen> {
         districtController: _districtController,
         latController: _latController,
         lonController: _lonController,
+        locationSearchController: _locationSearchController,
+        onLocationSearchChanged: _onLocationSearchChanged,
         onUseCurrentLocationChanged: _setUseCurrentLocation,
         onCountryChanged: (value) => unawaited(_onCountryChanged(value)),
         onStateChanged: (value) => unawaited(_onStateChanged(value)),

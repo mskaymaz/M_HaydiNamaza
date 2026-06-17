@@ -27,6 +27,20 @@ extension _HomeDataController on _HomeScreenState {
     }
 
     final timeZone = location.timeZoneOffset;
+    final today = DateTime(_now.year, _now.month, _now.day);
+    final cacheSignature = [
+      methodCode,
+      location.countryId,
+      location.province,
+      location.district,
+      location.latitude,
+      location.longitude,
+      today.toIso8601String(),
+    ].join('|');
+    if (_prayerDayCacheSignature != cacheSignature) {
+      _prayerDayCache.clear();
+      _prayerDayCacheSignature = cacheSignature;
+    }
     final todayTimes = await _prayerService.calculateToday(
       location: location,
       latitude: lat ?? 0,
@@ -34,20 +48,33 @@ extension _HomeDataController on _HomeScreenState {
       timeZone: timeZone,
       methodCode: methodCode,
     );
-    final today = DateTime(_now.year, _now.month, _now.day);
+    _prayerDayCache[0] = todayTimes;
     final displayDate = today.add(Duration(days: _prayerDayOffset));
-    final displayTimes = _prayerDayOffset == 0
-        ? todayTimes
-        : await _prayerService.calculateForDate(
-            location: location,
-            latitude: lat ?? 0,
-            longitude: lon ?? 0,
-            timeZone: timeZone,
-            methodCode: methodCode,
-            date: displayDate,
-            allowDiyanet: false,
-            allowRemote: true,
-          );
+    final cachedDisplayTimes = _prayerDayCache[_prayerDayOffset];
+    final displayTimes = cachedDisplayTimes ??
+        (_prayerDayOffset == 0
+            ? todayTimes
+            : await _prayerService.calculateForDate(
+                location: location,
+                latitude: lat ?? 0,
+                longitude: lon ?? 0,
+                timeZone: timeZone,
+                methodCode: methodCode,
+                date: displayDate,
+                allowDiyanet: false,
+                allowRemote: true,
+              ));
+    _prayerDayCache[_prayerDayOffset] = displayTimes;
+    unawaited(
+      _prefetchThirtyDayPrayerTimes(
+        location: location,
+        latitude: lat ?? 0,
+        longitude: lon ?? 0,
+        timeZone: timeZone,
+        methodCode: methodCode,
+        today: today,
+      ),
+    );
 
     return _HomeData(
       location: location,
@@ -56,6 +83,34 @@ extension _HomeDataController on _HomeScreenState {
       displayTimes: displayTimes,
       displayDate: displayDate,
     );
+  }
+
+  Future<void> _prefetchThirtyDayPrayerTimes({
+    required LocationData location,
+    required double latitude,
+    required double longitude,
+    required String timeZone,
+    required String methodCode,
+    required DateTime today,
+  }) async {
+    for (var offset = 1; offset < 30; offset += 1) {
+      if (_prayerDayCache.containsKey(offset)) continue;
+      try {
+        final times = await _prayerService.calculateForDate(
+          location: location,
+          latitude: latitude,
+          longitude: longitude,
+          timeZone: timeZone,
+          methodCode: methodCode,
+          date: today.add(Duration(days: offset)),
+          allowDiyanet: false,
+          allowRemote: true,
+        );
+        _prayerDayCache[offset] = times;
+      } catch (_) {
+        return;
+      }
+    }
   }
 
   Future<void> _refreshStoredCurrentLocation() async {

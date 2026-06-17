@@ -9,6 +9,7 @@ class ReminderTextSettingsMapperInput {
   final bool showAzanIcon;
   final bool showVibrationIcon;
   final bool sortCustomPrayersByTime;
+  final bool showHelpBalloons;
   final String voiceRepeatSecondsText;
   final String vibrationDurationSecondsText;
   final String vibrationPauseSecondsText;
@@ -32,6 +33,7 @@ class ReminderTextSettingsMapperInput {
     required this.showAzanIcon,
     required this.showVibrationIcon,
     required this.sortCustomPrayersByTime,
+    required this.showHelpBalloons,
     required this.voiceRepeatSecondsText,
     required this.vibrationDurationSecondsText,
     required this.vibrationPauseSecondsText,
@@ -56,10 +58,11 @@ ReminderTextSettings mapReminderTextSettings(
     visualText: input.visualText.trim(),
     audioMode: input.audioMode,
     showVoiceIcon: input.showVoiceIcon,
-    showVisualIcon: input.showVisualIcon,
+    showVisualIcon: false,
     showAzanIcon: input.showAzanIcon,
     showVibrationIcon: input.showVibrationIcon,
     sortCustomPrayersByTime: input.sortCustomPrayersByTime,
+    showHelpBalloons: input.showHelpBalloons,
     voiceRepeatSeconds: readReminderSeconds(
       input.voiceRepeatSecondsText,
       fallback: 15,

@@ -62,7 +62,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
       prayerTime,
     );
     final reminderId = _rowTriggerId(rowId, 'reminder');
-    if ((settings.voiceEnabled || settings.visualEnabled || settings.vibrationEnabled) &&
+    if ((settings.voiceEnabled || settings.vibrationEnabled) &&
         _isWithinTriggerWindow(now, reminderTime) &&
         _triggerLog[reminderId] != reminderKey) {
       await _triggerReminderForLabel(
@@ -294,9 +294,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
     required DateTime prayerTime,
     required _PrayerRowSettings settings,
   }) {
-    if (settings.voiceEnabled ||
-        settings.visualEnabled ||
-        settings.vibrationEnabled) {
+    if (settings.voiceEnabled || settings.vibrationEnabled) {
       final reminderTime = prayerTime.subtract(
         Duration(minutes: settings.reminderMinutes.clamp(0, 1440)),
       );
@@ -308,7 +306,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
             prayerLabel: label,
             stage: 'reminder',
             voiceEnabled: settings.voiceEnabled,
-            visualEnabled: settings.visualEnabled,
+            visualEnabled: false,
             azanEnabled: false,
             vibrationEnabled: settings.vibrationEnabled,
           ),
@@ -324,7 +322,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
             prayerLabel: label,
             stage: 'prayer',
             voiceEnabled: false,
-            visualEnabled: settings.azanEnabled,
+            visualEnabled: false,
             azanEnabled: settings.azanEnabled,
             vibrationEnabled: settings.vibrationEnabled,
           ),
@@ -358,7 +356,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
         : '$prayerLabel vakti yakla\u015f\u0131yor';
     final fallbackMessage = isPrayerStage
         ? '$prayerLabel vakti girdi.'
-        : _effectiveVisualReminderText(prayerLabel);
+        : _effectiveReminderMessage(prayerLabel);
     return NativePrayerNotificationEvent(
       id: id,
       triggerAt: triggerAt,
@@ -401,7 +399,6 @@ extension _HomeReminderEngineController on _HomeScreenState {
   }) async {
     if (stage == _ReminderStage.prayer) {
       _stopVoiceLoop();
-      _stopVisualLoop();
     }
     if (rowSettings.vibrationEnabled) {
       await _playVibrationPulse(
@@ -412,16 +409,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
       }
     }
     if (stage == _ReminderStage.prayer && rowSettings.azanEnabled) {
-      await _reminderAudioService.playAlert();
-      for (var index = 0; index < 3; index++) {
-        await _reminderAudioService.speakText(
-          text: 'Ezan okunuyor',
-          selectedLocale: const Locale('tr'),
-        );
-        if (index < 2) {
-          await Future<void>.delayed(const Duration(seconds: 5));
-        }
-      }
+      await _reminderAudioService.playAzan();
     }
     if (stage == _ReminderStage.reminder &&
         rowSettings.voiceEnabled &&
@@ -435,14 +423,6 @@ extension _HomeReminderEngineController on _HomeScreenState {
         _startVoiceLoop(prayerLabel: prayerLabel, prayerTime: prayerTime);
       } catch (_) {}
     }
-    if (stage == _ReminderStage.reminder && rowSettings.visualEnabled && mounted) {
-      final visualText = _effectiveVisualReminderText(prayerLabel);
-      _startVisualLoop(
-        prayerLabel: prayerLabel,
-        message: visualText,
-        prayerTime: prayerTime,
-      );
-    }
   }
 
   bool _canPlayVoiceReminder() {
@@ -455,15 +435,9 @@ extension _HomeReminderEngineController on _HomeScreenState {
     }
   }
 
-  String _effectiveVisualReminderText(String prayerLabel) {
-    final visualText = _reminderSettings.visualText.trim();
-    if (visualText.isNotEmpty) {
-      return visualText;
-    }
+  String _effectiveReminderMessage(String prayerLabel) {
     final voiceText = _reminderSettings.voiceText.trim();
-    if (voiceText.isNotEmpty) {
-      return voiceText;
-    }
+    if (voiceText.isNotEmpty) return voiceText;
     return '$prayerLabel vakti';
   }
 

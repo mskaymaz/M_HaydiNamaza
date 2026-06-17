@@ -4,20 +4,25 @@
       "app_id": "haydi_namaza",
       "name": "Let's Pray",
       "description": "Namaz vakti, kıble ve günlük içerik",
-      "url": "https://github.com/mskaymaz/M_HaydiNamaza",
+      "url": "https://github.com/mskaymaz/AllApp/tree/main/HaydiNamaza",
       "icon_asset": "img/HaydiNamaza_icon.png",
       "active": true,
       "order": 10,
-      "target_apps": ["*"]
+      "target_apps": [
+        "*"
+      ]
     },
     {
       "app_id": "rekat_sayar",
       "name": "M Rekat Sayar",
       "description": "Namaz sayım ve kalibrasyon uygulaması",
-      "url": "https://github.com/mskaymaz/M_RekatSay",
+      "url": "https://github.com/mskaymaz/AllApp",
       "active": true,
       "order": 20,
-      "target_apps": ["*"]
+      "target_apps": [
+        "*"
+      ],
+      "icon_asset": "assets/app_icon/app_icon.png"
     }
   ]
 }

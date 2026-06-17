@@ -141,6 +141,11 @@ class ReminderAudioService {
     // Prayer-time adhan alerts must not play the phone's default system sound.
   }
 
+  Future<void> playAzan() async {
+    await _audioPlayer.stop();
+    await _audioPlayer.play(AssetSource('audio/adhan/default_azan.mp3'));
+  }
+
   Future<void> speakText({required String text, Locale? selectedLocale}) async {
     final spokenText = text.trim();
     if (spokenText.isEmpty) return;

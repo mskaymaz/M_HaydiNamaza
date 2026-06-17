@@ -11,17 +11,17 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final EdgeInsets outerPadding;
   final SurfaceStyle panelStyle;
   final bool showVoiceIcon;
-  final bool showVisualIcon;
   final bool showAzanIcon;
   final bool showVibrationIcon;
   final bool sortCustomPrayersByTime;
+  final bool showHelpBalloons;
   final TextEditingController vibrationDurationController;
   final TextEditingController vibrationPauseController;
   final ValueChanged<bool> onVoiceToggleChanged;
-  final ValueChanged<bool> onVisualToggleChanged;
   final ValueChanged<bool> onAzanToggleChanged;
   final ValueChanged<bool> onVibrationToggleChanged;
   final ValueChanged<bool?> onSortChanged;
+  final ValueChanged<bool?> onHelpToggleChanged;
   final ValueChanged<String> onVibrationDurationChanged;
   final ValueChanged<String> onVibrationPauseChanged;
   final ReminderAudioMode selectedAudioMode;
@@ -34,13 +34,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final TextEditingController voiceRepeatController;
   final ValueChanged<String> onVoiceTextChanged;
   final ValueChanged<String> onVoiceRepeatChanged;
-  final TextEditingController visualReminderController;
-  final TextEditingController visualDisplayController;
-  final TextEditingController visualReopenController;
-  final ValueChanged<String> onVisualTextChanged;
-  final ValueChanged<String> onVisualDisplayChanged;
-  final ValueChanged<String> onVisualReopenChanged;
-  final VoidCallback onShowPreview;
   final Color panelColor;
   final Color textColor;
   final Color customPrayerLabelColor;
@@ -59,17 +52,17 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.outerPadding,
     required this.panelStyle,
     required this.showVoiceIcon,
-    required this.showVisualIcon,
     required this.showAzanIcon,
     required this.showVibrationIcon,
     required this.sortCustomPrayersByTime,
+    required this.showHelpBalloons,
     required this.vibrationDurationController,
     required this.vibrationPauseController,
     required this.onVoiceToggleChanged,
-    required this.onVisualToggleChanged,
     required this.onAzanToggleChanged,
     required this.onVibrationToggleChanged,
     required this.onSortChanged,
+    required this.onHelpToggleChanged,
     required this.onVibrationDurationChanged,
     required this.onVibrationPauseChanged,
     required this.selectedAudioMode,
@@ -82,13 +75,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.voiceRepeatController,
     required this.onVoiceTextChanged,
     required this.onVoiceRepeatChanged,
-    required this.visualReminderController,
-    required this.visualDisplayController,
-    required this.visualReopenController,
-    required this.onVisualTextChanged,
-    required this.onVisualDisplayChanged,
-    required this.onVisualReopenChanged,
-    required this.onShowPreview,
     required this.panelColor,
     required this.textColor,
     required this.customPrayerLabelColor,
@@ -119,7 +105,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
 
   Widget _warningSettingsCard(BuildContext context) {
     return SharedSettingsSectionCard(
-      title: 'Uyarı Ayarları',
+      title: 'Hatırlatma Ayarları',
       headerColor: sharedSettingsReminderOptionsHeader,
       child: _sectionChild(
         child: Column(
@@ -129,19 +115,11 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
             Row(
               children: [
                 Expanded(child: _toggle('Sesli', showVoiceIcon, onVoiceToggleChanged)),
-                Expanded(child: _toggle('Görsel', showVisualIcon, onVisualToggleChanged)),
+                const SizedBox(width: 10),
                 Expanded(child: _toggle('Ezan', showAzanIcon, onAzanToggleChanged)),
+                const SizedBox(width: 10),
                 Expanded(child: _toggle('Titreşim', showVibrationIcon, onVibrationToggleChanged)),
               ],
-            ),
-            const SizedBox(height: 10),
-            CheckboxListTile(
-              value: sortCustomPrayersByTime,
-              contentPadding: EdgeInsets.zero,
-              controlAffinity: ListTileControlAffinity.leading,
-              title: const Text('Nafileler vakitlere göre sıralansın'),
-              subtitle: const Text('Kapalıysa nafileler listenin en altında kalır.'),
-              onChanged: onSortChanged,
             ),
             const SizedBox(height: 18),
             _subHeader('Titreşimle Uyarı Ayarları', sharedSettingsVibrationHeader),
@@ -168,8 +146,8 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
             _subHeader('Sesli Hatırlatma', sharedSettingsVoiceHeader),
             _voiceSettings(context),
             const SizedBox(height: 18),
-            _subHeader('Görsel Hatırlatma', sharedSettingsVisualHeader),
-            _visualSettings(),
+            _subHeader('Ezan Okuma', sharedSettingsVisualHeader),
+            _azanSettingsInfo(context),
           ],
         ),
       ),
@@ -233,45 +211,19 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     );
   }
 
-  Widget _visualSettings() {
+  Widget _azanSettingsInfo(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SettingsReminderTextField(
-          label: 'Buraya metin girilmezse, sesli hatırlatma metni kullanılacaktır.',
-          controller: visualReminderController,
-          hintText: '',
-          onChanged: onVisualTextChanged,
-          maxLines: 3,
+        Text(
+          'Ezan okunacak vakitler ana sayfadaki cami ikonu ile açılır. '
+          'Varsayılan ezan uygulama içinde yüklüdür ve kullanıcı başka dosya seçmese bile çalışır.',
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         const SizedBox(height: 8),
-        Row(
-          children: [
-            Expanded(
-              child: SettingsReminderNumberField(
-                label: 'Ekranda Kalma (sn)',
-                controller: visualDisplayController,
-                onChanged: onVisualDisplayChanged,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: SettingsReminderNumberField(
-                label: 'Kapanıp Açılma (sn)',
-                controller: visualReopenController,
-                onChanged: onVisualReopenChanged,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Align(
-          alignment: Alignment.centerRight,
-          child: OutlinedButton.icon(
-            onPressed: onShowPreview,
-            icon: const Icon(Icons.visibility_outlined),
-            label: const Text('Görsel Uyarıyı Göster'),
-          ),
+        Text(
+          'İleri adım: Her vakit için farklı ezan dosyası seçimi ve uzaktan indirme kataloğu bu bölüm altında yönetilecektir.',
+          style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
     );
@@ -279,12 +231,21 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
 
   Widget _colorsCard(BuildContext context) {
     return SharedSettingsSectionCard(
-      title: 'Arayüz ve Arka Plan Renkleri',
+      title: 'Arayüz Ayarları',
       headerColor: sharedSettingsMergedColorsHeader,
       child: _sectionChild(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            CheckboxListTile(
+              value: showHelpBalloons,
+              contentPadding: EdgeInsets.zero,
+              controlAffinity: ListTileControlAffinity.leading,
+              title: const Text('Yardımları Göster'),
+              subtitle: const Text('Soru işareti ikonları ve kısa kullanım açıklamalarını gösterir.'),
+              onChanged: onHelpToggleChanged,
+            ),
+            const SizedBox(height: 8),
             Row(
               children: [
                 Expanded(child: SettingsColorActionTile(title: 'Panel Rengi', color: panelColor, onTap: onEditPanelColor)),
@@ -306,20 +267,16 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 10),
-            Row(
-              children: [
-                OutlinedButton.icon(
-                  onPressed: () => onResetInterfaceColors(),
-                  icon: const Icon(Icons.restart_alt_rounded),
-                  label: const Text('Arayüz Varsayılan'),
-                ),
-                const SizedBox(width: 8),
-                OutlinedButton.icon(
-                  onPressed: () => onResetBackgroundColors(),
-                  icon: const Icon(Icons.wallpaper_rounded),
-                  label: const Text('Zemin Varsayılan'),
-                ),
-              ],
+            Align(
+              alignment: Alignment.centerLeft,
+              child: OutlinedButton.icon(
+                onPressed: () async {
+                  await onResetInterfaceColors();
+                  await onResetBackgroundColors();
+                },
+                icon: const Icon(Icons.restart_alt_rounded),
+                label: const Text('Renkleri Varsayılan Yap'),
+              ),
             ),
             const SizedBox(height: 8),
             Align(

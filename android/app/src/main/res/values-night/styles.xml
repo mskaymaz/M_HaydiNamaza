@@ -15,11 +15,4 @@
     <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
-
-    <style name="PrayerVisualReminderTheme" parent="android:style/Theme.Material.Dialog.Alert">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:backgroundDimEnabled">true</item>
-    </style>
 </resources>

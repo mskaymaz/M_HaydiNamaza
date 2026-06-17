@@ -95,7 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int _dailyContentSifatOffset = 0;
   Timer? _ticker;
   Timer? _voiceRepeatTimer;
-  Timer? _visualCycleTimer;
   Timer? _vibrationRepeatTimer;
   DateTime _now = DateTime.now();
   DateTime _lastRefreshDay = DateTime.now();
@@ -109,14 +108,12 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _nativeScheduleRefreshInProgress = false;
   bool _nativeScheduleRefreshPending = false;
   int _customPrayerSeed = 0;
+  final Map<int, PrayerTimes> _prayerDayCache = <int, PrayerTimes>{};
+  String? _prayerDayCacheSignature;
   DateTime? _voiceLoopUntil;
   String? _voiceLoopPrayerLabel;
-  DateTime? _visualLoopUntil;
-  String? _visualLoopPrayerLabel;
-  String? _visualLoopMessage;
   DateTime? _vibrationLoopUntil;
   String? _vibrationLoopPrayerLabel;
-  bool _showVisualOverlay = false;
   ReminderTextSettings _reminderSettings = const ReminderTextSettings(
     voiceText: kDefaultVoiceReminderText,
     visualText: '',
@@ -155,7 +152,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _ticker?.cancel();
     _voiceRepeatTimer?.cancel();
-    _visualCycleTimer?.cancel();
     _vibrationRepeatTimer?.cancel();
     _reminderAudioService.dispose();
     _prayerListScrollController.dispose();

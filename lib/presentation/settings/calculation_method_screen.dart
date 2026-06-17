@@ -54,7 +54,7 @@ class _CalculationMethodScreenState extends State<CalculationMethodScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final items = <_MethodItem>[
-      _MethodItem('aladhan', '${l10n.methodAladhan} (Şafii)'),
+      _MethodItem('aladhan', l10n.methodAladhan),
       _MethodItem('turkey', l10n.methodTurkey),
       const _MethodItem('diyanet', 'Diyanet'),
       _MethodItem('umm_al_qura', l10n.methodUmmAlQura),
@@ -96,7 +96,7 @@ class _CalculationMethodScreenState extends State<CalculationMethodScreen> {
             const Padding(
               padding: EdgeInsets.fromLTRB(16, 12, 16, 4),
               child: Text(
-                'Varsayılan vakit hesabı Aladhan Şafii olarak ayarlanır.',
+                'Varsayılan vakit hesabı Aladhan olarak ayarlanır.',
                 style: TextStyle(fontSize: 13, color: Colors.black54),
               ),
             ),

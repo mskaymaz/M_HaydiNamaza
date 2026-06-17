@@ -7,7 +7,7 @@ import 'settings_audio_mode_texts.dart';
 String methodSubtitleForCode(String? methodCode, AppLocalizations l10n) {
   switch (methodCode) {
     case 'aladhan':
-      return '${l10n.methodAladhan} (Şafii)';
+      return l10n.methodAladhan;
     case 'turkey':
       return l10n.methodTurkey;
     case 'diyanet':

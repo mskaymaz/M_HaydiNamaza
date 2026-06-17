@@ -8,6 +8,7 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.IBinder
@@ -24,6 +25,7 @@ class PrayerActiveReminderService : Service() {
     private var active = false
     private var notificationId = 0
     private var tts: TextToSpeech? = null
+    private var mediaPlayer: MediaPlayer? = null
     private var vibrator: Vibrator? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -51,11 +53,8 @@ class PrayerActiveReminderService : Service() {
         if (notificationId == 0) notificationId = NOTIFICATION_ID_FALLBACK
         startForeground(notificationId, buildNotification(intent))
         if (intent.getBooleanExtra("vibrationEnabled", false)) startVibrationLoop(intent)
-        if (intent.getBooleanExtra("voiceEnabled", false) ||
-            intent.getBooleanExtra("azanEnabled", false)
-        ) {
-            startVoiceLoop(intent)
-        }
+        if (intent.getBooleanExtra("azanEnabled", false)) startAzanPlayback()
+        if (intent.getBooleanExtra("voiceEnabled", false)) startVoiceLoop(intent)
     }
 
     private fun buildNotification(intent: Intent): Notification {
@@ -63,16 +62,12 @@ class PrayerActiveReminderService : Service() {
         ensureChannel(manager)
         val title = intent.getStringExtra("title") ?: "Namaz vakti"
         val message = intent.getStringExtra("message") ?: "Namaz vakti"
-        val visualIntent = PrayerAlarmReceiver.activeReminderIntent(
-            this,
-            intent,
-            title,
-            message
-        )
+        val launchIntent = packageManager.getLaunchIntentForPackage(packageName)
+            ?: Intent(this, MainActivity::class.java)
         val contentPendingIntent = PendingIntent.getActivity(
             this,
             notificationId + 710000,
-            visualIntent,
+            launchIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         val stopPendingIntent = PendingIntent.getService(
@@ -150,21 +145,26 @@ class PrayerActiveReminderService : Service() {
         }
     }
 
+    private fun startAzanPlayback() {
+        try {
+            mediaPlayer?.release()
+            mediaPlayer = MediaPlayer.create(this, R.raw.default_azan)?.apply {
+                setOnCompletionListener { player ->
+                    try { player.release() } catch (_: Exception) {}
+                    if (mediaPlayer === player) mediaPlayer = null
+                }
+                start()
+            }
+        } catch (_: Exception) {
+        }
+    }
+
     private fun startVoiceLoop(intent: Intent) {
-        val isAzan = intent.getBooleanExtra("azanEnabled", false)
-        val text = if (isAzan) {
-            "Ezan okunuyor"
-        } else {
-            val prayerLabel = intent.getStringExtra("prayerLabel") ?: "Vakit"
-            val message = intent.getStringExtra("message") ?: "Namaz vakti"
-            "$prayerLabel vakti. $message"
-        }
-        val repeatMillis = if (isAzan) {
-            5000L
-        } else {
-            readFlutterInt("reminder_voice_repeat_seconds", 15)
-                .coerceIn(1, 3600) * 1000L
-        }
+        val prayerLabel = intent.getStringExtra("prayerLabel") ?: "Vakit"
+        val message = intent.getStringExtra("message") ?: "Namaz vakti"
+        val text = "$prayerLabel vakti. $message"
+        val repeatMillis = readFlutterInt("reminder_voice_repeat_seconds", 15)
+            .coerceIn(1, 3600) * 1000L
         tts = TextToSpeech(applicationContext) { status ->
             if (!active || status != TextToSpeech.SUCCESS) return@TextToSpeech
             val engine = tts ?: return@TextToSpeech
@@ -262,7 +262,10 @@ class PrayerActiveReminderService : Service() {
         try { vibrator?.cancel() } catch (_: Exception) {}
         try { tts?.stop() } catch (_: Exception) {}
         try { tts?.shutdown() } catch (_: Exception) {}
+        try { mediaPlayer?.stop() } catch (_: Exception) {}
+        try { mediaPlayer?.release() } catch (_: Exception) {}
         tts = null
+        mediaPlayer = null
         vibrator = null
         if (cancelNotification) cancelNotification()
     }

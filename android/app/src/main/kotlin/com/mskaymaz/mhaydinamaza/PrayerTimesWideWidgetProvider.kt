@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.SystemClock
+import android.graphics.Color
 import android.view.View
 import android.widget.RemoteViews
 import java.util.Calendar
@@ -93,7 +94,7 @@ class PrayerTimesWideWidgetProvider : AppWidgetProvider() {
             views.setTextViewText(R.id.prayer_wide_asr_time, "--:--")
             views.setTextViewText(R.id.prayer_wide_maghrib_time, "--:--")
             views.setTextViewText(R.id.prayer_wide_isha_time, "--:--")
-            hideActiveIndicators(views)
+            resetPrayerCells(views)
             views.setTextViewText(R.id.prayer_wide_remaining_label, "Kalan süre:")
             views.setTextViewText(R.id.prayer_wide_countdown, "--:--:--")
         }
@@ -102,26 +103,36 @@ class PrayerTimesWideWidgetProvider : AppWidgetProvider() {
             views: RemoteViews,
             event: PrayerWidgetScheduler.WidgetEvent
         ) {
-            hideActiveIndicators(views)
-            val activeId = activeIndicatorId(event) ?: return
-            views.setViewVisibility(activeId, View.VISIBLE)
+            resetPrayerCells(views)
+            val active = activeCellIds(event) ?: return
+            views.setInt(active.cellId, "setBackgroundResource", R.drawable.prayer_widget_wide_active_cell)
+            views.setTextColor(active.labelId, Color.WHITE)
+            views.setTextColor(active.timeId, Color.WHITE)
         }
 
-        private fun hideActiveIndicators(views: RemoteViews) {
-            val ids = intArrayOf(
-                R.id.prayer_wide_active_indicator_fajr,
-                R.id.prayer_wide_active_indicator_sunrise,
-                R.id.prayer_wide_active_indicator_dhuhr,
-                R.id.prayer_wide_active_indicator_asr,
-                R.id.prayer_wide_active_indicator_maghrib,
-                R.id.prayer_wide_active_indicator_isha
+        private data class ActiveCellIds(
+            val cellId: Int,
+            val labelId: Int,
+            val timeId: Int
+        )
+
+        private fun resetPrayerCells(views: RemoteViews) {
+            val cells = arrayOf(
+                ActiveCellIds(R.id.prayer_wide_fajr_cell, R.id.prayer_wide_fajr_label, R.id.prayer_wide_fajr_time),
+                ActiveCellIds(R.id.prayer_wide_sunrise_cell, R.id.prayer_wide_sunrise_label, R.id.prayer_wide_sunrise_time),
+                ActiveCellIds(R.id.prayer_wide_dhuhr_cell, R.id.prayer_wide_dhuhr_label, R.id.prayer_wide_dhuhr_time),
+                ActiveCellIds(R.id.prayer_wide_asr_cell, R.id.prayer_wide_asr_label, R.id.prayer_wide_asr_time),
+                ActiveCellIds(R.id.prayer_wide_maghrib_cell, R.id.prayer_wide_maghrib_label, R.id.prayer_wide_maghrib_time),
+                ActiveCellIds(R.id.prayer_wide_isha_cell, R.id.prayer_wide_isha_label, R.id.prayer_wide_isha_time)
             )
-            for (id in ids) {
-                views.setViewVisibility(id, View.GONE)
+            for (cell in cells) {
+                views.setInt(cell.cellId, "setBackgroundColor", Color.TRANSPARENT)
+                views.setTextColor(cell.labelId, Color.rgb(211, 47, 47))
+                views.setTextColor(cell.timeId, Color.rgb(211, 47, 47))
             }
         }
 
-        private fun activeIndicatorId(event: PrayerWidgetScheduler.WidgetEvent): Int? {
+        private fun activeCellIds(event: PrayerWidgetScheduler.WidgetEvent): ActiveCellIds? {
             val fajr = minuteOfDay(event.fajrTime) ?: return null
             val sunrise = minuteOfDay(event.sunriseTime) ?: return null
             val dhuhr = minuteOfDay(event.dhuhrTime) ?: return null
@@ -131,13 +142,13 @@ class PrayerTimesWideWidgetProvider : AppWidgetProvider() {
             val now = Calendar.getInstance()
             val current = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE)
             return when {
-                current >= isha -> R.id.prayer_wide_active_indicator_isha
-                current >= maghrib -> R.id.prayer_wide_active_indicator_maghrib
-                current >= asr -> R.id.prayer_wide_active_indicator_asr
-                current >= dhuhr -> R.id.prayer_wide_active_indicator_dhuhr
-                current >= sunrise -> R.id.prayer_wide_active_indicator_sunrise
-                current >= fajr -> R.id.prayer_wide_active_indicator_fajr
-                else -> R.id.prayer_wide_active_indicator_fajr
+                current >= isha -> ActiveCellIds(R.id.prayer_wide_isha_cell, R.id.prayer_wide_isha_label, R.id.prayer_wide_isha_time)
+                current >= maghrib -> ActiveCellIds(R.id.prayer_wide_maghrib_cell, R.id.prayer_wide_maghrib_label, R.id.prayer_wide_maghrib_time)
+                current >= asr -> ActiveCellIds(R.id.prayer_wide_asr_cell, R.id.prayer_wide_asr_label, R.id.prayer_wide_asr_time)
+                current >= dhuhr -> ActiveCellIds(R.id.prayer_wide_dhuhr_cell, R.id.prayer_wide_dhuhr_label, R.id.prayer_wide_dhuhr_time)
+                current >= sunrise -> ActiveCellIds(R.id.prayer_wide_sunrise_cell, R.id.prayer_wide_sunrise_label, R.id.prayer_wide_sunrise_time)
+                current >= fajr -> ActiveCellIds(R.id.prayer_wide_fajr_cell, R.id.prayer_wide_fajr_label, R.id.prayer_wide_fajr_time)
+                else -> ActiveCellIds(R.id.prayer_wide_fajr_cell, R.id.prayer_wide_fajr_label, R.id.prayer_wide_fajr_time)
             }
         }
 

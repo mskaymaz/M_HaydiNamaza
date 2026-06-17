@@ -81,6 +81,8 @@ flutter:
     - img/M_BizKimiz.jpg
     - img/HaydiNamaza_icon.png
     - assets/icons/
+    - assets/app_icon/app_icon.png
+    - assets/audio/adhan/default_azan.mp3
     - assets/data/daily_content/approved/
     - assets/data/shared_settings/
 

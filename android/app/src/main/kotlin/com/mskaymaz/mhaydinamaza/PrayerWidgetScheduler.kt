@@ -68,14 +68,7 @@ object PrayerWidgetScheduler {
 
     fun nextEvent(context: Context): WidgetEvent? {
         val now = System.currentTimeMillis()
-        return readEvents(context).firstOrNull {
-            it.triggerAtMillis > now && !isSunriseLabel(it.prayerLabel)
-        }
-    }
-
-    private fun isSunriseLabel(label: String): Boolean {
-        val normalized = label.trim().lowercase()
-        return normalized == "güneş" || normalized == "gunes" || normalized == "sunrise"
+        return readEvents(context).firstOrNull { it.triggerAtMillis > now }
     }
 
     private fun nextRefreshEvent(context: Context): WidgetEvent? {

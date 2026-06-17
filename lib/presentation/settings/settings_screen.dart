@@ -16,9 +16,7 @@ import 'settings_audio_mode_texts.dart';
 import 'settings_dialog_helpers.dart';
 import 'settings_dropdown_decoration.dart';
 import 'settings_favorite_matcher.dart';
-import 'settings_reminder_runtime_helpers.dart';
 import 'settings_reminder_snapshot.dart';
-import 'settings_text_formatters.dart';
 import 'settings_ui_mappers.dart';
 import 'widgets/settings_top_settings_section.dart';
 import 'widgets/shared_settings/settings_legacy_accordion_group.dart';
@@ -72,10 +70,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String? _selectedArabicVoiceName;
   String? _selectedArabicVoiceLocale;
   bool _showVoiceIcon = true;
-  bool _showVisualIcon = true;
+  bool _showVisualIcon = false;
   bool _showAzanIcon = true;
   bool _showVibrationIcon = true;
   bool _sortCustomPrayersByTime = true;
+  bool _showHelpBalloons = true;
   Color? _draftBackgroundColor;
 
   @override
@@ -142,10 +141,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _selectedArabicVoiceName = settings.selectedArabicVoiceName;
     _selectedArabicVoiceLocale = settings.selectedArabicVoiceLocale;
     _showVoiceIcon = settings.showVoiceIcon;
-    _showVisualIcon = settings.showVisualIcon;
+    _showVisualIcon = false;
     _showAzanIcon = settings.showAzanIcon;
     _showVibrationIcon = settings.showVibrationIcon;
     _sortCustomPrayersByTime = settings.sortCustomPrayersByTime;
+    _showHelpBalloons = settings.showHelpBalloons;
     if (!mounted) return;
     setState(() {});
   }
@@ -218,23 +218,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 await _loadMethod();
               }
             },
+            sortCustomPrayersByTime: _sortCustomPrayersByTime,
+            onSortChanged: (value) {
+              setState(() => _sortCustomPrayersByTime = value ?? true);
+              _persistReminderTexts();
+            },
           ),
           SettingsLegacyAccordionGroup(
             outerPadding: ui.screenPadding.copyWith(top: 0),
             panelStyle: ui.panel,
             showVoiceIcon: _showVoiceIcon,
-            showVisualIcon: _showVisualIcon,
             showAzanIcon: _showAzanIcon,
             showVibrationIcon: _showVibrationIcon,
             sortCustomPrayersByTime: _sortCustomPrayersByTime,
+            showHelpBalloons: _showHelpBalloons,
+            onHelpToggleChanged: (value) {
+              setState(() => _showHelpBalloons = value ?? true);
+              _persistReminderTexts();
+            },
             vibrationDurationController: _vibrationDurationController,
             vibrationPauseController: _vibrationPauseController,
             onVoiceToggleChanged: (value) {
               setState(() => _showVoiceIcon = value);
-              _persistReminderTexts();
-            },
-            onVisualToggleChanged: (value) {
-              setState(() => _showVisualIcon = value);
               _persistReminderTexts();
             },
             onAzanToggleChanged: (value) {
@@ -268,13 +273,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             voiceRepeatController: _voiceRepeatController,
             onVoiceTextChanged: (_) => _persistReminderTexts(),
             onVoiceRepeatChanged: (_) => _persistReminderTexts(),
-            visualReminderController: _visualReminderController,
-            visualDisplayController: _visualDisplayController,
-            visualReopenController: _visualReopenController,
-            onVisualTextChanged: (_) => _persistReminderTexts(),
-            onVisualDisplayChanged: (_) => _persistReminderTexts(),
-            onVisualReopenChanged: (_) => _persistReminderTexts(),
-            onShowPreview: () => _showVisualReminderPreview(context, l10n),
             panelColor: palette.zeminColor,
             textColor: palette.cizgiColor,
             customPrayerLabelColor: palette.customPrayerLabelColor,
@@ -376,6 +374,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+  Future<void> _editColor({
+    required BuildContext context,
+    required String title,
+    required Color initialColor,
+    required Future<void> Function(Color color) onApply,
+  }) async {
+    await showSettingsColorPickerDialog(
+      context: context,
+      title: title,
+      initialColor: initialColor,
+      onApply: onApply,
+      onApplied: () {
+        if (!mounted) return;
+        setState(() {});
+      },
+    );
+  }
+
+
+  Future<void> _pickReminderAudio(BuildContext context) async {
+    final result = await FilePicker.platform.pickFiles(
+      type: _selectedAudioMode == ReminderAudioMode.mp3File
+          ? FileType.custom
+          : FileType.audio,
+      allowedExtensions: _selectedAudioMode == ReminderAudioMode.mp3File
+          ? const ['mp3']
+          : null,
+    );
+    final file = result == null || result.files.isEmpty
+        ? null
+        : result.files.first;
+    final path = file?.path?.trim() ?? '';
+    if (path.isEmpty) return;
+    setState(() {
+      _selectedAudioPath = path;
+      _selectedAudioLabel = file?.name ?? path.split('\\').last;
+    });
+    await _persistReminderTexts();
+  }
+
   Future<void> _persistReminderTexts() async {
     await _reminderTextStorage.write(_currentReminderSettingsSnapshot());
   }
@@ -416,6 +454,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       showAzanIcon: _showAzanIcon,
       showVibrationIcon: _showVibrationIcon,
       sortCustomPrayersByTime: _sortCustomPrayersByTime,
+      showHelpBalloons: _showHelpBalloons,
       voiceRepeatSecondsText: _voiceRepeatController.text,
       vibrationDurationSecondsText: _vibrationDurationController.text,
       vibrationPauseSecondsText: _vibrationPauseController.text,
@@ -435,62 +474,4 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Future<void> _showVisualReminderPreview(
-    BuildContext context,
-    AppLocalizations l10n,
-  ) async {
-    final effectiveText = effectiveVisualReminderText(
-      visualText: _visualReminderController.text,
-      voiceText: _voiceReminderController.text,
-    ).trim();
-    if (effectiveText.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Önizleme için önce metin girin.')),
-      );
-      return;
-    }
-    await showSettingsVisualReminderPreviewDialog(
-      context: context,
-      prayerLabel: '${toTurkishUpper(l10n.prayerDhuhr)} VAKTI',
-      message: effectiveText,
-    );
-  }
-
-  Future<void> _pickReminderAudio(BuildContext context) async {
-    final result = await FilePicker.platform.pickFiles(
-      type: _selectedAudioMode == ReminderAudioMode.mp3File
-          ? FileType.custom
-          : FileType.audio,
-      allowedExtensions: _selectedAudioMode == ReminderAudioMode.mp3File
-          ? const ['mp3']
-          : null,
-    );
-    final file = result == null || result.files.isEmpty
-        ? null
-        : result.files.first;
-    final path = file?.path?.trim() ?? '';
-    if (path.isEmpty) return;
-    setState(() {
-      _selectedAudioPath = path;
-      _selectedAudioLabel = file?.name ?? path.split('\\').last;
-    });
-    await _persistReminderTexts();
-  }
-
-  Future<void> _editColor({
-    required BuildContext context,
-    required String title,
-    required Color initialColor,
-    required Future<void> Function(Color color) onApply,
-  }) {
-    return showSettingsColorPickerDialog(
-      context: context,
-      title: title,
-      initialColor: initialColor,
-      onApply: onApply,
-      onApplied: () {
-        if (mounted) setState(() {});
-      },
-    );
-  }
 }

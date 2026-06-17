@@ -149,8 +149,8 @@ extension _HomePrayerPanelController on _HomeScreenState {
         ? draggedDistance.sign
         : velocity.sign;
     final nextOffset = direction < 0
-        ? (_prayerDayOffset + 1).clamp(0, 7)
-        : (_prayerDayOffset - 1).clamp(0, 7);
+        ? (_prayerDayOffset + 1).clamp(0, 29)
+        : (_prayerDayOffset - 1).clamp(0, 29);
     if (nextOffset == _prayerDayOffset) return;
     _setHomeState(() {
       _prayerPanelTransitionDirection = nextOffset > _prayerDayOffset ? 1 : -1;

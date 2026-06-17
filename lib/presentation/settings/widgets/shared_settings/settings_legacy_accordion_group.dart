@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../../app/adhan_catalog.dart';
 import '../../../../app/reminder_text_settings_storage.dart';
 import '../../../../core/config/config_registry.dart';
 import '../../settings_audio_mode_texts.dart';
 import '../settings_color_action_widgets.dart';
 import '../settings_reminder_fields.dart';
+import '../settings_adhan_selection_section.dart';
 import 'shared_settings_section_styles.dart';
 
 class SettingsLegacyAccordionGroup extends StatelessWidget {
@@ -15,8 +17,14 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final bool showVibrationIcon;
   final bool sortCustomPrayersByTime;
   final bool showHelpBalloons;
+  final Map<String, AdhanSelection> adhanSelections;
+  final Set<String> downloadingAdhanPrayerKeys;
   final TextEditingController vibrationDurationController;
   final TextEditingController vibrationPauseController;
+  final ValueChanged<String> onUseDefaultAdhan;
+  final Future<void> Function(String prayerKey, AdhanCatalogOption option)
+      onDownloadAdhan;
+  final Future<void> Function(String prayerKey) onPickLocalAdhan;
   final ValueChanged<bool> onVoiceToggleChanged;
   final ValueChanged<bool> onAzanToggleChanged;
   final ValueChanged<bool> onVibrationToggleChanged;
@@ -56,8 +64,13 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.showVibrationIcon,
     required this.sortCustomPrayersByTime,
     required this.showHelpBalloons,
+    required this.adhanSelections,
+    required this.downloadingAdhanPrayerKeys,
     required this.vibrationDurationController,
     required this.vibrationPauseController,
+    required this.onUseDefaultAdhan,
+    required this.onDownloadAdhan,
+    required this.onPickLocalAdhan,
     required this.onVoiceToggleChanged,
     required this.onAzanToggleChanged,
     required this.onVibrationToggleChanged,
@@ -147,7 +160,13 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
             _voiceSettings(context),
             const SizedBox(height: 18),
             _subHeader('Ezan Okuma', sharedSettingsVisualHeader),
-            _azanSettingsInfo(context),
+            SettingsAdhanSelectionSection(
+              selections: adhanSelections,
+              downloadingPrayerKeys: downloadingAdhanPrayerKeys,
+              onUseDefault: onUseDefaultAdhan,
+              onDownloadOption: onDownloadAdhan,
+              onPickLocalFile: onPickLocalAdhan,
+            ),
           ],
         ),
       ),
@@ -206,24 +225,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
             icon: const Icon(Icons.play_arrow_rounded),
             label: const Text('Sesli Test'),
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _azanSettingsInfo(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Ezan okunacak vakitler ana sayfadaki cami ikonu ile açılır. '
-          'Varsayılan ezan uygulama içinde yüklüdür ve kullanıcı başka dosya seçmese bile çalışır.',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'İleri adım: Her vakit için farklı ezan dosyası seçimi ve uzaktan indirme kataloğu bu bölüm altında yönetilecektir.',
-          style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
     );

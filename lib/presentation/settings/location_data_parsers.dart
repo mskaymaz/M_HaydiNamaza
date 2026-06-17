@@ -63,20 +63,52 @@ String pickDistrictName(Placemark? placemark) {
 List<DiyanetItem> parseItems(String raw) {
   try {
     final decoded = jsonDecode(raw);
-    if (decoded is! Map<String, dynamic>) return [];
-    final data = decoded['data'];
+    final data = decoded is List
+        ? decoded
+        : decoded is Map<String, dynamic>
+            ? decoded['data']
+            : null;
     if (data is! List) return [];
     final items = <DiyanetItem>[];
     for (final entry in data) {
       if (entry is! Map<String, dynamic>) continue;
-      final id = entry['_id']?.toString();
-      final name = entry['name'] ?? entry['name_en'];
+      final id = (entry['_id'] ?? entry['id'])?.toString();
+      final name = entry['name'] ?? entry['name_tr'] ?? entry['name_en'];
       if (id == null || name is! String) continue;
-      items.add(DiyanetItem(id: id, name: name));
+      items.add(
+        DiyanetItem(
+          id: id,
+          name: name,
+          countryId: (entry['country_id'] ?? entry['countryId'])?.toString(),
+          stateId: (entry['state_id'] ?? entry['stateId'])?.toString(),
+          latitude: _readCoordinate(entry, const [
+            'latitude',
+            'lat',
+            'enlem',
+          ]),
+          longitude: _readCoordinate(entry, const [
+            'longitude',
+            'lng',
+            'lon',
+            'boylam',
+          ]),
+        ),
+      );
     }
     items.sort((a, b) => normalizeName(a.name).compareTo(normalizeName(b.name)));
     return items;
   } catch (_) {
     return [];
   }
+}
+
+
+String? _readCoordinate(Map<String, dynamic> entry, List<String> keys) {
+  for (final key in keys) {
+    final value = entry[key];
+    if (value == null) continue;
+    final text = value.toString().trim();
+    if (double.tryParse(text) != null) return text;
+  }
+  return null;
 }

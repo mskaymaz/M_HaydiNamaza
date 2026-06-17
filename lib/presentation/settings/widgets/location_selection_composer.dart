@@ -12,6 +12,9 @@ class LocationSelectionComposer extends StatelessWidget {
   final String districtLabel;
   final TextEditingController searchController;
   final String searchHint;
+  final String searchButtonLabel;
+  final String? searchStatus;
+  final bool searching;
   final String? selectedCountryId;
   final String? selectedStateId;
   final String? selectedDistrictId;
@@ -20,6 +23,7 @@ class LocationSelectionComposer extends StatelessWidget {
   final List<DropdownMenuItem<String>> districtItems;
   final ValueChanged<String?>? onCountryChanged;
   final ValueChanged<String> onSearchChanged;
+  final VoidCallback onFindLocation;
   final ValueChanged<String?>? onStateChanged;
   final ValueChanged<String?>? onDistrictChanged;
   final String? listLoadError;
@@ -35,6 +39,9 @@ class LocationSelectionComposer extends StatelessWidget {
     required this.districtLabel,
     required this.searchController,
     required this.searchHint,
+    required this.searchButtonLabel,
+    required this.searchStatus,
+    required this.searching,
     required this.selectedCountryId,
     required this.selectedStateId,
     required this.selectedDistrictId,
@@ -43,6 +50,7 @@ class LocationSelectionComposer extends StatelessWidget {
     required this.districtItems,
     required this.onCountryChanged,
     required this.onSearchChanged,
+    required this.onFindLocation,
     required this.onStateChanged,
     required this.onDistrictChanged,
     required this.listLoadError,
@@ -60,7 +68,11 @@ class LocationSelectionComposer extends StatelessWidget {
       districtLabel: districtLabel,
       searchController: searchController,
       searchHint: searchHint,
+      searchButtonLabel: searchButtonLabel,
+      searchStatus: searchStatus,
+      searching: searching,
       onSearchChanged: onSearchChanged,
+      onFindLocation: onFindLocation,
       selectedCountryId: selectedCountryId,
       selectedStateId: selectedStateId,
       selectedDistrictId: selectedDistrictId,

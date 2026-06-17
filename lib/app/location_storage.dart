@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocationData {
   final String? countryId;
   final String? countryName;
+  final String? stateId;
+  final String? districtId;
   final String province;
   final String district;
   final String latitude;
@@ -13,6 +15,8 @@ class LocationData {
   const LocationData({
     this.countryId,
     this.countryName,
+    this.stateId,
+    this.districtId,
     required this.province,
     required this.district,
     required this.latitude,
@@ -20,6 +24,17 @@ class LocationData {
     this.timeZoneName = '',
     this.timeZoneOffset = '',
   });
+
+  bool get hasUsableCoordinates {
+    final lat = double.tryParse(latitude);
+    final lon = double.tryParse(longitude);
+    return latitude.trim().isNotEmpty &&
+        longitude.trim().isNotEmpty &&
+        lat != null &&
+        lon != null &&
+        lat.isFinite &&
+        lon.isFinite;
+  }
 
   String get displayName {
     if (district.isEmpty) {
@@ -33,6 +48,8 @@ class LocationStorage {
   static const String _cityKey = 'location_city';
   static const String _countryIdKey = 'location_country_id';
   static const String _countryNameKey = 'location_country_name';
+  static const String _stateIdKey = 'location_state_id';
+  static const String _districtIdKey = 'location_district_id';
   static const String _provinceKey = 'location_province';
   static const String _districtKey = 'location_district';
   static const String _latKey = 'location_latitude';
@@ -54,6 +71,8 @@ class LocationStorage {
     final prefs = await SharedPreferences.getInstance();
     final countryId = prefs.getString(_countryIdKey);
     final countryName = prefs.getString(_countryNameKey);
+    final stateId = prefs.getString(_stateIdKey);
+    final districtId = prefs.getString(_districtIdKey);
     final province = prefs.getString(_provinceKey);
     final district = prefs.getString(_districtKey);
     final lat = prefs.getString(_latKey);
@@ -70,6 +89,8 @@ class LocationStorage {
       return LocationData(
         countryId: countryId,
         countryName: countryName,
+        stateId: stateId,
+        districtId: districtId,
         province: legacyCity,
         district: '',
         latitude: lat,
@@ -84,6 +105,8 @@ class LocationStorage {
     return LocationData(
       countryId: countryId,
       countryName: countryName,
+      stateId: stateId,
+      districtId: districtId,
       province: province,
       district: district ?? '',
       latitude: lat,
@@ -113,6 +136,8 @@ class LocationStorage {
     if (data.countryName != null) {
       await prefs.setString(_countryNameKey, data.countryName!);
     }
+    await _writeOptionalString(prefs, _stateIdKey, data.stateId);
+    await _writeOptionalString(prefs, _districtIdKey, data.districtId);
     await prefs.setString(_provinceKey, data.province);
     await prefs.setString(_districtKey, data.district);
     await prefs.setString(_latKey, data.latitude);
@@ -123,6 +148,19 @@ class LocationStorage {
       _timeZoneOffsetKey,
       _resolveTimeZoneOffset(data.timeZoneOffset),
     );
+  }
+
+  Future<void> _writeOptionalString(
+    SharedPreferences prefs,
+    String key,
+    String? value,
+  ) async {
+    final normalized = value?.trim() ?? '';
+    if (normalized.isEmpty) {
+      await prefs.remove(key);
+      return;
+    }
+    await prefs.setString(key, normalized);
   }
 
   String _resolveTimeZoneName(String? input) {

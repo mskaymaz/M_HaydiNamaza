@@ -60,7 +60,6 @@ extension _HomeSettingsPersistenceController on _HomeScreenState {
           timeRule: _CustomPrayerTimeRule(
             mode: _customPrayerTimeModeFromKey(record.timeMode),
             anchorPrayer: record.anchorPrayer,
-            secondaryAnchorPrayer: record.secondaryAnchorPrayer,
             offsetMinutes: record.offsetMinutes,
             manualTime: manualTime,
           ),
@@ -93,7 +92,6 @@ extension _HomeSettingsPersistenceController on _HomeScreenState {
         vibrationEnabled: row.settings.vibrationEnabled,
         timeMode: row.timeRule.mode.name,
         anchorPrayer: row.timeRule.anchorPrayer,
-        secondaryAnchorPrayer: row.timeRule.secondaryAnchorPrayer,
         offsetMinutes: row.timeRule.offsetMinutes,
         manualHour: row.timeRule.manualTime?.hour,
         manualMinute: row.timeRule.manualTime?.minute,

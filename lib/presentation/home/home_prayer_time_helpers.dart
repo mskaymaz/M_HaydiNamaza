@@ -74,32 +74,70 @@ extension _HomePrayerTimeHelpers on _HomeScreenState {
   }
 
   DateTime _atToday(DateTime source, DateTime now) {
+    return _clockTimeOnDate(source, now);
+  }
+
+  DateTime _clockTimeOnDate(DateTime source, DateTime date) {
     return DateTime(
-      now.year,
-      now.month,
-      now.day,
+      date.year,
+      date.month,
+      date.day,
       source.hour,
       source.minute,
       source.second,
+      source.millisecond,
+      source.microsecond,
     );
   }
 
-  DateTime _prayerTimeFor(Prayer prayer, PrayerTimes times) {
+
+  DateTime _timeOfDayOnDate(TimeOfDay source, DateTime date) {
+    return DateTime(
+      date.year,
+      date.month,
+      date.day,
+      source.hour,
+      source.minute,
+    );
+  }
+
+  int _compareClockTimes(DateTime left, DateTime right) {
+    final leftValue =
+        left.hour * 3600000000 +
+        left.minute * 60000000 +
+        left.second * 1000000 +
+        left.millisecond * 1000 +
+        left.microsecond;
+    final rightValue =
+        right.hour * 3600000000 +
+        right.minute * 60000000 +
+        right.second * 1000000 +
+        right.millisecond * 1000 +
+        right.microsecond;
+    return leftValue.compareTo(rightValue);
+  }
+
+
+  DateTime _prayerTimeForDate(
+    Prayer prayer,
+    PrayerTimes times,
+    DateTime date,
+  ) {
     switch (prayer) {
       case Prayer.fajr:
-        return _atToday(times.fajr, _now);
+        return _clockTimeOnDate(times.fajr, date);
       case Prayer.sunrise:
-        return _atToday(times.sunrise, _now);
+        return _clockTimeOnDate(times.sunrise, date);
       case Prayer.dhuhr:
-        return _atToday(times.dhuhr, _now);
+        return _clockTimeOnDate(times.dhuhr, date);
       case Prayer.asr:
-        return _atToday(times.asr, _now);
+        return _clockTimeOnDate(times.asr, date);
       case Prayer.maghrib:
-        return _atToday(times.maghrib, _now);
+        return _clockTimeOnDate(times.maghrib, date);
       case Prayer.isha:
-        return _atToday(times.isha, _now);
+        return _clockTimeOnDate(times.isha, date);
       case Prayer.none:
-        return _now;
+        return _clockTimeOnDate(_now, date);
     }
   }
 

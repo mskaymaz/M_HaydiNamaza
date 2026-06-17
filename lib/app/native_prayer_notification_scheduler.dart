@@ -24,6 +24,7 @@ class NativePrayerNotificationEvent {
   final bool voiceEnabled;
   final bool visualEnabled;
   final bool azanEnabled;
+  final String? azanFilePath;
   final bool vibrationEnabled;
   final int vibrationDurationMs;
 
@@ -37,6 +38,7 @@ class NativePrayerNotificationEvent {
     required this.voiceEnabled,
     required this.visualEnabled,
     required this.azanEnabled,
+    this.azanFilePath,
     required this.vibrationEnabled,
     required this.vibrationDurationMs,
   });
@@ -52,6 +54,7 @@ class NativePrayerNotificationEvent {
       'voiceEnabled': voiceEnabled,
       'visualEnabled': visualEnabled,
       'azanEnabled': azanEnabled,
+      'azanFilePath': azanFilePath,
       'vibrationEnabled': vibrationEnabled,
       'vibrationDurationMs': vibrationDurationMs,
     };

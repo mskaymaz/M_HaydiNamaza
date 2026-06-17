@@ -15,7 +15,6 @@ class CustomPrayerRecord {
   final bool vibrationEnabled;
   final String timeMode;
   final Prayer? anchorPrayer;
-  final Prayer? secondaryAnchorPrayer;
   final int offsetMinutes;
   final int? manualHour;
   final int? manualMinute;
@@ -30,7 +29,6 @@ class CustomPrayerRecord {
     required this.vibrationEnabled,
     required this.timeMode,
     required this.anchorPrayer,
-    required this.secondaryAnchorPrayer,
     required this.offsetMinutes,
     required this.manualHour,
     required this.manualMinute,
@@ -47,7 +45,6 @@ class CustomPrayerRecord {
       'vibrationEnabled': vibrationEnabled,
       'timeMode': timeMode,
       'anchorPrayer': anchorPrayer?.name,
-      'secondaryAnchorPrayer': secondaryAnchorPrayer?.name,
       'offsetMinutes': offsetMinutes,
       'manualHour': manualHour,
       'manualMinute': manualMinute,
@@ -67,9 +64,6 @@ class CustomPrayerRecord {
       vibrationEnabled: payload['vibrationEnabled'] == true,
       timeMode: (payload['timeMode'] as String? ?? '').trim(),
       anchorPrayer: _prayerFromName(payload['anchorPrayer'] as String?),
-      secondaryAnchorPrayer: _prayerFromName(
-        payload['secondaryAnchorPrayer'] as String?,
-      ),
       offsetMinutes: (payload['offsetMinutes'] as num?)?.toInt() ?? 0,
       manualHour: (payload['manualHour'] as num?)?.toInt(),
       manualMinute: (payload['manualMinute'] as num?)?.toInt(),

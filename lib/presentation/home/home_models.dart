@@ -70,7 +70,6 @@ enum _CustomPrayerTimeMode {
   manual,
   beforePrayer,
   afterPrayer,
-  midpointBetweenPrayers,
 }
 
 _CustomPrayerTimeMode _customPrayerTimeModeFromKey(String key) {
@@ -83,20 +82,28 @@ _CustomPrayerTimeMode _customPrayerTimeModeFromKey(String key) {
 class _CustomPrayerTimeRule {
   final _CustomPrayerTimeMode mode;
   final Prayer? anchorPrayer;
-  final Prayer? secondaryAnchorPrayer;
   final int offsetMinutes;
   final TimeOfDay? manualTime;
 
   const _CustomPrayerTimeRule({
     required this.mode,
     this.anchorPrayer,
-    this.secondaryAnchorPrayer,
     this.offsetMinutes = 0,
     this.manualTime,
   });
 }
 
 enum _ReminderStage { reminder, prayer }
+
+enum _PrayerTableMode { none, week, thirtyDays, range }
+
+class _PrayerTableDay {
+  final DateTime date;
+  final PrayerTimes times;
+
+  const _PrayerTableDay({required this.date, required this.times});
+}
+
 
 class _PrayerNext {
   final String label;

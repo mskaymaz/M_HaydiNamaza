@@ -122,6 +122,7 @@ object PrayerAlarmScheduler {
             putExtra("voiceEnabled", event.optBoolean("voiceEnabled", false))
             putExtra("visualEnabled", event.optBoolean("visualEnabled", false))
             putExtra("azanEnabled", event.optBoolean("azanEnabled", false))
+            putExtra("azanFilePath", event.optString("azanFilePath", ""))
             putExtra("vibrationEnabled", event.optBoolean("vibrationEnabled", false))
             putExtra("vibrationDurationMs", event.optInt("vibrationDurationMs", 3000))
         }
@@ -161,6 +162,7 @@ object PrayerAlarmScheduler {
             put("voiceEnabled", input["voiceEnabled"] == true)
             put("visualEnabled", input["visualEnabled"] == true)
             put("azanEnabled", input["azanEnabled"] == true)
+            put("azanFilePath", input["azanFilePath"]?.toString().orEmpty())
             put("vibrationEnabled", input["vibrationEnabled"] == true)
             put("vibrationDurationMs", numberToInt(input["vibrationDurationMs"]) ?: 3000)
         }

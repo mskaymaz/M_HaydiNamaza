@@ -33,7 +33,7 @@ extension _HomeNavigationController on _HomeScreenState {
   }
 
   Future<void> _openLocationSettings(LocationData? location) async {
-    await Navigator.of(context).push<bool>(
+    final changed = await Navigator.of(context).push<bool>(
       MaterialPageRoute(
         builder: (_) => LocationScreen(
           initial: location,
@@ -43,7 +43,18 @@ extension _HomeNavigationController on _HomeScreenState {
     );
     if (!mounted) return;
     _setHomeState(() {
+      if (changed == true) {
+        _prayerDayOffset = 0;
+        _prayerDayCache.clear();
+        _prayerDayCacheSignature = null;
+        _prayerTableMode = _PrayerTableMode.none;
+        _prayerTableRange = null;
+        _prayerTableFuture = null;
+      }
       _future = _loadData();
     });
+    if (changed == true) {
+      unawaited(_refreshNativeReminderSchedule());
+    }
   }
 }

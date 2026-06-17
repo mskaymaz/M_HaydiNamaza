@@ -24,6 +24,7 @@ class LocationScreenContent extends StatelessWidget {
   final bool loadingCountries;
   final bool loadingStates;
   final bool loadingDistricts;
+  final bool searchingLocation;
   final List<DiyanetItem> countries;
   final List<DiyanetItem> states;
   final List<DiyanetItem> districts;
@@ -33,6 +34,7 @@ class LocationScreenContent extends StatelessWidget {
   final List<LocationFavorite> favorites;
   final LocationFavorite? selectedFavorite;
   final String? listLoadError;
+  final String? locationSearchStatus;
   final TextEditingController provinceController;
   final TextEditingController districtController;
   final TextEditingController latController;
@@ -40,6 +42,7 @@ class LocationScreenContent extends StatelessWidget {
   final TextEditingController locationSearchController;
   final ValueChanged<bool> onUseCurrentLocationChanged;
   final ValueChanged<String> onLocationSearchChanged;
+  final VoidCallback onFindLocation;
   final ValueChanged<String> onCountryChanged;
   final ValueChanged<String> onStateChanged;
   final ValueChanged<String> onDistrictChanged;
@@ -59,6 +62,7 @@ class LocationScreenContent extends StatelessWidget {
     required this.loadingCountries,
     required this.loadingStates,
     required this.loadingDistricts,
+    required this.searchingLocation,
     required this.countries,
     required this.states,
     required this.districts,
@@ -68,6 +72,7 @@ class LocationScreenContent extends StatelessWidget {
     required this.favorites,
     required this.selectedFavorite,
     required this.listLoadError,
+    required this.locationSearchStatus,
     required this.provinceController,
     required this.districtController,
     required this.latController,
@@ -75,6 +80,7 @@ class LocationScreenContent extends StatelessWidget {
     required this.locationSearchController,
     required this.onUseCurrentLocationChanged,
     required this.onLocationSearchChanged,
+    required this.onFindLocation,
     required this.onCountryChanged,
     required this.onStateChanged,
     required this.onDistrictChanged,
@@ -120,7 +126,11 @@ class LocationScreenContent extends StatelessWidget {
           districtLabel: l10n.locationDistrictLabel,
           searchController: locationSearchController,
           searchHint: 'İl veya ilçe ara',
+          searchButtonLabel: 'Bul',
+          searchStatus: locationSearchStatus,
+          searching: searchingLocation,
           onSearchChanged: onLocationSearchChanged,
+          onFindLocation: onFindLocation,
           selectedCountryId: countryValue,
           selectedStateId: stateValue,
           selectedDistrictId: districtValue,

@@ -12,9 +12,9 @@ class ReminderAudioService {
   static const String defaultTurkishVoiceLocale =
       ReminderTtsVoicePolicy.defaultTurkishVoiceLocale;
   static const double _stableTtsPitch = 1.0;
-  static const double _turkishTtsRate = 0.42;
-  static const double _stableTtsRate = 0.52;
-  static const double _arabicTtsRate = 0.45;
+  static const double _turkishTtsRate = 0.315;
+  static const double _stableTtsRate = 0.39;
+  static const double _arabicTtsRate = 0.3375;
   static const double _stableTtsVolume = 1.0;
   static const Duration _ttsRestartGap = Duration(milliseconds: 80);
   static const Duration _ttsDebounce = Duration(milliseconds: 400);
@@ -455,7 +455,6 @@ class ReminderAudioService {
     if (languageCode == 'tr') return _turkishTtsRate;
     return _stableTtsRate;
   }
-
   String _languageCodeForSpeech(Locale? locale, String? voiceLocale) {
     final fromVoice = ReminderTtsVoicePolicy.languageCodeFromTag(voiceLocale);
     if (fromVoice.isNotEmpty) return fromVoice;

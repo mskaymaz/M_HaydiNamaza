@@ -17,7 +17,6 @@ class _HomeCustomTimeEditorSheet extends StatefulWidget {
 class _HomeCustomTimeEditorSheetState extends State<_HomeCustomTimeEditorSheet> {
   late _CustomPrayerTimeMode _mode;
   late Prayer _anchorPrayer;
-  late Prayer _secondaryAnchorPrayer;
   late TextEditingController _offsetController;
   late TextEditingController _hourController;
   late TextEditingController _minuteController;
@@ -36,8 +35,6 @@ class _HomeCustomTimeEditorSheetState extends State<_HomeCustomTimeEditorSheet> 
     super.initState();
     _mode = widget.initialRule.mode;
     _anchorPrayer = widget.initialRule.anchorPrayer ?? Prayer.fajr;
-    _secondaryAnchorPrayer =
-        widget.initialRule.secondaryAnchorPrayer ?? Prayer.sunrise;
     _offsetController = TextEditingController(
       text: widget.initialRule.offsetMinutes.toString(),
     );
@@ -75,10 +72,6 @@ class _HomeCustomTimeEditorSheetState extends State<_HomeCustomTimeEditorSheet> 
     final rule = _CustomPrayerTimeRule(
       mode: _mode,
       anchorPrayer: _mode == _CustomPrayerTimeMode.manual ? null : _anchorPrayer,
-      secondaryAnchorPrayer:
-          _mode == _CustomPrayerTimeMode.midpointBetweenPrayers
-              ? _secondaryAnchorPrayer
-              : null,
       offsetMinutes: offsetMinutes,
       manualTime: _mode == _CustomPrayerTimeMode.manual ? _readManualTime() : null,
     );
@@ -136,15 +129,6 @@ class _HomeCustomTimeEditorSheetState extends State<_HomeCustomTimeEditorSheet> 
                   });
                 },
               ),
-              ChoiceChip(
-                label: const Text('Iki vaktin ortasi'),
-                selected: _mode == _CustomPrayerTimeMode.midpointBetweenPrayers,
-                onSelected: (_) {
-                  setState(() {
-                    _mode = _CustomPrayerTimeMode.midpointBetweenPrayers;
-                  });
-                },
-              ),
             ],
           ),
           const SizedBox(height: 16),
@@ -180,51 +164,7 @@ class _HomeCustomTimeEditorSheetState extends State<_HomeCustomTimeEditorSheet> 
                 ),
               ],
             )
-          else if (_mode == _CustomPrayerTimeMode.midpointBetweenPrayers) ...[
-            Text(
-              'Birinci vakit',
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                for (final option in _prayerOptions)
-                  ChoiceChip(
-                    label: Text(option.value),
-                    selected: _anchorPrayer == option.key,
-                    onSelected: (_) {
-                      setState(() {
-                        _anchorPrayer = option.key;
-                      });
-                    },
-                  ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              'Ikinci vakit',
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                for (final option in _prayerOptions)
-                  ChoiceChip(
-                    label: Text(option.value),
-                    selected: _secondaryAnchorPrayer == option.key,
-                    onSelected: (_) {
-                      setState(() {
-                        _secondaryAnchorPrayer = option.key;
-                      });
-                    },
-                  ),
-              ],
-            ),
-          ] else ...[
+          else ...[
             Text(
               'Referans vakit',
               style: Theme.of(context).textTheme.labelLarge,

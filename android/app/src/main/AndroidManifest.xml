@@ -8,12 +8,22 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
 
     <application
         android:label="Haydi Namaza"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
+
+        <activity
+            android:name=".PrayerVisualReminderActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:showWhenLocked="true"
+            android:theme="@style/PrayerAlarmTheme"
+            android:turnScreenOn="true" />
 
         <service
             android:name=".PrayerActiveReminderService"

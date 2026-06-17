@@ -15,9 +15,12 @@ extension _HomeDataController on _HomeScreenState {
 
     final lat = double.tryParse(location.latitude);
     final lon = double.tryParse(location.longitude);
+    final canUseDiyanetLocation = location.province.trim().isNotEmpty &&
+        location.district.trim().isNotEmpty;
     if (methodCode != 'turkey' &&
         methodCode != 'diyanet' &&
         methodCode != 'diyanet_tabanli' &&
+        !canUseDiyanetLocation &&
         (lat == null || lon == null)) {
       return _HomeData(
         location: location,
@@ -31,6 +34,8 @@ extension _HomeDataController on _HomeScreenState {
     final cacheSignature = [
       methodCode,
       location.countryId,
+      location.stateId,
+      location.districtId,
       location.province,
       location.district,
       location.latitude,
@@ -65,17 +70,6 @@ extension _HomeDataController on _HomeScreenState {
                 allowRemote: true,
               ));
     _prayerDayCache[_prayerDayOffset] = displayTimes;
-    unawaited(
-      _prefetchThirtyDayPrayerTimes(
-        location: location,
-        latitude: lat ?? 0,
-        longitude: lon ?? 0,
-        timeZone: timeZone,
-        methodCode: methodCode,
-        today: today,
-      ),
-    );
-
     return _HomeData(
       location: location,
       methodCode: methodCode,
@@ -83,34 +77,6 @@ extension _HomeDataController on _HomeScreenState {
       displayTimes: displayTimes,
       displayDate: displayDate,
     );
-  }
-
-  Future<void> _prefetchThirtyDayPrayerTimes({
-    required LocationData location,
-    required double latitude,
-    required double longitude,
-    required String timeZone,
-    required String methodCode,
-    required DateTime today,
-  }) async {
-    for (var offset = 1; offset < 30; offset += 1) {
-      if (_prayerDayCache.containsKey(offset)) continue;
-      try {
-        final times = await _prayerService.calculateForDate(
-          location: location,
-          latitude: latitude,
-          longitude: longitude,
-          timeZone: timeZone,
-          methodCode: methodCode,
-          date: today.add(Duration(days: offset)),
-          allowDiyanet: false,
-          allowRemote: true,
-        );
-        _prayerDayCache[offset] = times;
-      } catch (_) {
-        return;
-      }
-    }
   }
 
   Future<void> _refreshStoredCurrentLocation() async {

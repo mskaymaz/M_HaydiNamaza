@@ -113,10 +113,14 @@ extension _HomeBuildController on _HomeScreenState {
                           final panelWidthFactor = isLandscape
                               ? (_isLandscapePanelsExpanded ? 0.9 : 0.72)
                               : 1.0;
+                          final prayerTablePanelHeight =
+                              _prayerTableFuture == null ? 112.0 : 310.0;
+                          final infoPanelEstimatedHeight =
+                              infoPanelMaxHeight + 8.0 + prayerTablePanelHeight;
                           final scrollContentHeight = math.max(
                             constraints.maxHeight,
                             infoPanelTop +
-                                infoPanelMaxHeight +
+                                infoPanelEstimatedHeight +
                                 infoPanelBottomPadding,
                           );
 
@@ -412,32 +416,12 @@ extension _HomeBuildController on _HomeScreenState {
                                           alignment: Alignment.topCenter,
                                           child: FractionallySizedBox(
                                             widthFactor: panelWidthFactor,
-                                            child:
-                                                FutureBuilder<
-                                                  DailyContentSelectionResult
-                                                >(
-                                                  future: _dailyContentFuture,
-                                                  builder: (context, snapshot) {
-                                                    return HomeDailyContentPanel(
-                                                      result: snapshot.data,
-                                                      isLoading:
-                                                          snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .waiting,
-                                                      hasError:
-                                                          snapshot.hasError,
-                                                      cizgiColor:
-                                                          palette.cizgiColor,
-                                                      panelColor:
-                                                          palette.zeminColor,
-                                                      maxHeight:
-                                                          infoPanelMaxHeight,
-                                                      onCycleContentTap:
-                                                          _cycleDailyContent,
-                                                    );
-                                                  },
-                                                ),
+                                            child: _buildInfoPanels(
+                                              data: data,
+                                              cizgiColor: palette.cizgiColor,
+                                              panelColor: palette.zeminColor,
+                                              maxHeight: infoPanelMaxHeight,
+                                            ),
                                           ),
                                         ),
                                       ),

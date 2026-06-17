@@ -155,12 +155,13 @@ extension _HomeCustomPrayerRowsController on _HomeScreenState {
   ) {
     HomePrayerListItem itemFor(Prayer prayer, String label, DateTime time) {
       final settings = _settingsFor(prayer);
+      final displayTime = _clockTimeOnDate(time, _now);
       return HomePrayerListItem(
         id: prayer.name,
         prayer: prayer,
         label: label,
-        sortTime: time,
-        timeLabel: homeFormatTime(time),
+        sortTime: displayTime,
+        timeLabel: homeFormatTime(displayTime),
         reminderController: _controllerFor(prayer),
         onReminderChanged: (value) => _setReminderMinutes(prayer, value),
         onReminderTap: () => _editReminderMinutes(
@@ -232,7 +233,7 @@ extension _HomeCustomPrayerRowsController on _HomeScreenState {
       if (aTime == null && bTime == null) return 0;
       if (aTime == null) return 1;
       if (bTime == null) return -1;
-      final compare = aTime.compareTo(bTime);
+      final compare = _compareClockTimes(aTime, bTime);
       if (compare != 0) return compare;
       if (a.prayer != null && b.prayer == null) return -1;
       if (a.prayer == null && b.prayer != null) return 1;

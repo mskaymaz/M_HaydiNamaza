@@ -1,15 +1,12 @@
 package com.mskaymaz.mhaydinamaza
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.WindowManager
@@ -19,35 +16,22 @@ import android.widget.TextView
 import kotlin.math.min
 
 class PrayerVisualReminderActivity : Activity() {
-    private val handler = Handler(Looper.getMainLooper())
-    private val blinkingViews = mutableListOf<TextView>()
-    private var active = true
-    private var blinkVisible = true
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         prepareWindow()
         setContentView(buildContent())
         resizeDialogWindow()
-        startBlinkLoop()
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        handler.removeCallbacksAndMessages(null)
         setIntent(intent)
-        active = true
-        blinkVisible = true
-        blinkingViews.clear()
         setContentView(buildContent())
         resizeDialogWindow()
-        startBlinkLoop()
     }
 
-    override fun onDestroy() {
-        active = false
-        handler.removeCallbacksAndMessages(null)
-        super.onDestroy()
+    override fun onBackPressed() {
+        stopAllWarnings()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -79,7 +63,7 @@ class PrayerVisualReminderActivity : Activity() {
     }
 
     private fun resizeDialogWindow() {
-        val width = min(resources.displayMetrics.widthPixels - dp(48), dp(360))
+        val width = min(resources.displayMetrics.widthPixels - dp(32), dp(390))
         window.setGravity(Gravity.CENTER)
         window.setLayout(width, WindowManager.LayoutParams.WRAP_CONTENT)
     }
@@ -115,7 +99,6 @@ class PrayerVisualReminderActivity : Activity() {
             typeface = Typeface.DEFAULT_BOLD
             this.text = text
             includeFontPadding = true
-            blinkingViews.add(this)
         }
     }
 
@@ -127,7 +110,6 @@ class PrayerVisualReminderActivity : Activity() {
             this.text = text
             includeFontPadding = true
             setPadding(0, dp(14), 0, dp(8))
-            blinkingViews.add(this)
         }
     }
 
@@ -136,7 +118,7 @@ class PrayerVisualReminderActivity : Activity() {
             gravity = Gravity.CENTER
             setTextColor(Color.rgb(90, 90, 90))
             textSize = 12.5f
-            text = "Ses tuşları da uyarıyı kapatır."
+            text = "Ses, titreşim ve ezanı kapatmak için aşağıdaki düğmeye basın. Ses tuşları da kapatır."
             includeFontPadding = true
             setPadding(0, 0, 0, dp(14))
         }
@@ -149,28 +131,21 @@ class PrayerVisualReminderActivity : Activity() {
         }
     }
 
-    private fun startBlinkLoop() {
-        if (!intent.getBooleanExtra("visualEnabled", false)) return
-        handler.post(object : Runnable {
-            override fun run() {
-                if (!active) return
-                blinkVisible = !blinkVisible
-                val alpha = if (blinkVisible) 1.0f else 0.18f
-                blinkingViews.forEach { it.alpha = alpha }
-                handler.postDelayed(this, 650L)
-            }
-        })
-    }
-
     private fun stopAllWarnings() {
-        active = false
-        handler.removeCallbacksAndMessages(null)
         try {
             val stopIntent = PrayerActiveReminderService.stopIntent(this)
             startService(stopIntent)
         } catch (_: Exception) {
         }
-        finish()
+        finishAndRemoveIfPossible()
+    }
+
+    private fun finishAndRemoveIfPossible() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAndRemoveTask()
+        } else {
+            finish()
+        }
     }
 
     private fun dp(value: Int): Int {

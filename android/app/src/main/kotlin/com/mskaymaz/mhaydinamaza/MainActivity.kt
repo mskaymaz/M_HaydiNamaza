@@ -33,6 +33,15 @@ class MainActivity : FlutterActivity() {
                     PrayerAlarmScheduler.cancelAll(this)
                     result.success(null)
                 }
+                "downloadAdhanOption" -> {
+                    AdhanDownloader.download(
+                        this,
+                        call.argument<String>("id"),
+                        call.argument<String>("fileName"),
+                        call.argument<String>("url"),
+                        result
+                    )
+                }
                 else -> result.notImplemented()
             }
         }

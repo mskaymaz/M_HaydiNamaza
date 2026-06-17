@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocationFavorite {
   final String? countryId;
   final String? countryName;
+  final String? stateId;
+  final String? districtId;
   final String province;
   final String district;
   final String latitude;
@@ -13,6 +15,8 @@ class LocationFavorite {
   const LocationFavorite({
     this.countryId,
     this.countryName,
+    this.stateId,
+    this.districtId,
     required this.province,
     required this.district,
     required this.latitude,
@@ -29,6 +33,8 @@ class LocationFavorite {
   Map<String, dynamic> toJson() => {
         'countryId': countryId,
         'countryName': countryName,
+        'stateId': stateId,
+        'districtId': districtId,
         'province': province,
         'district': district,
         'latitude': latitude,
@@ -38,6 +44,8 @@ class LocationFavorite {
   static LocationFavorite? fromJson(Map<String, dynamic> json) {
     final countryId = json['countryId'];
     final countryName = json['countryName'];
+    final stateId = json['stateId'];
+    final districtId = json['districtId'];
     final province = json['province'];
     final district = json['district'];
     final latitude = json['latitude'];
@@ -48,6 +56,8 @@ class LocationFavorite {
     return LocationFavorite(
       countryId: countryId is String ? countryId : null,
       countryName: countryName is String ? countryName : null,
+      stateId: stateId is String ? stateId : null,
+      districtId: districtId is String ? districtId : null,
       province: province,
       district: district,
       latitude: latitude is String ? latitude : '',
@@ -60,6 +70,8 @@ class LocationFavorite {
     if (identical(this, other)) return true;
     return other is LocationFavorite &&
         other.countryId == countryId &&
+        other.stateId == stateId &&
+        other.districtId == districtId &&
         other.province == province &&
         other.district == district &&
         other.latitude == latitude &&
@@ -69,6 +81,8 @@ class LocationFavorite {
   @override
   int get hashCode => Object.hash(
     countryId,
+    stateId,
+    districtId,
     province,
     district,
     latitude,

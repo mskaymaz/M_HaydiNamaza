@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 import '../../../core/config/config_registry.dart';
 import 'location_compact_dropdown.dart';
@@ -13,6 +13,9 @@ class LocationSelectionSection extends StatelessWidget {
   final String districtLabel;
   final TextEditingController searchController;
   final String searchHint;
+  final String searchButtonLabel;
+  final String? searchStatus;
+  final bool searching;
   final String? selectedCountryId;
   final String? selectedStateId;
   final String? selectedDistrictId;
@@ -21,6 +24,7 @@ class LocationSelectionSection extends StatelessWidget {
   final List<DropdownMenuItem<String>> districtItems;
   final ValueChanged<String?>? onCountryChanged;
   final ValueChanged<String> onSearchChanged;
+  final VoidCallback onFindLocation;
   final ValueChanged<String?>? onStateChanged;
   final ValueChanged<String?>? onDistrictChanged;
   final String? listLoadError;
@@ -36,6 +40,9 @@ class LocationSelectionSection extends StatelessWidget {
     required this.districtLabel,
     required this.searchController,
     required this.searchHint,
+    required this.searchButtonLabel,
+    required this.searchStatus,
+    required this.searching,
     required this.selectedCountryId,
     required this.selectedStateId,
     required this.selectedDistrictId,
@@ -44,6 +51,7 @@ class LocationSelectionSection extends StatelessWidget {
     required this.districtItems,
     required this.onCountryChanged,
     required this.onSearchChanged,
+    required this.onFindLocation,
     required this.onStateChanged,
     required this.onDistrictChanged,
     required this.listLoadError,
@@ -66,16 +74,46 @@ class LocationSelectionSection extends StatelessWidget {
                 ),
           ),
           SizedBox(height: ui.fieldGap),
-          TextField(
-            controller: searchController,
-            decoration: InputDecoration(
-              labelText: searchHint,
-              prefixIcon: const Icon(Icons.search_rounded),
-              border: const OutlineInputBorder(),
-              isDense: true,
-            ),
-            onChanged: onSearchChanged,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    labelText: searchHint,
+                    prefixIcon: const Icon(Icons.search_rounded),
+                    border: const OutlineInputBorder(),
+                    isDense: true,
+                  ),
+                  textInputAction: TextInputAction.search,
+                  onChanged: onSearchChanged,
+                  onSubmitted: (_) {
+                    if (!searching) onFindLocation();
+                  },
+                ),
+              ),
+              const SizedBox(width: 8),
+              FilledButton.tonalIcon(
+                onPressed: searching ? null : onFindLocation,
+                icon: searching
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.travel_explore_rounded),
+                label: Text(searchButtonLabel),
+              ),
+            ],
           ),
+          if (searchStatus != null && searchStatus!.isNotEmpty) ...[
+            SizedBox(height: ui.fieldGap / 2),
+            Text(
+              searchStatus!,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ],
           SizedBox(height: ui.fieldGap),
           LocationCompactDropdown<String>(
             value: selectedCountryId,
@@ -104,9 +142,9 @@ class LocationSelectionSection extends StatelessWidget {
             SizedBox(height: ui.fieldGap),
             Text(
               listLoadError!,
-              style: Theme.of(
-                context,
-              ).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.error),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
             ),
             Align(
               alignment: Alignment.centerRight,

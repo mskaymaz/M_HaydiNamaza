@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 import 'package:vibration/vibration.dart';
 import 'package:geocoding/geocoding.dart';
 
+import '../../app/adhan_catalog.dart';
+import '../../app/adhan_selection_storage.dart';
 import '../../app/calculation_method_storage.dart';
 import '../../app/custom_prayer_storage.dart';
 import '../../app/locale_controller.dart';
@@ -45,6 +48,8 @@ part 'home_content_controller.dart';
 part 'home_reminder_runtime_controller.dart';
 part 'home_navigation_controller.dart';
 part 'home_build_controller.dart';
+part 'home_prayer_table_controller.dart';
+part 'home_prayer_table_panel.dart';
 part 'home_reminder_engine_controller.dart';
 part 'home_settings_persistence_controller.dart';
 part 'home_prayer_panel_controller.dart';
@@ -71,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(action);
   }
 
+  final _adhanSelectionStorage = AdhanSelectionStorage();
   final _locationStorage = LocationStorage();
   final _methodStorage = CalculationMethodStorage();
   final _customPrayerStorage = CustomPrayerStorage();
@@ -104,6 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _showPanelAddButton = false;
   bool _showPrayerControlPanel = false;
   int _prayerDayOffset = 0;
+  _PrayerTableMode _prayerTableMode = _PrayerTableMode.none;
+  DateTimeRange? _prayerTableRange;
+  Future<List<_PrayerTableDay>>? _prayerTableFuture;
   bool _reminderCheckInProgress = false;
   bool _nativeScheduleRefreshInProgress = false;
   bool _nativeScheduleRefreshPending = false;

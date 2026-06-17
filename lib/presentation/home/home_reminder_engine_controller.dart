@@ -139,6 +139,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
     final today = DateTime(now.year, now.month, now.day);
     final notifications = <NativePrayerNotificationEvent>[];
     final widgetEvents = <NativePrayerWidgetEvent>[];
+    final adhanSelections = await _adhanSelectionStorage.read();
     final times = await _prayerService.calculateToday(
       location: location,
       latitude: latitude ?? 0,
@@ -151,6 +152,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
       widgetEvents: widgetEvents,
       times: times,
       now: now,
+      adhanSelections: adhanSelections,
     );
     final tomorrow = today.add(const Duration(days: 1));
     final tomorrowTimes = await _prayerService.calculateForDate(
@@ -187,6 +189,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
     required List<NativePrayerWidgetEvent> widgetEvents,
     required PrayerTimes times,
     required DateTime now,
+    required Map<String, AdhanSelection> adhanSelections,
   }) {
     final prayerTimes = <Prayer, DateTime>{
       Prayer.fajr: times.fajr,
@@ -207,6 +210,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
         label: label,
         prayerTime: entry.value,
         settings: settings,
+        azanFilePath: _adhanFilePathForPrayer(entry.key, adhanSelections),
       );
     }
   }
@@ -293,6 +297,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
     required String label,
     required DateTime prayerTime,
     required _PrayerRowSettings settings,
+    String? azanFilePath,
   }) {
     if (settings.voiceEnabled || settings.vibrationEnabled) {
       final reminderTime = prayerTime.subtract(
@@ -325,10 +330,23 @@ extension _HomeReminderEngineController on _HomeScreenState {
             visualEnabled: false,
             azanEnabled: settings.azanEnabled,
             vibrationEnabled: settings.vibrationEnabled,
+            azanFilePath: azanFilePath,
           ),
         );
       }
     }
+  }
+
+  String? _adhanFilePathForPrayer(
+    Prayer prayer,
+    Map<String, AdhanSelection> selections,
+  ) {
+    final selection = selections[prayer.name];
+    if (selection == null || selection.source == AdhanSelectionSource.bundled) {
+      return null;
+    }
+    final path = selection.localPath?.trim() ?? '';
+    return path.isEmpty ? null : path;
   }
 
   NativePrayerNotificationEvent _nativeEvent({
@@ -340,6 +358,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
     required bool visualEnabled,
     required bool azanEnabled,
     required bool vibrationEnabled,
+    String? azanFilePath,
   }) {
     final stageOffset = stage == 'prayer' ? 5000 : 0;
     final dayId =
@@ -367,6 +386,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
       voiceEnabled: voiceEnabled,
       visualEnabled: visualEnabled,
       azanEnabled: azanEnabled,
+      azanFilePath: azanFilePath,
       vibrationEnabled: vibrationEnabled,
       vibrationDurationMs: _reminderSettings.vibrationDurationSeconds * 1000,
     );
@@ -400,6 +420,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
     if (stage == _ReminderStage.prayer) {
       _stopVoiceLoop();
     }
+    if (_nativeActiveReminderSurfaceHandles(rowSettings)) return;
     if (rowSettings.vibrationEnabled) {
       await _playVibrationPulse(
         _reminderSettings.vibrationDurationSeconds * 1000,
@@ -423,6 +444,12 @@ extension _HomeReminderEngineController on _HomeScreenState {
         _startVoiceLoop(prayerLabel: prayerLabel, prayerTime: prayerTime);
       } catch (_) {}
     }
+  }
+
+
+  bool _nativeActiveReminderSurfaceHandles(_PrayerRowSettings settings) {
+    if (kIsWeb || defaultTargetPlatform != TargetPlatform.android) return false;
+    return settings.voiceEnabled || settings.vibrationEnabled || settings.azanEnabled;
   }
 
   bool _canPlayVoiceReminder() {

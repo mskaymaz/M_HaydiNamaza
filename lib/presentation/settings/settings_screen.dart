@@ -2,10 +2,13 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
+import '../../app/adhan_catalog.dart';
+import '../../app/adhan_selection_storage.dart';
 import '../../app/calculation_method_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
+import '../../app/native_adhan_downloader.dart';
 import '../../app/reminder_audio_service.dart';
 import '../../app/reminder_text_settings_storage.dart';
 import '../../app/ui_palette_controller.dart';
@@ -21,6 +24,8 @@ import 'settings_ui_mappers.dart';
 import 'widgets/settings_top_settings_section.dart';
 import 'widgets/shared_settings/settings_legacy_accordion_group.dart';
 import 'widgets/settings_shared_sections_list.dart';
+
+part 'settings_adhan_controller.dart';
 
 class SettingsScreen extends StatefulWidget {
   final LocaleController localeController;
@@ -43,6 +48,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final ReminderTextSettingsStorage _reminderTextStorage =
       ReminderTextSettingsStorage();
   final ReminderAudioService _reminderAudioService = ReminderAudioService();
+  final AdhanSelectionStorage _adhanSelectionStorage =
+      AdhanSelectionStorage();
+  final NativeAdhanDownloader _adhanDownloader = NativeAdhanDownloader();
   final TextEditingController _voiceReminderController =
       TextEditingController();
   final TextEditingController _visualReminderController =
@@ -63,6 +71,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   ReminderAudioMode _selectedAudioMode = ReminderAudioMode.textToSpeech;
   String? _selectedAudioPath;
   String? _selectedAudioLabel;
+  Map<String, AdhanSelection> _adhanSelections = defaultAdhanSelections();
+  final Set<String> _downloadingAdhanPrayerKeys = <String>{};
   String? _selectedVoiceName;
   String? _selectedVoiceLocale;
   String? _selectedEnglishVoiceName;
@@ -84,6 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _loadFavorites();
     _loadMethod();
     _loadReminderTexts();
+    _loadAdhanSelections();
   }
 
   Future<void> _loadLocation() async {
@@ -121,6 +132,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
+
   Future<void> _loadReminderTexts() async {
     final settings = await _reminderTextStorage.read();
     _voiceReminderController.text = settings.voiceText;
@@ -148,6 +160,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _showHelpBalloons = settings.showHelpBalloons;
     if (!mounted) return;
     setState(() {});
+  }
+
+  void _updateSettingsState(VoidCallback update) {
+    if (!mounted) return;
+    setState(update);
   }
 
   @override
@@ -232,6 +249,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             showVibrationIcon: _showVibrationIcon,
             sortCustomPrayersByTime: _sortCustomPrayersByTime,
             showHelpBalloons: _showHelpBalloons,
+            adhanSelections: _adhanSelections,
+            downloadingAdhanPrayerKeys: _downloadingAdhanPrayerKeys,
+            onUseDefaultAdhan: _useDefaultAdhan,
+            onDownloadAdhan: _downloadAdhan,
+            onPickLocalAdhan: _pickLocalAdhan,
             onHelpToggleChanged: (value) {
               setState(() => _showHelpBalloons = value ?? true);
               _persistReminderTexts();

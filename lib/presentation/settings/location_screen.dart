@@ -13,6 +13,8 @@ import 'location_models.dart';
 import 'widgets/location_screen_content.dart';
 
 part 'location_screen_favorites.dart';
+part 'location_screen_search.dart';
+part 'location_screen_storage.dart';
 
 class LocationScreen extends StatefulWidget {
   final LocationData? initial;
@@ -57,7 +59,8 @@ class _LocationScreenState extends State<LocationScreen> {
   String? _listLoadError;
   bool _useCurrentLocation = false;
   bool _locating = false;
-  String _locationSearchQuery = '';
+  bool _searchingLocation = false;
+  String? _locationSearchStatus;
   bool _isMounted = true;
 
   @override
@@ -67,6 +70,8 @@ class _LocationScreenState extends State<LocationScreen> {
     if (initial != null) {
       _selectedCountryId = initial.countryId;
       _selectedCountryName = initial.countryName ?? '';
+      _selectedStateId = initial.stateId;
+      _selectedDistrictId = initial.districtId;
       _provinceController.text = initial.province;
       _districtController.text = initial.district;
       _latController.text = initial.latitude;
@@ -353,30 +358,6 @@ class _LocationScreenState extends State<LocationScreen> {
     }
   }
 
-  Future<void> _persistManualSelection() async {
-    final countryId = _selectedCountryId;
-    final countryName = _selectedCountryName.trim();
-    final province = _provinceController.text.trim();
-    final district = _districtController.text.trim();
-    if (countryId == null ||
-        countryName.isEmpty ||
-        province.isEmpty ||
-        district.isEmpty) {
-      return;
-    }
-    await _storage.writeUseCurrentLocation(false);
-    await _storage.write(
-      LocationData(
-        countryId: countryId,
-        countryName: countryName,
-        province: province,
-        district: district,
-        latitude: _latController.text.trim(),
-        longitude: _lonController.text.trim(),
-      ),
-    );
-  }
-
   Future<void> _onCountryChanged(String value) async {
     final selected = _countries.firstWhere((item) => item.id == value);
     setState(() {
@@ -390,6 +371,8 @@ class _LocationScreenState extends State<LocationScreen> {
       _districts = [];
       _provinceController.text = '';
       _districtController.text = '';
+      _latController.text = '';
+      _lonController.text = '';
     });
     await _storage.writeUseCurrentLocation(false);
     await _loadStates(value);
@@ -405,6 +388,8 @@ class _LocationScreenState extends State<LocationScreen> {
       _districts = [];
       _provinceController.text = selected.name;
       _districtController.text = '';
+      _latController.text = selected.latitude ?? '';
+      _lonController.text = selected.longitude ?? '';
     });
     await _storage.writeUseCurrentLocation(false);
     await _loadDistricts(value);
@@ -417,22 +402,10 @@ class _LocationScreenState extends State<LocationScreen> {
       _selectedFavorite = null;
       _selectedDistrictId = value;
       _districtController.text = selected.name;
+      _latController.text = selected.latitude ?? '';
+      _lonController.text = selected.longitude ?? '';
     });
     unawaited(_persistManualSelection());
-  }
-
-  void _onLocationSearchChanged(String value) {
-    setState(() {
-      _locationSearchQuery = value.trim();
-    });
-  }
-
-  List<DiyanetItem> _filteredLocationItems(List<DiyanetItem> items) {
-    final query = normalizeName(_locationSearchQuery);
-    if (query.isEmpty) return items;
-    return items
-        .where((item) => normalizeName(item.name).contains(query))
-        .toList(growable: false);
   }
 
   @override
@@ -440,8 +413,6 @@ class _LocationScreenState extends State<LocationScreen> {
     final l10n = AppLocalizations.of(context)!;
     final palette = widget.uiPaletteController.value;
     final ui = ConfigRegistry.settingsPanelsFor(palette);
-    final filteredStates = _filteredLocationItems(_states);
-    final filteredDistricts = _filteredLocationItems(_districts);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.locationEditTitle)),
       body: LocationScreenContent(
@@ -452,21 +423,24 @@ class _LocationScreenState extends State<LocationScreen> {
         loadingCountries: _loadingCountries,
         loadingStates: _loadingStates,
         loadingDistricts: _loadingDistricts,
+        searchingLocation: _searchingLocation,
         countries: _countries,
-        states: filteredStates,
-        districts: filteredDistricts,
+        states: _states,
+        districts: _districts,
         selectedCountryId: _selectedCountryId,
         selectedStateId: _selectedStateId,
         selectedDistrictId: _selectedDistrictId,
         favorites: _favorites,
         selectedFavorite: _selectedFavorite,
         listLoadError: _listLoadError,
+        locationSearchStatus: _locationSearchStatus,
         provinceController: _provinceController,
         districtController: _districtController,
         latController: _latController,
         lonController: _lonController,
         locationSearchController: _locationSearchController,
         onLocationSearchChanged: _onLocationSearchChanged,
+        onFindLocation: () => unawaited(_findLocationFromSearch()),
         onUseCurrentLocationChanged: _setUseCurrentLocation,
         onCountryChanged: (value) => unawaited(_onCountryChanged(value)),
         onStateChanged: (value) => unawaited(_onStateChanged(value)),
@@ -486,6 +460,11 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   void _updateFavoriteState(VoidCallback update) {
+    _updateLocationState(update);
+  }
+
+  void _updateLocationState(VoidCallback update) {
+    if (!mounted) return;
     setState(update);
   }
 }

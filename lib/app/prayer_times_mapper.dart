@@ -13,8 +13,10 @@ class PrayerTimesMapper {
     required double longitude,
     required CalculationParameters calculationParameters,
   }) {
+    final resolvedLatitude = daily.latitude ?? latitude;
+    final resolvedLongitude = daily.longitude ?? longitude;
     return PrayerTimes.fromTimings(
-      coordinates: Coordinates(latitude, longitude),
+      coordinates: Coordinates(resolvedLatitude, resolvedLongitude),
       date: date,
       calculationParameters: calculationParameters,
       fajr: daily.fajr,

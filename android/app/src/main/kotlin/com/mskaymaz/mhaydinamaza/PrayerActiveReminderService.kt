@@ -18,6 +18,7 @@ import android.os.Vibrator
 import android.os.VibratorManager
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import java.io.File
 import java.util.Locale
 
 class PrayerActiveReminderService : Service() {
@@ -53,7 +54,7 @@ class PrayerActiveReminderService : Service() {
         if (notificationId == 0) notificationId = NOTIFICATION_ID_FALLBACK
         startForeground(notificationId, buildNotification(intent))
         if (intent.getBooleanExtra("vibrationEnabled", false)) startVibrationLoop(intent)
-        if (intent.getBooleanExtra("azanEnabled", false)) startAzanPlayback()
+        if (intent.getBooleanExtra("azanEnabled", false)) startAzanPlayback(intent)
         if (intent.getBooleanExtra("voiceEnabled", false)) startVoiceLoop(intent)
     }
 
@@ -62,12 +63,17 @@ class PrayerActiveReminderService : Service() {
         ensureChannel(manager)
         val title = intent.getStringExtra("title") ?: "Namaz vakti"
         val message = intent.getStringExtra("message") ?: "Namaz vakti"
-        val launchIntent = packageManager.getLaunchIntentForPackage(packageName)
-            ?: Intent(this, MainActivity::class.java)
+        val alarmScreenIntent = alarmScreenIntent(intent)
         val contentPendingIntent = PendingIntent.getActivity(
             this,
             notificationId + 710000,
-            launchIntent,
+            alarmScreenIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        val fullScreenPendingIntent = PendingIntent.getActivity(
+            this,
+            notificationId + 715000,
+            alarmScreenIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         val stopPendingIntent = PendingIntent.getService(
@@ -90,6 +96,7 @@ class PrayerActiveReminderService : Service() {
             .setAutoCancel(false)
             .setOngoing(true)
             .setContentIntent(contentPendingIntent)
+            .setFullScreenIntent(fullScreenPendingIntent, true)
             .addAction(R.mipmap.ic_launcher, "Kapat", stopPendingIntent)
             .setCategory(Notification.CATEGORY_ALARM)
             .setVisibility(Notification.VISIBILITY_PUBLIC)
@@ -97,13 +104,25 @@ class PrayerActiveReminderService : Service() {
             .setShowWhen(true)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             @Suppress("DEPRECATION")
-            builder.setPriority(Notification.PRIORITY_HIGH)
+            builder.setPriority(Notification.PRIORITY_MAX)
         }
         @Suppress("DEPRECATION")
         builder.setSound(null)
         @Suppress("DEPRECATION")
         builder.setDefaults(0)
         return builder.build()
+    }
+
+
+    private fun alarmScreenIntent(sourceIntent: Intent): Intent {
+        return Intent(this, PrayerVisualReminderActivity::class.java).apply {
+            putExtras(sourceIntent)
+            addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP
+            )
+        }
     }
 
     private fun startVibrationLoop(intent: Intent) {
@@ -145,18 +164,43 @@ class PrayerActiveReminderService : Service() {
         }
     }
 
-    private fun startAzanPlayback() {
+    private fun startAzanPlayback(intent: Intent) {
+        val selectedPath = intent.getStringExtra("azanFilePath")?.trim().orEmpty()
+        if (selectedPath.isNotEmpty() && File(selectedPath).exists()) {
+            startFileAzanPlayback(selectedPath)
+            return
+        }
+        startBundledAzanPlayback()
+    }
+
+    private fun startBundledAzanPlayback() {
         try {
             mediaPlayer?.release()
             mediaPlayer = MediaPlayer.create(this, R.raw.default_azan)?.apply {
-                setOnCompletionListener { player ->
-                    try { player.release() } catch (_: Exception) {}
-                    if (mediaPlayer === player) mediaPlayer = null
-                }
+                setOnCompletionListener { player -> releaseCompletedPlayer(player) }
                 start()
             }
         } catch (_: Exception) {
         }
+    }
+
+    private fun startFileAzanPlayback(path: String) {
+        try {
+            mediaPlayer?.release()
+            val player = MediaPlayer()
+            mediaPlayer = player
+            player.setDataSource(path)
+            player.setOnCompletionListener { completed -> releaseCompletedPlayer(completed) }
+            player.prepare()
+            player.start()
+        } catch (_: Exception) {
+            startBundledAzanPlayback()
+        }
+    }
+
+    private fun releaseCompletedPlayer(player: MediaPlayer) {
+        try { player.release() } catch (_: Exception) {}
+        if (mediaPlayer === player) mediaPlayer = null
     }
 
     private fun startVoiceLoop(intent: Intent) {
@@ -169,7 +213,7 @@ class PrayerActiveReminderService : Service() {
             if (!active || status != TextToSpeech.SUCCESS) return@TextToSpeech
             val engine = tts ?: return@TextToSpeech
             if (!applyMaleTurkishVoice(engine)) return@TextToSpeech
-            engine.setSpeechRate(0.52f)
+            engine.setSpeechRate(0.39f)
             engine.setPitch(1.0f)
             engine.setOnUtteranceProgressListener(
                 object : UtteranceProgressListener() {

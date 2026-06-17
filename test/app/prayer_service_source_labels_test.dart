@@ -185,6 +185,8 @@ class _FakeDiyanetLocationIdResolver extends DiyanetLocationIdResolver {
   @override
   Future<DiyanetIds?> resolve({
     required String? countryId,
+    required String? stateId,
+    required String? districtId,
     required String province,
     required String district,
     required Duration timeout,

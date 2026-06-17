@@ -29,17 +29,23 @@ extension _LocationScreenFavorites on _LocationScreenState {
       ).showSnackBar(SnackBar(content: Text(l10n.locationFillAll)));
       return;
     }
-    final added = await _favoritesStorage.add(
-      LocationFavorite(
-        countryId: _selectedCountryId,
-        countryName: _selectedCountryName,
-        province: province,
-        district: district,
-        latitude: latitude,
-        longitude: longitude,
-      ),
+    final favorite = LocationFavorite(
+      countryId: _selectedCountryId,
+      countryName: _selectedCountryName,
+      stateId: _selectedStateId,
+      districtId: _selectedDistrictId,
+      province: province,
+      district: district,
+      latitude: latitude,
+      longitude: longitude,
     );
+    final added = await _favoritesStorage.add(favorite);
     await _loadFavorites();
+    if (_isMounted) {
+      _updateFavoriteState(() {
+        _selectedFavorite = favorite;
+      });
+    }
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -74,10 +80,10 @@ extension _LocationScreenFavorites on _LocationScreenState {
       _selectedFavorite = favorite;
       _selectedCountryId = favorite.countryId ?? _selectedCountryId;
       _selectedCountryName = favorite.countryName ?? _selectedCountryName;
-      _selectedStateId = null;
-      _selectedDistrictId = null;
-      _states = [];
-      _districts = [];
+      _selectedStateId = favorite.stateId;
+      _selectedDistrictId = favorite.districtId;
+      if (favorite.stateId == null) _states = [];
+      if (favorite.districtId == null) _districts = [];
       _provinceController.text = favorite.province;
       _districtController.text = favorite.district;
     });
@@ -95,6 +101,8 @@ extension _LocationScreenFavorites on _LocationScreenState {
       LocationData(
         countryId: _selectedCountryId,
         countryName: _selectedCountryName,
+        stateId: _selectedStateId,
+        districtId: _selectedDistrictId,
         province: _provinceController.text.trim(),
         district: _districtController.text.trim(),
         latitude: _latController.text.trim(),

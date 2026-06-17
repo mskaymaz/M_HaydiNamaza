@@ -11,6 +11,8 @@ class DiyanetLocationIdResolver {
 
   Future<DiyanetIds?> resolve({
     required String? countryId,
+    required String? stateId,
+    required String? districtId,
     required String province,
     required String district,
     required Duration timeout,
@@ -20,10 +22,13 @@ class DiyanetLocationIdResolver {
     final provinceKey = normalizePrayerLocationName(province);
     final districtKey = normalizePrayerLocationName(district);
     final config = ConfigRegistry.dataSources.diyanet;
-    final resolvedCountryId =
-        (countryId != null && countryId.trim().isNotEmpty)
-            ? countryId.trim()
-            : config.countryId;
+    final resolvedCountryId = _resolveCountryId(countryId, config.countryId);
+    final storedStateId = stateId?.trim() ?? '';
+    final storedDistrictId = districtId?.trim() ?? '';
+    if (storedStateId.isNotEmpty && storedDistrictId.isNotEmpty) {
+      return DiyanetIds(stateId: storedStateId, districtId: storedDistrictId);
+    }
+
     final cachePrefix = '$resolvedCountryId|$provinceKey';
     final cachedState = _stateIdCache[cachePrefix];
     final cachedDistrict = _districtIdCache['$cachePrefix|$districtKey'];
@@ -31,54 +36,100 @@ class DiyanetLocationIdResolver {
       return DiyanetIds(stateId: cachedState, districtId: cachedDistrict);
     }
 
-    final statesUri = Uri.parse('${config.baseUrl}/api/locations/states').replace(
-      queryParameters: <String, String>{'countryId': resolvedCountryId},
+    final resolvedStateId = storedStateId.isNotEmpty
+        ? storedStateId
+        : await _fetchStateId(
+            countryId: resolvedCountryId,
+            province: province,
+            provinceKey: provinceKey,
+            timeout: timeout,
+            headers: headers,
+            onLog: onLog,
+          );
+    if (resolvedStateId == null) return null;
+
+    final resolvedDistrictId = storedDistrictId.isNotEmpty
+        ? storedDistrictId
+        : await _fetchDistrictId(
+            stateId: resolvedStateId,
+            province: province,
+            district: district,
+            districtKey: districtKey,
+            timeout: timeout,
+            headers: headers,
+            onLog: onLog,
+          );
+    if (resolvedDistrictId == null) return null;
+
+    _stateIdCache[cachePrefix] = resolvedStateId;
+    _districtIdCache['$cachePrefix|$districtKey'] = resolvedDistrictId;
+    return DiyanetIds(
+      stateId: resolvedStateId,
+      districtId: resolvedDistrictId,
     );
+  }
 
+  String _resolveCountryId(String? countryId, String fallback) {
+    final value = countryId?.trim() ?? '';
+    return value.isEmpty ? fallback : value;
+  }
+
+  Future<String?> _fetchStateId({
+    required String countryId,
+    required String province,
+    required String provinceKey,
+    required Duration timeout,
+    required Map<String, String> headers,
+    void Function(String message)? onLog,
+  }) async {
+    final config = ConfigRegistry.dataSources.diyanet;
+    final uri = Uri.parse('${config.baseUrl}/api/locations/states').replace(
+      queryParameters: <String, String>{'countryId': countryId},
+    );
     try {
-      final statesResponse = await http.get(statesUri, headers: headers).timeout(timeout);
-      if (statesResponse.statusCode != 200) {
-        onLog?.call('[Diyanet] states status=${statesResponse.statusCode}');
+      final response = await http.get(uri, headers: headers).timeout(timeout);
+      if (response.statusCode != 200) {
+        onLog?.call('[Diyanet] states status=${response.statusCode}');
         return null;
       }
-      final statesPayload = jsonDecode(statesResponse.body) as Map<String, dynamic>;
-      final statesData = statesPayload['data'];
-      if (statesData is! List) {
-        return null;
-      }
-      final stateId = findDiyanetEntryIdByNormalizedName(statesData, provinceKey);
-      if (stateId == null) {
-        onLog?.call('[Diyanet] state not found for $province');
-        return null;
-      }
+      final payload = jsonDecode(response.body) as Map<String, dynamic>;
+      final data = payload['data'];
+      if (data is! List) return null;
+      final id = findDiyanetEntryIdByNormalizedName(data, provinceKey);
+      if (id == null) onLog?.call('[Diyanet] state not found for $province');
+      return id;
+    } catch (_) {
+      return null;
+    }
+  }
 
-      final districtsUri = Uri.parse('${config.baseUrl}/api/locations/districts').replace(
-        queryParameters: <String, String>{'stateId': stateId},
-      );
-      final districtsResponse = await http
-          .get(districtsUri, headers: headers)
-          .timeout(timeout);
-      if (districtsResponse.statusCode != 200) {
-        onLog?.call('[Diyanet] districts status=${districtsResponse.statusCode}');
+  Future<String?> _fetchDistrictId({
+    required String stateId,
+    required String province,
+    required String district,
+    required String districtKey,
+    required Duration timeout,
+    required Map<String, String> headers,
+    void Function(String message)? onLog,
+  }) async {
+    final config = ConfigRegistry.dataSources.diyanet;
+    final uri = Uri.parse('${config.baseUrl}/api/locations/districts').replace(
+      queryParameters: <String, String>{'stateId': stateId},
+    );
+    try {
+      final response = await http.get(uri, headers: headers).timeout(timeout);
+      if (response.statusCode != 200) {
+        onLog?.call('[Diyanet] districts status=${response.statusCode}');
         return null;
       }
-      final districtsPayload = jsonDecode(districtsResponse.body) as Map<String, dynamic>;
-      final districtsData = districtsPayload['data'];
-      if (districtsData is! List) {
-        return null;
-      }
-      final districtId = findDiyanetEntryIdByNormalizedName(
-        districtsData,
-        districtKey,
-      );
-      if (districtId == null) {
+      final payload = jsonDecode(response.body) as Map<String, dynamic>;
+      final data = payload['data'];
+      if (data is! List) return null;
+      final id = findDiyanetEntryIdByNormalizedName(data, districtKey);
+      if (id == null) {
         onLog?.call('[Diyanet] district not found for $province/$district');
-        return null;
       }
-
-      _stateIdCache[cachePrefix] = stateId;
-      _districtIdCache['$cachePrefix|$districtKey'] = districtId;
-      return DiyanetIds(stateId: stateId, districtId: districtId);
+      return id;
     } catch (_) {
       return null;
     }

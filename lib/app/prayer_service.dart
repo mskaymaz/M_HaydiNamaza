@@ -56,9 +56,7 @@ class PrayerService {
            aladhanPrayerTimesClient ?? AladhanPrayerTimesClient();
 
   void _log(String message) {
-    if (kDebugMode) {
-      debugPrint(message);
-    }
+    if (kDebugMode) debugPrint(message);
   }
 
   Future<PrayerTimes> calculateToday({
@@ -159,9 +157,7 @@ class PrayerService {
       date: date,
       calculationParameters: params,
     );
-    if (cached != null) {
-      return cached;
-    }
+    if (cached != null) return cached;
 
     final fresh = await _calculateFresh(
       location: location,
@@ -190,55 +186,85 @@ class PrayerService {
     bool allowRemote = true,
   }) async {
     if (!allowRemote) {
-      _log('[Calc] local engine remote disabled');
-      return _engine.calculate(
-        date: date,
-        coordinates: Coordinates(latitude, longitude),
-        timeZone: timeZone,
-        params: params,
-      );
+      return _calculateLocally(date, latitude, longitude, timeZone, params);
     }
 
     if (_isDiyanetMethod(methodCode)) {
-      if (allowDiyanet && _isSameLocalDay(date, DateTime.now())) {
-        final diyanetTimes = await _tryDiyanet(
-          location: location,
+      final diyanetTimes = await _tryDiyanetForToday(
+        allowDiyanet: allowDiyanet,
+        location: location,
+        date: date,
+        fallbackParams: params,
+      );
+      if (diyanetTimes != null) return diyanetTimes;
+      final cityTimes = await _tryAladhanByLocation(
+        date: date,
+        location: location,
+        methodCode: _aladhanMethodCodeFor(methodCode),
+        school: _aladhanSchoolFor(params),
+        fallbackParams: params,
+      );
+      if (cityTimes != null) return cityTimes;
+    } else if (_isAladhanBackedMethod(methodCode)) {
+      if (location.hasUsableCoordinates) {
+        final remoteTimes = await _tryAladhan(
           date: date,
+          latitude: latitude,
+          longitude: longitude,
+          methodCode: methodCode,
+          school: _aladhanSchoolFor(params),
           fallbackParams: params,
         );
-        if (diyanetTimes != null) {
-          _log('[Diyanet] ${location.province}/${location.district} '
-              'Fajr ${formatPrayerTimeHourMinute(diyanetTimes.fajr)} '
-              'Sunrise ${formatPrayerTimeHourMinute(diyanetTimes.sunrise)} '
-              'Dhuhr ${formatPrayerTimeHourMinute(diyanetTimes.dhuhr)} '
-              'Asr ${formatPrayerTimeHourMinute(diyanetTimes.asr)} '
-              'Maghrib ${formatPrayerTimeHourMinute(diyanetTimes.maghrib)} '
-              'Isha ${formatPrayerTimeHourMinute(diyanetTimes.isha)}');
-          return diyanetTimes;
-        }
+        if (remoteTimes != null) return remoteTimes;
       }
-    } else if (_isAladhanBackedMethod(methodCode)) {
-      final remoteTimes = await _tryAladhan(
+      final cityTimes = await _tryAladhanByLocation(
         date: date,
-        latitude: latitude,
-        longitude: longitude,
+        location: location,
         methodCode: methodCode,
         school: _aladhanSchoolFor(params),
         fallbackParams: params,
       );
-      if (remoteTimes != null) {
-        _log('[Aladhan:$methodCode] '
-            'Fajr ${formatPrayerTimeHourMinute(remoteTimes.fajr)} '
-            'Sunrise ${formatPrayerTimeHourMinute(remoteTimes.sunrise)} '
-            'Dhuhr ${formatPrayerTimeHourMinute(remoteTimes.dhuhr)} '
-            'Asr ${formatPrayerTimeHourMinute(remoteTimes.asr)} '
-            'Maghrib ${formatPrayerTimeHourMinute(remoteTimes.maghrib)} '
-            'Isha ${formatPrayerTimeHourMinute(remoteTimes.isha)}');
-        return remoteTimes;
-      }
+      if (cityTimes != null) return cityTimes;
+    } else if (!location.hasUsableCoordinates && _canUseDiyanetLocation(location)) {
+      final diyanetTimes = await _tryDiyanetForToday(
+        allowDiyanet: allowDiyanet,
+        location: location,
+        date: date,
+        fallbackParams: params,
+      );
+      if (diyanetTimes != null) return diyanetTimes;
+      final cityTimes = await _tryAladhanByLocation(
+        date: date,
+        location: location,
+        methodCode: _aladhanMethodCodeFor(methodCode),
+        school: _aladhanSchoolFor(params),
+        fallbackParams: params,
+      );
+      if (cityTimes != null) return cityTimes;
+    }
+
+    if (!location.hasUsableCoordinates) {
+      final cityTimes = await _tryAladhanByLocation(
+        date: date,
+        location: location,
+        methodCode: _aladhanMethodCodeFor(methodCode),
+        school: _aladhanSchoolFor(params),
+        fallbackParams: params,
+      );
+      if (cityTimes != null) return cityTimes;
     }
 
     _log('[Calc] fallback local engine');
+    return _calculateLocally(date, latitude, longitude, timeZone, params);
+  }
+
+  PrayerTimes _calculateLocally(
+    DateTime date,
+    double latitude,
+    double longitude,
+    String timeZone,
+    CalculationParameters params,
+  ) {
     return _engine.calculate(
       date: date,
       coordinates: Coordinates(latitude, longitude),
@@ -247,12 +273,40 @@ class PrayerService {
     );
   }
 
+  Future<PrayerTimes?> _tryDiyanetForToday({
+    required bool allowDiyanet,
+    required LocationData location,
+    required DateTime date,
+    required CalculationParameters fallbackParams,
+  }) async {
+    if (!allowDiyanet || !_isSameLocalDay(date, DateTime.now())) return null;
+    final times = await _tryDiyanet(
+      location: location,
+      date: date,
+      fallbackParams: fallbackParams,
+    );
+    if (times != null) _logTimes('[Diyanet]', location, times);
+    return times;
+  }
+
   bool _isDiyanetMethod(String methodCode) {
     return methodCode == 'diyanet' || methodCode == 'diyanet_tabanli';
   }
 
   bool _isAladhanBackedMethod(String methodCode) {
     return ConfigRegistry.dataSources.aladhan.methodIds.containsKey(methodCode);
+  }
+
+  String _aladhanMethodCodeFor(String methodCode) {
+    if (_isAladhanBackedMethod(methodCode)) return methodCode;
+    return 'aladhan';
+  }
+
+  bool _canUseDiyanetLocation(LocationData location) {
+    return location.province.trim().isNotEmpty &&
+        location.district.trim().isNotEmpty &&
+        (location.countryId == null ||
+            location.countryId == ConfigRegistry.dataSources.diyanet.countryId);
   }
 
   bool _isSameLocalDay(DateTime left, DateTime right) {
@@ -273,9 +327,7 @@ class PrayerService {
     required int school,
     required CalculationParameters fallbackParams,
   }) async {
-    if (!latitude.isFinite || !longitude.isFinite) {
-      return null;
-    }
+    if (!latitude.isFinite || !longitude.isFinite) return null;
     final daily = await _aladhanPrayerTimesClient.fetchDaily(
       date: date,
       latitude: latitude,
@@ -285,17 +337,64 @@ class PrayerService {
       timeout: _aladhanTimeout,
       headers: _diyanetHeaders,
     );
-    if (daily == null) {
-      return null;
-    }
-
-    return PrayerTimesMapper.fromAladhanDaily(
+    if (daily == null) return null;
+    final times = PrayerTimesMapper.fromAladhanDaily(
       daily: daily,
       date: date,
       latitude: latitude,
       longitude: longitude,
       calculationParameters: fallbackParams,
     );
+    _logTimes('[Aladhan:$methodCode coordinates]', null, times);
+    return times;
+  }
+
+  Future<PrayerTimes?> _tryAladhanByLocation({
+    required DateTime date,
+    required LocationData location,
+    required String methodCode,
+    required int school,
+    required CalculationParameters fallbackParams,
+  }) async {
+    if (!_isAladhanBackedMethod(methodCode)) return null;
+    final country = _aladhanCountryName(location);
+    final candidates = <String>[
+      location.district.trim(),
+      location.province.trim(),
+    ].where((value) => value.isNotEmpty).toSet().toList();
+    for (final city in candidates) {
+      final daily = await _aladhanPrayerTimesClient.fetchDailyByCity(
+        date: date,
+        city: city,
+        country: country,
+        methodCode: methodCode,
+        school: school,
+        timeout: _aladhanTimeout,
+        headers: _diyanetHeaders,
+      );
+      if (daily == null) continue;
+      final times = PrayerTimesMapper.fromAladhanDaily(
+        daily: daily,
+        date: date,
+        latitude: double.tryParse(location.latitude) ?? 0,
+        longitude: double.tryParse(location.longitude) ?? 0,
+        calculationParameters: fallbackParams,
+      );
+      _logTimes('[Aladhan:$methodCode city=$city]', location, times);
+      return times;
+    }
+    return null;
+  }
+
+  String _aladhanCountryName(LocationData location) {
+    final countryName = (location.countryName ?? '').trim();
+    final normalized = normalizePrayerLocationName(countryName);
+    if (location.countryId == ConfigRegistry.dataSources.diyanet.countryId ||
+        normalized == 'TURKIYE' ||
+        normalized == 'TURKEY') {
+      return 'Turkey';
+    }
+    return countryName.isEmpty ? 'Turkey' : countryName;
   }
 
   Future<PrayerTimes?> _tryDiyanet({
@@ -308,6 +407,8 @@ class PrayerService {
     }
     final ids = await _diyanetLocationIdResolver.resolve(
       countryId: location.countryId,
+      stateId: location.stateId,
+      districtId: location.districtId,
       province: location.province,
       district: location.district,
       timeout: _diyanetTimeout,
@@ -331,10 +432,7 @@ class PrayerService {
         headers: _diyanetHeaders,
         onLog: _log,
       );
-      if (daily == null) {
-        return null;
-      }
-
+      if (daily == null) return null;
       return PrayerTimesMapper.fromDiyanetDaily(
         daily: daily,
         location: location,
@@ -345,4 +443,16 @@ class PrayerService {
     }
   }
 
+  void _logTimes(String source, LocationData? location, PrayerTimes times) {
+    final locationLabel = location == null
+        ? ''
+        : ' ${location.province}/${location.district}';
+    _log('$source$locationLabel '
+        'Fajr ${formatPrayerTimeHourMinute(times.fajr)} '
+        'Sunrise ${formatPrayerTimeHourMinute(times.sunrise)} '
+        'Dhuhr ${formatPrayerTimeHourMinute(times.dhuhr)} '
+        'Asr ${formatPrayerTimeHourMinute(times.asr)} '
+        'Maghrib ${formatPrayerTimeHourMinute(times.maghrib)} '
+        'Isha ${formatPrayerTimeHourMinute(times.isha)}');
+  }
 }

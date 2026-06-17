@@ -31,7 +31,7 @@ String? findDiyanetEntryIdByNormalizedName(
     final name = entry['name'] ?? entry['name_en'];
     if (name is! String) continue;
     if (normalizePrayerLocationName(name) != normalizedName) continue;
-    final id = entry['_id'];
+    final id = entry['_id'] ?? entry['id'];
     if (id is String) return id;
     if (id is int) return id.toString();
   }

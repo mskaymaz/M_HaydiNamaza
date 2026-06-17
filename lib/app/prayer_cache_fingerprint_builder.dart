@@ -16,6 +16,8 @@ class PrayerCacheFingerprintBuilder {
         '${date.month.toString().padLeft(2, '0')}-'
         '${date.day.toString().padLeft(2, '0')}';
     final countryId = (location.countryId ?? '').trim();
+    final stateId = (location.stateId ?? '').trim();
+    final districtId = (location.districtId ?? '').trim();
     final province = normalizePrayerLocationName(location.province);
     final district = normalizePrayerLocationName(location.district);
     final lat = latitude.toStringAsFixed(4);
@@ -28,7 +30,8 @@ class PrayerCacheFingerprintBuilder {
       advancedSettings.maghribOffsetMinutes,
       advancedSettings.ishaOffsetMinutes,
     ].join(',');
-    return '$dayKey|$methodCode|$timeZone|$countryId|$province|$district|$lat|$lon'
+    return '$dayKey|$methodCode|$timeZone|$countryId|$stateId|$districtId|'
+        '$province|$district|$lat|$lon'
         '|${advancedSettings.madhabCode}|${advancedSettings.highLatitudeRuleCode}'
         '|${advancedSettings.shafaqCode}|${advancedSettings.roundingCode}|$offsets';
   }

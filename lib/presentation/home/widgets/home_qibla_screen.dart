@@ -7,11 +7,17 @@ import 'package:geolocator/geolocator.dart';
 import '../../../app/location_storage.dart';
 import '../../../features/qibla/qibla_bearing_calculator.dart';
 import '../../../features/qibla/qibla_constants.dart';
+import '../../shared/app_help_tooltip.dart';
 
 class HomeQiblaScreen extends StatefulWidget {
   final LocationData? location;
+  final bool showHelpBalloons;
 
-  const HomeQiblaScreen({super.key, required this.location});
+  const HomeQiblaScreen({
+    super.key,
+    required this.location,
+    this.showHelpBalloons = false,
+  });
 
   @override
   State<HomeQiblaScreen> createState() => _HomeQiblaScreenState();
@@ -126,7 +132,18 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
         : null;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Kıble Yönü')),
+      appBar: AppBar(
+        title: const Text('Kıble Yönü'),
+        actions: [
+          AppHelpTooltip(
+            visible: widget.showHelpBalloons,
+            title: 'Kıble yönü',
+            message:
+                'Telefonu düz tutun ve yeşil oku takip edin. Konum bilgisi varsa ok Kâbe yönünü gösterir. Konum alınamazsa ekran yalnızca pusula sensörünü referans alır. Manyetik alanlardan uzak durmak ve telefonu sekiz çizerek kalibre etmek doğruluğu artırabilir.',
+          ),
+          const SizedBox(width: 8),
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(

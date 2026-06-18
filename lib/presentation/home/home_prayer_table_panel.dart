@@ -6,6 +6,7 @@ extension _HomePrayerTableInfoPanel on _HomeScreenState {
     required Color cizgiColor,
     required Color panelColor,
     required double maxHeight,
+    required bool showHelpBalloons,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -21,6 +22,7 @@ extension _HomePrayerTableInfoPanel on _HomeScreenState {
               panelColor: panelColor,
               maxHeight: maxHeight,
               onCycleContentTap: _cycleDailyContent,
+              showHelpBalloons: showHelpBalloons,
             );
           },
         ),
@@ -34,6 +36,7 @@ extension _HomePrayerTableInfoPanel on _HomeScreenState {
           onWeek: () => _loadWeeklyPrayerTable(data),
           onThirtyDays: () => _loadThirtyDayPrayerTable(data),
           onRange: () => _pickPrayerTableRange(data),
+          showHelpBalloons: showHelpBalloons,
         ),
       ],
     );
@@ -49,6 +52,7 @@ class _PrayerTimesTablePanel extends StatelessWidget {
   final VoidCallback onWeek;
   final VoidCallback onThirtyDays;
   final VoidCallback onRange;
+  final bool showHelpBalloons;
 
   const _PrayerTimesTablePanel({
     required this.mode,
@@ -59,6 +63,7 @@ class _PrayerTimesTablePanel extends StatelessWidget {
     required this.onWeek,
     required this.onThirtyDays,
     required this.onRange,
+    required this.showHelpBalloons,
   });
 
   @override
@@ -89,6 +94,7 @@ class _PrayerTimesTablePanel extends StatelessWidget {
             onWeek: onWeek,
             onThirtyDays: onThirtyDays,
             onRange: onRange,
+            showHelpBalloons: showHelpBalloons,
           ),
           const SizedBox(height: 8),
           Flexible(child: _PrayerTableBody(future: future)),
@@ -104,6 +110,7 @@ class _PrayerTableHeader extends StatelessWidget {
   final VoidCallback onWeek;
   final VoidCallback onThirtyDays;
   final VoidCallback onRange;
+  final bool showHelpBalloons;
 
   const _PrayerTableHeader({
     required this.mode,
@@ -111,6 +118,7 @@ class _PrayerTableHeader extends StatelessWidget {
     required this.onWeek,
     required this.onThirtyDays,
     required this.onRange,
+    required this.showHelpBalloons,
   });
 
   @override
@@ -125,6 +133,14 @@ class _PrayerTableHeader extends StatelessWidget {
         Row(
           children: [
             Expanded(child: Text('Vakit Tablosu', style: titleStyle)),
+            AppHelpTooltip(
+              visible: showHelpBalloons,
+              title: 'Vakit Tablosu',
+              message:
+                  'Bu bölüm seçili konum için haftalık, 30 günlük veya özel tarih aralığındaki namaz vakitlerini getirir. Aralık seçeneği başlangıç ve bitiş tarihi belirlemenizi sağlar.',
+              iconSize: 18,
+              tapSize: 30,
+            ),
             if (range != null)
               Text(
                 _rangeLabel(range!),

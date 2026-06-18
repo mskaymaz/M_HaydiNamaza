@@ -9,6 +9,7 @@ import '../location_label_helpers.dart';
 import '../location_models.dart';
 import '../location_name_formatters.dart';
 import '../location_selection_item_builders.dart';
+import '../../shared/app_help_tooltip.dart';
 import 'location_add_favorite_button.dart';
 import 'location_coordinates_section.dart';
 import 'location_current_location_tile.dart';
@@ -19,6 +20,7 @@ import 'location_selection_composer.dart';
 class LocationScreenContent extends StatelessWidget {
   final UiPaletteConfig palette;
   final SettingsPanelsConfig ui;
+  final bool showHelpBalloons;
   final bool useCurrentLocation;
   final bool locating;
   final bool loadingCountries;
@@ -57,6 +59,7 @@ class LocationScreenContent extends StatelessWidget {
     super.key,
     required this.palette,
     required this.ui,
+    required this.showHelpBalloons,
     required this.useCurrentLocation,
     required this.locating,
     required this.loadingCountries,
@@ -110,17 +113,35 @@ class LocationScreenContent extends StatelessWidget {
         LocationSectionCard(
           style: ui.panel,
           padding: ui.sectionPadding,
-          child: LocationCurrentLocationTile(
-            useCurrentLocation: useCurrentLocation,
-            locating: locating,
-            onChanged: (value) => onUseCurrentLocationChanged(value ?? false),
+          child: Stack(
+            children: [
+              LocationCurrentLocationTile(
+                useCurrentLocation: useCurrentLocation,
+                locating: locating,
+                onChanged: (value) => onUseCurrentLocationChanged(value ?? false),
+              ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: AppHelpTooltip(
+                  visible: showHelpBalloons,
+                  title: 'Mevcut konumu kullan',
+                  message:
+                      'Bu seçenek açıkken uygulama cihaz konumunu almaya çalışır. Konum alınamazsa ülke, il ve ilçe seçimlerini elle yapabilirsiniz.',
+                  iconSize: 18,
+                  tapSize: 30,
+                ),
+              ),
+            ],
           ),
         ),
         SizedBox(height: ui.sectionGap),
-        LocationSelectionComposer(
-          ui: ui,
-          palette: palette,
-          title: l10n.locationSelectLabel,
+        Stack(
+          children: [
+            LocationSelectionComposer(
+              ui: ui,
+              palette: palette,
+              title: l10n.locationSelectLabel,
           countryLabel: l10n.locationCountryLabel,
           cityLabel: l10n.locationCityLabel,
           districtLabel: l10n.locationDistrictLabel,
@@ -156,18 +177,48 @@ class LocationScreenContent extends StatelessWidget {
           onDistrictChanged: loadingDistricts
               ? null
               : _forward(onDistrictChanged),
-          listLoadError: listLoadError,
-          onRetry: onRetry,
+              listLoadError: listLoadError,
+              onRetry: onRetry,
+            ),
+            Positioned(
+              top: 8,
+              right: 8,
+              child: AppHelpTooltip(
+                visible: showHelpBalloons,
+                title: 'Konum seçimi',
+                message:
+                    'İl veya ilçe arayıp Bul düğmesiyle hızlı seçim yapabilirsiniz. İsterseniz ülke, il ve ilçe listelerini sırayla seçin. Seçim değiştiğinde namaz vakitleri ve widget sayacı yeni konuma göre güncellenir.',
+                iconSize: 18,
+                tapSize: 30,
+              ),
+            ),
+          ],
         ),
         SizedBox(height: ui.sectionGap),
-        LocationCoordinatesSection(
-          ui: ui,
+        Stack(
+          children: [
+            LocationCoordinatesSection(
+              ui: ui,
           palette: palette,
           latitudeLabel: l10n.locationLatitudeLabel,
           longitudeLabel: l10n.locationLongitudeLabel,
           latitudeController: latController,
           longitudeController: lonController,
-          onSave: () => unawaited(Future<void>.microtask(onSaveCoordinates)),
+              onSave: () => unawaited(Future<void>.microtask(onSaveCoordinates)),
+            ),
+            Positioned(
+              top: 8,
+              right: 8,
+              child: AppHelpTooltip(
+                visible: showHelpBalloons,
+                title: 'Koordinat bilgisi',
+                message:
+                    'Enlem ve boylam alanları seçili konumun koordinatlarını gösterir. Gerekirse elle düzenleyip kaydedebilirsiniz. Kıble yönü ve vakit hesapları bu konum bilgisine göre çalışır.',
+                iconSize: 18,
+                tapSize: 30,
+              ),
+            ),
+          ],
         ),
         SizedBox(height: ui.sectionGap),
         LocationAddFavoriteButton(

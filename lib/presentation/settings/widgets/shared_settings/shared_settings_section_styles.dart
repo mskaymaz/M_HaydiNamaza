@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/app_help_tooltip.dart';
+
 const Color sharedSettingsContentSurface = Color(0xFFF4F4F4);
 const Color sharedSettingsUpdateHeader = Color(0xFFE6D5F0);
 const Color sharedSettingsOtherAppsHeader = Color(0xFFF2D9E8);
@@ -19,6 +21,8 @@ class SharedSettingsSectionCard extends StatelessWidget {
   final bool initiallyExpanded;
   final ValueChanged<bool>? onExpansionChanged;
   final ExpansibleController? controller;
+  final bool showHelpBalloons;
+  final String? helpMessage;
 
   const SharedSettingsSectionCard({
     super.key,
@@ -28,6 +32,8 @@ class SharedSettingsSectionCard extends StatelessWidget {
     this.initiallyExpanded = false,
     this.onExpansionChanged,
     this.controller,
+    this.showHelpBalloons = false,
+    this.helpMessage,
   });
 
   @override
@@ -53,18 +59,35 @@ class SharedSettingsSectionCard extends StatelessWidget {
             onExpansionChanged: onExpansionChanged,
             title: SizedBox(
               height: sharedSettingsHeaderRowHeight,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 25),
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 25, right: 34),
+                      child: Text(
+                        title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  Positioned(
+                    right: -4,
+                    top: 2,
+                    child: AppHelpTooltip(
+                      visible: showHelpBalloons,
+                      title: title,
+                      message: helpMessage ?? '',
+                      iconSize: 18,
+                      tapSize: 30,
+                    ),
+                  ),
+                ],
               ),
             ),
             children: [

@@ -5,6 +5,7 @@ import '../../../../app/reminder_text_settings_storage.dart';
 import '../../../../core/config/config_registry.dart';
 import '../../settings_audio_mode_texts.dart';
 import '../settings_color_action_widgets.dart';
+import '../../../shared/app_help_tooltip.dart';
 import '../settings_reminder_fields.dart';
 import '../settings_adhan_selection_section.dart';
 import 'shared_settings_section_styles.dart';
@@ -139,11 +140,19 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     return SharedSettingsSectionCard(
       title: 'Hatırlatma Ayarları',
       headerColor: sharedSettingsReminderOptionsHeader,
+      showHelpBalloons: showHelpBalloons,
+      helpMessage:
+          'Bu bölüm vakit satırlarında görünen sesli hatırlatma, ezan ve titreşim seçeneklerini yönetir. Her vakit için ayrı ezan seçebilir, sesli hatırlatma ve titreşim sürelerini buradan ayarlayabilirsiniz.',
       child: _sectionChild(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _subHeader('Hatırlatma Seçenekleri', sharedSettingsReminderOptionsHeader),
+            _subHeader(
+              title: 'Hatırlatma Seçenekleri',
+              color: sharedSettingsReminderOptionsHeader,
+              helpMessage:
+                  'Ana ekrandaki vakit satırlarında sesli hatırlatma, ezan ve titreşim simgelerinin görünüp görünmeyeceğini belirler.',
+            ),
             Row(
               children: [
                 Expanded(child: _toggle('Sesli', showVoiceIcon, onVoiceToggleChanged)),
@@ -154,7 +163,12 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 18),
-            _subHeader('Titreşimle Uyarı Ayarları', sharedSettingsVibrationHeader),
+            _subHeader(
+              title: 'Titreşimle Uyarı Ayarları',
+              color: sharedSettingsVibrationHeader,
+              helpMessage:
+                  'Titreşimin kaç saniye süreceğini ve tekrarlar arasındaki bekleme süresini buradan ayarlayabilirsiniz.',
+            ),
             Row(
               children: [
                 Expanded(
@@ -175,10 +189,20 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 18),
-            _subHeader('Sesli Hatırlatma', sharedSettingsVoiceHeader),
+            _subHeader(
+              title: 'Sesli Hatırlatma',
+              color: sharedSettingsVoiceHeader,
+              helpMessage:
+                  'Sesli hatırlatma için metinden sese okuma veya seçtiğiniz yerel ses dosyasını kullanabilirsiniz. Sesli Test düğmesi ayarı denemenizi sağlar.',
+            ),
             _voiceSettings(context),
             const SizedBox(height: 18),
-            _subHeader('Ezan Okuma', sharedSettingsVisualHeader),
+            _subHeader(
+              title: 'Ezan Okuma',
+              color: sharedSettingsVisualHeader,
+              helpMessage:
+                  'Önce vakti seçin. Sonra varsayılan ezanı, telefondan seçeceğiniz yerel dosyayı veya indirilebilir ezan kütüphanesindeki seçenekleri o vakit için kullanabilirsiniz.',
+            ),
             SettingsAdhanSelectionSection(
               selections: adhanSelections,
               downloadedAdhanPaths: downloadedAdhanPaths,
@@ -262,6 +286,9 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     return SharedSettingsSectionCard(
       title: 'Arayüz Ayarları',
       headerColor: sharedSettingsMergedColorsHeader,
+      showHelpBalloons: showHelpBalloons,
+      helpMessage:
+          'Bu bölüm ana ekran renklerini ve yardım ikonlarının görünürlüğünü düzenler. Renk değişiklikleri ana sayfaya Uygula düğmesiyle yansır.',
       child: _sectionChild(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,18 +363,35 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     );
   }
 
-  Widget _subHeader(String title, Color color) {
+  Widget _subHeader({
+    required String title,
+    required Color color,
+    required String helpMessage,
+  }) {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.7),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Text(
-        title,
-        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+            ),
+          ),
+          AppHelpTooltip(
+            visible: showHelpBalloons,
+            title: title,
+            message: helpMessage,
+            iconSize: 18,
+            tapSize: 30,
+          ),
+        ],
       ),
     );
   }

@@ -7,21 +7,27 @@ import 'shared_settings/settings_shared_support_section.dart';
 import 'shared_settings/settings_shared_update_section.dart';
 
 class SettingsSharedSectionsList extends StatelessWidget {
-  const SettingsSharedSectionsList({super.key});
+  final bool showHelpBalloons;
+
+  const SettingsSharedSectionsList({
+    super.key,
+    required this.showHelpBalloons,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        SettingsSharedAboutSection(),
+        SettingsSharedAboutSection(showHelpBalloons: showHelpBalloons),
         SizedBox(height: 20),
-        SettingsSharedUpdateSection(),
+        SettingsSharedUpdateSection(showHelpBalloons: showHelpBalloons),
         SizedBox(height: 20),
         SettingsSharedOtherAppsSection(
-          remoteClient: SharedSettingsRemoteClient(),
+          remoteClient: const SharedSettingsRemoteClient(),
+          showHelpBalloons: showHelpBalloons,
         ),
         SizedBox(height: 20),
-        SettingsSharedSupportSection(),
+        SettingsSharedSupportSection(showHelpBalloons: showHelpBalloons),
       ],
     );
   }

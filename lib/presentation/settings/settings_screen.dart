@@ -208,6 +208,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   builder: (_) => LocationScreen(
                     initial: _location,
                     uiPaletteController: widget.uiPaletteController,
+                    showHelpBalloons: _showHelpBalloons,
                   ),
                 ),
               );
@@ -218,6 +219,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             calculationItemPanelStyle: ui.itemPanel,
             calculationTitle: l10n.calculationMethodLabel,
             calculationSubtitle: methodSubtitleForCode(_methodCode, l10n),
+            showHelpBalloons: _showHelpBalloons,
             onOpenCalculationMethod: () async {
               final changed = await Navigator.of(context).push<bool>(
                 MaterialPageRoute(
@@ -361,7 +363,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           Padding(
             padding: ui.screenPadding.copyWith(top: 0),
-            child: const SettingsSharedSectionsList(),
+            child: SettingsSharedSectionsList(
+              showHelpBalloons: _showHelpBalloons,
+            ),
           ),
         ],
       ),

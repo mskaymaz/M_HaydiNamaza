@@ -19,11 +19,13 @@ part 'location_screen_storage.dart';
 class LocationScreen extends StatefulWidget {
   final LocationData? initial;
   final UiPaletteController uiPaletteController;
+  final bool showHelpBalloons;
 
   const LocationScreen({
     super.key,
     this.initial,
     required this.uiPaletteController,
+    this.showHelpBalloons = false,
   });
 
   @override
@@ -418,6 +420,7 @@ class _LocationScreenState extends State<LocationScreen> {
       body: LocationScreenContent(
         palette: palette,
         ui: ui,
+        showHelpBalloons: widget.showHelpBalloons,
         useCurrentLocation: _useCurrentLocation,
         locating: _locating,
         loadingCountries: _loadingCountries,

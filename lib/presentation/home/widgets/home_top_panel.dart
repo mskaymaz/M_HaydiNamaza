@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../../core/config/config_registry.dart';
+import '../../shared/app_help_tooltip.dart';
 
 const double _locationSettingsIconSize = 27.0;
 const double _locationSettingsTapSize = 50.0;
@@ -38,6 +39,7 @@ class HomeTopPanel extends StatelessWidget {
   final double settingsIconOpacity;
   final HomeTypography typography;
   final Color cizgiColor;
+  final bool showHelpBalloons;
 
   const HomeTopPanel({
     super.key,
@@ -56,6 +58,7 @@ class HomeTopPanel extends StatelessWidget {
     required this.settingsIconOpacity,
     required this.typography,
     required this.cizgiColor,
+    this.showHelpBalloons = false,
   });
 
   @override
@@ -92,15 +95,18 @@ class HomeTopPanel extends StatelessWidget {
           borderRadius: style.borderRadius,
           boxShadow: style.shadows,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
+          clipBehavior: Clip.none,
           children: [
-            SizedBox(
-              height: topRowHeight,
-              child: Stack(
-                children: [
-                  Align(
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: topRowHeight,
+                  child: Stack(
+                    children: [
+                      Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -281,6 +287,21 @@ class HomeTopPanel extends StatelessWidget {
                     ),
                   );
                 },
+              ),
+                ),
+              ],
+            ),
+            Positioned(
+              left: -6,
+              top: 38,
+              child: AppHelpTooltip(
+                visible: showHelpBalloons,
+                title: 'Ana panel',
+                message:
+                    'Bu üst panel seçili konumu, sıradaki vakti ve kalan süreyi gösterir. Konum yazısına dokunarak şehir/ilçe seçimini açabilirsiniz. Pusula ikonundan kıble yönüne, dişli ikonundan ayarlara ulaşabilirsiniz.',
+                color: cizgiColor,
+                iconSize: 19,
+                tapSize: 32,
               ),
             ),
           ],

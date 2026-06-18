@@ -8,10 +8,12 @@ import 'shared_settings_section_styles.dart';
 
 class SettingsSharedOtherAppsSection extends StatefulWidget {
   final SharedSettingsRemoteClient remoteClient;
+  final bool showHelpBalloons;
 
   const SettingsSharedOtherAppsSection({
     super.key,
     required this.remoteClient,
+    required this.showHelpBalloons,
   });
 
   @override
@@ -37,6 +39,9 @@ class _SettingsSharedOtherAppsSectionState
   Widget build(BuildContext context) {
     return SharedSettingsSectionCard(
       title: 'Diğer Uygulamalarımız',
+      showHelpBalloons: widget.showHelpBalloons,
+      helpMessage:
+          'Bu bölümde yer alan uygulamalar ekibimizin yapmış olduğu, ücretsiz ve reklamsız diğer tüm uygulamalara erişimi sağlar. Bu yapı aracılığıyla diğer uygulamalarımızı da indirebilirsiniz.',
       headerColor: sharedSettingsOtherAppsHeader,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(18, 15, 18, 15),

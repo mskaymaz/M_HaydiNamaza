@@ -1,4 +1,4 @@
-part of 'home_daily_content_panel.dart';
+﻿part of 'home_daily_content_panel.dart';
 
 extension _HomeDailyContentPanelTabs on _HomeDailyContentPanelState {
   Widget _buildPage({
@@ -13,48 +13,64 @@ extension _HomeDailyContentPanelTabs on _HomeDailyContentPanelState {
         children: [
           SizedBox(
             height: 36,
-            child: Row(
+            child: Stack(
               children: [
-                const SizedBox(width: 25),
-                Expanded(
-                  child: Text(
-                    heading,
-                    textAlign: TextAlign.left,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: _activeLanguage == 'ar' ? 23 : 20,
+                Row(
+                  children: [
+                    const SizedBox(width: 25),
+                    Expanded(
+                      child: Text(
+                        heading,
+                        textAlign: TextAlign.left,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                          fontSize: _activeLanguage == 'ar' ? 23 : 20,
+                        ),
+                      ),
                     ),
-                  ),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          _buildCycleButton(kind),
+                          const SizedBox(width: 6),
+                          _buildLanguageToggle(
+                            label: 'TR',
+                            selected: _activeLanguage == 'tr',
+                            onTap: () => _toggleLanguage('tr'),
+                          ),
+                          const SizedBox(width: 6),
+                          _buildLanguageToggle(
+                            label: 'EN',
+                            selected: _activeLanguage == 'en',
+                            onTap: () => _toggleLanguage('en'),
+                          ),
+                          const SizedBox(width: 6),
+                          _buildLanguageToggle(
+                            label: _HomeDailyContentPanelState._labelArabic,
+                            selected: _activeLanguage == 'ar',
+                            onTap: () => _toggleLanguage('ar'),
+                            fontSize: 13,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _buildCycleButton(kind),
-                      const SizedBox(width: 6),
-                      _buildLanguageToggle(
-                        label: 'TR',
-                        selected: _activeLanguage == 'tr',
-                        onTap: () => _toggleLanguage('tr'),
-                      ),
-                      const SizedBox(width: 6),
-                      _buildLanguageToggle(
-                        label: 'EN',
-                        selected: _activeLanguage == 'en',
-                        onTap: () => _toggleLanguage('en'),
-                      ),
-                      const SizedBox(width: 6),
-                      _buildLanguageToggle(
-                        label: _HomeDailyContentPanelState._labelArabic,
-                        selected: _activeLanguage == 'ar',
-                        onTap: () => _toggleLanguage('ar'),
-                        fontSize: 13,
-                      ),
-                    ],
+                Positioned(
+                  left: -5,
+                  top: -3,
+                  child: AppHelpTooltip(
+                    visible: widget.showHelpBalloons,
+                    title: 'Günlük içerik paneli',
+                    message:
+                        'Bu panel günün ayeti, hadisi, Esmâül Hüsnâ ve Allah’ın sıfatları arasında kaydırarak gezmenizi sağlar. TR, EN ve Arapça düğmeleri metin dilini değiştirir. Hoparlör simgesi görünen Türkçe metni sesli okur.',
+                    iconSize: 18,
+                    tapSize: 30,
                   ),
                 ),
               ],
@@ -350,3 +366,5 @@ extension _HomeDailyContentPanelTabs on _HomeDailyContentPanelState {
     );
   }
 }
+
+

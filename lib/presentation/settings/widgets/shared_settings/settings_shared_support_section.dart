@@ -7,7 +7,12 @@ import '../../../../features/shared_settings/shared_settings_support_bridge.dart
 import 'shared_settings_section_styles.dart';
 
 class SettingsSharedSupportSection extends StatefulWidget {
-  const SettingsSharedSupportSection({super.key});
+  final bool showHelpBalloons;
+
+  const SettingsSharedSupportSection({
+    super.key,
+    required this.showHelpBalloons,
+  });
 
   @override
   State<SettingsSharedSupportSection> createState() =>
@@ -41,6 +46,9 @@ class _SettingsSharedSupportSectionState
     return SharedSettingsSectionCard(
       key: ValueKey<String>('support_$_openRevision'),
       title: support.title,
+      showHelpBalloons: widget.showHelpBalloons,
+      helpMessage:
+          'Bu bölüm uygulamaya destek ve dua hatırlatma alanıdır. Dua Ediyorum düğmesi yalnızca ekrandaki teşekkür mesajını gösterir.',
       headerColor: sharedSettingsSupportHeader,
       controller: _controller,
       initiallyExpanded: _expanded,

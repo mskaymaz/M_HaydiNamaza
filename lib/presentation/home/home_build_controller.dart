@@ -281,6 +281,22 @@ extension _HomeBuildController on _HomeScreenState {
                                                                 ),
                                                         ),
                                                       ),
+                                                      Positioned(
+                                                        top: 8,
+                                                        left: 8,
+                                                        child: AppHelpTooltip(
+                                                          visible: _reminderSettings
+                                                              .showHelpBalloons,
+                                                          title: _showPrayerControlPanel
+                                                              ? 'Vakit paneli ayarları'
+                                                              : 'Vakit paneli',
+                                                          message: _showPrayerControlPanel
+                                                              ? 'Bu görünümde her vakit için sesli hatırlatma, ezan ve titreşim seçeneklerini satır satır düzenleyebilirsiniz. ✕ simgesine bastığınızda normal vakit listesine dönersiniz.'
+                                                              : 'Bu panel bugünün namaz vakitlerini ve aktif vakti gösterir. 🔔 simgesine bastığınızda vakit ayarları açılır. Paneli sağdan sola sürüklediğinizde seçili konum için sıradaki 7 günün vakitlerini görebilirsiniz. Yatay ekranda çift dokunuş panel genişliğini değiştirir.',
+                                                          iconSize: 19,
+                                                          tapSize: 32,
+                                                        ),
+                                                      ),
                                                       if (_showPrayerControlPanel)
                                                         Positioned(
                                                           top: 8,
@@ -390,6 +406,8 @@ extension _HomeBuildController on _HomeScreenState {
                                           ui.settingsIconOpacity,
                                       typography: ui.typography,
                                       cizgiColor: palette.cizgiColor,
+                                      showHelpBalloons:
+                                          _reminderSettings.showHelpBalloons,
                                     ),
                                   ),
                                   Positioned(
@@ -421,6 +439,8 @@ extension _HomeBuildController on _HomeScreenState {
                                               cizgiColor: palette.cizgiColor,
                                               panelColor: palette.zeminColor,
                                               maxHeight: infoPanelMaxHeight,
+                                              showHelpBalloons:
+                                                  _reminderSettings.showHelpBalloons,
                                             ),
                                           ),
                                         ),

@@ -8,7 +8,12 @@ import '../../../../features/shared_settings/shared_settings_remote_client.dart'
 import 'shared_settings_section_styles.dart';
 
 class SettingsSharedUpdateSection extends StatefulWidget {
-  const SettingsSharedUpdateSection({super.key});
+  final bool showHelpBalloons;
+
+  const SettingsSharedUpdateSection({
+    super.key,
+    required this.showHelpBalloons,
+  });
 
   @override
   State<SettingsSharedUpdateSection> createState() =>
@@ -39,6 +44,9 @@ class _SettingsSharedUpdateSectionState
     final config = kSharedSettingsAppConfig;
     return SharedSettingsSectionCard(
       title: 'Uygulama Bilgileri ve Güncelleme',
+      showHelpBalloons: widget.showHelpBalloons,
+      helpMessage:
+          'Bu bölüm mevcut sürüm bilgisini gösterir ve public dağıtım kaynağından yeni sürüm kontrolü yapar. Güncelleme varsa indirme bağlantısını açar.',
       headerColor: sharedSettingsUpdateHeader,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),

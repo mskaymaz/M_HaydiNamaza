@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../app/reminder_audio_service.dart';
 import '../../../features/daily_content/daily_content_models.dart';
 import '../../../features/daily_content/daily_content_selection_models.dart';
+import '../../shared/app_help_tooltip.dart';
 import 'home_daily_content_helpers.dart';
 import 'home_daily_content_note.dart';
 import 'home_daily_content_section.dart';
@@ -23,6 +24,7 @@ class HomeDailyContentPanel extends StatefulWidget {
   final Color panelColor;
   final double? maxHeight;
   final ValueChanged<DailyContentPanelKind>? onCycleContentTap;
+  final bool showHelpBalloons;
 
   const HomeDailyContentPanel({
     super.key,
@@ -33,6 +35,7 @@ class HomeDailyContentPanel extends StatefulWidget {
     required this.panelColor,
     this.maxHeight,
     this.onCycleContentTap,
+    this.showHelpBalloons = false,
   });
 
   @override

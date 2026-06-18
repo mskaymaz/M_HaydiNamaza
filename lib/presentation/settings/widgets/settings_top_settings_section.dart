@@ -16,6 +16,7 @@ class SettingsTopSettingsSection extends StatelessWidget {
   final SurfaceStyle calculationItemPanelStyle;
   final String calculationTitle;
   final String calculationSubtitle;
+  final bool showHelpBalloons;
   final Future<void> Function() onOpenCalculationMethod;
   final bool sortCustomPrayersByTime;
   final ValueChanged<bool?> onSortChanged;
@@ -33,6 +34,7 @@ class SettingsTopSettingsSection extends StatelessWidget {
     required this.calculationItemPanelStyle,
     required this.calculationTitle,
     required this.calculationSubtitle,
+    required this.showHelpBalloons,
     required this.onOpenCalculationMethod,
     required this.sortCustomPrayersByTime,
     required this.onSortChanged,
@@ -56,6 +58,7 @@ class SettingsTopSettingsSection extends StatelessWidget {
           itemPanelStyle: calculationItemPanelStyle,
           title: calculationTitle,
           subtitle: calculationSubtitle,
+          showHelpBalloons: showHelpBalloons,
           onTap: onOpenCalculationMethod,
         ),
         Padding(

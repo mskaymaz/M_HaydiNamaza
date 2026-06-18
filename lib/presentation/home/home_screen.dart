@@ -29,6 +29,7 @@ import '../../features/daily_content/daily_content_selection_models.dart';
 import '../../features/daily_content/daily_content_service.dart';
 import '../settings/location_screen.dart';
 import '../settings/settings_screen.dart';
+import '../shared/app_help_tooltip.dart';
 import 'home_date_text_helpers.dart';
 import 'widgets/home_daily_content_panel.dart';
 import 'widgets/home_presentational_widgets.dart';

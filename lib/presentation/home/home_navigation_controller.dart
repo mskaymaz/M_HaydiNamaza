@@ -19,7 +19,12 @@ extension _HomeNavigationController on _HomeScreenState {
 
   Future<void> _openQibla(LocationData? location) async {
     await Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => HomeQiblaScreen(location: location)),
+      MaterialPageRoute(
+        builder: (_) => HomeQiblaScreen(
+          location: location,
+          showHelpBalloons: _reminderSettings.showHelpBalloons,
+        ),
+      ),
     );
   }
 
@@ -38,6 +43,7 @@ extension _HomeNavigationController on _HomeScreenState {
         builder: (_) => LocationScreen(
           initial: location,
           uiPaletteController: widget.uiPaletteController,
+          showHelpBalloons: _reminderSettings.showHelpBalloons,
         ),
       ),
     );

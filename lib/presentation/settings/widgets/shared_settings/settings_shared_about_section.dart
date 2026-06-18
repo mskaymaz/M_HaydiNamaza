@@ -6,7 +6,12 @@ import '../../../../features/shared_settings/shared_settings_app_config.dart';
 import 'shared_settings_section_styles.dart';
 
 class SettingsSharedAboutSection extends StatelessWidget {
-  const SettingsSharedAboutSection({super.key});
+  final bool showHelpBalloons;
+
+  const SettingsSharedAboutSection({
+    super.key,
+    required this.showHelpBalloons,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,9 @@ class SettingsSharedAboutSection extends StatelessWidget {
 
     return SharedSettingsSectionCard(
       title: about.title,
+      showHelpBalloons: showHelpBalloons,
+      helpMessage:
+          'Bu bölüm uygulama hakkında kısa bilgi, proje bağlantısı ve iletişim adresini gösterir. Blog bağlantısını açabilir veya e-posta adresini kopyalayabilirsiniz.',
       headerColor: sharedSettingsAboutHeader,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15),

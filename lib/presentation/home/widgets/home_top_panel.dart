@@ -163,7 +163,7 @@ class HomeTopPanel extends StatelessWidget {
                               height:
                                   settingsIconSize * _qiblaCompassSizeFactor,
                             ),
-                            tooltip: 'Kible Yonu',
+                            tooltip: 'Kıble Yönü',
                             padding: EdgeInsets.zero,
                             constraints: BoxConstraints(
                               minWidth: _locationSettingsTapSize,

@@ -25,11 +25,11 @@ class SettingsLanguageLocationRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+      padding: const EdgeInsets.fromLTRB(16, 16, 15, 8),
       child: Row(
         children: [
           SizedBox(
-            width: 140,
+            width: 182,
             child: DropdownButtonFormField<String>(
               initialValue: initialLanguageCode,
               decoration: languageDecoration,
@@ -45,7 +45,7 @@ class SettingsLanguageLocationRow extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(width: 24),
+          const Spacer(),
           SizedBox(
             width: 142,
             child: OutlinedButton(

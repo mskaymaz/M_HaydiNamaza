@@ -126,7 +126,7 @@ class _SettingsAdhanSelectionSectionState
             onStopPreview: widget.onStopPreview,
             onDelete: () => widget.onDeleteDownloaded(option),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 3),
         ],
       ],
     );
@@ -165,22 +165,25 @@ class _SelectionSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.58),
+        color: const Color(0xFFE4F3E6).withValues(alpha: 0.95),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.black.withValues(alpha: 0.08)),
+        border: Border.all(color: const Color(0xFF1F7A3E).withValues(alpha: 0.32)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '${slot.label} için seçili ezan',
-            style: const TextStyle(fontWeight: FontWeight.w800),
+            style: const TextStyle(fontWeight: FontWeight.w900),
           ),
-          const SizedBox(height: 4),
-          Text(selection.label),
-          const SizedBox(height: 2),
+          const SizedBox(height: 3),
+          Text(
+            selection.label,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 1),
           Text(
             _sourceLabel(selection.source),
             style: Theme.of(context).textTheme.bodySmall,
@@ -259,6 +262,13 @@ class _LocalAdhanTile extends StatelessWidget {
     return _AdhanTileFrame(
       title: 'Yerel ezan dosyası',
       subtitle: isSelected ? selection.label : 'Telefondan ses dosyası seç.',
+      titleActions: [
+        _SmallActionButton(
+          icon: Icons.audio_file_rounded,
+          label: isSelected ? 'Değiştir' : 'Dosya Seç',
+          onPressed: isBusy ? null : onPick,
+        ),
+      ],
       children: [
         if (isSelected)
           _PreviewActionButton(
@@ -266,11 +276,6 @@ class _LocalAdhanTile extends StatelessWidget {
             onPreview: onPreview,
             onStopPreview: onStopPreview,
           ),
-        _SmallActionButton(
-          icon: Icons.audio_file_rounded,
-          label: isSelected ? 'Değiştir' : 'Dosya seç',
-          onPressed: isBusy ? null : onPick,
-        ),
         if (isSelected)
           _SmallActionButton(
             icon: Icons.delete_outline_rounded,
@@ -311,7 +316,9 @@ class _DownloadableAdhanTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return _AdhanTileFrame(
       title: option.label,
-      subtitle: isDownloaded ? 'Telefona indirildi.' : 'İndirilmedi.',
+      subtitle: isDownloaded ? 'Telefona indirildi' : 'İndirilmedi',
+      compact: true,
+      inlineSubtitle: true,
       children: [
         if (isDownloaded)
           _PreviewActionButton(
@@ -342,20 +349,32 @@ class _AdhanTileFrame extends StatelessWidget {
   final String title;
   final String subtitle;
   final List<Widget> children;
+  final List<Widget> titleActions;
+  final bool compact;
+  final bool inlineSubtitle;
 
   const _AdhanTileFrame({
     required this.title,
     required this.subtitle,
     required this.children,
+    this.titleActions = const [],
+    this.compact = false,
+    this.inlineSubtitle = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final titleStyle = compact
+        ? textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w800)
+        : const TextStyle(fontWeight: FontWeight.w800);
+    final subtitleStyle = textTheme.bodySmall;
+    final verticalPadding = compact ? 2.0 : 6.0;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: verticalPadding),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.52),
+        color: Colors.white.withValues(alpha: compact ? 0.44 : 0.52),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.black.withValues(alpha: 0.08)),
       ),
@@ -364,21 +383,33 @@ class _AdhanTileFrame extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.w800),
-                ),
-              ),
+              if (inlineSubtitle) ...[
+                Text(title, style: titleStyle),
+                const SizedBox(width: 20),
+                Flexible(child: Text(subtitle, style: subtitleStyle)),
+              ] else
+                Expanded(child: Text(title, style: titleStyle)),
+              if (titleActions.isNotEmpty) ...[
+                const SizedBox(width: 8),
+                ...titleActions,
+              ],
             ],
           ),
-          const SizedBox(height: 2),
-          Text(subtitle, style: Theme.of(context).textTheme.bodySmall),
-          const SizedBox(height: 6),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Wrap(spacing: 6, runSpacing: 4, children: children),
-          ),
+          if (!inlineSubtitle) ...[
+            const SizedBox(height: 2),
+            Text(subtitle, style: subtitleStyle),
+          ],
+          if (children.isNotEmpty) ...[
+            SizedBox(height: compact ? 3 : 5),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Wrap(
+                spacing: 5,
+                runSpacing: 3,
+                children: children,
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -441,14 +472,22 @@ class _SmallActionButton extends StatelessWidget {
     final child = Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 16),
-        const SizedBox(width: 4),
-        Text(label),
+        Icon(icon, size: 15),
+        const SizedBox(width: 3),
+        Text(label, style: Theme.of(context).textTheme.bodySmall),
       ],
     );
+    final style = ButtonStyle(
+      minimumSize: const WidgetStatePropertyAll(Size(0, 30)),
+      padding: const WidgetStatePropertyAll(
+        EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      ),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      visualDensity: VisualDensity.compact,
+    );
     if (filled) {
-      return FilledButton(onPressed: onPressed, child: child);
+      return FilledButton(onPressed: onPressed, style: style, child: child);
     }
-    return OutlinedButton(onPressed: onPressed, child: child);
+    return OutlinedButton(onPressed: onPressed, style: style, child: child);
   }
 }

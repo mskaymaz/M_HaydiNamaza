@@ -126,7 +126,7 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
         : null;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Kible Yonu')),
+      appBar: AppBar(title: const Text('Kıble Yönü')),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -241,7 +241,7 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                           Positioned(
                             bottom: 22,
                             child: Text(
-                              hasLocation ? 'Kabe' : 'Kuzey',
+                              hasLocation ? 'Kâbe' : 'Kuzey',
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -254,14 +254,14 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                     const SizedBox(height: 20),
                     Text(
                       hasLocation
-                          ? 'Kible acisi: ${qiblaBearing!.toStringAsFixed(1)} deg'
-                          : 'Pusula acisi: ${heading.toStringAsFixed(1)} deg',
+                          ? 'Kıble açısı: ${qiblaBearing!.toStringAsFixed(1)}°'
+                          : 'Pusula açısı: ${heading.toStringAsFixed(1)}°',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       hasLocation
-                          ? 'Telefonu duz tutup yesil oku takip edin.'
+                          ? 'Telefonu düz tutup yeşil oku takip edin.'
                           : 'Konum yokken sadece sensör referansı gösterilir.',
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,

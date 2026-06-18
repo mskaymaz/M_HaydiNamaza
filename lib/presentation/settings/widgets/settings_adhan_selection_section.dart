@@ -113,7 +113,7 @@ class _SettingsAdhanSelectionSectionState
           ),
         ),
         const SizedBox(height: 6),
-        for (final option in kDownloadableAdhanOptions) ...[
+        for (final option in adhanOptionsForPrayer(slot.key)) ...[
           _DownloadableAdhanTile(
             option: option,
             isBusy: isDownloading,

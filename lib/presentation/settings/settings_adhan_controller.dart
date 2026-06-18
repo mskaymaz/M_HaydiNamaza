@@ -23,6 +23,7 @@ extension _SettingsAdhanController on _SettingsScreenState {
   }
 
   Future<void> _downloadAdhan(String prayerKey, AdhanCatalogOption option) async {
+    if (!_optionMatchesPrayer(prayerKey, option)) return;
     if (_downloadingAdhanPrayerKeys.contains(prayerKey)) return;
     _updateSettingsState(() => _downloadingAdhanPrayerKeys.add(prayerKey));
     try {
@@ -64,6 +65,7 @@ extension _SettingsAdhanController on _SettingsScreenState {
     String prayerKey,
     AdhanCatalogOption option,
   ) async {
+    if (!_optionMatchesPrayer(prayerKey, option)) return;
     final localPath = _downloadedAdhanPaths[option.id]?.trim() ?? '';
     if (localPath.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -187,6 +189,12 @@ extension _SettingsAdhanController on _SettingsScreenState {
       _updateSettingsState(() => _activeAdhanPreviewKey = null);
       _showAdhanError('Ezan dinletisi başlatılamadı.');
     }
+  }
+
+  bool _optionMatchesPrayer(String prayerKey, AdhanCatalogOption option) {
+    if (option.prayerKey == prayerKey) return true;
+    _showAdhanError('Bu ezan seçili vakit için uygun değil.');
+    return false;
   }
 
   void _showAdhanError(String message) {

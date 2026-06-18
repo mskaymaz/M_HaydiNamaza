@@ -59,8 +59,10 @@ extension _HomeNavigationController on _HomeScreenState {
       }
       _future = _loadData();
     });
-    if (changed == true) {
-      unawaited(_refreshNativeReminderSchedule());
-    }
+    // Location changes may be persisted without returning an explicit
+    // `true` result, for example after a manual district selection followed by
+    // the Android back button. Always rebuild the native schedule after the
+    // location screen closes so home widgets receive the latest saved location.
+    unawaited(_refreshNativeReminderSchedule());
   }
 }

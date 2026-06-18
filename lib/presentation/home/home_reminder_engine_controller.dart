@@ -106,7 +106,6 @@ extension _HomeReminderEngineController on _HomeScreenState {
       final schedule = await _buildNativeReminderSchedule();
       await _nativeNotificationScheduler.ensurePermissions();
       await _nativeNotificationScheduler.configure(schedule.notifications);
-      await _nativeNotificationScheduler.configureWidget(schedule.widgetEvents);
     } catch (_) {
       try {
         await _nativeNotificationScheduler.cancelAll();
@@ -118,6 +117,91 @@ extension _HomeReminderEngineController on _HomeScreenState {
         unawaited(_refreshNativeReminderSchedule());
       }
     }
+  }
+
+  Future<void> _refreshNativeWidgetScheduleFromHomeData(
+    _HomeData data,
+    PrayerTimes times,
+  ) async {
+    final signature = _nativeWidgetScheduleSignature(data, times);
+    if (_lastWidgetScheduleSignature == signature) return;
+
+    final now = DateTime.now();
+    final widgetEvents = <NativePrayerWidgetEvent>[];
+    _appendNativeWidgetEvents(
+      widgetEvents,
+      <Prayer, DateTime>{
+        Prayer.fajr: times.fajr,
+        Prayer.sunrise: times.sunrise,
+        Prayer.dhuhr: times.dhuhr,
+        Prayer.asr: times.asr,
+        Prayer.maghrib: times.maghrib,
+        Prayer.isha: times.isha,
+      },
+      now,
+    );
+
+    final location = data.location;
+    final methodCode = data.methodCode ?? CalculationMethodStorage.defaultCode;
+    if (location != null) {
+      try {
+        final tomorrow = DateTime(
+          now.year,
+          now.month,
+          now.day,
+        ).add(const Duration(days: 1));
+        final tomorrowTimes = await _prayerService.calculateForDate(
+          location: location,
+          latitude: double.tryParse(location.latitude) ?? 0,
+          longitude: double.tryParse(location.longitude) ?? 0,
+          timeZone: location.timeZoneOffset,
+          methodCode: methodCode,
+          date: tomorrow,
+          allowDiyanet: false,
+          allowRemote: true,
+        );
+        _appendNativeWidgetEvents(
+          widgetEvents,
+          <Prayer, DateTime>{
+            Prayer.fajr: tomorrowTimes.fajr,
+            Prayer.sunrise: tomorrowTimes.sunrise,
+            Prayer.dhuhr: tomorrowTimes.dhuhr,
+            Prayer.asr: tomorrowTimes.asr,
+            Prayer.maghrib: tomorrowTimes.maghrib,
+            Prayer.isha: tomorrowTimes.isha,
+          },
+          now,
+        );
+      } catch (_) {
+        // Today's visible home data is still enough to refresh the widget
+        // for the current day. Tomorrow can be refreshed on the next app open.
+      }
+    }
+
+    await _nativeNotificationScheduler.configureWidget(widgetEvents);
+    _lastWidgetScheduleSignature = signature;
+  }
+
+  String _nativeWidgetScheduleSignature(_HomeData data, PrayerTimes times) {
+    final location = data.location;
+    final today = DateTime(_now.year, _now.month, _now.day);
+    return <String>[
+      today.toIso8601String(),
+      data.methodCode ?? '',
+      location?.countryId ?? '',
+      location?.stateId ?? '',
+      location?.districtId ?? '',
+      location?.province ?? '',
+      location?.district ?? '',
+      location?.latitude ?? '',
+      location?.longitude ?? '',
+      homeFormatTime(times.fajr),
+      homeFormatTime(times.sunrise),
+      homeFormatTime(times.dhuhr),
+      homeFormatTime(times.asr),
+      homeFormatTime(times.maghrib),
+      homeFormatTime(times.isha),
+    ].join('|');
   }
 
   Future<_NativeReminderSchedule> _buildNativeReminderSchedule() async {

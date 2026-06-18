@@ -117,6 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _reminderCheckInProgress = false;
   bool _nativeScheduleRefreshInProgress = false;
   bool _nativeScheduleRefreshPending = false;
+  String? _lastWidgetScheduleSignature;
   int _customPrayerSeed = 0;
   final Map<int, PrayerTimes> _prayerDayCache = <int, PrayerTimes>{};
   String? _prayerDayCacheSignature;

@@ -200,7 +200,8 @@ extension _LocationScreenSearch on _LocationScreenState {
   Future<void> _applyDistrictSearchMatch(_LocationSearchMatch match) async {
     await _applyLocationSearchMatch(match);
     _setLocationSearchStatus(
-      'İlçe bulundu: ${match.state.name} / ${match.district!.name}. Ekle ile favorilere ekleyin.',
+      'İlçe bulundu ve konum kaydedildi: '
+      '${match.state.name} / ${match.district!.name}.',
     );
   }
 
@@ -262,6 +263,10 @@ extension _LocationScreenSearch on _LocationScreenState {
       _lonController.text = match.district?.longitude ?? match.state.longitude ?? '';
     });
     await _storage.writeUseCurrentLocation(false);
+    // Search-based district selection previously only updated the visible
+    // controllers. Persist it as an active manual location too, otherwise
+    // the home screen and Android widgets may keep using the previous city.
+    await _persistManualSelection();
   }
 
   DiyanetItem? _bestLocationMatch(List<DiyanetItem> items, String query) {

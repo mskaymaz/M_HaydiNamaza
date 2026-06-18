@@ -36,6 +36,7 @@ extension _HomeBuildController on _HomeScreenState {
 
           WidgetsBinding.instance.addPostFrameCallback((_) {
             unawaited(_checkAndTriggerReminders(times, l10n));
+            unawaited(_refreshNativeWidgetScheduleFromHomeData(data, times));
           });
 
           final items = _buildItems(l10n, displayTimes);

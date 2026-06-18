@@ -2,9 +2,10 @@
   "apps": [
     {
       "app_id": "haydi_namaza",
-      "name": "Let's Pray",
-      "description": "Namaz vakti, kıble ve günlük içerik",
+      "name": "Haydi Namaza",
+      "description": "Namaz vakti, kıble ve günlük içerik uygulaması",
       "url": "https://github.com/mskaymaz/AllApp/tree/main/HaydiNamaza",
+      "download_url": "https://github.com/mskaymaz/AllApp/releases/download/haydi-namaza-v1.0.0-build1/Haydi.Namaza.apk",
       "icon_asset": "img/HaydiNamaza_icon.png",
       "active": true,
       "order": 10,
@@ -16,13 +17,15 @@
       "app_id": "rekat_sayar",
       "name": "M Rekat Sayar",
       "description": "Namaz sayım ve kalibrasyon uygulaması",
-      "url": "https://github.com/mskaymaz/AllApp",
+      "url": "https://github.com/mskaymaz/AllApp/tree/main/releases",
+      "download_url": "https://raw.githubusercontent.com/mskaymaz/AllApp/main/releases/RekatSayar-v1.0.0.apk",
+      "icon_asset": "",
+      "icon_url": "",
       "active": true,
       "order": 20,
       "target_apps": [
         "*"
-      ],
-      "icon_asset": "assets/app_icon/app_icon.png"
+      ]
     }
   ]
 }

@@ -75,6 +75,7 @@ class OtherAppItem {
   final String url;
   final String iconAsset;
   final String iconUrl;
+  final String downloadUrl;
   final bool active;
   final int order;
   final List<String> targetApps;
@@ -86,10 +87,13 @@ class OtherAppItem {
     required this.url,
     required this.iconAsset,
     required this.iconUrl,
+    required this.downloadUrl,
     required this.active,
     required this.order,
     required this.targetApps,
   });
+
+  String get launchUrl => downloadUrl.trim().isNotEmpty ? downloadUrl : url;
 
   bool isTargetFor(String appIdValue) {
     if (!active) return false;

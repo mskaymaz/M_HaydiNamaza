@@ -16,6 +16,10 @@ class SharedSettingsParser {
       final name = (map['name'] as String?)?.trim() ?? '';
       final description = (map['description'] as String?)?.trim() ?? '';
       final url = (map['url'] as String?)?.trim() ?? '';
+      final downloadUrl = _readFirstString(
+        map,
+        const ['download_url', 'downloadUrl', 'release_url', 'releaseUrl'],
+      );
       final iconAsset = _readString(map, 'icon_asset', 'iconAsset');
       final iconUrl = _readString(map, 'icon_url', 'iconUrl');
       final active = map['active'] is bool ? map['active'] as bool : true;
@@ -28,6 +32,9 @@ class SharedSettingsParser {
 
       if (appId.isEmpty || name.isEmpty || url.isEmpty) continue;
       if (Uri.tryParse(url) == null) continue;
+      if (downloadUrl.isNotEmpty && Uri.tryParse(downloadUrl) == null) {
+        continue;
+      }
 
       items.add(
         OtherAppItem(
@@ -37,6 +44,7 @@ class SharedSettingsParser {
           url: url,
           iconAsset: iconAsset,
           iconUrl: iconUrl,
+          downloadUrl: downloadUrl,
           active: active,
           order: order,
           targetApps: targets,
@@ -48,7 +56,17 @@ class SharedSettingsParser {
   }
 
   static String _readString(Map<String, dynamic> map, String first, String second) {
-    return ((map[first] ?? map[second]) as String?)?.trim() ?? '';
+    return _readFirstString(map, [first, second]);
+  }
+
+  static String _readFirstString(Map<String, dynamic> map, List<String> keys) {
+    for (final key in keys) {
+      final value = map[key];
+      if (value is! String) continue;
+      final trimmed = value.trim();
+      if (trimmed.isNotEmpty) return trimmed;
+    }
+    return '';
   }
 
   static UpdateManifest? parseUpdatePayload(String payload) {

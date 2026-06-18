@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../features/shared_settings/shared_settings_app_config.dart';
@@ -13,7 +13,7 @@ class SettingsSharedOtherAppsSection extends StatefulWidget {
   const SettingsSharedOtherAppsSection({
     super.key,
     required this.remoteClient,
-    required this.showHelpBalloons,
+    this.showHelpBalloons = false,
   });
 
   @override
@@ -39,10 +39,10 @@ class _SettingsSharedOtherAppsSectionState
   Widget build(BuildContext context) {
     return SharedSettingsSectionCard(
       title: 'Diğer Uygulamalarımız',
+      headerColor: sharedSettingsOtherAppsHeader,
       showHelpBalloons: widget.showHelpBalloons,
       helpMessage:
           'Bu bölümde yer alan uygulamalar ekibimizin yapmış olduğu, ücretsiz ve reklamsız diğer tüm uygulamalara erişimi sağlar. Bu yapı aracılığıyla diğer uygulamalarımızı da indirebilirsiniz.',
-      headerColor: sharedSettingsOtherAppsHeader,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(18, 15, 18, 15),
         child: FutureBuilder<List<OtherAppItem>>(
@@ -84,7 +84,7 @@ class _SettingsSharedOtherAppsSectionState
                   return _OtherAppTile(
                     item: item,
                     onTap: () => _openUrl(
-                      item.url,
+                      item.launchUrl,
                       failMessage: 'Bağlantı açılamadı.',
                     ),
                   );
@@ -169,34 +169,61 @@ class _AppIcon extends StatelessWidget {
         width: 52,
         height: 52,
         fit: BoxFit.contain,
-        errorBuilder: (_, _, _) => const _FallbackIcon(),
+        errorBuilder: (_, _, _) => _NetworkIcon(item: item),
       );
     }
 
+    return _NetworkIcon(item: item);
+  }
+}
+
+class _NetworkIcon extends StatelessWidget {
+  final OtherAppItem item;
+
+  const _NetworkIcon({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
     final iconUrl = item.iconUrl.trim();
-    if (iconUrl.isNotEmpty) {
-      return Image.network(
-        iconUrl,
-        width: 52,
-        height: 52,
-        fit: BoxFit.contain,
-        errorBuilder: (_, _, _) => const _FallbackIcon(),
-      );
-    }
-
-    return const _FallbackIcon();
+    if (iconUrl.isEmpty) return _FallbackIcon(label: item.name);
+    return Image.network(
+      iconUrl,
+      width: 52,
+      height: 52,
+      fit: BoxFit.contain,
+      errorBuilder: (_, _, _) => _FallbackIcon(label: item.name),
+    );
   }
 }
 
 class _FallbackIcon extends StatelessWidget {
-  const _FallbackIcon();
+  final String label;
+
+  const _FallbackIcon({required this.label});
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    final trimmedLabel = label.trim();
+    final initial = trimmedLabel.isEmpty
+        ? 'M'
+        : String.fromCharCode(trimmedLabel.runes.first).toUpperCase();
+    return Container(
       width: 52,
       height: 52,
-      child: Icon(Icons.apps_rounded, size: 42),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: const Color(0xFFFFF3CD),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFE0A800)),
+      ),
+      child: Text(
+        initial,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: const Color(0xFF7A4F00),
+              fontWeight: FontWeight.w800,
+            ),
+      ),
     );
   }
 }
+

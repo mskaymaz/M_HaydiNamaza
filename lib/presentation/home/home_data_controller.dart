@@ -66,7 +66,7 @@ extension _HomeDataController on _HomeScreenState {
                 timeZone: timeZone,
                 methodCode: methodCode,
                 date: displayDate,
-                allowDiyanet: false,
+                allowDiyanet: methodCode == 'diyanet' || methodCode == 'diyanet_tabanli',
                 allowRemote: true,
               ));
     _prayerDayCache[_prayerDayOffset] = displayTimes;

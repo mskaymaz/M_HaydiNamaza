@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'aladhan_prayer_times_client.dart';
 import 'calculation_advanced_settings_storage.dart';
 import 'diyanet_location_id_resolver.dart';
+import 'diyanet_local_prayer_times_repository.dart';
 import 'diyanet_prayer_times_client.dart';
 import 'prayer_cache_fingerprint_builder.dart';
 import 'prayer_calculation_parameters_factory.dart';
@@ -30,6 +31,7 @@ class PrayerService {
   final CalculationAdvancedSettingsStorage _advancedSettingsStorage;
   final PrayerDailyCacheRepository _dailyCacheRepository;
   final DiyanetLocationIdResolver _diyanetLocationIdResolver;
+  final DiyanetLocalPrayerTimesRepository _diyanetLocalPrayerTimesRepository;
   final DiyanetPrayerTimesClient _diyanetPrayerTimesClient;
   final AladhanPrayerTimesClient _aladhanPrayerTimesClient;
 
@@ -41,6 +43,7 @@ class PrayerService {
     CalculationAdvancedSettingsStorage? advancedSettingsStorage,
     PrayerDailyCacheRepository? dailyCacheRepository,
     DiyanetLocationIdResolver? diyanetLocationIdResolver,
+    DiyanetLocalPrayerTimesRepository? diyanetLocalPrayerTimesRepository,
     DiyanetPrayerTimesClient? diyanetPrayerTimesClient,
     AladhanPrayerTimesClient? aladhanPrayerTimesClient,
   }) : _engine = engine ?? const PrayerEngine(),
@@ -50,6 +53,8 @@ class PrayerService {
            dailyCacheRepository ?? PrayerDailyCacheRepository(),
        _diyanetLocationIdResolver =
            diyanetLocationIdResolver ?? DiyanetLocationIdResolver(),
+       _diyanetLocalPrayerTimesRepository =
+           diyanetLocalPrayerTimesRepository ?? DiyanetLocalPrayerTimesRepository(),
        _diyanetPrayerTimesClient =
            diyanetPrayerTimesClient ?? DiyanetPrayerTimesClient(),
        _aladhanPrayerTimesClient =
@@ -185,6 +190,15 @@ class PrayerService {
     bool allowDiyanet = true,
     bool allowRemote = true,
   }) async {
+    if (_isDiyanetMethod(methodCode) && allowDiyanet) {
+      final localDiyanetTimes = await _tryLocalDiyanet(
+        location: location,
+        date: date,
+        fallbackParams: params,
+      );
+      if (localDiyanetTimes != null) return localDiyanetTimes;
+    }
+
     if (!allowRemote) {
       return _calculateLocally(date, latitude, longitude, timeZone, params);
     }
@@ -271,6 +285,26 @@ class PrayerService {
       timeZone: timeZone,
       params: params,
     );
+  }
+
+  Future<PrayerTimes?> _tryLocalDiyanet({
+    required LocationData location,
+    required DateTime date,
+    required CalculationParameters fallbackParams,
+  }) async {
+    final daily = await _diyanetLocalPrayerTimesRepository.readDaily(
+      location: location,
+      date: date,
+      onLog: _log,
+    );
+    if (daily == null) return null;
+    final times = PrayerTimesMapper.fromDiyanetDaily(
+      daily: daily,
+      location: location,
+      calculationParameters: fallbackParams,
+    );
+    _logTimes('[Diyanet:local]', location, times);
+    return times;
   }
 
   Future<PrayerTimes?> _tryDiyanetForToday({

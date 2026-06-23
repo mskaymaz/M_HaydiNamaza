@@ -30,9 +30,14 @@ class PrayerCacheFingerprintBuilder {
       advancedSettings.maghribOffsetMinutes,
       advancedSettings.ishaOffsetMinutes,
     ].join(',');
+    final diyanetRevision =
+        methodCode == 'diyanet' || methodCode == 'diyanet_tabanli'
+            ? '|diyanet_local_2026_v1'
+            : '';
     return '$dayKey|$methodCode|$timeZone|$countryId|$stateId|$districtId|'
         '$province|$district|$lat|$lon'
         '|${advancedSettings.madhabCode}|${advancedSettings.highLatitudeRuleCode}'
-        '|${advancedSettings.shafaqCode}|${advancedSettings.roundingCode}|$offsets';
+        '|${advancedSettings.shafaqCode}|${advancedSettings.roundingCode}|$offsets'
+        '$diyanetRevision';
   }
 }

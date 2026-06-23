@@ -84,6 +84,7 @@ flutter:
     - assets/app_icon/app_icon.png
     - assets/audio/adhan/default_azan.mp3
     - assets/data/daily_content/approved/
+    - assets/data/prayer/diyanet/
     - assets/data/shared_settings/
 
   fonts:

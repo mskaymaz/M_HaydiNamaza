@@ -157,7 +157,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
           timeZone: location.timeZoneOffset,
           methodCode: methodCode,
           date: tomorrow,
-          allowDiyanet: false,
+          allowDiyanet: methodCode == 'diyanet' || methodCode == 'diyanet_tabanli',
           allowRemote: true,
         );
         _appendNativeWidgetEvents(
@@ -246,7 +246,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
       timeZone: location.timeZoneOffset,
       methodCode: methodCode,
       date: tomorrow,
-      allowDiyanet: false,
+      allowDiyanet: methodCode == 'diyanet' || methodCode == 'diyanet_tabanli',
       allowRemote: true,
     );
     _appendNativeWidgetEvents(

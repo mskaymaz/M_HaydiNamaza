@@ -75,13 +75,13 @@ class HomeTopPanel extends StatelessWidget {
     );
     final nextLabelTextStyle = theme.textTheme.titleSmall?.copyWith(
       color: cizgiColor,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w300,
       fontSize: typography.nextLabelSize + 2,
       letterSpacing: 1.0,
     );
     final nextTimeTextStyle = theme.textTheme.titleSmall?.copyWith(
       color: cizgiColor.withValues(alpha: 0.85),
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w600,
       fontSize: typography.nextLabelSize + 4,
       letterSpacing: 1.0,
     );

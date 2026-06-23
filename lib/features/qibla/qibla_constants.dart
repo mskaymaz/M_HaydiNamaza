@@ -4,6 +4,7 @@ class QiblaConstants {
   static const double kaabaLatitude = 21.422487;
   static const double kaabaLongitude = 39.826206;
 
+  static const String avkatLocationModeLabel = 'Avkat/Diyanet kıble verisi';
   static const String locationModeLabel = 'Konuma göre hesaplandı';
   static const String sensorFallbackModeLabel = 'Yaklasik / sensor tabanli';
   static const String enableLocationGuidance =

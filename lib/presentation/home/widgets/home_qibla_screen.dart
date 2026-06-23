@@ -1,10 +1,11 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../../app/location_storage.dart';
+import '../../../features/qibla/data/qibla_location_model.dart';
+import '../../../features/qibla/data/qibla_repository.dart';
+import '../../../features/qibla/domain/qibla_direction_calculator.dart';
 import '../../../features/qibla/qibla_bearing_calculator.dart';
 import '../../../features/qibla/qibla_constants.dart';
 import '../../shared/app_help_tooltip.dart';
@@ -24,7 +25,13 @@ class HomeQiblaScreen extends StatefulWidget {
 }
 
 class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
-  final QiblaBearingCalculator _bearingCalculator = const QiblaBearingCalculator();
+  final QiblaBearingCalculator _bearingCalculator =
+      const QiblaBearingCalculator();
+  final QiblaRepository _qiblaRepository = QiblaRepository();
+
+  QiblaLocation? _qiblaLocation;
+  bool _checkingQiblaData = false;
+  bool _qiblaDataUnavailable = false;
 
   double? _deviceLatitude;
   double? _deviceLongitude;
@@ -38,9 +45,69 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
   void initState() {
     super.initState();
     _resolveDeviceLocationIfNeeded();
+    _resolveQiblaData();
+  }
+
+  @override
+  void didUpdateWidget(covariant HomeQiblaScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_locationKey(oldWidget.location) != _locationKey(widget.location)) {
+      _resolveDeviceLocationIfNeeded();
+      _resolveQiblaData();
+    }
+  }
+
+  String _locationKey(LocationData? location) {
+    return [
+      location?.countryId ?? '',
+      location?.stateId ?? '',
+      location?.districtId ?? '',
+      location?.province ?? '',
+      location?.district ?? '',
+    ].join('|');
   }
 
   double? _parse(String? value) => double.tryParse((value ?? '').trim());
+
+  Future<void> _resolveQiblaData() async {
+    final location = widget.location;
+    if (location == null) {
+      setState(() {
+        _qiblaLocation = null;
+        _checkingQiblaData = false;
+        _qiblaDataUnavailable = true;
+      });
+      return;
+    }
+
+    setState(() {
+      _checkingQiblaData = true;
+      _qiblaDataUnavailable = false;
+    });
+
+    try {
+      final result = await _qiblaRepository.findForSelectedLocation(
+        locationId: location.districtId,
+        stateName: location.province,
+        locationName: location.district,
+      );
+      if (!mounted || _locationKey(location) != _locationKey(widget.location)) {
+        return;
+      }
+      setState(() {
+        _qiblaLocation = result;
+        _qiblaDataUnavailable = result == null;
+        _checkingQiblaData = false;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _qiblaLocation = null;
+        _qiblaDataUnavailable = true;
+        _checkingQiblaData = false;
+      });
+    }
+  }
 
   Future<void> _resolveDeviceLocationIfNeeded() async {
     final selectedLatitude = _parse(widget.location?.latitude);
@@ -124,12 +191,14 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
     final longitude = selectedLongitude ?? _deviceLongitude;
 
     final hasLocation = latitude != null && longitude != null;
-    final qiblaBearing = hasLocation
+    final coordinateQiblaBearing = hasLocation
         ? _bearingCalculator.calculateInitialBearing(
             latitude: latitude,
             longitude: longitude,
           )
         : null;
+    final qiblaBearing = _qiblaLocation?.angleDegrees ?? coordinateQiblaBearing;
+    final hasQiblaTarget = qiblaBearing != null;
 
     return Scaffold(
       appBar: AppBar(
@@ -153,7 +222,9 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
               builder: (context, snapshot) {
                 final heading = snapshot.data?.heading;
                 final accuracy = snapshot.data?.accuracy;
-                final modeLabel = hasLocation
+                final modeLabel = _qiblaLocation != null
+                    ? QiblaConstants.avkatLocationModeLabel
+                    : hasLocation
                     ? QiblaConstants.locationModeLabel
                     : QiblaConstants.sensorFallbackModeLabel;
 
@@ -169,9 +240,9 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 8),
-                      if (_checkingDeviceLocation)
+                      if (_checkingQiblaData || _checkingDeviceLocation)
                         const Text(
-                          'Konum izni kontrol ediliyor...',
+                          'Kıble ve konum verisi kontrol ediliyor...',
                           textAlign: TextAlign.center,
                         )
                       else
@@ -196,22 +267,42 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                   );
                 }
 
-                final rotation = hasLocation
-                    ? ((qiblaBearing! - heading) * math.pi) / 180
-                    : ((0 - heading) * math.pi) / 180;
-                final showUnstableWarning = _isHeadingUnstable(heading, accuracy);
+                final rotation = hasQiblaTarget
+                    ? QiblaDirectionCalculator.rotationRadians(
+                        targetDegrees: qiblaBearing,
+                        headingDegrees: heading,
+                      )
+                    : QiblaDirectionCalculator.rotationRadians(
+                        targetDegrees: 0,
+                        headingDegrees: heading,
+                      );
+                final isAligned =
+                    hasQiblaTarget &&
+                    QiblaDirectionCalculator.isAligned(
+                      targetDegrees: qiblaBearing,
+                      headingDegrees: heading,
+                    );
+                final needleColor = hasQiblaTarget
+                    ? isAligned
+                          ? const Color(0xFF1F7A3E)
+                          : const Color(0xFFC62828)
+                    : Colors.grey.shade700;
+                final showUnstableWarning = _isHeadingUnstable(
+                  heading,
+                  accuracy,
+                );
 
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       modeLabel,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
                       textAlign: TextAlign.center,
                     ),
-                    if (!hasLocation) ...[
+                    if (!hasQiblaTarget) ...[
                       const SizedBox(height: 6),
                       Text(
                         QiblaConstants.enableLocationGuidance,
@@ -227,7 +318,9 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                         shape: BoxShape.circle,
                         color: const Color(0xFFF5F0E6),
                         border: Border.all(
-                          color: const Color(0xFF1F7A3E).withValues(alpha: 0.22),
+                          color: const Color(
+                            0xFF1F7A3E,
+                          ).withValues(alpha: 0.22),
                         ),
                         boxShadow: const [
                           BoxShadow(
@@ -249,16 +342,16 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                           ),
                           Transform.rotate(
                             angle: rotation,
-                            child: const Icon(
+                            child: Icon(
                               Icons.navigation_rounded,
                               size: 120,
-                              color: Color(0xFF1F7A3E),
+                              color: needleColor,
                             ),
                           ),
                           Positioned(
                             bottom: 22,
                             child: Text(
-                              hasLocation ? 'Kâbe' : 'Kuzey',
+                              hasQiblaTarget ? 'Kâbe' : 'Kuzey',
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -270,19 +363,37 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      hasLocation
-                          ? 'Kıble açısı: ${qiblaBearing!.toStringAsFixed(1)}°'
+                      hasQiblaTarget
+                          ? 'Kıble açısı: ${qiblaBearing.toStringAsFixed(1)}°'
                           : 'Pusula açısı: ${heading.toStringAsFixed(1)}°',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      hasLocation
-                          ? 'Telefonu düz tutup yeşil oku takip edin.'
+                      hasQiblaTarget
+                          ? isAligned
+                                ? 'Kıble yönü hizalandı. Ok yeşil olduğunda yön doğrudur.'
+                                : 'Ok kırmızıysa telefonu yavaşça çevirin; yeşil olduğunda kıble yönüne hizalanır.'
                           : 'Konum yokken sadece sensör referansı gösterilir.',
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
+                    if (_qiblaLocation?.distanceToKaabaKm != null) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        'Kâbe mesafesi: ${_qiblaLocation!.distanceToKaabaKm!.toStringAsFixed(0)} km',
+                        style: Theme.of(context).textTheme.bodySmall,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                    if (_qiblaDataUnavailable && hasLocation) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        'Seçili konum için yerel kıble verisi bulunamadı; koordinata göre hesaplama kullanılıyor.',
+                        style: Theme.of(context).textTheme.bodySmall,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                     const SizedBox(height: 8),
                     Text(
                       QiblaConstants.calibrationGuidance,

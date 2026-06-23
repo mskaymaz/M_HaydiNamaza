@@ -9,9 +9,10 @@
     <TextView
         android:id="@+id/prayer_wide_date"
         android:layout_width="match_parent"
-        android:layout_height="24dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.82"
         android:autoSizeMaxTextSize="13sp"
-        android:autoSizeMinTextSize="9sp"
+        android:autoSizeMinTextSize="8sp"
         android:autoSizeStepGranularity="1sp"
         android:autoSizeTextType="uniform"
         android:fontFamily="sans-serif"
@@ -27,7 +28,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.35"
         android:background="#FAFAF2">
 
         <LinearLayout
@@ -42,15 +43,23 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp">
 
                 <TextView
+                    android:id="@+id/prayer_wide_fajr_label"
                     android:layout_width="match_parent"
-                    android:layout_height="17dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="12sp"
+                    android:autoSizeMinTextSize="7sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:id="@+id/prayer_wide_fajr_label"
+                    android:maxLines="1"
                     android:text="İmsak"
                     android:textColor="#D32F2F"
                     android:textSize="12sp" />
@@ -58,31 +67,44 @@
                 <TextView
                     android:id="@+id/prayer_wide_fajr_time"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.18"
+                    android:autoSizeMaxTextSize="15sp"
+                    android:autoSizeMinTextSize="9sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:text="--:--"
                     android:textColor="#D32F2F"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/prayer_wide_sunrise_cell"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp">
 
                 <TextView
+                    android:id="@+id/prayer_wide_sunrise_label"
                     android:layout_width="match_parent"
-                    android:layout_height="17dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="12sp"
+                    android:autoSizeMinTextSize="7sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:id="@+id/prayer_wide_sunrise_label"
+                    android:maxLines="1"
                     android:text="Güneş"
                     android:textColor="#D32F2F"
                     android:textSize="12sp" />
@@ -90,31 +112,44 @@
                 <TextView
                     android:id="@+id/prayer_wide_sunrise_time"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.18"
+                    android:autoSizeMaxTextSize="15sp"
+                    android:autoSizeMinTextSize="9sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:text="--:--"
                     android:textColor="#D32F2F"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/prayer_wide_dhuhr_cell"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp">
 
                 <TextView
+                    android:id="@+id/prayer_wide_dhuhr_label"
                     android:layout_width="match_parent"
-                    android:layout_height="17dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="12sp"
+                    android:autoSizeMinTextSize="7sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:id="@+id/prayer_wide_dhuhr_label"
+                    android:maxLines="1"
                     android:text="Öğle"
                     android:textColor="#D32F2F"
                     android:textSize="12sp" />
@@ -122,31 +157,44 @@
                 <TextView
                     android:id="@+id/prayer_wide_dhuhr_time"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.18"
+                    android:autoSizeMaxTextSize="15sp"
+                    android:autoSizeMinTextSize="9sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:text="--:--"
                     android:textColor="#D32F2F"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/prayer_wide_asr_cell"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp">
 
                 <TextView
+                    android:id="@+id/prayer_wide_asr_label"
                     android:layout_width="match_parent"
-                    android:layout_height="17dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="12sp"
+                    android:autoSizeMinTextSize="7sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:id="@+id/prayer_wide_asr_label"
+                    android:maxLines="1"
                     android:text="İkindi"
                     android:textColor="#D32F2F"
                     android:textSize="12sp" />
@@ -154,31 +202,44 @@
                 <TextView
                     android:id="@+id/prayer_wide_asr_time"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.18"
+                    android:autoSizeMaxTextSize="15sp"
+                    android:autoSizeMinTextSize="9sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:text="--:--"
                     android:textColor="#D32F2F"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/prayer_wide_maghrib_cell"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp">
 
                 <TextView
+                    android:id="@+id/prayer_wide_maghrib_label"
                     android:layout_width="match_parent"
-                    android:layout_height="17dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="12sp"
+                    android:autoSizeMinTextSize="7sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:id="@+id/prayer_wide_maghrib_label"
+                    android:maxLines="1"
                     android:text="Akşam"
                     android:textColor="#D32F2F"
                     android:textSize="12sp" />
@@ -186,31 +247,44 @@
                 <TextView
                     android:id="@+id/prayer_wide_maghrib_time"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.18"
+                    android:autoSizeMaxTextSize="15sp"
+                    android:autoSizeMinTextSize="9sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:text="--:--"
                     android:textColor="#D32F2F"
                     android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/prayer_wide_isha_cell"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp">
 
                 <TextView
+                    android:id="@+id/prayer_wide_isha_label"
                     android:layout_width="match_parent"
-                    android:layout_height="17dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="12sp"
+                    android:autoSizeMinTextSize="7sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:id="@+id/prayer_wide_isha_label"
+                    android:maxLines="1"
                     android:text="Yatsı"
                     android:textColor="#D32F2F"
                     android:textSize="12sp" />
@@ -218,10 +292,16 @@
                 <TextView
                     android:id="@+id/prayer_wide_isha_time"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.18"
+                    android:autoSizeMaxTextSize="15sp"
+                    android:autoSizeMinTextSize="9sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:text="--:--"
                     android:textColor="#D32F2F"
                     android:textSize="15sp"
@@ -233,7 +313,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="27dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.03"
         android:background="@drawable/prayer_widget_countdown_bottom"
         android:gravity="center"
         android:orientation="horizontal"
@@ -244,6 +325,10 @@
             android:id="@+id/prayer_wide_remaining_label"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:autoSizeMaxTextSize="12sp"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:includeFontPadding="false"
@@ -257,11 +342,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
+            android:autoSizeMaxTextSize="20sp"
+            android:autoSizeMinTextSize="12sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:includeFontPadding="false"
             android:maxLines="1"
-            android:minWidth="86dp"
+            android:minWidth="76dp"
             android:text="00:00:00"
             android:textColor="#FFFFFF"
             android:textSize="20sp"

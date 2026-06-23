@@ -59,15 +59,15 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
 
   String _locationKey(LocationData? location) {
     return [
-      location?.countryId ?? '',
-      location?.stateId ?? '',
-      location?.districtId ?? '',
-      location?.province ?? '',
-      location?.district ?? '',
+      location?.countryId ? '',
+      location?.stateId ? '',
+      location?.districtId ? '',
+      location?.province ? '',
+      location?.district ? '',
     ].join('|');
   }
 
-  double? _parse(String? value) => double.tryParse((value ?? '').trim());
+  double? _parse(String? value) => double.tryParse((value ? '').trim());
 
   Future<void> _resolveQiblaData() async {
     final location = widget.location;
@@ -187,8 +187,8 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
   Widget build(BuildContext context) {
     final selectedLatitude = _parse(widget.location?.latitude);
     final selectedLongitude = _parse(widget.location?.longitude);
-    final latitude = selectedLatitude ?? _deviceLatitude;
-    final longitude = selectedLongitude ?? _deviceLongitude;
+    final latitude = selectedLatitude ? _deviceLatitude;
+    final longitude = selectedLongitude ? _deviceLongitude;
 
     final hasLocation = latitude != null && longitude != null;
     final coordinateQiblaBearing = hasLocation
@@ -197,18 +197,18 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
             longitude: longitude,
           )
         : null;
-    final qiblaBearing = _qiblaLocation?.angleDegrees ?? coordinateQiblaBearing;
+    final qiblaBearing = _qiblaLocation?.angleDegrees ? coordinateQiblaBearing;
     final hasQiblaTarget = qiblaBearing != null;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('KÄ±ble YÃ¶nÃ¼'),
+        title: const Text('Kıble Yönü'),
         actions: [
           AppHelpTooltip(
             visible: widget.showHelpBalloons,
-            title: 'KÄ±ble yÃ¶nÃ¼',
+            title: 'Kıble yönü',
             message:
-                'Telefonu dÃ¼z tutun ve yeÅŸil oku takip edin. Konum bilgisi varsa ok KÃ¢be yÃ¶nÃ¼nÃ¼ gÃ¶sterir. Konum alÄ±namazsa ekran yalnÄ±zca pusula sensÃ¶rÃ¼nÃ¼ referans alÄ±r. Manyetik alanlardan uzak durmak ve telefonu sekiz Ã§izerek kalibre etmek doÄŸruluÄŸu artÄ±rabilir.',
+                'Telefonu düz tutun ve yeÅŸil oku takip edin. Konum bilgisi varsa ok Kâbe yönünÃ¼ gösterir. Konum alınamazsa ekran yalnızca pusula sensörünÃ¼ referans alÄ±r. Manyetik alanlardan uzak durmak ve telefonu sekiz Ã§izerek kalibre etmek doÄŸruluÄŸu artırabilir.',
           ),
           const SizedBox(width: 8),
         ],
@@ -242,7 +242,7 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                       const SizedBox(height: 8),
                       if (_checkingQiblaData || _checkingDeviceLocation)
                         const Text(
-                          'KÄ±ble ve konum verisi kontrol ediliyor...',
+                          'Kıble ve konum verisi kontrol ediliyor...',
                           textAlign: TextAlign.center,
                         )
                       else
@@ -351,7 +351,7 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                           Positioned(
                             bottom: 22,
                             child: Text(
-                              hasQiblaTarget ? 'KÃ¢be' : 'Kuzey',
+                              hasQiblaTarget ? '' : 'Kuzey',
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -364,16 +364,16 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                     const SizedBox(height: 20),
                     Text(
                       hasQiblaTarget
-                          ? 'KÄ±ble aÃ§Ä±sÄ±: ${qiblaBearing.toStringAsFixed(1)}Â°'
-                          : 'Pusula aÃ§Ä±sÄ±: ${heading.toStringAsFixed(1)}Â°',
+                          ? 'Kıble açısı: ${qiblaBearing.toStringAsFixed(1)}°'
+                          : 'Pusula açısı: ${heading.toStringAsFixed(1)}°',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       hasQiblaTarget
                           ? isAligned
-                                ? 'KÄ±ble yÃ¶nÃ¼ hizalandÄ±. Ok yeÅŸil olduÄŸunda yÃ¶n doÄŸrudur.'
-                                : 'Ok kÄ±rmÄ±zÄ±ysa telefonu yavaÅŸÃ§a Ã§evirin; yeÅŸil olduÄŸunda kÄ±ble yÃ¶nÃ¼ne hizalanÄ±r.'
+                                ? 'Kıble yönü hizalandÄ±. Ok yeÅŸil olduÄŸunda yÃ¶n doÄŸrudur.'
+                                : 'Ok kırmızıysa telefonu yavaÅŸÃ§a çevirin; yeÅŸil olduÄŸunda kıble yönüne hizalanır.'
                           : 'Konum yokken sadece sensÃ¶r referansÄ± gÃ¶sterilir.',
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
@@ -381,7 +381,7 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                     if (_qiblaLocation?.distanceToKaabaKm != null) ...[
                       const SizedBox(height: 6),
                       Text(
-                        'KÃ¢be mesafesi: ${_qiblaLocation!.distanceToKaabaKm!.toStringAsFixed(0)} km',
+                        'Kâbe mesafesi: ${_qiblaLocation!.distanceToKaabaKm!.toStringAsFixed(0)} km',
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       ),
@@ -389,7 +389,7 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                     if (_qiblaDataUnavailable && hasLocation) ...[
                       const SizedBox(height: 6),
                       Text(
-                        'SeÃ§ili konum iÃ§in yerel kÄ±ble verisi bulunamadÄ±; koordinata gÃ¶re hesaplama kullanÄ±lÄ±yor.',
+                        'Seçili konum için yerel kıble verisi bulunamadı; koordinata göre hesaplama kullanılıyor.',
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       ),
@@ -414,7 +414,7 @@ class _HomeQiblaScreenState extends State<HomeQiblaScreen> {
                     if (_locationPermissionUnavailable && !hasLocation) ...[
                       const SizedBox(height: 8),
                       Text(
-                        'Konum izni kapalÄ± olduÄŸu iÃ§in yaklaÅŸÄ±k sensÃ¶r modu kullanÄ±lÄ±yor.',
+                        'Konum izni kapalı olduÄŸu için yaklaÅŸÄ±k sensÃ¶r modu kullanılıyor.',
                         style: Theme.of(context).textTheme.bodySmall,
                         textAlign: TextAlign.center,
                       ),

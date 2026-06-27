@@ -1,8 +1,8 @@
-import 'package:shared_preferences/shared_preferences.dart';
+﻿import 'package:shared_preferences/shared_preferences.dart';
 
 class CalculationMethodStorage {
   static const String _key = 'calculation_method_code';
-  static const String defaultCode = 'aladhan';
+  static const String defaultCode = 'diyanet';
   static const Set<String> _supportedCodes = <String>{
     'aladhan',
     'turkey',
@@ -31,3 +31,4 @@ class CalculationMethodStorage {
     return _supportedCodes.contains(code) ? code! : defaultCode;
   }
 }
+

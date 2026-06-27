@@ -1,4 +1,4 @@
-part of 'home_screen.dart';
+﻿part of 'home_screen.dart';
 
 extension _HomeReminderEngineController on _HomeScreenState {
   Future<void> _checkAndTriggerReminders(
@@ -331,17 +331,17 @@ extension _HomeReminderEngineController on _HomeScreenState {
     }
     const months = <String>[
       'Ocak',
-      'Şubat',
+      'Åubat',
       'Mart',
       'Nisan',
-      'Mayıs',
+      'MayÄ±s',
       'Haziran',
       'Temmuz',
-      'Ağustos',
-      'Eylül',
+      'AÄŸustos',
+      'EylÃ¼l',
       'Ekim',
-      'Kasım',
-      'Aralık',
+      'KasÄ±m',
+      'AralÄ±k',
     ];
     final month = months[date.month - 1];
     return '${date.day} $month ${date.year}';
@@ -569,3 +569,4 @@ extension _HomeReminderEngineController on _HomeScreenState {
   }
 
 }
+

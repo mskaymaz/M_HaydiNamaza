@@ -85,13 +85,15 @@ extension _HomeBuildController on _HomeScreenState {
                       padding: ui.screenPadding,
                       child: LayoutBuilder(
                         builder: (context, constraints) {
+                          final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+                          final stablePanelHeight = isLandscape ? math.max(constraints.maxHeight, constraints.maxWidth) : constraints.maxHeight;
                           final drawerLayout = _computeDrawerLayout(
                             locationTextSize: ui.typography.locationSize,
                             nextTimeTextSize: ui.typography.nextTimeSize,
                             nextLabelTextSize: ui.typography.nextLabelSize,
                             topPanelVerticalPadding:
                                 ui.topPanelPadding.vertical,
-                            constraintsMaxHeight: constraints.maxHeight,
+                            constraintsMaxHeight: stablePanelHeight,
                             drawerProgress: 1.0,
                           );
                           const infoPanelGap = 3.0;
@@ -103,14 +105,11 @@ extension _HomeBuildController on _HomeScreenState {
                           final infoPanelTop = drawerBottom + infoPanelGap;
                           final infoPanelMaxHeight = math.max(
                             140.0,
-                            constraints.maxHeight -
+                            stablePanelHeight -
                                 infoPanelTop -
                                 infoPanelBottomPadding +
                                 infoPanelBottomOverflow,
                           );
-                          final isLandscape =
-                              MediaQuery.of(context).orientation ==
-                              Orientation.landscape;
                           final panelWidthFactor = isLandscape
                               ? (_isLandscapePanelsExpanded ? 0.9 : 0.72)
                               : 1.0;
@@ -289,11 +288,11 @@ extension _HomeBuildController on _HomeScreenState {
                                                           visible: _reminderSettings
                                                               .showHelpBalloons,
                                                           title: _showPrayerControlPanel
-                                                              ? 'Vakit paneli ayarları'
+                                                              ? 'Vakit paneli ayarlarÃ„Â±'
                                                               : 'Vakit paneli',
                                                           message: _showPrayerControlPanel
-                                                              ? 'Bu görünümde her vakit için sesli hatırlatma, ezan ve titreşim seçeneklerini satır satır düzenleyebilirsiniz. ✕ simgesine bastığınızda normal vakit listesine dönersiniz.'
-                                                              : 'Bu panel bugünün namaz vakitlerini ve aktif vakti gösterir. 🔔 simgesine bastığınızda vakit ayarları açılır. Paneli sağdan sola sürüklediğinizde seçili konum için sıradaki 7 günün vakitlerini görebilirsiniz. Yatay ekranda çift dokunuş panel genişliğini değiştirir.',
+                                                              ? 'Bu gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼mde her vakit iÃƒÂ§in sesli hatÃ„Â±rlatma, ezan ve titreÃ…Å¸im seÃƒÂ§eneklerini satÃ„Â±r satÃ„Â±r dÃƒÂ¼zenleyebilirsiniz. Ã¢Å“â€¢ simgesine bastÃ„Â±Ã„Å¸Ã„Â±nÃ„Â±zda normal vakit listesine dÃƒÂ¶nersiniz.'
+                                                              : 'Bu panel bugÃƒÂ¼nÃƒÂ¼n namaz vakitlerini ve aktif vakti gÃƒÂ¶sterir. ÄŸÅ¸â€â€ simgesine bastÃ„Â±Ã„Å¸Ã„Â±nÃ„Â±zda vakit ayarlarÃ„Â± aÃƒÂ§Ã„Â±lÃ„Â±r. Paneli saÃ„Å¸dan sola sÃƒÂ¼rÃƒÂ¼klediÃ„Å¸inizde seÃƒÂ§ili konum iÃƒÂ§in sÃ„Â±radaki 7 gÃƒÂ¼nÃƒÂ¼n vakitlerini gÃƒÂ¶rebilirsiniz. Yatay ekranda ÃƒÂ§ift dokunuÃ…Å¸ panel geniÃ…Å¸liÃ„Å¸ini deÃ„Å¸iÃ…Å¸tirir.',
                                                           iconSize: 19,
                                                           tapSize: 32,
                                                         ),

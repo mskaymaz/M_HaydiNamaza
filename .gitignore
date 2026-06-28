@@ -64,3 +64,5 @@ dist/
 android/key.properties
 android/app/keystore/*.jks
 android/app/keystore/*.keystore
+
+HaydiNamaza.apk

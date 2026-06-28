@@ -2,4 +2,5 @@
 <resources>
     <string name="prayer_time_widget_description">Bir sonraki namaz vaktini gösterir</string>
     <string name="prayer_times_wide_widget_description">Günlük namaz vakitlerini gösterir</string>
+    <string name="prayer_time_large_widget_description">Bir sonraki namaz vaktini büyük gösterir</string>
 </resources>

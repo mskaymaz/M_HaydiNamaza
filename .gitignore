@@ -60,3 +60,7 @@ Besmele/data/daily_panel/publish/*.bak.*
 
 # Local release outputs
 dist/
+
+android/key.properties
+android/app/keystore/*.jks
+android/app/keystore/*.keystore

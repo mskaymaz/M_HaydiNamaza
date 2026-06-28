@@ -58,6 +58,11 @@ object PrayerWidgetScheduler {
         if (compactIds.isNotEmpty()) {
             PrayerTimeWidgetProvider.updateAll(context, manager, compactIds)
         }
+        val large = ComponentName(context, PrayerTimeLargeWidgetProvider::class.java)
+        val largeIds = manager.getAppWidgetIds(large)
+        if (largeIds.isNotEmpty()) {
+            PrayerTimeLargeWidgetProvider.updateAll(context, manager, largeIds)
+        }
         val wide = ComponentName(context, PrayerTimesWideWidgetProvider::class.java)
         val wideIds = manager.getAppWidgetIds(wide)
         if (wideIds.isNotEmpty()) {

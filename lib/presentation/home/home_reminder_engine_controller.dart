@@ -1,4 +1,4 @@
-﻿part of 'home_screen.dart';
+part of 'home_screen.dart';
 
 extension _HomeReminderEngineController on _HomeScreenState {
   Future<void> _checkAndTriggerReminders(
@@ -128,6 +128,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
 
     final now = DateTime.now();
     final widgetEvents = <NativePrayerWidgetEvent>[];
+    final currentDateLabel = _widgetPanelDateLabel(data.displayDate ?? now);
     _appendNativeWidgetEvents(
       widgetEvents,
       <Prayer, DateTime>{
@@ -139,6 +140,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
         Prayer.isha: times.isha,
       },
       now,
+      dateLabel: currentDateLabel,
     );
 
     final location = data.location;
@@ -171,6 +173,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
             Prayer.isha: tomorrowTimes.isha,
           },
           now,
+          dateLabel: _widgetPanelDateLabel(tomorrow),
         );
       } catch (_) {
         // Today's visible home data is still enough to refresh the widget
@@ -237,6 +240,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
       times: times,
       now: now,
       adhanSelections: adhanSelections,
+      dateLabel: _widgetPanelDateLabel(today),
     );
     final tomorrow = today.add(const Duration(days: 1));
     final tomorrowTimes = await _prayerService.calculateForDate(
@@ -260,6 +264,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
         Prayer.isha: tomorrowTimes.isha,
       },
       now,
+      dateLabel: _widgetPanelDateLabel(tomorrow),
     );
     _appendNativeCustomPrayerEvents(notifications, times, now);
     return _NativeReminderSchedule(
@@ -274,6 +279,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
     required PrayerTimes times,
     required DateTime now,
     required Map<String, AdhanSelection> adhanSelections,
+    required String dateLabel,
   }) {
     final prayerTimes = <Prayer, DateTime>{
       Prayer.fajr: times.fajr,
@@ -283,7 +289,12 @@ extension _HomeReminderEngineController on _HomeScreenState {
       Prayer.maghrib: times.maghrib,
       Prayer.isha: times.isha,
     };
-    _appendNativeWidgetEvents(widgetEvents, prayerTimes, now);
+    _appendNativeWidgetEvents(
+      widgetEvents,
+      prayerTimes,
+      now,
+      dateLabel: dateLabel,
+    );
     for (final entry in prayerTimes.entries) {
       final settings = _settingsFor(entry.key);
       final label = _turkishPrayerLabel(entry.key);
@@ -302,13 +313,14 @@ extension _HomeReminderEngineController on _HomeScreenState {
   void _appendNativeWidgetEvents(
     List<NativePrayerWidgetEvent> widgetEvents,
     Map<Prayer, DateTime> prayerTimes,
-    DateTime now,
-  ) {
+    DateTime now, {
+    required String dateLabel,
+  }) {
     NativePrayerWidgetEvent widgetEvent(Prayer prayer, DateTime time) {
       return NativePrayerWidgetEvent(
         triggerAt: time,
         prayerLabel: _turkishPrayerLabel(prayer),
-        dateLabel: _turkishWidgetDateLabel(time),
+        dateLabel: dateLabel,
         fajrTime: homeFormatTime(prayerTimes[Prayer.fajr]!),
         sunriseTime: homeFormatTime(prayerTimes[Prayer.sunrise]!),
         dhuhrTime: homeFormatTime(prayerTimes[Prayer.dhuhr]!),
@@ -324,27 +336,14 @@ extension _HomeReminderEngineController on _HomeScreenState {
     }
   }
 
-  String _turkishWidgetDateLabel(DateTime date) {
+  String _widgetPanelDateLabel(DateTime date) {
     final l10n = AppLocalizations.of(context);
     if (l10n != null) {
       return _combinedDateLabel(date, l10n);
     }
-    const months = <String>[
-      'Ocak',
-      'Åubat',
-      'Mart',
-      'Nisan',
-      'MayÄ±s',
-      'Haziran',
-      'Temmuz',
-      'AÄŸustos',
-      'EylÃ¼l',
-      'Ekim',
-      'KasÄ±m',
-      'AralÄ±k',
-    ];
-    final month = months[date.month - 1];
-    return '${date.day} $month ${date.year}';
+    final day = date.day.toString().padLeft(2, '0');
+    final month = date.month.toString().padLeft(2, '0');
+    return '$day.$month.${date.year}';
   }
 
   void _appendNativeCustomPrayerEvents(

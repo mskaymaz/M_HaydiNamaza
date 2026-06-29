@@ -1,4 +1,4 @@
-part of 'home_screen.dart';
+﻿part of 'home_screen.dart';
 
 extension _HomeReminderEngineController on _HomeScreenState {
   Future<void> _checkAndTriggerReminders(
@@ -568,4 +568,5 @@ extension _HomeReminderEngineController on _HomeScreenState {
   }
 
 }
+
 

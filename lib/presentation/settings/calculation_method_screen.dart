@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
 import '../../app/calculation_advanced_settings_storage.dart';
@@ -137,5 +137,4 @@ class _MethodItem {
 
   const _MethodItem(this.code, this.label);
 }
-
 

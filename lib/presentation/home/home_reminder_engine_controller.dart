@@ -173,7 +173,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
             Prayer.isha: tomorrowTimes.isha,
           },
           now,
-          dateLabel: _widgetPanelDateLabel(tomorrow),
+          dateLabel: currentDateLabel,
         );
       } catch (_) {
         // Today's visible home data is still enough to refresh the widget
@@ -264,7 +264,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
         Prayer.isha: tomorrowTimes.isha,
       },
       now,
-      dateLabel: _widgetPanelDateLabel(tomorrow),
+      dateLabel: _widgetPanelDateLabel(today),
     );
     _appendNativeCustomPrayerEvents(notifications, times, now);
     return _NativeReminderSchedule(

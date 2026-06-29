@@ -67,7 +67,7 @@ class _CalculationMethodScreenState extends State<CalculationMethodScreen> {
       appBar: AppBar(
         titleSpacing: 7,
         title: const Text(
-          'Vakit HesabÄ±',
+          'Vakit Hesabı',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         actions: [
@@ -93,13 +93,6 @@ class _CalculationMethodScreenState extends State<CalculationMethodScreen> {
         minLeadingWidth: 7,
         child: ListView(
           children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(16, 12, 16, 4),
-              child: Text(
-                'VarsayÄ±lan vakit hesabÄ± Aladhan olarak ayarlanÄ±r.',
-                style: TextStyle(fontSize: 13, color: Colors.black54),
-              ),
-            ),
             Column(
               children: items
                   .map(
@@ -144,4 +137,5 @@ class _MethodItem {
 
   const _MethodItem(this.code, this.label);
 }
+
 

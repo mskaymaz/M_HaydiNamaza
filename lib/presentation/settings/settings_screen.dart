@@ -1,4 +1,4 @@
-import 'package:file_picker/file_picker.dart';
+﻿import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mhaydinamaza/l10n/app_localizations.dart';
 
@@ -118,7 +118,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _loadMethod() async {
     var code = await _methodStorage.readCode();
     if (code == null) {
-      code = 'turkey';
+      code = CalculationMethodStorage.defaultCode;
       await _methodStorage.writeCode(code);
     }
     if (!mounted) return;
@@ -313,7 +313,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onEditTextColor: () => _editColor(
               context: context,
-              title: 'Yazı Rengi',
+              title: 'YazÄ± Rengi',
               initialColor: palette.cizgiColor,
               onApply: widget.uiPaletteController.setCizgiColor,
             ),
@@ -338,7 +338,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               if (!context.mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Arka plan seçimleri ana sayfaya uygulandı.'),
+                  content: Text('Arka plan seÃ§imleri ana sayfaya uygulandÄ±.'),
                 ),
               );
             },
@@ -453,7 +453,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (settings.audioMode != ReminderAudioMode.textToSpeech &&
         (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Test için önce bir ses dosyası seçin.')),
+        const SnackBar(content: Text('Test iÃ§in Ã¶nce bir ses dosyasÄ± seÃ§in.')),
       );
       return;
     }
@@ -466,7 +466,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sesli test başlatılamadı.')),
+        const SnackBar(content: Text('Sesli test baÅŸlatÄ±lamadÄ±.')),
       );
     }
   }
@@ -501,3 +501,4 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 }
+

@@ -64,6 +64,8 @@ class NativePrayerNotificationEvent {
 class NativePrayerWidgetEvent {
   final DateTime triggerAt;
   final String prayerLabel;
+  final DateTime remainingTriggerAt;
+  final String remainingPrayerLabel;
   final String dateLabel;
   final String fajrTime;
   final String sunriseTime;
@@ -75,6 +77,8 @@ class NativePrayerWidgetEvent {
   const NativePrayerWidgetEvent({
     required this.triggerAt,
     required this.prayerLabel,
+    DateTime? remainingTriggerAt,
+    String? remainingPrayerLabel,
     required this.dateLabel,
     required this.fajrTime,
     required this.sunriseTime,
@@ -82,12 +86,15 @@ class NativePrayerWidgetEvent {
     required this.asrTime,
     required this.maghribTime,
     required this.ishaTime,
-  });
+  }) : remainingTriggerAt = remainingTriggerAt ?? triggerAt,
+       remainingPrayerLabel = remainingPrayerLabel ?? prayerLabel;
 
   Map<String, Object?> toJson() {
     return <String, Object?>{
       'triggerAtMillis': _wallClockMillis(triggerAt),
       'prayerLabel': prayerLabel,
+      'remainingTriggerAtMillis': _wallClockMillis(remainingTriggerAt),
+      'remainingPrayerLabel': remainingPrayerLabel,
       'timeLabel':
           '${triggerAt.hour.toString().padLeft(2, '0')}:'
           '${triggerAt.minute.toString().padLeft(2, '0')}',

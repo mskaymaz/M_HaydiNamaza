@@ -1,6 +1,7 @@
 import 'shared_settings_models.dart';
 
-const SharedSettingsAppConfig kSharedSettingsAppConfig = SharedSettingsAppConfig(
+const SharedSettingsAppConfig
+kSharedSettingsAppConfig = SharedSettingsAppConfig(
   appName: 'Let\'s Pray',
   appId: 'haydi_namaza',
   packageName: 'com.mskaymaz.mhaydinamaza',
@@ -13,7 +14,8 @@ const SharedSettingsAppConfig kSharedSettingsAppConfig = SharedSettingsAppConfig
   otherAppsRemoteCatalogUrl:
       'https://raw.githubusercontent.com/mskaymaz/AllApp/main/app_catalog.json',
   localCatalogAssetPath: 'assets/data/shared_settings/app_catalog.local.json',
-  localUpdateAssetPath: 'assets/data/shared_settings/update_manifest.local.json',
+  localUpdateAssetPath:
+      'assets/data/shared_settings/update_manifest.local.json',
   contact: SharedSettingsContactConfig(email: 'msklabs.org@gmail.com'),
   support: SharedSettingsSupportConfig(
     title: 'Destek Olabilirsiniz',

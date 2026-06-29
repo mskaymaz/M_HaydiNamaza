@@ -6,7 +6,7 @@ import 'shared_settings_parser.dart';
 
 class SharedSettingsRemoteClient {
   const SharedSettingsRemoteClient({http.Client? httpClient})
-      : _httpClient = httpClient;
+    : _httpClient = httpClient;
 
   final http.Client? _httpClient;
 
@@ -15,17 +15,26 @@ class SharedSettingsRemoteClient {
     required String localAssetPath,
     required String currentAppId,
   }) async {
-    final payload = await _loadPayload(
-      remoteUrl: remoteUrl,
-      localAssetPath: localAssetPath,
-    );
+    final remotePayload = await _fetchRemote(remoteUrl);
+    final localPayload = await _fetchLocalAsset(localAssetPath);
+    final payload = remotePayload?.trim().isNotEmpty == true
+        ? remotePayload
+        : localPayload;
     if (payload == null) return const <OtherAppItem>[];
-    final current = currentAppId.trim().toLowerCase();
-    final items = SharedSettingsParser.parseCatalogPayload(payload);
-    return items
-        .where((item) => item.appId.trim().toLowerCase() != current)
+
+    final localItems = localPayload == null
+        ? const <OtherAppItem>[]
+        : SharedSettingsParser.parseCatalogPayload(localPayload);
+    final localById = <String, OtherAppItem>{
+      for (final item in localItems) item.appId: item,
+    };
+
+    final items = SharedSettingsParser.parseCatalogPayload(payload)
+        .map((item) => _withDeterministicVisuals(item, localById[item.appId]))
         .where((item) => item.isTargetFor(currentAppId))
         .toList(growable: false);
+    items.sort((left, right) => left.order.compareTo(right.order));
+    return items;
   }
 
   Future<UpdateManifest?> loadUpdateManifest({
@@ -38,6 +47,19 @@ class SharedSettingsRemoteClient {
     );
     if (payload == null) return null;
     return SharedSettingsParser.parseUpdatePayload(payload);
+  }
+
+  OtherAppItem _withDeterministicVisuals(
+    OtherAppItem item,
+    OtherAppItem? localItem,
+  ) {
+    if (localItem == null) return item;
+    final localIconAsset = localItem.iconAsset.trim();
+    final localName = localItem.name.trim();
+    return item.copyWith(
+      name: localName.isNotEmpty ? localName : item.name,
+      iconAsset: localIconAsset.isNotEmpty ? localIconAsset : item.iconAsset,
+    );
   }
 
   Future<String?> _loadPayload({
@@ -57,9 +79,9 @@ class SharedSettingsRemoteClient {
 
     try {
       final client = _httpClient ?? http.Client();
-      final response = await client.get(uri).timeout(
-            const Duration(seconds: 8),
-          );
+      final response = await client
+          .get(uri)
+          .timeout(const Duration(seconds: 8));
       if (_httpClient == null) {
         client.close();
       }

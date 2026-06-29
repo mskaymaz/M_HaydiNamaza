@@ -12,23 +12,33 @@ class SharedSettingsParser {
     for (final row in rows) {
       if (row is! Map) continue;
       final map = Map<String, dynamic>.from(row);
-      final appId = (map['app_id'] as String?)?.trim() ?? '';
+      final appId = _normalizeAppId((map['app_id'] as String?)?.trim() ?? '');
       final name = (map['name'] as String?)?.trim() ?? '';
       final description = (map['description'] as String?)?.trim() ?? '';
       final url = (map['url'] as String?)?.trim() ?? '';
-      final downloadUrl = _readFirstString(
-        map,
-        const ['download_url', 'downloadUrl', 'release_url', 'releaseUrl'],
-      );
+      final downloadUrl = _readFirstString(map, const [
+        'download_url',
+        'downloadUrl',
+        'release_url',
+        'releaseUrl',
+      ]);
       final iconAsset = _readString(map, 'icon_asset', 'iconAsset');
       final iconUrl = _readString(map, 'icon_url', 'iconUrl');
+      final platform = _normalizePlatform(
+        _readFirstString(map, const [
+          'platform',
+          'platform_type',
+          'platformType',
+        ]),
+      );
       final active = map['active'] is bool ? map['active'] as bool : true;
       final order = map['order'] is num ? (map['order'] as num).toInt() : 9999;
-      final targets = (map['target_apps'] as List<dynamic>? ?? const <dynamic>[])
-          .whereType<String>()
-          .map((value) => value.trim().toLowerCase())
-          .where((value) => value.isNotEmpty)
-          .toList(growable: false);
+      final targets =
+          (map['target_apps'] as List<dynamic>? ?? const <dynamic>[])
+              .whereType<String>()
+              .map((value) => value.trim().toLowerCase())
+              .where((value) => value.isNotEmpty)
+              .toList(growable: false);
 
       if (appId.isEmpty || name.isEmpty || url.isEmpty) continue;
       if (Uri.tryParse(url) == null) continue;
@@ -45,6 +55,7 @@ class SharedSettingsParser {
           iconAsset: iconAsset,
           iconUrl: iconUrl,
           downloadUrl: downloadUrl,
+          platform: platform,
           active: active,
           order: order,
           targetApps: targets,
@@ -55,7 +66,31 @@ class SharedSettingsParser {
     return items;
   }
 
-  static String _readString(Map<String, dynamic> map, String first, String second) {
+  static String _normalizeAppId(String value) {
+    final normalized = value.trim().toLowerCase();
+    if (normalized == 'rekat_sayar' || normalized == 'm_rekat_sayar') {
+      return 'rekatsay';
+    }
+    return normalized;
+  }
+
+  static String _normalizePlatform(String value) {
+    final normalized = value.trim().toLowerCase();
+    if (normalized == 'desktop' ||
+        normalized == 'computer' ||
+        normalized == 'pc' ||
+        normalized == 'bilgisayar') {
+      return 'desktop';
+    }
+    if (normalized == 'web') return 'web';
+    return 'mobile';
+  }
+
+  static String _readString(
+    Map<String, dynamic> map,
+    String first,
+    String second,
+  ) {
     return _readFirstString(map, [first, second]);
   }
 

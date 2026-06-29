@@ -72,10 +72,10 @@ class PrayerTimesWideWidgetProvider : AppWidgetProvider() {
             bindActiveCell(views, next)
             views.setTextViewText(
                 R.id.prayer_wide_remaining_label,
-                "${next.prayerLabel} vaktine kalan süre:"
+                "${next.remainingPrayerLabel} vaktine kalan süre:"
             )
             views.setViewVisibility(R.id.prayer_wide_countdown, View.VISIBLE)
-            val remaining = next.triggerAtMillis - System.currentTimeMillis()
+            val remaining = next.remainingTriggerAtMillis - System.currentTimeMillis()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 val base = SystemClock.elapsedRealtime() + remaining
                 views.setChronometer(R.id.prayer_wide_countdown, base, null, true)

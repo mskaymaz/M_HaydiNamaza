@@ -18,6 +18,8 @@ object PrayerWidgetScheduler {
     data class WidgetEvent(
         val triggerAtMillis: Long,
         val prayerLabel: String,
+        val remainingTriggerAtMillis: Long,
+        val remainingPrayerLabel: String,
         val timeLabel: String,
         val dateLabel: String,
         val fajrTime: String,
@@ -36,6 +38,8 @@ object PrayerWidgetScheduler {
                 JSONObject().apply {
                     put("triggerAtMillis", event.triggerAtMillis)
                     put("prayerLabel", event.prayerLabel)
+                    put("remainingTriggerAtMillis", event.remainingTriggerAtMillis)
+                    put("remainingPrayerLabel", event.remainingPrayerLabel)
                     put("timeLabel", event.timeLabel)
                     put("dateLabel", event.dateLabel)
                     put("fajrTime", event.fajrTime)
@@ -73,17 +77,21 @@ object PrayerWidgetScheduler {
 
     fun nextEvent(context: Context): WidgetEvent? {
         val now = System.currentTimeMillis()
-        return readEvents(context).firstOrNull { it.triggerAtMillis > now }
+        return readEvents(context)
+            .filter { it.remainingTriggerAtMillis > now }
+            .minByOrNull { it.remainingTriggerAtMillis }
     }
 
     private fun nextRefreshEvent(context: Context): WidgetEvent? {
         val now = System.currentTimeMillis()
-        return readEvents(context).firstOrNull { it.triggerAtMillis > now }
+        return readEvents(context)
+            .filter { it.remainingTriggerAtMillis > now }
+            .minByOrNull { it.remainingTriggerAtMillis }
     }
 
     private fun scheduleNextRefresh(context: Context) {
         val next = nextRefreshEvent(context) ?: return
-        val triggerAt = next.triggerAtMillis + 1000L
+        val triggerAt = next.remainingTriggerAtMillis + 1000L
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, PrayerTimeWidgetProvider::class.java).apply {
             action = ACTION_REFRESH
@@ -120,6 +128,14 @@ object PrayerWidgetScheduler {
                     WidgetEvent(
                         triggerAtMillis = item.optLong("triggerAtMillis", 0L),
                         prayerLabel = item.optString("prayerLabel", "Vakit"),
+                        remainingTriggerAtMillis = item.optLong(
+                            "remainingTriggerAtMillis",
+                            item.optLong("triggerAtMillis", 0L)
+                        ),
+                        remainingPrayerLabel = item.optString(
+                            "remainingPrayerLabel",
+                            item.optString("prayerLabel", "Vakit")
+                        ),
                         timeLabel = item.optString("timeLabel", "--:--"),
                         dateLabel = item.optString("dateLabel", ""),
                         fajrTime = item.optString("fajrTime", "--:--"),
@@ -145,6 +161,8 @@ object PrayerWidgetScheduler {
         return WidgetEvent(
             triggerAtMillis = triggerAtMillis,
             prayerLabel = prayerLabel,
+            remainingTriggerAtMillis = numberToLong(input["remainingTriggerAtMillis"]) ?: triggerAtMillis,
+            remainingPrayerLabel = input["remainingPrayerLabel"]?.toString()?.trim().orEmpty().ifEmpty { prayerLabel },
             timeLabel = timeLabel,
             dateLabel = input["dateLabel"]?.toString()?.trim().orEmpty(),
             fajrTime = input["fajrTime"]?.toString()?.trim().orEmpty().ifEmpty { "--:--" },

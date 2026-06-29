@@ -1,4 +1,4 @@
-﻿part of 'home_screen.dart';
+part of 'home_screen.dart';
 
 extension _HomeReminderEngineController on _HomeScreenState {
   Future<void> _checkAndTriggerReminders(
@@ -159,7 +159,8 @@ extension _HomeReminderEngineController on _HomeScreenState {
           timeZone: location.timeZoneOffset,
           methodCode: methodCode,
           date: tomorrow,
-          allowDiyanet: methodCode == 'diyanet' || methodCode == 'diyanet_tabanli',
+          allowDiyanet:
+              methodCode == 'diyanet' || methodCode == 'diyanet_tabanli',
           allowRemote: true,
         );
         _appendNativeWidgetEvents(
@@ -174,6 +175,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
           },
           now,
           dateLabel: currentDateLabel,
+          remainingDate: tomorrow,
         );
       } catch (_) {
         // Today's visible home data is still enough to refresh the widget
@@ -217,7 +219,9 @@ extension _HomeReminderEngineController on _HomeScreenState {
     methodCode ??= CalculationMethodStorage.defaultCode;
     final latitude = double.tryParse(location.latitude);
     final longitude = double.tryParse(location.longitude);
-    if ((methodCode != 'turkey' && methodCode != 'diyanet' && methodCode != 'diyanet_tabanli') &&
+    if ((methodCode != 'turkey' &&
+            methodCode != 'diyanet' &&
+            methodCode != 'diyanet_tabanli') &&
         (latitude == null || longitude == null)) {
       return const _NativeReminderSchedule(notifications: [], widgetEvents: []);
     }
@@ -265,6 +269,7 @@ extension _HomeReminderEngineController on _HomeScreenState {
       },
       now,
       dateLabel: _widgetPanelDateLabel(today),
+      remainingDate: tomorrow,
     );
     _appendNativeCustomPrayerEvents(notifications, times, now);
     return _NativeReminderSchedule(
@@ -315,11 +320,18 @@ extension _HomeReminderEngineController on _HomeScreenState {
     Map<Prayer, DateTime> prayerTimes,
     DateTime now, {
     required String dateLabel,
+    DateTime? remainingDate,
   }) {
+    final remainingBaseDate = remainingDate ?? now;
+
     NativePrayerWidgetEvent widgetEvent(Prayer prayer, DateTime time) {
+      final remainingTime = _clockTimeOnDate(time, remainingBaseDate);
+      final label = _turkishPrayerLabel(prayer);
       return NativePrayerWidgetEvent(
         triggerAt: time,
-        prayerLabel: _turkishPrayerLabel(prayer),
+        prayerLabel: label,
+        remainingTriggerAt: remainingTime,
+        remainingPrayerLabel: label,
         dateLabel: dateLabel,
         fajrTime: homeFormatTime(prayerTimes[Prayer.fajr]!),
         sunriseTime: homeFormatTime(prayerTimes[Prayer.sunrise]!),
@@ -331,7 +343,8 @@ extension _HomeReminderEngineController on _HomeScreenState {
     }
 
     for (final entry in prayerTimes.entries) {
-      if (!entry.value.isAfter(now)) continue;
+      final remainingTime = _clockTimeOnDate(entry.value, remainingBaseDate);
+      if (!remainingTime.isAfter(now)) continue;
       widgetEvents.add(widgetEvent(entry.key, entry.value));
     }
   }
@@ -529,10 +542,11 @@ extension _HomeReminderEngineController on _HomeScreenState {
     }
   }
 
-
   bool _nativeActiveReminderSurfaceHandles(_PrayerRowSettings settings) {
     if (kIsWeb || defaultTargetPlatform != TargetPlatform.android) return false;
-    return settings.voiceEnabled || settings.vibrationEnabled || settings.azanEnabled;
+    return settings.voiceEnabled ||
+        settings.vibrationEnabled ||
+        settings.azanEnabled;
   }
 
   bool _canPlayVoiceReminder() {
@@ -566,7 +580,4 @@ extension _HomeReminderEngineController on _HomeScreenState {
     final prayerStamp = '${two(prayerTime.hour)}${two(prayerTime.minute)}';
     return '$rowId|$stage|$reminderStamp|$prayerStamp';
   }
-
 }
-
-

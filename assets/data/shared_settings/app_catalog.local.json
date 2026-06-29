@@ -1,31 +1,36 @@
 {
+  "version": 1,
+  "updated_at": "2026-06-29",
   "apps": [
     {
       "app_id": "haydi_namaza",
       "name": "Haydi Namaza",
-      "description": "Namaz vakti, kıble ve günlük içerik uygulaması",
+      "description": "Namaz vakti, k\u0131ble ve g\u00fcnl\u00fck i\u00e7erik uygulamas\u0131",
       "url": "https://github.com/mskaymaz/AllApp/tree/main/HaydiNamaza",
       "download_url": "https://github.com/mskaymaz/AllApp/releases/download/haydi-namaza-v1.0.0-build1/Haydi.Namaza.apk",
-      "icon_asset": "img/HaydiNamaza_icon.png",
+      "icon_asset": "assets/app_icon/app_icon.png",
+      "icon_url": "",
       "active": true,
       "order": 10,
       "target_apps": [
         "*"
-      ]
+      ],
+      "platform": "mobile"
     },
     {
-      "app_id": "rekat_sayar",
-      "name": "M Rekat Sayar",
-      "description": "Namaz sayım ve kalibrasyon uygulaması",
-      "url": "https://github.com/mskaymaz/AllApp/tree/main/releases",
-      "download_url": "https://raw.githubusercontent.com/mskaymaz/AllApp/main/releases/RekatSayar-v1.0.0.apk",
-      "icon_asset": "",
+      "app_id": "rekatsay",
+      "name": "Rekat Say",
+      "description": "Namaz rekatlar\u0131n\u0131 takip etmeye yard\u0131mc\u0131 sade ve \u00fccretsiz uygulama.",
+      "url": "https://raw.githubusercontent.com/mskaymaz/AllApp/main/releases/RekatSay-v1.0.0.apk",
+      "download_url": "https://raw.githubusercontent.com/mskaymaz/AllApp/main/releases/RekatSay-v1.0.0.apk",
+      "icon_asset": "assets/icons/rekatsay.png",
       "icon_url": "",
       "active": true,
       "order": 20,
       "target_apps": [
         "*"
-      ]
+      ],
+      "platform": "mobile"
     }
   ]
 }

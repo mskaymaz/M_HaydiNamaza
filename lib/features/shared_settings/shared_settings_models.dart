@@ -76,6 +76,7 @@ class OtherAppItem {
   final String iconAsset;
   final String iconUrl;
   final String downloadUrl;
+  final String platform;
   final bool active;
   final int order;
   final List<String> targetApps;
@@ -88,10 +89,41 @@ class OtherAppItem {
     required this.iconAsset,
     required this.iconUrl,
     required this.downloadUrl,
+    required this.platform,
     required this.active,
     required this.order,
     required this.targetApps,
   });
+
+
+
+  OtherAppItem copyWith({
+    String? appId,
+    String? name,
+    String? description,
+    String? url,
+    String? iconAsset,
+    String? iconUrl,
+    String? downloadUrl,
+    String? platform,
+    bool? active,
+    int? order,
+    List<String>? targetApps,
+  }) {
+    return OtherAppItem(
+      appId: appId ?? this.appId,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      url: url ?? this.url,
+      iconAsset: iconAsset ?? this.iconAsset,
+      iconUrl: iconUrl ?? this.iconUrl,
+      downloadUrl: downloadUrl ?? this.downloadUrl,
+      platform: platform ?? this.platform,
+      active: active ?? this.active,
+      order: order ?? this.order,
+      targetApps: targetApps ?? this.targetApps,
+    );
+  }
 
   String get launchUrl => downloadUrl.trim().isNotEmpty ? downloadUrl : url;
 

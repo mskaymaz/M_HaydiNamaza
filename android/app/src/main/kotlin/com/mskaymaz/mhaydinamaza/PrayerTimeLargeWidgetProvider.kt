@@ -64,12 +64,12 @@ class PrayerTimeLargeWidgetProvider : AppWidgetProvider() {
                 return views
             }
 
-            views.setTextViewText(R.id.prayer_widget_label, next.prayerLabel)
+            views.setTextViewText(R.id.prayer_widget_label, next.remainingPrayerLabel)
             views.setTextViewText(R.id.prayer_widget_time, next.timeLabel)
             views.setTextViewText(R.id.prayer_widget_remaining_label, "Kalan Süre")
             views.setViewVisibility(R.id.prayer_widget_countdown, View.VISIBLE)
 
-            val remaining = next.triggerAtMillis - System.currentTimeMillis()
+            val remaining = next.remainingTriggerAtMillis - System.currentTimeMillis()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 val base = SystemClock.elapsedRealtime() + remaining
                 views.setChronometer(R.id.prayer_widget_countdown, base, null, true)

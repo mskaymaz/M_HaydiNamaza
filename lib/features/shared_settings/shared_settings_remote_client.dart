@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,12 +43,18 @@ class SharedSettingsRemoteClient {
     required String remoteUrl,
     required String localAssetPath,
   }) async {
-    final payload = await _loadPayload(
-      remoteUrl: remoteUrl,
-      localAssetPath: localAssetPath,
-    );
-    if (payload == null) return null;
-    return SharedSettingsParser.parseUpdatePayload(payload);
+    final remotePayload = await _fetchRemote(remoteUrl);
+    if (remotePayload != null && remotePayload.trim().isNotEmpty) {
+      final remoteManifest =
+          SharedSettingsParser.parseUpdatePayload(remotePayload);
+      if (remoteManifest != null) return remoteManifest;
+    }
+
+    if (remoteUrl.trim().isNotEmpty) return null;
+
+    final localPayload = await _fetchLocalAsset(localAssetPath);
+    if (localPayload == null) return null;
+    return SharedSettingsParser.parseUpdatePayload(localPayload);
   }
 
   OtherAppItem _withDeterministicVisuals(
@@ -62,33 +70,37 @@ class SharedSettingsRemoteClient {
     );
   }
 
-  Future<String?> _loadPayload({
-    required String remoteUrl,
-    required String localAssetPath,
-  }) async {
-    final remote = await _fetchRemote(remoteUrl);
-    if (remote != null && remote.trim().isNotEmpty) {
-      return remote;
-    }
-    return _fetchLocalAsset(localAssetPath);
-  }
 
   Future<String?> _fetchRemote(String remoteUrl) async {
-    final uri = Uri.tryParse(remoteUrl.trim());
-    if (uri == null) return null;
+    final parsed = Uri.tryParse(remoteUrl.trim());
+    if (parsed == null) return null;
 
+    final uri = parsed.replace(
+      queryParameters: <String, String>{
+        ...parsed.queryParameters,
+        '_ts': DateTime.now().millisecondsSinceEpoch.toString(),
+      },
+    );
+
+    http.Client? ownedClient;
+    final client = _httpClient ?? (ownedClient = http.Client());
     try {
-      final client = _httpClient ?? http.Client();
       final response = await client
-          .get(uri)
-          .timeout(const Duration(seconds: 8));
-      if (_httpClient == null) {
-        client.close();
-      }
+          .get(
+            uri,
+            headers: const <String, String>{
+              'Cache-Control': 'no-cache',
+              'Pragma': 'no-cache',
+              'Accept': 'application/json,text/plain,*/*',
+            },
+          )
+          .timeout(const Duration(seconds: 12));
       if (response.statusCode != 200) return null;
-      return response.body;
+      return utf8.decode(response.bodyBytes);
     } catch (_) {
       return null;
+    } finally {
+      ownedClient?.close();
     }
   }
 

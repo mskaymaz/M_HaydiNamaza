@@ -132,10 +132,14 @@ class SharedSettingsParser {
 
   static dynamic _decode(String payload) {
     try {
-      return jsonDecode(payload);
+      return jsonDecode(_cleanJsonPayload(payload));
     } catch (_) {
       return null;
     }
+  }
+
+  static String _cleanJsonPayload(String payload) {
+    return payload.replaceFirst(String.fromCharCode(0xFEFF), '').trim();
   }
 
   static List<dynamic> _rawRows(dynamic decoded) {

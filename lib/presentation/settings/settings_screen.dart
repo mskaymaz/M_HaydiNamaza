@@ -313,7 +313,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             onEditTextColor: () => _editColor(
               context: context,
-              title: 'YazÄ± Rengi',
+              title: 'Yaz\u0131 Rengi',
               initialColor: palette.cizgiColor,
               onApply: widget.uiPaletteController.setCizgiColor,
             ),
@@ -338,7 +338,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               if (!context.mounted) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Arka plan seÃ§imleri ana sayfaya uygulandÄ±.'),
+                  content: Text('Arka plan se\u00e7imleri ana sayfaya uyguland\u0131.'),
                 ),
               );
             },
@@ -453,7 +453,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (settings.audioMode != ReminderAudioMode.textToSpeech &&
         (settings.selectedAudioPath?.trim().isEmpty ?? true)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Test iÃ§in Ã¶nce bir ses dosyasÄ± seÃ§in.')),
+        const SnackBar(content: Text('Test i\u00e7in \u00f6nce bir ses dosyas\u0131 se\u00e7in.')),
       );
       return;
     }
@@ -466,7 +466,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     } catch (_) {
       if (!context.mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sesli test baÅŸlatÄ±lamadÄ±.')),
+        const SnackBar(content: Text('Sesli test ba\u015flat\u0131lamad\u0131.')),
       );
     }
   }

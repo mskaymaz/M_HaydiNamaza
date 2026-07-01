@@ -288,11 +288,11 @@ extension _HomeBuildController on _HomeScreenState {
                                                           visible: _reminderSettings
                                                               .showHelpBalloons,
                                                           title: _showPrayerControlPanel
-                                                              ? 'Vakit paneli ayarlarÃ„Â±'
+                                                              ? 'Vakit paneli ayarlar\u0131'
                                                               : 'Vakit paneli',
                                                           message: _showPrayerControlPanel
-                                                              ? 'Bu gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼mde her vakit iÃƒÂ§in sesli hatÃ„Â±rlatma, ezan ve titreÃ…Å¸im seÃƒÂ§eneklerini satÃ„Â±r satÃ„Â±r dÃƒÂ¼zenleyebilirsiniz. Ã¢Å“â€¢ simgesine bastÃ„Â±Ã„Å¸Ã„Â±nÃ„Â±zda normal vakit listesine dÃƒÂ¶nersiniz.'
-                                                              : 'Bu panel bugÃƒÂ¼nÃƒÂ¼n namaz vakitlerini ve aktif vakti gÃƒÂ¶sterir. ÄŸÅ¸â€â€ simgesine bastÃ„Â±Ã„Å¸Ã„Â±nÃ„Â±zda vakit ayarlarÃ„Â± aÃƒÂ§Ã„Â±lÃ„Â±r. Paneli saÃ„Å¸dan sola sÃƒÂ¼rÃƒÂ¼klediÃ„Å¸inizde seÃƒÂ§ili konum iÃƒÂ§in sÃ„Â±radaki 7 gÃƒÂ¼nÃƒÂ¼n vakitlerini gÃƒÂ¶rebilirsiniz. Yatay ekranda ÃƒÂ§ift dokunuÃ…Å¸ panel geniÃ…Å¸liÃ„Å¸ini deÃ„Å¸iÃ…Å¸tirir.',
+                                                              ? 'Bu g\u00f6r\u00fcn\u00fcmde her vakit i\u00e7in sesli hat\u0131rlatma, ezan ve titre\u015fim se\u00e7eneklerini sat\u0131r sat\u0131r d\u00fczenleyebilirsiniz. \u2715 simgesine bast\u0131\u011f\u0131n\u0131zda normal vakit listesine d\u00f6nersiniz.'
+                                                              : 'Bu panel bug\u00fcn\u00fcn namaz vakitlerini ve aktif vakti g\u00f6sterir. \u{1F514} simgesine bast\u0131\u011f\u0131n\u0131zda vakit ayarlar\u0131 a\u00e7\u0131l\u0131r. Paneli sa\u011fdan sola s\u00fcr\u00fckledi\u011finizde se\u00e7ili konum i\u00e7in s\u0131radaki 7 g\u00fcn\u00fcn vakitlerini g\u00f6rebilirsiniz. Yatay ekranda \u00e7ift dokunu\u015f panel geni\u015fli\u011fini de\u011fi\u015ftirir.',
                                                           iconSize: 19,
                                                           tapSize: 32,
                                                         ),

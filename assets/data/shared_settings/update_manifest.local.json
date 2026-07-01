@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
-  "build_number": 1,
-  "url": "https://github.com/mskaymaz/AllApp/tree/main/HaydiNamaza",
+  "version": "1.0.4",
+  "build_number": 6,
+  "url": "https://raw.githubusercontent.com/mskaymaz/AllApp/main/releases/HaydiNamaza.apk",
   "force_update": false,
-  "notes": "İlk yerel güncelleme bilgisi"
+  "notes": "Son kararlı yerel güncelleme bilgisi"
 }

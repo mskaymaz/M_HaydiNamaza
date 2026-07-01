@@ -1,0 +1,269 @@
+# MASTER PROJECT PROMPT (SPP)
+
+You are joining an existing long-term Flutter production project.
+
+DO NOT WRITE OR MODIFY ANY CODE BEFORE ANALYZING THE PROVIDED CONTEXT.
+
+This project has accumulated many months of development and architectural decisions.
+
+Preserve all existing behavior unless explicitly requested.
+
+--------------------------------------------------
+PROJECT
+--------------------------------------------------
+
+Project:
+M_HaydiNamaza (Haydi Namaza)
+
+Tech Stack
+
+- Flutter
+- Dart
+- Kotlin
+- Android Widgets
+- AlarmManager
+- SharedPreferences
+- Material Design
+
+Local repositories
+
+Main application
+
+D:\Code\mskaymaz\M_HaydiNamaza
+
+Public release repository
+
+D:\Code\mskaymaz\AllAppReleaseWork
+
+GitHub repositories
+
+Private application repository
+
+https://github.com/mskaymaz/M_HaydiNamaza
+
+Public release repository
+
+https://github.com/mskaymaz/AllApp
+
+--------------------------------------------------
+SAFEPATCH PROTOCOL (SPP)
+--------------------------------------------------
+
+Mandatory workflow
+
+1. Analyze first.
+2. Never guess.
+3. Find the real root cause.
+4. Preserve architecture.
+5. Never refactor unrelated code.
+6. Never rewrite working code.
+7. Verify every modification.
+8. flutter analyze must be clean.
+9. Only modify files that are required.
+10. Production quality only.
+
+Small changes
+→ PowerShell Patch
+
+Medium / Large
+→ Real Patch ZIP
+
+Large architectural changes
+→ Analyze first
+→ Explain architecture
+→ Then patch
+
+--------------------------------------------------
+MANDATORY DEVELOPMENT WORKFLOW
+--------------------------------------------------
+
+For EVERY implementation:
+
+1.
+Analyze.
+
+2.
+Apply Patch / Patch ZIP.
+
+3.
+Run
+
+flutter analyze
+
+4.
+If analyze is clean
+
+flutter build apk --release
+
+5.
+Install EXACTLY the APK that has just been built
+
+adb install -r build\app\outputs\flutter-apk\app-release.apk
+
+6.
+Verify on the physical Android device.
+
+DO NOT assume the installed APK is the latest one.
+
+DO NOT test against stale APKs.
+
+7.
+Only after successful verification
+
+git add
+
+git commit
+
+git push
+
+8.
+If the change is intended for public users
+
+Copy
+
+build\app\outputs\flutter-apk\app-release.apk
+
+to
+
+D:\Code\mskaymaz\AllAppReleaseWork\releases\HaydiNamaza.apk
+
+Commit
+
+Push
+
+Update M_HaydiNamaza external reference if necessary.
+
+--------------------------------------------------
+CURRENT RELEASE ARCHITECTURE
+--------------------------------------------------
+
+Public repository now contains ONLY latest APKs.
+
+releases/
+
+HaydiNamaza.apk
+
+RekatSay.apk
+
+Users always download
+
+https://raw.githubusercontent.com/mskaymaz/AllApp/main/releases/HaydiNamaza.apk
+
+and
+
+https://raw.githubusercontent.com/mskaymaz/AllApp/main/releases/RekatSay.apk
+
+These URLs MUST NEVER change.
+
+Old public APK archives have been removed.
+
+Do NOT reintroduce version-specific download URLs.
+
+--------------------------------------------------
+COMPLETED WORK
+--------------------------------------------------
+
+Already completed
+
+✓ Deterministic application icons
+
+✓ Settings / Our Applications redesign
+
+✓ Stable application catalog
+
+✓ Unicode fixes for Turkish help texts
+
+✓ Stable latest APK architecture
+
+✓ Documentation
+
+PROJECT_INFO.md
+
+CHANGELOG.md
+
+✓ Widget transition scheduling improvement
+
+Widget transition still requires long-term real device validation across prayer transitions.
+
+--------------------------------------------------
+CURRENT PROJECT STATUS
+--------------------------------------------------
+
+flutter analyze
+
+Clean
+
+Main repository
+
+Up to date
+
+AllApp repository
+
+Up to date
+
+Stable latest APK architecture completed.
+
+--------------------------------------------------
+NEXT TASK
+--------------------------------------------------
+
+Continue ONLY with the task I describe.
+
+Do not start additional improvements.
+
+Do not expand scope.
+
+--------------------------------------------------
+COMMUNICATION STYLE
+--------------------------------------------------
+
+Keep answers concise.
+
+Do not produce unnecessary long explanations.
+
+Do not generate many PowerShell commands at once.
+
+Proceed one verified step at a time.
+
+Wait for command output before continuing.
+
+If a task requires multiple commits,
+separate them into logical commits.
+
+--------------------------------------------------
+IMPORTANT
+--------------------------------------------------
+
+Never assume an APK is current.
+
+Always verify by:
+
+flutter analyze
+
+↓
+
+flutter build apk --release
+
+↓
+
+adb install -r
+
+↓
+
+Real device testing
+
+↓
+
+Commit
+
+↓
+
+Push
+
+↓
+
+Update public release repository if needed.
+
+This workflow is mandatory for this project.
+
+Ayrıca bana vereceğin komut ve ps için kod yapılarını da (zip olanlar hariç) context olacak şekilde (yani satır satır olmayacak ve chat i şişirmeyecek şekilde) aşağı doğru uzamasın istiyorum ver. 

@@ -7,9 +7,9 @@ kSharedSettingsAppConfig = SharedSettingsAppConfig(
   packageName: 'com.mskaymaz.mhaydinamaza',
   adminName: 'HaydiNamazaAdmin',
   updateRemoteManifestUrl:
-      'https://raw.githubusercontent.com/mskaymaz/AllApp/main/HaydiNamaza/update.json',
+      'https://raw.githubusercontent.com/mskaymaz/AllApp/main/update_manifest.json',
   updateFallbackReleaseUrl:
-      'https://github.com/mskaymaz/AllApp/tree/main/HaydiNamaza',
+      'https://raw.githubusercontent.com/mskaymaz/AllApp/main/releases/HaydiNamaza.apk',
   updateChannel: 'public',
   otherAppsRemoteCatalogUrl:
       'https://raw.githubusercontent.com/mskaymaz/AllApp/main/app_catalog.json',

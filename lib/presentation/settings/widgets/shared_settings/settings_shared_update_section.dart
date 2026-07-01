@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../features/shared_settings/shared_settings_app_config.dart';
+import '../../../../features/shared_settings/shared_settings_models.dart';
 import '../../../../features/shared_settings/shared_settings_remote_client.dart';
 import 'shared_settings_section_styles.dart';
 
@@ -27,26 +28,29 @@ class _SettingsSharedUpdateSectionState
   late final Future<PackageInfo> _packageInfoFuture;
   bool _checkingUpdate = false;
   bool _updateAvailable = false;
+  bool _automaticUpdateChecksEnabled = true;
 
   static const String _lastUpdateCheckKey =
       'shared_settings_last_update_check_ms';
-  static const Duration _automaticUpdateCheckInterval = Duration(days: 10);
+  static const String _automaticUpdateChecksEnabledKey =
+      'shared_settings_automatic_update_checks_enabled';
+  static const Duration _automaticUpdateCheckInterval = Duration(hours: 12);
 
   @override
   void initState() {
     super.initState();
     _packageInfoFuture = PackageInfo.fromPlatform();
-    _packageInfoFuture.then(_checkForUpdateIfDue);
+    _loadAutomaticUpdatePreference();
   }
 
   @override
   Widget build(BuildContext context) {
     final config = kSharedSettingsAppConfig;
     return SharedSettingsSectionCard(
-      title: 'Uygulama Bilgileri ve Güncelleme',
+      title: 'Uygulama Bilgileri ve G\u00fcncelleme',
       showHelpBalloons: widget.showHelpBalloons,
       helpMessage:
-          'Bu bölüm mevcut sürüm bilgisini gösterir ve public dağıtım kaynağından yeni sürüm kontrolü yapar. Güncelleme varsa indirme bağlantısını açar.',
+          'Bu b\u00f6l\u00fcm mevcut s\u00fcr\u00fcm bilgisini g\u00f6sterir ve public da\u011f\u0131t\u0131m kayna\u011f\u0131ndan yeni s\u00fcr\u00fcm kontrol\u00fc yapar. G\u00fcncelleme varsa indirme ba\u011flant\u0131s\u0131n\u0131 a\u00e7ar.',
       headerColor: sharedSettingsUpdateHeader,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(25, 15, 25, 15),
@@ -68,9 +72,19 @@ class _SettingsSharedUpdateSectionState
                 _infoRow('Uygulama', config.appName),
                 _infoRow('App ID', config.appId),
                 _infoRow('Package', config.packageName),
-                _infoRow('Sürüm', versionText),
+                _infoRow('S\u00fcr\u00fcm', versionText),
                 _infoRow('Kanal', config.updateChannel),
                 const SizedBox(height: 12),
+                SwitchListTile.adaptive(
+                  contentPadding: EdgeInsets.zero,
+                  value: _automaticUpdateChecksEnabled,
+                  onChanged: (value) => _setAutomaticUpdateChecks(value),
+                  title: const Text('G\u00fcncellemeleri otomatik kontrol et'),
+                  subtitle: const Text(
+                    'A\u00e7\u0131ksa, bu b\u00f6l\u00fcm a\u00e7\u0131ld\u0131\u011f\u0131nda internet \u00fczerinden yeni s\u00fcr\u00fcm bilgisi kontrol edilir.',
+                  ),
+                ),
+                const SizedBox(height: 8),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: FilledButton.icon(
@@ -88,8 +102,8 @@ class _SettingsSharedUpdateSectionState
                       _checkingUpdate
                           ? 'Kontrol Ediliyor...'
                           : (_updateAvailable
-                              ? 'Güncelleme var'
-                              : 'Güncellemeleri Kontrol Et'),
+                              ? 'G\u00fcncelleme var'
+                              : 'G\u00fcncellemeleri Kontrol Et'),
                     ),
                   ),
                 ),
@@ -113,7 +127,34 @@ class _SettingsSharedUpdateSectionState
     );
   }
 
+  Future<void> _loadAutomaticUpdatePreference() async {
+    final prefs = await SharedPreferences.getInstance();
+    final enabled = prefs.getBool(_automaticUpdateChecksEnabledKey) ?? true;
+    if (!mounted) return;
+    setState(() => _automaticUpdateChecksEnabled = enabled);
+    if (!enabled) return;
+    final packageInfo = await _packageInfoFuture;
+    if (!mounted) return;
+    await _checkForUpdateIfDue(packageInfo);
+  }
+
+  Future<void> _setAutomaticUpdateChecks(bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_automaticUpdateChecksEnabledKey, enabled);
+    if (!mounted) return;
+    setState(() => _automaticUpdateChecksEnabled = enabled);
+    if (!enabled) {
+      _showSnack('Otomatik g\u00fcncelleme kontrol\u00fc kapat\u0131ld\u0131.');
+      return;
+    }
+    _showSnack('Otomatik g\u00fcncelleme kontrol\u00fc a\u00e7\u0131ld\u0131.');
+    final packageInfo = await _packageInfoFuture;
+    if (!mounted) return;
+    await _checkForUpdate(packageInfo, automatic: true, ignoreInterval: true);
+  }
+
   Future<void> _checkForUpdateIfDue(PackageInfo packageInfo) async {
+    if (!_automaticUpdateChecksEnabled) return;
     final prefs = await SharedPreferences.getInstance();
     final lastMs = prefs.getInt(_lastUpdateCheckKey);
     final now = DateTime.now();
@@ -127,8 +168,11 @@ class _SettingsSharedUpdateSectionState
   Future<void> _checkForUpdate(
     PackageInfo? packageInfo, {
     required bool automatic,
+    bool ignoreInterval = false,
   }) async {
+    if (automatic && !_automaticUpdateChecksEnabled) return;
     final localBuild = int.tryParse(packageInfo?.buildNumber ?? '') ?? 0;
+    if (!mounted) return;
     setState(() => _checkingUpdate = true);
 
     final manifest = await _remoteClient.loadUpdateManifest(
@@ -140,13 +184,15 @@ class _SettingsSharedUpdateSectionState
     setState(() => _checkingUpdate = false);
 
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(
-      _lastUpdateCheckKey,
-      DateTime.now().millisecondsSinceEpoch,
-    );
+    if (!automatic || !ignoreInterval) {
+      await prefs.setInt(
+        _lastUpdateCheckKey,
+        DateTime.now().millisecondsSinceEpoch,
+      );
+    }
 
     if (manifest == null) {
-      if (!automatic) _showSnack('Güncelleme bilgisi alınamadı.');
+      if (!automatic) _showSnack('G\u00fcncelleme bilgisi al\u0131namad\u0131.');
       return;
     }
 
@@ -154,7 +200,7 @@ class _SettingsSharedUpdateSectionState
       setState(() {
         _updateAvailable = false;
       });
-      if (!automatic) _showSnack('Yeni sürüm bulunamadı.');
+      if (!automatic) _showSnack('Yeni s\u00fcr\u00fcm bulunamad\u0131.');
       return;
     }
 
@@ -162,16 +208,19 @@ class _SettingsSharedUpdateSectionState
       _updateAvailable = true;
     });
 
-    if (automatic) return;
+    if (automatic) {
+      _showUpdateAvailableSnack(manifest);
+      return;
+    }
     if (!mounted) return;
 
     final open = await showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Yeni Sürüm Hazır'),
+          title: const Text('Yeni S\u00fcr\u00fcm Haz\u0131r'),
           content: Text(
-            'Yeni sürüm: ${manifest.version} (${manifest.buildNumber})\n\n${manifest.notes.isEmpty ? 'Güncelleme mevcut.' : manifest.notes}',
+            'Yeni s\u00fcr\u00fcm: ${manifest.version} (${manifest.buildNumber})\n\n${manifest.notes.isEmpty ? 'G\u00fcncelleme mevcut.' : manifest.notes}',
           ),
           actions: [
             TextButton(
@@ -180,7 +229,7 @@ class _SettingsSharedUpdateSectionState
             ),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Güncelle'),
+              child: const Text('G\u00fcncelle'),
             ),
           ],
         );
@@ -189,10 +238,14 @@ class _SettingsSharedUpdateSectionState
 
     if (open != true) return;
 
+    await _openUpdateLink(manifest);
+  }
+
+  Future<void> _openUpdateLink(UpdateManifest manifest) async {
     final link = manifest.url.trim().isNotEmpty
         ? manifest.url
         : kSharedSettingsAppConfig.updateFallbackReleaseUrl;
-    await _openUrl(link, failMessage: 'Güncelleme bağlantısı açılamadı.');
+    await _openUrl(link, failMessage: 'G\u00fcncelleme ba\u011flant\u0131s\u0131 a\u00e7\u0131lamad\u0131.');
   }
 
   Future<void> _openUrl(String rawUrl, {required String failMessage}) async {
@@ -207,9 +260,32 @@ class _SettingsSharedUpdateSectionState
     }
   }
 
+  void _showUpdateAvailableSnack(UpdateManifest manifest) {
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    messenger?.hideCurrentSnackBar();
+    messenger?.showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        duration: const Duration(seconds: 10),
+        content: Text(
+          'Yeni s\u00fcr\u00fcm haz\u0131r: ${manifest.version} (${manifest.buildNumber})',
+        ),
+        action: SnackBarAction(
+          label: 'G\u00fcncelle',
+          onPressed: () => _openUpdateLink(manifest),
+        ),
+      ),
+    );
+  }
+
   void _showSnack(String message) {
     final messenger = ScaffoldMessenger.maybeOf(context);
     messenger?.hideCurrentSnackBar();
-    messenger?.showSnackBar(SnackBar(content: Text(message)));
+    messenger?.showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        content: Text(message),
+      ),
+    );
   }
 }

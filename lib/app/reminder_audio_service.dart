@@ -12,7 +12,7 @@ class ReminderAudioService {
   static const String defaultTurkishVoiceLocale =
       ReminderTtsVoicePolicy.defaultTurkishVoiceLocale;
   static const double _stableTtsPitch = 1.0;
-  static const double _turkishTtsRate = 0.315;
+  static const double _turkishTtsRate = 0.365;
   static const double _stableTtsRate = 0.39;
   static const double _arabicTtsRate = 0.3375;
   static const double _stableTtsVolume = 1.0;

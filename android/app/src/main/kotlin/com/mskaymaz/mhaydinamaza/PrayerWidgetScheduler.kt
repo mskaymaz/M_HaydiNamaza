@@ -13,6 +13,8 @@ import org.json.JSONObject
 object PrayerWidgetScheduler {
     private const val PREFS_NAME = "prayer_widget_schedule"
     private const val EVENTS_KEY = "events"
+    private const val REFRESH_REQUEST_CODE_BASE = 9911
+    private val REFRESH_OFFSETS_AFTER_TRANSITION = longArrayOf(1_000L, 60_000L, 5 * 60_000L)
     const val ACTION_REFRESH = "com.mskaymaz.mhaydinamaza.PRAYER_WIDGET_REFRESH"
 
     data class WidgetEvent(
@@ -91,30 +93,60 @@ object PrayerWidgetScheduler {
 
     private fun scheduleNextRefresh(context: Context) {
         val next = nextRefreshEvent(context) ?: return
-        val triggerAt = next.remainingTriggerAtMillis + 1000L
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        for ((index, offset) in REFRESH_OFFSETS_AFTER_TRANSITION.withIndex()) {
+            scheduleRefreshAt(
+                context = context,
+                alarmManager = alarmManager,
+                requestCode = REFRESH_REQUEST_CODE_BASE + index,
+                triggerAt = next.remainingTriggerAtMillis + offset
+            )
+        }
+    }
+
+    private fun scheduleRefreshAt(
+        context: Context,
+        alarmManager: AlarmManager,
+        requestCode: Int,
+        triggerAt: Long
+    ) {
+        val pendingIntent = refreshPendingIntent(context, requestCode)
+        alarmManager.cancel(pendingIntent)
+        try {
+            when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms() -> {
+                    alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+                }
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> {
+                    alarmManager.setExactAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        triggerAt,
+                        pendingIntent
+                    )
+                }
+                else -> {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+                }
+            }
+        } catch (_: SecurityException) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            } else {
+                alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            }
+        }
+    }
+
+    private fun refreshPendingIntent(context: Context, requestCode: Int): PendingIntent {
         val intent = Intent(context, PrayerTimeWidgetProvider::class.java).apply {
             action = ACTION_REFRESH
         }
-        val pendingIntent = PendingIntent.getBroadcast(
+        return PendingIntent.getBroadcast(
             context,
-            9911,
+            requestCode,
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alarmManager.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    triggerAt,
-                    pendingIntent
-                )
-            } else {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
-            }
-        } catch (_: SecurityException) {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
-        }
     }
 
     private fun readEvents(context: Context): List<WidgetEvent> {

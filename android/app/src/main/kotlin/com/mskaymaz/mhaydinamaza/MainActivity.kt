@@ -3,6 +3,8 @@ package com.mskaymaz.mhaydinamaza
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
+import android.provider.Settings
+import android.content.Intent
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -27,6 +29,16 @@ class MainActivity : FlutterActivity() {
                 "configureWidget" -> {
                     val events = call.argument<List<Map<String, Any?>>>("events").orEmpty()
                     PrayerWidgetScheduler.configure(this, events)
+                    result.success(null)
+                }
+                "requestWidgetDataRefresh" -> {
+                    PrayerWidgetScheduler.requestBackgroundRefresh(this)
+                    result.success(null)
+                }
+                "openNotificationPolicySettings" -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        startActivity(Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                    }
                     result.success(null)
                 }
                 "cancelAll" -> {

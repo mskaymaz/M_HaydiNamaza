@@ -8,7 +8,9 @@ import '../core/prayer_engine/prayer_times.dart';
 import 'runtime_monitor.dart';
 
 class PrayerDailyCacheRepository {
-  static const String _dailyCacheKey = 'prayer_daily_cache_v1';
+  static const String _dailyCacheKey = 'prayer_daily_cache_v2';
+  static const String _legacyDailyCacheKey = 'prayer_daily_cache_v1';
+  static const int _maxCachedDays = 90;
 
   Future<PrayerTimes?> read({
     required String fingerprint,
@@ -18,17 +20,36 @@ class PrayerDailyCacheRepository {
   }) async {
     final prefs = await SharedPreferences.getInstance();
     final raw = prefs.getString(_dailyCacheKey);
-    if (raw == null || raw.trim().isEmpty) return null;
+    final legacyRaw = prefs.getString(_legacyDailyCacheKey);
+    if ((raw == null || raw.trim().isEmpty) &&
+        (legacyRaw == null || legacyRaw.trim().isEmpty)) {
+      return null;
+    }
     try {
-      final payload = jsonDecode(raw);
-      if (payload is! Map<String, dynamic>) {
-        await _recoverCorruptCache(
-          prefs,
-          reasonCode: 'invalid_payload_shape',
-        );
-        return null;
+      Map<String, dynamic>? payload;
+      if (raw != null && raw.trim().isNotEmpty) {
+        final decoded = jsonDecode(raw);
+        if (decoded is! Map<String, dynamic>) {
+          await _recoverCorruptCache(
+            prefs,
+            reasonCode: 'invalid_payload_shape',
+          );
+          return null;
+        }
+        final entries = decoded['entries'];
+        final entry = entries is Map ? entries[fingerprint] : null;
+        if (entry is Map) {
+          payload = Map<String, dynamic>.from(entry);
+        }
       }
-      if (payload['fingerprint'] != fingerprint) return null;
+      if (payload == null && legacyRaw != null && legacyRaw.trim().isNotEmpty) {
+        final legacyPayload = jsonDecode(legacyRaw);
+        if (legacyPayload is Map<String, dynamic> &&
+            legacyPayload['fingerprint'] == fingerprint) {
+          payload = legacyPayload;
+        }
+      }
+      if (payload == null) return null;
       final fajr = DateTime.tryParse((payload['fajr'] ?? '').toString());
       final sunrise = DateTime.tryParse((payload['sunrise'] ?? '').toString());
       final dhuhr = DateTime.tryParse((payload['dhuhr'] ?? '').toString());
@@ -79,7 +100,38 @@ class PrayerDailyCacheRepository {
     };
     try {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_dailyCacheKey, jsonEncode(payload));
+      final entries = <String, dynamic>{};
+      final raw = prefs.getString(_dailyCacheKey);
+      if (raw != null && raw.trim().isNotEmpty) {
+        try {
+          final decoded = jsonDecode(raw);
+          final storedEntries = decoded is Map ? decoded['entries'] : null;
+          if (storedEntries is Map) {
+            for (final entry in storedEntries.entries) {
+              if (entry.key is String && entry.value is Map) {
+                entries[entry.key as String] =
+                    Map<String, dynamic>.from(entry.value as Map);
+              }
+            }
+          }
+        } catch (_) {}
+      }
+      entries[fingerprint] = payload;
+      if (entries.length > _maxCachedDays) {
+        final keysByAge = entries.keys.toList()
+          ..sort((left, right) {
+            final leftSaved = (entries[left] as Map?)?['savedAt']?.toString() ?? '';
+            final rightSaved = (entries[right] as Map?)?['savedAt']?.toString() ?? '';
+            return leftSaved.compareTo(rightSaved);
+          });
+        for (final key in keysByAge.take(entries.length - _maxCachedDays)) {
+          entries.remove(key);
+        }
+      }
+      await prefs.setString(
+        _dailyCacheKey,
+        jsonEncode(<String, dynamic>{'entries': entries}),
+      );
     } catch (_) {
       RuntimeMonitor.instance.reportNonFatalCode(
         source: 'prayer_daily_cache_write',
@@ -95,6 +147,7 @@ class PrayerDailyCacheRepository {
   }) async {
     try {
       await prefs.remove(_dailyCacheKey);
+      await prefs.remove(_legacyDailyCacheKey);
     } catch (_) {
       // Ignore secondary remove failures.
     }

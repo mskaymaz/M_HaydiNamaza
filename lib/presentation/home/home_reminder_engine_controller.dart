@@ -128,7 +128,8 @@ extension _HomeReminderEngineController on _HomeScreenState {
 
     final now = DateTime.now();
     final widgetEvents = <NativePrayerWidgetEvent>[];
-    final currentDateLabel = _widgetPanelDateLabel(data.displayDate ?? now);
+    final today = DateTime(now.year, now.month, now.day);
+    final currentDateLabel = _widgetPanelDateLabel(today);
     _appendNativeWidgetEvents(
       widgetEvents,
       <Prayer, DateTime>{
@@ -146,40 +147,37 @@ extension _HomeReminderEngineController on _HomeScreenState {
     final location = data.location;
     final methodCode = data.methodCode ?? CalculationMethodStorage.defaultCode;
     if (location != null) {
-      try {
-        final tomorrow = DateTime(
-          now.year,
-          now.month,
-          now.day,
-        ).add(const Duration(days: 1));
-        final tomorrowTimes = await _prayerService.calculateForDate(
-          location: location,
-          latitude: double.tryParse(location.latitude) ?? 0,
-          longitude: double.tryParse(location.longitude) ?? 0,
-          timeZone: location.timeZoneOffset,
-          methodCode: methodCode,
-          date: tomorrow,
-          allowDiyanet:
-              methodCode == 'diyanet' || methodCode == 'diyanet_tabanli',
-          allowRemote: true,
-        );
-        _appendNativeWidgetEvents(
-          widgetEvents,
-          <Prayer, DateTime>{
-            Prayer.fajr: tomorrowTimes.fajr,
-            Prayer.sunrise: tomorrowTimes.sunrise,
-            Prayer.dhuhr: tomorrowTimes.dhuhr,
-            Prayer.asr: tomorrowTimes.asr,
-            Prayer.maghrib: tomorrowTimes.maghrib,
-            Prayer.isha: tomorrowTimes.isha,
-          },
-          now,
-          dateLabel: currentDateLabel,
-          remainingDate: tomorrow,
-        );
-      } catch (_) {
-        // Today's visible home data is still enough to refresh the widget
-        // for the current day. Tomorrow can be refreshed on the next app open.
+      for (var offset = 1; offset < prayerTimesPrefetchDays; offset += 1) {
+        final date = today.add(Duration(days: offset));
+        try {
+          final dateTimes = await _prayerService.calculateForDate(
+            location: location,
+            latitude: double.tryParse(location.latitude) ?? 0,
+            longitude: double.tryParse(location.longitude) ?? 0,
+            timeZone: location.timeZoneOffset,
+            methodCode: methodCode,
+            date: date,
+            allowDiyanet:
+                methodCode == 'diyanet' || methodCode == 'diyanet_tabanli',
+            allowRemote: true,
+          );
+          _appendNativeWidgetEvents(
+            widgetEvents,
+            <Prayer, DateTime>{
+              Prayer.fajr: dateTimes.fajr,
+              Prayer.sunrise: dateTimes.sunrise,
+              Prayer.dhuhr: dateTimes.dhuhr,
+              Prayer.asr: dateTimes.asr,
+              Prayer.maghrib: dateTimes.maghrib,
+              Prayer.isha: dateTimes.isha,
+            },
+            now,
+            dateLabel: _widgetPanelDateLabel(date),
+            remainingDate: date,
+          );
+        } catch (_) {
+          // Keep the dates that were loaded successfully.
+        }
       }
     }
 
@@ -272,6 +270,13 @@ extension _HomeReminderEngineController on _HomeScreenState {
       remainingDate: tomorrow,
     );
     _appendNativeCustomPrayerEvents(notifications, times, now);
+    await _appendFutureNativeSilenceEvents(
+      notifications: notifications,
+      location: location,
+      methodCode: methodCode,
+      firstDate: today,
+      now: now,
+    );
     return _NativeReminderSchedule(
       notifications: notifications,
       widgetEvents: widgetEvents,
@@ -431,6 +436,16 @@ extension _HomeReminderEngineController on _HomeScreenState {
         );
       }
     }
+    if (_reminderSettings.prayerSilenceEnabled && settings.silentEnabled) {
+      _appendNativeSilenceEventsForRow(
+        events: events,
+        baseId: baseId,
+        label: label,
+        prayerTime: prayerTime,
+        settings: settings,
+        now: now,
+      );
+    }
   }
 
   String? _adhanFilePathForPrayer(
@@ -443,49 +458,6 @@ extension _HomeReminderEngineController on _HomeScreenState {
     }
     final path = selection.localPath?.trim() ?? '';
     return path.isEmpty ? null : path;
-  }
-
-  NativePrayerNotificationEvent _nativeEvent({
-    required int baseId,
-    required DateTime triggerAt,
-    required String prayerLabel,
-    required String stage,
-    required bool voiceEnabled,
-    required bool visualEnabled,
-    required bool azanEnabled,
-    required bool vibrationEnabled,
-    String? azanFilePath,
-  }) {
-    final stageOffset = stage == 'prayer' ? 5000 : 0;
-    final dayId =
-        DateTime(
-          triggerAt.year,
-          triggerAt.month,
-          triggerAt.day,
-        ).millisecondsSinceEpoch ~/
-        Duration.millisecondsPerDay;
-    final id = (dayId * 10000) + stageOffset + baseId;
-    final isPrayerStage = stage == 'prayer';
-    final title = isPrayerStage
-        ? '$prayerLabel vakti'
-        : '$prayerLabel vakti yakla\u015f\u0131yor';
-    final fallbackMessage = isPrayerStage
-        ? '$prayerLabel vakti girdi.'
-        : _effectiveReminderMessage(prayerLabel);
-    return NativePrayerNotificationEvent(
-      id: id,
-      triggerAt: triggerAt,
-      prayerLabel: prayerLabel,
-      stage: stage,
-      title: title,
-      message: fallbackMessage,
-      voiceEnabled: voiceEnabled,
-      visualEnabled: visualEnabled,
-      azanEnabled: azanEnabled,
-      azanFilePath: azanFilePath,
-      vibrationEnabled: vibrationEnabled,
-      vibrationDurationMs: _reminderSettings.vibrationDurationSeconds * 1000,
-    );
   }
 
   String _turkishPrayerLabel(Prayer prayer) {

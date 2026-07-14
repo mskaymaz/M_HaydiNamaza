@@ -27,12 +27,16 @@ object PrayerAlarmScheduler {
             json.put(event)
         }
         prefs(context).edit().putString(EVENTS_KEY, json.toString()).apply()
+        if (normalized.none { it.optString("stage") == "silence_end" }) {
+            PrayerSilenceManager.restoreNow(context)
+        }
         scheduleEvents(context, normalized)
     }
 
     fun cancelAll(context: Context) {
         val storedEvents = readStoredEvents(context)
         cancelEvents(context, storedEvents)
+        PrayerSilenceManager.restoreNow(context)
         prefs(context).edit().remove(EVENTS_KEY).apply()
     }
 
@@ -45,6 +49,9 @@ object PrayerAlarmScheduler {
             json.put(event)
         }
         prefs(context).edit().putString(EVENTS_KEY, json.toString()).apply()
+        if (events.none { it.optString("stage") == "silence_end" }) {
+            PrayerSilenceManager.restoreNow(context)
+        }
         scheduleEvents(context, events)
     }
 
@@ -125,6 +132,7 @@ object PrayerAlarmScheduler {
             putExtra("azanFilePath", event.optString("azanFilePath", ""))
             putExtra("vibrationEnabled", event.optBoolean("vibrationEnabled", false))
             putExtra("vibrationDurationMs", event.optInt("vibrationDurationMs", 3000))
+            putExtra("silentModeEvent", event.optBoolean("silentModeEvent", false))
         }
         return PendingIntent.getBroadcast(
             context,
@@ -165,6 +173,7 @@ object PrayerAlarmScheduler {
             put("azanFilePath", input["azanFilePath"]?.toString().orEmpty())
             put("vibrationEnabled", input["vibrationEnabled"] == true)
             put("vibrationDurationMs", numberToInt(input["vibrationDurationMs"]) ?: 3000)
+            put("silentModeEvent", input["silentModeEvent"] == true)
         }
     }
 

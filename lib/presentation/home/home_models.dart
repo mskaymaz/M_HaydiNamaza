@@ -24,6 +24,7 @@ class _PrayerRowSettings {
   final bool visualEnabled;
   final bool azanEnabled;
   final bool vibrationEnabled;
+  final bool silentEnabled;
 
   const _PrayerRowSettings({
     required this.reminderMinutes,
@@ -31,6 +32,7 @@ class _PrayerRowSettings {
     this.visualEnabled = false,
     this.azanEnabled = false,
     this.vibrationEnabled = false,
+    this.silentEnabled = false,
   });
 
   _PrayerRowSettings copyWith({
@@ -39,6 +41,7 @@ class _PrayerRowSettings {
     bool? visualEnabled,
     bool? azanEnabled,
     bool? vibrationEnabled,
+    bool? silentEnabled,
   }) {
     return _PrayerRowSettings(
       reminderMinutes: reminderMinutes ?? this.reminderMinutes,
@@ -46,6 +49,7 @@ class _PrayerRowSettings {
       visualEnabled: visualEnabled ?? this.visualEnabled,
       azanEnabled: azanEnabled ?? this.azanEnabled,
       vibrationEnabled: vibrationEnabled ?? this.vibrationEnabled,
+      silentEnabled: silentEnabled ?? this.silentEnabled,
     );
   }
 }

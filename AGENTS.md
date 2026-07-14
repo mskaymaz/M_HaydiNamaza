@@ -38,3 +38,9 @@ This file is the only bootstrap file for AI coding assistants.
 - For `flutter analyze` and similar validation commands, ask the user to run the command and share the terminal output.
 - Prefer user-provided validation output in this repo unless the user explicitly asks the assistant to run validations directly.
 
+## Device testing workflow (mandatory)
+- Before the user performs the separate debug/test flow on the phone, first remind the user to run `flutter build apk --debug` from the repository root.
+- Treat a successful `flutter build apk --debug` as the computer-side build checkpoint before phone testing.
+- Do not install the generated APK to the phone as part of this workflow unless the user explicitly asks; phone testing uses the user's separate debug process.
+- At the end of implementation work, always remind the user of the `flutter build apk --debug` command and ask them to share its result before proceeding to phone testing.
+

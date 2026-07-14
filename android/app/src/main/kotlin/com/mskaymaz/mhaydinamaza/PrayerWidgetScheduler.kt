@@ -6,6 +6,8 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import org.json.JSONArray
 import org.json.JSONObject
@@ -14,8 +16,12 @@ object PrayerWidgetScheduler {
     private const val PREFS_NAME = "prayer_widget_schedule"
     private const val EVENTS_KEY = "events"
     private const val REFRESH_REQUEST_CODE_BASE = 9911
+    private const val DATA_REFRESH_DEBOUNCE_MILLIS = 60_000L
+    private const val DATA_REFRESH_RETRY_DELAY_MILLIS = 60_000L
+    private const val LAST_DATA_REFRESH_REQUEST_KEY = "lastDataRefreshRequestMillis"
     private val REFRESH_OFFSETS_AFTER_TRANSITION = longArrayOf(1_000L, 60_000L, 5 * 60_000L)
     const val ACTION_REFRESH = "com.mskaymaz.mhaydinamaza.PRAYER_WIDGET_REFRESH"
+    const val ACTION_DATA_REFRESH = "com.mskaymaz.mhaydinamaza.PRAYER_WIDGET_DATA_REFRESH"
 
     data class WidgetEvent(
         val triggerAtMillis: Long,
@@ -77,6 +83,33 @@ object PrayerWidgetScheduler {
         scheduleNextRefresh(context)
     }
 
+    fun requestBackgroundRefresh(context: Context) {
+        if (!hasInternetConnection(context)) return
+        val now = System.currentTimeMillis()
+        val prefs = prefs(context)
+        val lastRequest = prefs.getLong(LAST_DATA_REFRESH_REQUEST_KEY, 0L)
+        if (now - lastRequest < DATA_REFRESH_DEBOUNCE_MILLIS) return
+        prefs.edit().putLong(LAST_DATA_REFRESH_REQUEST_KEY, now).apply()
+        val intent = Intent(context, PrayerWidgetRefreshReceiver::class.java).apply {
+            action = ACTION_DATA_REFRESH
+        }
+        context.sendBroadcast(intent)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun hasInternetConnection(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
+                ?: return false
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return connectivityManager.activeNetworkInfo?.isConnected == true
+        }
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
+            capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+    }
+
     fun nextEvent(context: Context): WidgetEvent? {
         val now = System.currentTimeMillis()
         return readEvents(context)
@@ -92,8 +125,17 @@ object PrayerWidgetScheduler {
     }
 
     private fun scheduleNextRefresh(context: Context) {
-        val next = nextRefreshEvent(context) ?: return
+        val next = nextRefreshEvent(context)
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        if (next == null) {
+            scheduleRefreshAt(
+                context = context,
+                alarmManager = alarmManager,
+                requestCode = REFRESH_REQUEST_CODE_BASE,
+                triggerAt = System.currentTimeMillis() + DATA_REFRESH_RETRY_DELAY_MILLIS
+            )
+            return
+        }
         for ((index, offset) in REFRESH_OFFSETS_AFTER_TRANSITION.withIndex()) {
             scheduleRefreshAt(
                 context = context,

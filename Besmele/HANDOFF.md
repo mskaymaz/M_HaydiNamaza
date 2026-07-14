@@ -1,6 +1,9 @@
 ﻿# HANDOFF.md
 
 ## Current status
+2026-07-14 checkpoint: “Namaz Vaktinde Sessiz Kal” akışı eklendi. Hatırlatma ayarlarında ortak N/M değerleri (varsayılan 5/20 dakika) ve ana etkinleştirme kutusu bulunuyor; vakitler panelindeki çan ikonunun sağında 24 px SVG sessiz ikon, 36 px dokunma alanı ve 8 px kutu boşluğuyla gösteriliyor. Ana ayar kapalıyken ikon Ayarlar yönlendirmeli uyarı verir; açıkken her vakit ayrı ayrı etkinleştirilir. Android alarm akışı sessize alma başlangıç/bitiş olaylarını uygulama kapalıyken de çalıştırıp önceki zil modu ve bildirim filtresini geri yüklemeyi deniyor. Android Notification Policy Access ekranı ana ayar etkinleştirilirken açılır.
+Validation in this checkpoint: `git diff --check` completed without whitespace errors. `dart format` was attempted but timed out; `flutter analyze` and `flutter build apk --debug` were not run. Before phone testing, first run `flutter build apk --debug` and confirm it succeeds; APK installation is not part of this checkpoint.
+
 2026-06-11 checkpoint: UI/prayer-time engine stabilization started. Diyanet/AwqatSalah access remains unresolved, so the current direction is calculation-based release stabilization with honest source labels instead of blocking all work on official access.
 Aladhan method selection now routes directly through the Aladhan fetch path; Türkiye method labels no longer imply official Diyanet data. Default voice reminder Turkish text and Arabic country label were cleaned.
 AllApp approved daily content publish artifacts were committed and pushed to `https://github.com/mskaymaz/AllApp.git` branch `main` at commit `39fe32b`.

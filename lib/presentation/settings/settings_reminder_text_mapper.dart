@@ -8,6 +8,9 @@ class ReminderTextSettingsMapperInput {
   final bool showVisualIcon;
   final bool showAzanIcon;
   final bool showVibrationIcon;
+  final bool prayerSilenceEnabled;
+  final String prayerSilenceStartMinutesText;
+  final String prayerSilenceDurationMinutesText;
   final bool sortCustomPrayersByTime;
   final bool showHelpBalloons;
   final String voiceRepeatSecondsText;
@@ -32,6 +35,9 @@ class ReminderTextSettingsMapperInput {
     required this.showVisualIcon,
     required this.showAzanIcon,
     required this.showVibrationIcon,
+    required this.prayerSilenceEnabled,
+    required this.prayerSilenceStartMinutesText,
+    required this.prayerSilenceDurationMinutesText,
     required this.sortCustomPrayersByTime,
     required this.showHelpBalloons,
     required this.voiceRepeatSecondsText,
@@ -61,6 +67,17 @@ ReminderTextSettings mapReminderTextSettings(
     showVisualIcon: false,
     showAzanIcon: input.showAzanIcon,
     showVibrationIcon: input.showVibrationIcon,
+    prayerSilenceEnabled: input.prayerSilenceEnabled,
+    prayerSilenceStartMinutes: readReminderMinutes(
+      input.prayerSilenceStartMinutesText,
+      fallback: 5,
+      minimum: 0,
+    ),
+    prayerSilenceDurationMinutes: readReminderMinutes(
+      input.prayerSilenceDurationMinutesText,
+      fallback: 20,
+      minimum: 1,
+    ),
     sortCustomPrayersByTime: input.sortCustomPrayersByTime,
     showHelpBalloons: input.showHelpBalloons,
     voiceRepeatSeconds: readReminderSeconds(
@@ -101,4 +118,14 @@ int readReminderSeconds(String input, {required int fallback}) {
     return parsed.clamp(0, 3600);
   }
   return parsed.clamp(1, 3600);
+}
+
+int readReminderMinutes(
+  String input, {
+  required int fallback,
+  required int minimum,
+}) {
+  final parsed = int.tryParse(input.trim());
+  if (parsed == null) return fallback;
+  return parsed.clamp(minimum, 1440);
 }

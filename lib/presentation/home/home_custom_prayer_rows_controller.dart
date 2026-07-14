@@ -119,6 +119,19 @@ extension _HomeCustomPrayerRowsController on _HomeScreenState {
     unawaited(_persistCustomPrayerRows());
   }
 
+  void _toggleCustomSilence(_CustomPrayerDraft row) {
+    if (!_reminderSettings.prayerSilenceEnabled) {
+      _showPrayerSilenceSettingsHint();
+      return;
+    }
+    _setHomeState(() {
+      row.settings = row.settings.copyWith(
+        silentEnabled: !row.settings.silentEnabled,
+      );
+    });
+    unawaited(_persistCustomPrayerRows());
+  }
+
   void _removeCustomPrayerRow(_CustomPrayerDraft row) {
     _setHomeState(() {
       _customPrayerRows.removeWhere((entry) => entry.id == row.id);
@@ -172,10 +185,13 @@ extension _HomeCustomPrayerRowsController on _HomeScreenState {
         visualEnabled: settings.visualEnabled,
         azanEnabled: settings.azanEnabled,
         vibrationEnabled: settings.vibrationEnabled,
+        silentEnabled:
+            _reminderSettings.prayerSilenceEnabled && settings.silentEnabled,
         onVoiceToggle: () => _toggleVoiceReminder(prayer),
         onVisualToggle: () => _toggleVisualReminder(prayer),
         onAzanToggle: () => _toggleAzanReminder(prayer),
         onVibrationToggle: () => _toggleVibrationReminder(prayer),
+        onSilentToggle: () => _toggleSilentPrayer(prayer),
       );
     }
 
@@ -213,10 +229,13 @@ extension _HomeCustomPrayerRowsController on _HomeScreenState {
           visualEnabled: row.settings.visualEnabled,
           azanEnabled: row.settings.azanEnabled,
           vibrationEnabled: row.settings.vibrationEnabled,
+          silentEnabled: _reminderSettings.prayerSilenceEnabled &&
+              row.settings.silentEnabled,
           onVoiceToggle: () => _toggleCustomVoice(row),
           onVisualToggle: () => _toggleCustomVisual(row),
           onAzanToggle: () => _toggleCustomAzan(row),
           onVibrationToggle: () => _toggleCustomVibration(row),
+          onSilentToggle: () => _toggleCustomSilence(row),
           onDelete: () => _removeCustomPrayerRow(row),
         ),
       );

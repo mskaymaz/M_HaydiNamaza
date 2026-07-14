@@ -291,8 +291,17 @@ extension _HomeBuildController on _HomeScreenState {
                                                               ? 'Vakit paneli ayarlar\u0131'
                                                               : 'Vakit paneli',
                                                           message: _showPrayerControlPanel
-                                                              ? 'Bu g\u00f6r\u00fcn\u00fcmde her vakit i\u00e7in sesli hat\u0131rlatma, ezan ve titre\u015fim se\u00e7eneklerini sat\u0131r sat\u0131r d\u00fczenleyebilirsiniz. \u2715 simgesine bast\u0131\u011f\u0131n\u0131zda normal vakit listesine d\u00f6nersiniz.'
-                                                              : 'Bu panel bug\u00fcn\u00fcn namaz vakitlerini ve aktif vakti g\u00f6sterir. \u{1F514} simgesine bast\u0131\u011f\u0131n\u0131zda vakit ayarlar\u0131 a\u00e7\u0131l\u0131r. Paneli sa\u011fdan sola s\u00fcr\u00fckledi\u011finizde se\u00e7ili konum i\u00e7in s\u0131radaki 7 g\u00fcn\u00fcn vakitlerini g\u00f6rebilirsiniz. Yatay ekranda \u00e7ift dokunu\u015f panel geni\u015fli\u011fini de\u011fi\u015ftirir.',
+                                                              ? 'Bu g\u00f6r\u00fcn\u00fcmde her vakit i\u00e7in sesli hat\u0131rlatma, ezan, titre\u015fim ve sessiz kal se\u00e7eneklerini sat\u0131r sat\u0131r d\u00fczenleyebilirsiniz. Sessiz kal ikonu, Ayarlar/Hat\u0131rlatma Ayarlar\u0131 b\u00f6l\u00fcm\u00fcndeki ana ayar etkinse ilgili vakitten \u00f6nce telefonu sessize al\u0131r ve s\u00fcre sonunda \u00f6nceki ayarlar\u0131na d\u00f6ner. \u2715 simgesine bast\u0131\u011f\u0131n\u0131zda normal vakit listesine d\u00f6nersiniz.'
+                                                              : 'Vakitler paneli sa\u011fdan sola kayd\u0131r\u0131ld\u0131\u011f\u0131nda se\u00e7ili konum i\u00e7in yaln\u0131zca s\u0131radaki 7 g\u00fcn\u00fcn vakitleri g\u00f6sterilir.\n\nAlarm/hat\u0131rlatma yap\u0131s\u0131: \u{1F514} simgesine bast\u0131\u011f\u0131n\u0131zda vakit ayarlar\u0131 a\u00e7\u0131l\u0131r. Buradan her vakit i\u00e7in sesli hat\u0131rlatma, ezan ve titre\u015fim se\u00e7eneklerini ayr\u0131 ayr\u0131 etkinle\u015ftirip pasifle\u015ftirebilirsiniz.\n\nSessiz kal yap\u0131s\u0131: [[inline_icon]] simgesine bast\u0131\u011f\u0131n\u0131zda o vakit i\u00e7in sessize alma etkinle\u015ftirilir veya pasifle\u015ftirilir. Kullanabilmek i\u00e7in Ayarlar/Hat\u0131rlatma Ayarlar\u0131 b\u00f6l\u00fcm\u00fcnden ana ayar\u0131 etkinle\u015ftirin. Belirlenen s\u00fcre sonunda telefon \u00f6nceki ayarlar\u0131na d\u00f6ner.\n\nYatay ekranda panele \u00e7ift dokunarak panel geni\u015fli\u011fini de\u011fi\u015ftirebilirsiniz.',
+                                                          inlineIconBuilder: (_) => SvgPicture.asset(
+                                                            'assets/icons/volume_off.svg',
+                                                            width: 18,
+                                                            height: 18,
+                                                            colorFilter: const ColorFilter.mode(
+                                                              Color(0xFF1F1F1F),
+                                                              BlendMode.srcIn,
+                                                            ),
+                                                          ),
                                                           iconSize: 19,
                                                           tapSize: 32,
                                                         ),

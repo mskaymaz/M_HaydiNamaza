@@ -19,10 +19,12 @@ class HomePrayerListItem {
   final bool visualEnabled;
   final bool azanEnabled;
   final bool vibrationEnabled;
+  final bool silentEnabled;
   final VoidCallback onVoiceToggle;
   final VoidCallback onVisualToggle;
   final VoidCallback onAzanToggle;
   final VoidCallback onVibrationToggle;
+  final VoidCallback onSilentToggle;
   final VoidCallback? onDelete;
 
   HomePrayerListItem({
@@ -42,10 +44,12 @@ class HomePrayerListItem {
     required this.visualEnabled,
     required this.azanEnabled,
     required this.vibrationEnabled,
+    required this.silentEnabled,
     required this.onVoiceToggle,
     required this.onVisualToggle,
     required this.onAzanToggle,
     required this.onVibrationToggle,
+    required this.onSilentToggle,
     this.onDelete,
   });
 }

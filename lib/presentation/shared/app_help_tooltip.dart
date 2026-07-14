@@ -9,6 +9,7 @@ class AppHelpTooltip extends StatelessWidget {
   final double iconSize;
   final double tapSize;
   final Color? color;
+  final Widget Function(BuildContext context)? inlineIconBuilder;
 
   const AppHelpTooltip({
     super.key,
@@ -18,6 +19,7 @@ class AppHelpTooltip extends StatelessWidget {
     this.iconSize = 20,
     this.tapSize = 34,
     this.color,
+    this.inlineIconBuilder,
   });
 
   @override
@@ -66,7 +68,10 @@ class AppHelpTooltip extends StatelessWidget {
       builder: (context) {
         return AlertDialog(
           title: Text(title),
-          content: Text(message),
+          content: _HelpMessage(
+            message: message,
+            inlineIconBuilder: inlineIconBuilder,
+          ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
@@ -79,5 +84,53 @@ class AppHelpTooltip extends StatelessWidget {
   }
 }
 
+class _HelpMessage extends StatelessWidget {
+  final String message;
+  final Widget Function(BuildContext context)? inlineIconBuilder;
 
+  const _HelpMessage({
+    required this.message,
+    this.inlineIconBuilder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final paragraphs = message.split('\n\n');
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (var index = 0; index < paragraphs.length; index++) ...[
+          if (index > 0) const SizedBox(height: 3),
+          _buildParagraph(context, paragraphs[index]),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildParagraph(BuildContext context, String paragraph) {
+    const marker = '[[inline_icon]]';
+    if (inlineIconBuilder == null || !paragraph.contains(marker)) {
+      return Text(paragraph);
+    }
+    final parts = paragraph.split(marker);
+    return Text.rich(
+      TextSpan(
+        children: [
+          for (var index = 0; index < parts.length; index++) ...[
+            if (parts[index].isNotEmpty) TextSpan(text: parts[index]),
+            if (index < parts.length - 1)
+              WidgetSpan(
+                alignment: PlaceholderAlignment.middle,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: inlineIconBuilder!(context),
+                ),
+              ),
+          ],
+        ],
+      ),
+    );
+  }
+}
 

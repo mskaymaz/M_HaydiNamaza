@@ -23,6 +23,7 @@ extension _HomeSettingsPersistenceController on _HomeScreenState {
           visualEnabled: entry.value.visualEnabled,
           azanEnabled: entry.value.azanEnabled,
           vibrationEnabled: entry.value.vibrationEnabled,
+          silentEnabled: entry.value.silentEnabled,
         );
         final controller = _reminderControllers[entry.key];
         if (controller != null) {
@@ -56,6 +57,7 @@ extension _HomeSettingsPersistenceController on _HomeScreenState {
             visualEnabled: record.visualEnabled,
             azanEnabled: record.azanEnabled,
             vibrationEnabled: record.vibrationEnabled,
+            silentEnabled: record.silentEnabled,
           ),
           timeRule: _CustomPrayerTimeRule(
             mode: _customPrayerTimeModeFromKey(record.timeMode),
@@ -90,6 +92,7 @@ extension _HomeSettingsPersistenceController on _HomeScreenState {
         visualEnabled: row.settings.visualEnabled,
         azanEnabled: row.settings.azanEnabled,
         vibrationEnabled: row.settings.vibrationEnabled,
+        silentEnabled: row.settings.silentEnabled,
         timeMode: row.timeRule.mode.name,
         anchorPrayer: row.timeRule.anchorPrayer,
         offsetMinutes: row.timeRule.offsetMinutes,
@@ -110,6 +113,7 @@ extension _HomeSettingsPersistenceController on _HomeScreenState {
         visualEnabled: entry.value.visualEnabled,
         azanEnabled: entry.value.azanEnabled,
         vibrationEnabled: entry.value.vibrationEnabled,
+        silentEnabled: entry.value.silentEnabled,
       );
     }
     await _rowSettingsStorage.write(payload);

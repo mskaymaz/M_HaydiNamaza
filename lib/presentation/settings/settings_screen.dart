@@ -9,6 +9,7 @@ import '../../app/locale_controller.dart';
 import '../../app/location_favorites_storage.dart';
 import '../../app/location_storage.dart';
 import '../../app/native_adhan_downloader.dart';
+import '../../app/native_prayer_notification_scheduler.dart';
 import '../../app/reminder_audio_service.dart';
 import '../../app/reminder_text_settings_storage.dart';
 import '../../app/ui_palette_controller.dart';
@@ -49,11 +50,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final ReminderAudioService _reminderAudioService = ReminderAudioService();
   final AdhanSelectionStorage _adhanSelectionStorage = AdhanSelectionStorage();
   final NativeAdhanDownloader _adhanDownloader = NativeAdhanDownloader();
+  final NativePrayerNotificationScheduler _nativeNotificationScheduler =
+      NativePrayerNotificationScheduler();
   final TextEditingController _voiceReminderController = TextEditingController();
   final TextEditingController _visualReminderController = TextEditingController();
   final TextEditingController _voiceRepeatController = TextEditingController();
   final TextEditingController _vibrationDurationController = TextEditingController();
   final TextEditingController _vibrationPauseController = TextEditingController();
+  final TextEditingController _prayerSilenceStartMinutesController =
+      TextEditingController();
+  final TextEditingController _prayerSilenceDurationMinutesController =
+      TextEditingController();
   final TextEditingController _visualDisplayController = TextEditingController();
   final TextEditingController _visualReopenController = TextEditingController();
 
@@ -78,6 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _showVisualIcon = false;
   bool _showAzanIcon = true;
   bool _showVibrationIcon = true;
+  bool _prayerSilenceEnabled = false;
   bool _sortCustomPrayersByTime = true;
   bool _showHelpBalloons = true;
   Color? _draftBackgroundColor;
@@ -135,6 +143,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _vibrationDurationController.text = settings.vibrationDurationSeconds
         .toString();
     _vibrationPauseController.text = settings.vibrationPauseSeconds.toString();
+    _prayerSilenceStartMinutesController.text =
+        settings.prayerSilenceStartMinutes.toString();
+    _prayerSilenceDurationMinutesController.text =
+        settings.prayerSilenceDurationMinutes.toString();
     _visualDisplayController.text = settings.visualDisplaySeconds.toString();
     _visualReopenController.text = settings.visualReopenSeconds.toString();
     _selectedAudioMode = settings.audioMode;
@@ -150,6 +162,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _showVisualIcon = false;
     _showAzanIcon = settings.showAzanIcon;
     _showVibrationIcon = settings.showVibrationIcon;
+    _prayerSilenceEnabled = settings.prayerSilenceEnabled;
     _sortCustomPrayersByTime = settings.sortCustomPrayersByTime;
     _showHelpBalloons = settings.showHelpBalloons;
     if (!mounted) return;
@@ -168,6 +181,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _voiceRepeatController.dispose();
     _vibrationDurationController.dispose();
     _vibrationPauseController.dispose();
+    _prayerSilenceStartMinutesController.dispose();
+    _prayerSilenceDurationMinutesController.dispose();
     _visualDisplayController.dispose();
     _visualReopenController.dispose();
     _reminderAudioService.dispose();
@@ -243,6 +258,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             showVoiceIcon: _showVoiceIcon,
             showAzanIcon: _showAzanIcon,
             showVibrationIcon: _showVibrationIcon,
+            prayerSilenceEnabled: _prayerSilenceEnabled,
             sortCustomPrayersByTime: _sortCustomPrayersByTime,
             showHelpBalloons: _showHelpBalloons,
             adhanSelections: _adhanSelections,
@@ -265,6 +281,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
             vibrationDurationController: _vibrationDurationController,
             vibrationPauseController: _vibrationPauseController,
+            prayerSilenceStartMinutesController:
+                _prayerSilenceStartMinutesController,
+            prayerSilenceDurationMinutesController:
+                _prayerSilenceDurationMinutesController,
             onVoiceToggleChanged: (value) {
               setState(() => _showVoiceIcon = value);
               _persistReminderTexts();
@@ -277,12 +297,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
               setState(() => _showVibrationIcon = value);
               _persistReminderTexts();
             },
+            onPrayerSilenceToggleChanged: (value) {
+              setState(() => _prayerSilenceEnabled = value);
+              _persistReminderTexts();
+              if (value) {
+                _nativeNotificationScheduler
+                    .openNotificationPolicySettings()
+                    .then((_) {}, onError: (_) {});
+              }
+            },
             onSortChanged: (value) {
               setState(() => _sortCustomPrayersByTime = value ?? true);
               _persistReminderTexts();
             },
             onVibrationDurationChanged: (_) => _persistReminderTexts(),
             onVibrationPauseChanged: (_) => _persistReminderTexts(),
+            onPrayerSilenceStartMinutesChanged: (_) =>
+                _persistReminderTexts(),
+            onPrayerSilenceDurationMinutesChanged: (_) =>
+                _persistReminderTexts(),
             selectedAudioMode: _selectedAudioMode,
             onAudioModeChanged: (value) {
               if (value == null) return;
@@ -480,6 +513,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       showVisualIcon: _showVisualIcon,
       showAzanIcon: _showAzanIcon,
       showVibrationIcon: _showVibrationIcon,
+      prayerSilenceEnabled: _prayerSilenceEnabled,
+      prayerSilenceStartMinutesText:
+          _prayerSilenceStartMinutesController.text,
+      prayerSilenceDurationMinutesText:
+          _prayerSilenceDurationMinutesController.text,
       sortCustomPrayersByTime: _sortCustomPrayersByTime,
       showHelpBalloons: _showHelpBalloons,
       voiceRepeatSecondsText: _voiceRepeatController.text,
@@ -501,5 +539,3 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 }
-
-

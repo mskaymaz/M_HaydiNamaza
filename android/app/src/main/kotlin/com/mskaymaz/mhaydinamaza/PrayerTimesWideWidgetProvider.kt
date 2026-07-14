@@ -58,6 +58,7 @@ class PrayerTimesWideWidgetProvider : AppWidgetProvider() {
             views.setOnClickPendingIntent(R.id.prayer_wide_widget_root, contentIntent)
 
             if (next == null) {
+                PrayerWidgetScheduler.requestBackgroundRefresh(context)
                 bindEmpty(views)
                 return views
             }
@@ -76,6 +77,11 @@ class PrayerTimesWideWidgetProvider : AppWidgetProvider() {
             )
             views.setViewVisibility(R.id.prayer_wide_countdown, View.VISIBLE)
             val remaining = next.remainingTriggerAtMillis - System.currentTimeMillis()
+            if (remaining <= 0L) {
+                PrayerWidgetScheduler.requestBackgroundRefresh(context)
+                views.setTextViewText(R.id.prayer_wide_countdown, "00:00:00")
+                return views
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 val base = SystemClock.elapsedRealtime() + remaining
                 views.setChronometer(R.id.prayer_wide_countdown, base, null, true)

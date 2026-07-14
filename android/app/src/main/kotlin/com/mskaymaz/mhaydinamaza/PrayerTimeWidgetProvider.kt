@@ -56,6 +56,7 @@ class PrayerTimeWidgetProvider : AppWidgetProvider() {
             views.setOnClickPendingIntent(R.id.prayer_widget_root, contentIntent)
 
             if (next == null) {
+                PrayerWidgetScheduler.requestBackgroundRefresh(context)
                 views.setTextViewText(R.id.prayer_widget_label, "Vakit")
                 views.setTextViewText(R.id.prayer_widget_time, "--:--")
                 views.setViewVisibility(R.id.prayer_widget_countdown, View.VISIBLE)
@@ -70,6 +71,11 @@ class PrayerTimeWidgetProvider : AppWidgetProvider() {
             views.setViewVisibility(R.id.prayer_widget_countdown, View.VISIBLE)
 
             val remaining = next.remainingTriggerAtMillis - System.currentTimeMillis()
+            if (remaining <= 0L) {
+                PrayerWidgetScheduler.requestBackgroundRefresh(context)
+                views.setTextViewText(R.id.prayer_widget_countdown, "00:00:00")
+                return views
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 val base = SystemClock.elapsedRealtime() + remaining
                 views.setChronometer(R.id.prayer_widget_countdown, base, null, true)

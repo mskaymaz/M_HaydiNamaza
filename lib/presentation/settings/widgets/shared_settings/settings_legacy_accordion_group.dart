@@ -16,6 +16,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final bool showVoiceIcon;
   final bool showAzanIcon;
   final bool showVibrationIcon;
+  final bool prayerSilenceEnabled;
   final bool sortCustomPrayersByTime;
   final bool showHelpBalloons;
   final Map<String, AdhanSelection> adhanSelections;
@@ -24,6 +25,8 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final String? activeAdhanPreviewKey;
   final TextEditingController vibrationDurationController;
   final TextEditingController vibrationPauseController;
+  final TextEditingController prayerSilenceStartMinutesController;
+  final TextEditingController prayerSilenceDurationMinutesController;
   final ValueChanged<String> onUseDefaultAdhan;
   final Future<void> Function(String prayerKey, AdhanCatalogOption option)
       onDownloadAdhan;
@@ -39,10 +42,13 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final ValueChanged<bool> onVoiceToggleChanged;
   final ValueChanged<bool> onAzanToggleChanged;
   final ValueChanged<bool> onVibrationToggleChanged;
+  final ValueChanged<bool> onPrayerSilenceToggleChanged;
   final ValueChanged<bool?> onSortChanged;
   final ValueChanged<bool?> onHelpToggleChanged;
   final ValueChanged<String> onVibrationDurationChanged;
   final ValueChanged<String> onVibrationPauseChanged;
+  final ValueChanged<String> onPrayerSilenceStartMinutesChanged;
+  final ValueChanged<String> onPrayerSilenceDurationMinutesChanged;
   final ReminderAudioMode selectedAudioMode;
   final ValueChanged<ReminderAudioMode?> onAudioModeChanged;
   final VoidCallback onPickAudio;
@@ -73,6 +79,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.showVoiceIcon,
     required this.showAzanIcon,
     required this.showVibrationIcon,
+    required this.prayerSilenceEnabled,
     required this.sortCustomPrayersByTime,
     required this.showHelpBalloons,
     required this.adhanSelections,
@@ -81,6 +88,8 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.activeAdhanPreviewKey,
     required this.vibrationDurationController,
     required this.vibrationPauseController,
+    required this.prayerSilenceStartMinutesController,
+    required this.prayerSilenceDurationMinutesController,
     required this.onUseDefaultAdhan,
     required this.onDownloadAdhan,
     required this.onSelectDownloadedAdhan,
@@ -94,10 +103,13 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.onVoiceToggleChanged,
     required this.onAzanToggleChanged,
     required this.onVibrationToggleChanged,
+    required this.onPrayerSilenceToggleChanged,
     required this.onSortChanged,
     required this.onHelpToggleChanged,
     required this.onVibrationDurationChanged,
     required this.onVibrationPauseChanged,
+    required this.onPrayerSilenceStartMinutesChanged,
+    required this.onPrayerSilenceDurationMinutesChanged,
     required this.selectedAudioMode,
     required this.onAudioModeChanged,
     required this.onPickAudio,
@@ -162,6 +174,52 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                 Expanded(child: _toggle('Titreşim', showVibrationIcon, onVibrationToggleChanged)),
               ],
             ),
+            const SizedBox(height: 18),
+            _subHeader(
+              title: 'Namaz Vaktinde Sessiz Kal',
+              color: sharedSettingsVibrationHeader,
+              helpMessage:
+                  'İşaretlendiğinde ana ekrandaki sessiz ikonları vakit bazında etkinleştirebilirsiniz. Sessize alma telefon ayarlarını süre sonunda geri yüklemeyi dener.',
+            ),
+            CheckboxListTile(
+              value: prayerSilenceEnabled,
+              contentPadding: EdgeInsets.zero,
+              controlAffinity: ListTileControlAffinity.leading,
+              title: const Text('Namaz Vaktinde Sessiz Kal'),
+              subtitle: const Text(
+                'Ana ayar kapalıysa vakit satırlarındaki sessiz ikonları kullanamazsınız.',
+              ),
+              onChanged: (value) {
+                onPrayerSilenceToggleChanged(value ?? false);
+              },
+            ),
+            if (prayerSilenceEnabled) ...[
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  Expanded(
+                    child: SettingsReminderNumberField(
+                      label: 'Kaç dakika önce',
+                      controller: prayerSilenceStartMinutesController,
+                      onChanged: onPrayerSilenceStartMinutesChanged,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: SettingsReminderNumberField(
+                      label: 'Kaç dakika sessiz',
+                      controller: prayerSilenceDurationMinutesController,
+                      onChanged: onPrayerSilenceDurationMinutesChanged,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Varsayılan: vakitten 5 dakika önce başlar, 20 dakika sürer.',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
             const SizedBox(height: 18),
             _subHeader(
               title: 'Titreşimle Uyarı Ayarları',

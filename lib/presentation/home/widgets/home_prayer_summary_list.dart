@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/prayer_engine/prayer.dart';
 import 'home_prayer_list_item.dart';
@@ -10,6 +11,7 @@ const double _summaryPrayerTextGap = 25.0;
 const double _summaryPrayerBellGap = 12.0;
 const double _summaryPrayerBellBoxSize = 36.0;
 const double _summaryPrayerBellIconSize = 24.0;
+const double _summaryPrayerSilentGap = 8.0;
 
 class HomePrayerSummaryList extends StatelessWidget {
   final ScrollController controller;
@@ -133,22 +135,20 @@ class HomePrayerSummaryList extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: _summaryPrayerBellGap),
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
+                      _summaryIconButton(
+                        icon: hasReminder
+                            ? Icons.notifications_active_outlined
+                            : Icons.notifications_none_outlined,
+                        color: bellColor,
                         onTap: onOpenControls,
-                        child: SizedBox(
-                          width: _summaryPrayerBellBoxSize,
-                          height: _summaryPrayerBellBoxSize,
-                          child: Center(
-                            child: Icon(
-                              hasReminder
-                                  ? Icons.notifications_active_outlined
-                                  : Icons.notifications_none_outlined,
-                              color: bellColor,
-                              size: _summaryPrayerBellIconSize,
-                            ),
-                          ),
-                        ),
+                      ),
+                      const SizedBox(width: _summaryPrayerSilentGap),
+                      _summaryIconButton(
+                        assetPath: 'assets/icons/volume_off.svg',
+                        color: item.silentEnabled
+                            ? cizgiColor.withValues(alpha: 0.95)
+                            : cizgiColor.withValues(alpha: 0.34),
+                        onTap: item.onSilentToggle,
                       ),
                     ],
                   ),
@@ -159,6 +159,32 @@ class HomePrayerSummaryList extends StatelessWidget {
           separatorBuilder: (_, _) =>
               const Divider(height: 1, color: Color(0x22000000)),
           itemCount: items.length,
+        ),
+      ),
+    );
+  }
+
+  Widget _summaryIconButton({
+    IconData? icon,
+    String? assetPath,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: SizedBox(
+        width: _summaryPrayerBellBoxSize,
+        height: _summaryPrayerBellBoxSize,
+        child: Center(
+          child: assetPath == null
+              ? Icon(icon, color: color, size: _summaryPrayerBellIconSize)
+              : SvgPicture.asset(
+                  assetPath,
+                  width: _summaryPrayerBellIconSize,
+                  height: _summaryPrayerBellIconSize,
+                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                ),
         ),
       ),
     );

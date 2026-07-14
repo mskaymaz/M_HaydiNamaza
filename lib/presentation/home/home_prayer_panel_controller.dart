@@ -139,6 +139,35 @@ extension _HomePrayerPanelController on _HomeScreenState {
     unawaited(_persistPrayerRowSettings());
   }
 
+  void _toggleSilentPrayer(Prayer prayer) {
+    if (!_reminderSettings.prayerSilenceEnabled) {
+      _showPrayerSilenceSettingsHint();
+      return;
+    }
+    _setHomeState(() {
+      final current = _settingsFor(prayer);
+      _rowSettings[prayer] = current.copyWith(
+        silentEnabled: !current.silentEnabled,
+      );
+    });
+    unawaited(_persistPrayerRowSettings());
+  }
+
+  void _showPrayerSilenceSettingsHint() {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text(
+          'Namaz Vaktinde Sessiz Kal özelliğini Ayarlar/Hatırlatma Ayarları bölümünden etkinleştirin.',
+        ),
+        action: SnackBarAction(
+          label: 'Ayarlar',
+          onPressed: _openSettings,
+        ),
+      ),
+    );
+  }
+
   void _onPrayerPanelHorizontalDragEnd(DragEndDetails details) {
     final velocity = details.primaryVelocity ?? 0;
     final draggedDistance = _prayerPanelDragDx;
@@ -149,14 +178,17 @@ extension _HomePrayerPanelController on _HomeScreenState {
         ? draggedDistance.sign
         : velocity.sign;
     final nextOffset = direction < 0
-        ? (_prayerDayOffset + 1).clamp(0, 6)
-        : (_prayerDayOffset - 1).clamp(0, 6);
+        ? (_prayerDayOffset + 1).clamp(0, prayerTimesPrefetchDays - 1)
+        : (_prayerDayOffset - 1).clamp(0, prayerTimesPrefetchDays - 1);
     if (nextOffset == _prayerDayOffset) return;
     _setHomeState(() {
       _prayerPanelTransitionDirection = nextOffset > _prayerDayOffset ? 1 : -1;
       _prayerDayOffset = nextOffset;
       _future = _loadData();
     });
+    if (nextOffset == prayerTimesPrefetchDays - 1) {
+      unawaited(_nativeNotificationScheduler.requestBackgroundWidgetRefresh());
+    }
   }
 
   void _onPrayerPanelHorizontalDragStart(DragStartDetails details) {

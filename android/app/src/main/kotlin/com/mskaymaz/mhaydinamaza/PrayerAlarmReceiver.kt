@@ -17,6 +17,14 @@ class PrayerAlarmReceiver : BroadcastReceiver() {
     }
 
     private fun handlePrayerAlarm(context: Context, intent: Intent) {
+        if (intent.getBooleanExtra("silentModeEvent", false)) {
+            if (intent.getStringExtra("stage") == "silence_start") {
+                PrayerSilenceManager.start(context)
+            } else if (intent.getStringExtra("stage") == "silence_end") {
+                PrayerSilenceManager.end(context)
+            }
+            return
+        }
         val title = intent.getStringExtra("title") ?: "Namaz vakti"
         val message = intent.getStringExtra("message") ?: "Namaz vakti"
         val voiceEnabled = intent.getBooleanExtra("voiceEnabled", false)

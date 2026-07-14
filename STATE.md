@@ -4,10 +4,11 @@ last_update: 2026-06-11
 project: M_HaydiNamaza
 status: ui_engine_stabilization_checkpoint_ready_for_home_continuation
 active_phase: advanced_architecture_upgrade
-active_task: TASK-09-ui-ux-professionalization-in-progress
+active_task: TASK-09-ui-ux-professionalization-in-progress; prayer-silence-flow-implementation-in-progress
 blockers:
   - Official Diyanet/AwqatSalah access remains unresolved; current release direction is calculation-based stabilization with honest source labeling.
 next_step:
+  - Run user-side validation for the new prayer silence settings, per-prayer icon toggles, Android policy access flow, and background restore behavior.
   - Continue UI and prayer-time engine stabilization from the main screen, settings, qibla, and daily content flows.
   - Keep approved runtime payloads under `assets/data/daily_content/approved/`.
   - Keep AllApp publish artifacts synced after future approved content changes.

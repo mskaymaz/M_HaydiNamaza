@@ -13,6 +13,7 @@ class CustomPrayerRecord {
   final bool visualEnabled;
   final bool azanEnabled;
   final bool vibrationEnabled;
+  final bool silentEnabled;
   final String timeMode;
   final Prayer? anchorPrayer;
   final int offsetMinutes;
@@ -27,6 +28,7 @@ class CustomPrayerRecord {
     required this.visualEnabled,
     required this.azanEnabled,
     required this.vibrationEnabled,
+    this.silentEnabled = false,
     required this.timeMode,
     required this.anchorPrayer,
     required this.offsetMinutes,
@@ -43,6 +45,7 @@ class CustomPrayerRecord {
       'visualEnabled': visualEnabled,
       'azanEnabled': azanEnabled,
       'vibrationEnabled': vibrationEnabled,
+      'silentEnabled': silentEnabled,
       'timeMode': timeMode,
       'anchorPrayer': anchorPrayer?.name,
       'offsetMinutes': offsetMinutes,
@@ -62,6 +65,7 @@ class CustomPrayerRecord {
       visualEnabled: payload['visualEnabled'] == true,
       azanEnabled: payload['azanEnabled'] == true,
       vibrationEnabled: payload['vibrationEnabled'] == true,
+      silentEnabled: payload['silentEnabled'] == true,
       timeMode: (payload['timeMode'] as String? ?? '').trim(),
       anchorPrayer: _prayerFromName(payload['anchorPrayer'] as String?),
       offsetMinutes: (payload['offsetMinutes'] as num?)?.toInt() ?? 0,

@@ -37,6 +37,9 @@ class ReminderTextSettings {
   final bool showVisualIcon;
   final bool showAzanIcon;
   final bool showVibrationIcon;
+  final bool prayerSilenceEnabled;
+  final int prayerSilenceStartMinutes;
+  final int prayerSilenceDurationMinutes;
   final bool sortCustomPrayersByTime;
   final bool showHelpBalloons;
   final int voiceRepeatSeconds;
@@ -61,6 +64,9 @@ class ReminderTextSettings {
     this.showVisualIcon = false,
     this.showAzanIcon = true,
     this.showVibrationIcon = true,
+    this.prayerSilenceEnabled = false,
+    this.prayerSilenceStartMinutes = 5,
+    this.prayerSilenceDurationMinutes = 20,
     this.sortCustomPrayersByTime = true,
     this.showHelpBalloons = true,
     this.voiceRepeatSeconds = 15,
@@ -90,6 +96,11 @@ class ReminderTextSettingsStorage {
   static const String _showVisualIconKey = 'reminder_show_visual_icon';
   static const String _showAzanIconKey = 'reminder_show_azan_icon';
   static const String _showVibrationIconKey = 'reminder_show_vibration_icon';
+  static const String _prayerSilenceEnabledKey = 'prayer_silence_enabled';
+  static const String _prayerSilenceStartMinutesKey =
+      'prayer_silence_start_minutes';
+  static const String _prayerSilenceDurationMinutesKey =
+      'prayer_silence_duration_minutes';
   static const String _sortCustomPrayersByTimeKey =
       'sort_custom_prayers_by_time';
   static const String _showHelpBalloonsKey = 'show_help_balloons';
@@ -142,6 +153,11 @@ class ReminderTextSettingsStorage {
       showVisualIcon: false,
       showAzanIcon: prefs.getBool(_showAzanIconKey) ?? true,
       showVibrationIcon: prefs.getBool(_showVibrationIconKey) ?? true,
+      prayerSilenceEnabled: prefs.getBool(_prayerSilenceEnabledKey) ?? false,
+      prayerSilenceStartMinutes:
+          (prefs.getInt(_prayerSilenceStartMinutesKey) ?? 5).clamp(0, 1440),
+      prayerSilenceDurationMinutes:
+          (prefs.getInt(_prayerSilenceDurationMinutesKey) ?? 20).clamp(1, 1440),
       sortCustomPrayersByTime:
           prefs.getBool(_sortCustomPrayersByTimeKey) ?? true,
       showHelpBalloons: prefs.getBool(_showHelpBalloonsKey) ?? true,
@@ -184,6 +200,18 @@ class ReminderTextSettingsStorage {
     await prefs.setBool(_showVisualIconKey, false);
     await prefs.setBool(_showAzanIconKey, settings.showAzanIcon);
     await prefs.setBool(_showVibrationIconKey, settings.showVibrationIcon);
+    await prefs.setBool(
+      _prayerSilenceEnabledKey,
+      settings.prayerSilenceEnabled,
+    );
+    await prefs.setInt(
+      _prayerSilenceStartMinutesKey,
+      settings.prayerSilenceStartMinutes,
+    );
+    await prefs.setInt(
+      _prayerSilenceDurationMinutesKey,
+      settings.prayerSilenceDurationMinutes,
+    );
     await prefs.setBool(
       _sortCustomPrayersByTimeKey,
       settings.sortCustomPrayersByTime,

@@ -1,6 +1,6 @@
 # STATE.md
 
-last_update: 2026-06-11
+last_update: 2026-07-14
 project: M_HaydiNamaza
 status: ui_engine_stabilization_checkpoint_ready_for_home_continuation
 active_phase: advanced_architecture_upgrade
@@ -12,6 +12,7 @@ next_step:
   - Continue UI and prayer-time engine stabilization from the main screen, settings, qibla, and daily content flows.
   - Keep approved runtime payloads under `assets/data/daily_content/approved/`.
   - Keep AllApp publish artifacts synced after future approved content changes.
+  - Shared settings template v2 is now the canonical AllApp contract/reference; validate the settings flow after this refactor.
 
 ## Current known risks
 - 2026-06-11 AllApp remote push completed for approved ayah/hadith/esma-sifat publish artifacts; remote commit is `39fe32b`.
@@ -22,3 +23,5 @@ next_step:
 - Daily content archive/approved roots were unified on 2026-06-04 and the Python review tool now depends on those fixed paths.
 - AllApp public content sync target is `https://github.com/mskaymaz/AllApp.git` branch `main`; latest daily content publish sync commit is `39fe32b`.
 - Local approved counts after 2026-06-09 Esma/Sifat import: `ayah=1438`, `hadith=438`, `esma/sifat=381` (`esma=99`, `sifat=282`); AllApp publish artifacts were pushed on 2026-06-11.
+- Shared settings alignment completed on 2026-07-14: AllApp v2 now documents the four-section contract, current catalog/manifest/config schemas, examples, and v1 is marked legacy. Haydi Namaza uses the config-driven support action and local update-manifest fallback.
+- User-side validation on 2026-07-14: `flutter analyze` passed with `No issues found!`; dependency update notices remain non-blocking.

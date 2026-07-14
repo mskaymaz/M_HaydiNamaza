@@ -1,6 +1,11 @@
 ﻿# AllApp Shared Settings Template v1
 
+> Legacy reference only. The canonical template is maintained in the AllApp remote
+> repository under `templates/shared_settings/v2/`.
+
 This template converts TASK-07 settings modules into reusable contracts for mobile apps.
+Do not copy v1 into new applications: v1 has five separate sections, while v2 uses four
+main sections and keeps contact information inside About.
 
 ## Scope
 - Bize Ulasin

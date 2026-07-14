@@ -2,7 +2,7 @@ import 'shared_settings_models.dart';
 
 const SharedSettingsAppConfig
 kSharedSettingsAppConfig = SharedSettingsAppConfig(
-  appName: 'Let\'s Pray',
+  appName: 'Haydi Namaza',
   appId: 'haydi_namaza',
   packageName: 'com.mskaymaz.mhaydinamaza',
   adminName: 'HaydiNamazaAdmin',
@@ -20,9 +20,10 @@ kSharedSettingsAppConfig = SharedSettingsAppConfig(
   support: SharedSettingsSupportConfig(
     title: 'Destek Olabilirsiniz',
     body:
-        'Uygulamayı faydalı bulduysanız paylaşarak ve geri bildirim vererek destek olabilirsiniz.',
+        'Öncelikle Direniş için,\ntüm Dünya Müslümanları için\nve bizim için dua edin.\n\nAllah (cc) hepimizden razı olsun.',
     actionUrl: 'https://github.com/mskaymaz/AllApp/tree/main/HaydiNamaza',
-    actionLabel: 'Projeyi Aç',
+    actionLabel: 'Dua Ediyorum',
+    actionType: 'prayer',
   ),
   about: SharedSettingsAboutConfig(
     title: 'Hakkımızda',

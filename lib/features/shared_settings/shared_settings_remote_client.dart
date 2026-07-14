@@ -50,8 +50,6 @@ class SharedSettingsRemoteClient {
       if (remoteManifest != null) return remoteManifest;
     }
 
-    if (remoteUrl.trim().isNotEmpty) return null;
-
     final localPayload = await _fetchLocalAsset(localAssetPath);
     if (localPayload == null) return null;
     return SharedSettingsParser.parseUpdatePayload(localPayload);

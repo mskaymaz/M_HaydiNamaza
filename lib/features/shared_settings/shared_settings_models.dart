@@ -9,12 +9,14 @@ class SharedSettingsSupportConfig {
   final String body;
   final String actionUrl;
   final String actionLabel;
+  final String actionType;
 
   const SharedSettingsSupportConfig({
     required this.title,
     required this.body,
     required this.actionUrl,
     required this.actionLabel,
+    this.actionType = 'external_url',
   });
 }
 

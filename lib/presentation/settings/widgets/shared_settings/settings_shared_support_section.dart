@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../features/shared_settings/shared_settings_app_config.dart';
+import '../../../../features/shared_settings/shared_settings_models.dart';
 import '../../../../features/shared_settings/shared_settings_support_bridge.dart';
 import 'shared_settings_section_styles.dart';
 
@@ -58,48 +60,21 @@ class _SettingsSharedSupportSectionState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 21,
-                  height: 1.45,
-                  fontWeight: FontWeight.w400,
-                ),
-                children: const [
-                  TextSpan(text: 'Öncelikle '),
-                  TextSpan(text: 'Direniş', style: TextStyle(fontWeight: FontWeight.w700)),
-                  TextSpan(text: ' için,\n'),
-                  TextSpan(text: 'tüm '),
-                  TextSpan(
-                    text: 'Dünya Müslümanları',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                  TextSpan(text: ' için\n'),
-                  TextSpan(text: 've '),
-                  TextSpan(text: 'bizim', style: TextStyle(fontWeight: FontWeight.w700)),
-                  TextSpan(text: ' için '),
-                  TextSpan(text: 'dua edin.', style: TextStyle(fontWeight: FontWeight.w700)),
-                ],
-              ),
-            ),
-            const SizedBox(height: 18),
             Text(
-              'Allah (cc) hepimizden razı olsun.',
+              support.body,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: textColor,
-                fontSize: 38 / 2,
-                height: 1.3,
-                fontWeight: FontWeight.w600,
+                fontSize: 21,
+                height: 1.45,
+                fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 20),
             FractionallySizedBox(
               widthFactor: 0.72,
               child: FilledButton.icon(
-                onPressed: _onPrayerSupport,
+                onPressed: () => _onSupportAction(support),
                 style: FilledButton.styleFrom(
                   backgroundColor: const Color(0xFF117A66),
                   foregroundColor: Colors.white,
@@ -110,7 +85,7 @@ class _SettingsSharedSupportSectionState
                   ),
                 ),
                 icon: const Icon(Icons.volunteer_activism_rounded, size: 22),
-                label: const Text('Dua Ediyorum'),
+                label: Text(support.actionLabel),
               ),
             ),
           ],
@@ -151,6 +126,26 @@ class _SettingsSharedSupportSectionState
     _controller.collapse();
   }
 
+  Future<void> _onSupportAction(
+    SharedSettingsSupportConfig support,
+  ) async {
+    if (support.actionType == 'prayer') {
+      _onPrayerSupport();
+      return;
+    }
+
+    final uri = Uri.tryParse(support.actionUrl.trim());
+    if (uri == null) {
+      _showSnack('Destek bağlantısı açılamadı.');
+      return;
+    }
+
+    final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
+    if (!opened && mounted) {
+      _showSnack('Destek bağlantısı açılamadı.');
+    }
+  }
+
   void _showSnack(
     String message, {
     Duration duration = const Duration(seconds: 3),
@@ -175,4 +170,3 @@ class _SettingsSharedSupportSectionState
     );
   }
 }
-

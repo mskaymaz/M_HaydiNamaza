@@ -267,6 +267,16 @@ Continue ayah/hadith/esma-sifat manual review from approved/runtime payloads whe
 - Large files must be split gradually.
 - Shared settings must be reusable across MSK Labs apps.
 
+## Shared Settings Template Alignment (2026-07-14)
+
+- AllApp `templates/shared_settings/v2/` is now the canonical shared-settings contract/reference.
+- v2 documents the four standard sections: Hakkımızda, Uygulama Bilgileri ve Güncelleme, Uygulamalarımız, Destek Olabilirsiniz.
+- Added current config, contact, about, catalog, and update-manifest schemas plus example payloads.
+- The root `AllApp/templates/shared_settings/v1/` copy is marked as legacy; it is not the starting point for new apps.
+- Haydi Namaza config now uses `Haydi Namaza` as the app name, supports config-driven support actions, and falls back to the local update manifest when the remote manifest cannot be read.
+- `dart format` timed out in the local environment; `git diff --check` passed. User should run `flutter analyze` before device testing.
+- User validation (2026-07-14): `flutter analyze` completed successfully; `No issues found!` (54.4s). `flutter pub get` also completed successfully; 41 packages have newer incompatible versions, which is informational only.
+
 ## TASK-04A checkpoint (2026-05-11)
 - Changed files:
   - `lib/app/prayer_calculation_parameters_factory.dart`

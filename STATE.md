@@ -13,7 +13,7 @@ next_step:
   - Continue UI and prayer-time engine stabilization from the main screen, settings, qibla, and daily content flows.
   - Keep approved runtime payloads under `assets/data/daily_content/approved/`.
   - Keep AllApp publish artifacts synced after future approved content changes.
-  - AllAppRemote was fetched from origin on 2026-07-15; local `main` matches remote `27a8788`, and the root AllApp template copy now includes canonical shared-settings v2.
+  - AllAppRemote cleanup was committed and pushed on 2026-07-15 at `d6a2938`; the root repo now tracks that clean AllApp main state.
   - Shared settings template v2 is now the canonical AllApp contract/reference; validate the settings flow after this refactor.
 
 ## Current known risks

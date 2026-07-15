@@ -3,10 +3,11 @@
 ## AllApp local template sync (2026-07-15)
 
 - AllApp remote: `https://github.com/mskaymaz/AllApp.git`, branch `main`.
-- After fetch, `_external/AllAppRemote` local `main` and `origin/main` are aligned at `27a8788` (`0/0` ahead/behind).
+- After cleanup, `_external/AllAppRemote` local `main` and `origin/main` are aligned at `d6a2938` (`0/0` ahead/behind).
 - The root `AllApp/templates/shared_settings/` snapshot previously contained only v1; canonical v2 was synchronized locally with its schemas, examples, assets, scripts, and Flutter reference files.
 - The two existing untracked AllAppRemote Hadith copies were preserved.
 - Validation: v2 file lists match (`19/19`), JSON parse passed (`11` files), and `git diff --check` passed. Flutter validation was not run because app source was unchanged.
+- AllAppRemote cleanup commit `d6a2938` and root synchronization commit `ce2b314` were pushed to their respective `main` branches; both working trees are clean.
 
 ## Computer-side debug build checkpoint (2026-07-15)
 

@@ -1,6 +1,6 @@
 # STATE.md
 
-last_update: 2026-07-14
+last_update: 2026-07-15
 project: M_HaydiNamaza
 status: ui_engine_stabilization_checkpoint_ready_for_home_continuation
 active_phase: advanced_architecture_upgrade
@@ -8,10 +8,12 @@ active_task: TASK-09-ui-ux-professionalization-in-progress; prayer-silence-flow-
 blockers:
   - Official Diyanet/AwqatSalah access remains unresolved; current release direction is calculation-based stabilization with honest source labeling.
 next_step:
+  - Computer-side debug build checkpoint passed on 2026-07-15; proceed with separate phone validation after reviewing the generated debug APK.
   - Run user-side validation for the new prayer silence settings, per-prayer icon toggles, Android policy access flow, and background restore behavior.
   - Continue UI and prayer-time engine stabilization from the main screen, settings, qibla, and daily content flows.
   - Keep approved runtime payloads under `assets/data/daily_content/approved/`.
   - Keep AllApp publish artifacts synced after future approved content changes.
+  - AllAppRemote was fetched from origin on 2026-07-15; local `main` matches remote `27a8788`, and the root AllApp template copy now includes canonical shared-settings v2.
   - Shared settings template v2 is now the canonical AllApp contract/reference; validate the settings flow after this refactor.
 
 ## Current known risks

@@ -52,6 +52,7 @@ _archive_instruction_old_*/
 .cache/
 .vscode/
 _external/AllAppRef/
+_external/AllAppRemote/
 
 # Content review tool local artifacts
 tools/content_review/review_state.json

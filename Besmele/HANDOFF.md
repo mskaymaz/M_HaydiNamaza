@@ -1,5 +1,20 @@
 ﻿# HANDOFF.md
 
+## AllApp local template sync (2026-07-15)
+
+- AllApp remote: `https://github.com/mskaymaz/AllApp.git`, branch `main`.
+- After fetch, `_external/AllAppRemote` local `main` and `origin/main` are aligned at `27a8788` (`0/0` ahead/behind).
+- The root `AllApp/templates/shared_settings/` snapshot previously contained only v1; canonical v2 was synchronized locally with its schemas, examples, assets, scripts, and Flutter reference files.
+- The two existing untracked AllAppRemote Hadith copies were preserved.
+- Validation: v2 file lists match (`19/19`), JSON parse passed (`11` files), and `git diff --check` passed. Flutter validation was not run because app source was unchanged.
+
+## Computer-side debug build checkpoint (2026-07-15)
+
+- User ran `flutter build apk --debug` from the repository root.
+- Result: successful; `build/app/outputs/flutter-apk/app-debug.apk` was generated.
+- `audioplayers_android-5.2.1` reported deprecated `isSpeakerphoneOn` warnings only; no build failure.
+- Phone validation may proceed using the user's separate debug/test flow. APK installation was not performed by Codex.
+
 ## Current status
 2026-07-14 checkpoint: “Namaz Vaktinde Sessiz Kal” akışı eklendi. Hatırlatma ayarlarında ortak N/M değerleri (varsayılan 5/20 dakika) ve ana etkinleştirme kutusu bulunuyor; vakitler panelindeki çan ikonunun sağında 24 px SVG sessiz ikon, 36 px dokunma alanı ve 8 px kutu boşluğuyla gösteriliyor. Ana ayar kapalıyken ikon Ayarlar yönlendirmeli uyarı verir; açıkken her vakit ayrı ayrı etkinleştirilir. Android alarm akışı sessize alma başlangıç/bitiş olaylarını uygulama kapalıyken de çalıştırıp önceki zil modu ve bildirim filtresini geri yüklemeyi deniyor. Android Notification Policy Access ekranı ana ayar etkinleştirilirken açılır.
 Validation in this checkpoint: `git diff --check` completed without whitespace errors. `dart format` was attempted but timed out; `flutter analyze` and `flutter build apk --debug` were not run. Before phone testing, first run `flutter build apk --debug` and confirm it succeeds; APK installation is not part of this checkpoint.

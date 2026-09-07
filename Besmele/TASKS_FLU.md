@@ -55,8 +55,8 @@ Bu dosya, `flu` dalında gerçekleştirilecek temizlik, mimari dönüşüm, UI/U
 
 ## 📌 Aşama 7: İçerik İnceleme & Yönetim Aracının Flutter/Dart Mimarisine Taşınması
 
-- [ ] **TASK 7.1:** Eski Python/PySide6 tabanlı Ayet/Hadis/Esma ekleme, inceleme ve onaylama aracının Flutter/Dart (Desktop/Web) mimarisinde kompakt ve modern bir araç olarak yeniden yazılması.
-- [ ] **TASK 7.2:** Flutter içerik aracının onaylanan verileri `assets/data/daily_content/approved/` ve `AllApp` yayınlama yapısına eksiksiz aktarmasının sağlanması.
+- [x] **TASK 7.1:** Eski Python/PySide6 tabanlı Ayet/Hadis/Esma ekleme, inceleme ve onaylama aracının Flutter/Dart (Desktop/Web) mimarisinde kompakt ve modern bir araç olarak yeniden yazılması.
+- [x] **TASK 7.2:** Flutter içerik aracının onaylanan verileri `assets/data/daily_content/approved/` ve `AllApp` yayınlama yapısına eksiksiz aktarmasının sağlanması.
 
 ---
 

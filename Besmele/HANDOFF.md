@@ -31,6 +31,9 @@
   - Standardized `AppHelpTooltip` icon sizes and top-panel positioning (`left: 4, top: 40`) for clean pixel alignment (`TASK 6.1`).
   - Added localized `kerahatWarning` strings in TR/EN/AR ARB files and localization classes, added `_KerahatPulsingBadge` badge in `home_top_panel.dart`, and added active Kerahat detection logic (`_checkIsKerahatActive`) in `home_build_controller.dart` (`TASK 6.2`).
   - Built Kerahat Settings storage binding (`KerahatSettingsStorage`), added default 45-minute Kerahat durations, added Kerahat toggle & duration text fields to `SettingsLegacyAccordionGroup`, and updated `SettingsScreen` to persist Kerahat settings (`TASK 6.3`).
+- **Phase 7 Completed:**
+  - Replaced legacy Python/PySide6 scripts with pure Flutter/Dart editor models (`DailyContentEditorModels`), storage/publishing service (`DailyContentEditorStorage`), and multi-tab Desktop/Web UI (`DailyContentReviewScreen`) (`TASK 7.1`).
+  - Implemented automatic validation, saving, and syncing of approved Ayah, Hadith, Esma, and sequence payload files (`TASK 7.2`). Added CLI entrypoint `bin/daily_content_review_tool.dart` and unit tests in `test/features/daily_content/daily_content_editor_storage_test.dart`.
 
 
 ## AllApp local template sync (2026-07-15)

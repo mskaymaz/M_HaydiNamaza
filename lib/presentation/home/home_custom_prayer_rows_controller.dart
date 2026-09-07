@@ -119,6 +119,17 @@ extension _HomeCustomPrayerRowsController on _HomeScreenState {
     unawaited(_persistCustomPrayerRows());
   }
 
+  void _toggleCustomSoundVibration(_CustomPrayerDraft row) {
+    _setHomeState(() {
+      final enable = !(row.settings.voiceEnabled || row.settings.vibrationEnabled);
+      row.settings = row.settings.copyWith(
+        voiceEnabled: enable,
+        vibrationEnabled: enable,
+      );
+    });
+    unawaited(_persistCustomPrayerRows());
+  }
+
   void _toggleCustomSilence(_CustomPrayerDraft row) {
     if (!_reminderSettings.prayerSilenceEnabled) {
       _showPrayerSilenceSettingsHint();
@@ -192,6 +203,7 @@ extension _HomeCustomPrayerRowsController on _HomeScreenState {
         onAzanToggle: () => _toggleAzanReminder(prayer),
         onVibrationToggle: () => _toggleVibrationReminder(prayer),
         onSilentToggle: () => _toggleSilentPrayer(prayer),
+        onSoundVibrationToggle: () => _toggleSoundVibrationReminder(prayer),
       );
     }
 
@@ -236,6 +248,7 @@ extension _HomeCustomPrayerRowsController on _HomeScreenState {
           onAzanToggle: () => _toggleCustomAzan(row),
           onVibrationToggle: () => _toggleCustomVibration(row),
           onSilentToggle: () => _toggleCustomSilence(row),
+          onSoundVibrationToggle: () => _toggleCustomSoundVibration(row),
           onDelete: () => _removeCustomPrayerRow(row),
         ),
       );

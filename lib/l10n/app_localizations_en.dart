@@ -145,4 +145,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get prayerIsha => 'Isha';
+
+  @override
+  String get kerahatWarning => 'KERAHAT TIME';
 }

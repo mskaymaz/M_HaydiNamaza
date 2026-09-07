@@ -11,6 +11,7 @@ const Color sharedSettingsReminderOptionsHeader = Color(0xFFE9D8C5);
 const Color sharedSettingsVibrationHeader = Color(0xFFDCE8F8);
 const Color sharedSettingsVoiceHeader = Color(0xFFE5DBF7);
 const Color sharedSettingsVisualHeader = Color(0xFFF6DEEA);
+const Color sharedSettingsKerahatHeader = Color(0xFFF9DADA);
 const Color sharedSettingsMergedColorsHeader = Color(0xFFD8EAD8);
 const double sharedSettingsHeaderRowHeight = 35;
 

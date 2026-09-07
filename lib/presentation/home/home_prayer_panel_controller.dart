@@ -139,6 +139,18 @@ extension _HomePrayerPanelController on _HomeScreenState {
     unawaited(_persistPrayerRowSettings());
   }
 
+  void _toggleSoundVibrationReminder(Prayer prayer) {
+    _setHomeState(() {
+      final current = _settingsFor(prayer);
+      final enable = !(current.voiceEnabled || current.vibrationEnabled);
+      _rowSettings[prayer] = current.copyWith(
+        voiceEnabled: enable,
+        vibrationEnabled: enable,
+      );
+    });
+    unawaited(_persistPrayerRowSettings());
+  }
+
   void _toggleSilentPrayer(Prayer prayer) {
     if (!_reminderSettings.prayerSilenceEnabled) {
       _showPrayerSilenceSettingsHint();

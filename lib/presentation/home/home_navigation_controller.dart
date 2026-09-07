@@ -11,6 +11,7 @@ extension _HomeNavigationController on _HomeScreenState {
       ),
     );
     await _loadReminderSettings();
+    await _loadKerahatSettings();
     _setHomeState(() {
       _future = _loadData();
     });
@@ -28,9 +29,14 @@ extension _HomeNavigationController on _HomeScreenState {
     );
   }
 
-  String _combinedDateLabel(DateTime date, AppLocalizations l10n) {
-    final hijri =
-        '${homeFormatHijriDayMonth(date, l10n)} ${homeFormatHijriYear(date)}';
+  String _combinedDateLabel(
+    DateTime date,
+    AppLocalizations l10n, {
+    String? diyanetHijriText,
+  }) {
+    final hijri = diyanetHijriText != null && diyanetHijriText.trim().isNotEmpty
+        ? diyanetHijriText.trim()
+        : '${homeFormatHijriDayMonth(date, l10n)} ${homeFormatHijriYear(date)}';
     final gregorian =
         '${homeFormatGregorianDayMonth(date, l10n)} '
         '${homeFormatGregorianYear(date, l10n)}';

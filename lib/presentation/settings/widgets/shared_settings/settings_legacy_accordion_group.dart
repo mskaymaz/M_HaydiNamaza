@@ -4,10 +4,11 @@ import '../../../../app/adhan_catalog.dart';
 import '../../../../app/reminder_text_settings_storage.dart';
 import '../../../../core/config/config_registry.dart';
 import '../../settings_audio_mode_texts.dart';
-import '../settings_color_action_widgets.dart';
 import '../../../shared/app_help_tooltip.dart';
 import '../settings_reminder_fields.dart';
 import '../settings_adhan_selection_section.dart';
+import '../settings_kerahat_section.dart';
+import '../settings_interface_colors_card.dart';
 import 'shared_settings_section_styles.dart';
 
 class SettingsLegacyAccordionGroup extends StatelessWidget {
@@ -17,6 +18,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final bool showAzanIcon;
   final bool showVibrationIcon;
   final bool prayerSilenceEnabled;
+  final bool kerahatEnabled;
   final bool sortCustomPrayersByTime;
   final bool showHelpBalloons;
   final Map<String, AdhanSelection> adhanSelections;
@@ -27,6 +29,13 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
   final TextEditingController vibrationPauseController;
   final TextEditingController prayerSilenceStartMinutesController;
   final TextEditingController prayerSilenceDurationMinutesController;
+  final TextEditingController kerahatSunriseMinutesController;
+  final TextEditingController kerahatDhuhrMinutesController;
+  final TextEditingController kerahatMaghribMinutesController;
+  final ValueChanged<bool> onKerahatToggleChanged;
+  final ValueChanged<String> onKerahatSunriseMinutesChanged;
+  final ValueChanged<String> onKerahatDhuhrMinutesChanged;
+  final ValueChanged<String> onKerahatMaghribMinutesChanged;
   final ValueChanged<String> onUseDefaultAdhan;
   final Future<void> Function(String prayerKey, AdhanCatalogOption option)
       onDownloadAdhan;
@@ -80,6 +89,7 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.showAzanIcon,
     required this.showVibrationIcon,
     required this.prayerSilenceEnabled,
+    required this.kerahatEnabled,
     required this.sortCustomPrayersByTime,
     required this.showHelpBalloons,
     required this.adhanSelections,
@@ -90,6 +100,13 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     required this.vibrationPauseController,
     required this.prayerSilenceStartMinutesController,
     required this.prayerSilenceDurationMinutesController,
+    required this.kerahatSunriseMinutesController,
+    required this.kerahatDhuhrMinutesController,
+    required this.kerahatMaghribMinutesController,
+    required this.onKerahatToggleChanged,
+    required this.onKerahatSunriseMinutesChanged,
+    required this.onKerahatDhuhrMinutesChanged,
+    required this.onKerahatMaghribMinutesChanged,
     required this.onUseDefaultAdhan,
     required this.onDownloadAdhan,
     required this.onSelectDownloadedAdhan,
@@ -142,7 +159,22 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
         children: [
           _warningSettingsCard(context),
           const SizedBox(height: 20),
-          _colorsCard(context),
+          SettingsInterfaceColorsCard(
+            showHelpBalloons: showHelpBalloons,
+            onHelpToggleChanged: onHelpToggleChanged,
+            panelColor: panelColor,
+            textColor: textColor,
+            customPrayerLabelColor: customPrayerLabelColor,
+            backgroundColor: backgroundColor,
+            hasPendingBackgroundChanges: hasPendingBackgroundChanges,
+            onEditPanelColor: onEditPanelColor,
+            onEditTextColor: onEditTextColor,
+            onEditCustomPrayerLabelColor: onEditCustomPrayerLabelColor,
+            onEditBackgroundColor: onEditBackgroundColor,
+            onResetInterfaceColors: onResetInterfaceColors,
+            onResetBackgroundColors: onResetBackgroundColors,
+            onApplyBackgroundStyle: onApplyBackgroundStyle,
+          ),
         ],
       ),
     );
@@ -155,7 +187,8 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
       showHelpBalloons: showHelpBalloons,
       helpMessage:
           'Bu bölüm vakit satırlarında görünen sesli hatırlatma, ezan ve titreşim seçeneklerini yönetir. Her vakit için ayrı ezan seçebilir, sesli hatırlatma ve titreşim sürelerini buradan ayarlayabilirsiniz.',
-      child: _sectionChild(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -167,11 +200,24 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
             ),
             Row(
               children: [
-                Expanded(child: _toggle('Sesli', showVoiceIcon, onVoiceToggleChanged)),
+                Expanded(
+                  child: SettingsReminderOptionToggle(
+                    label: 'Ses & Titreşim',
+                    value: showVoiceIcon || showVibrationIcon,
+                    onChanged: (value) {
+                      onVoiceToggleChanged(value);
+                      onVibrationToggleChanged(value);
+                    },
+                  ),
+                ),
                 const SizedBox(width: 10),
-                Expanded(child: _toggle('Ezan', showAzanIcon, onAzanToggleChanged)),
-                const SizedBox(width: 10),
-                Expanded(child: _toggle('Titreşim', showVibrationIcon, onVibrationToggleChanged)),
+                Expanded(
+                  child: SettingsReminderOptionToggle(
+                    label: 'Ezan',
+                    value: showAzanIcon,
+                    onChanged: onAzanToggleChanged,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 18),
@@ -245,6 +291,18 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 18),
+            SettingsKerahatSection(
+              kerahatEnabled: kerahatEnabled,
+              kerahatSunriseMinutesController: kerahatSunriseMinutesController,
+              kerahatDhuhrMinutesController: kerahatDhuhrMinutesController,
+              kerahatMaghribMinutesController: kerahatMaghribMinutesController,
+              onKerahatToggleChanged: onKerahatToggleChanged,
+              onKerahatSunriseMinutesChanged: onKerahatSunriseMinutesChanged,
+              onKerahatDhuhrMinutesChanged: onKerahatDhuhrMinutesChanged,
+              onKerahatMaghribMinutesChanged: onKerahatMaghribMinutesChanged,
+              buildSubHeader: _subHeader,
             ),
             const SizedBox(height: 18),
             _subHeader(
@@ -340,87 +398,6 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
     );
   }
 
-  Widget _colorsCard(BuildContext context) {
-    return SharedSettingsSectionCard(
-      title: 'Arayüz Ayarları',
-      headerColor: sharedSettingsMergedColorsHeader,
-      showHelpBalloons: showHelpBalloons,
-      helpMessage:
-          'Bu bölüm ana ekran renklerini ve yardım ikonlarının görünürlüğünü düzenler. Renk değişiklikleri ana sayfaya Uygula düğmesiyle yansır.',
-      child: _sectionChild(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CheckboxListTile(
-              value: showHelpBalloons,
-              contentPadding: EdgeInsets.zero,
-              controlAffinity: ListTileControlAffinity.leading,
-              title: const Text('Yardımları Göster'),
-              subtitle: const Text('Soru işareti ikonları ve kısa kullanım açıklamalarını gösterir.'),
-              onChanged: onHelpToggleChanged,
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Expanded(child: SettingsColorActionTile(title: 'Panel Rengi', color: panelColor, onTap: onEditPanelColor)),
-                const SizedBox(width: 10),
-                Expanded(child: SettingsColorActionTile(title: 'Yazı Rengi', color: textColor, onTap: onEditTextColor)),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(child: SettingsColorActionTile(title: 'Nafile Vakit Rengi', color: customPrayerLabelColor, onTap: onEditCustomPrayerLabelColor)),
-                const SizedBox(width: 10),
-                Expanded(child: SettingsColorActionTile(title: 'Zemin Rengi', color: backgroundColor, onTap: onEditBackgroundColor)),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              'Not: Seçimler ana sayfaya sadece Uygula butonuyla yansır.',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 10),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: OutlinedButton.icon(
-                onPressed: () async {
-                  await onResetInterfaceColors();
-                  await onResetBackgroundColors();
-                },
-                icon: const Icon(Icons.restart_alt_rounded),
-                label: const Text('Renkleri Varsayılan Yap'),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Align(
-              alignment: Alignment.centerRight,
-              child: FilledButton.icon(
-                onPressed: hasPendingBackgroundChanges
-                    ? () => onApplyBackgroundStyle()
-                    : null,
-                icon: const Icon(Icons.check_rounded),
-                label: const Text('Uygula'),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  SettingsReminderOptionToggle _toggle(
-    String label,
-    bool value,
-    ValueChanged<bool> onChanged,
-  ) {
-    return SettingsReminderOptionToggle(
-      label: label,
-      value: value,
-      onChanged: onChanged,
-    );
-  }
-
   Widget _subHeader({
     required String title,
     required Color color,
@@ -453,11 +430,5 @@ class SettingsLegacyAccordionGroup extends StatelessWidget {
       ),
     );
   }
-
-  Widget _sectionChild({required Widget child}) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 18),
-      child: child,
-    );
-  }
 }
+

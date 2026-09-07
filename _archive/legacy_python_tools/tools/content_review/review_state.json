@@ -1,0 +1,13 @@
+{
+  "cursors": {
+    "ayah": 0,
+    "hadith": 0,
+    "esma": 0
+  },
+  "last_undo": {
+    "archive_target": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\archive\\hadiths.pending_review.v1.json",
+    "archive_backup": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\tools\\content_review\\backups\\hadiths.pending_review.v1.json.20260610_233330_210682.bak",
+    "approved_target": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\assets\\data\\daily_content\\approved\\hadiths.v1.approved.json",
+    "approved_backup": "D:\\Code\\mskaymaz\\M_HaydiNamaza\\tools\\content_review\\backups\\hadiths.v1.approved.json.20260610_233330_395566.bak"
+  }
+}

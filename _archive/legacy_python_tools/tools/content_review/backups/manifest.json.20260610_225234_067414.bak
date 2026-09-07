@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "content_version": "onay-tool-20260610_225115",
+  "generated_at_utc": "2026-06-10T22:51:15",
+  "publish_files": {
+    "ayahs": {
+      "path": "publish/ayahs.v1.approved.json",
+      "sha256": "b380ea1a896f5316b6484cbf2006b3f1c410e53e7a4d6ebbbf9f2240fecee796",
+      "bytes": 2124416,
+      "record_count": 1431
+    },
+    "hadiths": {
+      "path": "publish/hadiths.v1.approved.json",
+      "sha256": "ef5d80e3a4342892a8f7ea331ce9cd9c9d950367a767f214271d8232725f6237",
+      "bytes": 969956,
+      "record_count": 438
+    },
+    "esmas": {
+      "path": "publish/esmaul_husna.v1.approved.json",
+      "sha256": "ba8eed0c67641c55a3d0776ea000442399559049c96fca9672f55a9611900a54",
+      "bytes": 1054663,
+      "record_count": 381
+    }
+  },
+  "schedule": {
+    "start_date": "2026-05-15"
+  }
+}

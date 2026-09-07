@@ -46,6 +46,7 @@ extension _HomeBuildController on _HomeScreenState {
           final next = _nextPrayer(times, _now, l10n);
           final countdown = _formatCountdown(_now, next.time);
           final nextTime = homeFormatTime(next.time);
+          final isKerahatActive = _checkIsKerahatActive(displayTimes, _now);
           final location = data.location!;
           final provinceLabel = homeTitleCase(
             location.province,
@@ -257,6 +258,9 @@ extension _HomeBuildController on _HomeScreenState {
                                                                   showVibrationIcon:
                                                                       _reminderSettings
                                                                           .showVibrationIcon,
+                                                                  showSilentIcon:
+                                                                      _reminderSettings
+                                                                          .prayerSilenceEnabled,
                                                                 )
                                                               : HomePrayerSummaryList(
                                                                   key: ValueKey('prayer_summary_$_prayerDayOffset'),
@@ -417,6 +421,7 @@ extension _HomeBuildController on _HomeScreenState {
                                       cizgiColor: palette.cizgiColor,
                                       showHelpBalloons:
                                           _reminderSettings.showHelpBalloons,
+                                      isKerahatActive: isKerahatActive,
                                     ),
                                   ),
                                   Positioned(
@@ -484,5 +489,28 @@ extension _HomeBuildController on _HomeScreenState {
         },
       ),
     );
+  }
+
+  bool _checkIsKerahatActive(PrayerTimes times, DateTime now) {
+    if (!_kerahatSettings.enabled || _prayerDayOffset != 0) return false;
+    final sunriseStart = times.sunrise;
+    final sunriseEnd = sunriseStart.add(
+      Duration(minutes: _kerahatSettings.sunriseMinutes.clamp(0, 120)),
+    );
+    if (!now.isBefore(sunriseStart) && now.isBefore(sunriseEnd)) return true;
+
+    final dhuhrStart = times.dhuhr.subtract(
+      Duration(minutes: _kerahatSettings.dhuhrMinutes.clamp(0, 120)),
+    );
+    final dhuhrEnd = times.dhuhr;
+    if (!now.isBefore(dhuhrStart) && now.isBefore(dhuhrEnd)) return true;
+
+    final maghribStart = times.maghrib.subtract(
+      Duration(minutes: _kerahatSettings.maghribMinutes.clamp(0, 120)),
+    );
+    final maghribEnd = times.maghrib;
+    if (!now.isBefore(maghribStart) && now.isBefore(maghribEnd)) return true;
+
+    return false;
   }
 }

@@ -12,6 +12,8 @@ include: package:flutter_lints/flutter.yaml
 analyzer:
   exclude:
     - _external/**
+    - _archive/**
+    - AllApp/**
     - _archive_instruction_old_*/**
 
 linter:

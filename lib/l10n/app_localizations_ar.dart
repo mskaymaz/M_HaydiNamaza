@@ -145,4 +145,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get prayerIsha => 'العشاء';
+
+  @override
+  String get kerahatWarning => 'وقت الكراهة';
 }

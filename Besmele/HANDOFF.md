@@ -1,4 +1,37 @@
-﻿# HANDOFF.md
+# HANDOFF.md
+
+## Flutter & Dart Refactor - Phase 1 - 4 Completion (2026-09-07)
+
+- Git branch: `flu`.
+- Road map: `Besmele/TASKS_FLU.md`.
+- **Phase 1 Completed:**
+  - `flu` branch created and checked out (`TASK 1.1`).
+  - Deprecated Python/PySide6 scripts moved to `_archive/legacy_python_tools/` (`TASK 1.2`).
+  - Loose root build artifacts cleaned up, and legacy instruction folders moved to `_archive/legacy_instructions/` (`TASK 1.3`).
+- **Phase 2 Completed:**
+  - `avkat` Diyanet prayer data loading verified (`assets/data/prayer/diyanet/2026/index.json` and `https://github.com/mskaymaz/avkat`) (`TASK 2.1`).
+  - Home date formatters updated with optional official Diyanet/Avkat Hijri date overrides while preserving calculation fallback (`TASK 2.1`).
+  - Annual December update workflow documented in `docs/architecture/avkat_diyanet_yearly_update.md` (`TASK 2.2`).
+- **Phase 3 Completed:**
+  - TTS speech icon updated to `Icons.record_voice_over_rounded` in daily content card (`TASK 3.1`).
+  - TTS state and completion/cancel handlers added to `ReminderAudioService` with `toggleSpeakText` toggle (`TASK 3.2`).
+  - Voice test screen and reminder settings test button updated with Play/Stop toggle (`TASK 3.3`).
+  - Custom adhan audio playback updated with Play/Stop toggle state (`TASK 3.4`).
+- **Phase 4 Completed:**
+  - Daily content panel header icons reorganized: Info and Speech icons shifted inward (`TASK 4.1`).
+  - Far left (`<`) and far right (`>`) chevron arrow buttons added for page navigation (`TASK 4.2`).
+  - Smooth page swiping (`_pageController.previousPage` / `nextPage`) connected to navigation arrows (`TASK 4.3`).
+  - Test "Replace" button removal task postponed to Phase 8 (`TASK 8.5`) as requested by user to allow ongoing testing during development.
+- **Phase 5 Completed:**
+  - `PrayerSilenceManager.kt` updated with `SecurityException` fallback to `RINGER_MODE_VIBRATE` (for Android 7.0+ without DND permission) and DND interruption filter changed to `INTERRUPTION_FILTER_PRIORITY` (`TASK 5.1`).
+  - Separate Voice and Vibration toggles combined into unified `Ses & Titreşim` toggle (`Icons.notifications_active_outlined`) in `HomePrayerList` row controls and `SettingsLegacyAccordionGroup` (`TASK 5.2`).
+  - Double-minaret mosque icon replaced with modern Adhan call icon (`Icons.campaign_rounded`) (`TASK 5.3`).
+  - Silence volume_off icon removed from main summary prayer cards and moved inside the `HomePrayerList` row controls panel (`TASK 5.4`).
+- **Phase 6 Completed:**
+  - Standardized `AppHelpTooltip` icon sizes and top-panel positioning (`left: 4, top: 40`) for clean pixel alignment (`TASK 6.1`).
+  - Added localized `kerahatWarning` strings in TR/EN/AR ARB files and localization classes, added `_KerahatPulsingBadge` badge in `home_top_panel.dart`, and added active Kerahat detection logic (`_checkIsKerahatActive`) in `home_build_controller.dart` (`TASK 6.2`).
+  - Built Kerahat Settings storage binding (`KerahatSettingsStorage`), added default 45-minute Kerahat durations, added Kerahat toggle & duration text fields to `SettingsLegacyAccordionGroup`, and updated `SettingsScreen` to persist Kerahat settings (`TASK 6.3`).
+
 
 ## AllApp local template sync (2026-07-15)
 

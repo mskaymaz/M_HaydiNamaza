@@ -21,6 +21,8 @@ class DailyContentSection extends StatefulWidget {
   final double topContentInset;
   final String infoText;
   final VoidCallback? onReadTap;
+  final VoidCallback? onPreviousPageTap;
+  final VoidCallback? onNextPageTap;
 
   const DailyContentSection({
     super.key,
@@ -38,6 +40,8 @@ class DailyContentSection extends StatefulWidget {
     this.topContentInset = 0,
     this.infoText = '',
     this.onReadTap,
+    this.onPreviousPageTap,
+    this.onNextPageTap,
   });
 
   @override
@@ -136,6 +140,8 @@ class _DailyContentSectionState extends State<DailyContentSection> {
                     hasReadAction: hasReadAction,
                     onInfoTap: () => _openInfoPanel(infoTextTrimmed),
                     onReadTap: widget.onReadTap,
+                    onPreviousPageTap: widget.onPreviousPageTap,
+                    onNextPageTap: widget.onNextPageTap,
                   ),
                   SizedBox(height: basmalaAfterGap),
                 ],

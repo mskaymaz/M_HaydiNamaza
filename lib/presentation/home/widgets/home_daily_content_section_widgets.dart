@@ -80,22 +80,38 @@ class _BasmalaHeader extends StatelessWidget {
   final bool hasReadAction;
   final VoidCallback onInfoTap;
   final VoidCallback? onReadTap;
+  final VoidCallback? onPreviousPageTap;
+  final VoidCallback? onNextPageTap;
 
   const _BasmalaHeader({
     required this.hasInfoAction,
     required this.hasReadAction,
     required this.onInfoTap,
     required this.onReadTap,
+    this.onPreviousPageTap,
+    this.onNextPageTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          width: 34,
-          height: 34,
+          width: 32,
+          height: 32,
+          child: onPreviousPageTap != null
+              ? _OverlayIconButton(
+                  icon: Icons.chevron_left_rounded,
+                  tooltip: 'Önceki',
+                  onTap: onPreviousPageTap!,
+                )
+              : const SizedBox.shrink(),
+        ),
+        const SizedBox(width: 2),
+        SizedBox(
+          width: 32,
+          height: 32,
           child: hasInfoAction
               ? _OverlayIconButton(
                   icon: Icons.info_outline_rounded,
@@ -104,22 +120,34 @@ class _BasmalaHeader extends StatelessWidget {
                 )
               : const SizedBox.shrink(),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 4),
         const Expanded(
           child: Padding(
-            padding: EdgeInsets.only(top: 4),
+            padding: EdgeInsets.only(top: 2),
             child: _BasmalaMark(),
           ),
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 4),
         SizedBox(
-          width: 34,
-          height: 34,
+          width: 32,
+          height: 32,
           child: hasReadAction && onReadTap != null
               ? _OverlayIconButton(
-                  icon: Icons.volume_up_rounded,
-                  tooltip: 'Oku',
+                  icon: Icons.record_voice_over_rounded,
+                  tooltip: 'Sesli Oku / Durdur',
                   onTap: onReadTap!,
+                )
+              : const SizedBox.shrink(),
+        ),
+        const SizedBox(width: 2),
+        SizedBox(
+          width: 32,
+          height: 32,
+          child: onNextPageTap != null
+              ? _OverlayIconButton(
+                  icon: Icons.chevron_right_rounded,
+                  tooltip: 'Sonraki',
+                  onTap: onNextPageTap!,
                 )
               : const SizedBox.shrink(),
         ),

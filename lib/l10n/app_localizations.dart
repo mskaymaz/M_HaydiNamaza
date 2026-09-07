@@ -375,6 +375,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Isha'**
   String get prayerIsha;
+
+  /// No description provided for @kerahatWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'KERAHAT TIME'**
+  String get kerahatWarning;
 }
 
 class _AppLocalizationsDelegate

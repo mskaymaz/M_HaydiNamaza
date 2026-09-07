@@ -33,6 +33,7 @@ class HomePrayerList extends StatelessWidget {
   final bool showVisualIcon;
   final bool showAzanIcon;
   final bool showVibrationIcon;
+  final bool showSilentIcon;
 
   const HomePrayerList({
     super.key,
@@ -52,6 +53,7 @@ class HomePrayerList extends StatelessWidget {
     required this.showVisualIcon,
     required this.showAzanIcon,
     required this.showVibrationIcon,
+    this.showSilentIcon = true,
   });
 
   @override
@@ -214,48 +216,41 @@ class HomePrayerList extends StatelessWidget {
                         onTap: item.onReminderTap,
                       ),
                     ),
-                    if (showVoiceIcon)
+                    if (showVoiceIcon || showVibrationIcon)
                       SizedBox(
                         width: iconSlotWidth,
                         child: HomeIconToggle(
-                          icon: Icons.volume_up_outlined,
+                          icon: Icons.notifications_active_outlined,
                           style: scaledIconStyle,
-                          isEnabled: item.voiceEnabled,
+                          isEnabled: item.soundVibrationEnabled,
                           cizgiColor: controlColor,
-                          onTap: item.onVoiceToggle,
-                        ),
-                      ),
-                    if (showVisualIcon)
-                      SizedBox(
-                        width: iconSlotWidth,
-                        child: HomeIconToggle(
-                          icon: Icons.desktop_windows_outlined,
-                          style: scaledIconStyle,
-                          isEnabled: item.visualEnabled,
-                          cizgiColor: controlColor,
-                          onTap: item.onVisualToggle,
+                          onTap: item.onSoundVibrationToggle ??
+                              () {
+                                item.onVoiceToggle();
+                                item.onVibrationToggle();
+                              },
                         ),
                       ),
                     if (showAzanIcon)
                       SizedBox(
                         width: iconSlotWidth,
                         child: HomeIconToggle(
-                          icon: Icons.mosque_sharp,
+                          icon: Icons.campaign_rounded,
                           style: scaledIconStyle,
                           isEnabled: item.azanEnabled,
                           cizgiColor: controlColor,
                           onTap: item.onAzanToggle,
                         ),
                       ),
-                    if (showVibrationIcon)
+                    if (showSilentIcon)
                       SizedBox(
                         width: iconSlotWidth,
                         child: HomeIconToggle(
-                          icon: Icons.vibration_outlined,
+                          icon: Icons.volume_off_outlined,
                           style: scaledIconStyle,
-                          isEnabled: item.vibrationEnabled,
+                          isEnabled: item.silentEnabled,
                           cizgiColor: controlColor,
-                          onTap: item.onVibrationToggle,
+                          onTap: item.onSilentToggle,
                         ),
                       ),
                     SizedBox(

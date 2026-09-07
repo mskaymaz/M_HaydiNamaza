@@ -13,6 +13,7 @@ import '../../app/adhan_catalog.dart';
 import '../../app/adhan_selection_storage.dart';
 import '../../app/calculation_method_storage.dart';
 import '../../app/custom_prayer_storage.dart';
+import '../../app/kerahat_settings_storage.dart';
 import '../../app/locale_controller.dart';
 import '../../app/location_storage.dart';
 import '../../app/native_prayer_notification_scheduler.dart';
@@ -131,6 +132,8 @@ class _HomeScreenState extends State<HomeScreen> {
     voiceText: kDefaultVoiceReminderText,
     visualText: '',
   );
+  final _kerahatSettingsStorage = KerahatSettingsStorage();
+  KerahatSettingsRecord _kerahatSettings = const KerahatSettingsRecord();
 
   @override
   void initState() {
@@ -139,6 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
     unawaited(_loadPrayerRowSettings());
     unawaited(_loadCustomPrayerRows());
     unawaited(_loadReminderSettings());
+    unawaited(_loadKerahatSettings());
     unawaited(_loadReminderTriggerLog());
     _future = _loadData();
     _dailyContentFuture = _dailyContentService.loadToday();

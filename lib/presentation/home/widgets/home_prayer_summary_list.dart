@@ -11,7 +11,6 @@ const double _summaryPrayerTextGap = 25.0;
 const double _summaryPrayerBellGap = 12.0;
 const double _summaryPrayerBellBoxSize = 36.0;
 const double _summaryPrayerBellIconSize = 24.0;
-const double _summaryPrayerSilentGap = 8.0;
 
 class HomePrayerSummaryList extends StatelessWidget {
   final ScrollController controller;
@@ -141,14 +140,6 @@ class HomePrayerSummaryList extends StatelessWidget {
                             : Icons.notifications_none_outlined,
                         color: bellColor,
                         onTap: onOpenControls,
-                      ),
-                      const SizedBox(width: _summaryPrayerSilentGap),
-                      _summaryIconButton(
-                        assetPath: 'assets/icons/volume_off.svg',
-                        color: item.silentEnabled
-                            ? cizgiColor.withValues(alpha: 0.95)
-                            : cizgiColor.withValues(alpha: 0.34),
-                        onTap: item.onSilentToggle,
                       ),
                     ],
                   ),

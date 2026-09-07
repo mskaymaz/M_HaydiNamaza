@@ -1,4 +1,4 @@
-﻿import 'dart:math' as math;
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
@@ -16,8 +16,8 @@ class AppHelpTooltip extends StatelessWidget {
     required this.visible,
     required this.title,
     required this.message,
-    this.iconSize = 20,
-    this.tapSize = 34,
+    this.iconSize = 22.0,
+    this.tapSize = 34.0,
     this.color,
     this.inlineIconBuilder,
   });
@@ -25,19 +25,18 @@ class AppHelpTooltip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!visible || message.trim().isEmpty) return const SizedBox.shrink();
-    final effectiveIconSize = iconSize * 1.275;
-    final effectiveTapSize = math.max(tapSize, effectiveIconSize + 10);
-    final helpColor = _resolveHelpColor(context);
+    final helpColor = color ?? _resolveHelpColor(context);
     return SizedBox(
-      width: effectiveTapSize,
-      height: effectiveTapSize,
+      width: tapSize,
+      height: tapSize,
       child: IconButton(
+        alignment: Alignment.center,
         tooltip: 'Yardım',
         padding: EdgeInsets.zero,
-        constraints: BoxConstraints.tight(Size.square(effectiveTapSize)),
+        constraints: BoxConstraints.tight(Size.square(tapSize)),
         icon: Icon(
           Icons.help_outline_rounded,
-          size: effectiveIconSize,
+          size: iconSize,
           color: helpColor,
         ),
         onPressed: () => _showHelpDialog(context),

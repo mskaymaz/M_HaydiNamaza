@@ -7,10 +7,35 @@ export 'reminder_tts_voice_policy.dart' show ReminderVoiceOption;
 class ReminderAudioService {
   final FlutterTts _flutterTts = FlutterTts();
   final AudioPlayer _audioPlayer = AudioPlayer();
+
+  ReminderAudioService() {
+    _initTtsHandlers();
+    _initAudioHandlers();
+  }
+
+  void _initTtsHandlers() {
+    _flutterTts.setCompletionHandler(() {
+      _ttsInProgress = false;
+    });
+    _flutterTts.setCancelHandler(() {
+      _ttsInProgress = false;
+    });
+    _flutterTts.setErrorHandler((_) {
+      _ttsInProgress = false;
+    });
+  }
+
+  void _initAudioHandlers() {
+    _audioPlayer.onPlayerStateChanged.listen((state) {
+      _audioPlaying = state == PlayerState.playing;
+    });
+  }
+
   static const String defaultTurkishVoiceName =
       ReminderTtsVoicePolicy.defaultTurkishVoiceName;
   static const String defaultTurkishVoiceLocale =
       ReminderTtsVoicePolicy.defaultTurkishVoiceLocale;
+
   static const double _stableTtsPitch = 1.0;
   static const double _turkishTtsRate = 0.365;
   static const double _stableTtsRate = 0.39;
@@ -18,8 +43,59 @@ class ReminderAudioService {
   static const double _stableTtsVolume = 1.0;
   static const Duration _ttsRestartGap = Duration(milliseconds: 80);
   static const Duration _ttsDebounce = Duration(milliseconds: 400);
+
   bool _ttsInProgress = false;
+  bool _audioPlaying = false;
   DateTime? _lastTtsStartAt;
+
+  bool get isSpeaking => _ttsInProgress;
+  bool get isPlayingAudio => _audioPlaying;
+
+  Future<void> toggleSpeakText({
+    required String text,
+    Locale? selectedLocale,
+  }) async {
+    if (_ttsInProgress) {
+      await stop();
+    } else {
+      await speakText(text: text, selectedLocale: selectedLocale);
+    }
+  }
+
+  Future<void> toggleSpeakTextWithVoice({
+    required String text,
+    String? voiceName,
+    String? voiceLocale,
+    Locale? selectedLocale,
+  }) async {
+    if (_ttsInProgress) {
+      await stop();
+    } else {
+      await speakTextWithVoice(
+        text: text,
+        voiceName: voiceName,
+        voiceLocale: voiceLocale,
+        selectedLocale: selectedLocale,
+      );
+    }
+  }
+
+  Future<void> togglePlayAzan() async {
+    if (_audioPlaying) {
+      await stop();
+    } else {
+      await playAzan();
+    }
+  }
+
+  Future<void> togglePlayAudioPath(String audioPath) async {
+    if (_audioPlaying) {
+      await stop();
+    } else {
+      await _audioPlayer.stop();
+      await _audioPlayer.play(DeviceFileSource(audioPath));
+    }
+  }
   Future<List<ReminderVoiceOption>> loadVoiceOptions({
     bool onlyTurkishMale = false,
     String? languageCode,
@@ -212,6 +288,7 @@ class ReminderAudioService {
           : await _applyPreferredMaleVoice(selectedLocale: selectedLocale);
       if (!voiceApplied) {
         debugPrint('[TTS] Male voice not found; speech skipped.');
+        _ttsInProgress = false;
         return;
       }
       await _applyStableSpeechSettings(
@@ -225,8 +302,9 @@ class ReminderAudioService {
       }
       final result = await _flutterTts.speak(spokenText);
       if (result == 1 || result == null) return;
+      _ttsInProgress = false;
       throw Exception('tts_failed');
-    } finally {
+    } catch (_) {
       _ttsInProgress = false;
     }
   }

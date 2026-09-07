@@ -146,4 +146,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get prayerIsha => 'Yatsı';
+
+  @override
+  String get kerahatWarning => 'KERAHAT VAKTİDİR';
 }

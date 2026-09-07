@@ -25,7 +25,10 @@ class HomePrayerListItem {
   final VoidCallback onAzanToggle;
   final VoidCallback onVibrationToggle;
   final VoidCallback onSilentToggle;
+  final VoidCallback? onSoundVibrationToggle;
   final VoidCallback? onDelete;
+
+  bool get soundVibrationEnabled => voiceEnabled || vibrationEnabled;
 
   HomePrayerListItem({
     required this.id,
@@ -50,6 +53,7 @@ class HomePrayerListItem {
     required this.onAzanToggle,
     required this.onVibrationToggle,
     required this.onSilentToggle,
+    this.onSoundVibrationToggle,
     this.onDelete,
   });
 }

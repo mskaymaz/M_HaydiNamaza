@@ -15,12 +15,22 @@ String homeFormatGregorianDayMonth(DateTime dt, AppLocalizations l10n) {
   return DateFormat.MMMMd(l10n.localeName).format(dt);
 }
 
-String homeFormatHijriYear(DateTime dt) {
+String homeFormatHijriYear(DateTime dt, {String? diyanetHijriYear}) {
+  if (diyanetHijriYear != null && diyanetHijriYear.trim().isNotEmpty) {
+    return diyanetHijriYear.trim();
+  }
   final hijri = _toHijri(dt);
   return hijri.year.toString();
 }
 
-String homeFormatHijriDayMonth(DateTime dt, AppLocalizations l10n) {
+String homeFormatHijriDayMonth(
+  DateTime dt,
+  AppLocalizations l10n, {
+  String? diyanetHijriDayMonth,
+}) {
+  if (diyanetHijriDayMonth != null && diyanetHijriDayMonth.trim().isNotEmpty) {
+    return diyanetHijriDayMonth.trim();
+  }
   final hijri = _toHijri(dt);
   final months = _hijriMonths(l10n.localeName);
   final monthName =

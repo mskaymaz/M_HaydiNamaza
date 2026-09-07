@@ -1,4 +1,4 @@
-﻿part of 'home_daily_content_panel.dart';
+part of 'home_daily_content_panel.dart';
 
 extension _HomeDailyContentPanelTabs on _HomeDailyContentPanelState {
   Widget _buildPage({
@@ -234,6 +234,8 @@ extension _HomeDailyContentPanelTabs on _HomeDailyContentPanelState {
       onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
           ? () => _readTurkishAyahText(activeText)
           : null,
+      onPreviousPageTap: _previousPage,
+      onNextPageTap: _nextPage,
     );
   }
 
@@ -279,6 +281,8 @@ extension _HomeDailyContentPanelTabs on _HomeDailyContentPanelState {
       onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
           ? () => _readTurkishText(activeText)
           : null,
+      onPreviousPageTap: _previousPage,
+      onNextPageTap: _nextPage,
     );
   }
 
@@ -328,12 +332,32 @@ extension _HomeDailyContentPanelTabs on _HomeDailyContentPanelState {
       onReadTap: _activeLanguage == 'tr' && activeText.trim().isNotEmpty
           ? () => _readTurkishText('$title. $activeText')
           : null,
+      onPreviousPageTap: _previousPage,
+      onNextPageTap: _nextPage,
     );
+  }
+
+  void _previousPage() {
+    if (_pageController.hasClients) {
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  void _nextPage() {
+    if (_pageController.hasClients) {
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   Future<void> _readTurkishText(String text) async {
     try {
-      await _reminderAudioService.speakText(
+      await _reminderAudioService.toggleSpeakText(
         text: text,
         selectedLocale: const Locale('tr', 'TR'),
       );

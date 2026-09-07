@@ -45,5 +45,6 @@
   "prayerDhuhr": "Dhuhr",
   "prayerAsr": "Asr",
   "prayerMaghrib": "Maghrib",
-  "prayerIsha": "Isha"
+  "prayerIsha": "Isha",
+  "kerahatWarning": "KERAHAT TIME"
 }

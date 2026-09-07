@@ -51,6 +51,11 @@ object PrayerSilenceManager {
             val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
             audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
         } catch (_: SecurityException) {
+            try {
+                val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+                audioManager.ringerMode = AudioManager.RINGER_MODE_VIBRATE
+            } catch (_: Exception) {
+            }
         } catch (_: Exception) {
         }
         try {
@@ -59,7 +64,7 @@ object PrayerSilenceManager {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 manager.isNotificationPolicyAccessGranted
             ) {
-                manager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE)
+                manager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
             }
         } catch (_: SecurityException) {
         } catch (_: Exception) {

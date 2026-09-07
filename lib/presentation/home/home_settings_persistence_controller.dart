@@ -34,6 +34,14 @@ extension _HomeSettingsPersistenceController on _HomeScreenState {
     unawaited(_refreshNativeReminderSchedule());
   }
 
+  Future<void> _loadKerahatSettings() async {
+    final saved = await _kerahatSettingsStorage.read();
+    if (!mounted) return;
+    _setHomeState(() {
+      _kerahatSettings = saved;
+    });
+  }
+
   Future<void> _loadCustomPrayerRows() async {
     final saved = await _customPrayerStorage.read();
     if (!mounted || saved.isEmpty) return;

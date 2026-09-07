@@ -40,6 +40,7 @@ class HomeTopPanel extends StatelessWidget {
   final HomeTypography typography;
   final Color cizgiColor;
   final bool showHelpBalloons;
+  final bool isKerahatActive;
 
   const HomeTopPanel({
     super.key,
@@ -59,6 +60,7 @@ class HomeTopPanel extends StatelessWidget {
     required this.typography,
     required this.cizgiColor,
     this.showHelpBalloons = false,
+    this.isKerahatActive = false,
   });
 
   @override
@@ -258,23 +260,38 @@ class HomeTopPanel extends StatelessWidget {
                                         _countdownOffsetX,
                                         0,
                                       ),
-                                      child: Transform.scale(
-                                        scaleX: _countdownHorizontalScale,
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          countdown,
-                                          maxLines: 1,
-                                          softWrap: false,
-                                          style: theme.textTheme.headlineSmall
-                                              ?.copyWith(
-                                                color: cizgiColor,
-                                                fontWeight: FontWeight.w400,
-                                                letterSpacing: 0.5,
-                                                fontSize:
-                                                    typography.nextTimeSize +
-                                                    10,
-                                              ),
-                                        ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Transform.scale(
+                                            scaleX: _countdownHorizontalScale,
+                                            alignment: Alignment.centerRight,
+                                            child: Text(
+                                              countdown,
+                                              maxLines: 1,
+                                              softWrap: false,
+                                              style: theme.textTheme.headlineSmall
+                                                  ?.copyWith(
+                                                    color: cizgiColor,
+                                                    fontWeight: FontWeight.w400,
+                                                    letterSpacing: 0.5,
+                                                    fontSize:
+                                                        typography.nextTimeSize +
+                                                        10,
+                                                  ),
+                                            ),
+                                          ),
+                                          if (isKerahatActive)
+                                            _KerahatPulsingBadge(
+                                              label:
+                                                  AppLocalizations.of(
+                                                    context,
+                                                  )?.kerahatWarning ??
+                                                  'KERAHAT VAKTİDİR',
+                                            ),
+                                        ],
                                       ),
                                     ),
                                   ),
@@ -288,23 +305,84 @@ class HomeTopPanel extends StatelessWidget {
                   );
                 },
               ),
-                ),
-              ],
             ),
             Positioned(
-              left: -6,
-              top: 38,
+              left: 4,
+              top: 40,
               child: AppHelpTooltip(
                 visible: showHelpBalloons,
                 title: 'Ana panel',
                 message:
                     'Bu üst panel seçili konumu, sıradaki vakti ve kalan süreyi gösterir. Konum yazısına dokunarak şehir/ilçe seçimini açabilirsiniz. Pusula ikonundan kıble yönüne, dişli ikonundan ayarlara ulaşabilirsiniz.',
                 color: cizgiColor,
-                iconSize: 19,
-                tapSize: 32,
+                iconSize: 22,
+                tapSize: 34,
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _KerahatPulsingBadge extends StatefulWidget {
+  final String label;
+  const _KerahatPulsingBadge({required this.label});
+
+  @override
+  State<_KerahatPulsingBadge> createState() => _KerahatPulsingBadgeState();
+}
+
+class _KerahatPulsingBadgeState extends State<_KerahatPulsingBadge>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _opacity;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    )..repeat(reverse: true);
+    _opacity = Tween<double>(begin: 0.35, end: 1.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: _opacity,
+      child: Container(
+        margin: const EdgeInsets.only(top: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+        decoration: BoxDecoration(
+          color: const Color(0xFFD32F2F),
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x55D32F2F),
+              blurRadius: 6,
+              spreadRadius: 1,
+            ),
+          ],
+        ),
+        child: Text(
+          widget.label,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 10.5,
+            letterSpacing: 0.7,
+          ),
         ),
       ),
     );

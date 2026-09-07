@@ -121,7 +121,7 @@ class _VoiceTestScreenState extends State<VoiceTestScreen> {
 
   Future<void> _playArabic() async {
     final voice = _voiceFromKey(_selectedArabicKey);
-    await _audioService.speakTextWithVoice(
+    await _audioService.toggleSpeakTextWithVoice(
       text: _arabicController.text,
       voiceName: voice.name,
       voiceLocale: voice.locale,
@@ -131,7 +131,7 @@ class _VoiceTestScreenState extends State<VoiceTestScreen> {
 
   Future<void> _playEnglish() async {
     final voice = _voiceFromKey(_selectedEnglishKey);
-    await _audioService.speakTextWithVoice(
+    await _audioService.toggleSpeakTextWithVoice(
       text: _englishController.text,
       voiceName: voice.name,
       voiceLocale: voice.locale,

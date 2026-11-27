@@ -27,3 +27,9 @@ next_step:
 - Local approved counts after 2026-06-09 Esma/Sifat import: `ayah=1438`, `hadith=438`, `esma/sifat=381` (`esma=99`, `sifat=282`); AllApp publish artifacts were pushed on 2026-06-11.
 - Shared settings alignment completed on 2026-07-14: AllApp v2 now documents the four-section contract, current catalog/manifest/config schemas, examples, and v1 is marked legacy. Haydi Namaza uses the config-driven support action and local update-manifest fallback.
 - User-side validation on 2026-07-14: `flutter analyze` passed with `No issues found!`; dependency update notices remain non-blocking.
+
+## IST-001 Denetim Hatırlatıcısı (27.11.2026)
+> Yeni oturumda çalışmaya başlandığında önce aşağıdaki eksikler `IST-001` (`D:\Code\mskaymaz\istisare\istisareler\001-uygulama-anayasasi-ve-repo-mimarisi.md`) doğrultusunda ele alınır:
+- [ ] Kodda `Eco-SDK` (`eco_device_id` + 7 günlük `/api/v1/telemetry/heartbeat`) entegrasyonu yapılacak.
+- [ ] Eksik SSOT belgesi `tasks.md` eklenecek; `docs/kullanim_kilavuzu/{tr,en,ar}` + uygulama içi yardım doğrulanacak.
+- [ ] `tools/content_review/` altında `>650` satırı aşan `4` dosya modülerleştirilecek.

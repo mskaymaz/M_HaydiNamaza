@@ -99,3 +99,21 @@
 
 - **Kimlik:** `document.cookie` üzerinden `Domain=.msklabs.org; SameSite=Lax; Secure; max-age=31536000` çerezi + `localStorage.getItem('eco_device_id')` fallback'i kullanılır. Parmak izi (`FingerprintJS`, Canvas/Audio hash) **yasaktır**.
 - **Gönderim:** Sayfa açılışında `localStorage` üzerindeki `eco_state_<app_id>` kontrol edilir; aynı 7 günlük kural geçerlidir. İstek `fetch(ENDPOINT, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload), keepalive: true })` ile atılır.
+
+
+---
+
+## 5. Destek Formu Link Standardı (`destek.html`)
+
+Uygulama içinden "Destek / Bize Ulaşın" bağlantısı açılırken yalnızca `/destek` değil, aşağıdaki parametreler mutlaka eklenmelidir:
+
+```text
+https://msklabs.org/destek?app=<app_id>&ver=<sürüm>&os=<işletim_sistemi>&lang=<dil>
+```
+
+- **`app`:** `haydi_namaza` (resmi `snake_case` kimlik)
+- **`ver`:** Aktif sürüm (ör. `1.0.5`)
+- **`os`:** `Android` / `iOS`
+- **`lang`:** `tr` / `en` / `ar`
+- **Önemli:** Doğrudan `/api/support`'a `POST` **atılmaz**; yalnızca yukarıdaki parametreli URL dış tarayıcıda (`launchUrl`) açılır.
+- **Dinamik Okuma:** `ver` ve `os` sabit yazılmaz; `PackageInfo.fromPlatform().version` ve `Platform.isAndroid ? 'Android' : 'iOS'` ile dinamik okunur.
